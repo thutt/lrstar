@@ -1,0 +1,99 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="3. Grammar Files">
+      <UniqueIdentifier>{2d1d3974-1338-45cc-9f1d-c6dbb29fee59}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="2. Command Files">
+      <UniqueIdentifier>{bea30ade-8a0d-43aa-9626-3a32b87f83ef}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{902b2bf8-a2c1-4bfb-aa2d-5ae15d5dd32e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{61704202-a8bb-4fe5-bb4d-24d058fa364a}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="make.bat">
+      <Filter>2. Command Files</Filter>
+    </CustomBuild>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="verilog.grm">
+      <Filter>3. Grammar Files</Filter>
+    </None>
+    <None Include="verilog.grm.conflicts.html">
+      <Filter>3. Grammar Files</Filter>
+    </None>
+    <None Include="verilog.grm.states.html">
+      <Filter>3. Grammar Files</Filter>
+    </None>
+    <None Include="verilog.lex">
+      <Filter>3. Grammar Files</Filter>
+    </None>
+    <None Include="verilog.lgr">
+      <Filter>3. Grammar Files</Filter>
+    </None>
+    <None Include="verilog.lgr.conflicts.html">
+      <Filter>3. Grammar Files</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="verilog.grm.grammar.txt">
+      <Filter>3. Grammar Files</Filter>
+    </Text>
+    <Text Include="verilog.grm.log.txt">
+      <Filter>3. Grammar Files</Filter>
+    </Text>
+    <Text Include="verilog.grm.warnings.txt">
+      <Filter>3. Grammar Files</Filter>
+    </Text>
+    <Text Include="verilog.lgr.grammar.txt">
+      <Filter>3. Grammar Files</Filter>
+    </Text>
+    <Text Include="verilog.lgr.log.txt">
+      <Filter>3. Grammar Files</Filter>
+    </Text>
+    <Text Include="verilog.lgr.states.txt">
+      <Filter>3. Grammar Files</Filter>
+    </Text>
+    <Text Include="verilog.lgr.warnings.txt">
+      <Filter>3. Grammar Files</Filter>
+    </Text>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="verilog_Actions.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="verilog_LexerTables.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="verilog_LexerTables.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="verilog_Parser.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="verilog_ParserTables.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="verilog_ParserTables.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="verilog_Actions.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="verilog_Lexer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="verilog_Main.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="verilog_Parser.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>

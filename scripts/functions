@@ -1,0 +1,217 @@
+#!/bin/bash
+# Copyright (c) 2023 Logic Magician Software
+#
+# BSD 3 License
+#
+# Do not run.  Use 'source' to load into environment.
+set -o pipefail;
+# Ubuntu bash completion appears to fail if 'unset' enabled.
+# set -o nounset;
+
+declare -a LRSTAR_BUILD_TYPE_VALID=(
+    debug                       # Debugging enabled.
+    release                     # All debugging turned off.
+);
+
+declare -a LRSTAR_BUILD_OPTIONS_VALID=(
+    profile                     # Compiler profiling codegen
+    strict                      # Enable warnings, turn them into errrors.
+);
+
+
+function build-option-validate ()
+{
+    local opt="${1}";
+    local v;
+    for v in  ${LRSTAR_BUILD_OPTIONS_VALID[*]}; do
+        if [ "${opt}" = "${v}" ] ; then
+            return 0;
+        fi;
+    done;
+    return 1;
+}
+export -f build-option-validate;
+
+
+function trim ()
+{
+    # Remove leading and trailing whitespace.
+    local trimv="${1}";
+    trimv="${trimv#"${trimv%%[![:space:]]*}"}";
+    trimv="${trimv%"${trimv##*[![:space:]]}"}";
+    echo "${trimv}";
+}
+export -f trim;
+
+
+function build-option-remove ()
+{
+    local opt="${1}";
+    export LRSTAR_BUILD_OPTIONS="$(trim "${LRSTAR_BUILD_OPTIONS//${opt}}")";
+}
+export -f build-option-remove;
+
+
+function build-option-add ()
+{
+    local opt="${1}";
+    local boa;
+    # The options in ${LRSTAR_BUILD_OPTIONS} must always be sorted.
+    # If they are not sorted, the build output directory computed by
+    # the the lrstar build process and lrstar-path() will diverge.
+    boa=$((local v;
+           for v in "${LRSTAR_BUILD_OPTIONS}" "${opt}"; do
+               echo ${v};
+           done)|sort|tr '\n' ' ');
+    export LRSTAR_BUILD_OPTIONS="$(trim "${boa}")";
+}
+export -f build-option-add;
+
+
+function build-option-enable ()
+{
+    local opt="${1}";
+
+    if build-option-validate "${opt}"; then
+        build-option-remove "${opt}";
+        build-option-add "${opt}";
+        echo "LRSTAR_BUILD_OPTIONS: ${LRSTAR_BUILD_OPTIONS}";
+    else
+        echo "**** Invalid build option '${opt}'";
+    fi;
+}
+export -f build-option-enable;
+
+
+function build-option-disable ()
+{
+    local opt="${1}";
+
+    if build-option-validate "${opt}"; then
+        build-option-remove "${opt}";
+        echo "LRSTAR_BUILD_OPTIONS: ${LRSTAR_BUILD_OPTIONS}";
+    else
+        echo "**** Invalid build option '${opt}'";
+    fi;
+}
+export -f build-option-disable;
+
+
+function build-set-type ()
+{
+    local type="${1}";
+    local v;
+    for v in  ${LRSTAR_BUILD_TYPE_VALID[*]}; do
+        if [ "${type}" = "${v}" ] ; then
+            export LRSTAR_BUILD_TYPE="${type}";
+            return 0;
+        fi;
+    done;
+    echo "Invalid build type: '${type}'";
+    return 1;
+}
+export -f build-set-type;
+
+
+function debug-enable ()
+{
+    set -v -x;                  # Enable tracing of these shell functions.
+}
+export -f debug-enable;
+
+
+function debug-disable ()
+{
+    set +v +x;                  # Disable tracing of these shell functions.
+}
+export -f debug-disable;
+
+
+# Produces the root of the current build output.
+function lrstar-build-path ()
+{
+    local obd="${LRSTAR_BUILD_DIR}";
+    local obt="/${LRSTAR_BUILD_TYPE}";
+    local obo;
+    if [ ! -z "${LRSTAR_BUILD_OPTIONS:-''}" ] ; then
+	obo="${LRSTAR_BUILD_OPTIONS:+/}${LRSTAR_BUILD_OPTIONS/ //}";
+    else
+	obo="";
+    fi;
+    echo "${obd}${obt}${obo}";
+}
+export -f lrstar-build-path;
+
+
+function lrstar-path ()
+{
+    # This pathname construction must match the pathname construction
+    # in the lrstar build process.
+
+    local obp=$(lrstar-build-path);
+    path="${obp}/bin/lrstar";
+    echo "${path}";
+}
+export -f lrstar-path;
+
+
+function dfa-path ()
+{
+    # This pathname construction must match the pathname construction
+    # in the lrstar build process.
+
+    local obp=$(lrstar-build-path);
+    path="${obp}/bin/lrstar";
+    echo "${path}";
+}
+export -f dfa-path;
+
+
+function lrstar-show-config ()
+{
+    echo "LRSTAR_DIR          : '${LRSTAR_DIR:?LRSTAR_DIR not set.}'";
+    echo "LRSTAR_ARCHITECTURE : '${LRSTAR_ARCHITECTURE}'";
+    echo "LRSTAR_BUILD_OPTIONS: '${LRSTAR_BUILD_OPTIONS}'";
+    echo "LRSTAR_BUILD_DIR    : '${LRSTAR_BUILD_DIR}'";
+    echo "";
+    echo "Build types         : ${LRSTAR_BUILD_TYPE_VALID[*]}";
+    echo "Build options       : ${LRSTAR_BUILD_OPTIONS_VALID[*]}";
+}
+export -f lrstar-show-config;
+
+
+function lrstar-gprof ()
+{
+    local gmon="${1:?Path of 'gmon.out' must be provided.}";
+    if [ -f "${gmon}" ] ; then
+        gprof $(lrstar-path) "${gmon}";
+    else
+        echo "'${gmon}' does not exist.";
+        echo "";
+        echo "Enable 'profile', rebuild everything and then re-run test.";
+        echo "";
+        echo "   build-option-enable  profile"
+        echo "";
+    fi;
+}
+export -f lrstar-gprof;
+
+
+function lrstar-build ()
+{
+    local architecture="$(uname -m)";
+    local arch;
+
+    case "${architecture}" in
+        aarch64)
+            arch="Arm64";
+            ;;
+
+        x86_64)
+            arch="Intel-x86-64";
+            ;;
+    esac;
+
+    (cd ${LRSTAR_DIR:?LRSTAR_DIR not set.};           \
+     make LRSTAR_ARCHITECTURE="${arch}" "${@}";)
+}

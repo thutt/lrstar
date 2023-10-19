@@ -1,0 +1,7 @@
+
+typedef unsigned int x;
+x * y;
+
+typedef unsigned int uint, *uintptr;
+uint    a, b, c;
+uintptr p, q, r;	

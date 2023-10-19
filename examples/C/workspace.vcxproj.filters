@@ -1,0 +1,133 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="1. MAKE FILE">
+      <UniqueIdentifier>{2e2471cd-24d6-48db-b238-2397460e4398}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="5. HEADER FILES">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="6. SOURCE FILES">
+      <UniqueIdentifier>{e76479a3-5e62-44b8-885b-bb3de8c6cf29}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="7. CODE FILES">
+      <UniqueIdentifier>{6e283911-69e4-469a-9f98-54e94b5100aa}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="8. TEST FILES">
+      <UniqueIdentifier>{bcf95ffe-fda9-46e0-a43f-82e2d3310049}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="2. PARSER GRAMMAR">
+      <UniqueIdentifier>{2d1d3974-1338-45cc-9f1d-c6dbb29fee59}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="3. LEXER GRAMMAR">
+      <UniqueIdentifier>{3a8ca6ad-0388-40c8-a5e6-d5990a6b6115}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="C.grm">
+      <Filter>2. PARSER GRAMMAR</Filter>
+    </None>
+    <None Include="test.input.txt">
+      <Filter>8. TEST FILES</Filter>
+    </None>
+    <None Include="C.lex">
+      <Filter>3. LEXER GRAMMAR</Filter>
+    </None>
+    <None Include="C.lgr">
+      <Filter>3. LEXER GRAMMAR</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="C.grm.grammar.txt">
+      <Filter>2. PARSER GRAMMAR</Filter>
+    </Text>
+    <Text Include="C.grm.warnings.txt">
+      <Filter>2. PARSER GRAMMAR</Filter>
+    </Text>
+    <Text Include="test.output.txt">
+      <Filter>8. TEST FILES</Filter>
+    </Text>
+    <Text Include="C.grm.states.txt">
+      <Filter>2. PARSER GRAMMAR</Filter>
+    </Text>
+    <Text Include="C.grm.conflicts.txt">
+      <Filter>2. PARSER GRAMMAR</Filter>
+    </Text>
+    <Text Include="C.grm.log.txt">
+      <Filter>2. PARSER GRAMMAR</Filter>
+    </Text>
+    <Text Include="C.lgr.conflicts.txt">
+      <Filter>3. LEXER GRAMMAR</Filter>
+    </Text>
+    <Text Include="C.lgr.grammar.txt">
+      <Filter>3. LEXER GRAMMAR</Filter>
+    </Text>
+    <Text Include="C.lgr.log.txt">
+      <Filter>3. LEXER GRAMMAR</Filter>
+    </Text>
+    <Text Include="C.lgr.states.txt">
+      <Filter>3. LEXER GRAMMAR</Filter>
+    </Text>
+    <Text Include="C.lgr.warnings.txt">
+      <Filter>3. LEXER GRAMMAR</Filter>
+    </Text>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="C_Parser.h">
+      <Filter>5. HEADER FILES</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\code\lexer.h">
+      <Filter>7. CODE FILES</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\code\main.h">
+      <Filter>7. CODE FILES</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\code\parser.h">
+      <Filter>7. CODE FILES</Filter>
+    </ClInclude>
+    <ClInclude Include="C_LexerTables.h">
+      <Filter>5. HEADER FILES</Filter>
+    </ClInclude>
+    <ClInclude Include="C_ParserTables.h">
+      <Filter>5. HEADER FILES</Filter>
+    </ClInclude>
+    <ClInclude Include="C_Actions.h">
+      <Filter>5. HEADER FILES</Filter>
+    </ClInclude>
+    <ClInclude Include="C_LexerTables.hpp">
+      <Filter>5. HEADER FILES</Filter>
+    </ClInclude>
+    <ClInclude Include="C_ParserTables.hpp">
+      <Filter>5. HEADER FILES</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="C_Lexer.cpp">
+      <Filter>6. SOURCE FILES</Filter>
+    </ClCompile>
+    <ClCompile Include="C_Main.cpp">
+      <Filter>6. SOURCE FILES</Filter>
+    </ClCompile>
+    <ClCompile Include="C_Parser.cpp">
+      <Filter>6. SOURCE FILES</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\code\lexer.cpp">
+      <Filter>7. CODE FILES</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\code\main.cpp">
+      <Filter>7. CODE FILES</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\code\parser.cpp">
+      <Filter>7. CODE FILES</Filter>
+    </ClCompile>
+    <ClCompile Include="C_Actions.cpp">
+      <Filter>6. SOURCE FILES</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="make.bat">
+      <Filter>1. MAKE FILE</Filter>
+    </CustomBuild>
+  </ItemGroup>
+</Project>

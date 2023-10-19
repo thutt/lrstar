@@ -1,0 +1,198 @@
+
+// LEXER
+
+	<eof> -> \z
+
+	<identifier>
+		->	JavaLetter JavaLetterOrDigit*
+
+	<literal>
+		->	IntegerLiteral
+		->	FloatingPointLiteral
+		->	CharacterLiteral
+		->	StringLiteral
+
+	IntegerLiteral
+		->	DecimalIntegerLiteral
+		->	HexIntegerLiteral
+		->	OctalIntegerLiteral
+		->	BinaryIntegerLiteral
+
+	DecimalIntegerLiteral
+		->	DecimalNumeral IntegerTypeSuffix?
+
+	OctalIntegerLiteral
+		->	OctalNumeral IntegerTypeSuffix?
+
+	BinaryIntegerLiteral
+		->	BinaryNumeral IntegerTypeSuffix?
+
+	IntegerTypeSuffix
+		->	'l'
+		->  'L'	
+
+	DecimalNumeral
+		->	'0'
+		->	NonZeroDigit 
+		->	NonZeroDigit Digits 
+		->	NonZeroDigit '_'+ Digits 
+
+	Digits
+		->	Digit 
+		->	Digits Digit
+		->	Digits '_'+ Digit
+
+	Digit
+		->	'0'
+		->	NonZeroDigit
+
+	NonZeroDigit
+		=	'1'..'9'
+
+	HexDigits
+		->	HexDigit 
+		->	HexDigits HexDigit 
+		->	HexDigits '_'+ HexDigit 
+
+	HexDigit
+		=	'0'..'9' | 'a'..'f' | 'A'..'F'
+
+	OctalNumeral
+		->	'0' OctalDigit
+		->	'0' '_'+ OctalDigit
+		->	OctalNumeral OctalDigit
+		->	OctalNumeral '_'+ OctalDigit
+
+	OctalDigit
+		=	'0'..'7'
+
+	BinaryNumeral
+		->	'0' 'b' BinaryDigit
+		->	BinaryNumeral BinaryDigit
+		->	BinaryNumeral '_'+ BinaryDigit
+
+	// 3.10.2 Floating-Point Literals
+
+	FloatingPointLiteral
+		->	DecimalFloatingPointLiteral
+		->	HexadecimalFloatingPointLiteral
+
+	DecimalFloatingPointLiteral
+		->	Digits '.' Digits? ExponentPart? FloatTypeSuffix?
+		->	       '.' Digits  ExponentPart? FloatTypeSuffix?
+		->	Digits             ExponentPart  FloatTypeSuffix?
+		->	Digits                           FloatTypeSuffix
+
+	ExponentPart
+		->	ExponentIndicator SignedInteger
+
+	HexadecimalFloatingPointLiteral
+		->	HexSignificand BinaryExponent FloatTypeSuffix?
+
+	HexIntegerLiteral
+		->	HexNumeral IntegerTypeSuffix?
+
+	HexSignificand
+		->	HexNumeral
+		->	HexNumeral '.'
+		->	'0' 'x' HexDigits? '.' HexDigits
+		->	'0' 'X' HexDigits? '.' HexDigits
+
+	HexNumeral
+		->	'0' 'x' HexDigits
+		->	'0' 'X' HexDigits
+
+	BinaryExponent
+		->	BinaryExponentIndicator SignedInteger
+
+	// 3.10.4 Character Literals
+
+	CharacterLiteral
+		->	''' SingleCharacter '''
+		->	''' EscapeSequence  '''
+
+	SingleCharacter
+		->	neol
+
+	// 3.10.5 String Literals
+
+	StringLiteral
+		->	'"' StringCharacters? '"'
+
+	StringCharacters
+		->	StringCharacter+
+
+	StringCharacter
+		->	neol
+		->	EscapeSequence
+
+	SignedInteger
+		->	Sign? Digits
+
+	// 3.10.6 Escape Sequences for Character and String Literals
+
+	EscapeSequence
+		->	'\' 'b'
+		->	'\' 't'
+		->	'\' 'n'
+		->	'\' 'f'
+		->	'\' 'r'
+		->	'\' '"'
+		->	'\' '''
+		->	'\' '\'
+		->	OctalEscape
+		-> UnicodeEscape // This is not in the spec but prevents having to preprocess the input
+
+
+	OctalEscape
+		->	'\' OctalDigit
+		->	'\' OctalDigit  OctalDigit
+
+	UnicodeEscape
+		->   '\' 'u' HexDigit HexDigit HexDigit HexDigit
+
+	{whitespace}			-> whitechar+
+	
+	{commentline}  		-> '/' '/' neol*
+      
+	{commentblock} 		-> '/' '*' na* '*'+ (nans na* '*'+)* '/'
+
+/* Character Sets */
+							
+	JavaLetter
+	=	'a'..'z' | 'A'..'Z' | '$' | '_'  // these are the "java letters" below 0x7F
+
+	JavaLetterOrDigit
+	=	'a'..'z' | 'A'..'Z' | '$' | '_' | '0'..'9' // these are the "java letters" below 0x7F
+
+	BinaryExponentIndicator
+		=	'p' | 'P'
+
+	BinaryDigit
+		=	'0'..'1'
+
+	ExponentIndicator
+		=	'e' | 'E'
+
+	Sign
+		=	'+' | '-'
+
+	FloatTypeSuffix
+		=	'f' | 'F' | 'd' | 'D'
+
+	whitechar     			= \t | \n | \r | \f | \v | ' ' 
+
+	any						= 0..255 - \z  		// any character except end of file
+	na             		= any - '*' 			// not asterisk
+	nans           		= any - '*' - '/'	   // not asterisk not slash
+	neol           		= any - \n 			   // not end of line
+
+	\t							= 09						// tab
+	\n							= 10						// newline
+	\v							= 11						// vertical feed?
+	\f							= 12						// form feed
+	\r							= 13						// return
+	\z							= 26						// end of file
+	\b							= 32						// blank/space
+	
+	

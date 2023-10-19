@@ -1,0 +1,16 @@
+
+program TEST
+{
+      if a == 0 
+      then 
+         if X == 0 
+         then b = 1+2*3;     
+         else b = 2+3+4;     
+         endif
+      else 	 
+         if x != 1 	 
+         then b3 = 3*4+5;    
+         else B43509 = 4*5*6;     
+         endif
+      endif
+}
