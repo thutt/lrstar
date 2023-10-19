@@ -1,0 +1,97 @@
+
+/* C99 Lexical Grammar */
+
+/* Rules */
+
+  	<eof>						-> \z
+
+	<t_constant>     		-> literal 
+								-> integer	
+								-> decimal	
+
+   <f_constant>   		-> real
+
+	<identifier>   		-> letter (letter|digit)* 
+		           
+	<string_literal>		-> string
+
+/* <digit_sequence>     -> '#'  // Not sure what this is. 
+*/								
+	string					-> '"' schar* '"'
+
+	schar          		-> sany 
+								-> '\' '\'
+								-> '\' '''
+								-> '\' '"'
+								-> '\' 'n' 
+								-> '\' 't'			 
+								-> '\' 'a'
+								-> '\' 'b'
+								-> '\' 'f'
+								-> '\' 'r'
+								-> '\' 'v'
+								-> '\' '0'
+	               		
+	literal        		-> ''' lchar '''
+
+	lchar          		-> lany 
+								-> '\' '\'
+								-> '\' '''
+								-> '\' '"'
+								-> '\' 'n' 
+								-> '\' 't'			 
+								-> '\' 'a'
+								-> '\' 'b'
+								-> '\' 'f'
+								-> '\' 'r'
+								-> '\' 'v'
+								-> '\' '0'
+	               		
+	integer        		-> digit+
+
+	real	         		-> integer exp
+								-> decimal exp
+
+	decimal        		-> digit+ '.'
+								->        '.' digit+
+								-> digit+ '.' digit+
+
+	exp	         		-> 'e' digit+ 
+								-> 'E' digit+
+								-> 'e' '-' digit+ 
+								-> 'E' '-' digit+
+								-> 'e' '+' digit+ 
+								-> 'E' '+' digit+
+
+	{whitespace}       	-> whitechar+
+
+	{commentline}  		-> '/' '/' neol*
+
+	{commentblock} 		-> '/' '*' na* '*'+ (nans na* '*'+)* '/'
+
+/* Character-Set Definitions */
+
+	any						= 0..255 - \z  		// any character except end of file
+
+	lany           		= any - ''' - '\' - \n 
+	sany	         		= any - '"' - '\' - \n 
+
+	letter	      		= 'a'..'z' | 'A'..'Z' | '_' 
+	digit	         		= '0'..'9' 
+
+	whitechar     			= \t | \n | \r | \f | \v | ' ' 
+
+	na             		= any - '*' 			// not asterisk
+	nans           		= any - '*' - '/'	   // not asterisk not slash
+	neol           		= any - \n 			   // not end of line
+
+	\t							=  9						// tab
+	\n							= 10						// newline
+	\v							= 11						// vertical feed?
+	\f							= 12						// form feed
+	\r							= 13						// return
+	\z							= 26						// end of file
+	\b							= 32						// blank/space
+	
+/* End of lexical grammar */
+

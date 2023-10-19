@@ -1,0 +1,62 @@
+
+/* Token Rules */
+
+   <eof>                -> \z
+
+   <integer>            -> digit+
+
+   <string_literal>     -> ''' schar+ '''
+
+   schar                -> sany 
+                        -> '\' '\'
+                        -> '\' '''
+                        -> '\' '"'
+                        -> '\' 'n' 
+                        -> '\' 't'         
+                        -> '\' 'a'
+                        -> '\' 'b'
+                        -> '\' 'f'
+                        -> '\' 'r'
+                        -> '\' 'v'
+                        -> '\' '0'
+
+   <lexer_char_set>     -> '[' lexer_char+ ']'
+
+   <rule_ref>           -> lowercase (letter|digit)*
+
+   <token_ref>          -> uppercase (letter|digit)*
+                        
+   {whitespace}         -> whitechar+
+
+   {commentline}        -> '/' '/' neol*
+
+   {commentblock}       -> '/' '*' na* '*'+ (nans na* '*'+)* '/'
+
+/* Character-Set Definitions */
+
+   letter               = uppercase | lowercase | '_' 
+
+   uppercase            = 'A'..'Z'
+   lowercase            = 'a'..'z'
+
+   digit                = '0'..'9' 
+
+   lexer_char           = 33..127 - '[' - ']'
+
+   whitechar            = \t | \n | \r | \f | \v | ' ' 
+
+   any                  = 0..255 - \z        // any character except end of file
+   sany                 = any - ''' - '\' - \n 
+   na                   = any - '*'          // not asterisk
+   nans                 = any - '*' - '/'    // not asterisk not slash
+   neol                 = any - \n           // not end of line
+
+   \t                   =  9                 // tab
+   \n                   = 10                 // newline
+   \v                   = 11                 // vertical feed?
+   \f                   = 12                 // form feed
+   \r                   = 13                 // return
+   \z                   = 26                 // end of file
+   \b                   = 32                 // blank/space
+   
+/* End */

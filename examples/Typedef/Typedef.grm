@@ -1,0 +1,32 @@
+
+/* C Typedef Solution. */
+
+/* Terminal Declarations. */
+
+	<error>			=> error();
+   <identifier> 	=> lookup();  /* Symbol table lookup. */
+
+/* Rules. */
+
+   Goal				-> Declaration* <eof>							
+						
+	Declaration 	->         Type+     VarList ';'					
+						-> typedef Type+ TypeVarList ';'	 
+
+	VarList			-> Var     /','+				
+	TypeVarList		-> TypeVar /','+				
+						 
+	Var				-> Ptr* <identifier> 		
+	TypeVar			-> Ptr* TypeIdent
+	
+	TypeIdent      -> <identifier>^{typename}   +> hello_(1)
+						 
+	Ptr				-> '*'							
+						 									
+	Type				-> char							
+					   -> int												
+						-> short							
+						-> unsigned												
+						-> {typename}											
+
+/* End Of Grammar. */

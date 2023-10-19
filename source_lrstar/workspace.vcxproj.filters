@@ -1,0 +1,177 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="2b. LEXER GRAMMAR">
+      <UniqueIdentifier>{3dad62e1-4caa-4025-9282-343d433a37b0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="2a. PARSER GRAMMAR">
+      <UniqueIdentifier>{782ab1e9-eba0-44c6-886b-421ee08c786e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="1. MAKE FILES">
+      <UniqueIdentifier>{a60c278a-1908-4ec1-92db-92a94bd8b53a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="4. SOURCE FILES">
+      <UniqueIdentifier>{b26c2df1-9c4a-4002-85ee-df0f53abd41d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="3. HEADER FILES">
+      <UniqueIdentifier>{77fa7e0a-2716-4601-96c4-b50a892b7171}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="5. TEST FILES">
+      <UniqueIdentifier>{615db7a4-d42d-4420-9337-634e8e560e5f}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="PG_BuildLR0.h">
+      <Filter>3. HEADER FILES</Filter>
+    </ClInclude>
+    <ClInclude Include="PG_CheckGrammar.h">
+      <Filter>3. HEADER FILES</Filter>
+    </ClInclude>
+    <ClInclude Include="PG_ComputeLA.h">
+      <Filter>3. HEADER FILES</Filter>
+    </ClInclude>
+    <ClInclude Include="PG_CreateTables.h">
+      <Filter>3. HEADER FILES</Filter>
+    </ClInclude>
+    <ClInclude Include="PG_Main.h">
+      <Filter>3. HEADER FILES</Filter>
+    </ClInclude>
+    <ClInclude Include="PG_Lexer.h">
+      <Filter>3. HEADER FILES</Filter>
+    </ClInclude>
+    <ClInclude Include="PG_OptimizeStates.h">
+      <Filter>3. HEADER FILES</Filter>
+    </ClInclude>
+    <ClInclude Include="PG_Parser.h">
+      <Filter>3. HEADER FILES</Filter>
+    </ClInclude>
+    <ClInclude Include="PG_PrintStates.h">
+      <Filter>3. HEADER FILES</Filter>
+    </ClInclude>
+    <ClInclude Include="PG_PrintGrammar.h">
+      <Filter>3. HEADER FILES</Filter>
+    </ClInclude>
+    <ClInclude Include="PG_Actions.h">
+      <Filter>3. HEADER FILES</Filter>
+    </ClInclude>
+    <ClInclude Include="CM_Global.h">
+      <Filter>3. HEADER FILES</Filter>
+    </ClInclude>
+    <ClInclude Include="PG_LexerTables.hpp">
+      <Filter>3. HEADER FILES</Filter>
+    </ClInclude>
+    <ClInclude Include="PG_ParserTables.hpp">
+      <Filter>3. HEADER FILES</Filter>
+    </ClInclude>
+    <ClInclude Include="PG_LexerDefines.h">
+      <Filter>3. HEADER FILES</Filter>
+    </ClInclude>
+    <ClInclude Include="PG_LexerTables.h">
+      <Filter>3. HEADER FILES</Filter>
+    </ClInclude>
+    <ClInclude Include="PG_ParserTables.h">
+      <Filter>3. HEADER FILES</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="PG.lex">
+      <Filter>2b. LEXER GRAMMAR</Filter>
+    </None>
+    <None Include="PG.lgr">
+      <Filter>2b. LEXER GRAMMAR</Filter>
+    </None>
+    <None Include="PG.grm">
+      <Filter>2a. PARSER GRAMMAR</Filter>
+    </None>
+    <None Include="PG.lgr.conflicts.html">
+      <Filter>2b. LEXER GRAMMAR</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="PG.lgr.grammar.txt">
+      <Filter>2b. LEXER GRAMMAR</Filter>
+    </Text>
+    <Text Include="PG.lgr.log.txt">
+      <Filter>2b. LEXER GRAMMAR</Filter>
+    </Text>
+    <Text Include="PG.lgr.states.txt">
+      <Filter>2b. LEXER GRAMMAR</Filter>
+    </Text>
+    <Text Include="PG.lgr.warnings.txt">
+      <Filter>2b. LEXER GRAMMAR</Filter>
+    </Text>
+    <Text Include="PG.lgr.conflicts.txt">
+      <Filter>2b. LEXER GRAMMAR</Filter>
+    </Text>
+    <Text Include="PG.grm.grammar.txt">
+      <Filter>2a. PARSER GRAMMAR</Filter>
+    </Text>
+    <Text Include="PG.grm.states.txt">
+      <Filter>2a. PARSER GRAMMAR</Filter>
+    </Text>
+    <Text Include="PG.grm.warnings.txt">
+      <Filter>2a. PARSER GRAMMAR</Filter>
+    </Text>
+    <Text Include="PG.grm.log.txt">
+      <Filter>2a. PARSER GRAMMAR</Filter>
+    </Text>
+    <Text Include="PG.grm.conflicts.txt">
+      <Filter>2a. PARSER GRAMMAR</Filter>
+    </Text>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="PG_BuildLR0.cpp">
+      <Filter>4. SOURCE FILES</Filter>
+    </ClCompile>
+    <ClCompile Include="PG_CheckGrammar.cpp">
+      <Filter>4. SOURCE FILES</Filter>
+    </ClCompile>
+    <ClCompile Include="PG_ComputeLA.cpp">
+      <Filter>4. SOURCE FILES</Filter>
+    </ClCompile>
+    <ClCompile Include="PG_CreateTables.cpp">
+      <Filter>4. SOURCE FILES</Filter>
+    </ClCompile>
+    <ClCompile Include="PG_Generate.cpp">
+      <Filter>4. SOURCE FILES</Filter>
+    </ClCompile>
+    <ClCompile Include="PG_Main.cpp">
+      <Filter>4. SOURCE FILES</Filter>
+    </ClCompile>
+    <ClCompile Include="PG_OptimizeStates.cpp">
+      <Filter>4. SOURCE FILES</Filter>
+    </ClCompile>
+    <ClCompile Include="PG_Parser.cpp">
+      <Filter>4. SOURCE FILES</Filter>
+    </ClCompile>
+    <ClCompile Include="PG_PrintStates.cpp">
+      <Filter>4. SOURCE FILES</Filter>
+    </ClCompile>
+    <ClCompile Include="PG_Lexer.cpp">
+      <Filter>4. SOURCE FILES</Filter>
+    </ClCompile>
+    <ClCompile Include="PG_PrintGrammar.cpp">
+      <Filter>4. SOURCE FILES</Filter>
+    </ClCompile>
+    <ClCompile Include="PG_Actions1.cpp">
+      <Filter>4. SOURCE FILES</Filter>
+    </ClCompile>
+    <ClCompile Include="PG_Actions2.cpp">
+      <Filter>4. SOURCE FILES</Filter>
+    </ClCompile>
+    <ClCompile Include="PG_Actions.cpp">
+      <Filter>4. SOURCE FILES</Filter>
+    </ClCompile>
+    <ClCompile Include="PG_Actions3.cpp">
+      <Filter>4. SOURCE FILES</Filter>
+    </ClCompile>
+    <ClCompile Include="CM_Global.cpp">
+      <Filter>4. SOURCE FILES</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="make.bat">
+      <Filter>1. MAKE FILES</Filter>
+    </CustomBuild>
+  </ItemGroup>
+</Project>

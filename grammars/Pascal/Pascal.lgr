@@ -1,0 +1,81 @@
+
+/* Lexical grammar */
+
+   <eof>          -> 26
+
+   <number>       -> hex
+                  -> digits
+                  -> float
+
+   <identifier>   -> letter
+                  -> <identifier> letter
+                  -> <identifier> digit
+
+   letter         = 'a' .. 'z' | 'A' .. 'Z' | '_'
+
+   digit          = '0' .. '9'
+
+   digits         -> digit
+                  -> digits digit
+                  -> digits '_'
+
+   hex            -> '$' hexdigit
+                  -> hex hexdigit
+                  -> hex '_'
+
+   hexdigit       = '0' .. '9' | 'a' .. 'f' | 'A' .. 'F'
+
+   float          -> rational
+                  -> digits exp
+                  -> rational exp
+
+   rational       -> digits '.'
+                  -> '.' digits
+                  -> digits '.' digits
+
+   exp            -> 'e'     digits 
+                  -> 'E'     digits
+                  -> 'e' '-' digits 
+                  -> 'E' '-' digits
+                  -> 'e' '+' digits 
+                  -> 'E' '+' digits
+
+   <string>       -> ''' inside '''
+
+   inside         -> char
+                  -> inside char
+
+   char           -> any
+                  -> '#' digit
+                  -> '#' digit digit
+                  -> '#' digit digit digit
+
+   any            = 0 .. 255 - ''' - 10 - 26
+
+   {spaces}       -> space+
+
+   space          = 0 | 9 | 10 | 32 | 255
+
+   {comment}      -> '(' '*' end ')'
+
+   {bcomment}     -> '{' anymb '}'
+
+   end            -> endin
+                  -> end anymp endin
+
+   endin          -> as
+                  -> nona as
+
+   as             -> '*'
+                  -> as '*'
+
+   nona           -> anyma
+                  -> nona anyma
+
+   anymp          = 0 .. 255 - 26 - ')'
+
+   anyma          = 0 .. 255 - 26 - '*'
+
+   anymb          = 0 .. 255 - 26 - '}'
+
+/* End of lexical grammar */

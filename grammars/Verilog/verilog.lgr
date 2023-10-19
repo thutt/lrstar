@@ -1,0 +1,45 @@
+
+/* Lexical grammar */
+
+	<eof>					
+	   -> \z
+
+	<decimal_number>	
+		-> digit+ '.' 
+		-> '.' digit+
+		-> digit+ '.' digit+
+
+	<edge_symbol>     -> 'e' ''' <identifier>
+
+	<identifier>		-> letter (letter | digit)*
+
+	<level_symbol>		-> 'l' ''' <identifier>
+
+	<name_of_system_function> -> 's' ''' <identifier>
+
+	<number>				-> digit+
+
+	<output_symbol>	-> 'o' ''' <identifier>
+
+	<real_number>		-> <decimal_number> 'e' ('+'|'-') digit+
+
+	<scalar_constant>	-> 's' ''' digit+
+
+	<size_base>			-> 'z' ''' digit+
+
+	<string>				-> '"' schar+ '"'
+
+	<symtem_name_of_task> -> 't' ''' <identifier>
+
+/* Character Sets */
+	
+	digit					= '0'..'9'
+	letter				= 'a'..'z' | 'A'..'Z' | '_'
+
+	schar					= 32..127 - \z - \n - '"'
+
+	\n						= 10
+	\z						= 26
+
+/* End of grammar */
+

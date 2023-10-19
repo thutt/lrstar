@@ -1,0 +1,130 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="1. MAKE FILE">
+      <UniqueIdentifier>{e599d205-5eb5-4129-b86b-dff54dbe0daf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="3. HEADER FILES">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="4. SOURCE FILES">
+      <UniqueIdentifier>{020f255b-8714-4d5a-a97e-336e06cbc40e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="5. CODE FILES">
+      <UniqueIdentifier>{7c2b103c-e8ec-4cbc-a790-021aef440416}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="6. TEST FILES">
+      <UniqueIdentifier>{b541a42d-9a42-44a8-944b-0dd1d307f4e6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="2a. PARSER GRAMMAR">
+      <UniqueIdentifier>{73ee130d-1edc-4b04-b2f6-0c7c4d296452}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="2b. LEXER GRAMMAR">
+      <UniqueIdentifier>{a903a327-2923-4422-b842-41ea65d403c0}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="test.input.txt">
+      <Filter>6. TEST FILES</Filter>
+    </None>
+    <None Include="test.output.txt">
+      <Filter>6. TEST FILES</Filter>
+    </None>
+    <None Include="Typedef.grm">
+      <Filter>2a. PARSER GRAMMAR</Filter>
+    </None>
+    <None Include="Typedef.lex">
+      <Filter>2b. LEXER GRAMMAR</Filter>
+    </None>
+    <None Include="Typedef.lgr">
+      <Filter>2b. LEXER GRAMMAR</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="make.bat">
+      <Filter>1. MAKE FILE</Filter>
+    </CustomBuild>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\code\lexer.h">
+      <Filter>5. CODE FILES</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\code\main.h">
+      <Filter>5. CODE FILES</Filter>
+    </ClInclude>
+    <ClInclude Include="Typedef_LexerTables.h">
+      <Filter>3. HEADER FILES</Filter>
+    </ClInclude>
+    <ClInclude Include="Typedef_Parser.h">
+      <Filter>3. HEADER FILES</Filter>
+    </ClInclude>
+    <ClInclude Include="Typedef_ParserTables.h">
+      <Filter>3. HEADER FILES</Filter>
+    </ClInclude>
+    <ClInclude Include="Typedef_Actions.h">
+      <Filter>3. HEADER FILES</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\code\parser.h">
+      <Filter>5. CODE FILES</Filter>
+    </ClInclude>
+    <ClInclude Include="Typedef_LexerTables.hpp">
+      <Filter>3. HEADER FILES</Filter>
+    </ClInclude>
+    <ClInclude Include="Typedef_ParserTables.hpp">
+      <Filter>3. HEADER FILES</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\code\lexer.cpp">
+      <Filter>5. CODE FILES</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\code\main.cpp">
+      <Filter>5. CODE FILES</Filter>
+    </ClCompile>
+    <ClCompile Include="Typedef_Lexer.cpp">
+      <Filter>4. SOURCE FILES</Filter>
+    </ClCompile>
+    <ClCompile Include="Typedef_Main.cpp">
+      <Filter>4. SOURCE FILES</Filter>
+    </ClCompile>
+    <ClCompile Include="Typedef_Parser.cpp">
+      <Filter>4. SOURCE FILES</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\code\parser.cpp">
+      <Filter>5. CODE FILES</Filter>
+    </ClCompile>
+    <ClCompile Include="Typedef_Actions.cpp">
+      <Filter>4. SOURCE FILES</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="Typedef.grm.grammar.txt">
+      <Filter>2a. PARSER GRAMMAR</Filter>
+    </Text>
+    <Text Include="Typedef.grm.log.txt">
+      <Filter>2a. PARSER GRAMMAR</Filter>
+    </Text>
+    <Text Include="Typedef.grm.warnings.txt">
+      <Filter>2a. PARSER GRAMMAR</Filter>
+    </Text>
+    <Text Include="Typedef.grm.conflicts.txt">
+      <Filter>2a. PARSER GRAMMAR</Filter>
+    </Text>
+    <Text Include="Typedef.grm.states.txt">
+      <Filter>2a. PARSER GRAMMAR</Filter>
+    </Text>
+    <Text Include="Typedef.lgr.grammar.txt">
+      <Filter>2b. LEXER GRAMMAR</Filter>
+    </Text>
+    <Text Include="Typedef.lgr.log.txt">
+      <Filter>2b. LEXER GRAMMAR</Filter>
+    </Text>
+    <Text Include="Typedef.lgr.states.txt">
+      <Filter>2b. LEXER GRAMMAR</Filter>
+    </Text>
+    <Text Include="Typedef.lgr.warnings.txt">
+      <Filter>2b. LEXER GRAMMAR</Filter>
+    </Text>
+  </ItemGroup>
+</Project>
