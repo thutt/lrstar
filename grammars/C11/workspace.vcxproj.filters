@@ -1,0 +1,126 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="3. Grammar Files">
+      <UniqueIdentifier>{2d1d3974-1338-45cc-9f1d-c6dbb29fee59}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="2. Command Files">
+      <UniqueIdentifier>{bea30ade-8a0d-43aa-9626-3a32b87f83ef}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="4. Header Files">
+      <UniqueIdentifier>{5632e193-4f87-4be8-9887-08d5d1c50f75}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="5. Source Files">
+      <UniqueIdentifier>{307688a9-02ff-4c82-9816-29072ae08b58}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="6. Code Files">
+      <UniqueIdentifier>{a67196de-aeee-4700-8e99-310ed128904e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="7. Test Files">
+      <UniqueIdentifier>{9c5ff353-e272-4abb-9e13-29b3d6fc033f}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="test.input.txt">
+      <Filter>7. Test Files</Filter>
+    </Text>
+    <Text Include="test.output.txt">
+      <Filter>7. Test Files</Filter>
+    </Text>
+    <Text Include="C11.grm.grammar.txt">
+      <Filter>3. Grammar Files</Filter>
+    </Text>
+    <Text Include="C11.grm.log.txt">
+      <Filter>3. Grammar Files</Filter>
+    </Text>
+    <Text Include="C11.grm.warnings.txt">
+      <Filter>3. Grammar Files</Filter>
+    </Text>
+    <Text Include="C11.lgr.grammar.txt">
+      <Filter>3. Grammar Files</Filter>
+    </Text>
+    <Text Include="C11.lgr.log.txt">
+      <Filter>3. Grammar Files</Filter>
+    </Text>
+    <Text Include="C11.lgr.states.txt">
+      <Filter>3. Grammar Files</Filter>
+    </Text>
+    <Text Include="C11.lgr.warnings.txt">
+      <Filter>3. Grammar Files</Filter>
+    </Text>
+    <Text Include="C11.grm.states.txt">
+      <Filter>3. Grammar Files</Filter>
+    </Text>
+    <Text Include="C11.grm.conflicts.txt">
+      <Filter>3. Grammar Files</Filter>
+    </Text>
+    <Text Include="C11.lgr.conflicts.txt">
+      <Filter>3. Grammar Files</Filter>
+    </Text>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\code\lexer.h">
+      <Filter>6. Code Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\code\main.h">
+      <Filter>6. Code Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\code\parser.h">
+      <Filter>6. Code Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C11_LexerTables.h">
+      <Filter>4. Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C11_LexerTables.hpp">
+      <Filter>4. Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C11_Parser.h">
+      <Filter>4. Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C11_ParserTables.h">
+      <Filter>4. Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C11_ParserTables.hpp">
+      <Filter>4. Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\code\lexer.cpp">
+      <Filter>6. Code Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\code\main.cpp">
+      <Filter>6. Code Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\code\parser.cpp">
+      <Filter>6. Code Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C11_Lexer.cpp">
+      <Filter>5. Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C11_Main.cpp">
+      <Filter>5. Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C11_Parser.cpp">
+      <Filter>5. Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C11_Actions.cpp">
+      <Filter>5. Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="make.bat">
+      <Filter>2. Command Files</Filter>
+    </CustomBuild>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="C11.grm">
+      <Filter>3. Grammar Files</Filter>
+    </None>
+    <None Include="C11.lex">
+      <Filter>3. Grammar Files</Filter>
+    </None>
+    <None Include="C11.lgr">
+      <Filter>3. Grammar Files</Filter>
+    </None>
+  </ItemGroup>
+</Project>

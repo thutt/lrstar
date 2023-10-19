@@ -1,0 +1,36 @@
+
+/* Calc Lexical Grammar. */
+
+	<eof>          		-> \z	            
+
+	<identifier>			-> letter (letter|digit)*		  
+
+	<integer>				-> digit+ 
+
+	{spaces}       		-> ( \t | \n | ' ' )+
+
+	{commentline}  		-> '/' '/' neol*
+
+	{commentblock} 		-> '/' '*' na* '*'+ (nans na* '*'+)* '/'												
+
+/* Character Set Specifications. */
+
+	uppercase				= 'A'..'Z'
+	lowercase				= 'a'..'z'
+
+	letter         		= lowercase | uppercase | '_' 
+	digit          		= '0'..'9' 				 
+
+	any						= 0..127 - \z 		
+	na             		= any - '*'						// not asterisk
+	nans           		= any - '*' - '/'				// not asterisk not slash
+	neol           		= any - \n						// not end of line
+
+	\t							=  9								// tab
+	\n							= 10								// newline
+	\f							= 12								// form feed
+	\r							= 13								// return
+	\z							= 26								// end of file
+
+/* End of Grammar. */
+

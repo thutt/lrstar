@@ -1,0 +1,133 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="3. HEADER FILES">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="4. SOURCE FILES">
+      <UniqueIdentifier>{885b648b-2bc1-4ef4-b653-bf76a7b32f04}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="5. CODE FILES">
+      <UniqueIdentifier>{191fbcc0-30c5-4733-9f5b-dff105902212}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="6. TEST FILES">
+      <UniqueIdentifier>{94a93038-7996-419b-8c2f-df6ddd3ff0e9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="1. MAKE FILE">
+      <UniqueIdentifier>{b027226c-4a4d-47e4-9737-f958d9b47706}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="2a. PARSER GRAMMAR">
+      <UniqueIdentifier>{7facf209-5963-46c4-9afa-154deb04ee4a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="2b. LEXER GRAMMAR">
+      <UniqueIdentifier>{1db32f9c-eb82-449b-bbb8-2460ba7491b4}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="test.input.txt">
+      <Filter>6. TEST FILES</Filter>
+    </None>
+    <None Include="LRK.grm">
+      <Filter>2a. PARSER GRAMMAR</Filter>
+    </None>
+    <None Include="LRK.lex">
+      <Filter>2b. LEXER GRAMMAR</Filter>
+    </None>
+    <None Include="LRK.lgr">
+      <Filter>2b. LEXER GRAMMAR</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="test.output.txt">
+      <Filter>6. TEST FILES</Filter>
+    </Text>
+    <Text Include="LRK.grm.grammar.txt">
+      <Filter>2a. PARSER GRAMMAR</Filter>
+    </Text>
+    <Text Include="LRK.grm.log.txt">
+      <Filter>2a. PARSER GRAMMAR</Filter>
+    </Text>
+    <Text Include="LRK.grm.warnings.txt">
+      <Filter>2a. PARSER GRAMMAR</Filter>
+    </Text>
+    <Text Include="LRK.grm.states.txt">
+      <Filter>2a. PARSER GRAMMAR</Filter>
+    </Text>
+    <Text Include="LRK.lgr.grammar.txt">
+      <Filter>2b. LEXER GRAMMAR</Filter>
+    </Text>
+    <Text Include="LRK.lgr.log.txt">
+      <Filter>2b. LEXER GRAMMAR</Filter>
+    </Text>
+    <Text Include="LRK.lgr.states.txt">
+      <Filter>2b. LEXER GRAMMAR</Filter>
+    </Text>
+    <Text Include="LRK.lgr.warnings.txt">
+      <Filter>2b. LEXER GRAMMAR</Filter>
+    </Text>
+    <Text Include="LRK.grm.conflicts.txt">
+      <Filter>2a. PARSER GRAMMAR</Filter>
+    </Text>
+    <Text Include="LRK.lgr.conflicts.txt">
+      <Filter>2b. LEXER GRAMMAR</Filter>
+    </Text>
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="make.bat">
+      <Filter>1. MAKE FILE</Filter>
+    </CustomBuild>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\code\lexer.h">
+      <Filter>5. CODE FILES</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\code\main.h">
+      <Filter>5. CODE FILES</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\code\parser.h">
+      <Filter>5. CODE FILES</Filter>
+    </ClInclude>
+    <ClInclude Include="LRK_Parser.h">
+      <Filter>3. HEADER FILES</Filter>
+    </ClInclude>
+    <ClInclude Include="LRK_ParserTables.h">
+      <Filter>3. HEADER FILES</Filter>
+    </ClInclude>
+    <ClInclude Include="LRK_Actions.h">
+      <Filter>3. HEADER FILES</Filter>
+    </ClInclude>
+    <ClInclude Include="LRK_LexerTables.h">
+      <Filter>3. HEADER FILES</Filter>
+    </ClInclude>
+    <ClInclude Include="LRK_LexerTables.hpp">
+      <Filter>3. HEADER FILES</Filter>
+    </ClInclude>
+    <ClInclude Include="LRK_ParserTables.hpp">
+      <Filter>3. HEADER FILES</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\code\lexer.cpp">
+      <Filter>5. CODE FILES</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\code\main.cpp">
+      <Filter>5. CODE FILES</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\code\parser.cpp">
+      <Filter>5. CODE FILES</Filter>
+    </ClCompile>
+    <ClCompile Include="LRK_Lexer.cpp">
+      <Filter>4. SOURCE FILES</Filter>
+    </ClCompile>
+    <ClCompile Include="LRK_Main.cpp">
+      <Filter>4. SOURCE FILES</Filter>
+    </ClCompile>
+    <ClCompile Include="LRK_Parser.cpp">
+      <Filter>4. SOURCE FILES</Filter>
+    </ClCompile>
+    <ClCompile Include="LRK_Actions.cpp">
+      <Filter>4. SOURCE FILES</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>

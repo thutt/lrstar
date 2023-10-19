@@ -1,0 +1,18 @@
+
+Memory Allocation Options (maximum values).
+Modify these values to suit your needs.
+
+/sym  =   100000  Symbols in the grammar
+/pro  =   100000  Productions in the grammar
+/tail =   500000  Tail symbols in the grammar
+/sta  =   100000  States created
+/fin  =   100000  Final state items
+/ker  =  1000000  Kernel state items
+/ntt  =  1000000  Nonterminal transitions
+/tt   =  1000000  Terminal transitions
+/tta  =  1000000  Terminal transitions added
+/la   =  1000000  Lookaheads in LALR computation
+/lb   =  1000000  Lookbacks in LALR computation
+/inc  =  1000000  Includes in LALR computation
+/ch   =  1000000  Child nodes in graph
+/nd   =  1000000  Nondeterministic/conflict items

@@ -1,0 +1,216 @@
+
+/* YACC.Y: Yacc grammar for Yacc main program. 2-17-91, 4-30-91 AG
+   To bootstrap Yacc, use Yacc iself to compile this grammar, then
+   run tpc on the generated program.
+
+   Note:
+
+   This is not entirely the `official' syntax introduced by Johnson, but it
+   should be compatible with UNIX Yacc (except for the differences specified
+   in the program header, below), as described in the UNIX manual, including
+   the language elements entitled as "old features supported but not
+   encouraged."
+
+   Bugs:
+
+   - Processes $$'s, $i's, %} and } inside of comments in Turbo Pascal code
+     (instead of ignoring them).
+
+   Shift/reduce conflicts:
+
+   This grammar will produce a number of shift/reduce conflicts caused by
+   the error productions, since it does not specify unambigiously whether
+   errors are to be handled in global structures (definitions and rules)
+   or by enclosed syntactic constructs (e.g. symbols). Yacc will resolve
+   these conflicts in favour of shift, which is o.k. (it means that
+   errors will be caught in the innermost constructs with error handling,
+   thus reducing the amount of skipped symbols in resynchronization).
+
+   Error handling is done using the general method of Schreiner/Friedman
+   (see Schreiner/Friedman, "Introduction to compiler construction with
+   UNIX," 1985).
+
+*/
+
+/* Copyright (c) 1990,91 by Albert Graef, Schillerstr. 18,
+   6509 Schornsheim/Germany
+   All rights reserved */
+
+/* TP Yacc - Yet Another Compiler Compiler for MS-DOS/Turbo Pascal
+
+   Version 3.0 as of April 91
+   Version 3.0a as of May 92 (bug fixes in precedence and type information
+     updates)
+
+   Author
+
+   Albert Graef
+   Schillerstr. 18
+   6509 Schornsheim/Germany
+
+   Graef@DMZRZU71.bitnet
+
+   Synopsis   YACC [options] yacc-file[.Y] [output-file[.PAS]]
+
+   Options
+
+   /v  "Verbose:" Yacc generates a readable description of the generated
+       parser, written to yacc-file with new extension .LST.
+
+   /d  "Debug:" Yacc generates parser with debugging output.
+
+   Description
+
+   This is a reimplementation of the popular UNIX compiler generator
+   Yacc for MS-DOS and Turbo Pascal.
+
+   Differences from UNIX Yacc:
+
+   - Produces output code for Turbo Pascal, rather than for C.
+
+   - Does not support %union definitions. Instead, a value type is declared
+     by specifying the type identifier *itself* as the tag of a %token
+     or %type definition. Yacc will automatically generate an appropriate
+     yylval variable of a variant record type (YYSType) which is capable of
+     holding values of any of the types used in %token and %type.
+
+     Type checking is *very* strict. If you use type definitions, then
+     any symbol referred to in an action *must* have a type introduced
+     in a type definition. Either the symbol must have been assigned a
+     type in the definitions section, or the $<type-identifier> notation
+     must be used. The syntax of the %type definition has been changed
+     slightly to allow definitions of the form
+       %type <type-identifier>
+     (omitting the nonterminals) which may be used to declare types which
+     are not assigned to any grammar symbol, but are used with the
+     $<...> construct.
+
+   - The parse tables constructed by this Yacc version are slightly greater
+     than those constructed by UNIX Yacc, since a reduce action will only be
+     chosen as the default action if it is the *only* action in the state.
+     In difference, UNIX Yacc chooses a reduce action as the default action
+     whenever it is the only *reduce* action of the state (even if there are
+     other shift actions).
+
+     This solves a bug in UNIX Yacc that makes the generated parser start
+     error recovery too late with certain types of error productions (see
+     also Schreiner/Friedman, "Introduction to compiler construction with
+     UNIX," 1985). Also, errors will be caught sooner in most cases where
+     standard Yacc would carry out an additional (default) reduction before
+     detecting the error.
+*/
+
+/* Syntax and semantic routines: */
+
+start : grammar <eof>
+      ;
+
+grammar : defs pp
+		    rules
+		    aux_procs
+		  ;
+
+aux_procs	
+		: /* empty: aux_procs is optional */
+		| pp 
+		;
+
+
+defs		
+		: /* empty */
+      | defs def	
+		| defs error		
+		;
+
+def		
+		: pstart id
+		| pstart error
+		| lcurl  rcurl
+		| ptoken	tag token_list
+		| pleft  tag token_list
+		| pright	tag token_list
+		| pnonassoc	tag token_list
+		| ptype tag nonterm_list
+      | ptype tag
+		;
+
+tag		
+		: /* empty: type tag is optional */
+		| langle id rangle
+		;
+
+token_list	
+		: token_num
+		| token_list token_num
+		| token_list comma token_num
+		| error
+		| token_list error
+		| token_list comma error
+		;
+
+token_num	: literal
+           	| litid
+           	| id
+          	| litid number
+          	| id number
+       		;
+
+nonterm_list	
+      : nonterm
+		| nonterm_list nonterm
+		| nonterm_list comma nonterm
+		| error
+		| nonterm_list error
+		| nonterm_list comma error
+		;
+
+nonterm		
+      : id
+		;
+
+
+rules		
+         : 
+		   | lcurl rcurl rule1
+		   | rules rule
+	    	| error
+	    	| rules error
+   		;
+
+rule1		: c_id
+		     colon
+		     body prec
+		   ;
+
+rule		: rule1
+		   | bar	body prec
+	    	;
+
+body		
+      : /* empty */
+		| body literal
+		| body litid
+		| body id
+      | body action
+		| body error
+		;
+
+action		
+      : lbrace rbrace
+		| eq 
+		;
+
+prec		
+      : /* empty */
+		| pprec literal opt_action
+		| pprec litid   opt_action
+		| pprec id      opt_action
+		| prec semicolon
+		;
+
+opt_action	
+      : /* empty */
+		| action
+		;
+
+/* End of yacc.y */

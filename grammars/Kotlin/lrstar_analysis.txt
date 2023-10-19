@@ -1,0 +1,42 @@
+
+LRSTAR 22.1.004 32b Copyright Paul B Mann.
+Kotlin w
+Grammar      753 rules, 155 terminals, 407 nonterminals.
+Kotlin.grm(0039) :    DOUBLE_ARROW                     '=>';
+Kotlin.grm(0039) : ....................................^^^^.
+Kotlin.grm(0039) : Warning, Constant '=>' was declared but not used anywhere.
+
+Kotlin.grm(0040) :    DOUBLE_SEMICOLON                 ';;';
+Kotlin.grm(0040) : ....................................^^^^.
+Kotlin.grm(0040) : Warning, Constant ';;' was declared but not used anywhere.
+
+Kotlin.grm(0059) :    HASH                             '#';
+Kotlin.grm(0059) : ....................................^^^.
+Kotlin.grm(0059) : Warning, Constant '#' was declared but not used anywhere.
+
+Kotlin.grm(0099) :    RESERVED                         '...';
+Kotlin.grm(0099) : ....................................^^^^^.
+Kotlin.grm(0099) : Warning, Constant '...' was declared but not used anywhere.
+
+Kotlin.grm(0108) :    SINGLE_QUOTE                     '\'';
+Kotlin.grm(0108) : ....................................^^^^.
+Kotlin.grm(0108) : Warning, Constant '\'' was declared but not used anywhere.
+
+Kotlin.grm(0119) :    TYPEOF                           'typeof';
+Kotlin.grm(0119) : ....................................^^^^^^^^.
+Kotlin.grm(0119) : Warning, Constant 'typeof' was declared but not used anywhere.
+
+Kotlin.grm(0429) : parenthesizedUserType
+Kotlin.grm(0429) : ^^^^^^^^^^^^^^^^^^^^^
+Kotlin.grm(0429) : Warning, Nonterminal symbol parenthesizedUserType is not reachable from the goal symbol.
+
+States      1230 states in LALR(1) state machine.
+             670 states when using shift-reduce actions.
+Conflicts    233 states, 1018 shift-reduce, 2177 reduce-reduce.
+            rows   cols          matrix       list      vect     total
+B matrix     103 x   73 x 1 =     7,519 ->     790 +   1,650 =   2,440
+T matrix      22 x  102 x 2 =     4,488 ->   2,488 +   1,495 =   3,983
+N matrix     250 x  147 x 2 =    73,500 ->   9,296 +   2,093 =  11,389
+R matrix     107 x   53 x 2 =    11,080 ->  11,080 +   1,495 =  12,575
+Total                                       23,654 +   6,733 =  30,387
+0 min 0.033 sec, 30.587 MB, 7 WARNINGS, 0 errors.

@@ -1,0 +1,192 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="1. Make Files">
+      <UniqueIdentifier>{1782fe82-1ce9-4dda-8dc0-ec6f5542de72}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="5. Grm Files">
+      <UniqueIdentifier>{b24a62c8-c8ac-4f41-b904-18f49c447b9d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="4c. Header Files">
+      <UniqueIdentifier>{1ebef4dd-7edf-4ea6-b510-01172581ab2a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="4d. Source Files">
+      <UniqueIdentifier>{0e4d4b2d-3cae-4a77-966d-efbffbcb301d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="3b Lexical Grammar">
+      <UniqueIdentifier>{89e8c83a-366b-42b8-9761-afb0f274fc84}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="3a. Grammar">
+      <UniqueIdentifier>{e2a61013-3b8d-48e0-a5e7-402f5cddae39}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="LG_Actions.h">
+      <Filter>4c. Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="LG_AddExtra.h">
+      <Filter>4c. Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="LG_BuildStates.h">
+      <Filter>4c. Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="LG_CheckGrammar.h">
+      <Filter>4c. Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="LG_ComputeLA.h">
+      <Filter>4c. Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="LG_CreateTables.h">
+      <Filter>4c. Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="LG_Global.h">
+      <Filter>4c. Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="LG_Lexer.h">
+      <Filter>4c. Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="LG_OptimizeStates.h">
+      <Filter>4c. Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="LG_Parser.h">
+      <Filter>4c. Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="LG_PrintStates.h">
+      <Filter>4c. Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="CM_Global.h">
+      <Filter>4c. Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="LG_LexerTables.h">
+      <Filter>4c. Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="LG_LexerTables.hpp">
+      <Filter>4c. Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="LG_ParserTables.h">
+      <Filter>4c. Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="LG_ParserTables.hpp">
+      <Filter>4c. Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="LG_Actions.cpp">
+      <Filter>4d. Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="LG_AddExtra.cpp">
+      <Filter>4d. Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="LG_BuildStates.cpp">
+      <Filter>4d. Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="LG_CheckGrammar.cpp">
+      <Filter>4d. Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="LG_ComputeLA.cpp">
+      <Filter>4d. Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="LG_CreateTables.cpp">
+      <Filter>4d. Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="LG_Lexer.cpp">
+      <Filter>4d. Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="LG_Main.cpp">
+      <Filter>4d. Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="LG_OptimizeStates.cpp">
+      <Filter>4d. Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="LG_Parser.cpp">
+      <Filter>4d. Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="LG_PrintGrammar.cpp">
+      <Filter>4d. Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="LG_PrintStates.cpp">
+      <Filter>4d. Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="LG_Generate.cpp">
+      <Filter>4d. Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="CM_Global.cpp">
+      <Filter>4d. Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="CM_Main.cpp">
+      <Filter>4d. Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="LG_Actions2.cpp">
+      <Filter>4d. Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="LG.grm">
+      <Filter>3a. Grammar</Filter>
+    </None>
+    <None Include="LG.grm.conflicts.txt">
+      <Filter>3a. Grammar</Filter>
+    </None>
+    <None Include="LG.grm.grammar.txt">
+      <Filter>3a. Grammar</Filter>
+    </None>
+    <None Include="LG.grm.log.txt">
+      <Filter>3a. Grammar</Filter>
+    </None>
+    <None Include="LG.grm.states.txt">
+      <Filter>3a. Grammar</Filter>
+    </None>
+    <None Include="LG.grm.warnings.txt">
+      <Filter>3a. Grammar</Filter>
+    </None>
+    <None Include="LG.lex">
+      <Filter>3b Lexical Grammar</Filter>
+    </None>
+    <None Include="LG.lgr">
+      <Filter>3b Lexical Grammar</Filter>
+    </None>
+    <None Include="LG.lgr.conflicts.txt">
+      <Filter>3b Lexical Grammar</Filter>
+    </None>
+    <None Include="LG.lgr.grammar.txt">
+      <Filter>3b Lexical Grammar</Filter>
+    </None>
+    <None Include="LG.lgr.log.txt">
+      <Filter>3b Lexical Grammar</Filter>
+    </None>
+    <None Include="LG.lgr.states.txt">
+      <Filter>3b Lexical Grammar</Filter>
+    </None>
+    <None Include="LG.lgr.warnings.txt">
+      <Filter>3b Lexical Grammar</Filter>
+    </None>
+    <None Include="..\examples\Calc\Calc.lex">
+      <Filter>5. Grm Files</Filter>
+    </None>
+    <None Include="..\examples\Calc\Calc.lgr">
+      <Filter>5. Grm Files</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="make_dfa.bat">
+      <Filter>1. Make Files</Filter>
+    </CustomBuild>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="..\examples\Calc\Calc.lgr.conflicts.txt">
+      <Filter>5. Grm Files</Filter>
+    </Text>
+    <Text Include="..\examples\Calc\Calc.lgr.grammar.txt">
+      <Filter>5. Grm Files</Filter>
+    </Text>
+    <Text Include="..\examples\Calc\Calc.lgr.log.txt">
+      <Filter>5. Grm Files</Filter>
+    </Text>
+    <Text Include="..\examples\Calc\Calc.lgr.states.txt">
+      <Filter>5. Grm Files</Filter>
+    </Text>
+    <Text Include="..\examples\Calc\Calc.lgr.warnings.txt">
+      <Filter>5. Grm Files</Filter>
+    </Text>
+  </ItemGroup>
+</Project>
