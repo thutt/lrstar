@@ -33,6 +33,7 @@
       #endif
 
       #ifdef LINUX
+		#include <limits.h>
       #include <unistd.h>
       #endif
 
@@ -122,8 +123,6 @@
 		#endif
 
 
-		#undef  MAX_PATH
-      #define MAX_PATH            260 // Maximum path length.
       #define MAX_DIR             160 // Maximum directory name length, 159.
       #define MAX_FILENAME         64 // Maximum file name length, 63.
       #define MAX_FILETYPE         32 // Maximum file type length, 31.
@@ -315,11 +314,11 @@
 		EXTERN int    t_error;
 		EXTERN int    n_warnings;
 
-	   EXTERN char   exefid [MAX_PATH];
+	   EXTERN char   exefid [PATH_MAX];
       EXTERN char   gdn [MAX_DIR];
       EXTERN char   gfn [MAX_FILENAME];
       EXTERN char   gft [MAX_FILETYPE];
-	   EXTERN char   grmfid [MAX_PATH];
+	   EXTERN char   grmfid [PATH_MAX];
 
       EXTERN int    optn[N_OPTIONS];
       EXTERN int    optncount[N_OPTIONS];

@@ -11,7 +11,7 @@
 
 void  PG_PrintGrammar::PrintGrammar ()
 {
-      char fid [MAX_PATH];
+      char fid [PATH_MAX];
       int  h, p, t, nh;
 
       strcpy (fid, gdn);
@@ -204,7 +204,7 @@ void  PG_PrintGrammar::print_struc()
 
 void  PG_PrintGrammar::PrintHtml ()
 {
-      char fid [MAX_PATH];
+      char fid [PATH_MAX];
       int  h, p, t, nh;
 
       nont_on = 0;

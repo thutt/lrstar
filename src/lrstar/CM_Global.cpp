@@ -494,7 +494,7 @@ int   get_fid (char *arg, char *dir, char *fn, char *ft)
 
 char*	get_file (char *dir, char *fn, char *ft, int *nb, int flags)
 {
-      char  fid [MAX_PATH], *filep;
+      char  fid [PATH_MAX], *filep;
       int   fl, n, fd;
 
       strcpy (fid, dir);

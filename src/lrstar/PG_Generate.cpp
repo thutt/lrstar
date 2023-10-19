@@ -17,8 +17,8 @@ void	PG_Main::GenerateParserTables ()
 		FILE* header;
 		FILE* tables;
 		const char* name  = "_ParserTables";
-		char  filename_h  [MAX_PATH];
-		char  filename_hpp[MAX_PATH];
+		char  filename_h  [PATH_MAX];
+		char  filename_hpp[PATH_MAX];
 
 		strcpy (filename_h, gdn);
 		strcat (filename_h, gfn);
