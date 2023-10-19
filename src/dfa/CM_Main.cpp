@@ -219,17 +219,6 @@ void  InternalError (int n)
 ///////////////////////////////////////////////////////////////////////////////
 //                                                                           //
 
-#if 0
-void  MemCrash (char* msg)
-{
-      prt_log ("\n%s\n", msg);
-      Quit ();
-}
-#endif
-
-///////////////////////////////////////////////////////////////////////////////
-//                                                                           //
-
 void  MemCrash (const char* value, int n)
 {
       n_errors++;

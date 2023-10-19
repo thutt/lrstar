@@ -276,18 +276,18 @@ void	LG_ComputeLA::ANALYZE (int& nc, int s, int f)
 						}
 						else // HLA > 2 && HLP > 2
 						{
-         				if (HLA < MAX_INT)
+         				if (HLA < INT_MAX)
 							{
-								if (HLP == MAX_INT); // keep action.
+								if (HLP == INT_MAX); // keep action.
 								else // conflict between 2 original productions
 								{
 									conflict[t] = -p;
 									prt_rrcon (nc, s, t); // report fatal conflict.
 								}
 							}
-							else // HLA == MAX_INT
+							else // HLA == INT_MAX
 							{
-								if (HLP < MAX_INT) action[t] = -p; // change action.
+								if (HLP < INT_MAX) action[t] = -p; // change action.
 								else  // conflict between 2 added productions.
 								{
 								  	conflict[t] = -p;     // report this to avoid looping in LGOptimizeStates.

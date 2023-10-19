@@ -11,7 +11,7 @@
 void	LG::GenerateLexerDefines ()
 {
 		FILE* header;
-		char filename_h[MAX_PATH];
+		char filename_h[PATH_MAX];
 
 		const char* lexer_class = "_LexerTables";
 
@@ -56,7 +56,7 @@ void	LG::GenerateLexerDefines ()
 		fprintf (header, "\n/*\n");
 
 		FILE* tables;
-		char filename_hpp[MAX_PATH];
+		char filename_hpp[PATH_MAX];
 		char* make_term (char*);
       const char* vartype;
 
@@ -105,13 +105,13 @@ void	LG::GenerateLexerDefines ()
 			if (i % 20 == 0)
 			{
 				if (i > 0) fprintf (tables, ",");
-				if (T_matrix[i] == MAX_INT)
+				if (T_matrix[i] == INT_MAX)
 					  fprintf (tables, "\n      %5s", "  MAX");
 				else fprintf (tables, "\n      %5d", T_matrix[i]);
 			}
 			else
 			{
-				if (T_matrix[i] == MAX_INT)
+				if (T_matrix[i] == INT_MAX)
 					  fprintf (tables, ",%5s", "  MAX");
 				else fprintf (tables, ",%5d", T_matrix[i]);
 			}

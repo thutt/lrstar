@@ -15,11 +15,11 @@
 //																																	//
 //		Includes
 
-      #include "sys/types.h"
-      #include "sys/stat.h"
-      #include "fcntl.h"
-      #include "ctype.h"
-      #include "stdio.h"
+      #include <sys/types.h>
+      #include <sys/stat.h>
+      #include <fcntl.h>
+      #include <ctype.h>
+      #include <stdio.h>
 
       #include <stdlib.h>
       #include <string.h>
@@ -27,13 +27,14 @@
       #include <stdarg.h>
 
       #if defined(WINDOWS)
-      #include "wtypes.h"
+      #include <wtypes.h>
       #include <io.h>
-      #include "malloc.h"
+      #include <malloc.h>
       #endif
 
       #ifdef LINUX
       #include <unistd.h>
+      #include <limits.h>
       #endif
 
       #include "basic_defs.h"
@@ -102,27 +103,16 @@
       #define unlink _unlink
 		#endif
 
-      #define cchar     const char
-      #define uchar     unsigned char
-      #define uint      unsigned int
-      #define ushort    unsigned short
-      #define ulong     unsigned long
-
-      #define YES                   1 // Yes value.
-      #define NO                    0 // No value.
-
-		#undef  MAX_PATH
-      #define MAX_PATH            260 // Maximum path length.
+// TODO: Replace with PATH_MAX
       #define MAX_DIR             160 // Maximum directory name length, 159.
       #define MAX_FILENAME         64 // Maximum file name length, 63.
       #define MAX_FILETYPE         32 // Maximum file type length, 31.
 
-		#undef  UINT_MAX
-		#define UINT_MAX     0xFFFFFFFF // 32-bit integer value for hasing.
-		#define MAX_INT      2147483647 // Maximum integer.
       #define EOF_CHAR             26
       #define EOL_CHAR             10
 
+// TODO: This should be an enumeration, and uses should be logically
+//       ORed in 'charcode'
       #define UPPERCASE		   1
       #define LOWERCASE       2
       #define UNDERSCORE	   4
@@ -368,39 +358,21 @@
       extern const char*  copywrt;
 
 		extern uchar  charcode[256];
-		extern uchar  numeric[256];
-		extern uchar  alpha[256];
-		extern uchar  upper[256];
 		extern uchar  lower[256];
 
       EXTERN int    n_errors;
       EXTERN int    n_warnings;
 
-      EXTERN char   confid [MAX_PATH];
-      EXTERN char   dir [MAX_DIR];
-	   EXTERN char   exefid [MAX_PATH];
+	   EXTERN char   exefid [PATH_MAX];
       EXTERN char   gdn [MAX_DIR];
       EXTERN char   gfn [MAX_FILENAME];
       EXTERN char   gft [MAX_FILETYPE];
-	   EXTERN char   grmfid [MAX_PATH];
-	   EXTERN char   logfid [MAX_PATH];
-	   EXTERN char   lstfid [MAX_PATH];
-      EXTERN char   out_name [MAX_FILENAME];
+	   EXTERN char   grmfid [PATH_MAX];
 
       EXTERN int    optn[N_OPTIONS];
       EXTERN int    optncount[N_OPTIONS];
-      EXTERN char   odn [MAX_DIR];
-      EXTERN char   ofn [MAX_FILENAME];
-      EXTERN char   oft [MAX_FILETYPE];
-      EXTERN char   outfid [MAX_PATH];
-      EXTERN char   sdn [MAX_DIR];
-      EXTERN char   sfn [MAX_FILENAME];
-      EXTERN char   sft [MAX_FILETYPE];
-	   EXTERN char   sklfid [MAX_PATH];
-      EXTERN char   stafid [MAX_PATH];
 
       EXTERN FILE*  logfp;
-      EXTERN FILE*  errfp;
       EXTERN FILE*  lstfp;
 		EXTERN FILE*  confp;
 		EXTERN FILE*  grmfp;
@@ -417,7 +389,6 @@
       EXTERN char*  input_end;			/* Byte after input.                      */
       EXTERN char*  lex_input_start;   /* First byte of input area.              */
       EXTERN char*  lex_input_end;     /* Byte after input.                      */
-      EXTERN int    LR1Activated;
       EXTERN int    n_lines;
       EXTERN char   spaces [256]
       #ifdef MAIN
@@ -427,12 +398,13 @@
         "                                                               "	// 255
       #endif
       ;
-      extern OPTION PGOption[];
+
       extern OPTION LGOption[];
       extern OPTION MAOption[];
 
       EXTERN char** line_ptr;
       EXTERN char** lex_line_ptr;
+
 
 		EXTERN int    memory_max;
 		EXTERN int    memory_usage;
@@ -441,53 +413,15 @@
       EXTERN int    max_lookah;
       EXTERN int    max_terml;
       EXTERN int    max_headl;
-      EXTERN int    max_symbl;
       EXTERN int    max_errors;
 
 		EXTERN int	  option_warnings;
 		EXTERN int    option_grammar;
 
-      EXTERN char*  lexer_input;
-      EXTERN int    lexer_linenumb;
-
       EXTERN CHILD* child;
       EXTERN int*   f_child;
       EXTERN int    n_childs;
 
-/////////////////////////////////////////////////////////////////////////////////////////////////////
-//																																	//
-//		Generate Output Variables
-
-		EXTERN int    num_char;
-		EXTERN int    num_uchar;
-		EXTERN int    num_short;
-		EXTERN int    num_ushort;
-		EXTERN int    num_int;
-		EXTERN int    num_uint;
-		EXTERN int    num_charp;
-		EXTERN char   Nullstring[3];
-
-		EXTERN char   str_char  [32];
-		EXTERN char   str_uchar [32];
-		EXTERN char   str_short [32];
-		EXTERN char   str_ushort[32];
-		EXTERN char   str_int   [32];
-		EXTERN char   str_uint  [32];
-		EXTERN char   str_charp [32];
-
-		EXTERN int    parser_defined;
-		EXTERN int    lexer_defined;
-
-/////////////////////////////////////////////////////////////////////////////////////////////////////
-//																																	//
-//		Global Functions
-
-		extern void   C_FIRST  (int n_heads, int N_terms, int* f_prod, int* f_tail, int* tail, char**& FIRST, int* nullable);
-		extern void   C_FOLLOW (int n_heads, int N_terms, int* f_prod, int* f_tail, int* tail, char**  FIRST, char**& FOLLOW, int* nullable);
-      extern void   C_EQUIVALENCE_N (int n_heads, int* f_prod, int* f_tail, int* tail, char**& EQUIVALENCE);
-      extern void   C_EQUIVALENCE_T (int n_heads, int N_terms, int* f_prod, int* f_tail, int* tail, char**& EQUIVALENCE);
-		extern void   P_FIRST  (int n_heads, int N_terms, char** FOLLOW, char** term_name, char** head_name);
-		extern void   P_FOLLOW (int n_heads, int N_terms, char** FOLLOW, char** term_name, char** head_name);
 		extern void   C_CAMEFROM (int N_states, int* tt_start, int* tt_action, int* ntt_start, int* ntt_action, int*& f_camefrom, int*& camefrom);
 
 		extern int    close_con();
@@ -505,28 +439,20 @@
       extern void   fastini (int, int *, int);
       extern int    fastmrg (int*, int*, int);
       extern void   fastor  (int*, int*, int);
-      extern char  *fix_backslash (const char *in);
+
       extern void   frea (char* x, int n_bytes);
 
       extern int    get_fid (char*arg, char*dir, char*fn, char*ft);
-      extern char*  get_file (char* dir, char* fn, char* ft, int *nb, int flags);
 		extern int    GetMaxValues  (char* dir);
 		extern void   SaveMaxValues ();
 
-		extern int	  itsakeyword (const char* terminal);
       extern int    inputi (const char*);
       extern void   inputt ();
 		extern void   InternalError (int n);
 
-#if 0
-Are there actually two versions of this function?
-      extern void   MemCrash (char* msg);
-#endif
 		extern void   MemCrash (const char* value, int n);
 
 		extern char*  mystrlwr (char* s);
-		extern char*  mystrupr (char* s);
-      extern void   memcrash (char*, int);
 
 		extern void   number (int x, char* num);
 
@@ -543,20 +469,14 @@ Are there actually two versions of this function?
                                  char *start,
 											char *end,
                                  int         linenumb);
-		extern void   prt_line_with_pointer (const char *tokenstart, const char *tokenend, int tokenlinenumb);
       extern void   prt_warn    (const char* format, ...);
-		extern void   prt_warnscreen(const char *format, ...);
       extern void   prt_log     (const char* format, ...);
       extern void   prt_logonly (const char* format, ...);
       extern int    prt_grm     (const char* format, ...);
 		extern void   prt_con     (const char* format, ...);
 		extern void   prt_sta     (const char* format, ...);
 		extern void   PRT_ARGS    (int na, char** arg, int dest);
-      extern void   prt_path    (int itm, int state);
-      extern void   prt_pointer (int numb, char*line, char*object);
-      extern void   prt_prod    (int p, int dot);
 		extern void   prt_num     (const char* desc, int n, const char* name, int max);
-		extern int	  prt_sym     (int s, const char *sp, char** term_name, char** head_name);
 
 		extern void   Quit ();
 
@@ -564,42 +484,21 @@ Are there actually two versions of this function?
 
 		extern void   SORT (int *start, int *end);
       extern void   SORT2 (int* first, int* second, int n);
-      extern void   SORT3 (int* first, int* second, int* third, int n);
-		extern void   SORTNUMBS (int* numb, int n, int* seq);
-      extern int    symlen (int s, char** term_name, char** head_name);
-
-		extern char*  strchr (char*p, char c);
-		extern char*  strrchr (char* str, char c);
 
 		extern int    SET_OPTN (char* opt);
 		extern int    set_optn (OPTION* option, char* opt);
 		extern int    SET_OPTNS (int na, char** arg);
-		extern void   SORTNAMES (char** start, int n, int* seq);
-		extern void   SORTNAMES2 (char** start, int n, int* seq, int* pos);
 
 		extern void   TRAVERSE (int x);
 
       extern char*  alloc_debug (int n_bytes, const char *fname, size_t lineno);
 		extern char*  alloc (int n_bytes);
 
-		extern int    fastcmp (int *a, int *b, int n);
-		extern void   fastcpy (int *a, int *b, int n);
-		extern void   fastini (int v, int *b, int n);
-		extern int    fastmrg (int *a, int *b, int n);
-		extern void   fastor (int *a, int *b, int n);
-
 		extern int    ATTACH   (int x, int y);
-		extern int    ATTACHED (int x, int y);
 		extern void   T_GRAPH  (char **graph, int nr, int nc);
-		extern void   P_GRAPH  (char** graph, int nr, int nc);
-		extern void   TRAVERSE (int x);
 
 		extern const char*  get_typestr  (int*, int);
 		extern int    get_typesize (int*, int);
-
-//                                                                           //
-///////////////////////////////////////////////////////////////////////////////
-
 #endif
 /* Local Variables:    */
 /* mode: c             */

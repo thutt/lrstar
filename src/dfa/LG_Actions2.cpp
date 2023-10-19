@@ -219,7 +219,7 @@ int   LG_ParseActions::ADD_TERMINAL ()
 
 int   LG_ParseActions::ADD_NOTERM (int p)
 {
-      ret_numb[n_prods] = MAX_INT; // Ignore this symbol (<spaces>, <comment>, etc.)
+      ret_numb[n_prods] = INT_MAX; // Ignore this symbol (<spaces>, <comment>, etc.)
       return (0);
 }
 
@@ -492,7 +492,7 @@ int   LG_ParseActions::START_GRM ()
 int   LG_ParseActions::ADD_IGNORE (int p)
 {
 		ADD_TOKEN (p);
-      ret_numb[n_prods] = MAX_INT; // Ignore this symbol (<spaces>, <comment>, etc.)
+      ret_numb[n_prods] = INT_MAX; // Ignore this symbol (<spaces>, <comment>, etc.)
 		return (0);
 }
 
@@ -1837,7 +1837,7 @@ int   LG_ParseActions::GEN_CON ()   /* Generate defined constant array. */
       ndc = 0;
       for (p = 0; p < n_prods; p++)
       {
-         if (ret_numb[p] == MAX_INT)
+         if (ret_numb[p] == INT_MAX)
          {
          // ret_numb[p] = -1;
 	   		ret_name[p] = "UNDEFINED";          // Assign name to defined constant.

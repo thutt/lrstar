@@ -39,7 +39,7 @@ int   LG_CreateTables::CreateTables ()
 			if (D_red[s] > 0)
 			{
 				D_red[s] = ret_numb[D_red[s]];
-				if (optn[LG_TABL_LARGE] == 0 && D_red[s] == MAX_INT)
+				if (optn[LG_TABL_LARGE] == 0 && D_red[s] == INT_MAX)
 					D_red[s] = -1;
 			}
 		}
@@ -308,8 +308,8 @@ int   LG_CreateTables::BLD_LARGE () /* Build Terminal Matrix for Large Tables. *
 		{
 			for (int i = 0; i < 256; i++)
 			{
-				if (D_red[s] == MAX_INT)
-					  T_matrix[s*T_cols + i] = MAX_INT;
+				if (D_red[s] == INT_MAX)
+					  T_matrix[s*T_cols + i] = INT_MAX;
 				else T_matrix[s*T_cols + i] = -D_red[s];
 			}
          for (int i = tt_start [s]; i < tt_end [s]; i++)
@@ -387,12 +387,12 @@ int   LG_CreateTables::MRG_ROWE2T (int **matrix, int *row, int N_states)
       for (s = 0; s < N_states; s++) // For all states ...
       {
 			count[s] = 0;
-			hash = MAX_INT;
+			hash = INT_MAX;
 			if (optn[LG_TABL_LARGE])
 			{
 				for (t = 0; t < N_terms; t++)
 				{
-					if (D_red[s] != MAX_INT) buffer[t] = -D_red[s];
+					if (D_red[s] != INT_MAX) buffer[t] = -D_red[s];
 				}
 			}
 			else // Not large.

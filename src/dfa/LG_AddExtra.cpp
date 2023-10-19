@@ -302,7 +302,7 @@ void	LG_AddExtra::ADDING (int x, int y)
 			sprintf (name, "NT%d-%d", b, y);			// Create new head name.
 			len = (int)strlen (name) + 1;					// Get length + 1 for '\0'
 			head_name [h] = LG_ParseActions::ADDSYMBOL (name,len);	// Save name in symbol space.
-			head_level [h] = MAX_INT;
+			head_level [h] = INT_MAX;
 			possibil   [h] = 1;
 			ntt_symbx  [n_nttgotox] = h;
 			ntt_gotox  [n_nttgotox++] = y;
@@ -573,9 +573,7 @@ void  LG_AddExtra::DETECT_CYCLES ()
 			}
 		}
 
-	// P_GRAPH (TRANS, N_states, N_states);
 		T_GRAPH (TRANS, N_states, N_states);
-	//	P_GRAPH (TRANS, N_states, N_states);
 
 	  	DEF_CYCLES ();
 
@@ -763,16 +761,16 @@ int 	LG_AddExtra::POSSIBIL (int h)
 						if ((sym = -tail[t]) > 0) // head symbol?
 						{
 							x = POSSIBIL(sym);
-							if (x == MAX_INT)
+							if (x == INT_MAX)
 							{
-								combinations = MAX_INT;
+								combinations = INT_MAX;
 								break;
 							}
 							else combinations *= x;
 						}
 					}
-					if (combinations == MAX_INT)
-					     possibil[h]  = MAX_INT;
+					if (combinations == INT_MAX)
+					     possibil[h]  = INT_MAX;
 					else possibil[h] += combinations;
 				//	printf ("possibil[%s] = %d\n", head_name[h], possibil[h]);
 				}
@@ -782,7 +780,7 @@ int 	LG_AddExtra::POSSIBIL (int h)
       }
 		else
 		{
-			return (possibil[h] = MAX_INT);
+			return (possibil[h] = INT_MAX);
 		}
 }
 
