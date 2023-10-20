@@ -1450,13 +1450,17 @@ void  prt_message (const char* msgtype,
 		strcpy (MsgType, msgtype);
     	if (tokenstart != NULL)
 		{
+			char *copy;
          int n_char;
 			if (tokenend > tokenstart + 30) tokenend = tokenstart + 30;
 
-         n_char = tokenend - tokenstart;
-         assert(n_char < sizeof(line) / sizeof(line[0]) - 1);
-			snprintf(line, n_char, msg, tokenstart);
-         line[n_char + 1] = '\0';
+			n_char = tokenend - tokenstart + 1;
+			copy = new char[n_char + 1];
+			strncpy(copy, tokenstart, n_char);
+			copy[n_char - 1] = '\0';
+			snprintf(line, sizeof(line) / sizeof(line[0]) - 1, msg, copy);
+         line[sizeof(line) / sizeof(line[0]) - 1] = '\0';
+			delete [] copy;
 		}
       else // Token is NULL
 		{
@@ -1473,8 +1477,7 @@ void  prt_message (const char* msgtype,
          copy = new char[n_char + 1];
          strncpy(copy, p, n_char);
          copy[n_char] = '\0';
-//			c = *q;
-//			*q = 0;
+			c = *q;
 			if (c == 0) end = ".\n\n"; // Last time?
 			if (*msgtype == 'W')
 			{
