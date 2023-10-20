@@ -50,9 +50,9 @@
          N_Query = 10
       };
 
-      #define uint   unsigned int
-      #define uchar  unsigned char
-      #define ushort unsigned short
+      typedef unsigned int   uint;
+      typedef unsigned char  uchar;
+      typedef unsigned short ushort;
 
       #define TOP_DOWN  0
       #define PASS_OVER 1
