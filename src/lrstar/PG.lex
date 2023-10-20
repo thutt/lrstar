@@ -38,9 +38,3 @@
    '~'                               31
 
 /* End of PG lexical symbols. */
-/* Local Variables:    */
-/* mode: c             */
-/* c-basic-offset: 3   */
-/* tab-width: 3        */
-/* indent-tabs-mode: t */
-/* End:                */

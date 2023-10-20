@@ -1,0 +1,72 @@
+This file describes the coding standard that will be used for the
+programs in this repository.
+
+o Aesthetics
+
+  + Line length should be limited to 80 columns.
+
+  + C / C++ indentation levels are 3 spaces.
+
+  + Spaces, not tabs, will be used for lexical scoping levels.
+
+  + Trailing whitespace should not be committed.
+
+
+o Naming Conventions
+
+  + Snake case will be used.
+
+  + Lowercase preferred over mixed or all capitals.
+
+
+o The '*' and '&' associates with the symbol, not the type.
+
+      char *p;                // Yes
+
+      char* p;                // No
+
+o Conditional Compilation
+
+  Conditional compilation is to be avoided.
+  (describe why)
+
+o Use NULL rather than 0 for pointers
+
+  It was a mistake for C++ to treat a sentinel pointer value just as
+  any other integer.  There is great value in being able to identify
+  the basic premises of types visually:
+
+    f(0)  -vs-  f(NULL)
+
+o The ASCII 0 character is '\0', not 0.
+
+
+o Block Structure
+
+  + The opening '{' is given its own line.
+
+  + The closing '}' is given its own line.
+
+  + Both '{' and '}' are placed on the starting column of the
+    statement preceeding the new block.
+
+      while (v)               // Yes.
+      {
+         funtion(v);
+      }
+
+      while (v)               // No.
+         {
+         funtion(v);
+         }
+
+
+  + Single lines will be placed in a block.
+
+      if (v)               // No.
+         funtion(v);
+
+      if (v)               // Yes.
+      {
+         funtion(v);
+      }

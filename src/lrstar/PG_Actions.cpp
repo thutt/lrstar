@@ -2,49 +2,49 @@
 
 /* Copyright 2018, 2023 Paul B Mann.  BSD License. */
 
-		#include "CM_Global.h"
-      #include "PG_Actions.h"
-		#include "PG_Parser.h"
+#include "CM_Global.h"
+#include "PG_Actions.h"
+#include "PG_Parser.h"
 
-		int PG_Actions::head_col;
-		int PG_Actions::arrow_col;
-		int PG_Actions::colon_col;
-		int PG_Actions::n_terms;
+int PG_Actions::head_col;
+int PG_Actions::arrow_col;
+int PG_Actions::colon_col;
+int PG_Actions::n_terms;
 
 ///////////////////////////////////////////////////////////////////////////////
 
-void	PG_Actions::init_actions ()
+void  PG_Actions::init_actions ()
 {
-	/* Initialization code goes here */
-	   int sti;
+   /* Initialization code goes here */
+   int sti;
 
-		const char* p = "<error>";
-		sti = add_symbol (p, p+7, LEXICAL, 0);		// Add ERROR symbol.
-		symbol[sti].type = TERMINAL;
-		symbol[sti].numb = 0;
+   const char* p = "<error>";
+   sti = add_symbol (p, p+7, LEXICAL, 0);    // Add ERROR symbol.
+   symbol[sti].type = TERMINAL;
+   symbol[sti].numb = 0;
 
-		const char* q = "<eof>";
-		sti = add_symbol (q, q+5, EOFLITERAL, 0);	// Add EOF symbol.
-		symbol[sti].type = TERMINAL;
-		symbol[sti].numb = 1;
+   const char* q = "<eof>";
+   sti = add_symbol (q, q+5, EOFLITERAL, 0); // Add EOF symbol.
+   symbol[sti].type = TERMINAL;
+   symbol[sti].numb = 1;
 
-		n_terms  = 2;
-		n_errors = 0;
-		t_error  = 0;
-		goal_symbol = 0;								// Not encountered yet.
+   n_terms  = 2;
+   n_errors = 0;
+   t_error  = 0;
+   goal_symbol = 0;                       // Not encountered yet.
 }
 
 ///////////////////////////////////////////////////////////////////////////////
 
-void	PG_Actions::term_actions ()
+void  PG_Actions::term_actions ()
 {
-	/* Termination code goes here */
+   /* Termination code goes here */
 }
 
 
-/* Local Variables:    */
-/* mode: c             */
-/* c-basic-offset: 3   */
-/* tab-width: 3        */
-/* indent-tabs-mode: t */
-/* End:                */
+/* Local Variables:      */
+/* mode: c               */
+/* c-basic-offset: 3     */
+/* tab-width: 3          */
+/* indent-tabs-mode: nil */
+/* End:                  */

@@ -24,10 +24,3 @@
    '|'                               15
 
 /* End of LG lexical symbols. */
-
-/* Local Variables:    */
-/* mode: c             */
-/* c-basic-offset: 3   */
-/* tab-width: 3        */
-/* indent-tabs-mode: t */
-/* End:                */
