@@ -50,6 +50,14 @@ uchar lower[256] =
 };
 
 
+char spaces [256] =				  /* TODO: This should either be const,
+											* or allocated by size on-demand. */
+	"                                                                " //  64
+   "                                                                " // 128
+   "                                                                " // 192
+   "                                                               "; // 255
+
+
 ///////////////////////////////////////////////////////////////////////////////
 
 char* mystrlwr (char* s)

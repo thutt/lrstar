@@ -309,6 +309,7 @@ extern uchar  numeric[256];
 extern uchar  alpha[256];
 extern uchar  upper[256];
 extern uchar  lower[256];
+extern char   spaces[256];
 
 EXTERN int    n_errors;
 EXTERN int    t_error;
@@ -341,14 +342,6 @@ EXTERN char*  input_start;       /* First byte of input area.              */
 EXTERN char*  input_end;         /* Byte after input.                      */
 EXTERN int    LR1Activated;
 EXTERN int    n_lines;
-EXTERN char   spaces [256]
-#ifdef MAIN
-= "                                                                " //  64
-   "                                                                " // 128
-   "                                                                " // 192
-   "                                                               "  // 255
-#endif
-   ;
 extern OPTION PGOption[];
 extern OPTION MAOption[];
 

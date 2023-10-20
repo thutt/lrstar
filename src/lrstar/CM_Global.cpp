@@ -96,6 +96,15 @@ uchar lower[256] =
    240,241,242,243,244,245,246,247,248,249,250,251,252,253,254,255
 };
 
+
+char spaces [256] =             /* TODO: This should either be const,
+                                 * or allocated by size on-demand. */
+   "                                                                " //  64
+   "                                                                " // 128
+   "                                                                " // 192
+   "                                                               ";  // 255
+
+
 OPTION MAOption[]= // Memory Allocation Options
 {
    "sym",      "Symbols in the grammar",           MAX_SYM,       100000,

@@ -359,6 +359,7 @@ extern const char*  copywrt;
 
 extern uchar  charcode[256];
 extern uchar  lower[256];
+extern char   spaces[256];
 
 EXTERN int    n_errors;
 EXTERN int    n_warnings;
@@ -390,14 +391,6 @@ EXTERN char*  input_end;			/* Byte after input.                      */
 EXTERN char*  lex_input_start;   /* First byte of input area.              */
 EXTERN char*  lex_input_end;     /* Byte after input.                      */
 EXTERN int    n_lines;
-EXTERN char   spaces [256]
-#ifdef MAIN
-= "                                                                " //  64
-   "                                                                "	// 128
-   "                                                                "	// 192
-   "                                                               "	// 255
-#endif
-   ;
 
 extern OPTION LGOption[];
 extern OPTION MAOption[];
