@@ -1256,48 +1256,13 @@ void  inputt (void)
 	}
 }
 
-///////////////////////////////////////////////////////////////////////////////
 
-void  prt_error (const char* msg, const char* start, const char* end, int linenum)
-{
-	if (++n_errors == 1) prt_log ("\n");
-	if (start != NULL && end == NULL)
-	{
-		for (end = start; *end != 0; end++);
-	}
-	prt_message ("Error, ", msg, start, end, linenum);
-	if (n_errors >= max_errors)
-	{
-		prt_log ("Maximum number of errors (%d) has been reached.\n", max_errors);
-		Quit ();
-	}
-}
-
-///////////////////////////////////////////////////////////////////////////////
-
-void  prt_warning (const char* msg, const char* start, const char* end, int linenum)
-{
-	n_warnings++;
-	if (start != NULL && end == NULL)
-	{
-		for (end = start; *end != 0; end++);
-	}
-	prt_message ("Warning, ", msg, start, end, linenum);
-/*		if (n_warnings >= max_errors)
-		{
-		printf  ("Maximum number of warnings (%d) has been reached.\n", max_errors);
-		prt_warn ("Maximum number of warnings (%d) has been reached.\n", max_errors);
-		Quit();
-		}	*/
-}
-
-////////////////////////////////////////////////////////////////////////////////
-
-void  prt_message (const char* msgtype,
-                   const char* msg,
-                   const char* tokenstart,
-                   const char* tokenend,
-                   int   tokenlinenumb)
+static void
+prt_message(const char* msgtype,
+				const char* msg,
+				const char* tokenstart,
+				const char* tokenend,
+				int   tokenlinenumb)
 {
 	char  c;
 	const char* p;					// char pointer.
@@ -1497,6 +1462,44 @@ void  prt_message (const char* msgtype,
 		*MsgType = 0; // Only print "Error:" on the first line.
 	}
 	while (c == '\n');
+}
+
+
+
+
+///////////////////////////////////////////////////////////////////////////////
+
+void  prt_error (const char* msg, const char* start, const char* end, int linenum)
+{
+	if (++n_errors == 1) prt_log ("\n");
+	if (start != NULL && end == NULL)
+	{
+		for (end = start; *end != 0; end++);
+	}
+	prt_message ("Error, ", msg, start, end, linenum);
+	if (n_errors >= max_errors)
+	{
+		prt_log ("Maximum number of errors (%d) has been reached.\n", max_errors);
+		Quit ();
+	}
+}
+
+///////////////////////////////////////////////////////////////////////////////
+
+void  prt_warning (const char* msg, const char* start, const char* end, int linenum)
+{
+	n_warnings++;
+	if (start != NULL && end == NULL)
+	{
+		for (end = start; *end != 0; end++);
+	}
+	prt_message ("Warning, ", msg, start, end, linenum);
+/*		if (n_warnings >= max_errors)
+		{
+		printf  ("Maximum number of warnings (%d) has been reached.\n", max_errors);
+		prt_warn ("Maximum number of warnings (%d) has been reached.\n", max_errors);
+		Quit();
+		}	*/
 }
 
 

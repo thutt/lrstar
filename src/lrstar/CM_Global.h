@@ -434,11 +434,6 @@ extern int    open_warn (char*);
 extern void   prt_error   (const char *msg, const char *start, const char *end, int linenumb);
 extern void   prt_warning (const char *msg, const char *start,
                            const char *end, int linenumb);
-extern void   prt_message (const char *msgtype, /* TODO: No need to declare; it's private. */
-                           const char *msg,
-                           const char *start,
-                           const char *end,
-                           int         linenumb);
 extern void   prt_warn    (const char* format, ...);
 extern void   prt_warnscreen(const char *format, ...);
 extern void   prt_log     (const char* format, ...);
