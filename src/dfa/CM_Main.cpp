@@ -20,36 +20,36 @@ const char* copywrt = "Copyright Paul B Mann";
 
 OPTION LGOption[]= // Lexer Generator Options
 {
-   "crr",		"Conflict report for Reduce-Reduce",	LG_CONRR,		      1,
-   "csr",		"Conflict report for Shift-Reduce",		LG_CONSR,		      1,
-   "d",     	"Debug lexer activated",  					LG_DEBUG,            0,
-   "g",     	"Grammar listing",  							LG_GRAMMAR,          0,
-   "ko",			"Keywords only (no identifiers).",		LG_KEYWORDONLY,		0,
-   "m",			"Minimize lexer-table size",				LG_MINIMIZE,			0,
-   "st",   		"State machine for conflicts report",	LG_STATELIST,			0,
-   "sto",  		"State machine optimized",					LG_STATELISTOPT,		0,
-   "v",			"Verbose mode (0,1,2)",						LG_VERBOSE,				2,
-   "w",			"Print warnings on screen",				LG_WARNINGS,			0,
-   "",			"",												0,				         0
+   "crr",      "Conflict report for Reduce-Reduce",   LG_CONRR,            1,
+   "csr",      "Conflict report for Shift-Reduce",    LG_CONSR,            1,
+   "d",        "Debug lexer activated",               LG_DEBUG,            0,
+   "g",        "Grammar listing",                     LG_GRAMMAR,          0,
+   "ko",       "Keywords only (no identifiers).",     LG_KEYWORDONLY,      0,
+   "m",        "Minimize lexer-table size",           LG_MINIMIZE,         0,
+   "st",       "State machine for conflicts report",  LG_STATELIST,        0,
+   "sto",      "State machine optimized",             LG_STATELISTOPT,     0,
+   "v",        "Verbose mode (0,1,2)",                LG_VERBOSE,          2,
+   "w",        "Print warnings on screen",            LG_WARNINGS,         0,
+   "",         "",                                    0,                   0
 };
 
 OPTION MAOption[]= // Memory Allocation Options
 {
-   "sym",		"Symbols in the grammar",  				MAX_SYM,		   100000,
-   "pro",		"Productions in the grammar",				MAX_PRO,		   100000,
-   "tail",		"Tail symbols in the grammar",			MAX_TAIL,	   500000,
-   "sta",		"States created",								MAX_STA,		   100000,
-   "fin",		"Final state items",							MAX_FIN,		   100000,
-   "ker",		"Kernel state items",						MAX_KER,		  1000000,
-   "ntt",		"Nonterminal transitions",					MAX_NTT,		  1000000,
-   "tt",			"Terminal transitions",						MAX_TT,		  1000000,
-   "tta",		"Terminal transitions added",				MAX_TTA,		  1000000,
-   "la",			"Lookaheads in LALR computation",		MAX_LA,		  1000000,
-   "lb",			"Lookbacks in LALR computation",			MAX_LB,		  1000000,
-   "inc",		"Includes in LALR computation",			MAX_INC,		  1000000,
-   "ch",			"Child nodes in graph",						MAX_CH,		  1000000,
-   "nd",			"Nondeterministic/conflict items",		MAX_ND,		  1000000,
-   "", "",											0,			           0
+   "sym",      "Symbols in the grammar",              MAX_SYM,       100000,
+   "pro",      "Productions in the grammar",          MAX_PRO,       100000,
+   "tail",     "Tail symbols in the grammar",         MAX_TAIL,      500000,
+   "sta",      "States created",                      MAX_STA,       100000,
+   "fin",      "Final state items",                   MAX_FIN,       100000,
+   "ker",      "Kernel state items",                  MAX_KER,      1000000,
+   "ntt",      "Nonterminal transitions",             MAX_NTT,      1000000,
+   "tt",       "Terminal transitions",                MAX_TT,       1000000,
+   "tta",      "Terminal transitions added",          MAX_TTA,      1000000,
+   "la",       "Lookaheads in LALR computation",      MAX_LA,       1000000,
+   "lb",       "Lookbacks in LALR computation",       MAX_LB,       1000000,
+   "inc",      "Includes in LALR computation",        MAX_INC,      1000000,
+   "ch",       "Child nodes in graph",                MAX_CH,       1000000,
+   "nd",       "Nondeterministic/conflict items",     MAX_ND,       1000000,
+   "", "",                                0,                  0
 };
 
 void  ShowOptions ();
@@ -100,7 +100,7 @@ int   main (int na, char *arg[])
          if (!open_sta  (grmfid)) return 0;
          if (!open_warn (grmfid)) return 0;
 
-         if (get_fid (arg[0], dn, fn, ft)    == 0)	Quit ();
+         if (get_fid (arg[0], dn, fn, ft)    == 0) Quit ();
          if (GetMaxValues (dn) == 0) Quit ();;
 
          if (LG::Main ())
@@ -154,10 +154,10 @@ void  InitOptions ()
       optn[MAOption[i].numb] = MAOption[i].defvalue;
    }
 
-	// Define invisible LG options ...
+   // Define invisible LG options ...
    optn [LG_TABLES]        = 1;
-   optn [LG_BACKSLASH]    	= 0;
-   optn [LG_TRANSITIONS] 	= 1;
+   optn [LG_BACKSLASH]     = 0;
+   optn [LG_TRANSITIONS]   = 1;
 }
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -181,7 +181,7 @@ void  InitOptions ()
   if (_kbhit())
   {
   printf("Locked.\n");
-  Halt:			goto Halt;
+  Halt:        goto Halt;
   }
   }
   while (sec < limit);

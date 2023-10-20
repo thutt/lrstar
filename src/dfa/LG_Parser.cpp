@@ -14,8 +14,8 @@ PStack*  LG_Parser::top_ptr;
 PStack*  LG_Parser::PS;
 PStack   LG_Parser::P_stack[STKSIZE];
 
-RStack*	LG_Parser::RS;
-RStack	LG_Parser::R_stack[STKSIZE];
+RStack*  LG_Parser::RS;
+RStack   LG_Parser::R_stack[STKSIZE];
 
 char*    LG_Parser::T_list;
 char*    LG_Parser::H_list;
@@ -25,7 +25,7 @@ char*    LG_Parser::T_start;
 char*    LG_Parser::T_end;
 int      LG_Parser::T_line;
 
-static char*	prt_line   (char* ls, int ln);
+static char*   prt_line   (char* ls, int ln);
 
 ///////////////////////////////////////////////////////////////////////////////
 //                                                                           //
@@ -33,11 +33,11 @@ static char*	prt_line   (char* ls, int ln);
 
 int   LG_Parser::ParseInit ()
 {
-   PS = P_stack;										// Set parse stack pointer.
-   n_errors = 0;										// Set number of errors.
-   RS = R_stack;										// Reset reduction stack pointer.
-   top_ptr = PS;										// Save parse stack top pointer.
-   top_state = 0;										// Save current state.
+   PS = P_stack;                             // Set parse stack pointer.
+   n_errors = 0;                             // Set number of errors.
+   RS = R_stack;                             // Reset reduction stack pointer.
+   top_ptr = PS;                             // Save parse stack top pointer.
+   top_state = 0;                            // Save current state.
    state = 0;
    return (1);
 }
@@ -59,67 +59,67 @@ int   LG_Parser::ParseInit ()
 
 int   LG_Parser::Parse ()                        // LR Parser.
 {
-   int t;												// Terminal.
-   int p;												// Production.
-   int x = state;	   								// State.
-   init_lexer ();										// Initialize lexer.
-   t = get_token ();									// Get token.
-   if (t == 0) goto Err;							// Bad token!
+   int t;                                    // Terminal.
+   int p;                                    // Production.
+   int x = state;                            // State.
+   init_lexer ();                            // Initialize lexer.
+   t = get_token ();                         // Get token.
+   if (t == 0) goto Err;                     // Bad token!
    goto Cont;
 
-Read: RS = R_stack;										// Reset reduction stack pointer.
-   top_ptr = PS;										// Save parse stack top pointer.
-   top_state = x;										// Save current state.
-   t = get_token ();									// Get next token.
-Cont:	if (tact_numb[t] >= 0)							// If input action ...
+Read: RS = R_stack;                             // Reset reduction stack pointer.
+   top_ptr = PS;                             // Save parse stack top pointer.
+   top_state = x;                            // Save current state.
+   t = get_token ();                         // Get next token.
+Cont: if (tact_numb[t] >= 0)                    // If input action ...
    {
       int t1 = t;
-      // T_start = token.start;						// Set token start.
-      // T_end   = token.end;							// Set token end.
-      t = (*tact_func[tact_numb [t]]) (t);	// Call token action.
+      // T_start = token.start;                 // Set token start.
+      // T_end   = token.end;                   // Set token end.
+      t = (*tact_func[tact_numb [t]]) (t);   // Call token action.
    }
-   /*	For debugging ...
+   /* For debugging ...
       char ch = *token.end;
       *token.end = 0;
       printf ("       %-20s %3d, %s\n", token.start, t, term_symb[t]);
       *token.end = ch;
-		*/
-Shft: if (Bm [Br[x] + Bc[t]] & Bf[t])				// Accept this terminal symbol?
+      */
+Shft: if (Bm [Br[x] + Bc[t]] & Bf[t])           // Accept this terminal symbol?
    {
       (++PS)->state = x;                     // Stack state.
-      PS->start = token.start;					// Stack token start pointer.
-      PS->end   = token.end;						// Stack token end pointer.
-      PS->line  = token.line;						// Stack token line number.
-      p = -Tm [Tr[x] + Tc[t]];					// Get reduction or next state.
-      while (p >= 0)							      // While shift-reduce action.
+      PS->start = token.start;               // Stack token start pointer.
+      PS->end   = token.end;                 // Stack token end pointer.
+      PS->line  = token.line;                // Stack token line number.
+      p = -Tm [Tr[x] + Tc[t]];               // Get reduction or next state.
+      while (p >= 0)                         // While shift-reduce action.
       {
          PS -= PL[p];                        // Reduce parse stack pointer.
-         if (apply (p) != 0) return (0);		// Apply reduction, quit parsing?
-         p = -Nm [Nr[PS->state] + Nc[p]];		// Get reduction or next state.
+         if (apply (p) != 0) return (0);     // Apply reduction, quit parsing?
+         p = -Nm [Nr[PS->state] + Nc[p]];    // Get reduction or next state.
       }
-      x = -p;											// Set next state.
-      goto Read;										// Go read next token.
+      x = -p;                                // Set next state.
+      goto Read;                             // Go read next token.
    }
    if ((p = Rr[x]) > 0 || (p = Rm [Rc[t] - p]) > 0) // Get reduction?
    {
       if (PL[p] == -1)                       // Null production?
       {
-         (++RS)->state = (++PS)->state;		// Save state before destroying it.
-         PS->state  = x;							// Stack state.
-         RS->ptr = PS;								// Save parse-stack pointer.
-         PS->start  = NULL;					   // Clear start.
-         PS->end    = NULL;					   // Clear end.
+         (++RS)->state = (++PS)->state;      // Save state before destroying it.
+         PS->state  = x;                     // Stack state.
+         RS->ptr = PS;                       // Save parse-stack pointer.
+         PS->start  = NULL;                  // Clear start.
+         PS->end    = NULL;                  // Clear end.
          goto Apply;
       }
       do
       {
          PS -= PL[p];                        // Reduce parse stack ptr by production length.
-      Apply:		if (apply (p) != 0) return (0);		// Apply reduction, quit parsing?
-         p = -Nm [Nr[PS->state] + Nc[p]];		// Get reduction or next state.
+      Apply:      if (apply (p) != 0) return (0);     // Apply reduction, quit parsing?
+         p = -Nm [Nr[PS->state] + Nc[p]];    // Get reduction or next state.
       }
       while (p > 0);
-      x = -p;											// Set new state.
-      goto Shft;										// Try to shift from this new state.
+      x = -p;                                // Set new state.
+      goto Shft;                             // Try to shift from this new state.
    }
 
    if (x == accept_state)
@@ -136,7 +136,7 @@ Shft: if (Bm [Br[x] + Bc[t]] & Bf[t])				// Accept this terminal symbol?
       return -1;
    }
 
-//		Error ...
+//    Error ...
 Err:  syntax_error (t);
    expecting ();
    return (0);
@@ -149,16 +149,16 @@ Err:  syntax_error (t);
 int   LG_Parser::apply (int p)
 {
    int i, r;
-   if (pact_numb[p] >= 0)				      // Call function?
+   if (pact_numb[p] >= 0)                 // Call function?
    {
-      i = argx [p];								// Get parse stack position.
-      if (i >= 0)									// Valid parse stack position?
+      i = argx [p];                       // Get parse stack position.
+      if (i >= 0)                         // Valid parse stack position?
       {
          T_start = PS[i].start;           // Define T_start working pointer.
          T_end   = PS[i].end;             // Define T_end working pointer.
          T_line  = PS[i].line;            // Define T_line.
       }
-      else											// Use last token accepted.
+      else                                // Use last token accepted.
       {
          T_start = token.start;           // Define T_start working pointer.
          T_end   = token.end;             // Define T_end working pointer.
@@ -236,21 +236,21 @@ void  LG_Parser::syntax_error (int t)
 char* LG_Parser::prt_line (char* ls, int ln)
 {
    char *p;
-	// Replace tabs with spaces.
+   // Replace tabs with spaces.
    for (p = ls; *p != '\n'; p++)
    {
       if (*p == '\t') *p = ' ';
    }
-	// Remove ending spaces.
+   // Remove ending spaces.
    while (*(--p) == ' ');
    *(++p) = 0;
-	// Print the line.
+   // Print the line.
    prt_log ("%s(%04d) : %s\n", grmfid, ln, ls);
    *p = '\n';
    return (p);
 }
 
-void	LG_Parser::prt_pointer (char* ls, int ln, char* token)
+void  LG_Parser::prt_pointer (char* ls, int ln, char* token)
 {
    int  i = 0;
    char *p, string[10000];
@@ -295,7 +295,7 @@ int   LG_Parser::restore () // Restore parse stack.
 {
    while (RS > R_stack) // For all null reductions.
    {
-      (RS->ptr)->state = RS->state;	// Replace state with the saved one.
+      (RS->ptr)->state = RS->state; // Replace state with the saved one.
       RS--;
    }
    PS = top_ptr;
@@ -305,40 +305,40 @@ int   LG_Parser::restore () // Restore parse stack.
 ////////////////////////////////////////////////////////////////////////////////
 //
 
-void	LG_Parser::collect (int x) // Collect terminals that cause a transition or reduction.
+void  LG_Parser::collect (int x) // Collect terminals that cause a transition or reduction.
 {
    int t, y, p, h, i, la, offset, n_red;
-	//	printf ("Collecting terminals in state %d\n", x);
+   // printf ("Collecting terminals in state %d\n", x);
    for (h = 0; h < n_heads; h++) H_list[h] = -1;
-   for (t = 0; t < n_terms; t++)							// For all terminals.
+   for (t = 0; t < n_terms; t++)                   // For all terminals.
    {
-      if (Bm [Br[x] + Bc[t]] & Bf[t])				// Accept this terminal?
+      if (Bm [Br[x] + Bc[t]] & Bf[t])           // Accept this terminal?
       {
          if (T_list[t] == 0)
          {
-            T_list[t] = 1;										// Mark it done, in case of SR conflict.
-            y = Tm [Tr[x] + Tc[t]];							// Get action?
-            if (y > 0)											// Shift & goto y action?
+            T_list[t] = 1;                            // Mark it done, in case of SR conflict.
+            y = Tm [Tr[x] + Tc[t]];                   // Get action?
+            if (y > 0)                                // Shift & goto y action?
             {
-               if ((p = Rr[y]) > 0)							// Default reduction in state y?
+               if ((p = Rr[y]) > 0)                   // Default reduction in state y?
                {
                   if (PL[p] == 0) H_list [head_numb[p]] = t;
                }
                else
                {
                   offset = -p;
-                  for (la = 0; la < n_terms; la++)			// For all lookaheads.
+                  for (la = 0; la < n_terms; la++)       // For all lookaheads.
                   {
-                     if ((p = Rm [Rc[la] + offset]) > 0)	// Got a reduction on this terminal?
+                     if ((p = Rm [Rc[la] + offset]) > 0) // Got a reduction on this terminal?
                      {
                         if (PL[p] == 0) H_list [head_numb[p]] = t; // Yes t and not la.
                      }
                   }
                }
             }
-            else 													// Shift & reduce action!
+            else                                      // Shift & reduce action!
             {
-               p = -y;											// Get production.
+               p = -y;                                // Get production.
                if (PL[p] == 0) H_list [head_numb[p]] = t;
             }
             if (t == T_EOF) continue;
@@ -346,8 +346,8 @@ void	LG_Parser::collect (int x) // Collect terminals that cause a transition or 
             prt_log ("\t%-32s", term_symb[t]);
             char first = 1;
             char blank[21] = "                    ";
-/*					for (h = 0; h < n_heads; h++)
-					{
+/*             for (h = 0; h < n_heads; h++)
+               {
                if (H_list[h] == t)
                {
                if (first)
@@ -360,7 +360,7 @@ void	LG_Parser::collect (int x) // Collect terminals that cause a transition or 
                prt_log ("\t%-32s => %s\n", blank, head_symb[h]);
                }
                }
-					}
+               }
 */
             if (first)
             {
@@ -369,23 +369,23 @@ void	LG_Parser::collect (int x) // Collect terminals that cause a transition or 
          }
       }
    }
-   if ((p = Rr[x]) > 0)										// Default reduction?
+   if ((p = Rr[x]) > 0)                            // Default reduction?
    {
       reduce (p, x);
    }
-   else															// Reductions based on lookaheads!
+   else                                            // Reductions based on lookaheads!
    {
       n_red  = 0;
       offset = -p;
       for (la = 0; la < n_terms; la++)
       {
-         if ((p = Rm [Rc[la] + offset]) > 0)			// Got a reduction on this terminal?
+         if ((p = Rm [Rc[la] + offset]) > 0)       // Got a reduction on this terminal?
          {
-            for (i = 0; i < n_red; i++)				// For all reductions in the list.
+            for (i = 0; i < n_red; i++)            // For all reductions in the list.
             {
-               if (P_list[i] == p) break;				// Already in this list?
+               if (P_list[i] == p) break;          // Already in this list?
             }
-            if (i == n_red) P_list [n_red++] = p;	// Add this production to list.
+            if (i == n_red) P_list [n_red++] = p;  // Add this production to list.
          }
       }
       for (i = 0; i < n_red; i++)
@@ -398,22 +398,22 @@ void	LG_Parser::collect (int x) // Collect terminals that cause a transition or 
 ////////////////////////////////////////////////////////////////////////////////
 //
 
-void	LG_Parser::reduce (int p, int x)			// Reduce production.
+void  LG_Parser::reduce (int p, int x)       // Reduce production.
 {
    if (PL[p] == -1)                       // Null production?
    {
-      PS++;											// Increment stack pointer.
-      PS->state = x;								// Stack state.
+      PS++;                               // Increment stack pointer.
+      PS->state = x;                      // Stack state.
       goto Cont;
    }
    do
    {
-      PS -= PL[p];								// Reduce parse stack pointer.
-   Cont:		p = -Nm [Nr[PS->state] + Nc[p]];		// Get reduction or next state.
+      PS -= PL[p];                        // Reduce parse stack pointer.
+   Cont:    p = -Nm [Nr[PS->state] + Nc[p]];    // Get reduction or next state.
    }
    while (p > 0);
-   x = -p;											// Set new state.
-   collect (x);									// Go collect terminals.
+   x = -p;                                // Set new state.
+   collect (x);                           // Go collect terminals.
 }
 
 ///// End of Parser ////////////////////////////////////////////////////////////

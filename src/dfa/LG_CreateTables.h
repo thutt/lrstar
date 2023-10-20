@@ -7,7 +7,7 @@
 class LG_CreateTables : public LG_OptimizeStates
 {
 public:
-   static int	  err_ret_numb;
+   static int    err_ret_numb;
 
    static int*   B_col;
    static int    B_cols;

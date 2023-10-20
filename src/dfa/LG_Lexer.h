@@ -19,7 +19,7 @@ public:
    static int    line_pos;
    static char*  line_start;
    static int    max_char_set;
-   static int	  tab;
+   static int    tab;
 
    static int    get_token ();
    static int    get_lookahead (int&);

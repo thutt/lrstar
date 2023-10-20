@@ -12,8 +12,8 @@
 #define MAX_LENGTH 60 // Maximum generated symbol length, over this gets renamed to $0000x.
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////
-//																																	//
-//		Includes
+//                                                                                                 //
+//    Includes
 
 #include <sys/types.h>
 #include <sys/stat.h>
@@ -40,8 +40,8 @@
 #include "basic_defs.h"
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////
-//																																	//
-//		Defines
+//                                                                                                 //
+//    Defines
 
 enum options
 {
@@ -113,11 +113,11 @@ enum options
 
 // TODO: This should be an enumeration, and uses should be logically
 //       ORed in 'charcode'
-#define UPPERCASE		   1
+#define UPPERCASE       1
 #define LOWERCASE       2
-#define UNDERSCORE	   4
-#define DIGIT			   8
-#define QUOTE		     16
+#define UNDERSCORE      4
+#define DIGIT           8
+#define QUOTE          16
 
 // Function-call defines ...
 #define ALLOC(_x, _n_elem)                                        \
@@ -126,11 +126,11 @@ enum options
       const size_t   n_el_    = _n_elem;                          \
       const size_t   el_size_ = sizeof(*_x);                      \
       const size_t   n_bytes_ = n_el_ * el_size_;                 \
-      if (_debug) {																\
-         *p_ = alloc_debug(n_bytes_, __FILE__, __LINE__);			\
-      } else {																		\
-         *p_ = alloc(n_bytes_);												\
-      }																				\
+      if (_debug) {                                               \
+         *p_ = alloc_debug(n_bytes_, __FILE__, __LINE__);         \
+      } else {                                                    \
+         *p_ = alloc(n_bytes_);                                   \
+      }                                                           \
    } while (0)
 
 #define REALLOC(_x, _no_elem, _nn_elem)                           \
@@ -155,15 +155,15 @@ enum options
       _x = 0;                                                     \
    } while (0)
 
-#define FASTCMP(a,b,n)  			fastcmp ((int*)a, (int*)b, n)
-#define FASTCPY(a,b,n)  			fastcpy ((int*)a, (int*)b, n)
-#define FASTINI(a,b,n)  			fastini (      a, (int*)b, n)
-#define FASTMRG(a,b,n)  			fastmrg ((int*)a, (int*)b, n)
-#define FASTOR(a,b,n)   			fastor  ((int*)a, (int*)b, n)
+#define FASTCMP(a,b,n)           fastcmp ((int*)a, (int*)b, n)
+#define FASTCPY(a,b,n)           fastcpy ((int*)a, (int*)b, n)
+#define FASTINI(a,b,n)           fastini (      a, (int*)b, n)
+#define FASTMRG(a,b,n)           fastmrg ((int*)a, (int*)b, n)
+#define FASTOR(a,b,n)            fastor  ((int*)a, (int*)b, n)
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////
-//																																	//
-//		Typedefs
+//                                                                                                 //
+//    Typedefs
 
 typedef struct OPTION
 {
@@ -174,7 +174,7 @@ typedef struct OPTION
 }
    OPTION;
 
-typedef struct	ITEM
+typedef struct ITEM
 {
    int symb;
    int prod;
@@ -182,14 +182,14 @@ typedef struct	ITEM
 }
    ITEM;
 
-typedef struct	CLOSURE
+typedef struct CLOSURE
 {
    int item;
    int next;
 }
    CLOSURE;
 
-typedef struct	SYMLIST
+typedef struct SYMLIST
 {
    int symb;
    int start;
@@ -197,14 +197,14 @@ typedef struct	SYMLIST
 }
    SYMLIST;
 
-typedef struct	CHILD
+typedef struct CHILD
 {
    int numb;
    int link;
 }
    CHILD;
 
-typedef struct	CODETABLE
+typedef struct CODETABLE
 {
    char* keyword;
    char* operators;
@@ -214,143 +214,143 @@ typedef struct	CODETABLE
    CODETABLE;
 
 #define MAXTOP 10
-typedef struct	STAKTYPE
+typedef struct STAKTYPE
 {
-   char*	groupstart;
-   int	skipcode;
+   char* groupstart;
+   int   skipcode;
 }
    STAKTYPE;
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////
-//																																	//
-//		Classes
+//                                                                                                 //
+//    Classes
 
 class Token
 {
 public:
-   char* start;	   // Start of symbol.
-   char* end;		   // End of symbol.
-   int   sti;			// Symbol table index.
-   int   line;	      // Input line number.
-   int   column;		// Input column number.
+   char* start;      // Start of symbol.
+   char* end;        // End of symbol.
+   int   sti;        // Symbol table index.
+   int   line;       // Input line number.
+   int   column;     // Input column number.
 };
 
 class Symbol
 {
 public:
-   char*  name;		// Pointer to symbol name (allocated).   							      4	 4
-   char*  original;	// Original name for those renamed symbols.								4	 8
-   char*  start;		// Pointer to symbol start address (in source code).					4	12
-   int	 length;		// Length  of symbol.		      											4  16
-   int	 origleng;	// Original length  of symbol.		      								4  20
-   int    type;		// Type (e.g. integer, float, double, char, ...)						4  24
-   int    line;		// Line of first encounter in grammar.	                           4  28
-   int    numb;		// Number assigned to symbol (sequence number).		               4  32
-   int    value;		// Value of symbol (for constants and integers).		            4  36
+   char*  name;      // Pointer to symbol name (allocated).                            4   4
+   char*  original;  // Original name for those renamed symbols.                       4   8
+   char*  start;     // Pointer to symbol start address (in source code).              4  12
+   int    length;    // Length  of symbol.                                             4  16
+   int    origleng;  // Original length  of symbol.                                    4  20
+   int    type;      // Type (e.g. integer, float, double, char, ...)                  4  24
+   int    line;      // Line of first encounter in grammar.                            4  28
+   int    numb;      // Number assigned to symbol (sequence number).                   4  32
+   int    value;     // Value of symbol (for constants and integers).                  4  36
 };
 
 class Symtab
 {
 public:
-   static Symbol*  symbol;			   // Symbols.
-   static int      n_symbols;		   // Number of symbols.
-   static short    length;			   // Current length of symbol name.
-   static int      cell;			   // Current hash cell number.
-   static int      sti;				   // Current symbol-table index.
-   static uint     hashdiv;		   // Hash divisor.
-   static int*     hashvec;		   // Hash vector.
+   static Symbol*  symbol;          // Symbols.
+   static int      n_symbols;       // Number of symbols.
+   static short    length;          // Current length of symbol name.
+   static int      cell;            // Current hash cell number.
+   static int      sti;             // Current symbol-table index.
+   static uint     hashdiv;         // Hash divisor.
+   static int*     hashvec;         // Hash vector.
    static int      max_cells;       // Maximum number of cells in the hash vector = 2*max_symbols.
-   static int      max_symbols;	   // Maximum number of symbols.
+   static int      max_symbols;     // Maximum number of symbols.
 
    // Functions ...
-   static void     init_symtab  (int);										// Initialize the symbol table.
-   static void     term_symtab  ();											// Terminate the symbol table.
-   static char*    symname      (int);										// Get symbol name.
-   static int      add_symbol   (char*, char*, int, int);	// Add symbol to symbol table.
-   static void     rename_symbol(short, int);							// Rename symbol.
-   static int      get_symbol   (char*, char*, int);					// Get symbol number.
-   static void     print_symtab (char**);									// Print the symbol table.
+   static void     init_symtab  (int);                            // Initialize the symbol table.
+   static void     term_symtab  ();                               // Terminate the symbol table.
+   static char*    symname      (int);                            // Get symbol name.
+   static int      add_symbol   (char*, char*, int, int);   // Add symbol to symbol table.
+   static void     rename_symbol(short, int);                     // Rename symbol.
+   static int      get_symbol   (char*, char*, int);              // Get symbol number.
+   static void     print_symtab (char**);                         // Print the symbol table.
 };
 
 class Node
 {
 public:
-   int    id;		 // Node id number.	               				4	 4
-   int    numb;	 // Node number.					                  4	 8
-   int    prod;	 // Production number.					            4	12
-   int    sti;     // Symbol-table index (can be negative).   		4	16
-   int    line;    // Line number.              		            4	20
+   int    id;      // Node id number.                             4   4
+   int    numb;    // Node number.                                4   8
+   int    prod;    // Production number.                          4  12
+   int    sti;     // Symbol-table index (can be negative).       4  16
+   int    line;    // Line number.                                4  20
    char*  start;   // Start of token in source line.              4  24
    char*  end;     // End of token in source line.                4  28
-   Node*  next;	 // Next node.												4  32
-   Node*  prev;	 // Previous node.			   						4  36
-   Node*  child;   // Child node.                            		4  40
-   Node*  parent;  // Parent node.                            		4  44
+   Node*  next;    // Next node.                                  4  32
+   Node*  prev;    // Previous node.                              4  36
+   Node*  child;   // Child node.                                 4  40
+   Node*  parent;  // Parent node.                                4  44
 };
 
 class PStack // Parser stack.
 {
 public:
-   int    state;     // Parser state.                 4	 4
-   char*  start;     // Token start address.          4	 8
-   char*  end;       // Token end address.            4	12
-   int    line;      // Input line number.            4	16
-   int    sti;       // Symbol table index.           4	20
+   int    state;     // Parser state.                 4   4
+   char*  start;     // Token start address.          4   8
+   char*  end;       // Token end address.            4  12
+   int    line;      // Input line number.            4  16
+   int    sti;       // Symbol table index.           4  20
    int    sym;       // Symbol stacked, terminal (positive) or nonterminal (negative).
-   Node*  node;      // Node pointer.                 4	24
-   Node*  last;      // Last pointer.                 4	28	bytes
+   Node*  node;      // Node pointer.                 4  24
+   Node*  last;      // Last pointer.                 4  28 bytes
 };
 
 class RStack // Restore Stack.
 {
 public:
-   PStack* ptr;		// Parse stack pointer.				4	 4
-   int     state;    // State.								4	 8	bytes.
+   PStack* ptr;      // Parse stack pointer.          4   4
+   int     state;    // State.                        4   8 bytes.
 };
 
 class Stack
 {
 public:
-   int   id;      // Node id.                      2	 2
-   int   counter; // Counter of node accesses.     2	 4
+   int   id;      // Node id.                      2   2
+   int   counter; // Counter of node accesses.     2   4
 };
 
 class AST : public Symtab
 {
 public:
-   static char     indent[256];	   // Indentation for printing current node.
-   static int*     counter;		   // Node counter array.
-   static short    stacki;		      // AST stack index.
-   static Stack*   stack;			   // AST stack array.
-   static Node*    node;			   // AST node array.
-   static Node*    root;			   // Root node pointer.
-   static Node*    currnode;		   // Current node pointer.
-   static int      n_nodes;		   // Number of nodes created.
+   static char     indent[256];     // Indentation for printing current node.
+   static int*     counter;         // Node counter array.
+   static short    stacki;          // AST stack index.
+   static Stack*   stack;           // AST stack array.
+   static Node*    node;            // AST node array.
+   static Node*    root;            // Root node pointer.
+   static Node*    currnode;        // Current node pointer.
+   static int      n_nodes;         // Number of nodes created.
    static int      n_nodenames;     // Number of node names.
-   static int      n_nodeactions;	// Number of node actions.
-   static short    pass;		      // Pass number when traversing the AST.
-   static short    status;		      // Status (TOP_DOWN | PASS_OVER | BOTTOM_UP).
-   static char*    node_name[];	   // Node names array.
-   static char**   term_symb;	      // Terminal symbols.
+   static int      n_nodeactions;   // Number of node actions.
+   static short    pass;            // Pass number when traversing the AST.
+   static short    status;          // Status (TOP_DOWN | PASS_OVER | BOTTOM_UP).
+   static char*    node_name[];     // Node names array.
+   static char**   term_symb;       // Terminal symbols.
    static int      nact_numb[];     // Node action numbers.
-   static char*    nact_name[];		// Node action names.
+   static char*    nact_name[];     // Node action names.
 
    // Functions ...
-   static void     init_ast	 ();
-   static void     term_ast	 ();
-   static void     print_ast	 (char**);
-   static void     print_ast	 (Node* np);
+   static void     init_ast    ();
+   static void     term_ast    ();
+   static void     print_ast   (char**);
+   static void     print_ast   (Node* np);
    static void     print_node  (char *indent, Node* np);
-   static void     traverse	 ();
-   static void     traverse	 (Node* np);
-   static void     traverse	 (char *indent, Node* np);
-   static short    emitstr	    (Node* np, char* str);
+   static void     traverse    ();
+   static void     traverse    (Node* np);
+   static void     traverse    (char *indent, Node* np);
+   static short    emitstr     (Node* np, char* str);
    static int      (*nact_func[])(Node*);
 };
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////
-//																																	//
-//		Global Variables
+//                                                                                                 //
+//    Global Variables
 
 extern const char*  program;
 extern const char*  version;
@@ -384,10 +384,10 @@ EXTERN int    time2;
 EXTERN char   string [10000];
 
 EXTERN int    filesize;
-EXTERN int	  filedesc;
+EXTERN int    filedesc;
 
-EXTERN char*  input_start;			/* First byte of input area.              */
-EXTERN char*  input_end;			/* Byte after input.                      */
+EXTERN char*  input_start;       /* First byte of input area.              */
+EXTERN char*  input_end;         /* Byte after input.                      */
 EXTERN char*  lex_input_start;   /* First byte of input area.              */
 EXTERN char*  lex_input_end;     /* Byte after input.                      */
 EXTERN int    n_lines;
@@ -401,14 +401,14 @@ EXTERN char** lex_line_ptr;
 
 EXTERN int    memory_max;
 EXTERN int    memory_usage;
-EXTERN int    max_child;			// Option setting (rename this).
-EXTERN int    max_child_usage;	// Highest number found during processing.
+EXTERN int    max_child;         // Option setting (rename this).
+EXTERN int    max_child_usage;   // Highest number found during processing.
 EXTERN int    max_lookah;
 EXTERN int    max_terml;
 EXTERN int    max_headl;
 EXTERN int    max_errors;
 
-EXTERN int	  option_warnings;
+EXTERN int    option_warnings;
 EXTERN int    option_grammar;
 
 EXTERN CHILD* child;

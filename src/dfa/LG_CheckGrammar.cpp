@@ -20,33 +20,33 @@ int   LG_CheckGrammar::CheckGrammar ()
    if (n_errors) return 0;
 
    if (optn[LG_VERBOSE] > 2)
-	  	printf ("Checking for unreachable symbols ...\n");
+      printf ("Checking for unreachable symbols ...\n");
    P_UNREACHABLES ();
    if (n_errors) return 0;
 
    if (optn[LG_VERBOSE] > 2)
-	  	printf ("Checking for undefined symbols ...\n");
+      printf ("Checking for undefined symbols ...\n");
    P_UNDEFINED ();
    if (n_errors) return 0;
 
    if (optn[LG_VERBOSE] > 2)
-	  	printf ("Checking for useless productions ...\n");
+      printf ("Checking for useless productions ...\n");
    P_USELESS_PROD ();
    if (n_errors) return 0;
 
    if (optn[LG_VERBOSE] > 2)
-	  	printf ("Checking for null tokens ...\n");
+      printf ("Checking for null tokens ...\n");
    P_NULL_TOKENS ();
    if (n_errors) return 0;
 
    if (optn[LG_VERBOSE] > 2)
-	  	printf ("Checking for unreducible symbols ...\n");
+      printf ("Checking for unreducible symbols ...\n");
    P_UNREDUCIBLES ();
    if (n_errors) return 0;
 
    if (optn[LG_VERBOSE] > 2)
-	  	printf ("Checking for cycles in grammar ...\n");
-//		C_CYCLES();
+      printf ("Checking for cycles in grammar ...\n");
+//    C_CYCLES();
    if (n_errors) return 0;
 
    FREE (head_sym, n_heads); // Free this, DO_BACK_SUB changes n_heads.
@@ -65,12 +65,12 @@ int   LG_CheckGrammar::CheckGrammar ()
    FREE (term_line, N_terms);
 
    if (optn[LG_VERBOSE] > 2)
-	  	printf ("Doing back-substitutions for null symbols ...\n");
+      printf ("Doing back-substitutions for null symbols ...\n");
 
    DO_BACK_SUB ();
 
    if (optn[LG_VERBOSE] > 2)
-	  	printf ("Done with back-substitutions !!!\n");
+      printf ("Done with back-substitutions !!!\n");
    if (optn[LG_VERBOSE] > 2) PrintGrammar (); // Printing grammar for 2nd time?
    return (1);
 }
@@ -102,7 +102,7 @@ void  LG_CheckGrammar::C_NULLS ()
          {
             for (p = f_prod [h]; p < l_prod [h]; p++)
             {
-               for (t = f_tail [p]; t < l_tail [p]; t++)	/////////////////////////////////
+               for (t = f_tail [p]; t < l_tail [p]; t++) /////////////////////////////////
                {
                   if ((s = tail [t]) < 0)
                   {
@@ -191,7 +191,7 @@ void  LG_CheckGrammar::P_UNDEFINED ()
       for (t = max_char_set+1; t < N_terms; t++) // Skip <eof>
       {
          if (term_type[t] & LEXFILE)
-				prt_error ("'%s' is listed in the .lex file, but not defined in the .lgr file", term_name[t], 0, term_line[t]);
+            prt_error ("'%s' is listed in the .lex file, but not defined in the .lgr file", term_name[t], 0, term_line[t]);
       }
 
       strcpy (gft, ".lgr");
@@ -284,59 +284,59 @@ void  LG_CheckGrammar::P_UNREACHABLES ()
    ALLOC (head_used, n_heads);
    memset(head_used, 0, n_heads);
 
-   i = 0;							// Goal symbol!
-   n_used = 0;						// Start with 0.
-   head_used[i] = 1;				// Mark goal symbol used.
-   used_list[n_used++] = i;	// Add goal symbol to list.
+   i = 0;                     // Goal symbol!
+   n_used = 0;                // Start with 0.
+   head_used[i] = 1;          // Mark goal symbol used.
+   used_list[n_used++] = i;   // Add goal symbol to list.
 
-	// Traverse from goal symbol and mark all nonterminals that are used.
+   // Traverse from goal symbol and mark all nonterminals that are used.
    for (; i < n_used; i++)
    {
-      h = used_list[i];										// Pick head from list.
-		//	printf ("%s\n", head_name[h]);
-      for (p = f_prod[h]; p < l_prod[h]; p++)		// All of its rules.
+      h = used_list[i];                            // Pick head from list.
+      // printf ("%s\n", head_name[h]);
+      for (p = f_prod[h]; p < l_prod[h]; p++)      // All of its rules.
       {
-         for (t = f_tail[p]; t < l_tail[p]; t++)	// All of its tails.
+         for (t = f_tail[p]; t < l_tail[p]; t++)   // All of its tails.
          {
-            if ((s = tail[t]) < 0)						// Nonterminal?
+            if ((s = tail[t]) < 0)                 // Nonterminal?
             {
-               if (head_used[-s] == 0)					// Not used?
+               if (head_used[-s] == 0)             // Not used?
                {
-                  head_used[-s] = 1;					// Mark it used.
-                  used_list[n_used++] = -s;			// Add it to list.
-						//	printf ("   %s used\n", head_name[-s]);
+                  head_used[-s] = 1;               // Mark it used.
+                  used_list[n_used++] = -s;        // Add it to list.
+                  // printf ("   %s used\n", head_name[-s]);
                }
             }
          }
       }
    }
 
-	// Traverse from [ignore] symbols and mark all nonterminals that are used.
+   // Traverse from [ignore] symbols and mark all nonterminals that are used.
    int n_ignores = 0;
    for (int H = 0; H < n_heads; H++)
    {
       if (head_type[H] & IGNORESYM)
       {
          n_ignores++;
-			//	printf ("%s unused\n", head_name[H]);
+         // printf ("%s unused\n", head_name[H]);
          i = n_used;
-         head_used[H] = 1;				// Mark ignore symbol used.
-         used_list[n_used++] = H;	// Add ignore symbol to list.
+         head_used[H] = 1;          // Mark ignore symbol used.
+         used_list[n_used++] = H;   // Add ignore symbol to list.
          for (; i < n_used; i++)
          {
-            h = used_list[i];										// Pick head from list.
-				//	printf ("%s\n", head_name[h]);
-            for (p = f_prod[h]; p < l_prod[h]; p++)		// All of its rules.
+            h = used_list[i];                            // Pick head from list.
+            // printf ("%s\n", head_name[h]);
+            for (p = f_prod[h]; p < l_prod[h]; p++)      // All of its rules.
             {
-               for (t = f_tail[p]; t < l_tail[p]; t++)	// All of its tails.
+               for (t = f_tail[p]; t < l_tail[p]; t++)   // All of its tails.
                {
-                  if ((s = tail[t]) < 0)						// Nonterminal?
+                  if ((s = tail[t]) < 0)                 // Nonterminal?
                   {
-                     if (head_used[-s] == 0)					// Not marked yet?
+                     if (head_used[-s] == 0)             // Not marked yet?
                      {
-                        head_used[-s] = 1;				// Mark it used.
-                        used_list[n_used++] = -s;		// Add it to list.
-								//	printf ("   %s used %d\n", head_name[-s], n_used);
+                        head_used[-s] = 1;            // Mark it used.
+                        used_list[n_used++] = -s;     // Add it to list.
+                        // printf ("   %s used %d\n", head_name[-s], n_used);
                      }
                   }
                }
@@ -346,19 +346,19 @@ void  LG_CheckGrammar::P_UNREACHABLES ()
    }
    FREE (used_list, n_heads);
 
-	// List unreachable heads ...
+   // List unreachable heads ...
    n_unreachables = 0;
    for (h = 0; h < n_heads; h++)
    {
       if (!(head_type[h] & IGNORESYM) && head_used[h] == 0) // Not [ignore] and not used?
       {
-         if (head_line[h] != 0)							// Not generated symbol?
+         if (head_line[h] != 0)                    // Not generated symbol?
          {
-            if (head_type[h] & SETNAME)				// If setname (or escape symbol).
+            if (head_type[h] & SETNAME)            // If setname (or escape symbol).
             {
                // Nothing.
             }
-            else if (head_type[h] & LEXICON)			// If lexicon symbol.
+            else if (head_type[h] & LEXICON)       // If lexicon symbol.
             {
                n_unreachables++;
                head_type[h] |= UNREACHABLE;
@@ -380,7 +380,7 @@ void  LG_CheckGrammar::P_UNREACHABLES ()
    }
    FREE (head_used, n_heads);
 
-	// If we have any unreachables ...
+   // If we have any unreachables ...
    if (n_ignores && n_errors == 0)
    {
       if (n_prods + n_unreachables >= max_prods)
@@ -428,8 +428,8 @@ void  LG_CheckGrammar::RenumberProductions (int n_ignores)
          f_tail   [new_prod]   = new_tail;
          l_tail   [new_prod]   = new_tail+1;
          tail     [new_tail++] = -h;
-			//	ret_numb [new_prod]   = -1;				// Ignore this symbol.
-         ret_numb [new_prod]   = 2147483647;		// Ignore this symbol.
+         // ret_numb [new_prod]   = -1;            // Ignore this symbol.
+         ret_numb [new_prod]   = 2147483647;    // Ignore this symbol.
          ret_name [new_prod]   = "UNDEFINED";   // Assign name to defined constant.
          prod_line[new_prod]   = 0;
          prod_type[new_prod++] = 0;
@@ -437,9 +437,9 @@ void  LG_CheckGrammar::RenumberProductions (int n_ignores)
    }
 
    max_n_prods = n_prods;
-   REALLOC (f_tail,		max_prods, n_prods);
-   REALLOC (l_tail,		max_prods, n_prods);
-   REALLOC (tail,			max_tails, n_tails);
+   REALLOC (f_tail,     max_prods, n_prods);
+   REALLOC (l_tail,     max_prods, n_prods);
+   REALLOC (tail,       max_tails, n_tails);
    REALLOC (ret_numb,   max_prods,  n_prods);
    REALLOC (prod_line,  max_prods,  n_prods);
    REALLOC (prod_type,  max_prods,  n_prods);
@@ -503,7 +503,7 @@ void  LG_CheckGrammar::P_UNREDUCIBLES ()
 ///////////////////////////////////////////////////////////////////////////////
 //                                                                           //
 
-int	LG_CheckGrammar::p_sym (int s, const char *sp)
+int   LG_CheckGrammar::p_sym (int s, const char *sp)
 {
    char *p;
 
@@ -549,7 +549,7 @@ void  LG_CheckGrammar::p_prod (int p, int dot, const char *before)
 //
 //
 
-char*	onstack;
+char* onstack;
 
 void  LG_CheckGrammar::C_CYCLES ()
 {
@@ -573,9 +573,9 @@ int   LG_CheckGrammar::C_CYCLES2 (int h)
          nt = -tail[t];
          if (nt > 0) // Nonterminal ?
          {
-            if (t > f_tail[p])	// Not first tail symbol?
+            if (t > f_tail[p])   // Not first tail symbol?
             {
-               if (onstack[nt])	// Is it already on the stack?
+               if (onstack[nt])  // Is it already on the stack?
                {
                   prt_error ("'%s' is involved in an infinite cycle", head_name[nt], 0, head_line[nt]);
                   return (0);
@@ -584,7 +584,7 @@ int   LG_CheckGrammar::C_CYCLES2 (int h)
             }
             else  // First tail symbol.
             {
-               if (onstack[nt])	// Is it already on the stack?
+               if (onstack[nt])  // Is it already on the stack?
                {
                   if (nt != h)
                   {
@@ -637,7 +637,7 @@ Top:  nn = 0;
    }
    if (nn == 0) return;
 
-	//	printf ("\n%d nullables ...\n", nn);
+   // printf ("\n%d nullables ...\n", nn);
 
    ALLOC (HEAD,       n_heads);
    ALLOC (HEAD_START, n_heads);
@@ -661,7 +661,7 @@ Top:  nn = 0;
          HEAD [h] = N_HEADS;
          F_PROD [N_HEADS] = N_PRODS;
          HEAD_START [N_HEADS] = head_name[h];
-			//	printf ("%s ->\n", head_name[h]);
+         // printf ("%s ->\n", head_name[h]);
          for (p = f_prod[h]; p < l_prod[h]; p++)
          {
             scan_prod (h, p, f_tail[p]);
@@ -674,7 +674,7 @@ Top:  nn = 0;
          HEAD [h] = N_HEADS;
          F_PROD [N_HEADS] = N_PRODS;
          HEAD_START [N_HEADS] = head_name[h];
-			//	printf ("%s ->\n", head_name[h]);
+         // printf ("%s ->\n", head_name[h]);
          for (p = f_prod[h]+1; p < l_prod[h]; p++) // Skip the null production.
          {
             make_prod (h, p);
@@ -722,14 +722,14 @@ Top:  nn = 0;
    n_prods    = N_PRODS;
    n_heads    = N_HEADS;
 
-//		PrintGrammar();
+//    PrintGrammar();
    goto Top;
 }
 
 ///////////////////////////////////////////////////////////////////////////////
 //                                                                           //
 
-void 	LG_CheckGrammar::scan_prod (int h, int p, int t)
+void  LG_CheckGrammar::scan_prod (int h, int p, int t)
 {
    int t0, sym;
    if (t < l_tail[p])
@@ -756,14 +756,14 @@ void 	LG_CheckGrammar::scan_prod (int h, int p, int t)
 ///////////////////////////////////////////////////////////////////////////////
 //                                                                           //
 
-void 	LG_CheckGrammar::make_prod (int h, int p)
+void  LG_CheckGrammar::make_prod (int h, int p)
 {
    int t, t0, tn, sym, q, n, P, I, T;
 
    F_TAIL   [N_PRODS] = N_TAILS;
    RET_NUMB [N_PRODS] = ret_numb[p];
    RET_NAME [N_PRODS] = ret_name[p];
-	//	printf ("\nmake_prod (%d, %d) ...\n", h, p);
+   // printf ("\nmake_prod (%d, %d) ...\n", h, p);
 
    n  = 0;
    t0 = f_tail[p];
@@ -774,7 +774,7 @@ void 	LG_CheckGrammar::make_prod (int h, int p)
       {
          n++;
          sym = tail[t];
-      Check:		if (sym < 0 && nullable [-sym])
+      Check:      if (sym < 0 && nullable [-sym])
          {
             q = f_prod[-sym];
             if (l_tail[q] - f_tail[q] == 0)           // Null first production?
@@ -788,15 +788,15 @@ void 	LG_CheckGrammar::make_prod (int h, int p)
          }
          if (N_TAILS >= max_tails) MemCrash ("Number of tail symbols", max_tails);
          TAILSYM[N_TAILS++] = sym;
-			//	if (sym < 0) printf (" %s", head_name[-sym]);
-			//	else         printf (" %s", term_name[ sym]);
+         // if (sym < 0) printf (" %s", head_name[-sym]);
+         // else         printf (" %s", term_name[ sym]);
       }
    }
-	//	if (n == 0) printf ("<null>\n");
-	//	else        printf ("\n");
+   // if (n == 0) printf ("<null>\n");
+   // else        printf ("\n");
    L_TAIL [N_PRODS] = N_TAILS;
 
-	// Check for previous existence of this production.
+   // Check for previous existence of this production.
    if (n > 0)
    {
       if (n == 1 && -sym == h) goto Undo;
@@ -809,19 +809,19 @@ void 	LG_CheckGrammar::make_prod (int h, int p)
             I = F_TAIL [N_PRODS];
             for (T = F_TAIL [P]; T < L_TAIL [P]; T++)
             {
-					//	char a[50];
-					//	char b[50];
-					//	symstr(TAILSYM[T], a);
-					//	symstr(TAILSYM[I], b);
-					//	printf ("Comparing %s to %s\n", b, a);
+               // char a[50];
+               // char b[50];
+               // symstr(TAILSYM[T], a);
+               // symstr(TAILSYM[I], b);
+               // printf ("Comparing %s to %s\n", b, a);
                if (TAILSYM[T] != TAILSYM[I++]) goto NextP;
             }
-				//	printf ("already exists\n\n");
+            // printf ("already exists\n\n");
             goto Undo; // Production already exists!
          }
-      NextP:		continue;
+      NextP:      continue;
       }
-		//	printf ("new production accepted\n");
+      // printf ("new production accepted\n");
    }
    else // New production is NULL!
    {
@@ -830,23 +830,23 @@ void 	LG_CheckGrammar::make_prod (int h, int p)
       {
          if (F_TAIL [FP] == L_TAIL [FP]) goto Undo; // Already have NULL.
       }
-		// Move current productions down one.
+      // Move current productions down one.
       for (P = N_PRODS; P > FP; P--)
       {
          F_TAIL [P] = F_TAIL [P-1];
          L_TAIL [P] = L_TAIL [P-1];
       }
-		// Create NULL production in first place.
+      // Create NULL production in first place.
       F_TAIL [P] = F_TAIL [P+1];
       L_TAIL [P] = F_TAIL [P+1];
-		//	printf ("<null> production accepted\n");
+      // printf ("<null> production accepted\n");
    }
    if (++N_PRODS >= max_prods)
       MemCrash ("Number of productions", max_prods);
    return;
 
 Undo: N_TAILS = F_TAIL [N_PRODS]; // Reset number of tails.
-	//	printf ("new production rejected\n");
+   // printf ("new production rejected\n");
    return;
 }
 

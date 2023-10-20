@@ -6,9 +6,9 @@
 #include "LG_CreateTables.h"
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
-//																																 //
+//                                                                                               //
 
-void	LG::GenerateLexerDefines ()
+void  LG::GenerateLexerDefines ()
 {
    FILE* header;
    char filename_h[PATH_MAX];
@@ -47,8 +47,8 @@ void	LG::GenerateLexerDefines ()
 
    fprintf (header, "      #pragma once\n\n");
 
-   fprintf (header, "      #undef  LEXER\n");				// In case of multiple lexers.
-   fprintf (header, "      #undef  DEBUG_LEXER\n\n");	   // In case of multiple lexers.
+   fprintf (header, "      #undef  LEXER\n");            // In case of multiple lexers.
+   fprintf (header, "      #undef  DEBUG_LEXER\n\n");    // In case of multiple lexers.
 
    fprintf (header, "      #define LEXER         %s_Lexer\n", gfn);
    if (optn [LG_DEBUG]) fprintf (header, "      #define DEBUG_LEXER\n");
@@ -94,7 +94,7 @@ void	LG::GenerateLexerDefines ()
    fprintf (tables, "      #define ushort unsigned short\n");
    fprintf (tables, "      #define MAX    0x80000000\n\n");
 
-	// T_matrix ...
+   // T_matrix ...
    vartype = get_typestr (T_matrix, T_size);
    fprintf (header, "      static %-6s Tm[%6d]        ; // Terminal transition matrix.\n", vartype, T_size);
    fprintf (tables, "   // Terminal transition matrix ...\n");

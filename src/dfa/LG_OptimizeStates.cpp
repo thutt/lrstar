@@ -55,7 +55,7 @@ int   LG_OptimizeStates::OptimizeStates ()
       rc = 1;
    }
 
-	//	opt_stat_memory = memory_max;
+   // opt_stat_memory = memory_max;
    return rc;
 }
 
@@ -86,7 +86,7 @@ void  LG_OptimizeStates::ILLEGAL_CHARS ()
       if (optn[LG_INSENSITIVE] && charcode[t] == LOWERCASE)
       {
          n++;
-         buffer[t-32] = tt_action[i];	// buffer['A'] = same as buffer['a']
+         buffer[t-32] = tt_action[i];  // buffer['A'] = same as buffer['a']
       }
       buffer [t] = tt_action[i];
    }
@@ -98,20 +98,20 @@ void  LG_OptimizeStates::ILLEGAL_CHARS ()
       if (optn[LG_VERBOSE] > 2)
          prt_logonly ("         %7d state added for %d illegal characters.\n", 1, n);
 
-		/*	char* str = "";
-			if (n != 1) str = "s";
-			prt_logonly ("%d illegal character%s found in state 0, lexer will return %d for:", n, str, 0);
-			n = 0;
-			for (t = 0; t < N_terms; t++)
-			{
+      /* char* str = "";
+         if (n != 1) str = "s";
+         prt_logonly ("%d illegal character%s found in state 0, lexer will return %d for:", n, str, 0);
+         n = 0;
+         for (t = 0; t < N_terms; t++)
+         {
          if (buffer[t] == 0)
          {
          char* nl = "";
          if (n++ % 16 == 0) nl = "\n";
          prt_logonly ("%s %4s", nl, term_name[t]);
          }
-			}
-			prt_logonly ("\n\n");
+         }
+         prt_logonly ("\n\n");
       */
 
       illegal_char_state   = N_states;
@@ -131,7 +131,7 @@ void  LG_OptimizeStates::ILLEGAL_CHARS ()
       D_red     [N_states] = 0;
       ret_numb  [0]        = 0;
 
-		// Move transitions for state 0 ...
+      // Move transitions for state 0 ...
       i = tt_start[0];
       tt_start[0] = n_totalterm;
       for (; i < tt_end[0]; i++)
@@ -140,7 +140,7 @@ void  LG_OptimizeStates::ILLEGAL_CHARS ()
          tt_symb [n_totalterm++] = tt_symb[i];
       }
 
-		// Add illegal character transitions for state 0 ...
+      // Add illegal character transitions for state 0 ...
       for (t = 0; t < N_terms; t++)
       {
          if (buffer[t] == 0)
@@ -211,7 +211,7 @@ void  LG_OptimizeStates::REMOVE_DUP_STATES ()
                      }
                   }
                }
-            NextS2:				continue;
+            NextS2:           continue;
             }
          }
       }
@@ -222,7 +222,7 @@ void  LG_OptimizeStates::REMOVE_DUP_STATES ()
 
 Done:
    const char* ss = "s";
-   if (tnsr == 1)	ss = "";
+   if (tnsr == 1) ss = "";
    if (optn[LG_VERBOSE] > 2)
       prt_logonly ("         %7d state%s removed for duplication.\n", tnsr, ss);
 }
@@ -258,7 +258,7 @@ int   LG_OptimizeStates::REMOVE_NT_TRANS ()
    }
 
    if (optn[LG_VERBOSE] > 2)
-      prt_logonly ("         %7d states after  converting to a DFA.\n", nosl);	// +1 for error state created later.
+      prt_logonly ("         %7d states after  converting to a DFA.\n", nosl);   // +1 for error state created later.
 
    FREE (nt_problem, n_heads);
    FREE (jumpto, n_nonttran);
@@ -267,8 +267,8 @@ int   LG_OptimizeStates::REMOVE_NT_TRANS ()
 
 int   LG_OptimizeStates::REMOVE_SINGLE_RED () // Remove NT Transitions for Final Items in Terminal States.
 {
-   int  s;	// state
-   int  t;	// transition #
+   int  s;  // state
+   int  t;  // transition #
 
    ALLOC (jumpto, n_nonttran);
    for (s = 0; s < N_states; s++)
@@ -284,22 +284,22 @@ int   LG_OptimizeStates::REMOVE_SINGLE_RED () // Remove NT Transitions for Final
          ntt_action[t] = TRANSITION (s, ntt_action[t]);
       }
    }
-	//	return (nt_left == 0 ? 1 : 0);
-   return (1);	// Picks up more NT's remaining this way, more messages for user!
+   // return (nt_left == 0 ? 1 : 0);
+   return (1); // Picks up more NT's remaining this way, more messages for user!
 }
 
 int   LG_OptimizeStates::TRANSITION (int s, int x)
 {
    int  p, nj, j, tran;
-   if (st_type[x] == RO_STATE)					// if reduce-only state?
+   if (st_type[x] == RO_STATE)               // if reduce-only state?
    {
-      p = final[f_final[x]];						// get production
-      if (ret_numb[p] == 0)						// if not a "Token ->" production
+      p = final[f_final[x]];                 // get production
+      if (ret_numb[p] == 0)                  // if not a "Token ->" production
       {
-         nj = n_jumps;								// get current top of jump list
-         LOOK_BACK (p, prod_len [p]-1, s);	// from here (s) not there (x)
-         tran = ntt_action [jumpto[nj]];			// default transition is first one
-         for (j = nj+1; j < n_jumps; j++)		// all jumps go to the same state?
+         nj = n_jumps;                       // get current top of jump list
+         LOOK_BACK (p, prod_len [p]-1, s);   // from here (s) not there (x)
+         tran = ntt_action [jumpto[nj]];        // default transition is first one
+         for (j = nj+1; j < n_jumps; j++)    // all jumps go to the same state?
          {
             if (ntt_action [jumpto[j]] != tran)
             {
@@ -308,11 +308,11 @@ int   LG_OptimizeStates::TRANSITION (int s, int x)
                   nt_left++;
                   nt_problem [ntt_symb [jumpto[0]]] = 1;
                }
-               n_jumps = nj;						// reset top of jump list
+               n_jumps = nj;                 // reset top of jump list
                return (x);
             }
          }
-         n_jumps = nj;								// reset top of jump list
+         n_jumps = nj;                       // reset top of jump list
          return (tran);
       }
    }
@@ -369,19 +369,19 @@ int   LG_OptimizeStates::REMOVE_OTHER_RED () // Remove NT Transitions for all lo
          LA [tt_symb[i]] = -1; // Put shift actions in LA as -1.
       }
       COLLECT_LOOKAHEADS (s);
-      tta_start[s] = n_ttas;					// set start of list
-      for (t = 0; t < N_terms; t++)				// for all terminals
+      tta_start[s] = n_ttas;              // set start of list
+      for (t = 0; t < N_terms; t++)          // for all terminals
       {
-         if (LA[t] > 0)								// new added lookahead?
+         if (LA[t] > 0)                      // new added lookahead?
          {
             if (n_ttas >= max_ttas)
                MemCrash ("Number of terminal transitions added", max_ttas);
-            tta_symb [n_ttas] = t;		   // add terminal symbol
-            tta_list [n_ttas++] = LA[t];	// add transition
-				//	prt_log ("ADD %s -> state %d\n", term_name [t], LA[t]);
+            tta_symb [n_ttas] = t;        // add terminal symbol
+            tta_list [n_ttas++] = LA[t];  // add transition
+            // prt_log ("ADD %s -> state %d\n", term_name [t], LA[t]);
          }
       }
-      tta_end[s] = n_ttas;					// set end of list
+      tta_end[s] = n_ttas;             // set end of list
    }
    return (nt_left == 0 ? 1 : 0);
 }
@@ -389,18 +389,18 @@ int   LG_OptimizeStates::REMOVE_OTHER_RED () // Remove NT Transitions for all lo
 void  LG_OptimizeStates::COLLECT_LOOKAHEADS (int s)
 {
    int  f, p, nj, j, tran, t;
-	//	prt_log ("Collect Lookaheads from state %d\n", s);
+   // prt_log ("Collect Lookaheads from state %d\n", s);
    if (st_type[s] != RO_STATE)
    {
-      for (f = f_final[s]; f < f_final[s+1]; f++)	// Check all final items.
+      for (f = f_final[s]; f < f_final[s+1]; f++)  // Check all final items.
       {
-         p = final [f];										// get production
-         if (ret_numb[p] == 0)							// not a "Token ->" production?
+         p = final [f];                            // get production
+         if (ret_numb[p] == 0)                     // not a "Token ->" production?
          {
-            nj = n_jumps;									// get current top of jump list
-            LOOK_BACK2 (p, prod_len[p], s);			// Look back from this state.
-            tran = ntt_action [jumpto[nj]];	 			// default transition is first one
-            for (j = nj+1; j < n_jumps; j++)			// all jumps go to the same state?
+            nj = n_jumps;                          // get current top of jump list
+            LOOK_BACK2 (p, prod_len[p], s);        // Look back from this state.
+            tran = ntt_action [jumpto[nj]];           // default transition is first one
+            for (j = nj+1; j < n_jumps; j++)       // all jumps go to the same state?
             {
                if (ntt_action [jumpto[j]] != tran)
                {
@@ -409,29 +409,29 @@ void  LG_OptimizeStates::COLLECT_LOOKAHEADS (int s)
                      nt_left++;
                      nt_problem [ntt_symb [jumpto[0]]] = 1;
                   }
-                  n_jumps = nj;							// reset top of jump list
+                  n_jumps = nj;                    // reset top of jump list
                   return;
                }
             }
-            n_jumps = nj;									// reset top of jump list
+            n_jumps = nj;                          // reset top of jump list
 
-            COLLECT_LOOKAHEADS (tran);					// collect more lookaheads
+            COLLECT_LOOKAHEADS (tran);             // collect more lookaheads
 
-				//	prt_log ("\nAdd transitions to state %d\n", s);
+            // prt_log ("\nAdd transitions to state %d\n", s);
             for (t = tt_start [tran]; t < tt_end [tran]; t++) // for tran state
             {
-               if (LA [tt_symb[t]] == 0)				// If not defined yet.
+               if (LA [tt_symb[t]] == 0)           // If not defined yet.
                {
-                  LA [tt_symb[t]] = tt_action[t];		// add transitions to collection
-					  	//	prt_log ("add %s -> state %d\n", term_name [tt_symb[t]], tt_action[t]);
+                  LA [tt_symb[t]] = tt_action[t];     // add transitions to collection
+                  // prt_log ("add %s -> state %d\n", term_name [tt_symb[t]], tt_action[t]);
                }
             }
-            if (D_red[s] != 0)							// If not disabled, added 20091106 PBM
+            if (D_red[s] != 0)                     // If not disabled, added 20091106 PBM
             {
-               if (ret_numb [D_red[s]] == 0)		// not a 'Token ->' rule?
+               if (ret_numb [D_red[s]] == 0)    // not a 'Token ->' rule?
                {
                   if (D_red[tran] != -1)           // If default exists?
-							D_red[s] = D_red[tran];			   // change default reduction
+                     D_red[s] = D_red[tran];          // change default reduction
                }
             }
          }
@@ -466,7 +466,7 @@ int   LG_OptimizeStates::MODIFY_TERMINAL_TRAN ()
 {
    int s, t, n, start, first = 1;
 
-	// Count the number of terminal transitions.
+   // Count the number of terminal transitions.
    n_totalterm = 0;
    for (s = 0; s < N_states; s++)
    {
@@ -477,7 +477,7 @@ int   LG_OptimizeStates::MODIFY_TERMINAL_TRAN ()
    ALLOC (nu_symb, n_totalterm+256);
 
    n = 0;
-	// Merge original and newly added terminal transitions.
+   // Merge original and newly added terminal transitions.
    for (s = 0; s < N_states; s++)
    {
       start = n;
@@ -521,22 +521,22 @@ int   LG_OptimizeStates::NUMBER_OF_STATES_LEFT ()
    ALLOC (active, N_states);
    FASTINI (0, active, N_states); // Set active status to inactive.
 
-	// Mark all active states from transitions ...
+   // Mark all active states from transitions ...
    active[0] = 1;
    for (s = 0; s < N_states; s++) // For all states.
    {
       for (i = tt_start[s]; i < tt_end[s]; i++) // For all terminal transitions.
       {
-         if (tt_action[i] > 0) active [tt_action[i]] = 1;	// Mark this state active.
+         if (tt_action[i] > 0) active [tt_action[i]] = 1;   // Mark this state active.
       }
       for (i = ntt_start[s]; i < ntt_end[s]; i++) // For all terminal transitions.
       {
-         if (ntt_action[i] > 0) active [ntt_action[i]] = 1;	// Mark this state active.
+         if (ntt_action[i] > 0) active [ntt_action[i]] = 1; // Mark this state active.
       }
    }
    active[accept_state] = 0; // Token -> accept_state, so take it out.
 
-	// Count the number of states left ...
+   // Count the number of states left ...
    nosl = 0;
    for (s = 0; s < N_states; s++)
    {
@@ -596,7 +596,7 @@ int   LG_OptimizeStates::REMOVE_DUPLICATES () // Not being used 20100512
                goesto[s] = x;
                nd++;
             }
-         Next:				continue;
+         Next:          continue;
          }
       }
    }
@@ -693,10 +693,10 @@ void  LG_OptimizeStates::RENUMBER_STATES ()
    }
    op_states = newstate;
 
-	// Do zero states last.
+   // Do zero states last.
    for (s = 0; s < N_states; s++)
    {
-      if (st_type[s] == 0)		// Zero?
+      if (st_type[s] == 0)    // Zero?
       {
          newplace[s] = newstate++;
       }

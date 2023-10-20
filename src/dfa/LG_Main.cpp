@@ -61,10 +61,10 @@ int   LG::Start () // Display program information.
    time1 = clock();
    if (!CheckOptions()) return 0;
 
-   memory_usage  		 =  0;
-   memory_max    		 =  0;
-   ne            		 =  0;
-   n_errors      		 =  0;
+   memory_usage       =  0;
+   memory_max         =  0;
+   ne                 =  0;
+   n_errors           =  0;
    max_child_usage    =  0;
    exefid[0]          =  0;
    illegal_char_state = -1;
@@ -87,7 +87,7 @@ int   LG::GetFile (const char* file_type, const char* Msg)
    strcpy (gft, file_type);
    strcat (grmfid, gft);
    if (!inputi (Msg)) return 0;
-	// prt_log ("Reading   %s%s ...\n", gfn, file_type);
+   // prt_log ("Reading   %s%s ...\n", gfn, file_type);
    return 1;
 }
 
@@ -99,12 +99,12 @@ int   LG::FreeFile ()
 
 ///////////////////////////////////////////////////////////////////////////////
 
-int	LG::CheckOptions ()
+int   LG::CheckOptions ()
 {
    int n_outputs = 0;
-   if (optn[LG_TABL_SMALL])	n_outputs++;
-   if (optn[LG_TABL_MEDIUM])	n_outputs++;
-   if (optn[LG_TABL_LARGE])	n_outputs++;
+   if (optn[LG_TABL_SMALL])   n_outputs++;
+   if (optn[LG_TABL_MEDIUM])  n_outputs++;
+   if (optn[LG_TABL_LARGE])   n_outputs++;
 
    if      (n_outputs == 0) optn[LG_TABL_MEDIUM] = 1;
    else if (n_outputs > 1)
@@ -143,7 +143,7 @@ void  LG::PrintStats ()
 {
    if (N_states > org_states) org_states = N_states;
    if (n_prods > max_n_prods) max_n_prods = n_prods;  // brute force fix.
-   else                       max_n_prods++;				// brute force fix again.
+   else                       max_n_prods++;          // brute force fix again.
    if (n_prods < 0) n_prods = 0;                      // In case of early syntax error.
 
    optncount[MAX_SYM]  = n_symbs;

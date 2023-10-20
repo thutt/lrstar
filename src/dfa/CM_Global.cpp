@@ -50,9 +50,9 @@ uchar lower[256] =
 };
 
 
-char spaces [256] =				  /* TODO: This should either be const,
-											* or allocated by size on-demand. */
-	"                                                                " //  64
+char spaces [256] =             /* TODO: This should either be const,
+                                 * or allocated by size on-demand. */
+   "                                                                " //  64
    "                                                                " // 128
    "                                                                " // 192
    "                                                               "; // 255
@@ -72,9 +72,9 @@ char* mystrlwr (char* s)
 #ifdef LINUX
 ///////////////////////////////////////////////////////////////////////////////
 //                                                                           //
-//		_filelength function supplied by Vasko Mitanov, Feb 2012.               //
+//    _filelength function supplied by Vasko Mitanov, Feb 2012.               //
 
-long	_filelength (int fd)
+long  _filelength (int fd)
 {
    struct stat st;
    fstat(fd, &st);
@@ -88,7 +88,7 @@ void  PRT_ARGS (int na, char** arg, int destination)
 {
    int i;
    if (destination == 0) printf      (  "%s %s %s %s.\n", program, version, bits, copywrt);
-   else				       prt_logonly ("\n%s %s %s %s.\n", program, version, bits, copywrt);
+   else                  prt_logonly ("\n%s %s %s %s.\n", program, version, bits, copywrt);
    if (na > 1)
    {
       if (destination == 0) ;
@@ -158,7 +158,7 @@ int   set_optn (OPTION* option, char* opt)
       n = option[i].name;
       for (o = opt;; o++, n++)
       {
-         if (*n == 0)					  // name end?
+         if (*n == 0)                 // name end?
          {
             if (*o ==  0  ) goto set; // Got a match!
             if (*o == '\"') goto set; // Got a match!
@@ -167,8 +167,8 @@ int   set_optn (OPTION* option, char* opt)
             if (*o == '\t') goto spa; // Whitespace!
             goto next;                // Not a match yet!
          }
-         if (*o ==  0)      goto next; // Not a match	yet
-         if (*o != *n)      goto next; // Not a match	yet
+         if (*o ==  0)      goto next; // Not a match yet
+         if (*o != *n)      goto next; // Not a match yet
       }
    next:    continue;
    }
@@ -177,10 +177,10 @@ int   set_optn (OPTION* option, char* opt)
    printf ("Program option '%s' is invalid, not one of the following:\n", opt);
    return (0);
 
-spa:	while (*o == ' ' || *o == '\t') o++; // bypass spaces and tabs
+spa:  while (*o == ' ' || *o == '\t') o++; // bypass spaces and tabs
    if (*o == '=')
    {
-   val: 	   o++;
+   val:     o++;
       while (*o == ' ' || *o == '\t') o++; // bypass spaces and tabs
       if (*o < '0' || *o > '9')
       {
@@ -202,7 +202,7 @@ int   GetMaxValues (char* dn)
 {
    char* p;
    int   rc;   // Return code.
-   int   nb;	// Number of bytes read.
+   int   nb;   // Number of bytes read.
    int   linenumb;
    int   filedesc = -1;
    int   filesize;
@@ -211,39 +211,39 @@ int   GetMaxValues (char* dn)
    strcpy (exefid, getenv ("USERPROFILE"));
    strcat (exefid, "\\AppData\\Local\\LRSTAR");
    strcat (exefid, "\\memory.txt");
-   filedesc = open (exefid, 0);				// Open the file.
+   filedesc = open (exefid, 0);           // Open the file.
 #endif
-   if (filedesc < 0)								// File not found.
+   if (filedesc < 0)                      // File not found.
    {
       strcpy (exefid, dn);
       strcat (exefid, "memory.txt");
       filedesc = open (exefid, 0);        // Open the file.
-      if (filedesc < 0)							// File not found.
+      if (filedesc < 0)                   // File not found.
       {
-         SaveMaxValues ();						// Create it.
+         SaveMaxValues ();                // Create it.
          return 1;
       }
    }
 
    rc = 1; // OK
    linenumb = 1;
-   filesize = _filelength (filedesc) + 2;		// Set amount to read.
+   filesize = _filelength (filedesc) + 2;    // Set amount to read.
    ALLOC (input_start, filesize);
    nb = read (filedesc, input_start, filesize);
    if (nb <= 0)
    {
-      SaveMaxValues ();						      // Create it.
+      SaveMaxValues ();                      // Create it.
       goto Ret;
    }
 
-   input_end = input_start + nb;					// Set end-of-buffer pointer.
+   input_end = input_start + nb;             // Set end-of-buffer pointer.
    *(input_end)   = EOL_CHAR;
    *(input_end+1) = EOF_CHAR;
 
    p = input_start;
    do
    {
-   Find:		while (*p != '/' && *p != EOF_CHAR && *p != '\n') p++; // Find first "
+   Find:    while (*p != '/' && *p != EOF_CHAR && *p != '\n') p++; // Find first "
       if (*p == '\n')
       {
          p++;
@@ -251,8 +251,8 @@ int   GetMaxValues (char* dn)
          goto Find;
       }
       if (*p == EOF_CHAR) goto Ret;
-      char* option = p;										// Set option start.
-      while (*p != EOF_CHAR && *p != '\n') p++;		// Find end of line.
+      char* option = p;                            // Set option start.
+      while (*p != EOF_CHAR && *p != '\n') p++;    // Find end of line.
       if (*p == '\n') linenumb++;
       if (*p == EOF_CHAR) goto Ret;
 
@@ -272,7 +272,7 @@ int   GetMaxValues (char* dn)
    while (p < input_end);
 
 Ret:  FREE (input_start, filesize);
-   close (filedesc);								// Close input file.
+   close (filedesc);                      // Close input file.
    return rc;
 }
 
@@ -314,23 +314,23 @@ int   get_fid (char *arg, char *dir, char *fn, char *ft)
    last_slash = strrchr(arg, '\\');
    if (last_slash != NULL)
    {
-      f = last_slash + 1;			// Point at filename start.
-      c = *f;							// Save the char.
-      *f = 0;							// Drop null there.
-      if (f-arg < MAX_DIR)			// If length is OK.
+      f = last_slash + 1;        // Point at filename start.
+      c = *f;                    // Save the char.
+      *f = 0;                    // Drop null there.
+      if (f-arg < MAX_DIR)       // If length is OK.
       {
-         strcpy (dir, arg);		// Copy to 'dir'.
+         strcpy (dir, arg);      // Copy to 'dir'.
       }
-      else								// Directory name is too long.
+      else                       // Directory name is too long.
       {
          n_errors++;
          if (n_errors == 1) printf ("\n");
          printf ("Directory name\n\n%s\n\nhas more than %d characters.\n\n", arg, MAX_DIR-1);
          return (0);
       }
-      *f = c;							// Replace char.
+      *f = c;                    // Replace char.
    }
-   else f = arg;						// Point at filename start.
+   else f = arg;                 // Point at filename start.
 
    last_dot = strrchr (f, '.');
    if (last_dot != NULL)
@@ -338,22 +338,22 @@ int   get_fid (char *arg, char *dir, char *fn, char *ft)
       *last_dot = 0;
       if (last_dot-f < MAX_FILENAME)
       {
-         strcpy (fn, f);			// Copy to 'fn'.
+         strcpy (fn, f);         // Copy to 'fn'.
       }
-      else								// Filename is too long.
+      else                       // Filename is too long.
       {
          n_errors++;
          if (n_errors == 1) printf ("\n");
          printf ("Filename\n\n%s\n\nhas more than %d characters.\n\n", f, MAX_FILENAME-1);
          return (0);
       }
-      *last_dot = '.';				// Replace dot.
+      *last_dot = '.';           // Replace dot.
       len = (int)strlen(last_dot);
       if (len < MAX_FILETYPE)
       {
-         strcpy (ft, last_dot);	// Copy to 'ft'.
+         strcpy (ft, last_dot);  // Copy to 'ft'.
       }
-      else								// Filetype is too long.
+      else                       // Filetype is too long.
       {
          n_errors++;
          if (n_errors == 1) printf ("\n");
@@ -361,14 +361,14 @@ int   get_fid (char *arg, char *dir, char *fn, char *ft)
          return (0);
       }
    }
-   else									// No '\' and no '.'
+   else                          // No '\' and no '.'
    {
       len = (int)strlen (f);
       if (len < MAX_FILENAME)
       {
-         strcpy (fn, f);			// Copy to 'fn'.
+         strcpy (fn, f);         // Copy to 'fn'.
       }
-      else								// Filename is too long.
+      else                       // Filename is too long.
       {
          n_errors++;
          if (n_errors == 1) printf ("\n");
@@ -482,7 +482,7 @@ void  fastor (int *a, int *b, int n)
 
 ///////////////////////////////////////////////////////////////////////////////
 
-int	sqrt (int n) // Not very efficient.
+int   sqrt (int n) // Not very efficient.
 {
    int r;
    for (r = 1; r < 65535; r++)
@@ -494,7 +494,7 @@ int	sqrt (int n) // Not very efficient.
 
 ///////////////////////////////////////////////////////////////////////////////
 //                                                                           //
-//    number - put commas into number (12,345,002)    							  //
+//    number - put commas into number (12,345,002)                           //
 
 void  number (int x, char* string)
 {
@@ -519,7 +519,7 @@ void  number (int x, char* string)
 
 void  SORT (int *start, int *end) /* Integer bubble sort. */
 {
-	// Sort in place, destroys the original order.
+   // Sort in place, destroys the original order.
    int *p, *q, x;
 
    end--;
@@ -560,29 +560,29 @@ void  SORT2 (int* value, int* seq, int n)
    last = value + n - 1;
    v1 = value;
    s1 = seq;
-   while (v1 < last)			// from first to last-1
+   while (v1 < last)       // from first to last-1
    {
       v2 = ++v1;
       s2 = ++s1;
-      while (v2 > value)	// while next one > first in list.
+      while (v2 > value)   // while next one > first in list.
       {
-         vt = *v2--;			// save higher one into temp.
-         st = *s2--;			// save higher one's index into temp.
-         if (vt < *v2)		// if temp less than one above ...
+         vt = *v2--;       // save higher one into temp.
+         st = *s2--;       // save higher one's index into temp.
+         if (vt < *v2)     // if temp less than one above ...
          {
-            *(v2+1) = *v2;		// switch these two ...
-            *(s2+1) = *s2;		//	.
-            *v2 = vt;			// .
-            *s2 = st;			// done switching.
+            *(v2+1) = *v2;    // switch these two ...
+            *(s2+1) = *s2;    // .
+            *v2 = vt;         // .
+            *s2 = st;         // done switching.
          }
          else break;
       }
    }
-	/*	for (int i = 0; i < n; i++)
-		{
+   /* for (int i = 0; i < n; i++)
+      {
       printf ("%5d %5d\n", value[i], seq[i]);
-		}
-	*/
+      }
+   */
 }
 
 /*--- Attach Function. -----------------------------------------------------*/
@@ -597,12 +597,12 @@ void  SORT2 (int* value, int* seq, int n)
 
 int   ATTACH (int x, int y) // Attach y to x (add y to x set).
 {
-	/* Attach a Child to a Parent node to establish a relationship.
+   /* Attach a Child to a Parent node to establish a relationship.
       This builds a relationship of all those items associated with
       a parent item.  This routine returns:
       1 for already attached
       0 for not previously attached
-	*/
+   */
    int ptr, pre;
    if (f_child [x] == -1)
    {
@@ -751,7 +751,7 @@ void  T_GRAPH (char **g, int nr, int nc) // Traverse graph, do transitive closur
    graph = g;        // Set graph pointer.
    nw = (nc + 3)/4;  // Number of 4-byte words.
    ALLOC (N, nr);    // Allocate N, number of rows.
-   ALLOC (S, nr+1);	// Allocate S, number of rows + 1;
+   ALLOC (S, nr+1);  // Allocate S, number of rows + 1;
 
    // Mark nodes as not traversed.
    for (x = 0; x < nr; x++) N [x] = 0;
@@ -866,7 +866,7 @@ int   open_con (char* fid)
 {
    int i = (int)strlen(fid);
    strcat(fid, ".conflicts.txt");
-	// chmod  (fid, S_IWRITE);
+   // chmod  (fid, S_IWRITE);
    confp = fopen(fid, "w");
    if (confp == NULL)
    {
@@ -1024,7 +1024,7 @@ void  prt_warn (const char *format,...)
    va_list argptr;
 //    va_start (argptr, format);
 //    vprintf (format, argptr); // Print on screen.
-//		va_end (argptr);
+//    va_end (argptr);
 //    Print to listing file.
    if (lstfp != NULL)
    {
@@ -1056,9 +1056,9 @@ void  prt_num (const char* desc, int n, const char* name, int max)
 
 int   inputi (const char* Msg)
 {
-   int nb;												/* Number of bytes read.      */
-   filedesc = open (grmfid, 0);					/* Open the file.             */
-   if (filedesc < 0)									/* If open error.             */
+   int nb;                                   /* Number of bytes read.      */
+   filedesc = open (grmfid, 0);              /* Open the file.             */
+   if (filedesc < 0)                         /* If open error.             */
    {
       if (*Msg != 0)
       {
@@ -1073,19 +1073,19 @@ int   inputi (const char* Msg)
    *input_start++ = '\n';                    // Put EOL at the beggining.
 
    nb = read (filedesc, input_start, filesize);
-   if (nb <= 0)                           	// If read error.
+   if (nb <= 0)                              // If read error.
    {
       n_errors++;
       prt_log ("Read error on file %s, or it's empty.\n\n", grmfid);
       return 0; // Error
    }
 
-   input_end = input_start + nb;					// Set end-of-buffer pointer.
+   input_end = input_start + nb;             // Set end-of-buffer pointer.
    *input_end++ = '\n';
-   *input_end++ = 26;								// Parser needs 2 EOFs.
+   *input_end++ = 26;                        // Parser needs 2 EOFs.
    *input_end++ = 26;
-   *input_end++ = 0;									// ??
-   close (filedesc);									// Close input file.
+   *input_end++ = 0;                         // ??
+   close (filedesc);                         // Close input file.
 
    n_lines = 0;
    char* p = input_start;
@@ -1110,7 +1110,7 @@ void  inputt (void)
    if (input_start != NULL)
    {
       input_start--;
-      FREE (input_start, filesize+10);	// Free input buffer space.
+      FREE (input_start, filesize+10); // Free input buffer space.
       FREE (line_ptr, n_lines+5);
    }
 }
@@ -1142,12 +1142,12 @@ void  prt_warning (const char* msg, char* start, char* end, int linenum)
       for (end = start; *end != 0; end++);
    }
    prt_message ("Warning, ", msg, start, end, linenum);
-/*		if (n_warnings >= max_errors)
-		{
+/*    if (n_warnings >= max_errors)
+      {
       printf  ("Maximum number of warnings (%d) has been reached.\n", max_errors);
       prt_warn ("Maximum number of warnings (%d) has been reached.\n", max_errors);
       Quit();
-		}	*/
+      }  */
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -1159,23 +1159,23 @@ void  prt_message (const char* msgtype,
                    int tokenlinenumb)
 {
    char  c;
-   char* p;					// char pointer.
-   char* q;					// char pointer.
-   int   i;					// Start of token.
-   int   j;					// End of token.
-   int   k;					// End of token.
-   int   column;			// column where token starts.
-   char* linestart;		// Line start pointer.
-   char* lineend = 0;	// Line end pointer.
-   char  line[10000];	// Line string to be printed.
-   int   linelength;		// Line length.
-   int   tokenlength;	// Token length.
+   char* p;             // char pointer.
+   char* q;             // char pointer.
+   int   i;             // Start of token.
+   int   j;             // End of token.
+   int   k;             // End of token.
+   int   column;        // column where token starts.
+   char* linestart;     // Line start pointer.
+   char* lineend = 0;   // Line end pointer.
+   char  line[10000];   // Line string to be printed.
+   int   linelength;    // Line length.
+   int   tokenlength;   // Token length.
 
-	// Check line number ...
+   // Check line number ...
    if (tokenlinenumb > 0) // Line number defined?
    {
-      linestart = line_ptr [tokenlinenumb];							// Get Line start.
-      if (linestart >= input_start || linestart < input_end)	// Line start in input buffer?
+      linestart = line_ptr [tokenlinenumb];                    // Get Line start.
+      if (linestart >= input_start || linestart < input_end)   // Line start in input buffer?
       {
          for (lineend = linestart; *lineend != '\n'; lineend++);
          lineend++;
@@ -1184,21 +1184,21 @@ void  prt_message (const char* msgtype,
    }
    else linestart = NULL;
 
-	// Check token ...
+   // Check token ...
    if (tokenstart != NULL) // Token start looks OK.
    {
-		// Check token start ...
+      // Check token start ...
       if (tokenstart >= input_start && tokenstart < input_end) // Token is in input buffer?
       {
-         if (linestart == NULL)											// Get line start from token.
+         if (linestart == NULL)                                // Get line start from token.
          {
-				// Get line start ...
+            // Get line start ...
             for (linestart = tokenstart-1; *linestart != '\n'; linestart--);
             for (lineend   = tokenstart;   *lineend   != '\n'; lineend++  );
-            linestart++;	// Line start.
-            lineend++;		// Line start of next line.
+            linestart++;   // Line start.
+            lineend++;     // Line start of next line.
 
-				// Get line number ...
+            // Get line number ...
             tokenlinenumb = 0; // Maybe this should be 1, so double click will go to file.
             for (i = 1; i < n_lines; i++) // Not fast, could make this a binary search, later.
             {
@@ -1210,35 +1210,35 @@ void  prt_message (const char* msgtype,
             }
          }
       }
-		// Check token end ...
+      // Check token end ...
       if (tokenend < tokenstart) // token end is NULL or bad?
       {
          for (tokenend = tokenstart; *tokenend != 0; tokenend++);
       }
    }
 
-	// Check line start ...
+   // Check line start ...
    if (linestart != NULL)
    {
       if (lineend > linestart + 9999) lineend = linestart + 9999;
 
-		// Remove trailing whitespace.
-      lineend--;															// Backup to '\n'
-      if (*lineend == '\n') lineend--;								// If '\n' backup again.
+      // Remove trailing whitespace.
+      lineend--;                                            // Backup to '\n'
+      if (*lineend == '\n') lineend--;                      // If '\n' backup again.
       while (*lineend == ' ' || *lineend == '\t') lineend--;// Backup to first non-blank.
-      if (lineend < linestart) lineend = linestart;			// In case of blank line (?).
-      lineend++;															// Point at '\n' or next character.
+      if (lineend < linestart) lineend = linestart;         // In case of blank line (?).
+      lineend++;                                            // Point at '\n' or next character.
 
-		// Make line ...
+      // Make line ...
       i = 0;
-      for (p = linestart; p < lineend; p++)						// Scan to end of line.
+      for (p = linestart; p < lineend; p++)                 // Scan to end of line.
       {
-         if (*p == '\t') line[i++] = ' ';							// Move space, not tab.
-         else            line[i++] = *p;							// Move character to line.
+         if (*p == '\t') line[i++] = ' ';                   // Move space, not tab.
+         else            line[i++] = *p;                    // Move character to line.
       }
       line[i] = 0;
 
-		// Print line.
+      // Print line.
       if (*msgtype == 'W')
       {
          if (option_warnings)
@@ -1247,30 +1247,30 @@ void  prt_message (const char* msgtype,
       }
       else  prt_log ("%s(%04d) : %s\n", grmfid, tokenlinenumb, line);
 
-		// See if token is outside this line ...
+      // See if token is outside this line ...
       if (tokenstart < linestart || tokenstart >= lineend)
       {
-         if (tokenstart != NULL)												// Token is not null?
+         if (tokenstart != NULL)                                  // Token is not null?
          {
-				// Find first match in this line ...
-            tokenlength = (int)(tokenend - tokenstart);						// Get token length.
-            for (p = linestart; p < lineend; p++)						// Scan to end of line.
+            // Find first match in this line ...
+            tokenlength = (int)(tokenend - tokenstart);                 // Get token length.
+            for (p = linestart; p < lineend; p++)                 // Scan to end of line.
             {
-               if (*p == *tokenstart)										// First characters match?
+               if (*p == *tokenstart)                             // First characters match?
                {
                   int len = tokenlength;
                   if (len > lineend-p) len = (int)(lineend-p);
-                  if (strncmp (p, tokenstart, len) == 0)				// Whole tokens match?
+                  if (strncmp (p, tokenstart, len) == 0)          // Whole tokens match?
                   {
-                     tokenstart = p;										// Set tokenstart to p in this line.
-                     tokenend   = p + len;								// Set tokenend.
-                     goto Ptr;												// Go print pointer and message.
+                     tokenstart = p;                              // Set tokenstart to p in this line.
+                     tokenend   = p + len;                        // Set tokenend.
+                     goto Ptr;                                    // Go print pointer and message.
                   }
                }
             }
          }
 
-			// Token is NULL or not found in line.
+         // Token is NULL or not found in line.
          column = (int)(lineend - linestart);
          for (i = 0; i < column; i++) line[i] = '.';
          line[i] = 0;
@@ -1284,11 +1284,11 @@ void  prt_message (const char* msgtype,
       }
       else
       {
-			// Make pointer ...
-		Ptr:	if (tokenend > lineend) tokenend = lineend;
+         // Make pointer ...
+      Ptr:  if (tokenend > lineend) tokenend = lineend;
          linelength  = (int)(lineend - linestart);
          tokenlength = (int)(tokenend - tokenstart);
-         column      = (int)(tokenstart - linestart);								// Column number for token start.
+         column      = (int)(tokenstart - linestart);                      // Column number for token start.
          for (i = 0;   i < column;      i++) line[i]   = '.';
          for (j = 0;   j < tokenlength; j++) line[i+j] = '^';
          for (k = i+j; k < linelength;  k++) line[k]   = '.';
@@ -1303,7 +1303,7 @@ void  prt_message (const char* msgtype,
       }
    }
 
-	// Print message ...
+   // Print message ...
    char MsgType[32];
    strcpy (MsgType, msgtype);
    if (tokenstart != NULL)
@@ -1343,15 +1343,15 @@ void  prt_message (const char* msgtype,
 
 ///////////////////////////////////////////////////////////////////////////////
 //                                                                           //
-//		Best algorithm for space usage (does not need predefined Cameto).
+//    Best algorithm for space usage (does not need predefined Cameto).
 
 void  C_CAMEFROM (int   N_states,
-						int*  tt_start,
-						int*  tt_action,
-						int*  ntt_start,
-						int*  ntt_action,
-						int*& f_camefrom,
-						int*& camefrom)
+                  int*  tt_start,
+                  int*  tt_action,
+                  int*  ntt_start,
+                  int*  ntt_action,
+                  int*& f_camefrom,
+                  int*& camefrom)
 {
    int* n_cameto;
    int  s, i, x, n, sum;
@@ -1365,24 +1365,24 @@ void  C_CAMEFROM (int   N_states,
    {
       for (i = tt_start[s]; i < tt_start[s+1]; i++)
       {
-         x = tt_action[i];					// x = goto state.
-         if (x > 0) n_cameto[x+1]++;	// Increment number of transition to this state.
+         x = tt_action[i];             // x = goto state.
+         if (x > 0) n_cameto[x+1]++;   // Increment number of transition to this state.
       }
       for (i = ntt_start[s]; i < ntt_start[s+1]; i++)
       {
-         x = ntt_action[i];					// x = goto state.
-         if (x > 0) n_cameto[x+1]++;	// Increment number of transition to this state.
+         x = ntt_action[i];               // x = goto state.
+         if (x > 0) n_cameto[x+1]++;   // Increment number of transition to this state.
       }
    }
 
    // Define the first camefrom index for each state.
    n = sum = 0;
-   f_camefrom = n_cameto;					// f_camefrom uses same space as n_cameto!
-   for (x = 0; x < N_states; x++)		// For all goto states.
+   f_camefrom = n_cameto;              // f_camefrom uses same space as n_cameto!
+   for (x = 0; x < N_states; x++)      // For all goto states.
    {
-      sum += n;								// Increment sum by number of cameto's from last state.
-      n = n_cameto[x+1];					// Save number of cameto's.
-      f_camefrom[x+1] = sum;				// Define first camefrom, sum of all previous states.
+      sum += n;                        // Increment sum by number of cameto's from last state.
+      n = n_cameto[x+1];               // Save number of cameto's.
+      f_camefrom[x+1] = sum;           // Define first camefrom, sum of all previous states.
    }
    sum += n;
 
@@ -1406,7 +1406,7 @@ void  C_CAMEFROM (int   N_states,
 void  Quit ()
 {
 #ifdef _DEBUG
-	//	printf ("Terminating\n");
+   // printf ("Terminating\n");
 #endif
    inputt ();
    LG::Terminate ();

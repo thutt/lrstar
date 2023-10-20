@@ -18,7 +18,7 @@ int*   LG_CreateTables::T_row;
 int    LG_CreateTables::T_rows;
 int    LG_CreateTables::T_size;
 
-int	 LG_CreateTables::err_ret_numb;
+int    LG_CreateTables::err_ret_numb;
 
 static int    quiet;
 static int    T0, T1, T2;
@@ -105,9 +105,9 @@ int   LG_CreateTables::CreateTables ()
    FREE (la_red,     max_lookah);
    FREE (la_symb,    max_lookah);
 
-	// Reduce production length by 1, so no "-1" adjustment is required in skl file.
+   // Reduce production length by 1, so no "-1" adjustment is required in skl file.
    for (int p = 0; p < n_prods; p++) prod_len[p]--;
-	//	gen_tabl_memory = memory_max;
+   // gen_tabl_memory = memory_max;
    return (1);
 }
 
@@ -169,7 +169,7 @@ int   LG_CreateTables::BLD_T (int opt1, int opt2, const char *mark) /* Build Ter
    ALLOC (T_col,  N_terms);
    ALLOC (Matrix, tt_states);
 
-	// T_rows = MRG_ROWE2T (Matrix, T_row, tt_states);	// Total time is slower with 'M' option turned on.
+   // T_rows = MRG_ROWE2T (Matrix, T_row, tt_states); // Total time is slower with 'M' option turned on.
    T_rows = MRG_ROWZ (tt_start, tt_end, tt_action, tt_symb, Matrix, T_row, tt_states, N_terms, opt1); // Older code, much faster.
    T_cols = MRG_COLZ (T_col, N_terms, T_rows, Matrix, opt2);
    org_size = T_rows * T_cols;
@@ -286,9 +286,9 @@ int   LG_CreateTables::BLD_LARGE () /* Build Terminal Matrix for Large Tables. *
    T_rows = tt_states;
    T_cols = N_terms;
    org_size = T_rows * T_cols;
-//		if      (org_size > 65535) multiplier = 4;	// int
-//		else if (org_size >   255) multiplier = 2;	// ushort
-//		else                       multiplier = 1;	// uchar
+//    if      (org_size > 65535) multiplier = 4;   // int
+//    else if (org_size >   255) multiplier = 2;   // ushort
+//    else                       multiplier = 1;   // uchar
    multiplier = 4; // {whitespace} = 2147483647
    T_total = multiplier*org_size;
    number (T_total, num); // Gives 9 digits.
@@ -302,7 +302,7 @@ int   LG_CreateTables::BLD_LARGE () /* Build Terminal Matrix for Large Tables. *
    total0 += T_total;
    T_size = org_size;
    ALLOC (T_matrix, org_size);
-//		FASTINI (0, T_matrix, org_size);
+//    FASTINI (0, T_matrix, org_size);
 
    for (s = 0; s < N_states; s++)
    {
@@ -383,7 +383,7 @@ int   LG_CreateTables::MRG_ROWE2T (int **matrix, int *row, int N_states)
    FASTINI (-1, vector, n_cells);
    hash_divide = UINT_MAX / n_cells + 1;
 
-	//	nc = 0; // number of collisions = 0.
+   // nc = 0; // number of collisions = 0.
    for (s = 0; s < N_states; s++) // For all states ...
    {
       count[s] = 0;
@@ -412,8 +412,8 @@ int   LG_CreateTables::MRG_ROWE2T (int **matrix, int *row, int N_states)
             hash += tt_action[i]*i;
          }
       }
-      cell = hash % n_cells; 			// Get first cell.
-      r = vector [cell];					// Get symbol index.
+      cell = hash % n_cells;        // Get first cell.
+      r = vector [cell];               // Get symbol index.
       while (r >= 0)
       {
          if (count[s] != count[r]) goto Cont;
@@ -426,9 +426,9 @@ int   LG_CreateTables::MRG_ROWE2T (int **matrix, int *row, int N_states)
             }
          }
          goto Old;
-      Cont:			cell = (hash *= 65549) / hash_divide;	// Get new cell number.
-         r = vector[cell];		   					// Get row index.
-			//	nc++;	// number of collisions.
+      Cont:       cell = (hash *= 65549) / hash_divide;  // Get new cell number.
+         r = vector[cell];                      // Get row index.
+         // nc++; // number of collisions.
       }
       vector[cell] = nr;
       r = nr++;
@@ -611,14 +611,14 @@ int   LG_CreateTables::MRG_COLE2 (int *col, int n_rows, int**& matrix)
    cont:    continue;
    }
 
-   old_matrix = matrix;		// Save the old matrix ptr.
+   old_matrix = matrix;    // Save the old matrix ptr.
    ALLOC (matrix, n_rows); // Allocate new matrix space
    for (r = 0; r < n_rows; r++)
    {
-      ALLOC (matrix[r], n_cols);		 // Allocate new matrix space
+      ALLOC (matrix[r], n_cols);     // Allocate new matrix space
    }
 
-	// Move the old into the new.
+   // Move the old into the new.
    k = 0;
    ALLOC (new_col, N_terms);
    for (c = 0; c < N_terms; c++)
@@ -632,12 +632,12 @@ int   LG_CreateTables::MRG_COLE2 (int *col, int n_rows, int**& matrix)
          new_col[c] = k++;
       }
    }
-	// Define the new column locations.
+   // Define the new column locations.
    for (c = 0; c < N_terms; c++)
    {
       col[c] = new_col [col[c]];
    }
-	// Free the old matrix.
+   // Free the old matrix.
    for (r = 0; r < n_rows; r++)
    {
       FREE (old_matrix[r], N_terms); // Free the old rows.
@@ -792,7 +792,7 @@ int   LG_CreateTables::DISP_EQ1B (char** matrix, char* newmat, int* row, int nr,
    for (x = 0; x < nr; x++)
    {
       if (opt1) r = indx[x];
-      else		 r = x;
+      else      r = x;
       for (i = 0; i < size; i += inc)
       {
          n = size - i;
@@ -844,10 +844,10 @@ int   LG_CreateTables::DISP_EQ2 (int **matrix, int *newmat, int *row, int nr, in
 
    ALLOC (base, nr);
 /*    int *indx;
-		ALLOC (indx, nr);
+      ALLOC (indx, nr);
       for (r = 0; r < nr; r++) indx [r] = r;
-		if (opt1) // Not used (waste of time?)
-		{
+      if (opt1) // Not used (waste of time?)
+      {
       int *density, *p;
       ALLOC (density, nr);
       for (r = 0; r < nr; r++)
@@ -862,7 +862,7 @@ int   LG_CreateTables::DISP_EQ2 (int **matrix, int *newmat, int *row, int nr, in
       }
       SORT2 (density, indx, nr);
       FREE (density, nr);
-		}
+      }
 */
    size = 0;
    inc = optn[LG_MINIMIZE]; // 20100409 pbm
@@ -902,9 +902,9 @@ int   LG_CreateTables::DISP_ZEQ_RAND (int **matrix, int *newmat, int *row, int n
    int  r, i, j, size, *base, n;
    uint hash_divide, hash;
 
-	/* This function may not be working correctly.
-	   It's not needed anyway, because the 'ts' option is not being used anymore (pbm 20140831).
-	*/
+   /* This function may not be working correctly.
+      It's not needed anyway, because the 'ts' option is not being used anymore (pbm 20140831).
+   */
    i = 0;
    size = 0;
    hash = 32767 / 3;
@@ -913,7 +913,7 @@ int   LG_CreateTables::DISP_ZEQ_RAND (int **matrix, int *newmat, int *row, int n
    for (r = 0; r < nr; r++)
    {
       n = 0;
-   Loop:		for (j = 0; j < nc; j++)
+   Loop:    for (j = 0; j < nc; j++)
       {
          if ( matrix[r][j] == 0) continue;
          if ((newmat+i)[j] == 0) continue;
@@ -957,10 +957,10 @@ int   LG_CreateTables::DISP_ZEQ_SEQ (int **matrix, int *newmat, int *row, int nr
 
    ALLOC (base, nr);
 /*    int *indx;
-		ALLOC (indx, nr);
+      ALLOC (indx, nr);
       for (r = 0; r < nr; r++) indx[r] = r;
-    	if (optn[LG_MINIMIZE])
-		{
+      if (optn[LG_MINIMIZE])
+      {
       int *density, *p;
       ALLOC (density, nr);
       for (r = 0; r < nr; r++)
@@ -968,11 +968,11 @@ int   LG_CreateTables::DISP_ZEQ_SEQ (int **matrix, int *newmat, int *row, int nr
       density [r] = 0;
       p = matrix [r];
       for (int c = 0; c < nc; c++) if (*p++) density [r]--; // smaller?  most dense rows first.
-      // for (int c = 0; c < nc; c++) if (*p++) density [r]++; // larger?	most dense rows last.
+      // for (int c = 0; c < nc; c++) if (*p++) density [r]++; // larger?  most dense rows last.
       }
       SORT2 (density, indx, nr);
       FREE (density, nr);
-		}
+      }
 */
    inc = nc;
    size = 0;
@@ -995,7 +995,7 @@ int   LG_CreateTables::DISP_ZEQ_SEQ (int **matrix, int *newmat, int *row, int nr
             if ( matrix[r][j] != (newmat+i)[j]) goto Next;
          }
          goto Load;
-      Next:			continue;
+      Next:       continue;
       }
    Load:    base [r] = i;
       for (j = 0; j < nc; j++)

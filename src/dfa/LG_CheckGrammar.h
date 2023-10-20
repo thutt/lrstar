@@ -20,7 +20,7 @@ private:
    static void P_UNREACHABLES ();
    static void P_UNREDUCIBLES ();
    static void RenumberProductions (int n_unreachables);
-   static int	p_sym (int s, const char *sp);
+   static int  p_sym (int s, const char *sp);
    static void p_prod (int p, int dot, const char *before);
    static void C_CYCLES ();
    static int  C_CYCLES2 (int h);

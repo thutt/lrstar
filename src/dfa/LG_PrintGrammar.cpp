@@ -33,10 +33,10 @@ void  LG_CheckGrammar::PrintGrammar ()
       else prt_grm ( "%6d      ", h);
       prt_head (h, "");
 
-		//	printf ("\n%s\n", head_name[h]);
+      // printf ("\n%s\n", head_name[h]);
       for (p = f_prod [h]; p < l_prod [h]; p++)
       {
-			//	printf ("-> ");
+         // printf ("-> ");
          line_length = 16;
          if (prod_type != NULL)
          {
@@ -50,8 +50,8 @@ void  LG_CheckGrammar::PrintGrammar ()
          for (t = f_tail [p]; t < l_tail [p]; t++)
          {
             s = tail [t];
-				//	if (s < 0) printf ("%s ", head_name[-s]);
-				//	else       printf ("%s ", term_name[ s]);
+            // if (s < 0) printf ("%s ", head_name[-s]);
+            // else       printf ("%s ", term_name[ s]);
             const char* ch = " ";
             if (t == l_tail[p]-1) ch = "";
             line_length += prt_sym2 (s, ch);
@@ -66,7 +66,7 @@ void  LG_CheckGrammar::PrintGrammar ()
             prt_grm (" (%d)", ret_numb[p]);
          }
 
-			//	printf ("\n");
+         // printf ("\n");
       }
       prt_grm ("\n\n");
    }

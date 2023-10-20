@@ -6,7 +6,7 @@
 #include "LG_BuildStates.h"
 
 int    LG_BuildStates::N_states;
-int	 LG_BuildStates::extra_states;
+int    LG_BuildStates::extra_states;
 int*   LG_BuildStates::ntt_item;
 int*   LG_BuildStates::accessor;
 int    LG_BuildStates::accept_state;
@@ -66,7 +66,7 @@ int   LG_BuildStates::BuildStates () /* Build LR0 States */
    int p, state, t;
 
    if (optn[LG_VERBOSE] > 2)
-	  	printf ("Building states ...\n");
+      printf ("Building states ...\n");
 
    max_states  = optn[MAX_STA];
    max_final   = optn[MAX_FIN];
@@ -128,11 +128,11 @@ int   LG_BuildStates::BuildStates () /* Build LR0 States */
       EXPAND (state);
    }
 
-	// Create Accept & Final state.
+   // Create Accept & Final state.
    MAKE_ACCEPT_STATE ();
    MTSL ();
 
-	// Define accept state.
+   // Define accept state.
    for (t = ntt_start[0]; t < ntt_start[1]; t++)
    {
       if (ntt_symb[t] == 1) // Token transition?
@@ -172,7 +172,7 @@ int   LG_BuildStates::BuildStates () /* Build LR0 States */
    n_oprods = n_prods;  // Set number of original productions.
 
    if (optn[LG_VERBOSE] > 2)
-	  	printf ("Done with building states !!!\n");
+      printf ("Done with building states !!!\n");
    return (1);
 }
 
@@ -247,7 +247,7 @@ void  LG_BuildStates::EXPAND (int state)
          if (w > 0) Tcameto [w]++;
          tt_action [n_termtran++] = w;
          if (n_termtran >= max_tt)
-				MemCrash ("Number of terminal transitions", max_tt);
+            MemCrash ("Number of terminal transitions", max_tt);
       }
       for (i = 0; i < head_free; i++)
       {
@@ -266,7 +266,7 @@ void  LG_BuildStates::EXPAND (int state)
             ntt_action [n_nonttran++] = w;
          }
          if (n_nonttran >= max_ntt)
-				MemCrash ("Number of nonterminal transitions", max_ntt);
+            MemCrash ("Number of nonterminal transitions", max_ntt);
       }
    }
    tt_start  [state+1] = n_termtran;
@@ -374,14 +374,14 @@ void  LG_BuildStates::MAKE_KERNEL (int c)
 ///////////////////////////////////////////////////////////////////////////////
 //                                                                           //
 
-int	LG_BuildStates::TRANSIT (int ki, int sym)
+int   LG_BuildStates::TRANSIT (int ki, int sym)
 {
    int ni;
    ni = n_kernels - ki;
    if (ni > 1)                     // Number of items is 1?
    {
-		// Remove this SORT and save 1/2 sec on English.lgr,
-		// but better to have sorted items in the state listing.
+      // Remove this SORT and save 1/2 sec on English.lgr,
+      // but better to have sorted items in the state listing.
       SORT (kernel + ki, kernel + n_kernels);
    }
 
@@ -389,17 +389,17 @@ int	LG_BuildStates::TRANSIT (int ki, int sym)
       MemCrash ("Number of states", max_states);
    accessor [N_states]   = sym;
    f_kernel [N_states+1] = n_kernels;
-	//	if (((N_states+1) %  10000) == 0) printf ("*");
-	//	if (((N_states+1) % 800000) == 0) printf ("\n");
+   // if (((N_states+1) %  10000) == 0) printf ("*");
+   // if (((N_states+1) % 800000) == 0) printf ("\n");
    return (N_states++);
 }
 
 ///////////////////////////////////////////////////////////////////////////////
 //                                                                           //
 
-void	LG_BuildStates::MAKE_ACCEPT_STATE ()
+void  LG_BuildStates::MAKE_ACCEPT_STATE ()
 {
-	// Make accept_state
+   // Make accept_state
    if (N_states >= max_states)
       MemCrash ("Number of states", max_states);
    if (n_kernels >= max_kernel)
@@ -408,21 +408,21 @@ void	LG_BuildStates::MAKE_ACCEPT_STATE ()
       MemCrash ("Number of terminal transitions", max_tt);
 
    accept_state = N_states;
-   ntt_action [accept_tran]  = accept_state;	// Token transition to accept state.
-   Ncameto  [accept_state]++;						// Came to accept_state.
+   ntt_action [accept_tran]  = accept_state; // Token transition to accept state.
+   Ncameto  [accept_state]++;                // Came to accept_state.
    f_kernel [accept_state] = n_kernels;
    f_final  [accept_state] = n_finals;
-   accessor [accept_state] = -1;					// Token
+   accessor [accept_state] = -1;             // Token
    st_type  [accept_state] = TT_STATE;
    tt_start [accept_state] = n_termtran;
    ntt_start[accept_state] = n_nonttran;
-   kernel   [n_kernels]    = f_item [0] + 1;	// $start -> Token . $end
+   kernel   [n_kernels]    = f_item [0] + 1; // $start -> Token . $end
    tt_action  [n_termtran]   = N_states+1;
    n_termtran++;
    n_kernels++;
    N_states++;
 
-	// Make final_state
+   // Make final_state
    if (N_states >= max_states)
       MemCrash ("Number of states", max_states);
    if (n_finals  >= max_final )
@@ -463,13 +463,13 @@ void  LG_BuildStates::MTSL ()  // Make Transition Symbols List.
    for (i = 0; i < n_termtran; i++)
    {
       if (tt_action[i] > 0) tt_symb[i] = accessor [tt_action [i]];
-      else					    tt_symb[i] = tail[l_tail[-tt_action[i]]-1];
+      else                  tt_symb[i] = tail[l_tail[-tt_action[i]]-1];
    }
 
    for (i = 0; i < n_nonttran; i++)
    {
       if (ntt_action[i] > 0) ntt_symb[i] = -accessor [ntt_action [i]];
-      else						  ntt_symb[i] = -tail[l_tail[-ntt_action[i]]-1];
+      else                   ntt_symb[i] = -tail[l_tail[-ntt_action[i]]-1];
    }
 }
 

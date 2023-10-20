@@ -47,46 +47,46 @@ void  LG_Lexer::term_lexer () // General purpose lexer.
 
 /*--- DFA Lexer Engine. -----------------------------------------------------*/
 
-int   LG_Lexer::get_token ()		// DFA LG_Lexer Engine.
+int   LG_Lexer::get_token ()     // DFA LG_Lexer Engine.
 {
-   int state, next;		// State, next state, terminal, keyword.
+   int state, next;     // State, next state, terminal, keyword.
    do
    {
-      state = 0;									// Start in state zero.
-      token.start = token.end;				// Set start of token.
-      token.line  = line_numb;				// Set line number of token.
-      token.column = col_numb + 1;			// Set column number.
+      state = 0;                          // Start in state zero.
+      token.start = token.end;            // Set start of token.
+      token.line  = line_numb;            // Set line number of token.
+      token.column = col_numb + 1;        // Set column number.
       while (next = Tm [Tr [state] + Tc [*token.end]])
       {
-         if (*token.end == '\n')				// If end-of-line character.
+         if (*token.end == '\n')          // If end-of-line character.
          {
             col_numb = 0;
             line_pos = 0;
-            line_start = token.end + 1;	// Set beginning of next line.
+            line_start = token.end + 1;   // Set beginning of next line.
             line_ptr [++line_numb] = line_start;
          }
-         else if (*token.end == '\t')				// If tab character.
+         else if (*token.end == '\t')           // If tab character.
          {
             col_numb += tab - (col_numb % tab);
          }
          else
          {
-            col_numb++;							// Increment column.
+            col_numb++;                   // Increment column.
          }
-         token.end++;							// Increment token pointer.
-         state = next;							// Set next state number.
+         token.end++;                     // Increment token pointer.
+         state = next;                    // Set next state number.
       }
    }
-   while (term_numb[state] == -1);			// If whitespace, continue.
+   while (term_numb[state] == -1);        // If whitespace, continue.
 
    line_pos++;
-   return term_numb[state];					// Return terminal number.
+   return term_numb[state];               // Return terminal number.
 }
 
 ///////////////////////////////////////////////////////////////////////////////
 //                                                                           //
 
-int	LG_Lexer::get_lookahead (int& linenumber)
+int   LG_Lexer::get_lookahead (int& linenumber)
 {
    char* TS   = token.start;
    char* TE   = token.end;
@@ -98,7 +98,7 @@ int	LG_Lexer::get_lookahead (int& linenumber)
    int   LP   = line_pos;
 
    int   la = get_token();    // Get look ahead token.
-   linenumber = token.line;	// Set line number of lookahead.
+   linenumber = token.line;   // Set line number of lookahead.
 
    token.start  = TS;         // Reset token start.
    token.end    = TE;         // Reset token end.

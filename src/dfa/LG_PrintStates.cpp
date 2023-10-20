@@ -78,7 +78,7 @@ void  LG_PrintStates::PrintStates (int type)
             n = tt_symb [t];
             if (range[n] > 0)
             {
-            Inside:				if (count == 0)
+            Inside:           if (count == 0)
                {
                   first_n = n;
                   action = A;
@@ -93,7 +93,7 @@ void  LG_PrintStates::PrintStates (int type)
             }
             else
             {
-            Out:					if (count == 1)
+            Out:              if (count == 1)
                {
                   P_SYMBOL (first_n);
                   prt_sta (" +=> %4d\n", action);
@@ -155,7 +155,7 @@ void  LG_PrintStates::PrintStates (int type)
             c++;
             P_SYMBOL (-32767);
             prt_sta ("  <= %4d\n", A);
-				//	p_prod (A, -1, "", "\n");
+            // p_prod (A, -1, "", "\n");
          }
          else if (s != accept_state)
          {
@@ -286,7 +286,7 @@ void  LG_PrintStates::p_prod (int p, int dot,
    prt_sta ("%s", after);
 }
 
-int	LG_PrintStates::p_sym (int s, const char *sp)
+int   LG_PrintStates::p_sym (int s, const char *sp)
 {
    char *p;
    if (s >= 0)                 /* Terminal symbol? */

@@ -10,7 +10,7 @@ class LG_BuildStates : public LG_CheckGrammar
 {
 public:
    static int    N_states;
-   static int	  extra_states;
+   static int    extra_states;
    static int*   ntt_item;
    static int*   accessor;
    static int    accept_state;

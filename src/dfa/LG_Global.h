@@ -6,12 +6,12 @@
 #include "LG_PrintStates.h"
 
 // State Types.
-#define TT_STATE			1	// State has terminal transitions.
-#define NT_STATE			2	// State has nonterminal transitions.
-#define MR_STATE			4	// State has multiple reductions.
-#define RO_STATE			8	// State is a reduce-only state.
-#define UN_STATE		  16	// State is unused, remove it.
-#define RR_CONFL  	  32	// State has reduce-reduce conflict(s).
+#define TT_STATE        1  // State has terminal transitions.
+#define NT_STATE        2  // State has nonterminal transitions.
+#define MR_STATE        4  // State has multiple reductions.
+#define RO_STATE        8  // State is a reduce-only state.
+#define UN_STATE       16  // State is unused, remove it.
+#define RR_CONFL       32  // State has reduce-reduce conflict(s).
 
 // Symbol Types.
 #define TOKEN           1
@@ -29,7 +29,7 @@
 #define OUTPUTSYM    4096
 #define ACTIONCODE   8192
 
-#define MAXPRODLENG	 256	// Maximum number of symbols per production.
+#define MAXPRODLENG   256  // Maximum number of symbols per production.
 
 enum prodtype
 {
@@ -46,7 +46,7 @@ public:
    static int  Start ();
    static int  GetFile(const char*, const char*);
    static int  FreeFile();
-   static int	CheckOptions ();
+   static int  CheckOptions ();
    static void PrintStats ();
    static void Terminate ();
    static void GenerateLexerDefines();

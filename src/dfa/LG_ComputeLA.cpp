@@ -17,7 +17,7 @@ int    LG_ComputeLA::n_lookah;
 int    LG_ComputeLA::n_includes;
 static int    nwarn;
 static char** LA;
-//	static int*   term; not used?
+// static int*   term; not used?
 static int*   lb_num;
 static int*   action;
 static int*   conflict;
@@ -53,10 +53,10 @@ int   LG_ComputeLA::ComputeLA () /* Compute Look-Aheads */
    rr_con      = 0;
    rr_errors   = 0;
    n_lookah    = 0;
-   n_words     = (N_terms + 3)/4;	// Number of 4-byte words.
-   n_bytes     = 4*n_words;			// Number of bytes to allocate.
+   n_words     = (N_terms + 3)/4;   // Number of 4-byte words.
+   n_bytes     = 4*n_words;         // Number of bytes to allocate.
    max_lookah  = optn[MAX_LA];
-   ALLOC (D_red,    N_states+1);		// +1 in case of illegal_char state.
+   ALLOC (D_red,    N_states+1);    // +1 in case of illegal_char state.
    ALLOC (la_start, N_states+1);
    ALLOC (la_symb,  max_lookah);
    ALLOC (la_red,   max_lookah);
@@ -107,7 +107,7 @@ int   LG_ComputeLA::ComputeLA () /* Compute Look-Aheads */
       prt_log ("\n");
       rc = 0;
    }
-	//	anl_stat_memory = memory_max;
+   // anl_stat_memory = memory_max;
    return rc;
 }
 
@@ -118,7 +118,7 @@ void  LG_ComputeLA::C_LALR ()
 {
    int  nfi, t, i, p, s, f, nc;
 
-	//	numberofterms = max_char_set;
+   // numberofterms = max_char_set;
    numberofterms = N_terms;
 
    C_LOOKBACKS ();
@@ -129,10 +129,10 @@ void  LG_ComputeLA::C_LALR ()
    ALLOC (conflict, numberofterms);
    // ALLOC (term, numberofterms); not used?
 
-	//	nwarn = n_warnings;
+   // nwarn = n_warnings;
    for (s = 0; s < N_states; s++)
    {
-		// printf ("--> STATE %d\n", s);
+      // printf ("--> STATE %d\n", s);
       nc = sr = rr = 0;
       la_start[s] = n_lookah;
       nfi = f_final [s+1] - f_final [s];
@@ -149,7 +149,7 @@ void  LG_ComputeLA::C_LALR ()
             ANALYZE (nc, s, f);
          }
          p = 0;
-         for (t = 0; t < numberofterms; t++)	// For all terminal symbols.
+         for (t = 0; t < numberofterms; t++) // For all terminal symbols.
          {
             if (action[t] < 0 && t != end_symb) // Reduction?
             {
@@ -160,11 +160,11 @@ void  LG_ComputeLA::C_LALR ()
          if (action[end_symb] == 0 || action[end_symb] == -p)
          {
             D_red[s] = p;  // Same reduction for all lookaheads (terminals).
-				// printf ("D_red[%d] = %d\n", s, D_red[s]);
+            // printf ("D_red[%d] = %d\n", s, D_red[s]);
          }
          else
          {
-            for (t = 0; t < numberofterms; t++)	// For all terminal symbols.
+            for (t = 0; t < numberofterms; t++) // For all terminal symbols.
             {
                if (action[t] < 0 && action[t] != action[end_symb])
                {
@@ -174,11 +174,11 @@ void  LG_ComputeLA::C_LALR ()
                }
             }
             D_red[s] = -action[end_symb];
-				// printf ("D_red[%d] = %d\n", s, D_red[s]);
+            // printf ("D_red[%d] = %d\n", s, D_red[s]);
          }
          goto Next;
 
-      DoLA:			for (t = 0; t < numberofterms; t++)	// For all terminal symbols.
+      DoLA:       for (t = 0; t < numberofterms; t++) // For all terminal symbols.
          {
             if (action[t] < 0 && action[t] != action[end_symb])
             {
@@ -188,7 +188,7 @@ void  LG_ComputeLA::C_LALR ()
             }
          }
          D_red[s] = -action[end_symb];
-			// printf ("D_red[%d] = %d\n", s, D_red[s]);
+         // printf ("D_red[%d] = %d\n", s, D_red[s]);
          goto Next;
       }
       D_red[s] = -1; // No default reduction.
@@ -224,7 +224,7 @@ void  LG_ComputeLA::C_LALR ()
 ///////////////////////////////////////////////////////////////////////////////
 //                                                                           //
 
-void	LG_ComputeLA::ANALYZE (int& nc, int s, int f)
+void  LG_ComputeLA::ANALYZE (int& nc, int s, int f)
 {
    int p, lb, t;
 
@@ -234,12 +234,12 @@ void	LG_ComputeLA::ANALYZE (int& nc, int s, int f)
    {
       FASTOR (LA [lookback[lb]], LASUM, n_words);
    }
-   for (t = 0; t < numberofterms; t++)	// For all terminal symbols.
+   for (t = 0; t < numberofterms; t++) // For all terminal symbols.
    {
-      if (LASUM[t])							// Reduction defined for t ?
+      if (LASUM[t])                    // Reduction defined for t ?
       {
-         if (action[t] == 0) action[t] = -p;	// No conflict!
-         else if (action[t] <  0)				// RR conflict?
+         if (action[t] == 0) action[t] = -p; // No conflict!
+         else if (action[t] <  0)            // RR conflict?
          {
             int HLP = head_level [head_sym [p]];
             int HLA = head_level [head_sym [-action[t]]];
@@ -266,7 +266,7 @@ void	LG_ComputeLA::ANALYZE (int& nc, int s, int f)
                      }
                   }
                }
-               else;	// HLA <= 2 && HLP > 2 (keep action).
+               else; // HLA <= 2 && HLP > 2 (keep action).
             }
             else // HLA > 2
             {
@@ -302,7 +302,7 @@ void	LG_ComputeLA::ANALYZE (int& nc, int s, int f)
             if (p < n_oprods)
             {
                prt_srcon (nc, s, t, p);
-               if (conflict[t] == 0) conflict[t] = -p;		// Note conflict.
+               if (conflict[t] == 0) conflict[t] = -p;      // Note conflict.
                else if (p < -conflict[t]) conflict[t] = -p; // Note conflict.
             }
          }
@@ -317,18 +317,18 @@ void  LG_ComputeLA::prt_rrcon (int& nc, int s, int t)
 {
    if (ret_numb[-action[t]] != 0 && ret_numb[-conflict[t]] == 0)
    {
-		//	rr++;
-		//	if (optn [LG_CONRR])
-		//	{
-		//		if (nc == 0)
-		//		{
-		//			PRT_STA (s);
-		//			prt_con ("\n");
-		//		}
-		//		prt_con ("   Conflict on %s, ", term_name[t]);
-		//		prt_con ("reduce %d or reduce %d, ", -action[t], -conflict[t]);
-		//		prt_con ("choosing reduce %d.\n", -action[t]);
-		//	}
+      // rr++;
+      // if (optn [LG_CONRR])
+      // {
+      //    if (nc == 0)
+      //    {
+      //       PRT_STA (s);
+      //       prt_con ("\n");
+      //    }
+      //    prt_con ("   Conflict on %s, ", term_name[t]);
+      //    prt_con ("reduce %d or reduce %d, ", -action[t], -conflict[t]);
+      //    prt_con ("choosing reduce %d.\n", -action[t]);
+      // }
    }
    else // Same type of reductions, no priority for ?
    {
@@ -458,7 +458,7 @@ void  LG_ComputeLA::LOOK_BACK (int x, int p, int dot, int s)
 ///////////////////////////////////////////////////////////////////////////////
 //                                                                           //
 
-int	LG_ComputeLA::NTX (int s, int h) /* Nonterminal transition. */
+int   LG_ComputeLA::NTX (int s, int h) /* Nonterminal transition. */
 {
    int i;
    for (i = ntt_start [s]; i < ntt_start [s+1]; i++)
@@ -517,7 +517,7 @@ void  LG_ComputeLA::C_READS ()
    int* whereisit;
    int  i, s, m, lb;
 
-//	 	printf ("LA matrix size = %d\n", n_includes*n_bytes);
+//    printf ("LA matrix size = %d\n", n_includes*n_bytes);
 
    ALLOC (LA, n_includes);
    for (i = 0; i < n_includes; i++)
@@ -639,7 +639,7 @@ void  LG_ComputeLA::p_prod (int p, int dot, const char *before)
 ///////////////////////////////////////////////////////////////////////////////
 //                                                                           //
 
-int	LG_ComputeLA::p_sym (int s, const char *sp)
+int   LG_ComputeLA::p_sym (int s, const char *sp)
 {
    char *p;
    if (s >= 0)                 /* Terminal symbol? */

@@ -11,24 +11,24 @@ public:
 
 private:
    static void   DEFINE_POSS ();
-   static int 	  POSSIBIL (int h);
+   static int    POSSIBIL (int h);
    static void   GOTO (int, int);
    static int    JUMP_TO (int);
    static void   DEF_CYCLES ();
-   static void	  DEFINE_RECUR ();
+   static void   DEFINE_RECUR ();
    static int    RECURSIVE (int h);
    static void   DETECT_CYCLES ();
    static int    MERGE_FINALS ();
-   static void	  MERGE_NTTRANS ();
+   static void   MERGE_NTTRANS ();
    static int    REMOVE_FINAL (int);
    static int    N_TRAN (int x, int sym);
    static int    NO_REDUCE_GOTO (int, int);
    static void   LOOK_BACK (int p, int dot, int x, int& nj, int* jumpto);
    static int    REDUCE_GOTO (int p);
-   static void	  UNDO_REDUCE ();
+   static void   UNDO_REDUCE ();
    static void   TRACE (int, int, int, int);
-   static void	  TRACE_REDUCE (int, int);
-   static void	  ADDING (int x, int z);
+   static void   TRACE_REDUCE (int, int);
+   static void   ADDING (int x, int z);
    static int    NO_MATCHING_REDUCE (int x);
    static void   PRT_STA (int s);
    static void   p_all ();
