@@ -1,0 +1,37 @@
+
+LRSTAR 24.0.017 32b Copyright Paul B Mann.
+
+COBOL.grm 
+
+Grammar     1005 rules, 351 terminals, 425 nonterminals.
+States      1620 states in LALR(1) state machine.
+             887 states when using shift-reduce actions.
+Conflicts    107 states, 778 shift-reduce, 0 reduce-reduce.
+
+            rows   cols          matrix       list      vect     total
+B matrix     300 x  235 x 1 =    70,500 ->   4,284 +   2,476 =   6,760  
+T matrix     113 x  263 x 2 =    59,438 ->   5,972 +   2,476 =   8,448  
+N matrix     119 x  343 x 2 =    81,634 ->  12,366 +   3,784 =  16,150  
+R matrix      12 x   21 x 2 =       478 ->     478 +   2,125 =   2,603  
+Total                                       23,100 +  10,861 =  33,961
+
+Generating: COBOL_ParserTables.h
+Generating: COBOL_ParserTables.hpp
+
+Symbols in the grammar               2,792  sym  =    100,000    3% 
+Productions in the grammar           1,005  pro  =    100,000    1% 
+Tail symbols in the grammar          1,841  tail =    500,000    0% 
+States created                       1,620  sta  =    100,000    2% 
+Final state items                    1,083  fin  =    100,000    1% 
+Kernel state items                   1,960  ker  =  1,000,000    0% 
+Nonterminal transitions              3,761  ntt  =  1,000,000    0% 
+Terminal transitions                 4,621  tt   =  1,000,000    0% 
+Terminal transitions added               0  tta  =  1,000,000    0% 
+Lookaheads in LALR computation         510  la   =  1,000,000    0% 
+Lookbacks in LALR computation        9,824  lb   =  1,000,000    1% 
+Includes in LALR computation         3,761  inc  =  1,000,000    0% 
+Child nodes in graph                10,321  ch   =  1,000,000    1% 
+Nondeterministic/conflict items      1,556  nd   =  1,000,000    0% 
+
+0 min 0.117 sec, 31.985 MB, 0 warnings, 0 errors.
+

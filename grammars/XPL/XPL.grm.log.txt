@@ -1,0 +1,37 @@
+
+LRSTAR 24.0.017 32b Copyright Paul B Mann.
+
+XPL.grm 
+
+Grammar      109 rules, 49 terminals, 49 nonterminals.
+States       183 states in LALR(1) state machine.
+              97 states when using shift-reduce actions.
+Conflicts      0 states, 0 shift-reduce, 0 reduce-reduce.
+
+            rows   cols          matrix       list      vect     total
+B matrix      42 x   30 x 1 =     1,260 ->     118 +     195 =     313  
+T matrix      16 x   38 x 1 =       608 ->     144 +     146 =     290  
+N matrix      34 x   35 x 1 =     1,190 ->     580 +     303 =     883  
+R matrix       1 x    1 x 1 =         1 ->       1 +     146 =     147  
+Total                                          843 +     790 =   1,633
+
+Generating: XPL_ParserTables.h
+Generating: XPL_ParserTables.hpp
+
+Symbols in the grammar                 373  sym  =    100,000    0% 
+Productions in the grammar             109  pro  =    100,000    0% 
+Tail symbols in the grammar            221  tail =    500,000    0% 
+States created                         183  sta  =    100,000    0% 
+Final state items                      111  fin  =    100,000    0% 
+Kernel state items                     254  ker  =  1,000,000    0% 
+Nonterminal transitions                395  ntt  =  1,000,000    0% 
+Terminal transitions                   336  tt   =  1,000,000    0% 
+Terminal transitions added               0  tta  =  1,000,000    0% 
+Lookaheads in LALR computation           0  la   =  1,000,000    0% 
+Lookbacks in LALR computation          944  lb   =  1,000,000    0% 
+Includes in LALR computation           395  inc  =  1,000,000    0% 
+Child nodes in graph                   462  ch   =  1,000,000    0% 
+Nondeterministic/conflict items          0  nd   =  1,000,000    0% 
+
+0 min 0.012 sec, 31.347 MB, 0 warnings, 0 errors.
+

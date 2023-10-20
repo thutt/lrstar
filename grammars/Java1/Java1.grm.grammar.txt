@@ -1,0 +1,725 @@
+
+/* Java1 grammar */
+
+/* Terminal Symbols */
+
+       BOOLEAN                   'boolean';
+       CHAR                      'char';
+       BYTE                      'byte';
+       SHORT                     'short';
+       INT                       'int';
+       LONG                      'long';
+       FLOAT                     'float';
+       DOUBLE                    'double';
+       VOID                      'void';
+       ENUM                      'enum';
+       PACKAGE                   'package';
+       IMPORT                    'import';
+       ABSTRACT                  'abstract';
+       FINAL                     'final';
+       PUBLIC                    'public';
+       PROTECTED                 'protected';
+       PRIVATE                   'private';
+       STATIC                    'static';
+       TRANSIENT                 'transient';
+       VOLATILE                  'volatile';
+       NATIVE                    'native';
+       SYNCHRONIZED              'synchronized';
+       CLASS                     'class';
+       INTERFACE                 'interface';
+       IMPLEMENTS                'implements';
+       OP_DIM                    'op_dim';
+       THROWS                    'throws';
+       EXTENDS                   'extends';
+       CASE                      'case';
+       DEFAULT                   'default';
+       IF                        'if';
+       ELSE                      'else';
+       SWITCH                    'switch';
+       WHILE                     'while';
+       DO                        'do';
+       FOR                       'for';
+       BREAK                     'break';
+       CONTINUE                  'continue';
+       RETURN                    'return';
+       THROW                     'throw';
+       TRY                       'try';
+       CATCH                     'catch';
+       FINALLY                   'finally';
+       THIS                      'this';
+       SUPER                     'super';
+       JNULL                     'jnull';
+       NEW                       'new';
+       INSTANCEOF                'instanceof';
+
+    0  <error>
+    1  <eof>
+    2  <identifier>
+    3  <literal>
+    4  'boolean'
+    5  'char'
+    6  'byte'
+    7  'short'
+    8  'int'
+    9  'long'
+   10  'float'
+   11  'double'
+   12  'void'
+   13  'enum'
+   14  'package'
+   15  'import'
+   16  'abstract'
+   17  'final'
+   18  'public'
+   19  'protected'
+   20  'private'
+   21  'static'
+   22  'transient'
+   23  'volatile'
+   24  'native'
+   25  'synchronized'
+   26  'class'
+   27  'interface'
+   28  'implements'
+   29  'op_dim'
+   30  'throws'
+   31  'extends'
+   32  'case'
+   33  'default'
+   34  'if'
+   35  'else'
+   36  'switch'
+   37  'while'
+   38  'do'
+   39  'for'
+   40  'break'
+   41  'continue'
+   42  'return'
+   43  'throw'
+   44  'try'
+   45  'catch'
+   46  'finally'
+   47  'this'
+   48  'super'
+   49  'jnull'
+   50  'new'
+   51  'instanceof'
+   52  ','
+   53  ';'
+   54  'STATUC'
+   55  '.'
+   56  '*'
+   57  '{'
+   58  '}'
+   59  '='
+   60  '('
+   61  ')'
+   62  ':'
+   63  '['
+   64  ']'
+   65  '++'
+   66  '--'
+   67  '~'
+   68  '!'
+   69  '+'
+   70  '-'
+   71  '/'
+   72  '%'
+   73  '<<'
+   74  '>>'
+   75  '>>>'
+   76  '<'
+   77  '>'
+   78  '<='
+   79  '>='
+   80  '=='
+   81  '!='
+   82  '&'
+   83  '^'
+   84  '|'
+   85  '&&'
+   86  '||'
+   87  '?'
+   88  '*='
+   89  '/='
+   90  '%='
+   91  '+='
+   92  '-='
+   93  '<<='
+   94  '>>='
+   95  '>>>='
+   96  '&='
+   97  '^='
+   98  '|='
+
+/* Productions */
+
+    0       Goal
+        0      : CompilationUnit <eof> 
+               ;
+
+    1       TypeSpecifier
+        1      : TypeName 
+        2      | TypeName Dims 
+               ;
+
+    2       TypeName
+        3      : PrimitiveType 
+        4      | QualifiedName 
+               ;
+
+    3       ClassNameList
+        5      : QualifiedName 
+        6      | ClassNameList ',' QualifiedName 
+               ;
+
+    4       PrimitiveType
+        7      : 'boolean' 
+        8      | 'char' 
+        9      | 'byte' 
+       10      | 'short' 
+       11      | 'int' 
+       12      | 'long' 
+       13      | 'float' 
+       14      | 'double' 
+       15      | 'void' 
+               ;
+
+    5       CompilationUnit
+       16      : ProgramFile 
+               ;
+
+    6       ProgramFile
+       17      : PackageStatement ImportStatements TypeDeclarations 
+       18      | PackageStatement ImportStatements 
+       19      | PackageStatement TypeDeclarations 
+       20      | ImportStatements TypeDeclarations 
+       21      | PackageStatement 
+       22      | ImportStatements 
+       23      | TypeDeclarations 
+               ;
+
+    7       PackageStatement
+       24      : 'package' QualifiedName ';' 
+               ;
+
+    8       TypeDeclarations
+       25      : TypeDeclaration 
+       26      | TypeDeclarations TypeDeclaration 
+               ;
+
+    9       ImportStatements
+       27      : ImportStatement 
+       28      | ImportStatements ImportStatement 
+               ;
+
+   10       ImportStatement
+       29      : 'import' 'static'? QualifiedName ';' 
+       30      | 'import' STATUC? QualifiedName '.' '*' ';' 
+               ;
+
+   11       QualifiedName
+       31      : <identifier> 
+       32      | QualifiedName '.' <identifier> 
+       33      | QualifiedName '.' '*' 
+               ;
+
+   12       TypeDeclaration
+       34      : ClassHeader '{' FieldDeclarations '}' 
+       35      | ClassHeader '{' '}' 
+               ;
+
+   13       ClassHeader
+       36      : Modifiers ClassWord <identifier> Extends Interfaces 
+       37      | Modifiers ClassWord <identifier> Extends 
+       38      | Modifiers ClassWord <identifier> Interfaces 
+       39      | ClassWord <identifier> Extends Interfaces 
+       40      | Modifiers ClassWord <identifier> 
+       41      | ClassWord <identifier> Extends 
+       42      | ClassWord <identifier> Interfaces 
+       43      | ClassWord <identifier> 
+               ;
+
+   14       Modifiers
+       44      : Modifier 
+       45      | Modifiers Modifier 
+               ;
+
+   15       Modifier
+       46      : 'abstract' 
+       47      | 'final' 
+       48      | 'public' 
+       49      | 'protected' 
+       50      | 'private' 
+       51      | 'static' 
+       52      | 'transient' 
+       53      | 'volatile' 
+       54      | 'native' 
+       55      | 'synchronized' 
+       56      | 'enum' 
+               ;
+
+   16       ClassWord
+       57      : 'class' 
+       58      | 'interface' 
+               ;
+
+   17       Interfaces
+       59      : 'implements' ClassNameList 
+               ;
+
+   18       FieldDeclarations
+       60      : FieldDeclaration 
+       61      | FieldDeclarations FieldDeclaration 
+               ;
+
+   19       FieldDeclaration
+       62      : FieldVariableDeclaration ';' 
+       63      | MethodDeclaration 
+       64      | ConstructorDeclaration 
+       65      | StaticInitializer 
+       66      | NonStaticInitializer 
+       67      | TypeDeclaration 
+               ;
+
+   20       FieldVariableDeclaration
+       68      : Modifiers TypeSpecifier VariableDeclarators 
+       69      | TypeSpecifier VariableDeclarators 
+               ;
+
+   21       VariableDeclarators
+       70      : VariableDeclarator 
+       71      | VariableDeclarators ',' VariableDeclarator 
+               ;
+
+   22       VariableDeclarator
+       72      : DeclaratorName 
+       73      | DeclaratorName '=' VariableInitializer 
+               ;
+
+   23       VariableInitializer
+       74      : Expression 
+       75      | '{' '}' 
+       76      | '{' ArrayInitializers '}' 
+               ;
+
+   24       ArrayInitializers
+       77      : VariableInitializer 
+       78      | ArrayInitializers ',' VariableInitializer 
+       79      | ArrayInitializers ',' 
+               ;
+
+   25       MethodDeclaration
+       80      : Modifiers TypeSpecifier MethodDeclarator Throws MethodBody 
+       81      | Modifiers TypeSpecifier MethodDeclarator MethodBody 
+       82      | TypeSpecifier MethodDeclarator Throws MethodBody 
+       83      | TypeSpecifier MethodDeclarator MethodBody 
+               ;
+
+   26       MethodDeclarator
+       84      : DeclaratorName '(' ParameterList ')' 
+       85      | DeclaratorName '(' ')' 
+       86      | MethodDeclarator 'op_dim' 
+               ;
+
+   27       ParameterList
+       87      : Parameter 
+       88      | ParameterList ',' Parameter 
+               ;
+
+   28       Parameter
+       89      : TypeSpecifier DeclaratorName 
+               ;
+
+   29       DeclaratorName
+       90      : <identifier> 
+       91      | DeclaratorName 'op_dim' 
+               ;
+
+   30       Throws
+       92      : 'throws' ClassNameList 
+               ;
+
+   31       MethodBody
+       93      : Block 
+       94      | ';' 
+               ;
+
+   32       ConstructorDeclaration
+       95      : Modifiers ConstructorDeclarator Throws Block 
+       96      | Modifiers ConstructorDeclarator Block 
+       97      | ConstructorDeclarator Throws Block 
+       98      | ConstructorDeclarator Block 
+               ;
+
+   33       ConstructorDeclarator
+       99      : <identifier> '(' ParameterList ')' 
+      100      | <identifier> '(' ')' 
+               ;
+
+   34       StaticInitializer
+      101      : 'static' Block 
+               ;
+
+   35       NonStaticInitializer
+      102      : Block 
+               ;
+
+   36       Extends
+      103      : 'extends' TypeName 
+      104      | Extends ',' TypeName 
+               ;
+
+   37       Block
+      105      : '{' LocalVariableDeclarationsAndStatements '}' 
+      106      | '{' '}' 
+               ;
+
+   38       LocalVariableDeclarationsAndStatements
+      107      : LocalVariableDeclarationOrStatement 
+      108      | LocalVariableDeclarationsAndStatements LocalVariableDeclarationOrStatement 
+               ;
+
+   39       LocalVariableDeclarationOrStatement
+      109      : LocalVariableDeclarationStatement 
+      110      | Statement 
+               ;
+
+   40       LocalVariableDeclarationStatement
+      111      : TypeSpecifier VariableDeclarators ';' 
+               ;
+
+   41       Statement
+      112      : EmptyStatement 
+      113      | LabeledStatement 
+      114      | ExpressionStatement ';' 
+      115      | SelectionStatement 
+      116      | IterationStatement 
+      117      | JumpStatement 
+      118      | GuardingStatement 
+      119      | Block 
+               ;
+
+   42       EmptyStatement
+      120      : ';' 
+               ;
+
+   43       LabeledStatement
+      121      : <identifier> ':' LocalVariableDeclarationOrStatement 
+      122      | 'case' ConstantExpression ':' LocalVariableDeclarationOrStatement 
+      123      | 'default' ':' LocalVariableDeclarationOrStatement 
+               ;
+
+   44       ExpressionStatement
+      124      : Expression 
+               ;
+
+   45       SelectionStatement
+      125      : 'if' '(' Expression ')' Statement 
+      126      | 'if' '(' Expression ')' Statement 'else' Statement 
+      127      | 'switch' '(' Expression ')' Block 
+               ;
+
+   46       IterationStatement
+      128      : 'while' '(' Expression ')' Statement 
+      129      | 'do' Statement 'while' '(' Expression ')' ';' 
+      130      | 'for' '(' ForInit ForExpr ForIncr ')' Statement 
+      131      | 'for' '(' ForInit ForExpr ')' Statement 
+               ;
+
+   47       ForInit
+      132      : ExpressionStatements ';' 
+      133      | LocalVariableDeclarationStatement 
+      134      | ';' 
+               ;
+
+   48       ForExpr
+      135      : Expression ';' 
+      136      | ';' 
+               ;
+
+   49       ForIncr
+      137      : ExpressionStatements 
+               ;
+
+   50       ExpressionStatements
+      138      : ExpressionStatement 
+      139      | ExpressionStatements ',' ExpressionStatement 
+               ;
+
+   51       JumpStatement
+      140      : 'break' <identifier> ';' 
+      141      | 'break' ';' 
+      142      | 'continue' <identifier> ';' 
+      143      | 'continue' ';' 
+      144      | 'return' Expression ';' 
+      145      | 'return' ';' 
+      146      | 'throw' Expression ';' 
+               ;
+
+   52       GuardingStatement
+      147      : 'synchronized' '(' Expression ')' Statement 
+      148      | 'try' Block Finally 
+      149      | 'try' Block Catches 
+      150      | 'try' Block Catches Finally 
+               ;
+
+   53       Catches
+      151      : Catch 
+      152      | Catches Catch 
+               ;
+
+   54       Catch
+      153      : CatchHeader Block 
+               ;
+
+   55       CatchHeader
+      154      : 'catch' '(' TypeSpecifier <identifier> ')' 
+      155      | 'catch' '(' TypeSpecifier ')' 
+               ;
+
+   56       Finally
+      156      : 'finally' Block 
+               ;
+
+   57       PrimaryExpression
+      157      : QualifiedName 
+      158      | NotJustName 
+               ;
+
+   58       NotJustName
+      159      : SpecialName 
+      160      | NewAllocationExpression 
+      161      | ComplexPrimary 
+               ;
+
+   59       ComplexPrimary
+      162      : '(' Expression ')' 
+      163      | ComplexPrimaryNoParenthesis 
+               ;
+
+   60       ComplexPrimaryNoParenthesis
+      164      : <literal> 
+      165      | ArrayAccess 
+      166      | FieldAccess 
+      167      | MethodCall 
+               ;
+
+   61       ArrayAccess
+      168      : QualifiedName '[' Expression ']' 
+      169      | ComplexPrimary '[' Expression ']' 
+               ;
+
+   62       FieldAccess
+      170      : NotJustName '.' <identifier> 
+      171      | RealPostfixExpression '.' <identifier> 
+               ;
+
+   63       MethodCall
+      172      : MethodAccess '(' ArgumentList ')' 
+      173      | MethodAccess '(' ')' 
+               ;
+
+   64       MethodAccess
+      174      : ComplexPrimaryNoParenthesis 
+      175      | SpecialName 
+      176      | QualifiedName 
+               ;
+
+   65       SpecialName
+      177      : 'this' 
+      178      | 'super' 
+      179      | 'jnull' 
+               ;
+
+   66       ArgumentList
+      180      : Expression 
+      181      | ArgumentList ',' Expression 
+               ;
+
+   67       NewAllocationExpression
+      182      : ArrayAllocationExpression 
+      183      | ClassAllocationExpression 
+      184      | ArrayAllocationExpression '{' '}' 
+      185      | ClassAllocationExpression '{' '}' 
+      186      | ArrayAllocationExpression '{' ArrayInitializers '}' 
+      187      | ClassAllocationExpression '{' FieldDeclarations '}' 
+               ;
+
+   68       ClassAllocationExpression
+      188      : 'new' TypeName '(' ArgumentList ')' 
+      189      | 'new' TypeName '(' ')' 
+               ;
+
+   69       ArrayAllocationExpression
+      190      : 'new' TypeName DimExprs Dims 
+      191      | 'new' TypeName DimExprs 
+               ;
+
+   70       DimExprs
+      192      : DimExpr 
+      193      | DimExprs DimExpr 
+               ;
+
+   71       DimExpr
+      194      : '[' Expression ']' 
+               ;
+
+   72       Dims
+      195      : 'op_dim' 
+      196      | Dims 'op_dim' 
+               ;
+
+   73       PostfixExpression
+      197      : PrimaryExpression 
+      198      | RealPostfixExpression 
+               ;
+
+   74       RealPostfixExpression
+      199      : PostfixExpression '++' 
+      200      | PostfixExpression '--' 
+               ;
+
+   75       UnaryExpression
+      201      : '++' UnaryExpression 
+      202      | '--' UnaryExpression 
+      203      | ArithmeticUnaryOperator CastExpression 
+      204      | LogicalUnaryExpression 
+               ;
+
+   76       LogicalUnaryExpression
+      205      : PostfixExpression 
+      206      | LogicalUnaryOperator UnaryExpression 
+               ;
+
+   77       LogicalUnaryOperator
+      207      : '~' 
+      208      | '!' 
+               ;
+
+   78       ArithmeticUnaryOperator
+      209      : '+' 
+      210      | '-' 
+               ;
+
+   79       CastExpression
+      211      : UnaryExpression 
+      212      | '(' PrimitiveTypeExpression ')' CastExpression 
+      213      | '(' ClassTypeExpression ')' CastExpression 
+      214      | '(' Expression ')' LogicalUnaryExpression 
+               ;
+
+   80       PrimitiveTypeExpression
+      215      : PrimitiveType 
+      216      | PrimitiveType Dims 
+               ;
+
+   81       ClassTypeExpression
+      217      : QualifiedName Dims 
+               ;
+
+   82       MultiplicativeExpression
+      218      : CastExpression 
+      219      | MultiplicativeExpression '*' CastExpression 
+      220      | MultiplicativeExpression '/' CastExpression 
+      221      | MultiplicativeExpression '%' CastExpression 
+               ;
+
+   83       AdditiveExpression
+      222      : MultiplicativeExpression 
+      223      | AdditiveExpression '+' MultiplicativeExpression 
+      224      | AdditiveExpression '-' MultiplicativeExpression 
+               ;
+
+   84       ShiftExpression
+      225      : AdditiveExpression 
+      226      | ShiftExpression '<<' AdditiveExpression 
+      227      | ShiftExpression '>>' AdditiveExpression 
+      228      | ShiftExpression '>>>' AdditiveExpression 
+               ;
+
+   85       RelationalExpression
+      229      : ShiftExpression 
+      230      | RelationalExpression '<' ShiftExpression 
+      231      | RelationalExpression '>' ShiftExpression 
+      232      | RelationalExpression '<=' ShiftExpression 
+      233      | RelationalExpression '>=' ShiftExpression 
+      234      | RelationalExpression 'instanceof' TypeSpecifier 
+               ;
+
+   86       EqualityExpression
+      235      : RelationalExpression 
+      236      | EqualityExpression '==' RelationalExpression 
+      237      | EqualityExpression '!=' RelationalExpression 
+               ;
+
+   87       AndExpression
+      238      : EqualityExpression 
+      239      | AndExpression '&' EqualityExpression 
+               ;
+
+   88       ExclusiveOrExpression
+      240      : AndExpression 
+      241      | ExclusiveOrExpression '^' AndExpression 
+               ;
+
+   89       InclusiveOrExpression
+      242      : ExclusiveOrExpression 
+      243      | InclusiveOrExpression '|' ExclusiveOrExpression 
+               ;
+
+   90       ConditionalAndExpression
+      244      : InclusiveOrExpression 
+      245      | ConditionalAndExpression '&&' InclusiveOrExpression 
+               ;
+
+   91       ConditionalOrExpression
+      246      : ConditionalAndExpression 
+      247      | ConditionalOrExpression '||' ConditionalAndExpression 
+               ;
+
+   92       ConditionalExpression
+      248      : ConditionalOrExpression 
+      249      | ConditionalOrExpression '?' Expression ':' ConditionalExpression 
+               ;
+
+   93       AssignmentExpression
+      250      : ConditionalExpression 
+      251      | UnaryExpression AssignmentOperator AssignmentExpression 
+               ;
+
+   94       AssignmentOperator
+      252      : '=' 
+      253      | '*=' 
+      254      | '/=' 
+      255      | '%=' 
+      256      | '+=' 
+      257      | '-=' 
+      258      | '<<=' 
+      259      | '>>=' 
+      260      | '>>>=' 
+      261      | '&=' 
+      262      | '^=' 
+      263      | '|=' 
+               ;
+
+   95       Expression
+      264      : AssignmentExpression 
+               ;
+
+   96       ConstantExpression
+      265      : ConditionalExpression 
+               ;
+
+   97       'static'?
+      266      : 
+      267      | 'static' 
+               ;
+
+   98       STATUC?
+      268      : 
+      269      | 'STATUC' 
+               ;
+
+/* End of Java1 grammar 
+

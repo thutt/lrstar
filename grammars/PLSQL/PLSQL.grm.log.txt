@@ -1,0 +1,37 @@
+
+LRSTAR 24.0.017 32b Copyright Paul B Mann.
+
+PLSQL.grm 
+
+Grammar     6574 rules, 2285 terminals, 2242 nonterminals.
+States      9295 states in LALR(1) state machine.
+            3750 states when using shift-reduce actions.
+Conflicts    804 states, 257713 shift-reduce, 132606 reduce-reduce.
+
+            rows   cols          matrix       list      vect     total
+B matrix     937 x  665 x 1 =   623,105 ->  38,006 +  12,070 =  50,076  
+T matrix     221 x 2253 x 2 =   995,826 -> 149,170 +  19,570 = 168,740  
+N matrix     364 x 1508 x 2 = 1,097,824 ->  66,318 +  20,648 =  86,966  
+R matrix     247 x  178 x 2 =    85,788 ->  85,788 +  17,285 = 103,073  
+Total                                      339,282 +  69,573 = 408,855
+
+Generating: PLSQL_ParserTables.h
+Generating: PLSQL_ParserTables.hpp
+
+Symbols in the grammar              15,705  sym  =    100,000   16% *
+Productions in the grammar           6,574  pro  =    100,000    7% 
+Tail symbols in the grammar          9,789  tail =    500,000    2% 
+States created                       9,295  sta  =    100,000    9% 
+Final state items                    8,154  fin  =    100,000    8% 
+Kernel state items                  10,444  ker  =  1,000,000    1% 
+Nonterminal transitions             10,542  ntt  =  1,000,000    1% 
+Terminal transitions               556,842  tt   =  1,000,000   56% *****
+Terminal transitions added               0  tta  =  1,000,000    0% 
+Lookaheads in LALR computation     246,476  la   =  1,000,000   25% **
+Lookbacks in LALR computation      572,869  lb   =  1,000,000   57% *****
+Includes in LALR computation        10,542  inc  =  1,000,000    1% 
+Child nodes in graph                15,388  ch   =  1,000,000    2% 
+Nondeterministic/conflict items    714,621  nd   =  1,000,000   71% *******
+
+0 min 5.317 sec, 61.183 MB, 37 WARNINGS, 0 errors.
+

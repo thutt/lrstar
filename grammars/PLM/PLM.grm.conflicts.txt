@@ -1,0 +1,10 @@
+
+Conflicts Report:
+
+Neither 'csr' nor 'crr' option was specified.
+
+
+    7 conflict states.
+    9 shift-reduce conflicts.
+    4 reduce-reduce conflicts.
+

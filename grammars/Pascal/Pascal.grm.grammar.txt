@@ -1,0 +1,1084 @@
+
+/* Pascal grammar */
+
+/* Terminal Symbols */
+
+    0  <error>
+    1  <eof>
+    2  <identifier>
+    3  <number>
+    4  <string>
+    5  'OR'
+    6  'XOR'
+    7  'AND'
+    8  '='
+    9  '<>'
+   10  '<'
+   11  '>'
+   12  '<='
+   13  '>='
+   14  'SHL'
+   15  'SHR'
+   16  '+'
+   17  '-'
+   18  '*'
+   19  '/'
+   20  'MOD'
+   21  'DIV'
+   22  'IN'
+   23  ';'
+   24  '.'
+   25  'PROGRAM'
+   26  '('
+   27  ','
+   28  ')'
+   29  'USES'
+   30  'UNIT'
+   31  'INTERFACE'
+   32  'IMPLEMENTATION'
+   33  'LABEL'
+   34  {label_identifier}
+   35  'CONST'
+   36  {constant_identifier}
+   37  'TYPE'
+   38  ':'
+   39  {field_identifier}
+   40  '['
+   41  '..'
+   42  ']'
+   43  {type_identifier}
+   44  'REAL'
+   45  'SINGLE'
+   46  'DOUBLE'
+   47  'EXTENDED'
+   48  'COMP'
+   49  'SHORTINT'
+   50  'INTEGER'
+   51  'BYTE'
+   52  'LONGINT'
+   53  'WORD'
+   54  'BOOLEAN'
+   55  'CHAR'
+   56  'STRING'
+   57  'PACKED'
+   58  'ARRAY'
+   59  'OF'
+   60  'RECORD'
+   61  'END'
+   62  'CASE'
+   63  'SET'
+   64  'FILE'
+   65  '^'
+   66  'VAR'
+   67  'ABSOLUTE'
+   68  '@'
+   69  'NOT'
+   70  'ORD'
+   71  'ODD'
+   72  'LO'
+   73  'LENGTH'
+   74  'HI'
+   75  'CHR'
+   76  'ABS'
+   77  'PRED'
+   78  'PTR'
+   79  'ROUND'
+   80  'SIZEOF'
+   81  'SUCC'
+   82  'SWAP'
+   83  'TRUNC'
+   84  'NIL'
+   85  'BEGIN'
+   86  ':='
+   87  'GOTO'
+   88  'IF'
+   89  'THEN'
+   90  'ELSE'
+   91  'REPEAT'
+   92  'UNTIL'
+   93  'WHILE'
+   94  'DO'
+   95  'FOR'
+   96  'WITH'
+   97  'FUNCTION'
+   98  {func_identifier}
+   99  'PROCEDURE'
+  100  {proc_identifier}
+  101  'FORWARD'
+  102  'EXTERNAL'
+  103  'INTERUPT'
+  104  'INLINE'
+  105  'OBJECT'
+  106  'VIRTUAL'
+  107  'CONSTRUCTOR'
+  108  'DESTRUCTOR'
+  109  {variable_identifier}
+  110  {ordinal_type_id}
+  111  'TO'
+  112  'DOWNTO'
+
+/* Productions */
+
+    0       Goal
+        0      : (Program | Unit)* <eof> 
+               ;
+
+    1       Unit
+        1      : UnitHeading ';' InterfacePart ImplementationPart InitPart '.' 
+               ;
+
+    2       Program
+        2      : (ProgramHeading ';')? UseClause? Block '.' 
+               ;
+
+    3       ProgramHeading
+        3      : 'PROGRAM' Identifier ('(' Identifier/','+ ')')? 
+               ;
+
+    4       UseClause
+        4      : 'USES' (Identifier/','+ ';')* 
+               ;
+
+    5       UnitHeading
+        5      : 'UNIT' Identifier 
+               ;
+
+    6       InterfacePart
+        6      : 'INTERFACE' UseClause? InterfaceDecl* 
+               ;
+
+    7       InterfaceDecl
+        7      : ConDefPart 
+        8      | TypeDefPart 
+        9      | VarDeclPart 
+       10      | ProcAndFuncHeadingPart 
+               ;
+
+    8       ProcAndFuncHeadingPart
+       11      : ProcHeading ';' InlineDirective? 
+       12      | FuncHeading ';' InlineDirective? 
+               ;
+
+    9       ImplementationPart
+       13      : 'IMPLEMENTATION' UseClause? DeclSection* 
+               ;
+
+   10       Block
+       14      : DeclSection? StmtPart 
+               ;
+
+   11       DeclSection
+       15      : LabelDeclPart 
+       16      | ConDefPart 
+       17      | TypeDefPart 
+       18      | VarDeclPart 
+       19      | ProcAndFuncDeclPart 
+               ;
+
+   12       LabelDeclPart
+       20      : 'LABEL' ';' 
+       21      | 'LABEL' LabelIdent/','+ ';' 
+               ;
+
+   13       LabelIdent
+       22      : <identifier> 
+               ;
+
+   14       ConDefPart
+       23      : 'CONST' (UntypedConDef | TypeConDef)+ 
+               ;
+
+   15       UntypedConDef
+       24      : (ConIdent '=' Constant ';')+ 
+               ;
+
+   16       ConIdent
+       25      : <identifier> 
+               ;
+
+   17       TypeDefPart
+       26      : 'TYPE' TypeAssignment+ 
+               ;
+
+   18       TypeAssignment
+       27      : Identifier '=' Type ';' 
+               ;
+
+   19       TypeConDef
+       28      : ConIdent ':' Type '=' TypedConstant 
+               ;
+
+   20       TypedConstant
+       29      : Constant 
+       30      | ArrayConstant 
+       31      | RecordConstant 
+               ;
+
+   21       ArrayConstant
+       32      : '(' TypedConstant/','+ ')' 
+               ;
+
+   22       RecordConstant
+       33      : '(' ({field_identifier} ':' TypedConstant)/';'+ ')' 
+               ;
+
+   23       SetConstant
+       34      : '[' (Constant ('..' Constant)/','*)? ']' 
+               ;
+
+   24       Type
+       35      : SimpleType 
+       36      | StrucType 
+       37      | PointerType 
+       38      | StringType 
+       39      | ProcedureType 
+       40      | {type_identifier} 
+       41      | ObjectType 
+               ;
+
+   25       SimpleType
+       42      : (OrdinalType | RealType) 
+               ;
+
+   26       RealType
+       43      : 'REAL' 
+       44      | 'SINGLE' 
+       45      | 'DOUBLE' 
+       46      | 'EXTENDED' 
+       47      | 'COMP' 
+               ;
+
+   27       OrdinalType
+       48      : (SubrangeType | EnumeratedType | OrdIdentifier) 
+               ;
+
+   28       OrdIdentifier
+       49      : 'SHORTINT' 
+       50      | 'INTEGER' 
+       51      | 'BYTE' 
+       52      | 'LONGINT' 
+       53      | 'WORD' 
+       54      | 'BOOLEAN' 
+       55      | 'CHAR' 
+               ;
+
+   29       SubrangeType
+       56      : Constant '..' Constant 
+               ;
+
+   30       EnumeratedType
+       57      : '(' Identifier/','+ ')' 
+               ;
+
+   31       StringType
+       58      : 'STRING' ('[' Integer ']')? 
+               ;
+
+   32       StrucType
+       59      : PACKED? (ArrayType | SetType | FileType | RecType) 
+               ;
+
+   33       ArrayType
+       60      : 'ARRAY' '[' OrdinalType/','+ ']' 'OF' Type 
+               ;
+
+   34       RecType
+       61      : 'RECORD' FieldList? 'END' 
+               ;
+
+   35       FieldList
+       62      : FixedPart (';'? VariantPart)? ';'? 
+               ;
+
+   36       FixedPart
+       63      : (Identifier/','+ ':' Type)/';'+ 
+               ;
+
+   37       VariantPart
+       64      : 'CASE' (Identifier ':')? TagFieldType 'OF' Variant/';'+ 
+               ;
+
+   38       Variant
+       65      : Constant/','+ ':' '(' FieldList? ')' 
+               ;
+
+   39       TagFieldType
+       66      : ORDIdentifier 
+               ;
+
+   40       SetType
+       67      : 'SET' 'OF' OrdinalType 
+               ;
+
+   41       FileType
+       68      : 'FILE' 'OF' Type 
+               ;
+
+   42       PointerType
+       69      : '^' TIdentifier 
+               ;
+
+   43       ProcedureType
+       70      : (ProcHeading | FuncHeading) 
+               ;
+
+   44       VarDeclPart
+       71      : 'VAR' VarDeclList+ 
+               ;
+
+   45       VarDeclList
+       72      : <identifier> ':' Type ';' 
+       73      | <identifier> ':' Type 'ABSOLUTE' VIdentifier ';' 
+       74      | <identifier> ':' Type 'ABSOLUTE' Integer ':' Integer ';' 
+               ;
+
+   46       VarReference
+       75      : VIdentifier Qualifier* 
+       76      | VarTypeCast Qualifier* 
+       77      | FunctionCall '^' Qualifier* 
+               ;
+
+   47       Qualifier
+       78      : '[' Expression/','+ ']' 
+       79      | '.' FiIdentifier 
+       80      | '^' 
+               ;
+
+   48       VarTypeCast
+       81      : Identifier '(' VarReference ')' 
+               ;
+
+   49       Expression
+       82      : SimpleExpression 
+       83      | Expression RelOp Expression 
+       84      | Expression '<=' Expression 
+       85      | Expression '>=' Expression 
+       86      | Expression '=' Expression 
+       87      | Expression '<>' Expression 
+       88      | Expression 'IN' Expression 
+               ;
+
+   50       SimpleExpression
+       89      : Term 
+       90      | SimpleExpression Sign SimpleExpression 
+       91      | SimpleExpression 'OR' SimpleExpression 
+       92      | SimpleExpression 'XOR' SimpleExpression 
+               ;
+
+   51       Term
+       93      : Factor 
+       94      | Term '*' Term 
+       95      | Term '/' Term 
+       96      | Term 'DIV' Term 
+       97      | Term 'MOD' Term 
+       98      | Term 'AND' Term 
+       99      | Term 'SHL' Term 
+      100      | Term 'SHR' Term 
+               ;
+
+   52       Factor
+      101      : (VarReference | PIdentifier) 
+      102      | '@' (VarReference | PIdentifier) 
+      103      | UnsignedConstant 
+      104      | '(' Expression ')' 
+      105      | 'NOT' Factor 
+      106      | Sign Factor 
+      107      | FunctionCall 
+      108      | SetConstructor 
+      109      | ValueTypeCast 
+               ;
+
+   53       CExpression
+      110      : CTerm 
+      111      | CExpression Sign CExpression 
+      112      | CExpression 'OR' CExpression 
+      113      | CExpression 'XOR' CExpression 
+               ;
+
+   54       CTerm
+      114      : CFactor 
+      115      | CTerm '*' CTerm 
+      116      | CTerm '/' CTerm 
+      117      | CTerm 'DIV' CTerm 
+      118      | CTerm 'MOD' CTerm 
+      119      | CTerm 'AND' CTerm 
+      120      | CTerm 'SHL' CTerm 
+      121      | CTerm 'SHR' CTerm 
+               ;
+
+   55       CFactor
+      122      : UnsignedConstant 
+      123      | '(' CExpression ')' 
+      124      | 'NOT' CFactor 
+      125      | Sign CFactor 
+      126      | SetConstant 
+      127      | PreDefinedFunction 
+               ;
+
+   56       PreDefinedFunction
+      128      : 'ORD' '(' CExpression ')' 
+      129      | 'ODD' '(' CExpression ')' 
+      130      | 'LO' '(' Number ')' 
+      131      | 'LENGTH' '(' <string> ')' 
+      132      | 'HI' '(' Number ')' 
+      133      | 'CHR' '(' CExpression ')' 
+      134      | 'ABS' '(' CExpression ')' 
+      135      | 'PRED' '(' CExpression ')' 
+      136      | 'PTR' '(' CExpression ')' 
+      137      | 'ROUND' '(' CExpression ')' 
+      138      | 'SIZEOF' '(' CExpression ')' 
+      139      | 'SUCC' '(' CExpression ')' 
+      140      | 'SWAP' '(' CExpression ')' 
+      141      | 'TRUNC' '(' CExpression ')' 
+               ;
+
+   57       UnsignedConstant
+      142      : Number 
+      143      | String 
+      144      | {constant_identifier} 
+      145      | 'NIL' 
+               ;
+
+   58       FunctionCall
+      146      : FIdentifier ('(' Expression/','+ ')')? 
+               ;
+
+   59       SetConstructor
+      147      : '[' MemberGrp/','* ']' 
+               ;
+
+   60       MemberGrp
+      148      : Expression ('..' Expression)? 
+               ;
+
+   61       ValueTypeCast
+      149      : TIdentifier '(' Expression ')' 
+               ;
+
+   62       StmtPart
+      150      : 'BEGIN' Statement/';'+ 'END' 
+               ;
+
+   63       Statement
+      151      : (LIdentifier ':')? (SimpleStatement | StructStmt)? 
+               ;
+
+   64       SimpleStatement
+      152      : (ProcStmt | AssgStmt | GotoStmt) 
+               ;
+
+   65       AssgStmt
+      153      : (VarReference | FIdentifier) ':=' Expression 
+               ;
+
+   66       ProcStmt
+      154      : PIdentifier ('(' Expression/','+ ')')? 
+               ;
+
+   67       GotoStmt
+      155      : 'GOTO' Identifier 
+               ;
+
+   68       StructStmt
+      156      : StmtPart 
+      157      | CondStmt 
+      158      | ReptStmt 
+      159      | WithStmt 
+               ;
+
+   69       CondStmt
+      160      : (IfStmt | CaseStmt) 
+               ;
+
+   70       IfStmt
+      161      : 'IF' Expression 'THEN' Statement (ELSE Statement)? 
+               ;
+
+   71       CaseStmt
+      162      : 'CASE' Expression 'OF' CasePart/';'+ ElsePart? ';'? 'END' 
+               ;
+
+   72       CasePart
+      163      : Constant ('..' Constant)/','* ':' Statement 
+               ;
+
+   73       ElsePart
+      164      : 'ELSE' Statement 
+               ;
+
+   74       ReptStmt
+      165      : (RepeatStmt | WhileStmt | ForStmt) 
+               ;
+
+   75       RepeatStmt
+      166      : 'REPEAT' Statement/';'+ 'UNTIL' Expression 
+               ;
+
+   76       WhileStmt
+      167      : 'WHILE' Expression 'DO' Statement 
+               ;
+
+   77       ForStmt
+      168      : 'FOR' VIdentifier ':=' Expression UporDown Expression 'DO' Statement 
+               ;
+
+   78       WithStmt
+      169      : 'WITH' Identifier/','+ 'DO' Statement 
+               ;
+
+   79       ProcAndFuncDeclPart
+      170      : ProcDecl+ 
+      171      | FuncDecl+ 
+               ;
+
+   80       ProcDecl
+      172      : ProcHeading ';' ProcBody ';' 
+               ;
+
+   81       FuncDecl
+      173      : FuncHeading ';' FuncBody ';' 
+               ;
+
+   82       FuncHeading
+      174      : 'FUNCTION' FuncIdent ('(' FormalParSection/';'+ ')')? ':' (SimpleType | STRING) 
+               ;
+
+   83       FuncIdent
+      175      : <identifier> 
+               ;
+
+   84       ProcHeading
+      176      : 'PROCEDURE' ProcIdent ('(' FormalParSection/';'+ ')')? 
+               ;
+
+   85       ProcIdent
+      177      : <identifier> 
+               ;
+
+   86       FuncBody
+      178      : Block 
+      179      | 'FORWARD' 
+      180      | 'EXTERNAL' 
+      181      | InlineDirective 
+               ;
+
+   87       FormalParSection
+      182      : VAR? Identifier/','+ (':' SimpleType | STRING | FILE)? 
+               ;
+
+   88       ProcBody
+      183      : (INTERUPT ';')? Block 
+      184      | (INTERUPT ';')? 'FORWARD' 
+      185      | (INTERUPT ';')? 'EXTERNAL' 
+      186      | InlineDirective 
+               ;
+
+   89       InlineDirective
+      187      : 'INLINE' '(' InlineElement/'/'+ ')' 
+               ;
+
+   90       InlineElement
+      188      : RelOp? (Number | Identifier (Sign Number)*) 
+               ;
+
+   91       ObjectType
+      189      : 'OBJECT' Heritage? OfieldList ';'? MethodList? 'END' 
+               ;
+
+   92       Heritage
+      190      : '(' ObjectId ')' 
+               ;
+
+   93       MethodList
+      191      : (MethodHeading (';' VIRTUAL)?)/';'+ 
+               ;
+
+   94       MethodHeading
+      192      : ProcHeading 
+      193      | FuncHeading 
+      194      | ConstrucHeading 
+      195      | DestrucHeading 
+               ;
+
+   95       ConstrucHeading
+      196      : 'CONSTRUCTOR' ConsIdent ('(' FormalParSection/';'+ ')')? 
+               ;
+
+   96       ConsIdent
+      197      : <identifier> 
+               ;
+
+   97       DestrucHeading
+      198      : 'DESTRUCTOR' DesIdent ('(' FormalParSection/';'+ ')')? 
+               ;
+
+   98       DesIdent
+      199      : <identifier> 
+               ;
+
+   99       OfieldList
+      200      : (Identifier/','+ ':' Type)/';'* 
+               ;
+
+  100       InitPart
+      201      : 'END' 
+      202      | StmtPart 
+               ;
+
+  101       Constant
+      203      : CExpression 
+               ;
+
+  102       ObjectId
+      204      : (Identifier '.')? QualifiedIdentifier 
+               ;
+
+  103       QualifiedIdentifier
+      205      : (Identifier '.')? Identifier 
+               ;
+
+  104       Identifier
+      206      : <identifier> 
+               ;
+
+  105       LIdentifier
+      207      : {label_identifier} 
+               ;
+
+  106       TIdentifier
+      208      : {type_identifier} 
+               ;
+
+  107       VIdentifier
+      209      : {variable_identifier} 
+               ;
+
+  108       PIdentifier
+      210      : {proc_identifier} 
+               ;
+
+  109       FIdentifier
+      211      : {func_identifier} 
+               ;
+
+  110       FiIdentifier
+      212      : {field_identifier} 
+               ;
+
+  111       ORDIdentifier
+      213      : {ordinal_type_id} 
+               ;
+
+  112       Integer
+      214      : <number> 
+               ;
+
+  113       Number
+      215      : <number> 
+               ;
+
+  114       String
+      216      : <string> 
+               ;
+
+  115       Sign
+      217      : '+' 
+      218      | '-' 
+               ;
+
+  116       UporDown
+      219      : 'TO' 
+      220      | 'DOWNTO' 
+               ;
+
+  117       RelOp
+      221      : '<' 
+      222      | '>' 
+               ;
+
+  118       (Program | Unit)
+      223      : Program 
+      224      | Unit 
+               ;
+
+  119       (Program | Unit)*
+      225      : 
+      226      | (Program | Unit)* (Program | Unit) 
+               ;
+
+  120       (ProgramHeading ';')?
+      227      : 
+      228      | ProgramHeading ';' 
+               ;
+
+  121       UseClause?
+      229      : 
+      230      | UseClause 
+               ;
+
+  122       Identifier/','+
+      231      : Identifier 
+      232      | Identifier/','+ ',' Identifier 
+               ;
+
+  123       ('(' Identifier/','+ ')')?
+      233      : 
+      234      | '(' Identifier/','+ ')' 
+               ;
+
+  124       (Identifier/','+ ';')
+      235      : Identifier/','+ ';' 
+               ;
+
+  125       (Identifier/','+ ';')*
+      236      : 
+      237      | (Identifier/','+ ';')* (Identifier/','+ ';') 
+               ;
+
+  126       InterfaceDecl*
+      238      : 
+      239      | InterfaceDecl* InterfaceDecl 
+               ;
+
+  127       InlineDirective?
+      240      : 
+      241      | InlineDirective 
+               ;
+
+  128       DeclSection*
+      242      : 
+      243      | DeclSection* DeclSection 
+               ;
+
+  129       DeclSection?
+      244      : 
+      245      | DeclSection 
+               ;
+
+  130       LabelIdent/','+
+      246      : LabelIdent 
+      247      | LabelIdent/','+ ',' LabelIdent 
+               ;
+
+  131       (UntypedConDef | TypeConDef)
+      248      : UntypedConDef 
+      249      | TypeConDef 
+               ;
+
+  132       (UntypedConDef | TypeConDef)+
+      250      : (UntypedConDef | TypeConDef) 
+      251      | (UntypedConDef | TypeConDef)+ (UntypedConDef | TypeConDef) 
+               ;
+
+  133       (ConIdent '=' Constant ';')
+      252      : ConIdent '=' Constant ';' 
+               ;
+
+  134       (ConIdent '=' Constant ';')+
+      253      : (ConIdent '=' Constant ';') 
+      254      | (ConIdent '=' Constant ';')+ (ConIdent '=' Constant ';') 
+               ;
+
+  135       TypeAssignment+
+      255      : TypeAssignment 
+      256      | TypeAssignment+ TypeAssignment 
+               ;
+
+  136       TypedConstant/','+
+      257      : TypedConstant 
+      258      | TypedConstant/','+ ',' TypedConstant 
+               ;
+
+  137       ({field_identifier} ':' TypedConstant)
+      259      : {field_identifier} ':' TypedConstant 
+               ;
+
+  138       ({field_identifier} ':' TypedConstant)/';'+
+      260      : ({field_identifier} ':' TypedConstant) 
+      261      | ({field_identifier} ':' TypedConstant)/';'+ ';' ({field_identifier} ':' TypedConstant) 
+               ;
+
+  139       ('..' Constant)
+      262      : '..' Constant 
+               ;
+
+  140       ('..' Constant)/','*
+      263      : 
+      264      | ('..' Constant) 
+      265      | ('..' Constant)/','* ',' ('..' Constant) 
+               ;
+
+  141       (Constant ('..' Constant)/','*)?
+      266      : 
+      267      | Constant ('..' Constant)/','* 
+               ;
+
+  142       (OrdinalType | RealType)
+      268      : OrdinalType 
+      269      | RealType 
+               ;
+
+  143       (SubrangeType | EnumeratedType | OrdIdentifier)
+      270      : SubrangeType 
+      271      | EnumeratedType 
+      272      | OrdIdentifier 
+               ;
+
+  144       ('[' Integer ']')?
+      273      : 
+      274      | '[' Integer ']' 
+               ;
+
+  145       PACKED?
+      275      : 
+      276      | 'PACKED' 
+               ;
+
+  146       (ArrayType | SetType | FileType | RecType)
+      277      : ArrayType 
+      278      | SetType 
+      279      | FileType 
+      280      | RecType 
+               ;
+
+  147       OrdinalType/','+
+      281      : OrdinalType 
+      282      | OrdinalType/','+ ',' OrdinalType 
+               ;
+
+  148       FieldList?
+      283      : 
+      284      | FieldList 
+               ;
+
+  149       ';'?
+      285      : 
+      286      | ';' 
+               ;
+
+  150       (';'? VariantPart)?
+      287      : 
+      288      | ';'? VariantPart 
+               ;
+
+  151       (Identifier/','+ ':' Type)
+      289      : Identifier/','+ ':' Type 
+               ;
+
+  152       (Identifier/','+ ':' Type)/';'+
+      290      : (Identifier/','+ ':' Type) 
+      291      | (Identifier/','+ ':' Type)/';'+ ';' (Identifier/','+ ':' Type) 
+               ;
+
+  153       (Identifier ':')?
+      292      : 
+      293      | Identifier ':' 
+               ;
+
+  154       Variant/';'+
+      294      : Variant 
+      295      | Variant/';'+ ';' Variant 
+               ;
+
+  155       Constant/','+
+      296      : Constant 
+      297      | Constant/','+ ',' Constant 
+               ;
+
+  156       (ProcHeading | FuncHeading)
+      298      : ProcHeading 
+      299      | FuncHeading 
+               ;
+
+  157       VarDeclList+
+      300      : VarDeclList 
+      301      | VarDeclList+ VarDeclList 
+               ;
+
+  158       Qualifier*
+      302      : 
+      303      | Qualifier* Qualifier 
+               ;
+
+  159       Expression/','+
+      304      : Expression 
+      305      | Expression/','+ ',' Expression 
+               ;
+
+  160       (VarReference | PIdentifier)
+      306      : VarReference 
+      307      | PIdentifier 
+               ;
+
+  161       ('(' Expression/','+ ')')?
+      308      : 
+      309      | '(' Expression/','+ ')' 
+               ;
+
+  162       MemberGrp/','*
+      310      : 
+      311      | MemberGrp 
+      312      | MemberGrp/','* ',' MemberGrp 
+               ;
+
+  163       ('..' Expression)?
+      313      : 
+      314      | '..' Expression 
+               ;
+
+  164       Statement/';'+
+      315      : Statement 
+      316      | Statement/';'+ ';' Statement 
+               ;
+
+  165       (LIdentifier ':')?
+      317      : 
+      318      | LIdentifier ':' 
+               ;
+
+  166       (SimpleStatement | StructStmt)?
+      319      : 
+      320      | SimpleStatement 
+      321      | StructStmt 
+               ;
+
+  167       (ProcStmt | AssgStmt | GotoStmt)
+      322      : ProcStmt 
+      323      | AssgStmt 
+      324      | GotoStmt 
+               ;
+
+  168       (VarReference | FIdentifier)
+      325      : VarReference 
+      326      | FIdentifier 
+               ;
+
+  169       (IfStmt | CaseStmt)
+      327      : IfStmt 
+      328      | CaseStmt 
+               ;
+
+  170       (ELSE Statement)?
+      329      : 
+      330      | 'ELSE' Statement 
+               ;
+
+  171       CasePart/';'+
+      331      : CasePart 
+      332      | CasePart/';'+ ';' CasePart 
+               ;
+
+  172       ElsePart?
+      333      : 
+      334      | ElsePart 
+               ;
+
+  173       (RepeatStmt | WhileStmt | ForStmt)
+      335      : RepeatStmt 
+      336      | WhileStmt 
+      337      | ForStmt 
+               ;
+
+  174       ProcDecl+
+      338      : ProcDecl 
+      339      | ProcDecl+ ProcDecl 
+               ;
+
+  175       FuncDecl+
+      340      : FuncDecl 
+      341      | FuncDecl+ FuncDecl 
+               ;
+
+  176       FormalParSection/';'+
+      342      : FormalParSection 
+      343      | FormalParSection/';'+ ';' FormalParSection 
+               ;
+
+  177       ('(' FormalParSection/';'+ ')')?
+      344      : 
+      345      | '(' FormalParSection/';'+ ')' 
+               ;
+
+  178       (SimpleType | STRING)
+      346      : SimpleType 
+      347      | 'STRING' 
+               ;
+
+  179       VAR?
+      348      : 
+      349      | 'VAR' 
+               ;
+
+  180       (':' SimpleType | STRING | FILE)?
+      350      : 
+      351      | ':' SimpleType 
+      352      | 'STRING' 
+      353      | 'FILE' 
+               ;
+
+  181       (INTERUPT ';')?
+      354      : 
+      355      | 'INTERUPT' ';' 
+               ;
+
+  182       InlineElement/'/'+
+      356      : InlineElement 
+      357      | InlineElement/'/'+ '/' InlineElement 
+               ;
+
+  183       RelOp?
+      358      : 
+      359      | RelOp 
+               ;
+
+  184       (Sign Number)
+      360      : Sign Number 
+               ;
+
+  185       (Sign Number)*
+      361      : 
+      362      | (Sign Number)* (Sign Number) 
+               ;
+
+  186       (Number | Identifier (Sign Number)*)
+      363      : Number 
+      364      | Identifier (Sign Number)* 
+               ;
+
+  187       Heritage?
+      365      : 
+      366      | Heritage 
+               ;
+
+  188       MethodList?
+      367      : 
+      368      | MethodList 
+               ;
+
+  189       (';' VIRTUAL)?
+      369      : 
+      370      | ';' 'VIRTUAL' 
+               ;
+
+  190       (MethodHeading (';' VIRTUAL)?)
+      371      : MethodHeading (';' VIRTUAL)? 
+               ;
+
+  191       (MethodHeading (';' VIRTUAL)?)/';'+
+      372      : (MethodHeading (';' VIRTUAL)?) 
+      373      | (MethodHeading (';' VIRTUAL)?)/';'+ ';' (MethodHeading (';' VIRTUAL)?) 
+               ;
+
+  192       (Identifier/','+ ':' Type)/';'*
+      374      : 
+      375      | (Identifier/','+ ':' Type) 
+      376      | (Identifier/','+ ':' Type)/';'* ';' (Identifier/','+ ':' Type) 
+               ;
+
+  193       (Identifier '.')?
+      377      : 
+      378      | Identifier '.' 
+               ;
+
+/* End of Pascal grammar 
+

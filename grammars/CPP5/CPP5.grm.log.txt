@@ -1,0 +1,37 @@
+
+LRSTAR 24.0.017 32b Copyright Paul B Mann.
+
+CPP5.grm 
+
+Grammar      643 rules, 103 terminals, 164 nonterminals.
+States      1235 states in LALR(1) state machine.
+             701 states when using shift-reduce actions.
+Conflicts     23 states, 24 shift-reduce, 18 reduce-reduce.
+
+            rows   cols          matrix       list      vect     total
+B matrix     131 x   50 x 1 =     6,550 ->     685 +   1,608 =   2,293  
+T matrix     159 x   74 x 2 =    23,532 ->  12,668 +   1,505 =  14,173  
+N matrix     265 x   80 x 2 =    42,400 ->  31,528 +   2,045 =  33,573  
+R matrix      48 x   18 x 2 =     1,668 ->   1,668 +   1,505 =   3,173  
+Total                                       46,549 +   6,663 =  53,212
+
+Generating: CPP5_ParserTables.h
+Generating: CPP5_ParserTables.hpp
+
+Symbols in the grammar               1,710  sym  =    100,000    2% 
+Productions in the grammar             643  pro  =    100,000    1% 
+Tail symbols in the grammar          1,532  tail =    500,000    0% 
+States created                       1,235  sta  =    100,000    1% 
+Final state items                      930  fin  =    100,000    1% 
+Kernel state items                   2,928  ker  =  1,000,000    0% 
+Nonterminal transitions              9,366  ntt  =  1,000,000    1% 
+Terminal transitions                 8,461  tt   =  1,000,000    1% 
+Terminal transitions added               0  tta  =  1,000,000    0% 
+Lookaheads in LALR computation       1,100  la   =  1,000,000    0% 
+Lookbacks in LALR computation       30,323  lb   =  1,000,000    3% 
+Includes in LALR computation         9,366  inc  =  1,000,000    1% 
+Child nodes in graph                18,777  ch   =  1,000,000    2% 
+Nondeterministic/conflict items         84  nd   =  1,000,000    0% 
+
+0 min 0.155 sec, 31.642 MB, 0 warnings, 0 errors.
+

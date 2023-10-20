@@ -1,0 +1,315 @@
+
+/* XPL grammar */
+
+/* Terminal Symbols */
+
+    0  <error>
+    1  <eof>
+    2  <identifier>
+    3  <string>
+    4  <constant>
+    5  ';'
+    6  'IF'
+    7  'THEN'
+    8  'ELSE'
+    9  'DO'
+   10  'TO'
+   11  'BY'
+   12  'WHILE'
+   13  'CASE'
+   14  'PROCEDURE'
+   15  ')'
+   16  '('
+   17  ','
+   18  'END'
+   19  ':'
+   20  'RETURN'
+   21  'CALL'
+   22  'GO'
+   23  'GOTO'
+   24  'DECLARE'
+   25  'LITERALLY'
+   26  'number'
+   27  'FIXED'
+   28  'CHARACTER'
+   29  'LABEL'
+   30  'BIT'
+   31  'INITIAL'
+   32  '='
+   33  '|'
+   34  '&'
+   35  '~'
+   36  '<'
+   37  '>'
+   38  '~='
+   39  '~<'
+   40  '~>'
+   41  '<='
+   42  '>='
+   43  '||'
+   44  '+'
+   45  '-'
+   46  '*'
+   47  '/'
+   48  'MOD'
+
+/* Productions */
+
+    0       program
+        0      : statement_list <eof> 
+               ;
+
+    1       statement_list
+        1      : statement 
+        2      | statement_list statement 
+               ;
+
+    2       statement
+        3      : basic_statement 
+        4      | if_statement 
+               ;
+
+    3       basic_statement
+        5      : assignment ';' 
+        6      | group ';' 
+        7      | procedure_definition ';' 
+        8      | return_statement ';' 
+        9      | call_statement ';' 
+       10      | go_to_statement ';' 
+       11      | declaration_statement ';' 
+       12      | ';' 
+       13      | label_definition basic_statement 
+               ;
+
+    4       if_statement
+       14      : if_clause statement 
+       15      | if_clause true_part statement 
+       16      | label_definition if_statement 
+               ;
+
+    5       if_clause
+       17      : 'IF' expression 'THEN' 
+               ;
+
+    6       true_part
+       18      : basic_statement 'ELSE' 
+               ;
+
+    7       group
+       19      : group_head ending 
+               ;
+
+    8       group_head
+       20      : 'DO' ';' 
+       21      | 'DO' step_definition ';' 
+       22      | 'DO' while_clause ';' 
+       23      | 'DO' case_selector ';' 
+       24      | group_head statement 
+               ;
+
+    9       step_definition
+       25      : variable replace expression iteration_control 
+               ;
+
+   10       iteration_control
+       26      : 'TO' expression 
+       27      | 'TO' expression 'BY' expression 
+               ;
+
+   11       while_clause
+       28      : 'WHILE' expression 
+               ;
+
+   12       case_selector
+       29      : 'CASE' expression 
+               ;
+
+   13       procedure_definition
+       30      : procedure_head statement_list ending 
+               ;
+
+   14       procedure_head
+       31      : procedure_name ';' 
+       32      | procedure_name type ';' 
+       33      | procedure_name parameter_list ';' 
+       34      | procedure_name parameter_list type ';' 
+               ;
+
+   15       procedure_name
+       35      : label_definition 'PROCEDURE' 
+               ;
+
+   16       parameter_list
+       36      : parameter_head <identifier> ')' 
+               ;
+
+   17       parameter_head
+       37      : '(' 
+       38      | parameter_head <identifier> ',' 
+               ;
+
+   18       ending
+       39      : 'END' 
+       40      | 'END' <identifier> 
+       41      | label_definition ending 
+               ;
+
+   19       label_definition
+       42      : <identifier> ':' 
+               ;
+
+   20       return_statement
+       43      : 'RETURN' 
+       44      | 'RETURN' expression 
+               ;
+
+   21       call_statement
+       45      : 'CALL' variable 
+               ;
+
+   22       go_to_statement
+       46      : go_to <identifier> 
+               ;
+
+   23       go_to
+       47      : 'GO' 'TO' 
+       48      | 'GOTO' 
+               ;
+
+   24       declaration_statement
+       49      : 'DECLARE' declaration_element 
+       50      | declaration_statement ',' declaration_element 
+               ;
+
+   25       declaration_element
+       51      : type_declaration 
+       52      | <identifier> 'LITERALLY' <string> 
+               ;
+
+   26       type_declaration
+       53      : identifier_specification type 
+       54      | bound_head 'number' ')' type 
+       55      | type_declaration initial_list 
+               ;
+
+   27       type
+       56      : 'FIXED' 
+       57      | 'CHARACTER' 
+       58      | 'LABEL' 
+       59      | bit_head 'number' ')' 
+               ;
+
+   28       bit_head
+       60      : 'BIT' '(' 
+               ;
+
+   29       bound_head
+       61      : identifier_specification '(' 
+               ;
+
+   30       identifier_specification
+       62      : <identifier> 
+       63      | identifier_list <identifier> ')' 
+               ;
+
+   31       identifier_list
+       64      : '(' 
+       65      | identifier_list <identifier> ',' 
+               ;
+
+   32       initial_list
+       66      : initial_head constant ')' 
+               ;
+
+   33       initial_head
+       67      : 'INITIAL' '(' 
+       68      | initial_head constant ',' 
+               ;
+
+   34       assignment
+       69      : variable replace expression 
+       70      | left_part assignment 
+               ;
+
+   35       replace
+       71      : '=' 
+               ;
+
+   36       left_part
+       72      : variable ',' 
+               ;
+
+   37       expression
+       73      : logical_factor 
+       74      | expression '|' logical_factor 
+               ;
+
+   38       logical_factor
+       75      : logical_secondary 
+       76      | logical_factor '&' logical_secondary 
+               ;
+
+   39       logical_secondary
+       77      : logical_primary 
+       78      | '~' logical_primary 
+               ;
+
+   40       logical_primary
+       79      : string_expression 
+       80      | string_expression relation string_expression 
+               ;
+
+   41       relation
+       81      : '=' 
+       82      | '<' 
+       83      | '>' 
+       84      | '~=' 
+       85      | '~<' 
+       86      | '~>' 
+       87      | '<=' 
+       88      | '>=' 
+               ;
+
+   42       string_expression
+       89      : arithmetic_expression 
+       90      | string_expression '||' arithmetic_expression 
+               ;
+
+   43       arithmetic_expression
+       91      : term 
+       92      | arithmetic_expression '+' term 
+       93      | arithmetic_expression '-' term 
+       94      | '+' term 
+       95      | '-' term 
+               ;
+
+   44       term
+       96      : primary 
+       97      | term '*' primary 
+       98      | term '/' primary 
+       99      | term 'MOD' primary 
+               ;
+
+   45       primary
+      100      : constant 
+      101      | variable 
+      102      | '(' expression ')' 
+               ;
+
+   46       constant
+      103      : <string> 
+      104      | <constant> 
+               ;
+
+   47       variable
+      105      : <identifier> 
+      106      | subscript_head expression ')' 
+               ;
+
+   48       subscript_head
+      107      : <identifier> '(' 
+      108      | subscript_head expression ',' 
+               ;
+
+/* End of XPL grammar 
+

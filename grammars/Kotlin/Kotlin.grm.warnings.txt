@@ -1,0 +1,30 @@
+
+Kotlin.grm(0039) :    DOUBLE_ARROW                     '=>';
+Kotlin.grm(0039) : ....................................^^^^..
+Kotlin.grm(0039) : Warning, Constant '=>' was declared but not used anywhere.
+
+Kotlin.grm(0040) :    DOUBLE_SEMICOLON                 ';;';
+Kotlin.grm(0040) : ....................................^^^^..
+Kotlin.grm(0040) : Warning, Constant ';;' was declared but not used anywhere.
+
+Kotlin.grm(0059) :    HASH                             '#';
+Kotlin.grm(0059) : ....................................^^^..
+Kotlin.grm(0059) : Warning, Constant '#' was declared but not used anywhere.
+
+Kotlin.grm(0099) :    RESERVED                         '...';
+Kotlin.grm(0099) : ....................................^^^^^..
+Kotlin.grm(0099) : Warning, Constant '...' was declared but not used anywhere.
+
+Kotlin.grm(0108) :    SINGLE_QUOTE                     '\'';
+Kotlin.grm(0108) : ....................................^^^^..
+Kotlin.grm(0108) : Warning, Constant '\'' was declared but not used anywhere.
+
+Kotlin.grm(0119) :    TYPEOF                           'typeof';
+Kotlin.grm(0119) : ....................................^^^^^^^^..
+Kotlin.grm(0119) : Warning, Constant 'typeof' was declared but not used anywhere.
+
+Kotlin.grm(0431) : parenthesizedUserType
+Kotlin.grm(0431) : ^^^^^^^^^^^^^^^^^^^^^.
+Kotlin.grm(0431) : Warning, Nonterminal symbol parenthesizedUserType is not reachable from the goal symbol.
+
+7 warnings.

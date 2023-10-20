@@ -1,0 +1,37 @@
+
+LRSTAR 24.0.017 32b Copyright Paul B Mann.
+
+PLM.grm 
+
+Grammar      255 rules, 70 terminals, 152 nonterminals.
+States       368 states in LALR(1) state machine.
+             148 states when using shift-reduce actions.
+Conflicts      7 states, 9 shift-reduce, 4 reduce-reduce.
+
+            rows   cols          matrix       list      vect     total
+B matrix      50 x   40 x 1 =     2,000 ->     190 +     288 =     478  
+T matrix       1 x   69 x 2 =       138 ->     138 +     218 =     356  
+N matrix      58 x   90 x 2 =    10,440 ->   4,830 +     551 =   5,381  
+R matrix       2 x    3 x 1 =         5 ->       5 +     366 =     371  
+Total                                        5,163 +   1,423 =   6,586
+
+Generating: PLM_ParserTables.h
+Generating: PLM_ParserTables.hpp
+
+Symbols in the grammar                 788  sym  =    100,000    1% 
+Productions in the grammar             255  pro  =    100,000    0% 
+Tail symbols in the grammar            410  tail =    500,000    0% 
+States created                         368  sta  =    100,000    0% 
+Final state items                      268  fin  =    100,000    0% 
+Kernel state items                     437  ker  =  1,000,000    0% 
+Nonterminal transitions              1,169  ntt  =  1,000,000    0% 
+Terminal transitions                   559  tt   =  1,000,000    0% 
+Terminal transitions added               0  tta  =  1,000,000    0% 
+Lookaheads in LALR computation          18  la   =  1,000,000    0% 
+Lookbacks in LALR computation        1,863  lb   =  1,000,000    0% 
+Includes in LALR computation         1,169  inc  =  1,000,000    0% 
+Child nodes in graph                 1,363  ch   =  1,000,000    0% 
+Nondeterministic/conflict items         26  nd   =  1,000,000    0% 
+
+0 min 0.019 sec, 31.421 MB, 0 warnings, 0 errors.
+

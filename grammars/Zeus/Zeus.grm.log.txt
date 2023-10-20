@@ -1,0 +1,37 @@
+
+LRSTAR 24.0.017 32b Copyright Paul B Mann.
+
+Zeus.grm 
+
+Grammar      222 rules, 71 terminals, 114 nonterminals.
+States       406 states in LALR(1) state machine.
+             229 states when using shift-reduce actions.
+Conflicts     10 states, 24 shift-reduce, 10 reduce-reduce.
+
+            rows   cols          matrix       list      vect     total
+B matrix      69 x   53 x 1 =     3,657 ->     340 +     600 =     940  
+T matrix      28 x   43 x 2 =     2,408 ->     800 +     529 =   1,329  
+N matrix      50 x   65 x 2 =     6,500 ->   2,308 +     680 =   2,988  
+R matrix       1 x    1 x 1 =         1 ->       1 +     300 =     301  
+Total                                        3,449 +   2,109 =   5,558
+
+Generating: Zeus_ParserTables.h
+Generating: Zeus_ParserTables.hpp
+
+Symbols in the grammar                 655  sym  =    100,000    1% 
+Productions in the grammar             222  pro  =    100,000    0% 
+Tail symbols in the grammar            479  tail =    500,000    0% 
+States created                         406  sta  =    100,000    0% 
+Final state items                      238  fin  =    100,000    0% 
+Kernel state items                     513  ker  =  1,000,000    0% 
+Nonterminal transitions                725  ntt  =  1,000,000    0% 
+Terminal transitions                   631  tt   =  1,000,000    0% 
+Terminal transitions added               0  tta  =  1,000,000    0% 
+Lookaheads in LALR computation           0  la   =  1,000,000    0% 
+Lookbacks in LALR computation        1,392  lb   =  1,000,000    0% 
+Includes in LALR computation           725  inc  =  1,000,000    0% 
+Child nodes in graph                   963  ch   =  1,000,000    0% 
+Nondeterministic/conflict items         64  nd   =  1,000,000    0% 
+
+0 min 0.016 sec, 31.412 MB, 0 warnings, 0 errors.
+

@@ -1,0 +1,147 @@
+
+/* YACC grammar */
+
+/* Terminal Symbols */
+
+    0  <error>
+    1  <eof>
+    2  'pp'
+    3  'error'
+    4  'pstart'
+    5  'id'
+    6  'lcurl'
+    7  'rcurl'
+    8  'ptoken'
+    9  'pleft'
+   10  'pright'
+   11  'pnonassoc'
+   12  'ptype'
+   13  'langle'
+   14  'rangle'
+   15  'comma'
+   16  'literal'
+   17  'litid'
+   18  'number'
+   19  'c_id'
+   20  'colon'
+   21  'bar'
+   22  'lbrace'
+   23  'rbrace'
+   24  'eq'
+   25  'pprec'
+   26  'semicolon'
+
+/* Productions */
+
+    0       start
+        0      : grammar <eof> 
+               ;
+
+    1       grammar
+        1      : defs 'pp' rules aux_procs 
+               ;
+
+    2       aux_procs
+        2      : 
+        3      | 'pp' 
+               ;
+
+    3       defs
+        4      : 
+        5      | defs def 
+        6      | defs 'error' 
+               ;
+
+    4       def
+        7      : 'pstart' 'id' 
+        8      | 'pstart' 'error' 
+        9      | 'lcurl' 'rcurl' 
+       10      | 'ptoken' tag token_list 
+       11      | 'pleft' tag token_list 
+       12      | 'pright' tag token_list 
+       13      | 'pnonassoc' tag token_list 
+       14      | 'ptype' tag nonterm_list 
+       15      | 'ptype' tag 
+               ;
+
+    5       tag
+       16      : 
+       17      | 'langle' 'id' 'rangle' 
+               ;
+
+    6       token_list
+       18      : token_num 
+       19      | token_list token_num 
+       20      | token_list 'comma' token_num 
+       21      | 'error' 
+       22      | token_list 'error' 
+       23      | token_list 'comma' 'error' 
+               ;
+
+    7       token_num
+       24      : 'literal' 
+       25      | 'litid' 
+       26      | 'id' 
+       27      | 'litid' 'number' 
+       28      | 'id' 'number' 
+               ;
+
+    8       nonterm_list
+       29      : nonterm 
+       30      | nonterm_list nonterm 
+       31      | nonterm_list 'comma' nonterm 
+       32      | 'error' 
+       33      | nonterm_list 'error' 
+       34      | nonterm_list 'comma' 'error' 
+               ;
+
+    9       nonterm
+       35      : 'id' 
+               ;
+
+   10       rules
+       36      : 
+       37      | 'lcurl' 'rcurl' rule1 
+       38      | rules rule 
+       39      | 'error' 
+       40      | rules 'error' 
+               ;
+
+   11       rule1
+       41      : 'c_id' 'colon' body prec 
+               ;
+
+   12       rule
+       42      : rule1 
+       43      | 'bar' body prec 
+               ;
+
+   13       body
+       44      : 
+       45      | body 'literal' 
+       46      | body 'litid' 
+       47      | body 'id' 
+       48      | body action 
+       49      | body 'error' 
+               ;
+
+   14       action
+       50      : 'lbrace' 'rbrace' 
+       51      | 'eq' 
+               ;
+
+   15       prec
+       52      : 
+       53      | 'pprec' 'literal' opt_action 
+       54      | 'pprec' 'litid' opt_action 
+       55      | 'pprec' 'id' opt_action 
+       56      | prec 'semicolon' 
+               ;
+
+   16       opt_action
+       57      : 
+       58      | action 
+               ;
+
+/* End of YACC grammar 
+

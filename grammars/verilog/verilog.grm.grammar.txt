@@ -1,0 +1,1398 @@
+
+/* verilog grammar */
+
+/* Terminal Symbols */
+
+    0  <error>
+    1  <eof>
+    2  <output_symbol>
+    3  <level_symbol>
+    4  <edge_symbol>
+    5  <symtem_name_of_task>
+    6  <scalar_constant>
+    7  <string>
+    8  <size_base>
+    9  <number>
+   10  <decimal_number>
+   11  <real_number>
+   12  <name_of_system_function>
+   13  <identifier>
+   14  'module'
+   15  {identifier}
+   16  ';'
+   17  'endmodule'
+   18  'macromodule'
+   19  '('
+   20  ','
+   21  ')'
+   22  '.'
+   23  '{'
+   24  '}'
+   25  '['
+   26  ']'
+   27  ':'
+   28  'primitive'
+   29  'endprimitive'
+   30  'initial'
+   31  '='
+   32  '1\'b0'
+   33  '1\'b1'
+   34  '1\'bx'
+   35  '1'
+   36  '0'
+   37  'table'
+   38  'endtable'
+   39  '-'
+   40  'task'
+   41  'endtask'
+   42  'function'
+   43  'endfunction'
+   44  'integer'
+   45  'real'
+   46  'parameter'
+   47  'input'
+   48  'output'
+   49  'inout'
+   50  'trireg'
+   51  'wire'
+   52  'tri'
+   53  'tri1'
+   54  'supply0'
+   55  'wand'
+   56  'triand'
+   57  'tri0'
+   58  'supply1'
+   59  'wor'
+   60  'trior'
+   61  'scalared'
+   62  'vectored'
+   63  'reg'
+   64  'time'
+   65  'event'
+   66  'assign'
+   67  'defparam'
+   68  'small'
+   69  'medium'
+   70  'large'
+   71  'strong0'
+   72  'pull0'
+   73  'weak0'
+   74  'highz0'
+   75  'strong1'
+   76  'pull1'
+   77  'weak1'
+   78  'highz1'
+   79  'and'
+   80  'nand'
+   81  'or'
+   82  'nor'
+   83  'xor'
+   84  'xnor'
+   85  'buf'
+   86  'bufif0'
+   87  'bufif1'
+   88  'not'
+   89  'notif0'
+   90  'notif1'
+   91  'pulldown'
+   92  'pullup'
+   93  'nmos'
+   94  'rnmos'
+   95  'pmos'
+   96  'rpmos'
+   97  'cmos'
+   98  'rcmos'
+   99  'tran'
+  100  'rtran'
+  101  'tranif0'
+  102  'rtranif0'
+  103  'tranif1'
+  104  'rtranif1'
+  105  '#'
+  106  'always'
+  107  'if'
+  108  'else'
+  109  'case'
+  110  'endcase'
+  111  'casex'
+  112  'casez'
+  113  'forever'
+  114  'repeat'
+  115  'while'
+  116  'for'
+  117  'wait'
+  118  '->'
+  119  'disable'
+  120  'force'
+  121  'release'
+  122  'deassign'
+  123  '<='
+  124  'default'
+  125  'begin'
+  126  'end'
+  127  'fork'
+  128  'join'
+  129  'specify'
+  130  'endspecify'
+  131  'specparam'
+  132  '=>'
+  133  '*>'
+  134  '$setup'
+  135  '$hold'
+  136  '$period'
+  137  '$width'
+  138  '$skew'
+  139  '$recovery'
+  140  '$setuphold'
+  141  '&&&'
+  142  'posedge'
+  143  'negedge'
+  144  'edge'
+  145  '01'
+  146  '10'
+  147  '0x'
+  148  'x1'
+  149  '1x'
+  150  'x0'
+  151  '~'
+  152  '=='
+  153  '==='
+  154  '!='
+  155  '!=='
+  156  '+'
+  157  '?'
+  158  '!'
+  159  '&'
+  160  '~&'
+  161  '|'
+  162  '~|'
+  163  '^'
+  164  '~^'
+  165  '^~'
+  166  '*'
+  167  '/'
+  168  '%'
+  169  '>>'
+  170  '<<'
+  171  '<'
+  172  '>'
+  173  '>='
+  174  '&&'
+  175  '||'
+  176  '@'
+
+/* Productions */
+
+    0       source_text
+        0      : description* <eof> 
+               ;
+
+    1       description
+        1      : module 
+        2      | UDP 
+               ;
+
+    2       module
+        3      : 'module' name_of_module list_of_ports? {identifier} ';' module_item* 'endmodule' 
+        4      | 'macromodule' name_of_module list_of_ports? ';' module_item* 'endmodule' 
+               ;
+
+    3       name_of_module
+        5      : IDENTIFIER 
+               ;
+
+    4       list_of_ports
+        6      : '(' port (',' port)* ')' 
+               ;
+
+    5       port
+        7      : port_expression? 
+        8      | '.' name_of_port '(' port_expression? ')' 
+               ;
+
+    6       port_expression
+        9      : port_reference 
+       10      | '{' port_reference (',' port_reference)* '}' 
+               ;
+
+    7       port_reference
+       11      : name_of_variable 
+       12      | name_of_variable '[' constant_expression ']' 
+       13      | name_of_variable '[' constant_expression ':' constant_expression ']' 
+               ;
+
+    8       name_of_port
+       14      : IDENTIFIER 
+               ;
+
+    9       module_item
+       15      : parameter_declaration 
+       16      | input_declaration 
+       17      | output_declaration 
+       18      | inout_declaration 
+       19      | net_declaration 
+       20      | reg_declaration 
+       21      | time_declaration 
+       22      | integer_declaration 
+       23      | real_declaration 
+       24      | event_declaration 
+       25      | gate_declaration 
+       26      | UDP_instantiation 
+       27      | module_instantiation 
+       28      | parameter_override 
+       29      | continuous_assign 
+       30      | specify_block 
+       31      | initial_statement 
+       32      | always_statement 
+       33      | task 
+       34      | function 
+               ;
+
+   10       UDP
+       35      : 'primitive' name_of_UDP '(' name_of_variable (',' name_of_variable)* ')' ';' UDP_declaration+ UDP_initial_statement? table_definition 'endprimitive' 
+               ;
+
+   11       UDP_declaration
+       36      : output_declaration 
+       37      | reg_declaration 
+       38      | input_declaration 
+               ;
+
+   12       UDP_initial_statement
+       39      : 'initial' output_terminal_name '=' init_val ';' 
+               ;
+
+   13       init_val
+       40      : '1\'b0' 
+       41      | '1\'b1' 
+       42      | '1\'bx' 
+       43      | '1' 
+       44      | '0' 
+               ;
+
+   14       output_terminal_name
+       45      : IDENTIFIER 
+               ;
+
+   15       table_definition
+       46      : 'table' table_entries 'endtable' 
+               ;
+
+   16       table_entries
+       47      : combinational_entry+ 
+       48      | sequential_entry+ 
+               ;
+
+   17       combinational_entry
+       49      : level_input_list ':' OUTPUT_SYMBOL ';' 
+               ;
+
+   18       sequential_entry
+       50      : input_list ':' state ':' next_state ';' 
+               ;
+
+   19       input_list
+       51      : level_input_list 
+       52      | edge_input_list 
+               ;
+
+   20       level_input_list
+       53      : LEVEL_SYMBOL+ 
+               ;
+
+   21       edge_input_list
+       54      : LEVEL_SYMBOL* edge LEVEL_SYMBOL* 
+               ;
+
+   22       edge
+       55      : '(' LEVEL_SYMBOL LEVEL_SYMBOL ')' 
+       56      | EDGE_SYMBOL 
+               ;
+
+   23       state
+       57      : LEVEL_SYMBOL 
+               ;
+
+   24       next_state
+       58      : OUTPUT_SYMBOL 
+       59      | '-' 
+               ;
+
+   25       OUTPUT_SYMBOL
+       60      : <output_symbol> 
+               ;
+
+   26       LEVEL_SYMBOL
+       61      : <level_symbol> 
+               ;
+
+   27       EDGE_SYMBOL
+       62      : <edge_symbol> 
+               ;
+
+   28       task
+       63      : 'task' name_of_decld_task ';' tf_declaration* statement_or_null 'endtask' 
+               ;
+
+   29       name_of_decld_task
+       64      : IDENTIFIER 
+               ;
+
+   30       function
+       65      : 'function' range_or_type? name_of_function ';' tf_declaration+ statement 'endfunction' 
+               ;
+
+   31       range_or_type
+       66      : range 
+       67      | 'integer' 
+       68      | 'real' 
+               ;
+
+   32       tf_declaration
+       69      : parameter_declaration 
+       70      | input_declaration 
+       71      | output_declaration 
+       72      | inout_declaration 
+       73      | reg_declaration 
+       74      | time_declaration 
+       75      | integer_declaration 
+       76      | real_declaration 
+       77      | event_declaration 
+               ;
+
+   33       parameter_declaration
+       78      : 'parameter' range_or_type? list_of_param_assignments ';' 
+               ;
+
+   34       list_of_param_assignments
+       79      : param_assignment (',' param_assignment)* 
+               ;
+
+   35       param_assignment
+       80      : identifier '=' constant_expression 
+               ;
+
+   36       input_declaration
+       81      : 'input' range? list_of_variables ';' 
+               ;
+
+   37       output_declaration
+       82      : 'output' range? list_of_variables ';' 
+               ;
+
+   38       inout_declaration
+       83      : 'inout' range? list_of_variables ';' 
+               ;
+
+   39       net_declaration
+       84      : NETTYPE expandrange? delay? list_of_variables ';' 
+       85      | 'trireg' charge_strength? expandrange? delay? list_of_variables ';' 
+               ;
+
+   40       NETTYPE
+       86      : 'wire' 
+       87      | 'tri' 
+       88      | 'tri1' 
+       89      | 'supply0' 
+       90      | 'wand' 
+       91      | 'triand' 
+       92      | 'tri0' 
+       93      | 'supply1' 
+       94      | 'wor' 
+       95      | 'trior' 
+       96      | 'trireg' 
+               ;
+
+   41       expandrange
+       97      : range 
+       98      | 'scalared' range 
+       99      | 'vectored' range 
+               ;
+
+   42       reg_declaration
+      100      : 'reg' range? list_of_register_variables ';' 
+               ;
+
+   43       time_declaration
+      101      : 'time' list_of_register_variables ';' 
+               ;
+
+   44       integer_declaration
+      102      : 'integer' list_of_register_variables ';' 
+               ;
+
+   45       real_declaration
+      103      : 'real' list_of_register_variables ';' 
+               ;
+
+   46       event_declaration
+      104      : 'event' name_of_event (',' name_of_event)* ';' 
+               ;
+
+   47       continuous_assign
+      105      : 'assign' drive_strength? delay? list_of_assignments ';' 
+      106      | NETTYPE drive_strength? expandrange? delay? list_of_assignments ';' 
+               ;
+
+   48       parameter_override
+      107      : 'defparam' list_of_param_assignments ';' 
+               ;
+
+   49       list_of_variables
+      108      : name_of_variable (',' name_of_variable)* 
+               ;
+
+   50       name_of_variable
+      109      : IDENTIFIER 
+               ;
+
+   51       list_of_register_variables
+      110      : register_decl (',' register_decl)* 
+               ;
+
+   52       register_decl
+      111      : name_of_register ('=' constant_expression)? 
+      112      | name_of_memory '[' constant_expression ':' constant_expression ']' 
+               ;
+
+   53       name_of_register
+      113      : IDENTIFIER 
+               ;
+
+   54       name_of_memory
+      114      : IDENTIFIER 
+               ;
+
+   55       name_of_event
+      115      : IDENTIFIER 
+               ;
+
+   56       charge_strength
+      116      : '(' 'small' ')' 
+      117      | '(' 'medium' ')' 
+      118      | '(' 'large' ')' 
+               ;
+
+   57       drive_strength
+      119      : '(' STRENGTH0 ',' STRENGTH1 ')' 
+      120      | '(' STRENGTH1 ',' STRENGTH0 ')' 
+               ;
+
+   58       STRENGTH0
+      121      : 'supply0' 
+      122      | 'strong0' 
+      123      | 'pull0' 
+      124      | 'weak0' 
+      125      | 'highz0' 
+               ;
+
+   59       STRENGTH1
+      126      : 'supply1' 
+      127      | 'strong1' 
+      128      | 'pull1' 
+      129      | 'weak1' 
+      130      | 'highz1' 
+               ;
+
+   60       range
+      131      : '[' constant_expression ':' constant_expression ']' 
+               ;
+
+   61       list_of_assignments
+      132      : assignment (',' assignment)* 
+               ;
+
+   62       gate_declaration
+      133      : GATETYPE drive_strength? delay? gate_instance (',' gate_instance)* ';' 
+               ;
+
+   63       GATETYPE
+      134      : 'and' 
+      135      | 'nand' 
+      136      | 'or' 
+      137      | 'nor' 
+      138      | 'xor' 
+      139      | 'xnor' 
+      140      | 'buf' 
+      141      | 'bufif0' 
+      142      | 'bufif1' 
+      143      | 'not' 
+      144      | 'notif0' 
+      145      | 'notif1' 
+      146      | 'pulldown' 
+      147      | 'pullup' 
+      148      | 'nmos' 
+      149      | 'rnmos' 
+      150      | 'pmos' 
+      151      | 'rpmos' 
+      152      | 'cmos' 
+      153      | 'rcmos' 
+      154      | 'tran' 
+      155      | 'rtran' 
+      156      | 'tranif0' 
+      157      | 'rtranif0' 
+      158      | 'tranif1' 
+      159      | 'rtranif1' 
+               ;
+
+   64       gate_instance
+      160      : name_of_gate_instance? range? '(' terminal (',' terminal)* ')' 
+               ;
+
+   65       name_of_gate_instance
+      161      : IDENTIFIER 
+               ;
+
+   66       UDP_instantiation
+      162      : name_of_UDP drive_strength? delay? UDP_instance (',' UDP_instance)* 
+               ;
+
+   67       name_of_UDP
+      163      : IDENTIFIER 
+               ;
+
+   68       UDP_instance
+      164      : name_of_UDP_instance? '(' terminal (',' terminal)* ')' 
+               ;
+
+   69       name_of_UDP_instance
+      165      : identifier 
+               ;
+
+   70       terminal
+      166      : expression 
+               ;
+
+   71       module_instantiation
+      167      : name_of_module parameter_value_assignment? module_instance (',' module_instance)* ';' 
+               ;
+
+   72       parameter_value_assignment
+      168      : '#' '(' expression (',' expression)+ ')' 
+      169      | '#' expression 
+               ;
+
+   73       module_instance
+      170      : name_of_instance range? '(' list_of_module_connections? ')' 
+               ;
+
+   74       name_of_instance
+      171      : IDENTIFIER 
+               ;
+
+   75       list_of_module_connections
+      172      : module_port_connection (',' module_port_connection)* 
+      173      | named_port_connection (',' named_port_connection)* 
+               ;
+
+   76       module_port_connection
+      174      : 
+      175      | expression 
+               ;
+
+   77       named_port_connection
+      176      : '.' IDENTIFIER '(' expression? ')' 
+               ;
+
+   78       initial_statement
+      177      : 'initial' statement 
+               ;
+
+   79       always_statement
+      178      : 'always' statement 
+               ;
+
+   80       statement_or_null
+      179      : statement 
+      180      | ';' 
+               ;
+
+   81       statement
+      181      : blocking_assignment ';' 
+      182      | non_blocking_assignment ';' 
+      183      | 'if' '(' expression ')' statement_or_null 
+      184      | 'if' '(' expression ')' statement_or_null 'else' statement_or_null 
+      185      | 'case' '(' expression ')' case_item+ 'endcase' 
+      186      | 'casex' '(' expression ')' case_item+ 'endcase' 
+      187      | 'casez' '(' expression ')' case_item+ 'endcase' 
+      188      | 'forever' statement 
+      189      | 'repeat' '(' expression ')' statement 
+      190      | 'while' '(' expression ')' statement 
+      191      | 'for' '(' assignment ';' expression ';' assignment ')' statement 
+      192      | delay_control statement_or_null 
+      193      | event_control statement_or_null 
+      194      | 'wait' '(' expression ')' statement_or_null 
+      195      | '->' name_of_event ';' 
+      196      | seq_block 
+      197      | par_block 
+      198      | task_enable 
+      199      | system_task_enable 
+      200      | 'disable' name_of_task_or_block ';' 
+      201      | 'force' assignment ';' 
+      202      | 'release' lvalue ';' 
+      203      | 'assign' assignment ';' 
+      204      | 'deassign' lvalue ';' 
+               ;
+
+   82       name_of_task_or_block
+      205      : identifier 
+               ;
+
+   83       name_of_task
+      206      : identifier 
+               ;
+
+   84       assignment
+      207      : lvalue '=' expression 
+               ;
+
+   85       blocking_assignment
+      208      : lvalue '=' expression 
+      209      | lvalue '=' delay_control expression 
+      210      | lvalue '=' event_control expression 
+               ;
+
+   86       non_blocking_assignment
+      211      : lvalue '<=' expression 
+      212      | lvalue '<=' delay_control expression 
+      213      | lvalue '<=' event_control expression 
+               ;
+
+   87       case_item
+      214      : expression (',' expression)* ':' statement_or_null 
+      215      | 'default' ':'? statement_or_null 
+               ;
+
+   88       seq_block
+      216      : 'begin' statement* 'end' 
+      217      | 'begin' ':' name_of_block block_declaration* statement* 'end' 
+               ;
+
+   89       par_block
+      218      : 'fork' statement* 'join' 
+      219      | 'fork' ':' name_of_block block_declaration* statement* 'join' 
+               ;
+
+   90       name_of_block
+      220      : IDENTIFIER 
+               ;
+
+   91       block_declaration
+      221      : parameter_declaration 
+      222      | reg_declaration 
+      223      | integer_declaration 
+      224      | real_declaration 
+      225      | time_declaration 
+      226      | event_declaration 
+               ;
+
+   92       task_enable
+      227      : name_of_task ';' 
+      228      | name_of_task '(' expression (',' expression)* ')' ';' 
+               ;
+
+   93       system_task_enable
+      229      : system_name_of_task ';' 
+      230      | system_name_of_task '(' expression? (',' expression?)* ')' ';' 
+               ;
+
+   94       system_name_of_task
+      231      : <symtem_name_of_task> 
+               ;
+
+   95       specify_block
+      232      : 'specify' specify_item* 'endspecify' 
+               ;
+
+   96       specify_item
+      233      : specparam_declaration 
+      234      | path_declaration 
+      235      | level_sensitive_path_declaration 
+      236      | edge_sensitive_path_declaration 
+      237      | system_timing_check 
+      238      | sdpd 
+               ;
+
+   97       specparam_declaration
+      239      : 'specparam' list_of_param_assignments ';' 
+               ;
+
+   98       path_declaration
+      240      : path_description '=' path_delay_value ';' 
+               ;
+
+   99       path_description
+      241      : '(' specify_input_terminal_descriptor '=>' specify_output_terminal_descriptor ')' 
+      242      | '(' list_of_path_inputs '*>' list_of_path_outputs ')' 
+               ;
+
+  100       list_of_path_inputs
+      243      : specify_input_terminal_descriptor (',' specify_input_terminal_descriptor)* 
+               ;
+
+  101       list_of_path_outputs
+      244      : specify_output_terminal_descriptor (',' specify_output_terminal_descriptor)* 
+               ;
+
+  102       specify_input_terminal_descriptor
+      245      : input_identifier 
+      246      | input_identifier '[' constant_expression ']' 
+      247      | input_identifier '[' constant_expression ':' constant_expression ']' 
+               ;
+
+  103       specify_output_terminal_descriptor
+      248      : output_identifier 
+      249      | output_identifier '[' constant_expression ']' 
+      250      | output_identifier '[' constant_expression ':' constant_expression ']' 
+               ;
+
+  104       input_identifier
+      251      : IDENTIFIER 
+               ;
+
+  105       output_identifier
+      252      : IDENTIFIER 
+               ;
+
+  106       path_delay_value
+      253      : path_delay_expression 
+      254      | '(' path_delay_expression ',' path_delay_expression ')' 
+      255      | '(' path_delay_expression ',' path_delay_expression ',' path_delay_expression ')' 
+      256      | '(' path_delay_expression ',' path_delay_expression ',' path_delay_expression ',' path_delay_expression ',' path_delay_expression ',' path_delay_expression ')' 
+               ;
+
+  107       path_delay_expression
+      257      : constant_mintypmax_expression 
+               ;
+
+  108       constant_mintypmax_expression
+      258      : mintypmax_expression 
+               ;
+
+  109       system_timing_check
+      259      : '$setup' '(' timing_check_event ',' timing_check_event ',' timing_check_limit (',' notify_register)? ')' ';' 
+      260      | '$hold' '(' timing_check_event ',' timing_check_event ',' timing_check_limit (',' notify_register)? ')' ';' 
+      261      | '$period' '(' controlled_timing_check_event ',' timing_check_limit (',' notify_register)? ')' ';' 
+      262      | '$width' '(' controlled_timing_check_event ',' timing_check_limit ',' (',' constant_expression ',' notify_register)? ')' ';' 
+      263      | '$skew' '(' timing_check_event ',' timing_check_event ',' timing_check_limit (',' notify_register)? ')' ';' 
+      264      | '$recovery' '(' controlled_timing_check_event ',' timing_check_event ',' timing_check_limit (',' notify_register)? ')' ';' 
+      265      | '$setuphold' '(' timing_check_event ',' timing_check_event ',' timing_check_limit ',' timing_check_limit ',' (',' notify_register)? ')' ';' 
+               ;
+
+  110       timing_check_event
+      266      : timing_check_event_control? specify_terminal_descriptor ('&&&' timing_check_condition)? 
+               ;
+
+  111       specify_terminal_descriptor
+      267      : specify_input_terminal_descriptor 
+      268      | specify_output_terminal_descriptor 
+               ;
+
+  112       controlled_timing_check_event
+      269      : timing_check_event_control specify_terminal_descriptor ('&&&' timing_check_condition)? 
+               ;
+
+  113       timing_check_event_control
+      270      : 'posedge' 
+      271      | 'negedge' 
+      272      | edge_control_specifier 
+               ;
+
+  114       edge_control_specifier
+      273      : 'edge' '[' edge_descriptor (',' edge_descriptor)* ']' 
+               ;
+
+  115       edge_descriptor
+      274      : '01' 
+      275      | '10' 
+      276      | '0x' 
+      277      | 'x1' 
+      278      | '1x' 
+      279      | 'x0' 
+               ;
+
+  116       timing_check_condition
+      280      : SCALAR_EXPRESSION 
+      281      | '~' SCALAR_EXPRESSION 
+      282      | SCALAR_EXPRESSION '==' scalar_constant 
+      283      | SCALAR_EXPRESSION '===' scalar_constant 
+      284      | SCALAR_EXPRESSION '!=' scalar_constant 
+      285      | SCALAR_EXPRESSION '!==' scalar_constant 
+               ;
+
+  117       SCALAR_EXPRESSION
+      286      : expression 
+               ;
+
+  118       timing_check_limit
+      287      : expression 
+               ;
+
+  119       scalar_constant
+      288      : <scalar_constant> 
+               ;
+
+  120       notify_register
+      289      : identifier 
+               ;
+
+  121       level_sensitive_path_declaration
+      290      : 'if' '(' conditional_port_expression ')' '(' specify_terminal_descriptor polarity_operator? '=>' specify_terminal_descriptor ')' '=' path_delay_value ';' 
+      291      | 'if' '(' conditional_port_expression ')' '(' list_of_path_inputs polarity_operator? '*>' list_of_path_outputs ')' '=' path_delay_value ';' 
+               ;
+
+  122       conditional_port_expression
+      292      : port_reference 
+      293      | UNARY_OPERATOR port_reference 
+      294      | port_reference BINARY_OPERATOR port_reference 
+               ;
+
+  123       polarity_operator
+      295      : '+' 
+      296      | '-' 
+               ;
+
+  124       edge_sensitive_path_declaration
+      297      : ('if' '(' expression ')')? '(' specify_terminal_descriptor '=>' '(' specify_terminal_descriptor polarity_operator? ':' data_source_expression ')' ')' '=' path_delay_value ';' 
+      298      | ('if' '(' expression ')')? '(' specify_terminal_descriptor '*>' '(' list_of_path_outputs polarity_operator? ':' data_source_expression ')' ')' '=' path_delay_value ';' 
+               ;
+
+  125       data_source_expression
+      299      : expression 
+               ;
+
+  126       sdpd
+      300      : 'if' '(' sdpd_conditional_expression ')' path_description '=' path_delay_value ';' 
+               ;
+
+  127       sdpd_conditional_expression
+      301      : expression BINARY_OPERATOR expression 
+      302      | UNARY_OPERATOR expression 
+               ;
+
+  128       lvalue
+      303      : identifier 
+      304      | identifier '[' expression ']' 
+      305      | identifier '[' constant_expression ':' constant_expression ']' 
+      306      | concatenation 
+               ;
+
+  129       constant_expression
+      307      : expression 
+               ;
+
+  130       mintypmax_expression
+      308      : expression 
+      309      | expression ':' expression ':' expression 
+               ;
+
+  131       expression
+      310      : primary 
+      311      | UNARY_OPERATOR primary 
+      312      | expression BINARY_OPERATOR expression 
+      313      | expression '?' expression ':' expression 
+      314      | STRING 
+               ;
+
+  132       UNARY_OPERATOR
+      315      : '+' 
+      316      | '-' 
+      317      | '!' 
+      318      | '~' 
+      319      | '&' 
+      320      | '~&' 
+      321      | '|' 
+      322      | '~|' 
+      323      | '^' 
+      324      | '~^' 
+      325      | '^~' 
+               ;
+
+  133       BINARY_OPERATOR
+      326      : '*' 
+      327      | '/' 
+      328      | '%' 
+      329      | '+' 
+      330      | '-' 
+      331      | '>>' 
+      332      | '<<' 
+      333      | '<' 
+      334      | '<=' 
+      335      | '>' 
+      336      | '>=' 
+      337      | '==' 
+      338      | '!=' 
+      339      | '===' 
+      340      | '!==' 
+      341      | '&' 
+      342      | '^' 
+      343      | '^~' 
+      344      | '~^' 
+      345      | '|' 
+      346      | '&&' 
+      347      | '||' 
+               ;
+
+  134       STRING
+      348      : <string> 
+               ;
+
+  135       primary
+      349      : number 
+      350      | identifier 
+      351      | identifier '[' expression ']' 
+      352      | identifier '[' constant_expression ':' constant_expression ']' 
+      353      | concatenation 
+      354      | multiple_concatenation 
+      355      | function_call 
+      356      | '(' mintypmax_expression ')' 
+               ;
+
+  136       number
+      357      : DECIMAL_NUMBER 
+      358      | SIZE_BASE NUMBER 
+      359      | REAL_NUMBER 
+               ;
+
+  137       SIZE_BASE
+      360      : <size_base> 
+               ;
+
+  138       NUMBER
+      361      : <number> 
+               ;
+
+  139       DECIMAL_NUMBER
+      362      : <decimal_number> 
+               ;
+
+  140       REAL_NUMBER
+      363      : <real_number> 
+               ;
+
+  141       concatenation
+      364      : '{' expression (',' expression)* '}' 
+               ;
+
+  142       multiple_concatenation
+      365      : '{' expression '{' expression (',' expression)* '}' '}' 
+               ;
+
+  143       function_call
+      366      : name_of_function '(' (expression (',' expression)*)? ')' 
+      367      | name_of_system_function '(' (expression (',' expression)*)? ')' 
+      368      | name_of_system_function 
+               ;
+
+  144       name_of_function
+      369      : identifier 
+               ;
+
+  145       name_of_system_function
+      370      : <name_of_system_function> 
+               ;
+
+  146       identifier
+      371      : IDENTIFIER ('.' IDENTIFIER)* 
+               ;
+
+  147       IDENTIFIER
+      372      : <identifier> 
+               ;
+
+  148       delay
+      373      : '#' number 
+      374      | '#' IDENTIFIER 
+      375      | '#' '(' mintypmax_expression (',' mintypmax_expression (',' mintypmax_expression)?)? ')' 
+               ;
+
+  149       delay_control
+      376      : '#' number 
+      377      | '#' IDENTIFIER 
+      378      | '#' '(' mintypmax_expression ')' 
+               ;
+
+  150       event_control
+      379      : '@' IDENTIFIER 
+      380      | '@' '(' event_expression ')' 
+               ;
+
+  151       event_expression
+      381      : expression 
+      382      | 'posedge' SCALAR_EVENT_EXPRESSION 
+      383      | 'negedge' SCALAR_EVENT_EXPRESSION 
+      384      | event_expression 'or' event_expression 
+               ;
+
+  152       SCALAR_EVENT_EXPRESSION
+      385      : expression 
+               ;
+
+  153       description*
+      386      : 
+      387      | description* description 
+               ;
+
+  154       list_of_ports?
+      388      : 
+      389      | list_of_ports 
+               ;
+
+  155       module_item*
+      390      : 
+      391      | module_item* module_item 
+               ;
+
+  156       (',' port)
+      392      : ',' port 
+               ;
+
+  157       (',' port)*
+      393      : 
+      394      | (',' port)* (',' port) 
+               ;
+
+  158       port_expression?
+      395      : 
+      396      | port_expression 
+               ;
+
+  159       (',' port_reference)
+      397      : ',' port_reference 
+               ;
+
+  160       (',' port_reference)*
+      398      : 
+      399      | (',' port_reference)* (',' port_reference) 
+               ;
+
+  161       (',' name_of_variable)
+      400      : ',' name_of_variable 
+               ;
+
+  162       (',' name_of_variable)*
+      401      : 
+      402      | (',' name_of_variable)* (',' name_of_variable) 
+               ;
+
+  163       UDP_declaration+
+      403      : UDP_declaration 
+      404      | UDP_declaration+ UDP_declaration 
+               ;
+
+  164       UDP_initial_statement?
+      405      : 
+      406      | UDP_initial_statement 
+               ;
+
+  165       combinational_entry+
+      407      : combinational_entry 
+      408      | combinational_entry+ combinational_entry 
+               ;
+
+  166       sequential_entry+
+      409      : sequential_entry 
+      410      | sequential_entry+ sequential_entry 
+               ;
+
+  167       LEVEL_SYMBOL+
+      411      : LEVEL_SYMBOL 
+      412      | LEVEL_SYMBOL+ LEVEL_SYMBOL 
+               ;
+
+  168       LEVEL_SYMBOL*
+      413      : 
+      414      | LEVEL_SYMBOL* LEVEL_SYMBOL 
+               ;
+
+  169       tf_declaration*
+      415      : 
+      416      | tf_declaration* tf_declaration 
+               ;
+
+  170       range_or_type?
+      417      : 
+      418      | range_or_type 
+               ;
+
+  171       tf_declaration+
+      419      : tf_declaration 
+      420      | tf_declaration+ tf_declaration 
+               ;
+
+  172       (',' param_assignment)
+      421      : ',' param_assignment 
+               ;
+
+  173       (',' param_assignment)*
+      422      : 
+      423      | (',' param_assignment)* (',' param_assignment) 
+               ;
+
+  174       range?
+      424      : 
+      425      | range 
+               ;
+
+  175       expandrange?
+      426      : 
+      427      | expandrange 
+               ;
+
+  176       delay?
+      428      : 
+      429      | delay 
+               ;
+
+  177       charge_strength?
+      430      : 
+      431      | charge_strength 
+               ;
+
+  178       (',' name_of_event)
+      432      : ',' name_of_event 
+               ;
+
+  179       (',' name_of_event)*
+      433      : 
+      434      | (',' name_of_event)* (',' name_of_event) 
+               ;
+
+  180       drive_strength?
+      435      : 
+      436      | drive_strength 
+               ;
+
+  181       (',' register_decl)
+      437      : ',' register_decl 
+               ;
+
+  182       (',' register_decl)*
+      438      : 
+      439      | (',' register_decl)* (',' register_decl) 
+               ;
+
+  183       ('=' constant_expression)?
+      440      : 
+      441      | '=' constant_expression 
+               ;
+
+  184       (',' assignment)
+      442      : ',' assignment 
+               ;
+
+  185       (',' assignment)*
+      443      : 
+      444      | (',' assignment)* (',' assignment) 
+               ;
+
+  186       (',' gate_instance)
+      445      : ',' gate_instance 
+               ;
+
+  187       (',' gate_instance)*
+      446      : 
+      447      | (',' gate_instance)* (',' gate_instance) 
+               ;
+
+  188       name_of_gate_instance?
+      448      : 
+      449      | name_of_gate_instance 
+               ;
+
+  189       (',' terminal)
+      450      : ',' terminal 
+               ;
+
+  190       (',' terminal)*
+      451      : 
+      452      | (',' terminal)* (',' terminal) 
+               ;
+
+  191       (',' UDP_instance)
+      453      : ',' UDP_instance 
+               ;
+
+  192       (',' UDP_instance)*
+      454      : 
+      455      | (',' UDP_instance)* (',' UDP_instance) 
+               ;
+
+  193       name_of_UDP_instance?
+      456      : 
+      457      | name_of_UDP_instance 
+               ;
+
+  194       parameter_value_assignment?
+      458      : 
+      459      | parameter_value_assignment 
+               ;
+
+  195       (',' module_instance)
+      460      : ',' module_instance 
+               ;
+
+  196       (',' module_instance)*
+      461      : 
+      462      | (',' module_instance)* (',' module_instance) 
+               ;
+
+  197       (',' expression)
+      463      : ',' expression 
+               ;
+
+  198       (',' expression)+
+      464      : (',' expression) 
+      465      | (',' expression)+ (',' expression) 
+               ;
+
+  199       list_of_module_connections?
+      466      : 
+      467      | list_of_module_connections 
+               ;
+
+  200       (',' module_port_connection)
+      468      : ',' module_port_connection 
+               ;
+
+  201       (',' module_port_connection)*
+      469      : 
+      470      | (',' module_port_connection)* (',' module_port_connection) 
+               ;
+
+  202       (',' named_port_connection)
+      471      : ',' named_port_connection 
+               ;
+
+  203       (',' named_port_connection)*
+      472      : 
+      473      | (',' named_port_connection)* (',' named_port_connection) 
+               ;
+
+  204       expression?
+      474      : 
+      475      | expression 
+               ;
+
+  205       case_item+
+      476      : case_item 
+      477      | case_item+ case_item 
+               ;
+
+  206       (',' expression)*
+      478      : 
+      479      | (',' expression)* (',' expression) 
+               ;
+
+  207       ':'?
+      480      : 
+      481      | ':' 
+               ;
+
+  208       statement*
+      482      : 
+      483      | statement* statement 
+               ;
+
+  209       block_declaration*
+      484      : 
+      485      | block_declaration* block_declaration 
+               ;
+
+  210       (',' expression?)
+      486      : ',' expression? 
+               ;
+
+  211       (',' expression?)*
+      487      : 
+      488      | (',' expression?)* (',' expression?) 
+               ;
+
+  212       specify_item*
+      489      : 
+      490      | specify_item* specify_item 
+               ;
+
+  213       (',' specify_input_terminal_descriptor)
+      491      : ',' specify_input_terminal_descriptor 
+               ;
+
+  214       (',' specify_input_terminal_descriptor)*
+      492      : 
+      493      | (',' specify_input_terminal_descriptor)* (',' specify_input_terminal_descriptor) 
+               ;
+
+  215       (',' specify_output_terminal_descriptor)
+      494      : ',' specify_output_terminal_descriptor 
+               ;
+
+  216       (',' specify_output_terminal_descriptor)*
+      495      : 
+      496      | (',' specify_output_terminal_descriptor)* (',' specify_output_terminal_descriptor) 
+               ;
+
+  217       (',' notify_register)?
+      497      : 
+      498      | ',' notify_register 
+               ;
+
+  218       (',' constant_expression ',' notify_register)?
+      499      : 
+      500      | ',' constant_expression ',' notify_register 
+               ;
+
+  219       timing_check_event_control?
+      501      : 
+      502      | timing_check_event_control 
+               ;
+
+  220       ('&&&' timing_check_condition)?
+      503      : 
+      504      | '&&&' timing_check_condition 
+               ;
+
+  221       (',' edge_descriptor)
+      505      : ',' edge_descriptor 
+               ;
+
+  222       (',' edge_descriptor)*
+      506      : 
+      507      | (',' edge_descriptor)* (',' edge_descriptor) 
+               ;
+
+  223       polarity_operator?
+      508      : 
+      509      | polarity_operator 
+               ;
+
+  224       ('if' '(' expression ')')?
+      510      : 
+      511      | 'if' '(' expression ')' 
+               ;
+
+  225       (expression (',' expression)*)?
+      512      : 
+      513      | expression (',' expression)* 
+               ;
+
+  226       ('.' IDENTIFIER)
+      514      : '.' IDENTIFIER 
+               ;
+
+  227       ('.' IDENTIFIER)*
+      515      : 
+      516      | ('.' IDENTIFIER)* ('.' IDENTIFIER) 
+               ;
+
+  228       (',' mintypmax_expression)?
+      517      : 
+      518      | ',' mintypmax_expression 
+               ;
+
+  229       (',' mintypmax_expression (',' mintypmax_expression)?)?
+      519      : 
+      520      | ',' mintypmax_expression (',' mintypmax_expression)? 
+               ;
+
+/* End of verilog grammar 
+

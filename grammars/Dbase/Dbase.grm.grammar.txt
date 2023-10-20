@@ -1,0 +1,1430 @@
+
+/* Dbase grammar */
+
+/* Terminal Symbols */
+
+    0  <error>
+    1  <eof>
+    2  <identifier>
+    3  <number>
+    4  <string>
+    5  <CR>
+    6  '*'
+    7  '!'
+    8  '?'
+    9  '??'
+   10  '@'
+   11  'CLEAR'
+   12  'TO'
+   13  'GET'
+   14  'PICTURE'
+   15  'RANGE'
+   16  'SAY'
+   17  'DOUBLE'
+   18  '='
+   19  'ACCEPT'
+   20  'APPEND'
+   21  'BLANK'
+   22  'FROM'
+   23  'FOR'
+   24  'TYPE'
+   25  'ASSIST'
+   26  'AVERAGE'
+   27  'WHILE'
+   28  'BROWSE'
+   29  'FIELDS'
+   30  'LOCK'
+   31  'WIDTH'
+   32  'FREEZE'
+   33  'NOFOLLOW'
+   34  'NOMENU'
+   35  'NOAPPEND'
+   36  'CALL'
+   37  'WITH'
+   38  'CANCEL'
+   39  'CHANGE'
+   40  'ALL'
+   41  'GETS'
+   42  'MEMORY'
+   43  'TYPEAHEAD'
+   44  'CLOSE'
+   45  'ALTERNATE'
+   46  'DATABASES'
+   47  'FORMAT'
+   48  'INDEX'
+   49  'PROCEDURE'
+   50  'CONTINUE'
+   51  'COPY'
+   52  'STRUCTURE'
+   53  'EXTENDED'
+   54  'FILE'
+   55  'COUNT'
+   56  'CREATE'
+   57  'LABEL'
+   58  'QUERY'
+   59  'REPORT'
+   60  'SCREEN'
+   61  'VIEW'
+   62  'ENVIRONMENT'
+   63  'DELETE'
+   64  'DIR'
+   65  'DISPLAY'
+   66  'PRINT'
+   67  'HISTORY'
+   68  'LAST'
+   69  'STATUS'
+   70  'DO'
+   71  'CASE'
+   72  'OTHERWISE'
+   73  'ENDCASE'
+   74  'ENDDO'
+   75  'EDIT'
+   76  'EJECT'
+   77  'ERASE'
+   78  'EXIT'
+   79  'EXPORT'
+   80  'PFS'
+   81  'FIND'
+   82  'GO'
+   83  'TOP'
+   84  'BOTTOM'
+   85  'GOTO'
+   86  'HELP'
+   87  'IF'
+   88  'ELSE'
+   89  'ENDIF'
+   90  'IMPORT'
+   91  'ON'
+   92  'UNIQUE'
+   93  'INPUT'
+   94  'INSERT'
+   95  'BEFORE'
+   96  'JOIN'
+   97  'SAMPLE'
+   98  'LIST'
+   99  'OFF'
+  100  'LOAD'
+  101  'LOCATE'
+  102  'LOOP'
+  103  'MODIFY'
+  104  'COMMAND'
+  105  'NOTE'
+  106  'ERROR'
+  107  'ESCAPE'
+  108  'KEY'
+  109  'PACK'
+  110  'PARAMETERS'
+  111  'PRIVATE'
+  112  'LIKE'
+  113  'EXCEPT'
+  114  'RETURN'
+  115  'MASTER'
+  116  'PUBLIC'
+  117  'QUIT'
+  118  'READ'
+  119  'SAVE'
+  120  'RECALL'
+  121  'REINDEX'
+  122  'RELEASE'
+  123  'MODULE'
+  124  'RENAME'
+  125  'REPLACE'
+  126  'FORM'
+  127  'PLAIN'
+  128  'HEADING'
+  129  'NOEJECT'
+  130  'SUMMARY'
+  131  'RESTORE'
+  132  'ADDITIVE'
+  133  'RESUME'
+  134  'RETRY'
+  135  'RUN'
+  136  'SEEK'
+  137  'SELECT'
+  138  'SET'
+  139  'BELL'
+  140  'CARRY'
+  141  'COLOR'
+  142  ','
+  143  'CONFIRM'
+  144  'CONSOLE'
+  145  'DATE'
+  146  'DEBUG'
+  147  'DECIMAL'
+  148  'DEFAULT'
+  149  'DELETED'
+  150  'DELIMITERS'
+  151  'DEVICE'
+  152  'DOHISTORY'
+  153  'ECHO'
+  154  'EXACT'
+  155  'FILTER'
+  156  'FIXED'
+  157  'FUNCTION'
+  158  'INTENSITY'
+  159  'MARGIN'
+  160  'MEMOWIDTH'
+  161  'MENU'
+  162  'MESSAGE'
+  163  'ORDER'
+  164  'PATH'
+  165  'PRINTER'
+  166  'RELATION'
+  167  'INTO'
+  168  'SAFETY'
+  169  'SCOREBOARD'
+  170  'STEP'
+  171  'TALK'
+  172  'TITLE'
+  173  'SKIP'
+  174  'SORT'
+  175  'A'
+  176  'D'
+  177  'STORE'
+  178  'SUM'
+  179  'SUSPEND'
+  180  'TEXT'
+  181  'ENDTEXT'
+  182  'TOTAL'
+  183  'UPDATE'
+  184  'RANDOM'
+  185  'USE'
+  186  'ALIAS'
+  187  'WAIT'
+  188  'ZAP'
+  189  '.AND.'
+  190  '.OR.'
+  191  '('
+  192  ')'
+  193  '<'
+  194  '>'
+  195  '#'
+  196  '<='
+  197  '>='
+  198  '<>'
+  199  '+'
+  200  '-'
+  201  '/'
+  202  '^'
+  203  '**'
+  204  '.NOT.'
+  205  'RECORD'
+  206  'NEXT'
+  207  'REST'
+  208  'X'
+  209  'N'
+  210  'B'
+  211  'GR'
+  212  'BG'
+  213  'G'
+  214  'BR'
+  215  'R'
+  216  'W'
+  217  'ABS'
+  218  'ASC'
+  219  'AT'
+  220  'BOF'
+  221  'CDOW'
+  222  'CHR'
+  223  'CMONTH'
+  224  'COL'
+  225  'CTOD'
+  226  'DAY'
+  227  'DBF'
+  228  'DISKSPACE'
+  229  'DOW'
+  230  'DTOC'
+  231  'EOF'
+  232  'EXP'
+  233  'FIELD'
+  234  'FKLABEL'
+  235  'FKMAX'
+  236  'FOUND'
+  237  'GETENV'
+  238  'IIF'
+  239  'INKEY'
+  240  'INT'
+  241  'ISALPHA'
+  242  'ISCOLOR'
+  243  'ISLOWER'
+  244  'ISUPPER'
+  245  'LEFT'
+  246  'LEN'
+  247  'LOG'
+  248  'LOWER'
+  249  'LTRIM'
+  250  'LUPDATE'
+  251  'MAX'
+  252  'MIN'
+  253  'MOD'
+  254  'MONTH'
+  255  'NDX'
+  256  'OS'
+  257  'PCOL'
+  258  'PROW'
+  259  'READKEY'
+  260  'RECOUNT'
+  261  'RECNO'
+  262  'RECSIZE'
+  263  'REPLICATE'
+  264  'RIGHT'
+  265  'ROUND'
+  266  'ROW'
+  267  'RTRIM'
+  268  'SPACE'
+  269  'SQRT'
+  270  'STR'
+  271  'STUFF'
+  272  'SUBSTR'
+  273  'TIME'
+  274  'TRANSFORM'
+  275  'TRIM'
+  276  'UPPER'
+  277  'VAL'
+  278  'VERSION'
+  279  'YEAR'
+
+/* Productions */
+
+    0       goal
+        0      : cmdlist <eof> 
+               ;
+
+    1       cmdlist
+        1      : command+ 
+               ;
+
+    2       command
+        2      : statement? <CR> 
+               ;
+
+    3       statement
+        3      : '*' text 
+        4      | '!' command 
+        5      | '?' explist? 
+        6      | '??' explist 
+        7      | '@' position 'CLEAR' 'TO' position 
+        8      | '@' position 'GET' variable (PICTURE template | RANGE low high)* 
+        9      | '@' position 'SAY' exp (PICTURE template)? 
+       10      | '@' position 'TO' position DOUBLE? 
+       11      | variable '=' exp 
+       12      | 'ACCEPT' prompt? 'TO' variable 
+       13      | 'APPEND' (BLANK | FROM filename | FOR condition | TYPE filetype)* 
+       14      | 'ASSIST' 
+       15      | 'AVERAGE' (scope | explist | TO varlist | FOR condition | WHILE condition)* 
+       16      | 'BROWSE' (FIELDS fldlist | LOCK <number> | WIDTH size | FREEZE field | NOFOLLOW | NOMENU | NOAPPEND)* 
+       17      | 'CALL' module (WITH variable)? 
+       18      | 'CANCEL' 
+       19      | 'CHANGE' (scope | FIELDS fldlist | FOR condition | WHILE condition)* 
+       20      | 'CLEAR' (ALL | FIELDS | GETS | MEMORY | TYPEAHEAD) 
+       21      | 'CLOSE' (ALL | ALTERNATE | DATABASES | FORMAT | INDEX | PROCEDURE) 
+       22      | 'CONTINUE' 
+       23      | 'COPY' 'STRUCTURE' (EXTENDED | TO filename | FIELDS fldlist)* 
+       24      | 'COPY' (FILE filename | TO filename | scope | FIELDS fldlist | FOR condition | WHILE condition | TYPE filetype)* 
+       25      | 'COUNT' (scope | TO variable | FOR condition | WHILE condition)* 
+       26      | 'CREATE' (LABEL | QUERY | REPORT | SCREEN)? filename (FROM filename)? 
+       27      | 'CREATE' (VIEW filename | FROM ENVIRONMENT)* 
+       28      | 'DELETE' (scope | FOR condition | WHILE condition)* 
+       29      | 'DIR' filename? 
+       30      | 'DISPLAY' (scope | explist | FOR condition | WHILE condition | TO PRINT)* 
+       31      | 'DISPLAY' 'HISTORY' (LAST <number> | TO PRINT)* 
+       32      | 'DISPLAY' (MEMORY | STATUS | STRUCTURE) (TO PRINT)? 
+       33      | 'DO' program (WITH parmlist)? 
+       34      | 'DO' 'CASE' caselist 'OTHERWISE' command+ 'ENDCASE' 
+       35      | 'DO' 'WHILE' condition <CR> cmdlist 'ENDDO' 
+       36      | 'EDIT' (scope | FIELDS fldlist | FOR condition | WHILE condition)* 
+       37      | 'EJECT' 
+       38      | 'ERASE' '?' 
+       39      | 'ERASE' filename 
+       40      | 'EXIT' 
+       41      | 'EXPORT' 'TO' filename TYPE? 'PFS' 
+       42      | 'FIND' (<number> | <string>) 
+       43      | 'GO' (<number> | TOP | BOTTOM) 
+       44      | 'GOTO' (<number> | TOP | BOTTOM) 
+       45      | 'HELP' keyword? 
+       46      | 'IF' condition <CR> cmdlist (ELSE cmdlist)? 'ENDIF' 
+       47      | 'IMPORT' 'FROM' filename TYPE? 'PFS' 
+       48      | 'INDEX' (ON keyfield | TO filename | UNIQUE)* 
+       49      | 'INPUT' prompt? 'TO' variable 
+       50      | 'INSERT' (BLANK | BEFORE)* 
+       51      | 'JOIN' (WITH database | TO filename | FOR condition | FIELDS fldlist)* 
+       52      | 'LABEL' (FROM filename | scope | FOR condition | WHILE condition | SAMPLE | TO PRINT | TO FILE filename)* 
+       53      | 'LIST' (scope | explist | FOR condition | WHILE condition | OFF | TO PRINT)* 
+       54      | 'LIST' 'HISTORY' (LAST <number> | TO PRINT)* 
+       55      | 'LIST' (MEMORY | STATUS | STRUCTURE) (TO PRINT)? 
+       56      | 'LOAD' module 
+       57      | 'LOCATE' (scope | FOR condition | WHILE condition)* 
+       58      | 'LOOP' 
+       59      | 'MODIFY' 'STRUCTURE' 
+       60      | 'MODIFY' (COMMAND | LABEL | QUERY | REPORT | SCREEN | VIEW) filename 
+       61      | 'NOTE' text 
+       62      | 'ON' 'ERROR' statement? <CR> 
+       63      | 'ON' 'ESCAPE' statement? <CR> 
+       64      | 'ON' 'KEY' statement? <CR> 
+       65      | 'PACK' 
+       66      | 'PARAMETERS' varlist 
+       67      | 'PRIVATE' varlist 
+       68      | 'PRIVATE' 'ALL' 
+       69      | 'PRIVATE' 'ALL' 'LIKE' skeleton 
+       70      | 'PRIVATE' 'ALL' 'EXCEPT' skeleton 
+       71      | 'PROCEDURE' procedure <CR> cmdlist 'RETURN' (TO MASTER)? 
+       72      | 'PUBLIC' varlist 
+       73      | 'QUIT' 
+       74      | 'READ' SAVE? 
+       75      | 'RECALL' (scope | FOR condition | WHILE condition)* 
+       76      | 'REINDEX' 
+       77      | 'RELEASE' varlist 
+       78      | 'RELEASE' 'ALL' 
+       79      | 'RELEASE' 'ALL' 'LIKE' skeleton 
+       80      | 'RELEASE' 'ALL' 'EXCEPT' skeleton 
+       81      | 'RELEASE' 'MODULE' module 
+       82      | 'RENAME' filename 'TO' filename 
+       83      | 'REPLACE' (scope | fieldWITHexplist | FOR condition | WHILE condition)* 
+       84      | 'REPORT' 'FORM' '?' 
+       85      | 'REPORT' 'FORM' filename (scope | FOR condition | WHILE condition | PLAIN | HEADING <string> | NOEJECT | TO PRINT | TO FILE filename | SUMMARY)* 
+       86      | 'RESTORE' (FROM filename | ADDITIVE | PLAIN | HEADING <string> | NOEJECT)* 
+       87      | 'RESUME' 
+       88      | 'RETRY' 
+       89      | 'RUN' command 
+       90      | 'SAVE' 'TO' filename 
+       91      | 'SAVE' 'TO' filename 'ALL' 
+       92      | 'SAVE' 'TO' filename 'ALL' 'LIKE' skeleton 
+       93      | 'SAVE' 'TO' filename 'ALL' 'EXCEPT' skeleton 
+       94      | 'SEEK' exp 
+       95      | 'SELECT' alias 
+       96      | 'SET' 
+       97      | 'SET' 'ALTERNATE' (TO filename? | ON | OFF) 
+       98      | 'SET' 'BELL' (ON | OFF) 
+       99      | 'SET' 'CARRY' (ON | OFF) 
+      100      | 'SET' 'COLOR' (ON | OFF) 
+      101      | 'SET' 'COLOR' 'TO' normal? 
+      102      | 'SET' 'COLOR' 'TO' normal? ',' reverse? 
+      103      | 'SET' 'COLOR' 'TO' normal? ',' reverse? ',' border? 
+      104      | 'SET' 'COLOR' 'TO' normal? ',' reverse? ',' border? ',' background? 
+      105      | 'SET' 'CONFIRM' (ON | OFF) 
+      106      | 'SET' 'CONSOLE' (ON | OFF) 
+      107      | 'SET' 'DATE' date 
+      108      | 'SET' 'DEBUG' (ON | OFF) 
+      109      | 'SET' 'DECIMAL' 'TO' <number> 
+      110      | 'SET' 'DEFAULT' 'TO' drive 
+      111      | 'SET' 'DELETED' (ON | OFF) 
+      112      | 'SET' 'DELIMITERS' (TO <string> | TO DEFAULT | ON | OFF) 
+      113      | 'SET' 'DEVICE' 'TO' (PRINT | SCREEN) 
+      114      | 'SET' 'DOHISTORY' (ON | OFF) 
+      115      | 'SET' 'ECHO' (ON | OFF) 
+      116      | 'SET' 'ESCAPE' (ON | OFF) 
+      117      | 'SET' 'EXACT' (ON | OFF) 
+      118      | 'SET' 'FIELDS' (ON | OFF | TO ALL | TO fldlist) 
+      119      | 'SET' 'FILTER' (TO condition | TO FILE '?' | TO FILE filename) 
+      120      | 'SET' 'FIXED' (ON | OFF) 
+      121      | 'SET' 'FORMAT' (TO '?' | TO filename) 
+      122      | 'SET' 'FUNCTION' functionkey 'TO' <string> 
+      123      | 'SET' 'HEADING' (ON | OFF) 
+      124      | 'SET' 'HELP' (ON | OFF) 
+      125      | 'SET' 'INDEX' (TO '?' | TO filenamelist) 
+      126      | 'SET' 'INTENSITY' (ON | OFF) 
+      127      | 'SET' 'MARGIN' 'TO' <number> 
+      128      | 'SET' 'MEMOWIDTH' 'TO' width? 
+      129      | 'SET' 'MENU' (ON | OFF) 
+      130      | 'SET' 'MESSAGE' 'TO' <string>? 
+      131      | 'SET' 'ORDER' 'TO' <number>? 
+      132      | 'SET' 'PATH' 'TO' dir? 
+      133      | 'SET' 'PRINT' (ON | OFF) 
+      134      | 'SET' 'PRINTER' 'TO' device 
+      135      | 'SET' 'PROCEDURE' 'TO' filename? 
+      136      | 'SET' 'RELATION' 'TO' (exp | INTO alias)* 
+      137      | 'SET' 'SAFETY' (ON | OFF) 
+      138      | 'SET' 'SCOREBOARD' (ON | OFF) 
+      139      | 'SET' 'STATUS' (ON | OFF) 
+      140      | 'SET' 'STEP' (ON | OFF) 
+      141      | 'SET' 'TALK' (ON | OFF) 
+      142      | 'SET' 'TITLE' (ON | OFF) 
+      143      | 'SET' 'TYPEAHEAD' 'TO' <number> 
+      144      | 'SET' 'UNIQUE' (ON | OFF) 
+      145      | 'SET' 'VIEW' (TO '?' | TO filename) 
+      146      | 'SKIP' <number>? 
+      147      | 'SORT' (scope | ON field (A | D)? (',' field (A | D)?)* | FOR condition | WHILE condition | TO filename)* 
+      148      | 'STORE' exp 'TO' varlist 
+      149      | 'SUM' (scope | explist | TO varlist | FOR condition | WHILE condition)* 
+      150      | 'SUSPEND' 
+      151      | 'TEXT' text2 'ENDTEXT' 
+      152      | 'TOTAL' (scope | ON keyfield | FIELDS fldlist | FOR condition | WHILE condition | TO filename)* 
+      153      | 'TYPE' filename (TO PRINT)? 
+      154      | 'UPDATE' (ON keyfield | FROM filename | REPLACE fieldWITHexplist | RANDOM)* 
+      155      | 'USE' '?' 
+      156      | 'USE' (filename | INDEX filenamelist | ALIAS alias)* 
+      157      | 'WAIT' (prompt | TO variable)* 
+      158      | 'ZAP' 
+               ;
+
+    4       text2
+      159      : (any | <CR>)* 
+               ;
+
+    5       text
+      160      : any* 
+               ;
+
+    6       any
+      161      : <identifier> 
+      162      | <number> 
+      163      | <string> 
+               ;
+
+    7       condition
+      164      : relation 
+      165      | condition and_or relation 
+               ;
+
+    8       and_or
+      166      : '.AND.' 
+      167      | '.OR.' 
+               ;
+
+    9       relation
+      168      : exp relop exp 
+      169      | '(' relation ')' 
+               ;
+
+   10       relop
+      170      : ('<' | '>' | '#' | '=' | '<=' | '>=' | '<>') 
+               ;
+
+   11       exp
+      171      : operand 
+      172      | exp expop operand 
+               ;
+
+   12       expop
+      173      : ('+' | '-' | '*' | '/' | '^' | '**') 
+               ;
+
+   13       operand
+      174      : <number> 
+      175      | <string> 
+      176      | <identifier> 
+      177      | function 
+      178      | '.NOT.' operand 
+      179      | '(' exp ')' 
+               ;
+
+   14       position
+      180      : row ',' col 
+               ;
+
+   15       scope
+      181      : 'RECORD' <number> 
+      182      | 'NEXT' <number> 
+      183      | 'REST' 
+      184      | 'ALL' 
+               ;
+
+   16       normal
+      185      : foreground ('/' background)? '*'? 
+               ;
+
+   17       reverse
+      186      : foreground ('/' background)? '*'? 
+               ;
+
+   18       background
+      187      : bcolor 
+               ;
+
+   19       border
+      188      : bcolor 
+               ;
+
+   20       foreground
+      189      : fcolor '+'? 
+               ;
+
+   21       fcolor
+      190      : 'X' 
+      191      | bcolor 
+               ;
+
+   22       bcolor
+      192      : (N | B | GR | BG | G | BR | R | W) 
+               ;
+
+   23       caselist
+      193      : (CASE condition <CR> cmdlist)+ 
+               ;
+
+   24       explist
+      194      : exp (',' exp)* 
+               ;
+
+   25       parmlist
+      195      : parameter (',' parameter)* 
+               ;
+
+   26       fldlist
+      196      : field (',' field)* 
+               ;
+
+   27       filenamelist
+      197      : filename (',' filename)* 
+               ;
+
+   28       varlist
+      198      : variable (',' variable)* 
+               ;
+
+   29       fieldWITHexplist
+      199      : field 'WITH' exp (',' field WITH exp)* 
+               ;
+
+   30       alias
+      200      : <identifier> 
+               ;
+
+   31       col
+      201      : <number> 
+               ;
+
+   32       database
+      202      : <identifier> 
+               ;
+
+   33       date
+      203      : <number> 
+               ;
+
+   34       device
+      204      : <identifier> 
+               ;
+
+   35       dir
+      205      : <identifier> 
+               ;
+
+   36       drive
+      206      : <identifier> 
+               ;
+
+   37       field
+      207      : <identifier> 
+               ;
+
+   38       filename
+      208      : <identifier> 
+               ;
+
+   39       filetype
+      209      : <identifier> 
+               ;
+
+   40       functionkey
+      210      : <number> 
+               ;
+
+   41       high
+      211      : <number> 
+               ;
+
+   42       keyfield
+      212      : <identifier> 
+               ;
+
+   43       keyword
+      213      : <identifier> 
+               ;
+
+   44       low
+      214      : <number> 
+               ;
+
+   45       module
+      215      : <identifier> 
+               ;
+
+   46       program
+      216      : <identifier> 
+               ;
+
+   47       parameter
+      217      : <identifier> 
+               ;
+
+   48       procedure
+      218      : <identifier> 
+               ;
+
+   49       prompt
+      219      : <string> 
+               ;
+
+   50       row
+      220      : <number> 
+               ;
+
+   51       size
+      221      : <number> 
+               ;
+
+   52       skeleton
+      222      : <identifier> 
+               ;
+
+   53       template
+      223      : <string> 
+               ;
+
+   54       variable
+      224      : <identifier> 
+               ;
+
+   55       width
+      225      : <number> 
+               ;
+
+   56       function
+      226      : 'ABS' '(' exp ')' 
+      227      | 'ASC' '(' <string> ')' 
+      228      | 'AT' '(' <string> ',' <string> ')' 
+      229      | 'BOF' '(' ')' 
+      230      | 'CDOW' '(' exp ')' 
+      231      | 'CHR' '(' <number> ')' 
+      232      | 'CMONTH' '(' exp ')' 
+      233      | 'COL' '(' ')' 
+      234      | 'CTOD' '(' <string> ')' 
+      235      | 'DATE' '(' ')' 
+      236      | 'DAY' '(' exp ')' 
+      237      | 'DBF' '(' ')' 
+      238      | 'DELETED' '(' ')' 
+      239      | 'DISKSPACE' '(' ')' 
+      240      | 'DOW' '(' exp ')' 
+      241      | 'DTOC' '(' exp ')' 
+      242      | 'EOF' '(' ')' 
+      243      | 'ERROR' '(' ')' 
+      244      | 'EXP' '(' <number> ')' 
+      245      | 'FIELD' '(' <number> ')' 
+      246      | 'FILE' '(' filename ')' 
+      247      | 'FKLABEL' '(' <number> ')' 
+      248      | 'FKMAX' '(' ')' 
+      249      | 'FOUND' '(' ')' 
+      250      | 'GETENV' '(' variable ')' 
+      251      | 'IIF' '(' condition ',' exp ',' exp ')' 
+      252      | 'INKEY' '(' ')' 
+      253      | 'INT' '(' <number> ')' 
+      254      | 'ISALPHA' '(' <string> ')' 
+      255      | 'ISCOLOR' '(' ')' 
+      256      | 'ISLOWER' '(' <string> ')' 
+      257      | 'ISUPPER' '(' <string> ')' 
+      258      | 'LEFT' '(' <string> ',' <number> ')' 
+      259      | 'LEN' '(' <string> ')' 
+      260      | 'LOG' '(' <number> ')' 
+      261      | 'LOWER' '(' <string> ')' 
+      262      | 'LTRIM' '(' <string> ')' 
+      263      | 'LUPDATE' '(' ')' 
+      264      | 'MAX' '(' <number> ',' <number> ')' 
+      265      | 'MESSAGE' '(' ')' 
+      266      | 'MIN' '(' <number> ',' <number> ')' 
+      267      | 'MOD' '(' <number> ',' <number> ')' 
+      268      | 'MONTH' '(' exp ')' 
+      269      | 'NDX' '(' <number> ')' 
+      270      | 'OS' '(' ')' 
+      271      | 'PCOL' '(' ')' 
+      272      | 'PROW' '(' ')' 
+      273      | 'READKEY' '(' ')' 
+      274      | 'RECOUNT' '(' ')' 
+      275      | 'RECNO' '(' ')' 
+      276      | 'RECSIZE' '(' ')' 
+      277      | 'REPLICATE' '(' <string> ',' <number> ')' 
+      278      | 'RIGHT' '(' <string> ',' <number> ')' 
+      279      | 'ROUND' '(' <number> ',' <number> ')' 
+      280      | 'ROW' '(' ')' 
+      281      | 'RTRIM' '(' <string> ')' 
+      282      | 'SPACE' '(' <number> ')' 
+      283      | 'SQRT' '(' <number> ')' 
+      284      | 'STR' '(' <number> ',' <number> ',' <number> ')' 
+      285      | 'STUFF' '(' <string> ',' <number> ',' <number> ',' <string> ')' 
+      286      | 'SUBSTR' '(' <string> ',' <number> ')' 
+      287      | 'SUBSTR' '(' <string> ',' <number> ',' <number> ')' 
+      288      | 'TIME' '(' ')' 
+      289      | 'TRANSFORM' '(' exp ',' <string> ')' 
+      290      | 'TRIM' '(' <string> ')' 
+      291      | 'TYPE' '(' exp ')' 
+      292      | 'UPPER' '(' <string> ')' 
+      293      | 'VAL' '(' <string> ')' 
+      294      | 'VERSION' '(' ')' 
+      295      | 'YEAR' '(' exp ')' 
+               ;
+
+   57       command+
+      296      : command 
+      297      | command+ command 
+               ;
+
+   58       statement?
+      298      : 
+      299      | statement 
+               ;
+
+   59       explist?
+      300      : 
+      301      | explist 
+               ;
+
+   60       (PICTURE template | RANGE low high)
+      302      : 'PICTURE' template 
+      303      | 'RANGE' low high 
+               ;
+
+   61       (PICTURE template | RANGE low high)*
+      304      : 
+      305      | (PICTURE template | RANGE low high)* (PICTURE template | RANGE low high) 
+               ;
+
+   62       (PICTURE template)?
+      306      : 
+      307      | 'PICTURE' template 
+               ;
+
+   63       DOUBLE?
+      308      : 
+      309      | 'DOUBLE' 
+               ;
+
+   64       prompt?
+      310      : 
+      311      | prompt 
+               ;
+
+   65       (BLANK | FROM filename | FOR condition | TYPE filetype)
+      312      : 'BLANK' 
+      313      | 'FROM' filename 
+      314      | 'FOR' condition 
+      315      | 'TYPE' filetype 
+               ;
+
+   66       (BLANK | FROM filename | FOR condition | TYPE filetype)*
+      316      : 
+      317      | (BLANK | FROM filename | FOR condition | TYPE filetype)* (BLANK | FROM filename | FOR condition | TYPE filetype) 
+               ;
+
+   67       (scope | explist | TO varlist | FOR condition | WHILE condition)
+      318      : scope 
+      319      | explist 
+      320      | 'TO' varlist 
+      321      | 'FOR' condition 
+      322      | 'WHILE' condition 
+               ;
+
+   68       (scope | explist | TO varlist | FOR condition | WHILE condition)*
+      323      : 
+      324      | (scope | explist | TO varlist | FOR condition | WHILE condition)* (scope | explist | TO varlist | FOR condition | WHILE condition) 
+               ;
+
+   69       (FIELDS fldlist | LOCK <number> | WIDTH size | FREEZE field | NOFOLLOW | NOMENU | NOAPPEND)
+      325      : 'FIELDS' fldlist 
+      326      | 'LOCK' <number> 
+      327      | 'WIDTH' size 
+      328      | 'FREEZE' field 
+      329      | 'NOFOLLOW' 
+      330      | 'NOMENU' 
+      331      | 'NOAPPEND' 
+               ;
+
+   70       (FIELDS fldlist | LOCK <number> | WIDTH size | FREEZE field | NOFOLLOW | NOMENU | NOAPPEND)*
+      332      : 
+      333      | (FIELDS fldlist | LOCK <number> | WIDTH size | FREEZE field | NOFOLLOW | NOMENU | NOAPPEND)* (FIELDS fldlist | LOCK <number> | WIDTH size | FREEZE field | NOFOLLOW | NOMENU | NOAPPEND) 
+               ;
+
+   71       (WITH variable)?
+      334      : 
+      335      | 'WITH' variable 
+               ;
+
+   72       (scope | FIELDS fldlist | FOR condition | WHILE condition)
+      336      : scope 
+      337      | 'FIELDS' fldlist 
+      338      | 'FOR' condition 
+      339      | 'WHILE' condition 
+               ;
+
+   73       (scope | FIELDS fldlist | FOR condition | WHILE condition)*
+      340      : 
+      341      | (scope | FIELDS fldlist | FOR condition | WHILE condition)* (scope | FIELDS fldlist | FOR condition | WHILE condition) 
+               ;
+
+   74       (ALL | FIELDS | GETS | MEMORY | TYPEAHEAD)
+      342      : 'ALL' 
+      343      | 'FIELDS' 
+      344      | 'GETS' 
+      345      | 'MEMORY' 
+      346      | 'TYPEAHEAD' 
+               ;
+
+   75       (ALL | ALTERNATE | DATABASES | FORMAT | INDEX | PROCEDURE)
+      347      : 'ALL' 
+      348      | 'ALTERNATE' 
+      349      | 'DATABASES' 
+      350      | 'FORMAT' 
+      351      | 'INDEX' 
+      352      | 'PROCEDURE' 
+               ;
+
+   76       (EXTENDED | TO filename | FIELDS fldlist)
+      353      : 'EXTENDED' 
+      354      | 'TO' filename 
+      355      | 'FIELDS' fldlist 
+               ;
+
+   77       (EXTENDED | TO filename | FIELDS fldlist)*
+      356      : 
+      357      | (EXTENDED | TO filename | FIELDS fldlist)* (EXTENDED | TO filename | FIELDS fldlist) 
+               ;
+
+   78       (FILE filename | TO filename | scope | FIELDS fldlist | FOR condition | WHILE condition | TYPE filetype)
+      358      : 'FILE' filename 
+      359      | 'TO' filename 
+      360      | scope 
+      361      | 'FIELDS' fldlist 
+      362      | 'FOR' condition 
+      363      | 'WHILE' condition 
+      364      | 'TYPE' filetype 
+               ;
+
+   79       (FILE filename | TO filename | scope | FIELDS fldlist | FOR condition | WHILE condition | TYPE filetype)*
+      365      : 
+      366      | (FILE filename | TO filename | scope | FIELDS fldlist | FOR condition | WHILE condition | TYPE filetype)* (FILE filename | TO filename | scope | FIELDS fldlist | FOR condition | WHILE condition | TYPE filetype) 
+               ;
+
+   80       (scope | TO variable | FOR condition | WHILE condition)
+      367      : scope 
+      368      | 'TO' variable 
+      369      | 'FOR' condition 
+      370      | 'WHILE' condition 
+               ;
+
+   81       (scope | TO variable | FOR condition | WHILE condition)*
+      371      : 
+      372      | (scope | TO variable | FOR condition | WHILE condition)* (scope | TO variable | FOR condition | WHILE condition) 
+               ;
+
+   82       (LABEL | QUERY | REPORT | SCREEN)?
+      373      : 
+      374      | 'LABEL' 
+      375      | 'QUERY' 
+      376      | 'REPORT' 
+      377      | 'SCREEN' 
+               ;
+
+   83       (FROM filename)?
+      378      : 
+      379      | 'FROM' filename 
+               ;
+
+   84       (VIEW filename | FROM ENVIRONMENT)
+      380      : 'VIEW' filename 
+      381      | 'FROM' 'ENVIRONMENT' 
+               ;
+
+   85       (VIEW filename | FROM ENVIRONMENT)*
+      382      : 
+      383      | (VIEW filename | FROM ENVIRONMENT)* (VIEW filename | FROM ENVIRONMENT) 
+               ;
+
+   86       (scope | FOR condition | WHILE condition)
+      384      : scope 
+      385      | 'FOR' condition 
+      386      | 'WHILE' condition 
+               ;
+
+   87       (scope | FOR condition | WHILE condition)*
+      387      : 
+      388      | (scope | FOR condition | WHILE condition)* (scope | FOR condition | WHILE condition) 
+               ;
+
+   88       filename?
+      389      : 
+      390      | filename 
+               ;
+
+   89       (scope | explist | FOR condition | WHILE condition | TO PRINT)
+      391      : scope 
+      392      | explist 
+      393      | 'FOR' condition 
+      394      | 'WHILE' condition 
+      395      | 'TO' 'PRINT' 
+               ;
+
+   90       (scope | explist | FOR condition | WHILE condition | TO PRINT)*
+      396      : 
+      397      | (scope | explist | FOR condition | WHILE condition | TO PRINT)* (scope | explist | FOR condition | WHILE condition | TO PRINT) 
+               ;
+
+   91       (LAST <number> | TO PRINT)
+      398      : 'LAST' <number> 
+      399      | 'TO' 'PRINT' 
+               ;
+
+   92       (LAST <number> | TO PRINT)*
+      400      : 
+      401      | (LAST <number> | TO PRINT)* (LAST <number> | TO PRINT) 
+               ;
+
+   93       (MEMORY | STATUS | STRUCTURE)
+      402      : 'MEMORY' 
+      403      | 'STATUS' 
+      404      | 'STRUCTURE' 
+               ;
+
+   94       (TO PRINT)?
+      405      : 
+      406      | 'TO' 'PRINT' 
+               ;
+
+   95       (WITH parmlist)?
+      407      : 
+      408      | 'WITH' parmlist 
+               ;
+
+   96       TYPE?
+      409      : 
+      410      | 'TYPE' 
+               ;
+
+   97       (<number> | <string>)
+      411      : <number> 
+      412      | <string> 
+               ;
+
+   98       (<number> | TOP | BOTTOM)
+      413      : <number> 
+      414      | 'TOP' 
+      415      | 'BOTTOM' 
+               ;
+
+   99       keyword?
+      416      : 
+      417      | keyword 
+               ;
+
+  100       (ELSE cmdlist)?
+      418      : 
+      419      | 'ELSE' cmdlist 
+               ;
+
+  101       (ON keyfield | TO filename | UNIQUE)
+      420      : 'ON' keyfield 
+      421      | 'TO' filename 
+      422      | 'UNIQUE' 
+               ;
+
+  102       (ON keyfield | TO filename | UNIQUE)*
+      423      : 
+      424      | (ON keyfield | TO filename | UNIQUE)* (ON keyfield | TO filename | UNIQUE) 
+               ;
+
+  103       (BLANK | BEFORE)
+      425      : 'BLANK' 
+      426      | 'BEFORE' 
+               ;
+
+  104       (BLANK | BEFORE)*
+      427      : 
+      428      | (BLANK | BEFORE)* (BLANK | BEFORE) 
+               ;
+
+  105       (WITH database | TO filename | FOR condition | FIELDS fldlist)
+      429      : 'WITH' database 
+      430      | 'TO' filename 
+      431      | 'FOR' condition 
+      432      | 'FIELDS' fldlist 
+               ;
+
+  106       (WITH database | TO filename | FOR condition | FIELDS fldlist)*
+      433      : 
+      434      | (WITH database | TO filename | FOR condition | FIELDS fldlist)* (WITH database | TO filename | FOR condition | FIELDS fldlist) 
+               ;
+
+  107       (FROM filename | scope | FOR condition | WHILE condition | SAMPLE | TO PRINT | TO FILE filename)
+      435      : 'FROM' filename 
+      436      | scope 
+      437      | 'FOR' condition 
+      438      | 'WHILE' condition 
+      439      | 'SAMPLE' 
+      440      | 'TO' 'PRINT' 
+      441      | 'TO' 'FILE' filename 
+               ;
+
+  108       (FROM filename | scope | FOR condition | WHILE condition | SAMPLE | TO PRINT | TO FILE filename)*
+      442      : 
+      443      | (FROM filename | scope | FOR condition | WHILE condition | SAMPLE | TO PRINT | TO FILE filename)* (FROM filename | scope | FOR condition | WHILE condition | SAMPLE | TO PRINT | TO FILE filename) 
+               ;
+
+  109       (scope | explist | FOR condition | WHILE condition | OFF | TO PRINT)
+      444      : scope 
+      445      | explist 
+      446      | 'FOR' condition 
+      447      | 'WHILE' condition 
+      448      | 'OFF' 
+      449      | 'TO' 'PRINT' 
+               ;
+
+  110       (scope | explist | FOR condition | WHILE condition | OFF | TO PRINT)*
+      450      : 
+      451      | (scope | explist | FOR condition | WHILE condition | OFF | TO PRINT)* (scope | explist | FOR condition | WHILE condition | OFF | TO PRINT) 
+               ;
+
+  111       (COMMAND | LABEL | QUERY | REPORT | SCREEN | VIEW)
+      452      : 'COMMAND' 
+      453      | 'LABEL' 
+      454      | 'QUERY' 
+      455      | 'REPORT' 
+      456      | 'SCREEN' 
+      457      | 'VIEW' 
+               ;
+
+  112       (TO MASTER)?
+      458      : 
+      459      | 'TO' 'MASTER' 
+               ;
+
+  113       SAVE?
+      460      : 
+      461      | 'SAVE' 
+               ;
+
+  114       (scope | fieldWITHexplist | FOR condition | WHILE condition)
+      462      : scope 
+      463      | fieldWITHexplist 
+      464      | 'FOR' condition 
+      465      | 'WHILE' condition 
+               ;
+
+  115       (scope | fieldWITHexplist | FOR condition | WHILE condition)*
+      466      : 
+      467      | (scope | fieldWITHexplist | FOR condition | WHILE condition)* (scope | fieldWITHexplist | FOR condition | WHILE condition) 
+               ;
+
+  116       (scope | FOR condition | WHILE condition | PLAIN | HEADING <string> | NOEJECT | TO PRINT | TO FILE filename | SUMMARY)
+      468      : scope 
+      469      | 'FOR' condition 
+      470      | 'WHILE' condition 
+      471      | 'PLAIN' 
+      472      | 'HEADING' <string> 
+      473      | 'NOEJECT' 
+      474      | 'TO' 'PRINT' 
+      475      | 'TO' 'FILE' filename 
+      476      | 'SUMMARY' 
+               ;
+
+  117       (scope | FOR condition | WHILE condition | PLAIN | HEADING <string> | NOEJECT | TO PRINT | TO FILE filename | SUMMARY)*
+      477      : 
+      478      | (scope | FOR condition | WHILE condition | PLAIN | HEADING <string> | NOEJECT | TO PRINT | TO FILE filename | SUMMARY)* (scope | FOR condition | WHILE condition | PLAIN | HEADING <string> | NOEJECT | TO PRINT | TO FILE filename | SUMMARY) 
+               ;
+
+  118       (FROM filename | ADDITIVE | PLAIN | HEADING <string> | NOEJECT)
+      479      : 'FROM' filename 
+      480      | 'ADDITIVE' 
+      481      | 'PLAIN' 
+      482      | 'HEADING' <string> 
+      483      | 'NOEJECT' 
+               ;
+
+  119       (FROM filename | ADDITIVE | PLAIN | HEADING <string> | NOEJECT)*
+      484      : 
+      485      | (FROM filename | ADDITIVE | PLAIN | HEADING <string> | NOEJECT)* (FROM filename | ADDITIVE | PLAIN | HEADING <string> | NOEJECT) 
+               ;
+
+  120       (TO filename? | ON | OFF)
+      486      : 'TO' filename? 
+      487      | 'ON' 
+      488      | 'OFF' 
+               ;
+
+  121       (ON | OFF)
+      489      : 'ON' 
+      490      | 'OFF' 
+               ;
+
+  122       normal?
+      491      : 
+      492      | normal 
+               ;
+
+  123       reverse?
+      493      : 
+      494      | reverse 
+               ;
+
+  124       border?
+      495      : 
+      496      | border 
+               ;
+
+  125       background?
+      497      : 
+      498      | background 
+               ;
+
+  126       (TO <string> | TO DEFAULT | ON | OFF)
+      499      : 'TO' <string> 
+      500      | 'TO' 'DEFAULT' 
+      501      | 'ON' 
+      502      | 'OFF' 
+               ;
+
+  127       (PRINT | SCREEN)
+      503      : 'PRINT' 
+      504      | 'SCREEN' 
+               ;
+
+  128       (ON | OFF | TO ALL | TO fldlist)
+      505      : 'ON' 
+      506      | 'OFF' 
+      507      | 'TO' 'ALL' 
+      508      | 'TO' fldlist 
+               ;
+
+  129       (TO condition | TO FILE '?' | TO FILE filename)
+      509      : 'TO' condition 
+      510      | 'TO' 'FILE' '?' 
+      511      | 'TO' 'FILE' filename 
+               ;
+
+  130       (TO '?' | TO filename)
+      512      : 'TO' '?' 
+      513      | 'TO' filename 
+               ;
+
+  131       (TO '?' | TO filenamelist)
+      514      : 'TO' '?' 
+      515      | 'TO' filenamelist 
+               ;
+
+  132       width?
+      516      : 
+      517      | width 
+               ;
+
+  133       <string>?
+      518      : 
+      519      | <string> 
+               ;
+
+  134       <number>?
+      520      : 
+      521      | <number> 
+               ;
+
+  135       dir?
+      522      : 
+      523      | dir 
+               ;
+
+  136       (exp | INTO alias)
+      524      : exp 
+      525      | 'INTO' alias 
+               ;
+
+  137       (exp | INTO alias)*
+      526      : 
+      527      | (exp | INTO alias)* (exp | INTO alias) 
+               ;
+
+  138       (A | D)?
+      528      : 
+      529      | 'A' 
+      530      | 'D' 
+               ;
+
+  139       (',' field (A | D)?)
+      531      : ',' field (A | D)? 
+               ;
+
+  140       (',' field (A | D)?)*
+      532      : 
+      533      | (',' field (A | D)?)* (',' field (A | D)?) 
+               ;
+
+  141       (scope | ON field (A | D)? (',' field (A | D)?)* | FOR condition | WHILE condition | TO filename)
+      534      : scope 
+      535      | 'ON' field (A | D)? (',' field (A | D)?)* 
+      536      | 'FOR' condition 
+      537      | 'WHILE' condition 
+      538      | 'TO' filename 
+               ;
+
+  142       (scope | ON field (A | D)? (',' field (A | D)?)* | FOR condition | WHILE condition | TO filename)*
+      539      : 
+      540      | (scope | ON field (A | D)? (',' field (A | D)?)* | FOR condition | WHILE condition | TO filename)* (scope | ON field (A | D)? (',' field (A | D)?)* | FOR condition | WHILE condition | TO filename) 
+               ;
+
+  143       (scope | ON keyfield | FIELDS fldlist | FOR condition | WHILE condition | TO filename)
+      541      : scope 
+      542      | 'ON' keyfield 
+      543      | 'FIELDS' fldlist 
+      544      | 'FOR' condition 
+      545      | 'WHILE' condition 
+      546      | 'TO' filename 
+               ;
+
+  144       (scope | ON keyfield | FIELDS fldlist | FOR condition | WHILE condition | TO filename)*
+      547      : 
+      548      | (scope | ON keyfield | FIELDS fldlist | FOR condition | WHILE condition | TO filename)* (scope | ON keyfield | FIELDS fldlist | FOR condition | WHILE condition | TO filename) 
+               ;
+
+  145       (ON keyfield | FROM filename | REPLACE fieldWITHexplist | RANDOM)
+      549      : 'ON' keyfield 
+      550      | 'FROM' filename 
+      551      | 'REPLACE' fieldWITHexplist 
+      552      | 'RANDOM' 
+               ;
+
+  146       (ON keyfield | FROM filename | REPLACE fieldWITHexplist | RANDOM)*
+      553      : 
+      554      | (ON keyfield | FROM filename | REPLACE fieldWITHexplist | RANDOM)* (ON keyfield | FROM filename | REPLACE fieldWITHexplist | RANDOM) 
+               ;
+
+  147       (filename | INDEX filenamelist | ALIAS alias)
+      555      : filename 
+      556      | 'INDEX' filenamelist 
+      557      | 'ALIAS' alias 
+               ;
+
+  148       (filename | INDEX filenamelist | ALIAS alias)*
+      558      : 
+      559      | (filename | INDEX filenamelist | ALIAS alias)* (filename | INDEX filenamelist | ALIAS alias) 
+               ;
+
+  149       (prompt | TO variable)
+      560      : prompt 
+      561      | 'TO' variable 
+               ;
+
+  150       (prompt | TO variable)*
+      562      : 
+      563      | (prompt | TO variable)* (prompt | TO variable) 
+               ;
+
+  151       (any | <CR>)
+      564      : any 
+      565      | <CR> 
+               ;
+
+  152       (any | <CR>)*
+      566      : 
+      567      | (any | <CR>)* (any | <CR>) 
+               ;
+
+  153       any*
+      568      : 
+      569      | any* any 
+               ;
+
+  154       ('<' | '>' | '#' | '=' | '<=' | '>=' | '<>')
+      570      : '<' 
+      571      | '>' 
+      572      | '#' 
+      573      | '=' 
+      574      | '<=' 
+      575      | '>=' 
+      576      | '<>' 
+               ;
+
+  155       ('+' | '-' | '*' | '/' | '^' | '**')
+      577      : '+' 
+      578      | '-' 
+      579      | '*' 
+      580      | '/' 
+      581      | '^' 
+      582      | '**' 
+               ;
+
+  156       ('/' background)?
+      583      : 
+      584      | '/' background 
+               ;
+
+  157       '*'?
+      585      : 
+      586      | '*' 
+               ;
+
+  158       '+'?
+      587      : 
+      588      | '+' 
+               ;
+
+  159       (N | B | GR | BG | G | BR | R | W)
+      589      : 'N' 
+      590      | 'B' 
+      591      | 'GR' 
+      592      | 'BG' 
+      593      | 'G' 
+      594      | 'BR' 
+      595      | 'R' 
+      596      | 'W' 
+               ;
+
+  160       (CASE condition <CR> cmdlist)
+      597      : 'CASE' condition <CR> cmdlist 
+               ;
+
+  161       (CASE condition <CR> cmdlist)+
+      598      : (CASE condition <CR> cmdlist) 
+      599      | (CASE condition <CR> cmdlist)+ (CASE condition <CR> cmdlist) 
+               ;
+
+  162       (',' exp)
+      600      : ',' exp 
+               ;
+
+  163       (',' exp)*
+      601      : 
+      602      | (',' exp)* (',' exp) 
+               ;
+
+  164       (',' parameter)
+      603      : ',' parameter 
+               ;
+
+  165       (',' parameter)*
+      604      : 
+      605      | (',' parameter)* (',' parameter) 
+               ;
+
+  166       (',' field)
+      606      : ',' field 
+               ;
+
+  167       (',' field)*
+      607      : 
+      608      | (',' field)* (',' field) 
+               ;
+
+  168       (',' filename)
+      609      : ',' filename 
+               ;
+
+  169       (',' filename)*
+      610      : 
+      611      | (',' filename)* (',' filename) 
+               ;
+
+  170       (',' variable)
+      612      : ',' variable 
+               ;
+
+  171       (',' variable)*
+      613      : 
+      614      | (',' variable)* (',' variable) 
+               ;
+
+  172       (',' field WITH exp)
+      615      : ',' field 'WITH' exp 
+               ;
+
+  173       (',' field WITH exp)*
+      616      : 
+      617      | (',' field WITH exp)* (',' field WITH exp) 
+               ;
+
+/* End of Dbase grammar 
+

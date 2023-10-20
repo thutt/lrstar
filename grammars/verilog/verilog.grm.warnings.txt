@@ -1,0 +1,50 @@
+
+verilog.grm(0000) : Warning, '-' has no operator precedence in state 138.
+
+verilog.grm(0000) : Warning, '<=' has no operator precedence in state 138.
+
+verilog.grm(0000) : Warning, '==' has no operator precedence in state 138.
+
+verilog.grm(0000) : Warning, '===' has no operator precedence in state 138.
+
+verilog.grm(0000) : Warning, '!=' has no operator precedence in state 138.
+
+verilog.grm(0000) : Warning, '!==' has no operator precedence in state 138.
+
+verilog.grm(0000) : Warning, '+' has no operator precedence in state 138.
+
+verilog.grm(0000) : Warning, '?' has no operator precedence in state 138.
+
+verilog.grm(0000) : Warning, '&' has no operator precedence in state 138.
+
+verilog.grm(0000) : Warning, '|' has no operator precedence in state 138.
+
+verilog.grm(0000) : Warning, '^' has no operator precedence in state 138.
+
+verilog.grm(0000) : Warning, '~^' has no operator precedence in state 138.
+
+verilog.grm(0000) : Warning, '^~' has no operator precedence in state 138.
+
+verilog.grm(0000) : Warning, '*' has no operator precedence in state 138.
+
+verilog.grm(0000) : Warning, '/' has no operator precedence in state 138.
+
+verilog.grm(0000) : Warning, ' 0x0p+0s no operator precedence in state 138.
+
+verilog.grm(0000) : Warning, '>>' has no operator precedence in state 138.
+
+verilog.grm(0000) : Warning, '<<' has no operator precedence in state 138.
+
+verilog.grm(0000) : Warning, '<' has no operator precedence in state 138.
+
+verilog.grm(0000) : Warning, '>' has no operator precedence in state 138.
+
+verilog.grm(0000) : Warning, '>=' has no operator precedence in state 138.
+
+verilog.grm(0000) : Warning, '&&' has no operator precedence in state 138.
+
+verilog.grm(0000) : Warning, '||' has no operator precedence in state 138.
+
+verilog.grm(0000) : Warning, 'or' has no operator precedence in state 416.
+
+24 warnings.

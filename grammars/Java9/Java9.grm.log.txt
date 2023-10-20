@@ -1,0 +1,37 @@
+
+LRSTAR 24.0.017 32b Copyright Paul B Mann.
+
+Java9.grm 
+
+Grammar      733 rules, 110 terminals, 366 nonterminals.
+States      1242 states in LALR(1) state machine.
+             745 states when using shift-reduce actions.
+Conflicts    225 states, 1289 shift-reduce, 334 reduce-reduce.
+
+            rows   cols          matrix       list      vect     total
+B matrix     105 x   72 x 1 =     7,560 ->     663 +   1,710 =   2,373  
+T matrix      85 x   64 x 2 =    10,880 ->   3,052 +   1,600 =   4,652  
+N matrix     163 x  173 x 2 =    56,398 ->  40,266 +   2,223 =  42,489  
+R matrix      92 x   46 x 2 =     8,126 ->   8,126 +   1,600 =   9,726  
+Total                                       52,107 +   7,133 =  59,240
+
+Generating: Java9_ParserTables.h
+Generating: Java9_ParserTables.hpp
+
+Symbols in the grammar               1,698  sym  =    100,000    2% 
+Productions in the grammar             733  pro  =    100,000    1% 
+Tail symbols in the grammar          1,440  tail =    500,000    0% 
+States created                       1,242  sta  =    100,000    1% 
+Final state items                    1,112  fin  =    100,000    1% 
+Kernel state items                   1,845  ker  =  1,000,000    0% 
+Nonterminal transitions              7,761  ntt  =  1,000,000    1% 
+Terminal transitions                 3,513  tt   =  1,000,000    0% 
+Terminal transitions added               0  tta  =  1,000,000    0% 
+Lookaheads in LALR computation       2,106  la   =  1,000,000    0% 
+Lookbacks in LALR computation       20,797  lb   =  1,000,000    2% 
+Includes in LALR computation         7,761  inc  =  1,000,000    1% 
+Child nodes in graph                12,852  ch   =  1,000,000    1% 
+Nondeterministic/conflict items      3,079  nd   =  1,000,000    0% 
+
+0 min 0.123 sec, 31.729 MB, 0 warnings, 0 errors.
+

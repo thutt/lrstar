@@ -1,0 +1,688 @@
+
+/* ANTLR grammar */
+
+/* Terminal Symbols */
+
+       ERR                       <error>;
+       EOF                       <eof>;
+       INT                       <integer>;
+       STRING_LITERAL            <string_literal>;
+       LEXER_CHAR_SET            <lexer_char_set>;
+       RULE_REF                  <rule_ref>;
+       TOKEN_REF                 <token_ref>;
+       GRAMMAR_                  'grammar';
+       PARSER_                   'parser';
+       LEXER_                    'lexer';
+       OPTIONS                   'options';
+       TOKENS                    'tokens';
+       CHANNELS                  'channels';
+       IMPORT                    'import';
+       FRAGMENT                  'fragment';
+       RETURNS                   'returns';
+       LOCALS                    'locals';
+       THROWS                    'throws';
+       CATCH                     'catch';
+       FINALLY                   'finally';
+       MODE                      'mode';
+       SEMI                      ';';
+       COLON                     ':';
+       COLONCOLON                '::';
+       COMMA                     ',';
+       LPAREN                    '(';
+       RPAREN                    ')';
+       RARROW                    '->';
+       LT                        '<';
+       GT                        '>';
+       ASSIGN                    '=';
+       QUESTION                  '?';
+       STAR                      '*';
+       PLUS_ASSIGN               '+=';
+       PLUS                      '+';
+       OR                        '|';
+       RANGE                     '..';
+       DOT                       '.';
+       AT                        '@';
+       POUND                     '#';
+       NOT                       '~';
+       LBRACE                    '{';
+       RBRACE                    '}';
+
+    0  <error>
+    1  <eof>
+    2  <integer>
+    3  <string_literal>
+    4  <lexer_char_set>
+    5  <rule_ref>
+    6  <token_ref>
+    7  'grammar'
+    8  'parser'
+    9  'lexer'
+   10  'options'
+   11  'tokens'
+   12  'channels'
+   13  'import'
+   14  'fragment'
+   15  'returns'
+   16  'locals'
+   17  'throws'
+   18  'catch'
+   19  'finally'
+   20  'mode'
+   21  ';'
+   22  ':'
+   23  '::'
+   24  ','
+   25  '('
+   26  ')'
+   27  '->'
+   28  '<'
+   29  '>'
+   30  '='
+   31  '?'
+   32  '*'
+   33  '+='
+   34  '+'
+   35  '|'
+   36  '..'
+   37  '.'
+   38  '@'
+   39  '#'
+   40  '~'
+   41  '{'
+   42  '}'
+
+/* Productions */
+
+    0       Goal
+        0      : grammarSpec <eof> 
+               ;
+
+    1       grammarSpec
+        1      : grammarType identifier ';' prequelConstruct* rules modeSpec* 
+               ;
+
+    2       grammarType
+        2      : ('lexer' 'grammar' | 'parser' 'grammar' | 'grammar') 
+               ;
+
+    3       prequelConstruct
+        3      : optionsSpec 
+        4      | delegateGrammars 
+        5      | tokensSpec 
+        6      | channelsSpec 
+        7      | action 
+               ;
+
+    4       optionsSpec
+        8      : 'options' '{' (option ';')* '}' 
+               ;
+
+    5       option
+        9      : identifier '=' optionValue 
+               ;
+
+    6       optionValue
+       10      : identifier ('.' identifier)* 
+       11      | <string_literal> 
+       12      | actionBlock 
+       13      | <integer> 
+               ;
+
+    7       delegateGrammars
+       14      : 'import' delegateGrammar (',' delegateGrammar)* ';' 
+               ;
+
+    8       delegateGrammar
+       15      : identifier '=' identifier 
+       16      | identifier 
+               ;
+
+    9       tokensSpec
+       17      : 'tokens' '{' idList? '}' 
+               ;
+
+   10       channelsSpec
+       18      : 'channels' '{' idList? '}' 
+               ;
+
+   11       idList
+       19      : identifier (',' identifier)* ','? 
+               ;
+
+   12       action
+       20      : '@' (actionScopeName '::')? identifier actionBlock 
+               ;
+
+   13       actionScopeName
+       21      : identifier 
+       22      | 'lexer' 
+       23      | 'parser' 
+               ;
+
+   14       actionBlock
+       24      : '{' ACTION_CONTENT* '}' 
+               ;
+
+   15       argActionBlock
+       25      : '{' ARGUMENT_CONTENT* '}' 
+               ;
+
+   16       modeSpec
+       26      : 'mode' identifier ';' lexerRule* 
+               ;
+
+   17       rules
+       27      : ruleSpec* 
+               ;
+
+   18       ruleSpec
+       28      : parserRuleSpec 
+       29      | lexerRule 
+               ;
+
+   19       parserRuleSpec
+       30      : <rule_ref> argActionBlock? ruleReturns? throwsSpec? localsSpec? rulePrequel* ':' ruleBlock ';' exceptionGroup 
+               ;
+
+   20       exceptionGroup
+       31      : exceptionHandler* finallyClause? 
+               ;
+
+   21       exceptionHandler
+       32      : 'catch' argActionBlock actionBlock 
+               ;
+
+   22       finallyClause
+       33      : 'finally' actionBlock 
+               ;
+
+   23       rulePrequel
+       34      : optionsSpec 
+       35      | ruleAction 
+               ;
+
+   24       ruleReturns
+       36      : 'returns' argActionBlock 
+               ;
+
+   25       throwsSpec
+       37      : 'throws' qid (',' qid)* 
+               ;
+
+   26       localsSpec
+       38      : 'locals' argActionBlock 
+               ;
+
+   27       ruleAction
+       39      : '@' identifier actionBlock 
+               ;
+
+   28       ruleBlock
+       40      : ruleAltList 
+               ;
+
+   29       ruleAltList
+       41      : labeledAlt ('|' labeledAlt)* 
+               ;
+
+   30       labeledAlt
+       42      : alternative ('#' identifier)? 
+               ;
+
+   31       lexerRule
+       43      : 'fragment'? <token_ref> optionsSpec? ':' lexerRuleBlock ';' 
+               ;
+
+   32       lexerRuleBlock
+       44      : lexerAltList 
+               ;
+
+   33       lexerAltList
+       45      : lexerAlt ('|' lexerAlt)* 
+               ;
+
+   34       lexerAlt
+       46      : lexerElements lexerCommands? 
+       47      | 
+               ;
+
+   35       lexerElements
+       48      : lexerElement+ 
+               ;
+
+   36       lexerElement
+       49      : labeledLexerElement ebnfSuffix? 
+       50      | lexerAtom ebnfSuffix? 
+       51      | lexerBlock ebnfSuffix? 
+       52      | actionElement 
+               ;
+
+   37       labeledLexerElement
+       53      : identifier ('=' | '+=') (lexerAtom | lexerBlock) 
+               ;
+
+   38       lexerBlock
+       54      : '(' (optionsSpec ':')? lexerAltList ')' 
+               ;
+
+   39       lexerCommands
+       55      : '->' lexerCommand (',' lexerCommand)* 
+               ;
+
+   40       lexerCommand
+       56      : lexerCommandName '(' lexerCommandExpr ')' 
+       57      | lexerCommandName 
+               ;
+
+   41       lexerCommandName
+       58      : identifier 
+       59      | 'mode' 
+               ;
+
+   42       lexerCommandExpr
+       60      : identifier 
+       61      | <integer> 
+               ;
+
+   43       altList
+       62      : alternative ('|' alternative)* 
+               ;
+
+   44       alternative
+       63      : elementOptions? element+ 
+       64      | 
+               ;
+
+   45       element
+       65      : labeledElement ebnfSuffix? 
+       66      | atom ebnfSuffix? 
+       67      | ebnf 
+       68      | actionElement 
+       69      | argActionElement 
+               ;
+
+   46       actionElement
+       70      : actionBlock '?'? elementOptions? 
+               ;
+
+   47       argActionElement
+       71      : argActionBlock '?'? elementOptions? 
+               ;
+
+   48       labeledElement
+       72      : identifier ('=' | '+=') (atom | block) 
+               ;
+
+   49       ebnf
+       73      : block blockSuffix? 
+               ;
+
+   50       blockSuffix
+       74      : ebnfSuffix 
+               ;
+
+   51       ebnfSuffix
+       75      : '?' '?'? 
+       76      | '*' '?'? 
+       77      | '+' '?'? 
+               ;
+
+   52       lexerAtom
+       78      : range 
+       79      | terminal 
+       80      | <rule_ref> 
+       81      | notSet 
+       82      | <lexer_char_set> 
+       83      | '.' elementOptions? 
+               ;
+
+   53       atom
+       84      : range 
+       85      | terminal 
+       86      | ruleref 
+       87      | notSet 
+       88      | '.' elementOptions? 
+               ;
+
+   54       notSet
+       89      : '~' setElement 
+       90      | '~' blockSet 
+               ;
+
+   55       blockSet
+       91      : '(' setElement ('|' setElement)* ')' 
+               ;
+
+   56       setElement
+       92      : <token_ref> elementOptions? 
+       93      | <string_literal> elementOptions? 
+       94      | range 
+       95      | <lexer_char_set> 
+               ;
+
+   57       block
+       96      : '(' (optionsSpec? ruleAction* ':')? altList ')' 
+               ;
+
+   58       ruleref
+       97      : <rule_ref> argActionBlock? elementOptions? 
+               ;
+
+   59       range
+       98      : <string_literal> '..' <string_literal> 
+               ;
+
+   60       terminal
+       99      : <token_ref> elementOptions? 
+      100      | <string_literal> elementOptions? 
+               ;
+
+   61       elementOptions
+      101      : '<' elementOption (',' elementOption)* '>' 
+               ;
+
+   62       elementOption
+      102      : qid 
+      103      | identifier '=' optionValue 
+               ;
+
+   63       identifier
+      104      : <rule_ref> 
+      105      | <token_ref> 
+               ;
+
+   64       qid
+      106      : identifier ('.' identifier)* 
+               ;
+
+   65       ACTION_CONTENT
+      107      : <error> 
+               ;
+
+   66       ARGUMENT_CONTENT
+      108      : <error> 
+               ;
+
+   67       prequelConstruct*
+      109      : 
+      110      | prequelConstruct* prequelConstruct 
+               ;
+
+   68       modeSpec*
+      111      : 
+      112      | modeSpec* modeSpec 
+               ;
+
+   69       ('lexer' 'grammar' | 'parser' 'grammar' | 'grammar')
+      113      : 'lexer' 'grammar' 
+      114      | 'parser' 'grammar' 
+      115      | 'grammar' 
+               ;
+
+   70       (option ';')
+      116      : option ';' 
+               ;
+
+   71       (option ';')*
+      117      : 
+      118      | (option ';')* (option ';') 
+               ;
+
+   72       ('.' identifier)
+      119      : '.' identifier 
+               ;
+
+   73       ('.' identifier)*
+      120      : 
+      121      | ('.' identifier)* ('.' identifier) 
+               ;
+
+   74       (',' delegateGrammar)
+      122      : ',' delegateGrammar 
+               ;
+
+   75       (',' delegateGrammar)*
+      123      : 
+      124      | (',' delegateGrammar)* (',' delegateGrammar) 
+               ;
+
+   76       idList?
+      125      : 
+      126      | idList 
+               ;
+
+   77       (',' identifier)
+      127      : ',' identifier 
+               ;
+
+   78       (',' identifier)*
+      128      : 
+      129      | (',' identifier)* (',' identifier) 
+               ;
+
+   79       ','?
+      130      : 
+      131      | ',' 
+               ;
+
+   80       (actionScopeName '::')
+      132      : actionScopeName '::' 
+               ;
+
+   81       (actionScopeName '::')?
+      133      : 
+      134      | (actionScopeName '::') 
+               ;
+
+   82       ACTION_CONTENT*
+      135      : 
+      136      | ACTION_CONTENT* ACTION_CONTENT 
+               ;
+
+   83       ARGUMENT_CONTENT*
+      137      : 
+      138      | ARGUMENT_CONTENT* ARGUMENT_CONTENT 
+               ;
+
+   84       lexerRule*
+      139      : 
+      140      | lexerRule* lexerRule 
+               ;
+
+   85       ruleSpec*
+      141      : 
+      142      | ruleSpec* ruleSpec 
+               ;
+
+   86       argActionBlock?
+      143      : 
+      144      | argActionBlock 
+               ;
+
+   87       ruleReturns?
+      145      : 
+      146      | ruleReturns 
+               ;
+
+   88       throwsSpec?
+      147      : 
+      148      | throwsSpec 
+               ;
+
+   89       localsSpec?
+      149      : 
+      150      | localsSpec 
+               ;
+
+   90       rulePrequel*
+      151      : 
+      152      | rulePrequel* rulePrequel 
+               ;
+
+   91       exceptionHandler*
+      153      : 
+      154      | exceptionHandler* exceptionHandler 
+               ;
+
+   92       finallyClause?
+      155      : 
+      156      | finallyClause 
+               ;
+
+   93       (',' qid)
+      157      : ',' qid 
+               ;
+
+   94       (',' qid)*
+      158      : 
+      159      | (',' qid)* (',' qid) 
+               ;
+
+   95       ('|' labeledAlt)
+      160      : '|' labeledAlt 
+               ;
+
+   96       ('|' labeledAlt)*
+      161      : 
+      162      | ('|' labeledAlt)* ('|' labeledAlt) 
+               ;
+
+   97       ('#' identifier)
+      163      : '#' identifier 
+               ;
+
+   98       ('#' identifier)?
+      164      : 
+      165      | ('#' identifier) 
+               ;
+
+   99       'fragment'?
+      166      : 
+      167      | 'fragment' 
+               ;
+
+  100       optionsSpec?
+      168      : 
+      169      | optionsSpec 
+               ;
+
+  101       ('|' lexerAlt)
+      170      : '|' lexerAlt 
+               ;
+
+  102       ('|' lexerAlt)*
+      171      : 
+      172      | ('|' lexerAlt)* ('|' lexerAlt) 
+               ;
+
+  103       lexerCommands?
+      173      : 
+      174      | lexerCommands 
+               ;
+
+  104       lexerElement+
+      175      : lexerElement 
+      176      | lexerElement+ lexerElement 
+               ;
+
+  105       ebnfSuffix?
+      177      : 
+      178      | ebnfSuffix 
+               ;
+
+  106       ('=' | '+=')
+      179      : '=' 
+      180      | '+=' 
+               ;
+
+  107       (lexerAtom | lexerBlock)
+      181      : lexerAtom 
+      182      | lexerBlock 
+               ;
+
+  108       (optionsSpec ':')
+      183      : optionsSpec ':' 
+               ;
+
+  109       (optionsSpec ':')?
+      184      : 
+      185      | (optionsSpec ':') 
+               ;
+
+  110       (',' lexerCommand)
+      186      : ',' lexerCommand 
+               ;
+
+  111       (',' lexerCommand)*
+      187      : 
+      188      | (',' lexerCommand)* (',' lexerCommand) 
+               ;
+
+  112       ('|' alternative)
+      189      : '|' alternative 
+               ;
+
+  113       ('|' alternative)*
+      190      : 
+      191      | ('|' alternative)* ('|' alternative) 
+               ;
+
+  114       elementOptions?
+      192      : 
+      193      | elementOptions 
+               ;
+
+  115       element+
+      194      : element 
+      195      | element+ element 
+               ;
+
+  116       '?'?
+      196      : 
+      197      | '?' 
+               ;
+
+  117       (atom | block)
+      198      : atom 
+      199      | block 
+               ;
+
+  118       blockSuffix?
+      200      : 
+      201      | blockSuffix 
+               ;
+
+  119       ('|' setElement)
+      202      : '|' setElement 
+               ;
+
+  120       ('|' setElement)*
+      203      : 
+      204      | ('|' setElement)* ('|' setElement) 
+               ;
+
+  121       ruleAction*
+      205      : 
+      206      | ruleAction* ruleAction 
+               ;
+
+  122       (optionsSpec? ruleAction* ':')
+      207      : optionsSpec? ruleAction* ':' 
+               ;
+
+  123       (optionsSpec? ruleAction* ':')?
+      208      : 
+      209      | (optionsSpec? ruleAction* ':') 
+               ;
+
+  124       (',' elementOption)
+      210      : ',' elementOption 
+               ;
+
+  125       (',' elementOption)*
+      211      : 
+      212      | (',' elementOption)* (',' elementOption) 
+               ;
+
+/* End of ANTLR grammar 
+

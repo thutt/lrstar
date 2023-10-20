@@ -1,0 +1,14 @@
+
+CICS.grm(0012) : <decimal>      => lookup;
+CICS.grm(0012) : ^^^^^^^^^.................
+CICS.grm(0012) : Warning, Terminal <decimal> was declared but not used anywhere.
+
+CICS.grm(0013) : <character>    => lookup;
+CICS.grm(0013) : ^^^^^^^^^^^...............
+CICS.grm(0013) : Warning, Terminal <character> was declared but not used anywhere.
+
+CICS.grm(0015) : <picture>      => lookup;
+CICS.grm(0015) : ^^^^^^^^^.................
+CICS.grm(0015) : Warning, Terminal <picture> was declared but not used anywhere.
+
+3 warnings.

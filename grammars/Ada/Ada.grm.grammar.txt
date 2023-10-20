@@ -1,0 +1,1132 @@
+
+/* Ada grammar */
+
+/* Terminal Symbols */
+
+    0  <error>
+    1  <eof>
+    2  <identifier>
+    3  <number>
+    4  <string>
+    5  'PRAGMA'
+    6  ';'
+    7  '('
+    8  ')'
+    9  ','
+   10  '=>'
+   11  'WITH'
+   12  'USE'
+   13  'SEPARATE'
+   14  'BEGIN'
+   15  'END'
+   16  'PACKAGE'
+   17  'BODY'
+   18  'IS'
+   19  'NEW'
+   20  'RANGE'
+   21  '..'
+   22  'DIGITS'
+   23  'DELTA'
+   24  'ARRAY'
+   25  'OF'
+   26  '<>'
+   27  'RECORD'
+   28  'NULL'
+   29  ':'
+   30  'CASE'
+   31  'WHEN'
+   32  'OTHERS'
+   33  '|'
+   34  'ACCESS'
+   35  'TYPE'
+   36  'EXCEPTION'
+   37  'CONSTANT'
+   38  ':='
+   39  'SUBTYPE'
+   40  'RENAMES'
+   41  'TASK'
+   42  '.'
+   43  'ALL'
+   44  '\''
+   45  'AND'
+   46  'OR'
+   47  'XOR'
+   48  'THEN'
+   49  'ELSE'
+   50  'IN'
+   51  'NOT'
+   52  '**'
+   53  '='
+   54  '<'
+   55  '>'
+   56  '/='
+   57  '<='
+   58  '>='
+   59  '+'
+   60  '-'
+   61  '&'
+   62  '*'
+   63  '/'
+   64  'MOD'
+   65  'REM'
+   66  'EXIT'
+   67  'RETURN'
+   68  'GOTO'
+   69  'DELAY'
+   70  'ABORT'
+   71  'RAISE'
+   72  '<<'
+   73  '>>'
+   74  'IF'
+   75  'ELSEIF'
+   76  'LOOP'
+   77  'FOR'
+   78  'REVERSE'
+   79  'WHILE'
+   80  'DECLARE'
+   81  'PROCEDURE'
+   82  'FUNCTION'
+   83  'OUT'
+   84  'PRIVATE'
+   85  'LIMITED'
+   86  'ENTRY'
+   87  'ACCEPT'
+   88  'DO'
+   89  'SELECT'
+   90  'TERMINATE'
+   91  'GENERIC'
+   92  'AT'
+
+/* Productions */
+
+    0       Goal
+        0      : Units <eof> 
+               ;
+
+    1       Units
+        1      : Unit 
+        2      | Units Unit 
+               ;
+
+    2       Unit
+        3      : Pragma* Context* UnitType 
+               ;
+
+    3       Pragma
+        4      : 'PRAGMA' <identifier> ';' 
+        5      | 'PRAGMA' <identifier> '(' ArgList ')' ';' 
+               ;
+
+    4       ArgList
+        6      : Arg 
+        7      | ArgList ',' Arg 
+               ;
+
+    5       Arg
+        8      : Exp 
+        9      | <identifier> '=>' Exp 
+               ;
+
+    6       Context
+       10      : WithClause UseClause? 
+               ;
+
+    7       WithClause
+       11      : 'WITH' NameList ';' 
+               ;
+
+    8       NameList
+       12      : Name 
+       13      | NameList ',' Name 
+               ;
+
+    9       Name
+       14      : OpSymbol 
+       15      | Attribute 
+       16      | IndexedComp 
+       17      | SelectedComp 
+       18      | FunctionCall 
+       19      | <identifier> 
+               ;
+
+   10       UseClause
+       20      : 'USE' NameList ';' 
+               ;
+
+   11       UnitType
+       21      : Subunit 
+       22      | Subpgm 
+       23      | Package 
+       24      | SubpgmDecl 
+       25      | PackageDecl 
+               ;
+
+   12       Subunit
+       26      : 'SEPARATE' '(' Name ')' Body 
+               ;
+
+   13       Subpgm
+       27      : SubpgmSpecIs DecltvPart 'BEGIN' Stmts Excp? 'END' Designator? ';' 
+               ;
+
+   14       Package
+       28      : 'PACKAGE' 'BODY' <identifier> 'IS' DecltvPart BeginStmts? 'END' Identifier? ';' 
+               ;
+
+   15       SubpgmDecl
+       29      : SubpgmSpec ';' 
+       30      | GenericSubpgmDecl 
+       31      | GenericSubpgmInst 
+               ;
+
+   16       PackageDecl
+       32      : PackageSpec ';' 
+       33      | GenericPackageDecl 
+       34      | GenericPackageInst 
+               ;
+
+   17       SubtypeInd
+       35      : Name 
+       36      | SubtypeIndWithConstr 
+               ;
+
+   18       SubtypeIndWithConstr
+       37      : Name RangeConstr 
+       38      | Name AccuracyConstr 
+               ;
+
+   19       DerivedTypeDef
+       39      : 'NEW' SubtypeInd 
+               ;
+
+   20       RangeConstr
+       40      : 'RANGE' Range 
+               ;
+
+   21       Range
+       41      : SimpleExp '..' SimpleExp 
+               ;
+
+   22       EnumTypeDef
+       42      : '(' EnumLiteralList ')' 
+               ;
+
+   23       EnumLiteralList
+       43      : EnumLiteral 
+       44      | EnumLiteralList ',' EnumLiteral 
+               ;
+
+   24       EnumLiteral
+       45      : <identifier> 
+       46      | <string> 
+               ;
+
+   25       IntegerTypeDef
+       47      : RangeConstr 
+               ;
+
+   26       RealTypeDef
+       48      : AccuracyConstr 
+               ;
+
+   27       AccuracyConstr
+       49      : FloatingPointConstr 
+       50      | FixedPointConstr 
+               ;
+
+   28       FloatingPointConstr
+       51      : 'DIGITS' SimpleExp RangeConstr? 
+               ;
+
+   29       FixedPointConstr
+       52      : 'DELTA' SimpleExp RangeConstr? 
+               ;
+
+   30       ArrayTypeDef
+       53      : 'ARRAY' '(' IndexList ')' 'OF' SubtypeInd 
+       54      | 'ARRAY' IndexConstr 'OF' SubtypeInd 
+               ;
+
+   31       IndexList
+       55      : Index 
+       56      | IndexList ',' Index 
+               ;
+
+   32       Index
+       57      : Name 'RANGE' '<>' 
+               ;
+
+   33       IndexConstr
+       58      : '(' DiscreteRangeList ')' 
+               ;
+
+   34       DiscreteRangeList
+       59      : DiscreteRange 
+       60      | DiscreteRangeList ',' DiscreteRange 
+               ;
+
+   35       DiscreteRange
+       61      : Name RangeConstr? 
+       62      | Range 
+               ;
+
+   36       RecordTypeDef
+       63      : 'RECORD' CompList 'END' 'RECORD' 
+               ;
+
+   37       CompList
+       64      : CompDecl* VariantPart? 
+       65      | 'NULL' ';' 
+               ;
+
+   38       CompDecl
+       66      : DiscrDecl ';' 
+       67      | IdentifierList ':' ArrayTypeDef Init? ';' 
+               ;
+
+   39       DiscrPart
+       68      : '(' DiscrDeclList ')' 
+               ;
+
+   40       DiscrDeclList
+       69      : DiscrDecl 
+       70      | DiscrDeclList ';' DiscrDecl 
+               ;
+
+   41       DiscrDecl
+       71      : IdentifierList ':' SubtypeInd Init? 
+               ;
+
+   42       VariantPart
+       72      : 'CASE' Name 'IS' Variant* 'END' 'CASE' ';' 
+               ;
+
+   43       Variant
+       73      : 'WHEN' ChoiceList '=>' CompList 
+               ;
+
+   44       Choice
+       74      : Range 
+       75      | SimpleExp 
+       76      | Name RangeConstr 
+       77      | 'OTHERS' 
+               ;
+
+   45       ChoiceList
+       78      : Choice 
+       79      | ChoiceList '|' Choice 
+               ;
+
+   46       AccessTypeDef
+       80      : 'ACCESS' SubtypeInd 
+               ;
+
+   47       IncompleteTypeDecl
+       81      : 'TYPE' <identifier> DiscrPart? ';' 
+               ;
+
+   48       DecltvPart
+       82      : DecltvItem* ReprSpec* ProgramComp* 
+       83      | DecltvItem* BodyOrStub ProgramComp* 
+               ;
+
+   49       DecltvItem
+       84      : Decl 
+       85      | UseClause 
+               ;
+
+   50       Decl
+       86      : Pragma 
+       87      | TypeDecl 
+       88      | TaskDecl 
+       89      | ExcpDecl 
+       90      | ObjectDecl 
+       91      | NumberDecl 
+       92      | PackageDecl 
+       93      | SubtypeDecl 
+       94      | RenamingDecl 
+       95      | SubpgmDecl 
+               ;
+
+   51       TypeDecl
+       96      : 'TYPE' <identifier> DiscrPart? 'IS' TypeDef ';' 
+       97      | IncompleteTypeDecl 
+               ;
+
+   52       TaskDecl
+       98      : TaskSpec 
+               ;
+
+   53       ExcpDecl
+       99      : <identifier> ':' 'EXCEPTION' ';' 
+               ;
+
+   54       ObjectDecl
+      100      : CompDecl 
+      101      | IdentifierList ':' 'CONSTANT' SubtypeInd Init? ';' 
+      102      | IdentifierList ':' 'CONSTANT' ArrayTypeDef Init? ';' 
+               ;
+
+   55       NumberDecl
+      103      : IdentifierList ':' 'CONSTANT' ':=' Exp ';' 
+               ;
+
+   56       SubtypeDecl
+      104      : 'SUBTYPE' <identifier> 'IS' SubtypeInd ';' 
+               ;
+
+   57       RenamingDecl
+      105      : SubpgmSpec 'RENAMES' Name ';' 
+      106      | 'TASK' <identifier> 'RENAMES' Name ';' 
+      107      | 'PACKAGE' <identifier> 'RENAMES' Name ';' 
+      108      | <identifier> ':' Name 'RENAMES' Name ';' 
+      109      | <identifier> ':' 'EXCEPTION' 'RENAMES' Name ';' 
+               ;
+
+   58       TypeDef
+      110      : EnumTypeDef 
+      111      | IntegerTypeDef 
+      112      | RealTypeDef 
+      113      | ArrayTypeDef 
+      114      | RecordTypeDef 
+      115      | AccessTypeDef 
+      116      | DerivedTypeDef 
+      117      | PrivateTypeDef 
+               ;
+
+   59       Init
+      118      : ':=' Exp 
+               ;
+
+   60       BodyOrStub
+      119      : Body 
+      120      | BodyStub 
+               ;
+
+   61       ProgramComp
+      121      : Body 
+      122      | TaskDecl 
+      123      | BodyStub 
+      124      | PackageDecl 
+               ;
+
+   62       Body
+      125      : Subpgm 
+      126      | Package 
+      127      | Task 
+               ;
+
+   63       IndexedComp
+      128      : Name '(' GeneralExpList ')' 
+               ;
+
+   64       GeneralExpList
+      129      : GeneralExp 
+      130      | GeneralExpList ',' GeneralExp 
+               ;
+
+   65       GeneralExp
+      131      : Exp 
+      132      | Range 
+      133      | ChoiceList '=>' Exp 
+      134      | ChoiceList '=>' SubtypeIndWithConstr 
+      135      | SubtypeIndWithConstr 
+               ;
+
+   66       SelectedComp
+      136      : Name '.' 'ALL' 
+      137      | Name '.' OpSymbol 
+      138      | Name '.' <identifier> 
+               ;
+
+   67       Attribute
+      139      : Name '\'' <identifier> 
+               ;
+
+   68       Literal
+      140      : <number> 
+      141      | <string> 
+      142      | 'NULL' 
+               ;
+
+   69       Aggregate
+      143      : '(' CompAssocList2 ')' 
+      144      | '(' ChoiceList '=>' Exp ')' 
+               ;
+
+   70       CompAssocList2
+      145      : CompAssoc ',' CompAssoc 
+      146      | CompAssocList2 ',' CompAssoc 
+               ;
+
+   71       CompAssoc
+      147      : Exp 
+      148      | ChoiceList '=>' Exp 
+               ;
+
+   72       Exp
+      149      : OrExp 
+      150      | AndExp 
+      151      | XorExp 
+      152      | OrElseExp 
+      153      | AndThenExp 
+      154      | Relation 
+               ;
+
+   73       AndExp
+      155      : Relation 'AND' Relation 
+      156      | AndExp 'AND' Relation 
+               ;
+
+   74       OrExp
+      157      : Relation 'OR' Relation 
+      158      | OrExp 'OR' Relation 
+               ;
+
+   75       XorExp
+      159      : Relation 'XOR' Relation 
+      160      | XorExp 'XOR' Relation 
+               ;
+
+   76       AndThenExp
+      161      : Relation 'AND' 'THEN' Relation 
+      162      | AndThenExp 'AND' 'THEN' Relation 
+               ;
+
+   77       OrElseExp
+      163      : Relation 'OR' 'ELSE' Relation 
+      164      | OrElseExp 'OR' 'ELSE' Relation 
+               ;
+
+   78       Relation
+      165      : SimpleExp 
+      166      | SimpleExp RelOp SimpleExp 
+      167      | SimpleExp MembOp Range 
+      168      | SimpleExp MembOp SubtypeInd 
+               ;
+
+   79       MembOp
+      169      : 'IN' 
+      170      | 'NOT' 'IN' 
+               ;
+
+   80       SimpleExp
+      171      : TermList 
+      172      | UnaryOp TermList 
+               ;
+
+   81       TermList
+      173      : Term 
+      174      | TermList AddOp Term 
+               ;
+
+   82       Term
+      175      : Factor 
+      176      | Term MultOp Factor 
+               ;
+
+   83       Factor
+      177      : Primary 
+      178      | Primary '**' Primary 
+               ;
+
+   84       Primary
+      179      : Name 
+      180      | Literal 
+      181      | QualExp 
+      182      | Aggregate 
+      183      | Allocator 
+      184      | '(' Exp ')' 
+               ;
+
+   85       RelOp
+      185      : ('=' | '<' | '>' | '/=' | '<=' | '>=') 
+               ;
+
+   86       AddOp
+      186      : ('+' | '-' | '&') 
+               ;
+
+   87       UnaryOp
+      187      : ('+' | '-' | NOT) 
+               ;
+
+   88       MultOp
+      188      : ('*' | '/' | MOD | REM) 
+               ;
+
+   89       QualExp
+      189      : Name '\'' '(' Exp ')' 
+      190      | Name '\'' Aggregate 
+               ;
+
+   90       Allocator
+      191      : 'NEW' Name 
+               ;
+
+   91       Stmts
+      192      : Stmt 
+      193      | Stmts Stmt 
+               ;
+
+   92       Stmt
+      194      : Pragma 
+      195      | Label* SimpleStmt 
+      196      | Label* CompoundStmt 
+               ;
+
+   93       SimpleStmt
+      197      : NullStmt 
+      198      | AssignStmt 
+      199      | ExitStmt 
+      200      | ReturnStmt 
+      201      | GotoStmt 
+      202      | CallStmt 
+      203      | DelayStmt 
+      204      | AbortStmt 
+      205      | RaiseStmt 
+      206      | CodeStmt 
+               ;
+
+   94       NullStmt
+      207      : 'NULL' ';' 
+               ;
+
+   95       AssignStmt
+      208      : Name ':=' Exp ';' 
+               ;
+
+   96       ExitStmt
+      209      : 'EXIT' Name? When? ';' 
+               ;
+
+   97       ReturnStmt
+      210      : 'RETURN' ';' 
+      211      | 'RETURN' Exp ';' 
+               ;
+
+   98       GotoStmt
+      212      : 'GOTO' Name ';' 
+               ;
+
+   99       CallStmt
+      213      : Name ';' 
+               ;
+
+  100       DelayStmt
+      214      : 'DELAY' SimpleExp ';' 
+               ;
+
+  101       AbortStmt
+      215      : 'ABORT' NameList ';' 
+               ;
+
+  102       RaiseStmt
+      216      : 'RAISE' Name? ';' 
+               ;
+
+  103       CodeStmt
+      217      : QualExp ';' 
+               ;
+
+  104       CompoundStmt
+      218      : IfStmt 
+      219      | CaseStmt 
+      220      | LoopStmt 
+      221      | Block 
+      222      | AcceptStmt 
+      223      | SelectStmt 
+               ;
+
+  105       Label
+      224      : '<<' <identifier> '>>' 
+               ;
+
+  106       IfStmt
+      225      : 'IF' Condition 'THEN' Stmts ElseIf* Else? 'END' 'IF' ';' 
+               ;
+
+  107       ElseIf
+      226      : 'ELSEIF' Condition 'THEN' Stmts 
+               ;
+
+  108       Else
+      227      : 'ELSE' Stmts 
+               ;
+
+  109       Condition
+      228      : Exp 
+               ;
+
+  110       CaseStmt
+      229      : 'CASE' Exp 'IS' Alt* 'END' 'CASE' ';' 
+               ;
+
+  111       Alt
+      230      : 'WHEN' ChoiceList '=>' Stmts 
+               ;
+
+  112       LoopStmt
+      231      : IterationClause? BasicLoop ';' 
+      232      | <identifier> ':' IterationClause? BasicLoop <identifier> ';' 
+               ;
+
+  113       BasicLoop
+      233      : 'LOOP' Stmts 'END' 'LOOP' 
+               ;
+
+  114       IterationClause
+      234      : 'FOR' <identifier> 'IN' DiscreteRange 
+      235      | 'FOR' <identifier> 'IN' 'REVERSE' DiscreteRange 
+      236      | 'WHILE' Condition 
+               ;
+
+  115       Block
+      237      : DeclPart? 'BEGIN' Stmts Excp? 'END' ';' 
+      238      | <identifier> ':' DeclPart? 'BEGIN' Stmts Excp? 'END' <identifier> ';' 
+               ;
+
+  116       DeclPart
+      239      : 'DECLARE' DecltvPart 
+               ;
+
+  117       Excp
+      240      : 'EXCEPTION' ExcpHandler* 
+               ;
+
+  118       When
+      241      : 'WHEN' Condition 
+               ;
+
+  119       SubpgmSpec
+      242      : 'PROCEDURE' <identifier> FormalPart? 
+      243      | 'FUNCTION' Designator FormalPart? 'RETURN' SubtypeInd 
+               ;
+
+  120       SubpgmSpecIs
+      244      : 'PROCEDURE' <identifier> 'IS' 
+      245      | 'PROCEDURE' <identifier> FormalPart 'IS' 
+      246      | 'FUNCTION' Designator FormalPart? 'RETURN' SubtypeInd 'IS' 
+               ;
+
+  121       Designator
+      247      : <identifier> 
+      248      | OpSymbol 
+               ;
+
+  122       OpSymbol
+      249      : <string> 
+               ;
+
+  123       FormalPart
+      250      : '(' ParmDeclList ')' 
+               ;
+
+  124       ParmDeclList
+      251      : ParmDecl 
+      252      | ParmDeclList ';' ParmDecl 
+               ;
+
+  125       ParmDecl
+      253      : IdentifierList ':' Mode? SubtypeInd Init? 
+               ;
+
+  126       Mode
+      254      : 'IN' 
+      255      | 'OUT' 
+      256      | 'IN' 'OUT' 
+               ;
+
+  127       FunctionCall
+      257      : Name '(' ')' 
+               ;
+
+  128       PackageSpec
+      258      : 'PACKAGE' <identifier> 'IS' DecltvItem* PrivatePart? 'END' Identifier? 
+               ;
+
+  129       PrivatePart
+      259      : 'PRIVATE' DecltvItem* ReprSpec* 
+               ;
+
+  130       Identifier
+      260      : <identifier> 
+               ;
+
+  131       BeginStmts
+      261      : 'BEGIN' Stmts Excp? 
+               ;
+
+  132       PrivateTypeDef
+      262      : 'PRIVATE' 
+      263      | 'LIMITED' 'PRIVATE' 
+               ;
+
+  133       TaskSpec
+      264      : 'TASK' <identifier> TaskSpecifier 
+      265      | 'TASK' 'TYPE' <identifier> TaskSpecifier 
+               ;
+
+  134       TaskSpecifier
+      266      : ';' 
+      267      | 'IS' EntryDecl* ReprSpec* 'END' Identifier? ';' 
+               ;
+
+  135       Task
+      268      : 'TASK' 'BODY' <identifier> 'IS' DecltvPart 'BEGIN' Stmts Excp? 'END' Identifier? ';' 
+               ;
+
+  136       EntryDecl
+      269      : 'ENTRY' <identifier> FormalPart? ';' 
+      270      | 'ENTRY' <identifier> '(' DiscreteRange ')' FormalPart? ';' 
+               ;
+
+  137       EntryCall
+      271      : CallStmt 
+               ;
+
+  138       AcceptStmt
+      272      : 'ACCEPT' EntryName FormalPart? ';' 
+      273      | 'ACCEPT' EntryName FormalPart? 'DO' Stmts 'END' Identifier? ';' 
+               ;
+
+  139       EntryName
+      274      : <identifier> 
+      275      | OpSymbol 
+      276      | EntryName '(' Exp ')' 
+      277      | EntryName '.' OpSymbol 
+      278      | EntryName '.' <identifier> 
+               ;
+
+  140       SelectStmt
+      279      : SelectiveWait 
+      280      | TimedEntryCall 
+      281      | ConditionalEntryCall 
+               ;
+
+  141       SelectiveWait
+      282      : 'SELECT' Cond? Select* Else? 'END' 'SELECT' ';' 
+               ;
+
+  142       Select
+      283      : 'OR' Cond? SelectAlt 
+               ;
+
+  143       Cond
+      284      : 'WHEN' Condition '=>' 
+               ;
+
+  144       SelectAlt
+      285      : 'TERMINATE' ';' 
+      286      | AcceptStmt Stmt* 
+      287      | DelayStmt Stmt* 
+               ;
+
+  145       ConditionalEntryCall
+      288      : 'SELECT' EntryCall Stmt* 'ELSE' Stmts 'END' 'SELECT' ';' 
+               ;
+
+  146       TimedEntryCall
+      289      : 'SELECT' EntryCall Stmt* 'OR' DelayStmt Stmts* 'END' 'SELECT' ';' 
+               ;
+
+  147       BodyStub
+      290      : SubpgmSpecIs 'SEPARATE' ';' 
+      291      | 'PACKAGE' 'BODY' <identifier> 'IS' 'SEPARATE' ';' 
+      292      | 'TASK' 'BODY' <identifier> 'IS' 'SEPARATE' ';' 
+               ;
+
+  148       ExcpHandler
+      293      : 'WHEN' ExcpChoiceList '=>' Stmts 
+               ;
+
+  149       ExcpChoiceList
+      294      : ExcpChoice 
+      295      | ExcpChoiceList '|' ExcpChoice 
+               ;
+
+  150       ExcpChoice
+      296      : Name 
+      297      | 'OTHERS' 
+               ;
+
+  151       GenericSubpgmDecl
+      298      : GenericPart SubpgmSpec ';' 
+               ;
+
+  152       GenericPackageDecl
+      299      : GenericPart PackageSpec ';' 
+               ;
+
+  153       GenericPart
+      300      : 'GENERIC' 
+      301      | GenericPart GenericFormalParm 
+               ;
+
+  154       GenericFormalParm
+      302      : ParmDecl ';' 
+      303      | 'WITH' SubpgmSpec ';' 
+      304      | 'WITH' SubpgmSpecIs '<>' ';' 
+      305      | 'WITH' SubpgmSpecIs Name ';' 
+      306      | 'TYPE' <identifier> DiscrPart? 'IS' GenericTypeDef ';' 
+               ;
+
+  155       GenericTypeDef
+      307      : '(' '<>' ')' 
+      308      | 'RANGE' '<>' 
+      309      | 'DELTA' '<>' 
+      310      | 'DIGITS' '<>' 
+      311      | ArrayTypeDef 
+      312      | AccessTypeDef 
+      313      | PrivateTypeDef 
+               ;
+
+  156       GenericSubpgmInst
+      314      : 'FUNCTION' Designator 'IS' GenericInst ';' 
+      315      | 'PROCEDURE' <identifier> 'IS' GenericInst ';' 
+               ;
+
+  157       GenericPackageInst
+      316      : 'PACKAGE' <identifier> 'IS' GenericInst ';' 
+               ;
+
+  158       GenericInst
+      317      : 'NEW' Name 
+               ;
+
+  159       ReprSpec
+      318      : LengthSpec 
+      319      | RecordTypeRepr 
+      320      | AddressSpec 
+               ;
+
+  160       LengthSpec
+      321      : 'FOR' Name 'USE' Exp ';' 
+               ;
+
+  161       RecordTypeRepr
+      322      : 'FOR' Name 'USE' 'RECORD' AlignClause? LocList? 'END' 'RECORD' ';' 
+               ;
+
+  162       AddressSpec
+      323      : 'FOR' Name 'USE' 'AT' SimpleExp ';' 
+               ;
+
+  163       AlignClause
+      324      : 'AT' 'MOD' SimpleExp ';' 
+               ;
+
+  164       LocList
+      325      : Name 'AT' SimpleExp 'RANGE' Range ';' 
+               ;
+
+  165       IdentifierList
+      326      : <identifier> 
+      327      | IdentifierList ',' <identifier> 
+               ;
+
+  166       Pragma*
+      328      : 
+      329      | Pragma* Pragma 
+               ;
+
+  167       Context*
+      330      : 
+      331      | Context* Context 
+               ;
+
+  168       UseClause?
+      332      : 
+      333      | UseClause 
+               ;
+
+  169       Excp?
+      334      : 
+      335      | Excp 
+               ;
+
+  170       Designator?
+      336      : 
+      337      | Designator 
+               ;
+
+  171       BeginStmts?
+      338      : 
+      339      | BeginStmts 
+               ;
+
+  172       Identifier?
+      340      : 
+      341      | Identifier 
+               ;
+
+  173       RangeConstr?
+      342      : 
+      343      | RangeConstr 
+               ;
+
+  174       CompDecl*
+      344      : 
+      345      | CompDecl* CompDecl 
+               ;
+
+  175       VariantPart?
+      346      : 
+      347      | VariantPart 
+               ;
+
+  176       Init?
+      348      : 
+      349      | Init 
+               ;
+
+  177       Variant*
+      350      : 
+      351      | Variant* Variant 
+               ;
+
+  178       DiscrPart?
+      352      : 
+      353      | DiscrPart 
+               ;
+
+  179       DecltvItem*
+      354      : 
+      355      | DecltvItem* DecltvItem 
+               ;
+
+  180       ReprSpec*
+      356      : 
+      357      | ReprSpec* ReprSpec 
+               ;
+
+  181       ProgramComp*
+      358      : 
+      359      | ProgramComp* ProgramComp 
+               ;
+
+  182       ('=' | '<' | '>' | '/=' | '<=' | '>=')
+      360      : '=' 
+      361      | '<' 
+      362      | '>' 
+      363      | '/=' 
+      364      | '<=' 
+      365      | '>=' 
+               ;
+
+  183       ('+' | '-' | '&')
+      366      : '+' 
+      367      | '-' 
+      368      | '&' 
+               ;
+
+  184       ('+' | '-' | NOT)
+      369      : '+' 
+      370      | '-' 
+      371      | 'NOT' 
+               ;
+
+  185       ('*' | '/' | MOD | REM)
+      372      : '*' 
+      373      | '/' 
+      374      | 'MOD' 
+      375      | 'REM' 
+               ;
+
+  186       Label*
+      376      : 
+      377      | Label* Label 
+               ;
+
+  187       Name?
+      378      : 
+      379      | Name 
+               ;
+
+  188       When?
+      380      : 
+      381      | When 
+               ;
+
+  189       ElseIf*
+      382      : 
+      383      | ElseIf* ElseIf 
+               ;
+
+  190       Else?
+      384      : 
+      385      | Else 
+               ;
+
+  191       Alt*
+      386      : 
+      387      | Alt* Alt 
+               ;
+
+  192       IterationClause?
+      388      : 
+      389      | IterationClause 
+               ;
+
+  193       DeclPart?
+      390      : 
+      391      | DeclPart 
+               ;
+
+  194       ExcpHandler*
+      392      : 
+      393      | ExcpHandler* ExcpHandler 
+               ;
+
+  195       FormalPart?
+      394      : 
+      395      | FormalPart 
+               ;
+
+  196       Mode?
+      396      : 
+      397      | Mode 
+               ;
+
+  197       PrivatePart?
+      398      : 
+      399      | PrivatePart 
+               ;
+
+  198       EntryDecl*
+      400      : 
+      401      | EntryDecl* EntryDecl 
+               ;
+
+  199       Cond?
+      402      : 
+      403      | Cond 
+               ;
+
+  200       Select*
+      404      : 
+      405      | Select* Select 
+               ;
+
+  201       Stmt*
+      406      : 
+      407      | Stmt* Stmt 
+               ;
+
+  202       Stmts*
+      408      : 
+      409      | Stmts* Stmts 
+               ;
+
+  203       AlignClause?
+      410      : 
+      411      | AlignClause 
+               ;
+
+  204       LocList?
+      412      : 
+      413      | LocList 
+               ;
+
+/* End of Ada grammar 
+
