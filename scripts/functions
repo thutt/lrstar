@@ -149,7 +149,7 @@ function lrstar-path ()
     # in the lrstar build process.
 
     local obp=$(lrstar-build-path);
-    path="${obp}/bin/lrstar";
+    path="${obp}/src/lrstar";
     echo "${path}";
 }
 export -f lrstar-path;
@@ -161,7 +161,7 @@ function dfa-path ()
     # in the lrstar build process.
 
     local obp=$(lrstar-build-path);
-    path="${obp}/bin/lrstar";
+    path="${obp}/src/dfa";
     echo "${path}";
 }
 export -f dfa-path;
