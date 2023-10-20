@@ -1,0 +1,83 @@
+#!/bin/bash
+#
+# Copyright (c) 2023 Logic Magicians Software
+#
+#  This script is used to ensure that the lrstar and dfa program do
+#  not generate different output than a previous version.
+#
+#  The text log files that are output by lrstar and dfa include memory
+#  utilization and execution time.  These will vary from run-to-run.
+#  It is up to the user of this tool to ensure that the times & memory
+#  utilization have not gotten worse in an unjustifiable way.
+#
+# BSD 3 License
+#
+set -o errexit;
+set -o nounset;
+set -o pipefail;
+
+SCRIPT="${0}";
+PN=${SCRIPT##*/};      # Program name (remove all before last '/').
+DN=${SCRIPT%/*};       # Directory name (removall all after last '/').
+
+function lrstar ()
+{
+    local lrstar="$(lrstar-path)/lrstar";
+    local grm="${1}";
+    local grm_name="$(basename "${grm}")";
+    local grm_dir="$(dirname "${grm}")";
+
+    pushd "${grm_dir}";
+    "${lrstar}" "${grm_name}";
+    popd;
+}
+
+
+function dfa ()
+{
+    local dfa="$(dfa-path)/dfa";
+    local lgr="${1}";
+    local lgr_name="$(basename "${lgr}")";
+    local lgr_dir="$(dirname "${lgr}")";
+
+    echo "${dfa} ${lgr_dir}";
+}
+
+
+function process ()
+{
+    local grm_dir="${1}";
+    local grm_name="$(basename "${grm_dir}")";
+    local grm="${grm_dir}/${grm_name}.grm";
+    local lgr="${grm_dir}/${grm_name}.lgr";
+
+    if [ -r "${grm}" ] ; then
+        lrstar "${grm}";
+    else
+        echo "${grm} does not exist";
+    fi;
+
+    if [ -r "${lgr}" ] ; then
+        dfa "${lgr}";
+    else
+        echo "${lgr} does not exist.";
+    fi;
+
+}
+
+
+function main ()
+{
+    if [ -v LRSTAR_DIR ] ; then
+        local grammars="${LRSTAR_DIR}/grammars";
+
+        for grm in ${grammars}/*; do
+            process "${grm}";
+        done;
+    else
+        echo "LRSTAR environment is not set up.";
+        false;
+    fi;
+}
+
+main "${@}";
