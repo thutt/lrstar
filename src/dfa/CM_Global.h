@@ -103,11 +103,6 @@ enum options
 #define unlink _unlink
 #endif
 
-// TODO: Replace with PATH_MAX
-#define MAX_DIR             160 // Maximum directory name length, 159.
-#define MAX_FILENAME         64 // Maximum file name length, 63.
-#define MAX_FILETYPE         32 // Maximum file type length, 31.
-
 #define EOF_CHAR             26
 #define EOL_CHAR             10
 
@@ -357,17 +352,17 @@ extern const char*  version;
 extern const char*  bits;
 extern const char*  copywrt;
 
-extern uchar  charcode[256];
-extern uchar  lower[256];
+extern const uchar charcode[256];
+extern const uchar lower[256];
 extern char   spaces[256];
 
 EXTERN int    n_errors;
 EXTERN int    n_warnings;
 
 EXTERN char   exefid [PATH_MAX];
-EXTERN char   gdn [MAX_DIR];
-EXTERN char   gfn [MAX_FILENAME];
-EXTERN char   gft [MAX_FILETYPE];
+EXTERN char   gdn [PATH_MAX];
+EXTERN char   gfn [PATH_MAX];
+EXTERN char   gft [PATH_MAX];
 EXTERN char   grmfid [PATH_MAX];
 
 EXTERN int    optn[N_OPTIONS];

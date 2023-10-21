@@ -6,7 +6,7 @@
 #include "LG_Global.h"
 
 // 1 = upper, 2 = lower, 4 = '_', 8 = digit, 16 = quote ("|')
-uchar charcode[256] =
+const uchar charcode[256] =
 {
    0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,
    0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,  0,
@@ -28,7 +28,7 @@ uchar charcode[256] =
 };
 
 // lower[x] makes lower case of x.
-uchar lower[256] =
+const uchar lower[256] =
 {
    0,  1,  2,  3,  4,  5,  6,  7,  8,  9, 10, 11, 12, 13, 14, 15,
    16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31,
@@ -317,7 +317,7 @@ int   get_fid (char *arg, char *dir, char *fn, char *ft)
       f = last_slash + 1;        // Point at filename start.
       c = *f;                    // Save the char.
       *f = 0;                    // Drop null there.
-      if (f-arg < MAX_DIR)       // If length is OK.
+      if (f-arg < PATH_MAX)       // If length is OK.
       {
          strcpy (dir, arg);      // Copy to 'dir'.
       }
@@ -325,7 +325,7 @@ int   get_fid (char *arg, char *dir, char *fn, char *ft)
       {
          n_errors++;
          if (n_errors == 1) printf ("\n");
-         printf ("Directory name\n\n%s\n\nhas more than %d characters.\n\n", arg, MAX_DIR-1);
+         printf ("Directory name\n\n%s\n\nhas more than %d characters.\n\n", arg, PATH_MAX-1);
          return (0);
       }
       *f = c;                    // Replace char.
@@ -336,7 +336,7 @@ int   get_fid (char *arg, char *dir, char *fn, char *ft)
    if (last_dot != NULL)
    {
       *last_dot = 0;
-      if (last_dot-f < MAX_FILENAME)
+      if (last_dot-f < PATH_MAX)
       {
          strcpy (fn, f);         // Copy to 'fn'.
       }
@@ -344,12 +344,12 @@ int   get_fid (char *arg, char *dir, char *fn, char *ft)
       {
          n_errors++;
          if (n_errors == 1) printf ("\n");
-         printf ("Filename\n\n%s\n\nhas more than %d characters.\n\n", f, MAX_FILENAME-1);
+         printf ("Filename\n\n%s\n\nhas more than %d characters.\n\n", f, PATH_MAX - 1);
          return (0);
       }
       *last_dot = '.';           // Replace dot.
       len = (int)strlen(last_dot);
-      if (len < MAX_FILETYPE)
+      if (len < PATH_MAX)
       {
          strcpy (ft, last_dot);  // Copy to 'ft'.
       }
@@ -357,14 +357,14 @@ int   get_fid (char *arg, char *dir, char *fn, char *ft)
       {
          n_errors++;
          if (n_errors == 1) printf ("\n");
-         printf ("Filetype\n\n%s\n\nhas more than %d characters.\n\n", last_dot, MAX_FILETYPE-1);
+         printf ("Filetype\n\n%s\n\nhas more than %d characters.\n\n", last_dot, PATH_MAX-1);
          return (0);
       }
    }
    else                          // No '\' and no '.'
    {
       len = (int)strlen (f);
-      if (len < MAX_FILENAME)
+      if (len < PATH_MAX)
       {
          strcpy (fn, f);         // Copy to 'fn'.
       }
@@ -372,7 +372,7 @@ int   get_fid (char *arg, char *dir, char *fn, char *ft)
       {
          n_errors++;
          if (n_errors == 1) printf ("\n");
-         printf ("Filename\n\n%s\n\nhas more than %d characters.\n\n", f, MAX_FILENAME-1);
+         printf ("Filename\n\n%s\n\nhas more than %d characters.\n\n", f, PATH_MAX - 1);
          return (0);
       }
    }

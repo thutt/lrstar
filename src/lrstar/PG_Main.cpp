@@ -317,7 +317,7 @@ void  PG_Main::OutputLexFile ()
 {
    const char* p;
    char  lexfid[256];
-   char  string[256];
+   char  string[PATH_MAX * 3];
    int   filedesc, first, i, k, n, ns, len;
 
    strcpy (lexfid, gdn);
