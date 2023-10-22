@@ -371,6 +371,31 @@ void  LG_BuildStates::MAKE_KERNEL (int c)
    while ((c = closure [c].next) != -1);
 }
 
+static void
+SORT (int *start, int *end) /* Integer bubble sort. */
+{
+   // Sort in place, destroys the original order.
+   int *p, *q, x;
+
+   end--;
+   p = start;
+   while (p < end)
+   {
+      x = *(q = ++p);
+      do
+      {
+         if (x < *--q)
+         {
+            *(q+1) = *q;
+            *q = x;
+         }
+         else break;
+      }
+      while (q > start);
+   }
+}
+
+
 ///////////////////////////////////////////////////////////////////////////////
 //                                                                           //
 

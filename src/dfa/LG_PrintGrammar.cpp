@@ -8,6 +8,23 @@
 ///////////////////////////////////////////////////////////////////////////////
 //                                                                           //
 
+static int
+prt_grm (const char *format,...)
+{
+   if (option_grammar == 0) return 0;
+   int length = 0;
+   va_list argptr;
+   if (grmfp != NULL)
+   {
+      va_start (argptr, format);
+      length = vfprintf (grmfp, format, argptr);
+      va_end (argptr);
+   }
+   return length;
+}
+
+
+
 void  LG_CheckGrammar::PrintGrammar ()
 {
    int line_length;

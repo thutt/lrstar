@@ -111,8 +111,37 @@ int   LG_CreateTables::CreateTables ()
    return (1);
 }
 
-/////////////////////////////////////////////////////////////////////////////////////////////////////
-//                                                                                                 //
+
+static int
+get_typesize (int *x, int n)
+{
+   int i, max = 0, min = 0;
+   for (i = 0; i < n; i++)
+   {
+      if      (x[i] > max) max = x[i];
+      else if (x[i] < min) min = x[i];
+   }
+   if (min == 0)
+   {
+      if      (max <=        255) return (1); // 1 byte
+      else if (max <=      65535) return (2); // 2 bytes
+      else                        return (4); // 4 bytes
+   }
+   else if (max > -min)
+   {
+      if      (max <=        127) return (1); // 1 byte
+      else if (max <=      32767) return (2); // 2 bytes
+      else                        return (4); // 4 bytes
+   }
+   else
+   {
+      if      (min >=       -127) return (1); // 1 byte
+      else if (min >=     -32767) return (2); // 2 bytes
+      else                        return (4); // 4 bytes
+   }
+   return (0); // never gets here.
+}
+
 
 int   LG_CreateTables::BLD_B (int opt1, const char *mark) // Build Boolean Matrix.
 {
@@ -447,6 +476,53 @@ int   LG_CreateTables::MRG_ROWE2T (int **matrix, int *row, int N_states)
    else                      prt_logonly ("  %6d ", nr);
    return (nr);
 }
+
+
+//
+//    SORT2 - Sort one vector of length n.
+//
+static void
+SORT2 (int* value, int* seq, int n)
+{
+//    Sort in place.  Destroys the original order, but seq contains the original order.
+
+   int *last;
+   int *v1, *v2, vt;
+   int *s1, *s2, st;
+
+   if (n <= 1) return;
+
+   // Note:  when using pointers instead of indexes,
+   // we must be careful not to decrement below zero.
+
+   last = value + n - 1;
+   v1 = value;
+   s1 = seq;
+   while (v1 < last)       // from first to last-1
+   {
+      v2 = ++v1;
+      s2 = ++s1;
+      while (v2 > value)   // while next one > first in list.
+      {
+         vt = *v2--;       // save higher one into temp.
+         st = *s2--;       // save higher one's index into temp.
+         if (vt < *v2)     // if temp less than one above ...
+         {
+            *(v2+1) = *v2;    // switch these two ...
+            *(s2+1) = *s2;    // .
+            *v2 = vt;         // .
+            *s2 = st;         // done switching.
+         }
+         else break;
+      }
+   }
+   /* for (int i = 0; i < n; i++)
+      {
+      printf ("%5d %5d\n", value[i], seq[i]);
+      }
+   */
+}
+
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////
 //                                                                                                 //

@@ -59,7 +59,13 @@ private:
    static void  MTSL ();
 };
 
-/* Local Variables:      */
+extern void   C_CAMEFROM(int   N_states,
+                         int  *tt_start,
+                         int  *tt_action,
+                         int  *ntt_start,
+                         int  *ntt_action,
+                         int *&f_camefrom,
+                         int *&camefrom);
 /* mode: c               */
 /* c-basic-offset: 3     */
 /* tab-width: 3          */

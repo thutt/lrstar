@@ -58,17 +58,6 @@ char spaces [256] =             /* TODO: This should either be const,
    "                                                               "; // 255
 
 
-///////////////////////////////////////////////////////////////////////////////
-
-char* mystrlwr (char* s)
-{
-   for (char* p = s; *p != 0; p++)
-   {
-      *p = lower[*p];
-   }
-   return s;
-}
-
 #ifdef LINUX
 ///////////////////////////////////////////////////////////////////////////////
 //                                                                           //
@@ -82,66 +71,9 @@ long  _filelength (int fd)
 }
 #endif
 
-///////////////////////////////////////////////////////////////////////////////
 
-void  PRT_ARGS (int na, char** arg, int destination)
-{
-   int i;
-   if (destination == 0) printf      (  "%s %s %s %s.\n", program, version, bits, copywrt);
-   else                  prt_logonly ("\n%s %s %s %s.\n", program, version, bits, copywrt);
-   if (na > 1)
-   {
-      if (destination == 0) ;
-      else                  prt_logonly ("\n");
-      for (i = 1; i < na; i++)
-      {
-         if (destination == 0) printf      ("%s ", arg[i]);
-         else                  prt_logonly ("%s ", arg[i]);
-      }
-      if (destination == 0) printf      ("\n");
-      else                  prt_logonly ("\n\n");
-   }
-}
-
-///////////////////////////////////////////////////////////////////////////////
-
-int   SET_OPTNS (int na, char** arg)
-{
-   int i, ne = 0;
-   for (i = 2; i < na; i++)
-   {
-      if (!SET_OPTN (arg[i])) ne++;
-   }
-   if (ne > 0)
-   {
-      printf ("\n   OPTION   DEFAULT  DESCRIPTION\n");
-      for (i = 0; *LGOption[i].name != 0; i++)
-      {
-         printf ("   %-6s  %8d  %s.\n", LGOption[i].name, LGOption[i].defvalue, LGOption[i].desc);
-      }
-      printf ("\n");
-      return (0);
-   }
-   return (1);
-}
-
-///////////////////////////////////////////////////////////////////////////////
-
-int   SET_OPTN (char* opt)
-{
-   return (set_optn (LGOption, opt));
-}
-
-///////////////////////////////////////////////////////////////////////////////
-
-int   SET_OPTN_MA (char* opt)
-{
-   return (set_optn (MAOption, opt));
-}
-
-///////////////////////////////////////////////////////////////////////////////
-
-int   set_optn (OPTION* option, char* opt)
+static int
+set_optn (OPTION *option, char *opt)
 {
    int  i;
    char *o;
@@ -195,6 +127,42 @@ set:  optn[option[i].numb] = value;
    if (optn [LG_VERBOSE] > 2) printf ("%s = %d\n", option[i].name, value);
    return 1;
 }
+
+
+static
+int SET_OPTN (char* opt)
+{
+   return (set_optn (LGOption, opt));
+}
+
+
+
+int   SET_OPTNS (int na, char** arg)
+{
+   int i, ne = 0;
+   for (i = 2; i < na; i++)
+   {
+      if (!SET_OPTN (arg[i])) ne++;
+   }
+   if (ne > 0)
+   {
+      printf ("\n   OPTION   DEFAULT  DESCRIPTION\n");
+      for (i = 0; *LGOption[i].name != 0; i++)
+      {
+         printf ("   %-6s  %8d  %s.\n", LGOption[i].name, LGOption[i].defvalue, LGOption[i].desc);
+      }
+      printf ("\n");
+      return (0);
+   }
+   return (1);
+}
+
+
+int   SET_OPTN_MA (char* opt)
+{
+   return (set_optn (MAOption, opt));
+}
+
 
 ///////////////////////////////////////////////////////////////////////////////
 
@@ -513,77 +481,69 @@ void  number (int x, char* string)
    }
 }
 
-///////////////////////////////////////////////////////////////////////////////
-//                                                                           //
-//    SORT - Sort one vector.
 
-void  SORT (int *start, int *end) /* Integer bubble sort. */
+
+////////////////////////////////////////////////////////////////////////////////
+//                                                                            //
+//    DeRemer & Pennello's Digraph Algorithm.                                 //
+//    From "Efficient Computation of LALR(1) Look-Ahead Sets."                //
+//    Printed in TOPLAS, Oct 1982.                                            //
+//                                                                            //
+//    Modified by me (PBM in 1985) because it did not work when I first       //
+//    implemented it, without a separate top variable.  My version turned     //
+//    out to be a simpler algorithm, actually! [Oct 14 2005]                  //
+//                                                                            //
+//    Global variables expected:                                              //
+//    f_child, child                                                          //
+
+static char **graph;            // Graph pointer.
+static int    top;              // Top of stack. (DeRemer's version)
+static int    depth;            // Depth of stack.
+static int    nw;               // Number of 32-bit words.
+static int   *N;                // Depth value for nodes.
+static int   *S;                // Stack of node numbers.
+
+static void
+TRAVERSE (int x) // Traverse node x in a graph.
 {
-   // Sort in place, destroys the original order.
-   int *p, *q, x;
-
-   end--;
-   p = start;
-   while (p < end)
+   int i;                           // Index of a child node.
+   int y;                           // Child node number.
+   i = f_child [x];                 // Get first child of node x.
+   if (i == -1)                     // If no children.
    {
-      x = *(q = ++p);
-      do
-      {
-         if (x < *--q)
-         {
-            *(q+1) = *q;
-            *q = x;
-         }
-         else break;
-      }
-      while (q > start);
+      N [x] = 2147483647;           // Mark it as traversed.
+      return;
    }
-}
-
-///////////////////////////////////////////////////////////////////////////////
-//                                                                           //
-//    SORT2 - Sort one vector of length n.                                   //
-
-void  SORT2 (int* value, int* seq, int n)
-{
-//    Sort in place.  Destroys the original order, but seq contains the original order.
-
-   int *last;
-   int *v1, *v2, vt;
-   int *s1, *s2, st;
-
-   if (n <= 1) return;
-
-   // Note:  when using pointers instead of indexes,
-   // we must be careful not to decrement below zero.
-
-   last = value + n - 1;
-   v1 = value;
-   s1 = seq;
-   while (v1 < last)       // from first to last-1
+   S [++top] = x;                   // Put x on the stack. (DeRemer's version)
+   N [x] = ++depth;                 // Depth of node x.    (DeRemer's version)
+   // S [++depth] = x;                 // Put x on the stack. (My version)
+   // N [x] = depth;                   // Depth of node x.    (My version)
+   do
    {
-      v2 = ++v1;
-      s2 = ++s1;
-      while (v2 > value)   // while next one > first in list.
+      y = child [i].numb;                 // Get child node y.
+      if (N [y] == 0) TRAVERSE (y);       // If node y not traversed.
+      if (N [y] < N [x])                  // If depth of y < depth of x,
+         N [x] = N [y];                  // Set depth of x to depth of y.
+      FASTOR (graph [y], graph [x], nw);  // Or y set onto x set.
+      i = child [i].link;                 // Get next child of node x.
+   }
+   while (i != -1);
+   if (N [x] == depth)                    // Original line from DeRemer's paper.
+      // if (S [N [x]] == x)                    // Modification by me, originally done in 1985.
+   {
+      for (;;)                            // For all nodes in this cycle.
       {
-         vt = *v2--;       // save higher one into temp.
-         st = *s2--;       // save higher one's index into temp.
-         if (vt < *v2)     // if temp less than one above ...
-         {
-            *(v2+1) = *v2;    // switch these two ...
-            *(s2+1) = *s2;    // .
-            *v2 = vt;         // .
-            *s2 = st;         // done switching.
-         }
-         else break;
+         y = S [top--];                   // Get node y from stack. (DeRemer's version)
+         // y = S [depth--];                 // Get node y from stack. (My version)
+         N [y] = 2147483647;              // Mark it as traversed.
+         if (y == x) break;                  // If we are back to the root.
+         FASTCPY (graph [x], graph [y], nw); // Copy set x to set y.
       }
    }
-   /* for (int i = 0; i < n; i++)
-      {
-      printf ("%5d %5d\n", value[i], seq[i]);
-      }
-   */
+   depth--;                               // Decrement depth. (DeRemer's version)
 }
+
+
 
 /*--- Attach Function. -----------------------------------------------------*/
 
@@ -634,115 +594,6 @@ int   ATTACH (int x, int y) // Attach y to x (add y to x set).
    return (0);
 }
 
-
-/*
-  Original version ...
-////////////////////////////////////////////////////////////////////////////////
-//                                                                            //
-//    DeRemer & Pennello's Digraph Algorithm.                                 //
-//    From "Efficient Computation of LALR(1) Look-Ahead Sets."                //
-//    Printed in TOPLAS, Oct 1982.                                            //
-//                                                                            //
-//    Modified by me (Paul Mann in 1985) because it did not work when I first //
-//    implemented it, without a separate top variable.  My version turned out //
-//    to be a simpler algorithm, actually! [Oct 14 2005]                      //
-//                                                                            //
-//    Global variables expected:                                              //
-//    n_bytes, f_child, child                                                 //
-
-static char**  graph;     // Graph pointer.
-static int     depth;     // Depth of stack.
-// static int     top;       // Top of stack. (DeRemer's version)
-static int*    N;         // Depth value for nodes.
-static int*    S;         // Stack of node numbers.
-
-void  T_GRAPH (char **g, int nr) // Traverse graph and do transitive closure.
-{
-int x;              // Node number.
-// top   = 0;          // Top of stack. (DeRemer's version)
-depth = 0;          // Depth of tree.
-graph = g;          // Set graph pointer.
-ALLOC (N, nr);      // Allocate N, number of rows.
-ALLOC (S, (nr+1));  // Allocate S, number of rows + 1;
-
-// Mark nodes as not traversed.
-for (x = 0; x < nr; x++) N [x] = 0;
-
-// Traverse all nodes in the graph.
-for (x = 0; x < nr; x++)
-{
-if (N [x] == 0) TRAVERSE (x);
-}
-FREE (S);
-FREE (N);
-}
-
-void  TRAVERSE (int x) // Traverse node x in a graph.
-{
-int i;                           // Index of a child node.
-int y;                           // Child node number.
-i = f_child [x];                 // Get first child of node x.
-if (i == -1)                     // If no children.
-{
-N [x] = 2147483647;           // Mark it as traversed.
-return;
-}
-// S [++top] = x;                   // Put x on the stack. (DeRemer's version)
-// N [x] = ++depth;                 // Depth of node x.    (DeRemer's version)
-S [++depth] = x;                 // Put x on the stack. (My version)
-N [x] = depth;                   // Depth of node x.    (My version)
-do
-{
-y = child [i].numb;           // Get child node y.
-if (N [y] == 0) TRAVERSE (y); // If node y not traversed.
-if (N [y] < N [x])            // If depth of y < depth of x,
-N [x] = N [y];            // Set depth of x to depth of y.
-FASTOR (graph [y], graph [x], n_words); // Or y set onto x set.
-i = child [i].link;              // Get next child of node x.
-}
-while (i != -1);
-
-// prt_lst ("N[x], depth = %d, %d\n", N[x], depth);
-// prt_lst ("S[N[x]],  x = %d, %d\n", S[N[x]],  x);
-// if (N [x] == depth)                 // Original line from DeRemer's paper.
-if (S [N [x]] == x)                 // Modification by me, originally done in 1985.
-{
-for (;;)                         // For all nodes in this cycle.
-{
-// y = S [top--];                // Get node y from stack. (DeRemer's version)
-y = S [depth--];              // Get node y from stack. (My version)
-N [y] = 2147483647;           // Mark it as traversed.
-if (y == x) break;            // If we are back to the root.
-FASTCPY (graph [x], graph [y], n_words); // Copy set x to set y.
-}
-}
-// depth--;                            // Decrement depth. (DeRemer's version)
-// Nothing.         (My version)
-return;
-}
-End of Original version.
-*/
-
-////////////////////////////////////////////////////////////////////////////////
-//                                                                            //
-//    DeRemer & Pennello's Digraph Algorithm.                                 //
-//    From "Efficient Computation of LALR(1) Look-Ahead Sets."                //
-//    Printed in TOPLAS, Oct 1982.                                            //
-//                                                                            //
-//    Modified by me (PBM in 1985) because it did not work when I first       //
-//    implemented it, without a separate top variable.  My version turned     //
-//    out to be a simpler algorithm, actually! [Oct 14 2005]                  //
-//                                                                            //
-//    Global variables expected:                                              //
-//    f_child, child                                                          //
-
-static char**  graph;     // Graph pointer.
-static int     top;       // Top of stack. (DeRemer's version)
-static int     depth;     // Depth of stack.
-static int     nw;        // Number of 32-bit words.
-static int*    N;         // Depth value for nodes.
-static int*    S;         // Stack of node numbers.
-
 void  T_GRAPH (char **g, int nr, int nc) // Traverse graph, do transitive closure.
 {
    int x;            // Node number.
@@ -763,63 +614,6 @@ void  T_GRAPH (char **g, int nr, int nc) // Traverse graph, do transitive closur
    }
    FREE (S, nr+1);
    FREE (N, nr);
-}
-
-void  TRAVERSE (int x) // Traverse node x in a graph.
-{
-   int i;                           // Index of a child node.
-   int y;                           // Child node number.
-   i = f_child [x];                 // Get first child of node x.
-   if (i == -1)                     // If no children.
-   {
-      N [x] = 2147483647;           // Mark it as traversed.
-      return;
-   }
-   S [++top] = x;                   // Put x on the stack. (DeRemer's version)
-   N [x] = ++depth;                 // Depth of node x.    (DeRemer's version)
-   // S [++depth] = x;                 // Put x on the stack. (My version)
-   // N [x] = depth;                   // Depth of node x.    (My version)
-   do
-   {
-      y = child [i].numb;                 // Get child node y.
-      if (N [y] == 0) TRAVERSE (y);       // If node y not traversed.
-      if (N [y] < N [x])                  // If depth of y < depth of x,
-         N [x] = N [y];                  // Set depth of x to depth of y.
-      FASTOR (graph [y], graph [x], nw);  // Or y set onto x set.
-      i = child [i].link;                 // Get next child of node x.
-   }
-   while (i != -1);
-   if (N [x] == depth)                    // Original line from DeRemer's paper.
-      // if (S [N [x]] == x)                    // Modification by me, originally done in 1985.
-   {
-      for (;;)                            // For all nodes in this cycle.
-      {
-         y = S [top--];                   // Get node y from stack. (DeRemer's version)
-         // y = S [depth--];                 // Get node y from stack. (My version)
-         N [y] = 2147483647;              // Mark it as traversed.
-         if (y == x) break;                  // If we are back to the root.
-         FASTCPY (graph [x], graph [y], nw); // Copy set x to set y.
-      }
-   }
-   depth--;                               // Decrement depth. (DeRemer's version)
-}
-
-///////////////////////////////////////////////////////////////////////////////
-
-int   open_log (char* fid)
-{
-   int i = (int)strlen (fid);
-   strcat (fid, ".log.txt");
-   // chmod  (fid, S_IWRITE);
-   logfp = fopen (fid, "w");
-   if (logfp == NULL)
-   {
-      printf ("Log file %s cannot be created.\n", fid);
-      fid[i] = 0;
-      return (0);
-   }
-   fid[i] = 0;
-   return (1);
 }
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -862,24 +656,6 @@ void  prt_logonly (const char *format,...) // Print only to the log file (not on
 
 ///////////////////////////////////////////////////////////////////////////////
 
-int   open_con (char* fid)
-{
-   int i = (int)strlen(fid);
-   strcat(fid, ".conflicts.txt");
-   // chmod  (fid, S_IWRITE);
-   confp = fopen(fid, "w");
-   if (confp == NULL)
-   {
-      prt_log("Conflict listing file %s cannot be created.\n", fid);
-      fid[i] = 0;
-      return (0);
-   }
-   fid[i] = 0;
-   return (1);
-}
-
-///////////////////////////////////////////////////////////////////////////////
-
 int   close_con()
 {
    if (confp != NULL) fclose(confp);
@@ -902,62 +678,10 @@ void  prt_con (const char *format, ...)
 
 ///////////////////////////////////////////////////////////////////////////////
 
-int   open_grm (char* fid)
-{
-   int i = (int)strlen (fid);
-   strcat (fid, ".grammar.txt");
-   // chmod (fid, S_IWRITE);
-   grmfp = fopen (fid, "w");
-   if (grmfp == NULL)
-   {
-      prt_log ("Grammar listing file %s cannot be created.\n", fid);
-      fid[i] = 0;
-      return (0);
-   }
-   fid[i] = 0;
-   return (1);
-}
-
-///////////////////////////////////////////////////////////////////////////////
-
 int   close_grm ()
 {
    if (grmfp != NULL) fclose (grmfp);
    grmfp = NULL;
-   return (1);
-}
-
-///////////////////////////////////////////////////////////////////////////////
-
-int   prt_grm (const char *format,...)
-{
-   if (option_grammar == 0) return 0;
-   int length = 0;
-   va_list argptr;
-   if (grmfp != NULL)
-   {
-      va_start (argptr, format);
-      length = vfprintf (grmfp, format, argptr);
-      va_end (argptr);
-   }
-   return length;
-}
-
-///////////////////////////////////////////////////////////////////////////////
-
-int   open_sta (char* fid)
-{
-   int i = (int)strlen (fid);
-   strcat (fid, ".states.txt");
-   // chmod (fid, S_IWRITE);
-   stafp = fopen (fid, "w");
-   if (stafp == NULL)
-   {
-      prt_log ("States listing file %s cannot be created.\n", fid);
-      fid[i] = 0;
-      return (0);
-   }
-   fid[i] = 0;
    return (1);
 }
 
@@ -970,8 +694,6 @@ int   close_sta ()
    return (1);
 }
 
-///////////////////////////////////////////////////////////////////////////////
-
 void  prt_sta (const char *format,...)
 {
    va_list argptr;
@@ -982,25 +704,6 @@ void  prt_sta (const char *format,...)
       vfprintf (stafp, format, argptr);
       va_end (argptr);
    }
-}
-
-///////////////////////////////////////////////////////////////////////////////
-
-int   open_warn (char* fid)
-{
-   int i = (int)strlen (fid);
-   strcat (fid, ".warnings.txt");
-   // chmod (fid, S_IWRITE);
-   lstfp = fopen (fid, "w");
-   if (lstfp == NULL)
-   {
-      prt_log ("Warning file '%s' cannot be created.\n", fid);
-      fid[i] = 0;
-      return (0);
-   }
-   prt_warn ("\n");
-   fid[i] = 0;
-   return (1);
 }
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -1034,23 +737,6 @@ void  prt_warn (const char *format,...)
    }
 }
 
-///////////////////////////////////////////////////////////////////////////////
-
-void  prt_num (const char* desc, int n, const char* name, int max)
-{
-   char bar [11] = "**********";
-   char num [14] = "             ";
-   char num2[14] = "             ";
-   double pc;
-   if (max == 0) pc = 0;
-   else pc = 100.0*n/max;
-   bar[(int)pc/10] = 0;
-   number (n, num);
-   number (max, num2);
-   if (n > 0) prt_logonly ("%-32s %9s  %-4s = %10s  %3.0f%% %s\n", desc, num, name, num2, pc, bar);
-   else       prt_logonly ("%-32s %9s  %-4s = %10s  %3.0f%% %s\n", desc, num, name, num2, pc, bar);
-   bar[(int)pc/10] = '*';
-}
 
 ///////////////////////////////////////////////////////////////////////////////
 
@@ -1115,48 +801,13 @@ void  inputt (void)
    }
 }
 
-///////////////////////////////////////////////////////////////////////////////
 
-void  prt_error (const char* msg, char* start, char* end, int linenum)
-{
-   if (++n_errors == 1) prt_log ("\n");
-   if (start != NULL && end == NULL)
-   {
-      for (end = start; *end != 0; end++);
-   }
-   prt_message ("Error, ", msg, start, end, linenum);
-   if (n_errors >= max_errors)
-   {
-      prt_log ("Maximum number of errors (%d) has been reached.\n", max_errors);
-      Quit();
-   }
-}
-
-///////////////////////////////////////////////////////////////////////////////
-
-void  prt_warning (const char* msg, char* start, char* end, int linenum)
-{
-   n_warnings++;
-   if (start != NULL && end == NULL)
-   {
-      for (end = start; *end != 0; end++);
-   }
-   prt_message ("Warning, ", msg, start, end, linenum);
-/*    if (n_warnings >= max_errors)
-      {
-      printf  ("Maximum number of warnings (%d) has been reached.\n", max_errors);
-      prt_warn ("Maximum number of warnings (%d) has been reached.\n", max_errors);
-      Quit();
-      }  */
-}
-
-////////////////////////////////////////////////////////////////////////////////
-
-void  prt_message (const char* msgtype,
-                   const char* msg,
-                   char* tokenstart,
-                   char* tokenend,
-                   int tokenlinenumb)
+static void
+prt_message(const char* msgtype,
+            const char* msg,
+            char* tokenstart,
+            char* tokenend,
+            int tokenlinenumb)
 {
    char  c;
    char* p;             // char pointer.
@@ -1342,6 +993,43 @@ void  prt_message (const char* msgtype,
 
 
 ///////////////////////////////////////////////////////////////////////////////
+
+void  prt_error (const char* msg, char* start, char* end, int linenum)
+{
+   if (++n_errors == 1) prt_log ("\n");
+   if (start != NULL && end == NULL)
+   {
+      for (end = start; *end != 0; end++);
+   }
+   prt_message ("Error, ", msg, start, end, linenum);
+   if (n_errors >= max_errors)
+   {
+      prt_log ("Maximum number of errors (%d) has been reached.\n", max_errors);
+      Quit();
+   }
+}
+
+///////////////////////////////////////////////////////////////////////////////
+
+void  prt_warning (const char* msg, char* start, char* end, int linenum)
+{
+   n_warnings++;
+   if (start != NULL && end == NULL)
+   {
+      for (end = start; *end != 0; end++);
+   }
+   prt_message ("Warning, ", msg, start, end, linenum);
+/*    if (n_warnings >= max_errors)
+      {
+      printf  ("Maximum number of warnings (%d) has been reached.\n", max_errors);
+      prt_warn ("Maximum number of warnings (%d) has been reached.\n", max_errors);
+      Quit();
+      }  */
+}
+
+////////////////////////////////////////////////////////////////////////////////
+
+///////////////////////////////////////////////////////////////////////////////
 //                                                                           //
 //    Best algorithm for space usage (does not need predefined Cameto).
 
@@ -1467,72 +1155,18 @@ void  SORTSYMB (int *s, char *start[], int n)
    FREE (p, n);
 }
 
-///////////////////////////////////////////////////////////////////////////////////////////////////
 
-const char* get_typestr (int* x, int n)
+void  MemCrash (const char* value, int n)
 {
-   int i, max = 0, min = 0;
-   for (i = 0; i < n; i++)
-   {
-      if (x[i] > max) max = x[i];
-      else if (x[i] < min) min = x[i];
-   }
-   if (min >= 0)
-   {
-      if      (max <=        127) return ("uchar"  ); // 1 byte
-      else if (max <=        255) return ("uchar"  ); // 1 byte
-      else if (max <=      32767) return ("ushort" ); // 2 bytes
-      else if (max <=      65535) return ("ushort" ); // 2 bytes
-      else if (max <= 2147483647) return ("uint"   ); // 4 bytes
-      else                        return ("uint"   ); // 4 bytes
-   }
-   else if (max > -min)
-   {
-      if      (max <=        127) return ("char"   ); // 1 byte
-      else if (max <=      32767) return ("short"  ); // 2 bytes
-      else                        return ("int"    ); // 4 bytes
-   }
-   else
-   {
-      if      (min >=       -127) return ("char"   ); // 1 byte
-      else if (min >=     -32767) return ("short"  ); // 2 bytes
-      else                        return ("int"    ); // 4 bytes
-   }
-   return (""); // never gets here, avoid compiler error.
+   n_errors++;
+   if (n_errors == 1) prt_log ("\n");
+   prt_log ("%s(%04d) : %s exceeds the limit of %d.\n", exefid, 1, value, n);
+   prt_log ("%s(%04d) : %s\n", exefid, 1, "Please increase the appropriate maximum value in this file:");
+   prt_log ("%s(%04d) : %s\n", exefid, 1, "<-- double click here.");
+   Quit ();
 }
 
-///////////////////////////////////////////////////////////////////////////////////////////////////
 
-int   get_typesize (int *x, int n)
-{
-   int i, max = 0, min = 0;
-   for (i = 0; i < n; i++)
-   {
-      if      (x[i] > max) max = x[i];
-      else if (x[i] < min) min = x[i];
-   }
-   if (min == 0)
-   {
-      if      (max <=        255) return (1); // 1 byte
-      else if (max <=      65535) return (2); // 2 bytes
-      else                        return (4); // 4 bytes
-   }
-   else if (max > -min)
-   {
-      if      (max <=        127) return (1); // 1 byte
-      else if (max <=      32767) return (2); // 2 bytes
-      else                        return (4); // 4 bytes
-   }
-   else
-   {
-      if      (min >=       -127) return (1); // 1 byte
-      else if (min >=     -32767) return (2); // 2 bytes
-      else                        return (4); // 4 bytes
-   }
-   return (0); // never gets here.
-}
-
-///////////////////////////////////////////////////////////////////////////////
 /* Local Variables:      */
 /* mode: c               */
 /* c-basic-offset: 3     */

@@ -17,6 +17,7 @@ const char* copywrt = "Copyright Paul B Mann";
 #define MAIN
 #include "CM_Global.h"
 #include "LG_Global.h"
+#include "LG_Main.h"
 
 OPTION LGOption[]= // Lexer Generator Options
 {
@@ -55,7 +56,134 @@ OPTION MAOption[]= // Memory Allocation Options
 void  ShowOptions ();
 void  InitOptions ();
 
+
+static char *mystrlwr (char* s)
+{
+   for (char* p = s; *p != 0; p++)
+   {
+      *p = lower[*p];
+   }
+   return s;
+}
+
+
 ///////////////////////////////////////////////////////////////////////////////
+
+static int open_warn(char* fid)
+{
+   int i = (int)strlen (fid);
+   strcat (fid, ".warnings.txt");
+   // chmod (fid, S_IWRITE);
+   lstfp = fopen (fid, "w");
+   if (lstfp == NULL)
+   {
+      prt_log ("Warning file '%s' cannot be created.\n", fid);
+      fid[i] = 0;
+      return (0);
+   }
+   prt_warn ("\n");
+   fid[i] = 0;
+   return (1);
+}
+
+
+///////////////////////////////////////////////////////////////////////////////
+
+static int open_log(char* fid)
+{
+   int i = (int)strlen (fid);
+   strcat (fid, ".log.txt");
+   // chmod  (fid, S_IWRITE);
+   logfp = fopen (fid, "w");
+   if (logfp == NULL)
+   {
+      printf ("Log file %s cannot be created.\n", fid);
+      fid[i] = 0;
+      return (0);
+   }
+   fid[i] = 0;
+   return (1);
+}
+
+
+///////////////////////////////////////////////////////////////////////////////
+
+static int open_con(char* fid)
+{
+   int i = (int)strlen(fid);
+   strcat(fid, ".conflicts.txt");
+   // chmod  (fid, S_IWRITE);
+   confp = fopen(fid, "w");
+   if (confp == NULL)
+   {
+      prt_log("Conflict listing file %s cannot be created.\n", fid);
+      fid[i] = 0;
+      return (0);
+   }
+   fid[i] = 0;
+   return (1);
+}
+
+
+///////////////////////////////////////////////////////////////////////////////
+
+static int open_grm (char* fid)
+{
+   int i = (int)strlen (fid);
+   strcat (fid, ".grammar.txt");
+   // chmod (fid, S_IWRITE);
+   grmfp = fopen (fid, "w");
+   if (grmfp == NULL)
+   {
+      prt_log ("Grammar listing file %s cannot be created.\n", fid);
+      fid[i] = 0;
+      return (0);
+   }
+   fid[i] = 0;
+   return (1);
+}
+
+
+///////////////////////////////////////////////////////////////////////////////
+
+static int open_sta (char* fid)
+{
+   int i = (int)strlen (fid);
+   strcat (fid, ".states.txt");
+   // chmod (fid, S_IWRITE);
+   stafp = fopen (fid, "w");
+   if (stafp == NULL)
+   {
+      prt_log ("States listing file %s cannot be created.\n", fid);
+      fid[i] = 0;
+      return (0);
+   }
+   fid[i] = 0;
+   return (1);
+}
+
+
+static void
+PRT_ARGS (int na, char **arg, int destination)
+{
+   int i;
+   if (destination == 0) printf      (  "%s %s %s %s.\n", program, version, bits, copywrt);
+   else                  prt_logonly ("\n%s %s %s %s.\n", program, version, bits, copywrt);
+   if (na > 1)
+   {
+      if (destination == 0) ;
+      else                  prt_logonly ("\n");
+      for (i = 1; i < na; i++)
+      {
+         if (destination == 0) printf      ("%s ", arg[i]);
+         else                  prt_logonly ("%s ", arg[i]);
+      }
+      if (destination == 0) printf      ("\n");
+      else                  prt_logonly ("\n\n");
+   }
+}
+
+
 
 int   main (int na, char *arg[])
 {
@@ -214,19 +342,6 @@ void  InternalError (int n)
    if (n_errors == 1) printf ("\n");
    printf ("INTERNAL ERROR %d\n\n", n);
    Quit();
-}
-
-///////////////////////////////////////////////////////////////////////////////
-//                                                                           //
-
-void  MemCrash (const char* value, int n)
-{
-   n_errors++;
-   if (n_errors == 1) prt_log ("\n");
-   prt_log ("%s(%04d) : %s exceeds the limit of %d.\n", exefid, 1, value, n);
-   prt_log ("%s(%04d) : %s\n", exefid, 1, "Please increase the appropriate maximum value in this file:");
-   prt_log ("%s(%04d) : %s\n", exefid, 1, "<-- double click here.");
-   Quit ();
 }
 
 //                                                                           //

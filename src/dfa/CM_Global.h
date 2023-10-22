@@ -410,83 +410,48 @@ EXTERN CHILD* child;
 EXTERN int*   f_child;
 EXTERN int    n_childs;
 
-extern void   C_CAMEFROM (int N_states, int* tt_start, int* tt_action, int* ntt_start, int* ntt_action, int*& f_camefrom, int*& camefrom);
-
-extern int    close_con();
-extern int    close_grm ();
-extern int    close_log ();
-extern int    close_sta ();
-extern int    close_warn ();
-
 #ifdef LINUX
-extern long   _filelength (int fd);
+long   _filelength (int fd);
 #endif
 
-extern int    fastcmp (int*, int*, int);
-extern void   fastcpy (int*, int*, int);
-extern void   fastini (int, int *, int);
-extern int    fastmrg (int*, int*, int);
-extern void   fastor  (int*, int*, int);
+int    fastcmp (int*, int*, int);
+void   fastcpy (int*, int*, int);
+void   fastini (int, int *, int);
+int    fastmrg (int*, int*, int);
+void   fastor  (int*, int*, int);
 
-extern void   frea (char* x, int n_bytes);
+void   frea (char* x, int n_bytes);
 
-extern int    get_fid (char*arg, char*dir, char*fn, char*ft);
-extern int    GetMaxValues  (char* dir);
-extern void   SaveMaxValues ();
+int    get_fid (char*arg, char*dir, char*fn, char*ft);
+int    GetMaxValues  (char* dir);
+void   SaveMaxValues ();
 
-extern int    inputi (const char*);
-extern void   inputt ();
-extern void   InternalError (int n);
+int    inputi (const char*);
+void   inputt ();
+void   InternalError (int n);
 
-extern void   MemCrash (const char* value, int n);
+void   MemCrash (const char* value, int n);
 
-extern char*  mystrlwr (char* s);
+void   number (int x, char* num);
 
-extern void   number (int x, char* num);
-
-extern int    open_log (char*);
-extern int    open_grm (char*);
-extern int    open_con (char*);
-extern int    open_sta (char*);
-extern int    open_warn (char*);
-
-extern void   prt_error   (const char *msg, char *start, char *end, int linenumb);
-extern void   prt_warning (const char *msg, char *start, char *end, int linenumb);
-extern void   prt_message (const char *msgtype,
-                           const char *msg,
-                           char *start,
-                           char *end,
-                           int         linenumb);
-extern void   prt_warn    (const char* format, ...);
-extern void   prt_log     (const char* format, ...);
-extern void   prt_logonly (const char* format, ...);
-extern int    prt_grm     (const char* format, ...);
-extern void   prt_con     (const char* format, ...);
-extern void   prt_sta     (const char* format, ...);
-extern void   PRT_ARGS    (int na, char** arg, int dest);
-extern void   prt_num     (const char* desc, int n, const char* name, int max);
-
-extern void   Quit ();
-
+void   prt_error   (const char *msg, char *start, char *end, int linenumb);
+void   prt_warning (const char *msg, char *start, char *end, int linenumb);
+void   prt_warn    (const char* format, ...);
+void   prt_log     (const char* format, ...);
+void   prt_logonly (const char* format, ...);
+void   prt_con     (const char* format, ...);
+void   prt_sta     (const char* format, ...);
+void   Quit ();
 char *ralloc (char *x, int no_bytes, int nn_bytes);
 
-extern void   SORT (int *start, int *end);
-extern void   SORT2 (int* first, int* second, int n);
 
-extern int    SET_OPTN (char* opt);
-extern int    set_optn (OPTION* option, char* opt);
-extern int    SET_OPTNS (int na, char** arg);
+int    SET_OPTNS (int na, char** arg);
 
-extern void   TRAVERSE (int x);
+char*  alloc_debug (int n_bytes, const char *fname, size_t lineno);
+char*  alloc (int n_bytes);
 
-extern char*  alloc_debug (int n_bytes, const char *fname, size_t lineno);
-extern char*  alloc (int n_bytes);
-
-extern int    ATTACH   (int x, int y);
-extern void   T_GRAPH  (char **graph, int nr, int nc);
-
-extern const char*  get_typestr  (int*, int);
-extern int    get_typesize (int*, int);
+int    ATTACH   (int x, int y);
+void   T_GRAPH  (char **graph, int nr, int nc);
 #endif
 /* Local Variables:      */
 /* mode: c               */

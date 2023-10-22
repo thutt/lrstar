@@ -3,6 +3,7 @@
 
 #include "CM_Global.h"
 #include "LG_Global.h"
+#include "LG_Main.h"
 
 ///////////////////////////////////////////////////////////////////////////////
 
@@ -138,6 +139,25 @@ int   LG::CheckOptions ()
    if (n_errors > 0) return 0;
    return (1);
 }
+
+
+static void
+prt_num (const char* desc, int n, const char* name, int max)
+{
+   char bar [11] = "**********";
+   char num [14] = "             ";
+   char num2[14] = "             ";
+   double pc;
+   if (max == 0) pc = 0;
+   else pc = 100.0*n/max;
+   bar[(int)pc/10] = 0;
+   number (n, num);
+   number (max, num2);
+   if (n > 0) prt_logonly ("%-32s %9s  %-4s = %10s  %3.0f%% %s\n", desc, num, name, num2, pc, bar);
+   else       prt_logonly ("%-32s %9s  %-4s = %10s  %3.0f%% %s\n", desc, num, name, num2, pc, bar);
+   bar[(int)pc/10] = '*';
+}
+
 
 void  LG::PrintStats ()
 {

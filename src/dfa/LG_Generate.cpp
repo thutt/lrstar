@@ -5,8 +5,39 @@
 #include "LG_Global.h"
 #include "LG_CreateTables.h"
 
-///////////////////////////////////////////////////////////////////////////////////////////////////
-//                                                                                               //
+static const char *
+get_typestr(int *x, int n)
+{
+   int i, max = 0, min = 0;
+   for (i = 0; i < n; i++)
+   {
+      if (x[i] > max) max = x[i];
+      else if (x[i] < min) min = x[i];
+   }
+   if (min >= 0)
+   {
+      if      (max <=        127) return ("uchar"  ); // 1 byte
+      else if (max <=        255) return ("uchar"  ); // 1 byte
+      else if (max <=      32767) return ("ushort" ); // 2 bytes
+      else if (max <=      65535) return ("ushort" ); // 2 bytes
+      else if (max <= 2147483647) return ("uint"   ); // 4 bytes
+      else                        return ("uint"   ); // 4 bytes
+   }
+   else if (max > -min)
+   {
+      if      (max <=        127) return ("char"   ); // 1 byte
+      else if (max <=      32767) return ("short"  ); // 2 bytes
+      else                        return ("int"    ); // 4 bytes
+   }
+   else
+   {
+      if      (min >=       -127) return ("char"   ); // 1 byte
+      else if (min >=     -32767) return ("short"  ); // 2 bytes
+      else                        return ("int"    ); // 4 bytes
+   }
+   return (""); // never gets here, avoid compiler error.
+}
+
 
 void  LG::GenerateLexerDefines ()
 {
