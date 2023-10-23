@@ -113,7 +113,18 @@ int   PG_PrintGrammar::p_tail (const char* before, int s, const char* after)
    return 1;
 }
 
-/////////////////////////////////////////////////////////////////////////////////////////////////////
+
+static void prt_grm(const char *format, ...)
+{
+   va_list argptr;
+   if (grmfp != NULL)
+   {
+      va_start(argptr, format);
+      vfprintf(outfp, format, argptr);
+      va_end(argptr);
+   }
+}
+
 
 void  PG_PrintGrammar::print_struc()
 {

@@ -147,45 +147,6 @@ int   main (int na, char *arg[])
    exit (n_errors);
 }
 
-///////////////////////////////////////////////////////////////////////////////
-
-void  PRT_ARGS (int na, char** arg, int destination)
-{
-   int i;
-   if (destination == 0) printf      (  "%s %s %s %s.\n", program, version, bits, copywrt);
-   else                  prt_logonly ("\n%s %s %s %s.\n", program, version, bits, copywrt);
-   if (na > 1)
-   {
-      if (destination == 0) ;
-      else prt_logonly ("\n");
-      for (i = 1; i < na; i++)
-      {
-         if (destination == 0) printf      ("%s ", arg[i]);
-         else                  prt_logonly ("%s ", arg[i]);
-      }
-      if (destination == 0) printf      ("\n");
-      else                  prt_logonly ("\n\n");
-   }
-}
-
-///////////////////////////////////////////////////////////////////////////////
-
-int   SET_OPTNS (int na, char** arg, OPTION* optionlist)
-{
-   int i, ne = 0;
-   for (i = 2; i < na; i++)
-   {
-      if (arg[i][0] == '/' || arg[i][0] == '-' || arg[i][0] == '!')
-      {
-         if (arg[i][1] != 0)
-         {
-            if (!set_optn (optionlist, arg[i])) return 0;
-         }
-      }
-      else if (!set_optn (optionlist, arg[i])) return 0;
-   }
-   return 1;
-}
 
 ///////////////////////////////////////////////////////////////////////////////
 
@@ -285,110 +246,6 @@ void  Wait ()
 
 ///////////////////////////////////////////////////////////////////////////////
 
-int   GetMaxValues (char* dn)
-{
-   char* p;
-   int   rc;   // Return code.
-   int   nb;   // Number of bytes read.
-   int   linenumb;
-   int   filedesc = -1;
-   int   filesize;
-
-#if defined(WINDOWS)
-   strcpy (exefid, getenv ("USERPROFILE"));
-   strcat (exefid, "\\AppData\\Local\\LRSTAR");
-   strcat (exefid, "\\memory.txt");
-   filedesc = open (exefid, 0);           // Open the file.
-#endif
-   if (filedesc < 0)                      // File not found.
-   {
-      strcpy (exefid, dn);
-      strcat (exefid, "memory.txt");
-      filedesc = open (exefid, 0);        // Open the file.
-      if (filedesc < 0)                   // File not found.
-      {
-         SaveMaxValues ();                // Create it.
-         return 1;
-      }
-   }
-
-   rc = 1; // OK
-   linenumb = 1;
-   filesize = _filelength (filedesc) + 2;    // Set amount to read.
-   ALLOC (input_start, filesize);
-   nb = read (filedesc, input_start, filesize);
-   if (nb <= 0)
-   {
-      SaveMaxValues ();                      // Create it.
-      goto Ret;
-   }
-
-   input_end = input_start + nb;             // Set end-of-buffer pointer.
-   *(input_end)   = EOL_CHAR;
-   *(input_end+1) = EOF_CHAR;
-
-   p = input_start;
-   do
-   {
-   Find:    while (*p != '/' && *p != EOF_CHAR && *p != '\n') p++; // Find first "
-      if (*p == '\n')
-      {
-         p++;
-         linenumb++;
-         goto Find;
-      }
-      if (*p == EOF_CHAR) goto Ret;
-      char* option = p;                            // Set option start.
-      while (*p != EOF_CHAR && *p != '\n') p++;    // Find end of line.
-      if (*p == '\n') linenumb++;
-      if (*p == EOF_CHAR) goto Ret;
-
-      *p++ = 0;  // skip over \n
-      if (set_optn (MAOption, option) == 0)
-      {
-         printf ("\n   OPTION   DEFAULT  DESCRIPTION\n");
-         for (int i = 0; *MAOption[i].name != 0; i++)
-         {
-            printf ("   %-6s  %8d  %s.\n", MAOption[i].name, MAOption[i].defvalue, MAOption[i].desc);
-         }
-         printf ("\n");
-         rc = 0; // error
-         goto Ret;
-      }
-   }
-   while (p < input_end);
-
-Ret:  FREE (input_start, filesize);
-   close (filedesc);                      // Close input file.
-   return rc;
-}
-
-///////////////////////////////////////////////////////////////////////////////
-
-void  SaveMaxValues ()
-{
-   int i;
-   FILE* fp;
-   fp = fopen (exefid, "w");
-   if (fp == NULL)
-   {
-      printf ("Error: Cannot write file '%s'.\n", exefid);
-      Quit ();
-   }
-   else
-   {
-      fprintf (fp, "\nMemory Allocation Options (maximum values).\n");
-      fprintf (fp, "Modify these values to suit your needs.\n\n");
-      for (i = 0; *MAOption[i].name != 0; i++)
-      {
-         fprintf (fp, "/%-4s = %8d  %s\n", MAOption[i].name, optn[MAOption[i].numb], MAOption[i].desc);
-      }
-      fclose (fp);
-   }
-}
-
-///////////////////////////////////////////////////////////////////////////////
-
 bool  itsakeyword (const char* terminal)
 {
    const char* p;
@@ -404,130 +261,6 @@ bool  itsakeyword (const char* terminal)
    return false;
 }
 
-///////////////////////////////////////////////////////////////////////////////
-
-char* mystrlwr (char* s)
-{
-   for (char* p = s; *p != 0; p++)
-   {
-      *p = lower[*p];
-   }
-   return s;
-}
-
-///////////////////////////////////////////////////////////////////////////////
-
-int   get_fid (char *arg, char *dir, char *fn, char *ft)
-{
-   int  len;
-   char *f, c, *last_slash, *last_dot;
-
-   dir[0] = 0;
-   fn [0] = 0;
-   ft [0] = 0;
-
-   last_slash = strrchr(arg, '\\');
-   if (last_slash != NULL)
-   {
-      f = last_slash + 1;        // Point at filename start.
-      c = *f;                    // Save the char.
-      *f = 0;                    // Drop null there.
-      if (f-arg < PATH_MAX)      // If length is OK.
-      {
-         strcpy (dir, arg);      // Copy to 'dir'.
-      }
-      else                       // Directory name is too long.
-      {
-         n_errors++;
-         if (n_errors == 1) printf ("\n");
-         printf ("Directory name\n\n%s\n\nhas more than %d characters.\n\n",
-                 arg, PATH_MAX - 1);
-         return (0);
-      }
-      *f = c;                    // Replace char.
-   }
-   else f = arg;                 // Point at filename start.
-
-   last_dot = strrchr (f, '.');
-   if (last_dot != NULL)
-   {
-      *last_dot = 0;
-      if (last_dot-f < PATH_MAX)
-      {
-         strcpy (fn, f);         // Copy to 'fn'.
-      }
-      else                       // Filename is too long.
-      {
-         n_errors++;
-         if (n_errors == 1) printf ("\n");
-         printf ("Filename\n\n%s\n\nhas more than %d characters.\n\n",
-                 f, PATH_MAX - 1);
-         return (0);
-      }
-      *last_dot = '.';           // Replace dot.
-      len = (int)strlen (last_dot);
-      if (len < PATH_MAX)
-      {
-         strcpy (ft, last_dot);  // Copy to 'ft'.
-      }
-      else                       // Filetype is too long.
-      {
-         n_errors++;
-         if (n_errors == 1) printf ("\n");
-         printf ("Filetype\n\n%s\n\nhas more than %d characters.\n\n",
-                 last_dot, PATH_MAX - 1);
-         return (0);
-      }
-   }
-   else                          // No '\' and no '.'
-   {
-      len = (int)strlen (f);
-      if (len < PATH_MAX)
-      {
-         strcpy (fn, f);         // Copy to 'fn'.
-      }
-      else                       // Filename is too long.
-      {
-         n_errors++;
-         if (n_errors == 1) printf ("\n");
-         printf ("Filename\n\n%s\n\nhas more than %d characters.\n\n",
-                 f, PATH_MAX - 1);
-         return (0);
-      }
-   }
-   return 1;
-}
-
-///////////////////////////////////////////////////////////////////////////////
-
-char* get_file (char *dir, char *fn, char *ft, int *nb, int flags)
-{
-   char  fid [PATH_MAX], *filep;
-   int   fl, n, fd;
-
-   strcpy (fid, dir);
-   strcat (fid, fn);
-   strcat (fid, ft);
-   if ((fd = open (fid, flags)) < 0)
-   {
-      *nb = 0;
-      return (NULL);
-   }
-//    prt_log ("Reading \"%s%s\" ...\n\n", fn, ft);
-   fl = _filelength (fd);
-   ALLOC (filep, fl+3);
-   *filep = '\n';                               // Put newline at beginning.
-   n = read (fd, filep+1, fl);
-   close (fd);
-   if (n < 0) goto Err;
-   if (*(filep+n) != '\n') *(filep+n++) = '\n'; // Put newline there.
-   *nb = n;                                     // Don't include EOF.
-   return (filep);
-
-Err:  n_errors++;
-   prt_log ("Read error on file %s.\n\n", fid);
-   return (NULL);
-}
 
 ///////////////////////////////////////////////////////////////////////////////
 
@@ -628,26 +361,6 @@ void  fastor (int *a, int *b, int n)
    for (i = 0; i < n; i++) b[i] |= a[i];
 }
 
-////////////////////////////////////////////////////////////////////////////////
-
-char *fix_backslash (const char *in) // Change \\ to \ in place.
-{
-   char *copy = strdup(in);
-   char *out;
-
-   out = copy;
-   in  = copy;
-   while (*in != 0)
-   {
-      if (*in == '\\' && *(in+1) == '\\')
-      {
-         in++;
-      }
-      *out++ = *in++;
-   }
-   *out = 0;
-   return copy;
-}
 
 ///////////////////////////////////////////////////////////////////////////////
 
@@ -677,33 +390,6 @@ void  number (int x, char* string)
       string[i--] = buff[--k];
       if (k == 0) break;
       if (++j % 3 == 0) string[i--] = ',';
-   }
-}
-
-///////////////////////////////////////////////////////////////////////////////
-//                                                                           //
-//    SORT - Sort one vector.
-
-void  SORT (int *start, int *end) /* Integer bubble sort. */
-{
-   // Sort in place, destroys the original order.
-   int *p, *q, x;
-
-   end--;
-   p = start;
-   while (p < end)
-   {
-      x = *(q = ++p);
-      do
-      {
-         if (x < *--q)
-         {
-            *(q+1) = *q;
-            *q = x;
-         }
-         else break;
-      }
-      while (q > start);
    }
 }
 
@@ -876,27 +562,6 @@ static int     nw;        // Number of 32-bit words.
 static int*    N;         // Depth value for nodes.
 static int*    S;         // Stack of node numbers.
 
-void  T_GRAPH (char **g, int nr, int nc) // Traverse graph, do transitive closure.
-{
-   int x;            // Node number.
-   top   = 0;        // Top of stack. (DeRemer's version)
-   depth = 0;        // Depth of tree.
-   graph = g;        // Set graph pointer.
-   nw = (nc + 3)/4;  // Number of 4-byte words.
-   ALLOC (N, nr);    // Allocate N, number of rows.
-   ALLOC (S, nr+1);  // Allocate S, number of rows + 1;
-
-   // Mark nodes as not traversed.
-   for (x = 0; x < nr; x++) N [x] = 0;
-
-   // Traverse all nodes in the graph.
-   for (x = 0; x < nr; x++)
-   {
-      if (N [x] == 0) TRAVERSE (x);
-   }
-   FREE (S, nr+1);
-   FREE (N, nr);
-}
 
 void  TRAVERSE (int x) // Traverse node x in a graph.
 {
@@ -937,22 +602,27 @@ void  TRAVERSE (int x) // Traverse node x in a graph.
    depth--;                               // Decrement depth. (DeRemer's version)
 }
 
-///////////////////////////////////////////////////////////////////////////////
 
-int   open_log (char* fid)
+void  T_GRAPH (char **g, int nr, int nc) // Traverse graph, do transitive closure.
 {
-   int i = (int)strlen (fid);
-   strcat (fid, ".log.txt");
-   // chmod  (fid, S_IWRITE);
-   logfp = fopen (fid, "w");
-   if (logfp == NULL)
+   int x;            // Node number.
+   top   = 0;        // Top of stack. (DeRemer's version)
+   depth = 0;        // Depth of tree.
+   graph = g;        // Set graph pointer.
+   nw = (nc + 3)/4;  // Number of 4-byte words.
+   ALLOC (N, nr);    // Allocate N, number of rows.
+   ALLOC (S, nr+1);  // Allocate S, number of rows + 1;
+
+   // Mark nodes as not traversed.
+   for (x = 0; x < nr; x++) N [x] = 0;
+
+   // Traverse all nodes in the graph.
+   for (x = 0; x < nr; x++)
    {
-      printf ("Log file %s cannot be created.\n", fid);
-      fid[i] = 0;
-      return (0);
+      if (N [x] == 0) TRAVERSE (x);
    }
-   fid[i] = 0;
-   return (1);
+   FREE (S, nr+1);
+   FREE (N, nr);
 }
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -993,76 +663,6 @@ void  prt_logonly (const char *format,...) // Print only to the log file (not on
    }
 }
 
-///////////////////////////////////////////////////////////////////////////////
-
-int   open_con (char* fid)
-{
-   int i = (int)strlen(fid);
-   strcat(fid, ".conflicts.txt");
-   // chmod  (fid, S_IWRITE);
-   confp = fopen(fid, "w");
-   if (confp == NULL)
-   {
-      prt_log("Conflict listing file %s cannot be created.\n", fid);
-      fid[i] = 0;
-      return (0);
-   }
-   fid[i] = 0;
-   return (1);
-}
-
-///////////////////////////////////////////////////////////////////////////////
-
-int   close_con()
-{
-   if (confp != NULL) fclose(confp);
-   confp = NULL;
-   return (1);
-}
-
-///////////////////////////////////////////////////////////////////////////////
-
-void  prt_con (const char *format, ...)
-{
-   va_list argptr;
-   if (confp != NULL)
-   {
-      va_start(argptr, format);
-      vfprintf(confp, format, argptr);
-      va_end(argptr);
-   }
-}
-
-///////////////////////////////////////////////////////////////////////////////
-
-int   open_grm (char* fid)
-{
-   int i = (int)strlen(fid);
-   strcat (fid, ".grammar.txt");
-   // chmod (fid, S_IWRITE);
-   grmfp = fopen (fid, "w");
-   if (grmfp == NULL)
-   {
-      prt_log("Output listing file %s cannot be created.\n", fid);
-      fid[i] = 0;
-      return (0);
-   }
-   fid[i] = 0;
-   return (1);
-}
-
-///////////////////////////////////////////////////////////////////////////////
-
-void  prt_grm (const char* format, ...)
-{
-   va_list argptr;
-   if (grmfp != NULL)
-   {
-      va_start(argptr, format);
-      vfprintf(outfp, format, argptr);
-      va_end(argptr);
-   }
-}
 
 ///////////////////////////////////////////////////////////////////////////////
 
@@ -1072,34 +672,6 @@ int   close_out ()
    return (1);
 }
 
-///////////////////////////////////////////////////////////////////////////////
-
-int   open_sta (char* fid)
-{
-   int i = (int)strlen (fid);
-   strcat (fid, ".states.txt");
-   // chmod (fid, S_IWRITE);
-   stafp = fopen (fid, "w");
-   if (stafp == NULL)
-   {
-      prt_log ("States listing file %s cannot be created.\n", fid);
-      fid[i] = 0;
-      return (0);
-   }
-   fid[i] = 0;
-   return (1);
-}
-
-///////////////////////////////////////////////////////////////////////////////
-
-int   close_sta ()
-{
-   if (stafp != NULL) fclose (stafp);
-   stafp = NULL;
-   return (1);
-}
-
-///////////////////////////////////////////////////////////////////////////////
 
 void  prt_sta (const char *format,...)
 {
@@ -1113,38 +685,6 @@ void  prt_sta (const char *format,...)
    }
 }
 
-///////////////////////////////////////////////////////////////////////////////
-
-int   open_warn (char* fid)
-{
-   int i = (int)strlen (fid);
-   strcat (fid, ".warnings.txt");
-   // chmod (fid, S_IWRITE);
-   lstfp = fopen (fid, "w");
-   if (lstfp == NULL)
-   {
-      prt_log ("Warning file '%s' cannot be created.\n", fid);
-      fid[i] = 0;
-      return (0);
-   }
-   prt_warn ("\n");
-   fid[i] = 0;
-   return (1);
-}
-
-///////////////////////////////////////////////////////////////////////////////
-
-int   close_warn ()
-{
-   if (lstfp != NULL)
-   {
-      if (n_warnings == 1) prt_warn ("%d warning.\n", n_warnings);
-      else                 prt_warn ("%d warnings.\n", n_warnings);
-      fclose (lstfp);
-      lstfp = NULL;
-   }
-   return (1);
-}
 
 ///////////////////////////////////////////////////////////////////////////////
 
@@ -1163,95 +703,6 @@ void  prt_warn (const char *format,...)
    }
 }
 
-///////////////////////////////////////////////////////////////////////////////
-
-void  prt_warnscreen (const char *format,...)
-{
-   va_list argptr;
-   // Print to screen.
-   if (option_warnings) // On screen?
-   {
-      va_start(argptr, format);
-      vprintf (format, argptr); // Print on screen.
-      va_end(argptr);
-   }
-   // Print to listing file.
-   if (lstfp != NULL)
-   {
-      va_start (argptr, format);
-      vfprintf (lstfp, format, argptr);
-      va_end (argptr);
-   }
-}
-
-///////////////////////////////////////////////////////////////////////////////
-
-void  prt_num (const char* desc, int n, const char* name, int max)
-{
-   char bar [11] = "**********";
-   char num [14] = "             ";
-   char num2[14] = "             ";
-   double pc;
-   if (max == 0) pc = 0;
-   else pc = 100.0*n/max;
-   bar[(int)pc/10] = 0;
-   number (n, num);
-   number (max, num2);
-   if (n > 0) prt_logonly ("%-32s %9s  %-4s = %10s  %3.0f%% %s\n", desc, num, name, num2, pc, bar);
-   else       prt_logonly ("%-32s %9s  %-4s = %10s  %3.0f%% %s\n", desc, num, name, num2, pc, bar);
-   bar[(int)pc/10] = '*';
-}
-
-///////////////////////////////////////////////////////////////////////////////
-
-int   inputi (const char* Msg)
-{
-   int nb;                                   /* Number of bytes read.      */
-   filedesc = open (grmfid, 0);              /* Open the file.             */
-   if (filedesc < 0)                         /* If open error.             */
-   {
-      if (*Msg != 0)
-      {
-         n_errors++;
-         prt_log ("%s: %s.\n", Msg, grmfid);
-      }
-      return 0;
-   }
-   filesize = _filelength (filedesc);
-
-   ALLOC (input_start, filesize + 110);
-   *input_start++ = '\n';                    // Put EOL at the beggining.
-
-   nb = read (filedesc, input_start, filesize);
-   if (nb <= 0)                              // If read error.
-   {
-      n_errors++;
-      prt_log ("Read error on file %s, or it's empty.\n\n", grmfid);
-      return 0; // Error
-   }
-
-   input_end = input_start + nb;             // Set end-of-buffer pointer.
-   *input_end++ = '\n';
-   *input_end++ = 26;                        // Parser needs 2 EOFs.
-   *input_end++ = 26;
-   *input_end++ = 0;                         // ??
-   close (filedesc);                         // Close input file.
-
-   n_lines = 0;
-   char* p = input_start;
-   while (*p != EOF_CHAR)
-   {
-      while (*p != '\n') p++;
-      n_lines++;
-      p++;
-   }
-   ALLOC (line_ptr, n_lines+5);  // Allow extra lines at end.
-   for (int i = 0; i < n_lines+5; i++)
-   {
-      line_ptr[i] = NULL;
-   }
-   return 1; // OK
-}
 
 ///////////////////////////////////////////////////////////////////////////////
 
@@ -1710,70 +1161,6 @@ void  SORTSYMB (int *s, char *start[], int n)
    FREE (p, n);
 }
 
-///////////////////////////////////////////////////////////////////////////////////////////////////
-
-const char* get_typestr (int* x, int n)
-{
-   int i, max = 0, min = 0;
-   for (i = 0; i < n; i++)
-   {
-      if (x[i] > max) max = x[i];
-      else if (x[i] < min) min = x[i];
-   }
-   if (min >= 0)
-   {
-      if      (max <=        127) return ("uchar"  ); // 1 byte
-      else if (max <=        255) return ("uchar"  ); // 1 byte
-      else if (max <=      32767) return ("ushort" ); // 2 bytes
-      else if (max <=      65535) return ("ushort" ); // 2 bytes
-      else if (max <= 2147483647) return ("uint"   ); // 4 bytes
-      else                        return ("uint"   ); // 4 bytes
-   }
-   else if (max > -min)
-   {
-      if      (max <=        127) return ("char"   ); // 1 byte
-      else if (max <=      32767) return ("short"  ); // 2 bytes
-      else                        return ("int"    ); // 4 bytes
-   }
-   else
-   {
-      if      (min >=       -127) return ("char"   ); // 1 byte
-      else if (min >=     -32767) return ("short"  ); // 2 bytes
-      else                        return ("int"    ); // 4 bytes
-   }
-   return (""); // never gets here, avoid compiler error.
-}
-
-///////////////////////////////////////////////////////////////////////////////////////////////////
-
-int   get_typesize (int *x, int n)
-{
-   int i, max = 0, min = 0;
-   for (i = 0; i < n; i++)
-   {
-      if      (x[i] > max) max = x[i];
-      else if (x[i] < min) min = x[i];
-   }
-   if (min == 0)
-   {
-      if      (max <=        255) return (1); // 1 byte
-      else if (max <=      65535) return (2); // 2 bytes
-      else                        return (4); // 4 bytes
-   }
-   else if (max > -min)
-   {
-      if      (max <=        127) return (1); // 1 byte
-      else if (max <=      32767) return (2); // 2 bytes
-      else                        return (4); // 4 bytes
-   }
-   else
-   {
-      if      (min >=       -127) return (1); // 1 byte
-      else if (min >=     -32767) return (2); // 2 bytes
-      else                        return (4); // 4 bytes
-   }
-   return (0); // never gets here.
-}
 
 ///////////////////////////////////////////////////////////////////////////////
 

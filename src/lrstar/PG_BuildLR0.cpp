@@ -4,9 +4,6 @@
 #include "CM_Global.h"
 #include "PG_BuildLR0.h"
 
-//    #define DEBUG
-#define PRINT prt_sta
-
 int    PG_BuildLR0::N_states;
 int*   PG_BuildLR0::ntt_item;
 int*   PG_BuildLR0::accessor;
@@ -364,8 +361,30 @@ void  PG_BuildLR0::MAKE_KERNEL (int c)
    while ((c = closure[c].next) != -1);
 }
 
-///////////////////////////////////////////////////////////////////////////////
-//                                                                           //
+
+void  SORT (int *start, int *end) /* Integer bubble sort. */
+{
+   // Sort in place, destroys the original order.
+   int *p, *q, x;
+
+   end--;
+   p = start;
+   while (p < end)
+   {
+      x = *(q = ++p);
+      do
+      {
+         if (x < *--q)
+         {
+            *(q+1) = *q;
+            *q = x;
+         }
+         else break;
+      }
+      while (q > start);
+   }
+}
+
 
 int   PG_BuildLR0::TRANSIT (int ki, int sym)
 {

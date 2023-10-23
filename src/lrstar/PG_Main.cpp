@@ -103,7 +103,356 @@ int   PG_Main::Main (int na, char** arg)
    return 0;
 }
 
-///////////////////////////////////////////////////////////////////////////////
+static int
+get_fid (char *arg, char *dir, char *fn, char *ft)
+{
+   int  len;
+   char *f, c, *last_slash, *last_dot;
+
+   dir[0] = 0;
+   fn [0] = 0;
+   ft [0] = 0;
+
+   last_slash = strrchr(arg, '\\');
+   if (last_slash != NULL)
+   {
+      f = last_slash + 1;        // Point at filename start.
+      c = *f;                    // Save the char.
+      *f = 0;                    // Drop null there.
+      if (f-arg < PATH_MAX)      // If length is OK.
+      {
+         strcpy (dir, arg);      // Copy to 'dir'.
+      }
+      else                       // Directory name is too long.
+      {
+         n_errors++;
+         if (n_errors == 1) printf ("\n");
+         printf ("Directory name\n\n%s\n\nhas more than %d characters.\n\n",
+                 arg, PATH_MAX - 1);
+         return (0);
+      }
+      *f = c;                    // Replace char.
+   }
+   else f = arg;                 // Point at filename start.
+
+   last_dot = strrchr (f, '.');
+   if (last_dot != NULL)
+   {
+      *last_dot = 0;
+      if (last_dot-f < PATH_MAX)
+      {
+         strcpy (fn, f);         // Copy to 'fn'.
+      }
+      else                       // Filename is too long.
+      {
+         n_errors++;
+         if (n_errors == 1) printf ("\n");
+         printf ("Filename\n\n%s\n\nhas more than %d characters.\n\n",
+                 f, PATH_MAX - 1);
+         return (0);
+      }
+      *last_dot = '.';           // Replace dot.
+      len = (int)strlen (last_dot);
+      if (len < PATH_MAX)
+      {
+         strcpy (ft, last_dot);  // Copy to 'ft'.
+      }
+      else                       // Filetype is too long.
+      {
+         n_errors++;
+         if (n_errors == 1) printf ("\n");
+         printf ("Filetype\n\n%s\n\nhas more than %d characters.\n\n",
+                 last_dot, PATH_MAX - 1);
+         return (0);
+      }
+   }
+   else                          // No '\' and no '.'
+   {
+      len = (int)strlen (f);
+      if (len < PATH_MAX)
+      {
+         strcpy (fn, f);         // Copy to 'fn'.
+      }
+      else                       // Filename is too long.
+      {
+         n_errors++;
+         if (n_errors == 1) printf ("\n");
+         printf ("Filename\n\n%s\n\nhas more than %d characters.\n\n",
+                 f, PATH_MAX - 1);
+         return (0);
+      }
+   }
+   return 1;
+}
+
+
+static void  SaveMaxValues ()
+{
+   int i;
+   FILE* fp;
+   fp = fopen (exefid, "w");
+   if (fp == NULL)
+   {
+      printf ("Error: Cannot write file '%s'.\n", exefid);
+      Quit ();
+   }
+   else
+   {
+      fprintf (fp, "\nMemory Allocation Options (maximum values).\n");
+      fprintf (fp, "Modify these values to suit your needs.\n\n");
+      for (i = 0; *MAOption[i].name != 0; i++)
+      {
+         fprintf (fp, "/%-4s = %8d  %s\n", MAOption[i].name, optn[MAOption[i].numb], MAOption[i].desc);
+      }
+      fclose (fp);
+   }
+}
+
+
+static int GetMaxValues (char *dn)
+{
+   char* p;
+   int   rc;   // Return code.
+   int   nb;   // Number of bytes read.
+   int   linenumb;
+   int   filedesc = -1;
+   int   filesize;
+
+#if defined(WINDOWS)
+   strcpy (exefid, getenv ("USERPROFILE"));
+   strcat (exefid, "\\AppData\\Local\\LRSTAR");
+   strcat (exefid, "\\memory.txt");
+   filedesc = open (exefid, 0);           // Open the file.
+#endif
+   if (filedesc < 0)                      // File not found.
+   {
+      strcpy (exefid, dn);
+      strcat (exefid, "memory.txt");
+      filedesc = open (exefid, 0);        // Open the file.
+      if (filedesc < 0)                   // File not found.
+      {
+         SaveMaxValues ();                // Create it.
+         return 1;
+      }
+   }
+
+   rc = 1; // OK
+   linenumb = 1;
+   filesize = _filelength (filedesc) + 2;    // Set amount to read.
+   ALLOC (input_start, filesize);
+   nb = read (filedesc, input_start, filesize);
+   if (nb <= 0)
+   {
+      SaveMaxValues ();                      // Create it.
+      goto Ret;
+   }
+
+   input_end = input_start + nb;             // Set end-of-buffer pointer.
+   *(input_end)   = EOL_CHAR;
+   *(input_end+1) = EOF_CHAR;
+
+   p = input_start;
+   do
+   {
+   Find:    while (*p != '/' && *p != EOF_CHAR && *p != '\n') p++; // Find first "
+      if (*p == '\n')
+      {
+         p++;
+         linenumb++;
+         goto Find;
+      }
+      if (*p == EOF_CHAR) goto Ret;
+      char* option = p;                            // Set option start.
+      while (*p != EOF_CHAR && *p != '\n') p++;    // Find end of line.
+      if (*p == '\n') linenumb++;
+      if (*p == EOF_CHAR) goto Ret;
+
+      *p++ = 0;  // skip over \n
+      if (set_optn (MAOption, option) == 0)
+      {
+         printf ("\n   OPTION   DEFAULT  DESCRIPTION\n");
+         for (int i = 0; *MAOption[i].name != 0; i++)
+         {
+            printf ("   %-6s  %8d  %s.\n", MAOption[i].name, MAOption[i].defvalue, MAOption[i].desc);
+         }
+         printf ("\n");
+         rc = 0; // error
+         goto Ret;
+      }
+   }
+   while (p < input_end);
+
+Ret:  FREE (input_start, filesize);
+   close (filedesc);                      // Close input file.
+   return rc;
+}
+
+
+static int inputi (const char *Msg)
+{
+   int nb;                                   /* Number of bytes read.      */
+   filedesc = open (grmfid, 0);              /* Open the file.             */
+   if (filedesc < 0)                         /* If open error.             */
+   {
+      if (*Msg != 0)
+      {
+         n_errors++;
+         prt_log ("%s: %s.\n", Msg, grmfid);
+      }
+      return 0;
+   }
+   filesize = _filelength (filedesc);
+
+   ALLOC (input_start, filesize + 110);
+   *input_start++ = '\n';                    // Put EOL at the beggining.
+
+   nb = read (filedesc, input_start, filesize);
+   if (nb <= 0)                              // If read error.
+   {
+      n_errors++;
+      prt_log ("Read error on file %s, or it's empty.\n\n", grmfid);
+      return 0; // Error
+   }
+
+   input_end = input_start + nb;             // Set end-of-buffer pointer.
+   *input_end++ = '\n';
+   *input_end++ = 26;                        // Parser needs 2 EOFs.
+   *input_end++ = 26;
+   *input_end++ = 0;                         // ??
+   close (filedesc);                         // Close input file.
+
+   n_lines = 0;
+   char* p = input_start;
+   while (*p != EOF_CHAR)
+   {
+      while (*p != '\n') p++;
+      n_lines++;
+      p++;
+   }
+   ALLOC (line_ptr, n_lines+5);  // Allow extra lines at end.
+   for (int i = 0; i < n_lines+5; i++)
+   {
+      line_ptr[i] = NULL;
+   }
+   return 1; // OK
+}
+
+
+static char *mystrlwr(char *s)
+{
+   for (char* p = s; *p != 0; p++)
+   {
+      *p = lower[*p];
+   }
+   return s;
+}
+
+
+static int open_log (char *fid)
+{
+   int i = (int)strlen (fid);
+   strcat (fid, ".log.txt");
+   // chmod  (fid, S_IWRITE);
+   logfp = fopen (fid, "w");
+   if (logfp == NULL)
+   {
+      printf ("Log file %s cannot be created.\n", fid);
+      fid[i] = 0;
+      return (0);
+   }
+   fid[i] = 0;
+   return (1);
+}
+
+
+static int open_grm(char *fid)
+{
+   int i = (int)strlen(fid);
+   strcat (fid, ".grammar.txt");
+   // chmod (fid, S_IWRITE);
+   grmfp = fopen (fid, "w");
+   if (grmfp == NULL)
+   {
+      prt_log("Output listing file %s cannot be created.\n", fid);
+      fid[i] = 0;
+      return (0);
+   }
+   fid[i] = 0;
+   return (1);
+}
+
+
+static int open_con(char *fid)
+{
+   int i = (int)strlen(fid);
+   strcat(fid, ".conflicts.txt");
+   // chmod  (fid, S_IWRITE);
+   confp = fopen(fid, "w");
+   if (confp == NULL)
+   {
+      prt_log("Conflict listing file %s cannot be created.\n", fid);
+      fid[i] = 0;
+      return (0);
+   }
+   fid[i] = 0;
+   return (1);
+}
+
+
+static int open_sta(char *fid)
+{
+   int i = (int)strlen (fid);
+   strcat (fid, ".states.txt");
+   // chmod (fid, S_IWRITE);
+   stafp = fopen (fid, "w");
+   if (stafp == NULL)
+   {
+      prt_log ("States listing file %s cannot be created.\n", fid);
+      fid[i] = 0;
+      return (0);
+   }
+   fid[i] = 0;
+   return (1);
+}
+
+
+static int open_warn(char *fid)
+{
+   int i = (int)strlen (fid);
+   strcat (fid, ".warnings.txt");
+   // chmod (fid, S_IWRITE);
+   lstfp = fopen (fid, "w");
+   if (lstfp == NULL)
+   {
+      prt_log ("Warning file '%s' cannot be created.\n", fid);
+      fid[i] = 0;
+      return (0);
+   }
+   prt_warn ("\n");
+   fid[i] = 0;
+   return (1);
+}
+
+
+static void PRT_ARGS(int na, char **arg, int destination)
+{
+   int i;
+   if (destination == 0) printf      (  "%s %s %s %s.\n", program, version, bits, copywrt);
+   else                  prt_logonly ("\n%s %s %s %s.\n", program, version, bits, copywrt);
+   if (na > 1)
+   {
+      if (destination == 0) ;
+      else prt_logonly ("\n");
+      for (i = 1; i < na; i++)
+      {
+         if (destination == 0) printf      ("%s ", arg[i]);
+         else                  prt_logonly ("%s ", arg[i]);
+      }
+      if (destination == 0) printf      ("\n");
+      else                  prt_logonly ("\n\n");
+   }
+}
+
 
 int   PG_Main::Start (int na, char** arg) /* Display program information. */
 {
@@ -169,7 +518,24 @@ int   PG_Main::Start (int na, char** arg) /* Display program information. */
    return 1;
 }
 
-///////////////////////////////////////////////////////////////////////////////
+
+static int SET_OPTNS(int na, char **arg, OPTION *optionlist)
+{
+   int i, ne = 0;
+   for (i = 2; i < na; i++)
+   {
+      if (arg[i][0] == '/' || arg[i][0] == '-' || arg[i][0] == '!')
+      {
+         if (arg[i][1] != 0)
+         {
+            if (!set_optn (optionlist, arg[i])) return 0;
+         }
+      }
+      else if (!set_optn (optionlist, arg[i])) return 0;
+   }
+   return 1;
+}
+
 
 int   PG_Main::SetOptions (int na, char** arg)
 {
@@ -549,7 +915,23 @@ char* PG_Main::slash_inside_keyword (char* term_name, char quote)
    return (string);
 }
 
-///////////////////////////////////////////////////////////////////////////////
+
+static void prt_num(const char *desc, int n, const char *name, int max)
+{
+   char bar [11] = "**********";
+   char num [14] = "             ";
+   char num2[14] = "             ";
+   double pc;
+   if (max == 0) pc = 0;
+   else pc = 100.0*n/max;
+   bar[(int)pc/10] = 0;
+   number (n, num);
+   number (max, num2);
+   if (n > 0) prt_logonly ("%-32s %9s  %-4s = %10s  %3.0f%% %s\n", desc, num, name, num2, pc, bar);
+   else       prt_logonly ("%-32s %9s  %-4s = %10s  %3.0f%% %s\n", desc, num, name, num2, pc, bar);
+   bar[(int)pc/10] = '*';
+}
+
 
 void  PG_Main::PrintStats ()
 {
@@ -574,7 +956,38 @@ void  PG_Main::PrintStats ()
    prt_logonly ("\n");
 }
 
-///////////////////////////////////////////////////////////////////////////////
+
+static
+int close_con()
+{
+   if (confp != NULL) fclose(confp);
+   confp = NULL;
+   return (1);
+}
+
+
+int
+close_sta()
+{
+   if (stafp != NULL) fclose (stafp);
+   stafp = NULL;
+   return (1);
+}
+
+
+int
+close_warn()
+{
+   if (lstfp != NULL)
+   {
+      if (n_warnings == 1) prt_warn ("%d warning.\n", n_warnings);
+      else                 prt_warn ("%d warnings.\n", n_warnings);
+      fclose (lstfp);
+      lstfp = NULL;
+   }
+   return (1);
+}
+
 
 void  PG_Main::Terminate ()
 {

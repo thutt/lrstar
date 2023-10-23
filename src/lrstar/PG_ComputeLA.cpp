@@ -4,12 +4,6 @@
 #include "CM_Global.h"
 #include "PG_ComputeLA.h"
 
-#ifdef _DEBUG
-#define PRINTF prt_con
-#else
-#define PRINTF prt_con
-#endif
-
 int    PG_ComputeLA::n_nditems;
 int    PG_ComputeLA::n_ndstates;
 int    PG_ComputeLA::n_ndterms;
@@ -68,28 +62,39 @@ static int    n_oper_prec;
 static int    sr, rr;
 static char*  LASUM;
 
+static void prt_con(const char *format, ...)
+{
+   va_list argptr;
+   if (confp != NULL)
+   {
+      va_start(argptr, format);
+      vfprintf(confp, format, argptr);
+      va_end(argptr);
+   }
+}
+
 ///////////////////////////////////////////////////////////////////////////////
 
 int   PG_ComputeLA::ComputeLA () /* Analyze States */
 {
    const char* ch;
-   PRINTF("\n");
+   prt_con("\n");
    if (optn[PG_CONSHIFT] && optn[PG_CONREDUCE])
    {
-      PRINTF("Shift-Reduce and Reduce-Reduce Conflicts Report\n\n");
+      prt_con("Shift-Reduce and Reduce-Reduce Conflicts Report\n\n");
    }
    else if (optn[PG_CONSHIFT])
    {
-      PRINTF ("Shift-Reduce Conflicts Report:\n\n");
+      prt_con ("Shift-Reduce Conflicts Report:\n\n");
    }
    else if (optn[PG_CONREDUCE])
    {
-      PRINTF ("Reduce-Reduce Conflicts Report:\n\n");
+      prt_con ("Reduce-Reduce Conflicts Report:\n\n");
    }
    else
    {
-      PRINTF ("Conflicts Report:\n\n");
-      PRINTF ("Neither 'csr' nor 'crr' option was specified.\n\n");
+      prt_con ("Conflicts Report:\n\n");
+      prt_con ("Neither 'csr' nor 'crr' option was specified.\n\n");
    }
 
    n_lookah      = 0;
@@ -154,7 +159,7 @@ int   PG_ComputeLA::ComputeLA () /* Analyze States */
       }
    }
 
-   if (sr_con || rr_con) PRINTF ("\n");
+   if (sr_con || rr_con) prt_con ("\n");
 
    ch = "s";
    if (c_states == 1) ch = "";
@@ -553,14 +558,14 @@ int   PG_ComputeLA::REPORT_CONFLICTS (int state, int sr, int rr)
                   {
                      first = 0;
                      PRT_STA (state);
-                     PRINTF ("\n");
+                     prt_con ("\n");
                   }
-                  PRINTF ("   RR conflict on %-20s, ", term_name[t]);
-                  PRINTF ("reduce %d or reduce %d, ", -action[t], -conflict[t]);
+                  prt_con ("   RR conflict on %-20s, ", term_name[t]);
+                  prt_con ("reduce %d or reduce %d, ", -action[t], -conflict[t]);
                   if (optn[PG_NONDETER])
-                     PRINTF ("resolved by ND parsing.\n");
+                     prt_con ("resolved by ND parsing.\n");
                   else
-                     PRINTF ("choosing reduce %d.\n", -action[t]);
+                     prt_con ("choosing reduce %d.\n", -action[t]);
                }
             }
          }
@@ -583,21 +588,21 @@ int   PG_ComputeLA::REPORT_CONFLICTS (int state, int sr, int rr)
                   {
                      first = 0;
                      PRT_STA (state);
-                     PRINTF ("\n");
+                     prt_con ("\n");
                   }
-                  PRINTF ("   SR conflict on %-20s, ", term_name[t]);
-                  PRINTF ("shift or reduce %d, ", -conflict[t]);
+                  prt_con ("   SR conflict on %-20s, ", term_name[t]);
+                  prt_con ("shift or reduce %d, ", -conflict[t]);
                   if (optn[PG_NONDETER])
-                     PRINTF ("resolved by ND parsing.\n");
+                     prt_con ("resolved by ND parsing.\n");
                   else
                   {
                      int x = action[t];
                      if (x > opt_states)
                      {
                         x = item[final[f_final[x]]].prod;
-                        PRINTF ("choosing shift and reduce %d.\n", x);
+                        prt_con ("choosing shift and reduce %d.\n", x);
                      }
-                     else PRINTF ("choosing shift and goto %d.\n", x);
+                     else prt_con ("choosing shift and goto %d.\n", x);
                   }
                }
             }
@@ -605,7 +610,7 @@ int   PG_ComputeLA::REPORT_CONFLICTS (int state, int sr, int rr)
       }
    }
    if (nc) rc = 1;
-   if (first == 0) PRINTF ("\n");
+   if (first == 0) prt_con ("\n");
    return (rc);
 }
 
@@ -801,7 +806,7 @@ void  PG_ComputeLA::C_READS ()
          else
          {
             m = newloc [s];
-            // PRINTF ("copying LA[%4d] to LA[%4d]\n", m, i);
+            // prt_con ("copying LA[%4d] to LA[%4d]\n", m, i);
             FASTCPY (LA[m], LA[i], n_words);
          }
       }
@@ -850,24 +855,24 @@ void  PG_ComputeLA::IND_READ (int i, int s)
 void  PG_ComputeLA::RESOLUTION ()
 {
    int t, l;
-   PRINTF ("\n   Lookahead symbol and action chosen:\n");
+   prt_con ("\n   Lookahead symbol and action chosen:\n");
    for (t = 0; t < N_terms; t++)
    {
       if (redconf [t] != 0)
       {
-         PRINTF ("   ");
+         prt_con ("   ");
          l = prt_sym (t, " ");
          if (l > max_terml) l = max_terml;
          spaces [max_terml-l] = 0;
-         PRINTF ("%s", spaces);
+         prt_con ("%s", spaces);
          spaces [max_terml-l] = ' ';
          if (action [t] < 0) /* If shift action for t? */
          {
-            PRINTF(" shift, not reduce %d\n", abs (redconf [t]));
+            prt_con(" shift, not reduce %d\n", abs (redconf [t]));
          }
          else /* If two reductions for t? */
          {
-            PRINTF(" reduce %d,  not %d\n", action[t], abs (redconf [t]));
+            prt_con(" reduce %d,  not %d\n", action[t], abs (redconf [t]));
          }
       }
    }
@@ -880,13 +885,13 @@ void  PG_ComputeLA::PRT_STA (int s)
    int k, i;
    int f, p;
 
-   PRINTF ("STATE %d ..........................................................................................\n\n", s);
+   prt_con ("STATE %d ..........................................................................................\n\n", s);
    for (k = f_kernel [s]; k < f_kernel [s+1]; k++)
    {
       i = kernel [k];
       if (item[i].symb != -32767)
       {
-         PRINTF ("   * ");
+         prt_con ("   * ");
          prt_prod (item[i].prod, item[i].dot, "");
       }
    }
@@ -895,7 +900,7 @@ void  PG_ComputeLA::PRT_STA (int s)
       p = item [final[f]].prod;
       if (p >= 0) // Not disabled ?
       {
-         PRINTF ("   * ");
+         prt_con ("   * ");
          prt_prod (p, -1, "");
       }
    }
@@ -906,19 +911,19 @@ void  PG_ComputeLA::PRT_STA (int s)
 void  PG_ComputeLA::prt_prod (int p, int dot, const char *before)
 {
    int t, u, d;
-   PRINTF ("%s%5d %s -> ", before, p, head_name [head_sym [p]]);
+   prt_con ("%s%5d %s -> ", before, p, head_name [head_sym [p]]);
    t = F_tail [p];
    u = F_tail [p+1];
    d = t + dot;
    if (dot == -1) d = u;
    for (;;)
    {
-      if (t == d) PRINTF (". ");
+      if (t == d) prt_con (". ");
       if (t >= u) break;
       prt_sym (Tail [t], " ");
       t++;
    }
-   PRINTF ("\n");
+   prt_con ("\n");
 }
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -932,7 +937,7 @@ int   PG_ComputeLA::prt_sym (int s, const char *sp)
    else                        /* Nonterminal symbol? */
       p = head_name[-s];
 
-   PRINTF ("%s%s", p, sp);
+   prt_con ("%s%s", p, sp);
    return ((int)strlen(p) + (int)strlen(sp));
 }
 
@@ -946,11 +951,11 @@ void  PG_ComputeLA::BF_TRACE_BACK (int state, int sr, int rr)
    if (!optn[PG_CONTRACEBACK]) return;
 
 #ifdef _DEBUG
-   PRINTF ("TRACE BACK from state %d:\n", state);
+   prt_con ("TRACE BACK from state %d:\n", state);
    prt_state (state);
 #endif
 
-   // PRINTF ("\n");
+   // prt_con ("\n");
    ALLOC (ntt_done, n_nttran);
    for (t = 0; t < N_terms; t++)                      // For all terminal symbols.
    {
@@ -958,13 +963,13 @@ void  PG_ComputeLA::BF_TRACE_BACK (int state, int sr, int rr)
       {
          n = 0;
          memset (ntt_done, 0, n_nttran);
-         PRINTF ("CHOICES for lookahead '%s'\n\n", term_name[t]);
+         prt_con ("CHOICES for lookahead '%s'\n\n", term_name[t]);
          if (action[t] >= 0)  // shift-reduce conflict? (zeroed action is possible)
          {
-            PRINTF ("%d   shift        %s\n", ++n, term_name[t]);
-            PRINTF ("    goto    %4d\n", action[t]);
+            prt_con ("%d   shift        %s\n", ++n, term_name[t]);
+            prt_con ("    goto    %4d\n", action[t]);
             prt_state (action[t]);
-            PRINTF ("\n");
+            prt_con ("\n");
          }
          else                 // reduce-reduce conflict!
          {
@@ -976,7 +981,7 @@ void  PG_ComputeLA::BF_TRACE_BACK (int state, int sr, int rr)
             h = head_sym[p];
             if (p == -conflict[t] || p == -action[t])
             {
-               PRINTF ("%d   reduce ", ++n);
+               prt_con ("%d   reduce ", ++n);
                prt_prod (p, -1, "");
                for (lb = f_lookback[f]; lb < f_lookback[f+1]; lb++)  // For all lookbacks of final item.
                {
@@ -1004,12 +1009,12 @@ void  PG_ComputeLA::BF_TRACE_BACK (int state, int sr, int rr)
                            // printf ("\ndepth = %d\n", depth);
                            if (bf_look_back (1, t, p, dot, orig, next, last))
                            {
-                           Shift:                           PRINTF ("    goto    %4d\n", next);
+                           Shift:                           prt_con ("    goto    %4d\n", next);
                               prt_state (next);
-                              PRINTF ("    shift        %s\n", term_name[t]);
-                              PRINTF ("    goto    %4d\n", last);
+                              prt_con ("    shift        %s\n", term_name[t]);
+                              prt_con ("    goto    %4d\n", last);
                               prt_state (last);
-                              // PRINTF ("\n");
+                              // prt_con ("\n");
                               ntt_done[ntti] = 0;
                               goto Cont;
                            }
@@ -1065,7 +1070,7 @@ int   PG_ComputeLA::bf_look_back (int d, int t, int p, int dot, int state, int& 
                      {
                         if (tt_symb[i] == t)
                         {
-                           PRINTF ("    backto  %4d\n", state);
+                           prt_con ("    backto  %4d\n", state);
                            prt_state (state);
                            last = tt_action[i];
                            return 1;
@@ -1103,9 +1108,9 @@ void  PG_ComputeLA::DF_TRACE_BACK (int state, int sr, int rr)
    int lb, ntti, orig, next, last, i, t, f, p, h, n, dot;
    if (!optn[PG_CONTRACEBACK]) return;
 
-   PRINTF ("CONFLICT ANALYSIS for state %d:\n\n", state);
+   prt_con ("CONFLICT ANALYSIS for state %d:\n\n", state);
    // prt_state (state);
-   // PRINTF ("\n");
+   // prt_con ("\n");
 
    ALLOC (ntt_done, n_nttran);
    for (t = 0; t < N_terms; t++) // For all terminal symbols.
@@ -1114,13 +1119,13 @@ void  PG_ComputeLA::DF_TRACE_BACK (int state, int sr, int rr)
       {
          n = 0;
          memset (ntt_done, 0, n_nttran);
-         PRINTF ("Choices for lookahead: %s\n\n", term_name[t]);
+         prt_con ("Choices for lookahead: %s\n\n", term_name[t]);
          if (action[t] >= 0)  // shift-reduce conflict? (zeroed action is possible)
          {
-            PRINTF ("%2d. shift        %s\n", ++n, term_name[t]);
-            PRINTF ("    goto    %4d\n", action[t]);
+            prt_con ("%2d. shift        %s\n", ++n, term_name[t]);
+            prt_con ("    goto    %4d\n", action[t]);
             prt_state (action[t]);
-            // PRINTF ("\n");
+            // prt_con ("\n");
          }
          else                 // reduce-reduce conflict!
          {
@@ -1132,7 +1137,7 @@ void  PG_ComputeLA::DF_TRACE_BACK (int state, int sr, int rr)
             h = head_sym[p];
             if (p == -conflict[t] || p == -action[t])
             {
-               PRINTF ("%2d. reduce ", ++n);
+               prt_con ("%2d. reduce ", ++n);
                prt_prod (p, -1, "");
                for (lb = f_lookback[f]; lb < f_lookback[f+1]; lb++)  // For all lookbacks of final item.
                {
@@ -1161,10 +1166,10 @@ void  PG_ComputeLA::DF_TRACE_BACK (int state, int sr, int rr)
                            ntt_done[ntti] = 1;
                            if (df_look_back (t, p, dot, orig, next, last))
                            {
-                           Shift:                           PRINTF ("    goto    %4d\n", next);
+                           Shift:                           prt_con ("    goto    %4d\n", next);
                               prt_state (next);
-                              PRINTF ("    shift        %s\n", term_name[t]);
-                              PRINTF ("    goto    %4d\n", last);
+                              prt_con ("    shift        %s\n", term_name[t]);
+                              prt_con ("    goto    %4d\n", last);
                               prt_state (last);
                               goto Cont; // next final item.
                            }
@@ -1180,7 +1185,7 @@ void  PG_ComputeLA::DF_TRACE_BACK (int state, int sr, int rr)
             }
          Cont:          continue;
          }
-         // PRINTF ("\n");
+         // prt_con ("\n");
       }
    }
    FREE (ntt_done, n_nttran);
@@ -1220,7 +1225,7 @@ int   PG_ComputeLA::df_look_back (int t, int p, int dot, int state, int& next, i
                   {
                      if (tt_symb[i] == t)
                      {
-                        PRINTF ("    backto  %4d\n", state);
+                        prt_con ("    backto  %4d\n", state);
                         prt_state (state);
                         last = tt_action[i];
                         ntt_done[ntti] = 1;
@@ -1263,7 +1268,7 @@ int   PG_ComputeLA::df_look_back (int t, int p, int dot, int state, int& next, i
          }
       }
    }
-   PRINTF ("\nNonfatal error caused by 'ca' option\n");
+   prt_con ("\nNonfatal error caused by 'ca' option\n");
    return 0;
 }
 
@@ -1272,9 +1277,9 @@ int   PG_ComputeLA::df_look_back (int t, int p, int dot, int state, int& next, i
 void  PG_ComputeLA::CYCLE_CHECK (int state)
 {
    int lb, ntti, orig, next, last, i, t, f, p, h, n, dot;
-   // PRINTF ("\nCYCLE CHECK for state %d:\n\n", state);
+   // prt_con ("\nCYCLE CHECK for state %d:\n\n", state);
    // prt_state (state);
-   // PRINTF ("\n");
+   // prt_con ("\n");
 
    ALLOC (ntt_done, n_nttran);
    for (t = 0; t < N_terms; t++) // For all terminal symbols.
@@ -1290,7 +1295,7 @@ void  PG_ComputeLA::CYCLE_CHECK (int state)
             h = head_sym[p];
             if (p == -conflict[t] || p == -action[t])
             {
-               // PRINTF ("%d   reduce ", ++n);
+               // prt_con ("%d   reduce ", ++n);
                // prt_prod (p, -1, "");
                for (lb = f_lookback[f]; lb < f_lookback[f+1]; lb++)  // For all lookbacks of final item.
                {
@@ -1322,23 +1327,23 @@ void  PG_ComputeLA::CYCLE_CHECK (int state)
                            Shift:                           if (next == state /* || last == action[t]*/ )
                               {
                                  sr--;
-                                 PRINTF ("CYCLE in state %d, choosing shift instead of reduce for %s.\n", state, term_name[t]);
+                                 prt_con ("CYCLE in state %d, choosing shift instead of reduce for %s.\n", state, term_name[t]);
                                  /* if (optn[PG_CONTRACEBACK])
                                     {
                                     // prt_state (state);
-                                    PRINTF ("\n");
-                                    PRINTF ("%d   shift        %s\n", ++n, term_name[t]);
-                                    PRINTF ("    goto    %4d\n", action[t]);
+                                    prt_con ("\n");
+                                    prt_con ("%d   shift        %s\n", ++n, term_name[t]);
+                                    prt_con ("    goto    %4d\n", action[t]);
                                     prt_state (action[t]);
-                                    // PRINTF ("\n");
-                                    PRINTF ("%d   reduce ", ++n);
+                                    // prt_con ("\n");
+                                    prt_con ("%d   reduce ", ++n);
                                     prt_prod (item[final[f]].prod, -1, "");
-                                    PRINTF ("    goto    %4d\n", next);
+                                    prt_con ("    goto    %4d\n", next);
                                     prt_state (next);
-                                    PRINTF ("    shift        %s\n", term_name[t]);
-                                    PRINTF ("    goto    %4d\n", last);
+                                    prt_con ("    shift        %s\n", term_name[t]);
+                                    prt_con ("    goto    %4d\n", last);
                                     prt_state (last);
-                                    // PRINTF ("\n");
+                                    // prt_con ("\n");
                                     }  */
                                  for (i = nd_item[state]; i < nd_item[state+1]; i++)
                                  {
@@ -1401,7 +1406,7 @@ int   PG_ComputeLA::cycle_look_back (int t, int p, int dot, int state, int& next
                   {
                      if (tt_symb[i] == t)
                      {
-                        // PRINTF ("    backto  %4d\n", state);
+                        // prt_con ("    backto  %4d\n", state);
                         // prt_state (state);
                         last = tt_action[i];
                         ntt_done[ntti] = 1;
@@ -1444,7 +1449,7 @@ int   PG_ComputeLA::cycle_look_back (int t, int p, int dot, int state, int& next
          }
       }
    }
-   PRINTF ("\nNonfatal error caused by 'ct' option\n");
+   prt_con ("\nNonfatal error caused by 'ct' option\n");
    return 0;
 }
 
@@ -1453,23 +1458,23 @@ int   PG_ComputeLA::cycle_look_back (int t, int p, int dot, int state, int& next
 void  PG_ComputeLA::prt_state (int s)
 {
    int k, i, f, p;
-   PRINTF ("\n    //STATE %4d ////////////////////////////////////////////////////////////////\n", s);
+   prt_con ("\n    //STATE %4d ////////////////////////////////////////////////////////////////\n", s);
    for (k = f_kernel [s]; k < f_kernel [s+1]; k++)
    {
       i = kernel [k];
       if (item[i].symb != -32767)
       {
-         PRINTF ("    // rule");
+         prt_con ("    // rule");
          prt_prod2 (item[i].prod, item[i].dot, "");
       }
    }
    for (f = f_final [s]; f < f_final [s+1]; f++)
    {
       p = item [final[f]].prod;
-      PRINTF ("    // rule");
+      prt_con ("    // rule");
       prt_prod2 (p, -1, "");
    }
-   PRINTF ("    /////////////////////////////////////////////////////////////////////////////\n\n");
+   prt_con ("    /////////////////////////////////////////////////////////////////////////////\n\n");
 }
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -1477,19 +1482,19 @@ void  PG_ComputeLA::prt_state (int s)
 void  PG_ComputeLA::prt_prod2 (int p, int dot, const char *before)
 {
    int t, u, d;
-   PRINTF ("%s%5d %s -> ", before, p, head_name [head_sym [p]]);
+   prt_con ("%s%5d %s -> ", before, p, head_name [head_sym [p]]);
    t = F_tail [p];
    u = F_tail [p+1];
    d = t + dot;
    if (dot == -1) d = u;
    for (;;)
    {
-      if (t == d) PRINTF (". ");
+      if (t == d) prt_con (". ");
       if (t >= u) break;
       prt_sym2 (Tail [t], " ");
       t++;
    }
-   PRINTF ("\n");
+   prt_con ("\n");
 }
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -1499,7 +1504,7 @@ int   PG_ComputeLA::prt_sym2 (int s, const char *sp)
    const char *p;
    if (s >= 0) p = term_name[s];
    else        p = head_name[-s];
-   PRINTF ("%s%s", p, sp);
+   prt_con ("%s%s", p, sp);
    return 1;
 }
 

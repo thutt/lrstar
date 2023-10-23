@@ -33,7 +33,25 @@ int   PG_CheckGrammar::CheckGrammar ()
    return (1);
 }
 
-/////////////////////////////////////////////////////////////////////////////////////////////////////
+static void prt_warnscreen(const char *format, ...)
+{
+   va_list argptr;
+   // Print to screen.
+   if (option_warnings) // On screen?
+   {
+      va_start(argptr, format);
+      vprintf (format, argptr); // Print on screen.
+      va_end(argptr);
+   }
+   // Print to listing file.
+   if (lstfp != NULL)
+   {
+      va_start (argptr, format);
+      vfprintf (lstfp, format, argptr);
+      va_end (argptr);
+   }
+}
+
 
 void  prt_chars (const char* sym, char ch, char prev)
 {
@@ -101,7 +119,27 @@ void  PG_CheckGrammar::check_first_args()
    if (n) prt_warnscreen("\n");
 }
 
-///////////////////////////////////////////////////////////////////////////////
+
+char *
+fix_backslash(const char *in) // Change \\ to \ in place.
+{
+   char *copy = strdup(in);
+   char *out;
+
+   out = copy;
+   in  = copy;
+   while (*in != 0)
+   {
+      if (*in == '\\' && *(in+1) == '\\')
+      {
+         in++;
+      }
+      *out++ = *in++;
+   }
+   *out = 0;
+   return copy;
+}
+
 
 void  PG_CheckGrammar::C_LENG () /* Compute maximum symbol length. */
 {

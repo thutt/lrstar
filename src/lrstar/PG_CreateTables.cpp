@@ -276,8 +276,35 @@ int   PGCreateTables::MAKE_PACKED (char* x, int n)
    return (m);
 }
 
-///////////////////////////////////////////////////////////////////////////////////////////////////
-//                                                                                               //
+static int get_typesize (int *x, int n)
+{
+   int i, max = 0, min = 0;
+   for (i = 0; i < n; i++)
+   {
+      if      (x[i] > max) max = x[i];
+      else if (x[i] < min) min = x[i];
+   }
+   if (min == 0)
+   {
+      if      (max <=        255) return (1); // 1 byte
+      else if (max <=      65535) return (2); // 2 bytes
+      else                        return (4); // 4 bytes
+   }
+   else if (max > -min)
+   {
+      if      (max <=        127) return (1); // 1 byte
+      else if (max <=      32767) return (2); // 2 bytes
+      else                        return (4); // 4 bytes
+   }
+   else
+   {
+      if      (min >=       -127) return (1); // 1 byte
+      else if (min >=     -32767) return (2); // 2 bytes
+      else                        return (4); // 4 bytes
+   }
+   return (0); // never gets here.
+}
+
 
 int   PGCreateTables::BLD_B (int opt1, const char *mark) // Build Boolean Matrix.
 {

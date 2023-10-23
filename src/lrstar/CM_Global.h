@@ -11,10 +11,6 @@
 
 #define MAX_LENGTH 60
 
-/////////////////////////////////////////////////////////////////////////////////////////////////////
-//                                                                                                 //
-//    Includes
-
 #include "sys/types.h"
 #include "sys/stat.h"
 #include "fcntl.h"
@@ -38,10 +34,6 @@
 #endif
 
 #include "basic_defs.h"
-
-/////////////////////////////////////////////////////////////////////////////////////////////////////
-//                                                                                                 //
-//    Defines
 
 enum options
 {
@@ -375,10 +367,7 @@ void C_CAMEFROM(int  N_states,
                 int *&f_camefrom,
                 int *&camefrom);
 
-extern int    close_con();
 extern int    close_log();
-extern int    close_sta();
-extern int    close_warn();
 
 #ifdef LINUX
 extern long   _filelength (int fd);
@@ -396,55 +385,31 @@ extern void   fastor  (int*, int*, int);
 #define FASTMRG(a,b,n)           fastmrg ((int*)a, (int*)b, n)
 #define FASTOR(a,b,n)            fastor  ((int*)a, (int*)b, n)
 
-extern char  *fix_backslash (const char *in);
 extern void   frea (char* x, int n_bytes);
 
-extern int    get_fid (char*arg, char*dir, char*fn, char*ft);
-extern char*  get_file (char* dir, char* fn, char* ft, int *nb, int flags);
-extern int    GetMaxValues  (char* dir);
-extern void   SaveMaxValues ();
-
 extern bool   itsakeyword (const char* terminal);
-extern int    inputi (const char*);
 extern void   inputt ();
 
 extern void   MemCrash (const char* value, int n);
 
-extern char*  mystrlwr (char* s);
-
 extern void   number (int x, char* num);
-
-extern int    open_log (char*);
-extern int    open_grm (char*);
-extern int    open_con (char*);
-extern int    open_sta (char*);
-extern int    open_warn (char*);
 
 extern void   prt_error   (const char *msg, const char *start, const char *end, int linenumb);
 extern void   prt_warning (const char *msg, const char *start,
                            const char *end, int linenumb);
 extern void   prt_warn    (const char* format, ...);
-extern void   prt_warnscreen(const char *format, ...);
 extern void   prt_log     (const char* format, ...);
 extern void   prt_logonly (const char* format, ...);
-extern void   prt_grm     (const char* format, ...);
-extern void   prt_con     (const char* format, ...);
 extern void   prt_sta     (const char* format, ...);
-extern void   PRT_ARGS    (int na, char** arg, int dest);
-extern void   prt_num     (const char* desc, int n, const char* name, int max);
 
 extern void   Quit ();
 
 char *ralloc (char *x, int no_bytes, int nn_bytes);
 
-extern void   SORT (int *start, int *end);
 extern void   SORT2 (int* first, int* second, int n);
 extern void   SORTNAMES(const char** start, int n, int* seq);
 
 extern int    set_optn (OPTION* option, char* opt);
-extern int    SET_OPTNS (int na, char** arg, OPTION* list);
-
-extern void   TRAVERSE (int x);
 
 extern char*  alloc_debug (int n_bytes, const char *fname, size_t lineno);
 extern char*  alloc (int n_bytes);
@@ -453,9 +418,6 @@ extern int    ATTACH   (int x, int y);
 extern void   T_GRAPH  (char **graph, int nr, int nc);
 
 extern char   oper_char (Node* np);
-extern const char*  get_typestr  (int*, int);
-extern int    get_typesize (int*, int);
-
 #endif
 /* Local Variables:      */
 /* mode: c               */
