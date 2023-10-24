@@ -15,6 +15,12 @@ N matrix     182 x  110 x 2 =    40,040 ->   7,154 +   1,659 =   8,813
 R matrix       9 x   19 x 2 =       306 ->     306 +   1,315 =   1,621  
 Total                                       11,149 +   5,781 =  16,930
 
+Generating: verilog_Actions.h
+Generating: verilog_Parser.h
+Generating: verilog_Actions.cpp
+Generating: verilog_Lexer.cpp
+Generating: verilog_Main.cpp
+Generating: verilog_Parser.cpp
 Generating: verilog_ParserTables.h
 Generating: verilog_ParserTables.hpp
 
@@ -33,5 +39,5 @@ Includes in LALR computation         2,526  inc  =  1,000,000    0%
 Child nodes in graph                 2,870  ch   =  1,000,000    0% 
 Nondeterministic/conflict items        324  nd   =  1,000,000    0% 
 
-0 min 0.048 sec, 31.624 MB, 24 WARNINGS, 0 errors.
+0 min 0.031 sec, 31.624 MB, 24 WARNINGS, 0 errors.
 

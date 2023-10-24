@@ -4,7 +4,7 @@
 
 #include "PLSQL_Parser.h"
 #include "PLSQL_ParserTables.hpp"
-#include "../../code/parser.cpp"
+#include "lrstar_parser.cpp"
 
 //                                                                           //
 ///////////////////////////////////////////////////////////////////////////////

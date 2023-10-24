@@ -15,6 +15,12 @@ N matrix     163 x  173 x 2 =    56,398 ->  40,266 +   2,223 =  42,489
 R matrix      92 x   46 x 2 =     8,126 ->   8,126 +   1,600 =   9,726  
 Total                                       52,107 +   7,133 =  59,240
 
+Generating: Java9_Actions.h
+Generating: Java9_Parser.h
+Generating: Java9_Actions.cpp
+Generating: Java9_Lexer.cpp
+Generating: Java9_Main.cpp
+Generating: Java9_Parser.cpp
 Generating: Java9_ParserTables.h
 Generating: Java9_ParserTables.hpp
 
@@ -33,5 +39,5 @@ Includes in LALR computation         7,761  inc  =  1,000,000    1%
 Child nodes in graph                12,852  ch   =  1,000,000    1% 
 Nondeterministic/conflict items      3,079  nd   =  1,000,000    0% 
 
-0 min 0.123 sec, 31.729 MB, 0 warnings, 0 errors.
+0 min 0.068 sec, 31.729 MB, 0 warnings, 0 errors.
 

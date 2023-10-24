@@ -15,6 +15,12 @@ N matrix     139 x   59 x 2 =    16,402 ->   4,492 +   1,041 =   5,533
 R matrix       7 x   14 x 2 =       182 ->     182 +     787 =     969  
 Total                                        6,228 +   3,503 =   9,731
 
+Generating: delphi_Actions.h
+Generating: delphi_Parser.h
+Generating: delphi_Actions.cpp
+Generating: delphi_Lexer.cpp
+Generating: delphi_Main.cpp
+Generating: delphi_Parser.cpp
 Generating: delphi_ParserTables.h
 Generating: delphi_ParserTables.hpp
 
@@ -33,5 +39,5 @@ Includes in LALR computation         1,281  inc  =  1,000,000    0%
 Child nodes in graph                 1,938  ch   =  1,000,000    0% 
 Nondeterministic/conflict items        396  nd   =  1,000,000    0% 
 
-0 min 0.028 sec, 31.483 MB, 0 warnings, 0 errors.
+0 min 0.020 sec, 31.483 MB, 0 warnings, 0 errors.
 

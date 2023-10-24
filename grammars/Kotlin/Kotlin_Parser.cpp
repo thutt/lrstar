@@ -4,7 +4,7 @@
 
 #include "Kotlin_Parser.h"
 #include "Kotlin_ParserTables.hpp"
-#include "../../code/parser.cpp"
+#include "lrstar_parser.cpp"
 
 //                                                                           //
 ///////////////////////////////////////////////////////////////////////////////

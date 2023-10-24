@@ -15,6 +15,12 @@ N matrix      58 x   90 x 2 =    10,440 ->   4,830 +     551 =   5,381
 R matrix       2 x    3 x 1 =         5 ->       5 +     366 =     371  
 Total                                        5,163 +   1,423 =   6,586
 
+Generating: PLM_Actions.h
+Generating: PLM_Parser.h
+Generating: PLM_Actions.cpp
+Generating: PLM_Lexer.cpp
+Generating: PLM_Main.cpp
+Generating: PLM_Parser.cpp
 Generating: PLM_ParserTables.h
 Generating: PLM_ParserTables.hpp
 
@@ -33,5 +39,5 @@ Includes in LALR computation         1,169  inc  =  1,000,000    0%
 Child nodes in graph                 1,363  ch   =  1,000,000    0% 
 Nondeterministic/conflict items         26  nd   =  1,000,000    0% 
 
-0 min 0.019 sec, 31.421 MB, 0 warnings, 0 errors.
+0 min 0.016 sec, 31.421 MB, 0 warnings, 0 errors.
 

@@ -15,6 +15,12 @@ N matrix      94 x  108 x 2 =    20,304 ->   8,242 +   1,311 =   9,553
 R matrix      14 x   20 x 2 =       530 ->     530 +   1,045 =   1,575  
 Total                                       12,542 +   4,585 =  17,127
 
+Generating: Vba_Actions.h
+Generating: Vba_Parser.h
+Generating: Vba_Actions.cpp
+Generating: Vba_Lexer.cpp
+Generating: Vba_Main.cpp
+Generating: Vba_Parser.cpp
 Generating: Vba_ParserTables.h
 Generating: Vba_ParserTables.hpp
 
@@ -33,5 +39,5 @@ Includes in LALR computation         2,940  inc  =  1,000,000    0%
 Child nodes in graph                 5,284  ch   =  1,000,000    1% 
 Nondeterministic/conflict items         22  nd   =  1,000,000    0% 
 
-0 min 0.046 sec, 31.572 MB, 5 WARNINGS, 0 errors.
+0 min 0.030 sec, 31.572 MB, 5 WARNINGS, 0 errors.
 

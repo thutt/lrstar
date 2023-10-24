@@ -4,7 +4,7 @@
 
 #include "ALGOL60_Parser.h"
 #include "ALGOL60_ParserTables.hpp"
-#include "../../code/parser.cpp"
+#include "lrstar_parser.cpp"
 
 //                                                                           //
 ///////////////////////////////////////////////////////////////////////////////

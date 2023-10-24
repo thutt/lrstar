@@ -2,11 +2,11 @@
 ///////////////////////////////////////////////////////////////////////////////
 //                                                                           //
 
-      #pragma once
+#pragma once
 
-      #include "ANTLR_Parser.h"
+#include "ANTLR_Parser.h"
 
-      #ifdef ACTIONS
+#ifdef ACTIONS
 
       class ACTIONS : public PARSER
       {
@@ -15,17 +15,25 @@
          static void term_actions ();
       };
 
-      #endif
-      #ifdef TERM_ACTIONS
+#endif
+#ifdef TERM_ACTIONS
 
       class TERM_ACTIONS : public ACTIONS
       {
          public:
-         static int  error  (int& t);
-         static int  lookup	(int& t);
+         static int  error     (int& t);
+         static int  lookup (int& t);
       };
 
-      #endif
+#endif
+#ifdef NODE_ACTIONS
+
+      class NODE_ACTIONS : public ACTIONS
+      {
+         public:
+      };
+
+#endif
 
 //                                                                           //
 ///////////////////////////////////////////////////////////////////////////////

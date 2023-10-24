@@ -4,7 +4,7 @@
 
 #include "Dbase_Parser.h"
 #include "Dbase_ParserTables.hpp"
-#include "../../code/parser.cpp"
+#include "lrstar_parser.cpp"
 
 //                                                                           //
 ///////////////////////////////////////////////////////////////////////////////

@@ -2,10 +2,10 @@
 ///////////////////////////////////////////////////////////////////////////////
 //                                                                           //
 
-#include "CPP5_LexerDefines.h"
 #include "CPP5_LexerTables.h"
-#include "../../code/lexer.h"
-#include "../../code/lexer.cpp"
+#include "CPP5_LexerTables.hpp"
+#include "lrstar_lexer.h"
+#include "lrstar_lexer.cpp"
 
 //                                                                           //
 ///////////////////////////////////////////////////////////////////////////////

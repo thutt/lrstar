@@ -4,7 +4,7 @@
 
 #include "PLM_Parser.h"
 #include "PLM_ParserTables.hpp"
-#include "../../code/parser.cpp"
+#include "lrstar_parser.cpp"
 
 //                                                                           //
 ///////////////////////////////////////////////////////////////////////////////

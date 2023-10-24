@@ -4,7 +4,7 @@
 
 #include "ANTLR_Parser.h"
 #include "ANTLR_ParserTables.hpp"
-#include "../../code/parser.cpp"
+#include "lrstar_parser.cpp"
 
 //                                                                           //
 ///////////////////////////////////////////////////////////////////////////////

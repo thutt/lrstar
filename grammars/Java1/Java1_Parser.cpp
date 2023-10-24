@@ -4,7 +4,7 @@
 
 #include "Java1_Parser.h"
 #include "Java1_ParserTables.hpp"
-#include "../../code/parser.cpp"
+#include "lrstar_parser.cpp"
 
 //                                                                           //
 ///////////////////////////////////////////////////////////////////////////////

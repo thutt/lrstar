@@ -15,6 +15,12 @@ N matrix     250 x  147 x 2 =    73,500 ->   9,296 +   2,093 =  11,389
 R matrix     107 x   53 x 2 =    11,080 ->  11,080 +   1,495 =  12,575  
 Total                                       23,654 +   6,733 =  30,387
 
+Generating: Kotlin_Actions.h
+Generating: Kotlin_Parser.h
+Generating: Kotlin_Actions.cpp
+Generating: Kotlin_Lexer.cpp
+Generating: Kotlin_Main.cpp
+Generating: Kotlin_Parser.cpp
 Generating: Kotlin_ParserTables.h
 Generating: Kotlin_ParserTables.hpp
 
@@ -33,5 +39,5 @@ Includes in LALR computation         2,148  inc  =  1,000,000    0%
 Child nodes in graph                 2,477  ch   =  1,000,000    0% 
 Nondeterministic/conflict items      6,165  nd   =  1,000,000    1% 
 
-0 min 0.063 sec, 31.837 MB, 7 WARNINGS, 0 errors.
+0 min 0.039 sec, 31.837 MB, 7 WARNINGS, 0 errors.
 

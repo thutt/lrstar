@@ -4,8 +4,8 @@
 
 #include "ALGOL60_LexerTables.h"
 #include "ALGOL60_LexerTables.hpp"
-#include "../../code/lexer.h"
-#include "../../code/lexer.cpp"
+#include "lrstar_lexer.h"
+#include "lrstar_lexer.cpp"
 
 //                                                                           //
 ///////////////////////////////////////////////////////////////////////////////

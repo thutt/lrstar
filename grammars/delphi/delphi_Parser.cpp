@@ -4,7 +4,7 @@
 
 #include "delphi_Parser.h"
 #include "delphi_ParserTables.hpp"
-#include "../../code/parser.cpp"
+#include "lrstar_parser.cpp"
 
 //                                                                           //
 ///////////////////////////////////////////////////////////////////////////////

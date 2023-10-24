@@ -3,8 +3,8 @@
 //                                                                           //
 
 #include "Java1_ParserTables.h"
-#include "../../code/lexer.h"
-#include "../../code/parser.h"
+#include "lrstar_lexer.h"
+#include "lrstar_parser.h"
 
 //                                                                           //
 ///////////////////////////////////////////////////////////////////////////////

@@ -3,7 +3,7 @@
 //                                                                           //
 
 #include "Kotlin_Actions.h"
-#include "../../code/main.h"
+#include "lrstar_main.h"
 
 ///////////////////////////////////////////////////////////////////////////////
 
@@ -48,9 +48,9 @@ int   TERM_ACTIONS::lookup (int& t)             // Lookup in symbol table.
          sti = add_symbol (t, token.start, token.end);
       }
       #ifdef SEMANTICS
-      t = symbol[sti].term;                //	Redefine terminal number?
+      t = symbol[sti].term;                // Redefine terminal number?
       #endif
-		return sti;
+    return sti;
 }
 
 #endif

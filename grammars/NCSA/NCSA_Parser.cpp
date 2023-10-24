@@ -4,7 +4,7 @@
 
 #include "NCSA_Parser.h"
 #include "NCSA_ParserTables.hpp"
-#include "../../code/parser.cpp"
+#include "lrstar_parser.cpp"
 
 //                                                                           //
 ///////////////////////////////////////////////////////////////////////////////

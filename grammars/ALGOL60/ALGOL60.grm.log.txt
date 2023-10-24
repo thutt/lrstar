@@ -15,6 +15,12 @@ N matrix      70 x   36 x 2 =     5,040 ->   2,274 +     465 =   2,739
 R matrix       5 x    8 x 1 =        36 ->      36 +     353 =     389  
 Total                                        2,815 +   1,285 =   4,100
 
+Generating: ALGOL60_Actions.h
+Generating: ALGOL60_Parser.h
+Generating: ALGOL60_Actions.cpp
+Generating: ALGOL60_Lexer.cpp
+Generating: ALGOL60_Main.cpp
+Generating: ALGOL60_Parser.cpp
 Generating: ALGOL60_ParserTables.h
 Generating: ALGOL60_ParserTables.hpp
 
@@ -33,5 +39,5 @@ Includes in LALR computation           707  inc  =  1,000,000    0%
 Child nodes in graph                 1,546  ch   =  1,000,000    0% 
 Nondeterministic/conflict items        466  nd   =  1,000,000    0% 
 
-0 min 0.016 sec, 31.375 MB, 12 WARNINGS, 0 errors.
+0 min 0.015 sec, 31.375 MB, 12 WARNINGS, 0 errors.
 

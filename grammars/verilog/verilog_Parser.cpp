@@ -4,7 +4,7 @@
 
 #include "verilog_Parser.h"
 #include "verilog_ParserTables.hpp"
-#include "../../code/parser.cpp"
+#include "lrstar_parser.cpp"
 
 //                                                                           //
 ///////////////////////////////////////////////////////////////////////////////

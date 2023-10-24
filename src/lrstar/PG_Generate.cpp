@@ -7,6 +7,11 @@
 #include "PG_Main.h"
 #include "PG_CreateTables.h"
 
+typedef void (*file_writer_fn_t)(FILE       *fp,
+                                 const char *pathname,
+                                 const char *fname);
+
+
 static const char *get_typestr(int *x, int n)
 {
    int i, max = 0, min = 0;
@@ -921,300 +926,295 @@ void  PG_Main::GenerateParserTables ()
    chmod   (filename_h, S_IREAD); // Make output file read-only.
 };
 
-///////////////////////////////////////////////////////////////////////////////////////////////////
+
+void actions_header_fn(FILE       *fp,
+                       const char *pathname,
+                       const char *fname)
+{
+   fprintf (fp, "\n");
+   fprintf (fp, "///////////////////////////////////////////////////////////////////////////////\n");
+   fprintf (fp, "//                                                                           //\n");
+   fprintf (fp, "\n");
+   fprintf (fp, "#pragma once\n");
+   fprintf (fp, "\n");
+   fprintf (fp, "#include \"%s_Parser.h\"\n", fname);
+   fprintf (fp, "\n");
+   fprintf (fp, "#ifdef ACTIONS\n");
+   fprintf (fp, "\n");
+   fprintf (fp, "      class ACTIONS : public PARSER\n");
+   fprintf (fp, "      {\n");
+   fprintf (fp, "         public:\n");
+   fprintf (fp, "         static void init_actions ();\n");
+   fprintf (fp, "         static void term_actions ();\n");
+   fprintf (fp, "      };\n");
+   fprintf (fp, "\n");
+   fprintf (fp, "#endif\n");
+   fprintf (fp, "#ifdef TERM_ACTIONS\n");
+   fprintf (fp, "\n");
+   fprintf (fp, "      class TERM_ACTIONS : public ACTIONS\n");
+   fprintf (fp, "      {\n");
+   fprintf (fp, "         public:\n");
+   fprintf (fp, "         static int  error     (int& t);\n");
+   fprintf (fp, "         static int  lookup (int& t);\n");
+   fprintf (fp, "      };\n");
+   fprintf (fp, "\n");
+   fprintf (fp, "#endif\n");
+   fprintf (fp, "#ifdef NODE_ACTIONS\n");
+   fprintf (fp, "\n");
+   fprintf (fp, "      class NODE_ACTIONS : public ACTIONS\n");
+   fprintf (fp, "      {\n");
+   fprintf (fp, "         public:\n");
+   fprintf (fp, "      };\n");
+   fprintf (fp, "\n");
+   fprintf (fp, "#endif\n");
+   fprintf (fp, "\n");
+   fprintf (fp, "//                                                                           //\n");
+   fprintf (fp, "///////////////////////////////////////////////////////////////////////////////\n\n");
+}
+
+
+static void parsertables_header_fn(FILE       *fp,
+                                   const char *pathname,
+                                   const char *fname)
+{
+   fprintf (fp, "\n");
+   fprintf (fp, "///////////////////////////////////////////////////////////////////////////////\n");
+   fprintf (fp, "//                                                                           //\n");
+   fprintf (fp, "\n");
+   fprintf (fp, "#include \"%s_ParserTables.h\"\n", fname);
+   if (lrstar_linux) {
+      fprintf (fp, ("#include \"lrstar_lexer.h\"\n"
+                    "#include \"lrstar_parser.h\"\n"));
+   } else {
+      assert(lrstar_windows);
+      fprintf (fp, "#include \"../../code/lexer.h\"\n");
+      fprintf (fp, "#include \"../../code/parser.h\"\n");
+   }
+   fprintf (fp, "\n");
+   fprintf (fp, "//                                                                           //\n");
+   fprintf (fp, "///////////////////////////////////////////////////////////////////////////////\n\n");
+}
+
+
+static void actions_cpp_fn(FILE       *fp,
+                           const char *pathname,
+                           const char *fname)
+{
+   fprintf (fp, "\n");
+   fprintf (fp, "///////////////////////////////////////////////////////////////////////////////\n");
+   fprintf (fp, "//                                                                           //\n");
+   fprintf (fp, "\n");
+   fprintf (fp, "#include \"%s_Actions.h\"\n", fname);
+   if (lrstar_linux) {
+      fprintf (fp, "#include \"lrstar_main.h\"\n");
+   } else {
+      assert(lrstar_windows);
+      fprintf (fp, "#include \"../../code/main.h\"\n");
+   }
+   fprintf (fp, "\n");
+   fprintf (fp, "///////////////////////////////////////////////////////////////////////////////\n");
+   fprintf (fp, "\n");
+   fprintf (fp, "#ifdef ACTIONS\n");
+   fprintf (fp, "\n");
+   fprintf (fp, "void  ACTIONS::init_actions ()\n");
+   fprintf (fp, "{\n");
+   fprintf (fp, "      /* Initialization code goes here */\n");
+   fprintf (fp, "}\n");
+   fprintf (fp, "\n");
+   fprintf (fp, "void  ACTIONS::term_actions ()\n");
+   fprintf (fp, "{\n");
+   fprintf (fp, "      /* Termination code goes here */\n");
+   fprintf (fp, "}\n");
+   fprintf (fp, "\n");
+   fprintf (fp, "#endif\n");
+   fprintf (fp, "\n");
+   fprintf (fp, "///////////////////////////////////////////////////////////////////////////////\n");
+   fprintf (fp, "\n");
+   fprintf (fp, "#ifdef TERM_ACTIONS\n");
+   fprintf (fp, "\n");
+   fprintf (fp, "int   TERM_ACTIONS::error (int& t)\n");
+   fprintf (fp, "{\n");
+   fprintf (fp, "      if (token.end == token.start)        // Illegal character?\n");
+   fprintf (fp, "      {\n");
+   fprintf (fp, "         token.end++;\n");
+   fprintf (fp, "      }\n");
+   fprintf (fp, "      return 0;\n");
+   fprintf (fp, "}\n");
+   fprintf (fp, "\n");
+   fprintf (fp, "int   TERM_ACTIONS::lookup (int& t)             // Lookup in symbol table.\n");
+   fprintf (fp, "{\n");
+   fprintf (fp, "      int sti;\n");
+   fprintf (fp, "      #ifdef ND_PARSING\n");
+   fprintf (fp, "      if (lookahead.start > 0)             // In lookahead mode?\n");
+   fprintf (fp, "      {\n");
+   fprintf (fp, "         sti = add_symbol (t, lookahead.start, lookahead.end);\n");
+   fprintf (fp, "      }\n");
+   fprintf (fp, "      else                                 // Regular mode of parsing.\n");
+   fprintf (fp, "      #endif\n");
+   fprintf (fp, "      {\n");
+   fprintf (fp, "         sti = add_symbol (t, token.start, token.end);\n");
+   fprintf (fp, "      }\n");
+   fprintf (fp, "      #ifdef SEMANTICS\n");
+   fprintf (fp, "      t = symbol[sti].term;                // Redefine terminal number?\n");
+   fprintf (fp, "      #endif\n");
+   fprintf (fp, "    return sti;\n");                       // Return symbol-table index.\n");
+   fprintf (fp, "}\n");
+   fprintf (fp, "\n");
+   fprintf (fp, "#endif\n");
+   fprintf (fp, "\n");
+   fprintf (fp, "///////////////////////////////////////////////////////////////////////////////\n");
+   fprintf (fp, "\n");
+   fprintf (fp, "#ifdef NODE_ACTIONS\n");
+   fprintf (fp, "\n");
+   fprintf (fp, "\n");
+   fprintf (fp, "\n");
+   fprintf (fp, "#endif\n");
+   fprintf (fp, "\n");
+   fprintf (fp, "//                                                                           //\n");
+   fprintf (fp, "///////////////////////////////////////////////////////////////////////////////\n");
+   fprintf (fp, "\n");
+}
+
+
+static void lexer_cpp_fn(FILE       *fp,
+                         const char *pathname,
+                         const char *fname)
+{
+   fprintf (fp, "\n");
+   fprintf (fp, "///////////////////////////////////////////////////////////////////////////////\n");
+   fprintf (fp, "//                                                                           //\n");
+   fprintf (fp, "\n");
+   fprintf (fp, "#include \"%s_LexerTables.h\"\n", fname);
+   fprintf (fp, "#include \"%s_LexerTables.hpp\"\n", fname);
+   if (lrstar_linux) {
+      fprintf (fp, ("#include \"lrstar_lexer.h\"\n"
+                    "#include \"lrstar_lexer.cpp\"\n"));
+   } else {
+      assert(lrstar_windows);
+      fprintf (fp, "#include \"../../code/lexer.h\"\n");
+      fprintf (fp, "#include \"../../code/lexer.cpp\"\n");
+   }
+   fprintf (fp, "\n");
+   fprintf (fp, "//                                                                           //\n");
+   fprintf (fp, "///////////////////////////////////////////////////////////////////////////////\n\n");
+}
+
+
+static void main_cpp_fn(FILE       *fp,
+                        const char *pathname,
+                        const char *fname)
+{
+   fprintf (fp, "\n");
+   fprintf (fp, "///////////////////////////////////////////////////////////////////////////////\n");
+   fprintf (fp, "//                                                                           //\n");
+   fprintf (fp, "\n");
+   fprintf (fp, "#include \"%s_Parser.h\"\n", fname);
+   if (lrstar_linux) {
+      fprintf (fp, "#include \"lrstar_main.cpp\"\n");
+   } else {
+      assert(lrstar_windows);
+      fprintf (fp, "#include \"../../code/main.cpp\"\n");
+   }
+   fprintf (fp, "\n");
+   fprintf (fp, "//                                                                           //\n");
+   fprintf (fp, "///////////////////////////////////////////////////////////////////////////////\n\n");
+}
+
+
+static void parser_cpp_fn(FILE       *fp,
+                         const char *pathname,
+                         const char *fname)
+{
+   fprintf (fp, "\n");
+   fprintf (fp, "///////////////////////////////////////////////////////////////////////////////\n");
+   fprintf (fp, "//                                                                           //\n");
+   fprintf (fp, "\n");
+   fprintf (fp, "#include \"%s_Parser.h\"\n", fname);
+   fprintf (fp, "#include \"%s_ParserTables.hpp\"\n", fname);
+   if (lrstar_linux) {
+      fprintf (fp, "#include \"lrstar_parser.cpp\"\n");
+   } else {
+      assert(lrstar_windows);
+      fprintf (fp, "#include \"../../code/parser.cpp\"\n");
+   }
+   fprintf (fp, "\n");
+   fprintf (fp, "//                                                                           //\n");
+   fprintf (fp, "///////////////////////////////////////////////////////////////////////////////\n\n");
+}
+
+
+static void make_bat_fn(FILE       *fp,
+                        const char *pathname,
+                        const char *fname)
+{
+      fprintf (fp, "rem  This make.bat must be in the same directory as the Visual Studio project files,\n");
+      fprintf (fp, "rem  or else the error messages will not have the correct directory name preceeding\n");
+      fprintf (fp, "rem  the file name, and clicking on the error messages will not work.\n");
+      fprintf (fp, "\n");
+      fprintf (fp, "@echo off\n");
+      fprintf (fp, "prompt $g$s\n");
+      fprintf (fp, "\n");
+      fprintf (fp, "..\\..\\bin\\lrstar %s d dt\n", fname);
+      fprintf (fp, "..\\..\\bin\\dfa    %s d\n\n", fname);
+}
+
+
+static void write_file(const char       *gdn,
+                       const char       *gfn,
+                       const char       *suffix,
+                       file_writer_fn_t  fn)
+{
+   char  pathname[PATH_MAX];
+   FILE *fp;
+
+   strcpy(pathname, gdn);
+   strcat(pathname, gfn);
+   strcat(pathname, suffix);
+   fp = fopen(pathname, "w");
+
+   if (fp != NULL) {
+      prt_logonly ("Generating: %s\n", pathname);
+      fn(fp, pathname, gfn);
+      fclose(fp);
+   } else {
+      if (++n_errors == 1) {
+         prt_log("\n");
+      }
+      prt_log("Output file '%s' cannot be written!\n\n", pathname);
+      Quit();
+   }
+}
+
 
 void  PG_Main::GenerateOtherFiles ()
 {
-   int fd, n = 0;
-   char filename[264];
-   strcpy (filename, gdn);
-   strcat (filename, gfn);
-   strcat (filename, "_Actions.h");
-   fd = open (filename, 0);
-   if (fd < 0) // Does not exist?
-   {
-      FILE* fp = fopen (filename, "w");
-      if (fp == NULL)
-      {
-         if (++n_errors == 1) prt_log("\n");
-         prt_log ("Output file '%s' cannot be written!\n\n", filename);
-         Quit();
-      }
-      n++;
-      prt_logonly ("Generating: %s\n", filename);
-      fprintf (fp, "\n");
-      fprintf (fp, "///////////////////////////////////////////////////////////////////////////////\n");
-      fprintf (fp, "//                                                                           //\n");
-      fprintf (fp, "\n");
-      fprintf (fp, "#pragma once\n");
-      fprintf (fp, "\n");
-      fprintf (fp, "#include \"%s_Parser.h\"\n", gfn);
-      fprintf (fp, "\n");
-      fprintf (fp, "#ifdef ACTIONS\n");
-      fprintf (fp, "\n");
-      fprintf (fp, "      class ACTIONS : public PARSER \n");
-      fprintf (fp, "      {\n");
-      fprintf (fp, "         public:\n");
-      fprintf (fp, "         static void init_actions ();\n");
-      fprintf (fp, "         static void term_actions ();\n");
-      fprintf (fp, "      };\n");
-      fprintf (fp, "\n");
-      fprintf (fp, "#endif\n");
-      fprintf (fp, "#ifdef TERM_ACTIONS\n");
-      fprintf (fp, "\n");
-      fprintf (fp, "      class TERM_ACTIONS : public ACTIONS \n");
-      fprintf (fp, "      {\n");
-      fprintf (fp, "         public:\n");
-      fprintf (fp, "         static int  error     (int& t);\n");
-      fprintf (fp, "         static int  lookup (int& t);\n");
-      fprintf (fp, "      };\n");
-      fprintf (fp, "\n");
-      fprintf (fp, "#endif\n");
-      fprintf (fp, "#ifdef NODE_ACTIONS\n");
-      fprintf (fp, "\n");
-      fprintf (fp, "      class NODE_ACTIONS : public ACTIONS \n");
-      fprintf (fp, "      {\n");
-      fprintf (fp, "         public:\n");
-      fprintf (fp, "      };\n");
-      fprintf (fp, "\n");
-      fprintf (fp, "#endif\n");
-      fprintf (fp, "\n");
-      fprintf (fp, "//                                                                           //\n");
-      fprintf (fp, "///////////////////////////////////////////////////////////////////////////////\n\n");
-      fclose (fp);
-   }
-   else close (fd);
+   char  filename[PATH_MAX];
+   int   fd;
+   int   n = 0;
+   FILE* fp;
 
-   strcpy (filename, gdn);
-   strcat (filename, gfn);
-   strcat (filename, "_Parser.h");
-   fd = open (filename, 0);
-   if (fd < 0) // Does not exist?
-   {
-      FILE* fp = fopen (filename, "w");
-      if (fp == NULL)
-      {
-         if (++n_errors == 1) prt_log("\n");
-         prt_log ("Output file '%s' cannot be written!\n\n", filename);
-         Quit();
-      }
-      n++;
-      prt_logonly ("Generating: %s\n", filename);
-      fprintf (fp, "\n");
-      fprintf (fp, "///////////////////////////////////////////////////////////////////////////////\n");
-      fprintf (fp, "//                                                                           //\n");
-      fprintf (fp, "\n");
-      fprintf (fp, "#include \"%s_ParserTables.h\"\n", gfn);
-      if (lrstar_linux) {
-         fprintf (fp, ("#include \"lrstar_lexer.h\"\n"
-                       "#include \"lrstar_parser.h\"\n"));
-      } else {
-         assert(lrstar_windows);
-         fprintf (fp, "#include \"../../code/lexer.h\"\n");
-         fprintf (fp, "#include \"../../code/parser.h\"\n");
-      }
-      fprintf (fp, "\n");
-      fprintf (fp, "//                                                                           //\n");
-      fprintf (fp, "///////////////////////////////////////////////////////////////////////////////\n\n");
-      fclose (fp);
-   }
-   else close (fd);
+   n++;
+   write_file(gdn, gfn, "_Actions.h", actions_header_fn);
 
-   strcpy (filename, gdn);
-   strcat (filename, gfn);
-   strcat (filename, "_Actions.cpp");
-   fd = open (filename, 0);
-   if (fd < 0) // Does not exist?
-   {
-      FILE* fp = fopen (filename, "w");
-      if (fp == NULL)
-      {
-         if (++n_errors == 1) prt_log("\n");
-         prt_log ("Output file '%s' cannot be written!\n\n", filename);
-         Quit();
-      }
-      n++;
-      prt_logonly ("Generating: %s\n", filename);
-      fprintf (fp, "\n");
-      fprintf (fp, "///////////////////////////////////////////////////////////////////////////////\n");
-      fprintf (fp, "//                                                                           //\n");
-      fprintf (fp, "\n");
-      fprintf (fp, "#include \"%s_Actions.h\"\n", gfn);
-      if (lrstar_linux) {
-         fprintf (fp, "#include \"lrstar_main.h\"\n");
-      } else {
-         assert(lrstar_windows);
-         fprintf (fp, "#include \"../../code/main.h\"\n");
-      }
-      fprintf (fp, "\n");
-      fprintf (fp, "///////////////////////////////////////////////////////////////////////////////\n");
-      fprintf (fp, "\n");
-      fprintf (fp, "#ifdef ACTIONS\n");
-      fprintf (fp, "\n");
-      fprintf (fp, "void  ACTIONS::init_actions ()\n");
-      fprintf (fp, "{\n");
-      fprintf (fp, "      /* Initialization code goes here */\n");
-      fprintf (fp, "}\n");
-      fprintf (fp, "\n");
-      fprintf (fp, "void  ACTIONS::term_actions ()\n");
-      fprintf (fp, "{\n");
-      fprintf (fp, "      /* Termination code goes here */\n");
-      fprintf (fp, "}\n");
-      fprintf (fp, "\n");
-      fprintf (fp, "#endif\n");
-      fprintf (fp, "\n");
-      fprintf (fp, "///////////////////////////////////////////////////////////////////////////////\n");
-      fprintf (fp, "\n");
-      fprintf (fp, "#ifdef TERM_ACTIONS\n");
-      fprintf (fp, "\n");
-      fprintf (fp, "int   TERM_ACTIONS::error (int& t)\n");
-      fprintf (fp, "{\n");
-      fprintf (fp, "      if (token.end == token.start)        // Illegal character?\n");
-      fprintf (fp, "      {\n");
-      fprintf (fp, "         token.end++;\n");
-      fprintf (fp, "      }\n");
-      fprintf (fp, "      return 0;\n");
-      fprintf (fp, "}\n");
-      fprintf (fp, "\n");
-      fprintf (fp, "int   TERM_ACTIONS::lookup (int& t)             // Lookup in symbol table.\n");
-      fprintf (fp, "{\n");
-      fprintf (fp, "      int sti;\n");
-      fprintf (fp, "      #ifdef ND_PARSING\n");
-      fprintf (fp, "      if (lookahead.start > 0)             // In lookahead mode?\n");
-      fprintf (fp, "      {\n");
-      fprintf (fp, "         sti = add_symbol (t, lookahead.start, lookahead.end);\n");
-      fprintf (fp, "      }\n");
-      fprintf (fp, "      else                                 // Regular mode of parsing.\n");
-      fprintf (fp, "      #endif\n");
-      fprintf (fp, "      {\n");
-      fprintf (fp, "         sti = add_symbol (t, token.start, token.end);\n");
-      fprintf (fp, "      }\n");
-      fprintf (fp, "      #ifdef SEMANTICS\n");
-      fprintf (fp, "      t = symbol[sti].term;                // Redefine terminal number?\n");
-      fprintf (fp, "      #endif\n");
-      fprintf (fp, "    return sti;\n");                       // Return symbol-table index.\n");
-      fprintf (fp, "}\n");
-      fprintf (fp, "\n");
-      fprintf (fp, "#endif\n");
-      fprintf (fp, "\n");
-      fprintf (fp, "///////////////////////////////////////////////////////////////////////////////\n");
-      fprintf (fp, "\n");
-      fprintf (fp, "#ifdef NODE_ACTIONS\n");
-      fprintf (fp, "\n");
-      fprintf (fp, "\n");
-      fprintf (fp, "\n");
-      fprintf (fp, "#endif\n");
-      fprintf (fp, "\n");
-      fprintf (fp, "//                                                                           //\n");
-      fprintf (fp, "///////////////////////////////////////////////////////////////////////////////\n");
-      fprintf (fp, "\n");
-      fclose (fp);
-   }
-   else close (fd);
+   n++;
+   write_file(gdn, gfn, "_Parser.h", parsertables_header_fn);
 
-   strcpy (filename, gdn);
-   strcat (filename, gfn);
-   strcat (filename, "_Lexer.cpp");
-   fd = open (filename, 0);
-   if (fd < 0) // Does not exist?
-   {
-      FILE* fp = fopen (filename, "w");
-      if (fp == NULL)
-      {
-         if (++n_errors == 1) prt_log("\n");
-         prt_log ("Output file '%s' cannot be written!\n\n", filename);
-         Quit();
-      }
-      n++;
-      prt_logonly ("Generating: %s\n", filename);
-      fprintf (fp, "\n");
-      fprintf (fp, "///////////////////////////////////////////////////////////////////////////////\n");
-      fprintf (fp, "//                                                                           //\n");
-      fprintf (fp, "\n");
-      fprintf (fp, "#include \"%s_LexerTables.h\"\n", gfn);
-      fprintf (fp, "#include \"%s_LexerTables.hpp\"\n", gfn);
-      if (lrstar_linux) {
-         fprintf (fp, ("#include \"lrstar_lexer.h\"\n"
-                       "#include \"lrstar_lexer.cpp\"\n"));
-      } else {
-         assert(lrstar_windows);
-         fprintf (fp, "#include \"../../code/lexer.h\"\n");
-         fprintf (fp, "#include \"../../code/lexer.cpp\"\n");
-      }
-      fprintf (fp, "\n");
-      fprintf (fp, "//                                                                           //\n");
-      fprintf (fp, "///////////////////////////////////////////////////////////////////////////////\n\n");
-      fclose (fp);
-   }
-   else close (fd);
+   n++;
+   write_file(gdn, gfn, "_Actions.cpp", actions_cpp_fn);
 
-   strcpy (filename, gdn);
-   strcat (filename, gfn);
-   strcat (filename, "_Main.cpp");
-   fd = open (filename, 0);
-   if (fd < 0) // Does not exist?
-   {
-      FILE* fp = fopen (filename, "w");
-      if (fp == NULL)
-      {
-         if (++n_errors == 1) prt_log("\n");
-         prt_log ("Output file '%s' cannot be written!\n\n", filename);
-         Quit();
-      }
-      n++;
-      prt_logonly ("Generating: %s\n", filename);
-      fprintf (fp, "\n");
-      fprintf (fp, "///////////////////////////////////////////////////////////////////////////////\n");
-      fprintf (fp, "//                                                                           //\n");
-      fprintf (fp, "\n");
-      fprintf (fp, "#include \"%s_Parser.h\"\n", gfn);
-      if (lrstar_linux) {
-         fprintf (fp, "#include \"lrstar_main.cpp\"\n");
-      } else {
-         assert(lrstar_windows);
-         fprintf (fp, "#include \"../../code/main.cpp\"\n");
-      }
-      fprintf (fp, "\n");
-      fprintf (fp, "//                                                                           //\n");
-      fprintf (fp, "///////////////////////////////////////////////////////////////////////////////\n\n");
-      fclose (fp);
-   }
-   else close (fd);
+   n++;
+   write_file(gdn, gfn, "_Lexer.cpp", lexer_cpp_fn);
 
-   strcpy (filename, gdn);
-   strcat (filename, gfn);
-   strcat (filename, "_Parser.cpp");
-   fd = open (filename, 0);
-   if (fd < 0) // Does not exist?
-   {
-      FILE* fp = fopen (filename, "w");
-      if (fp == NULL)
-      {
-         if (++n_errors == 1) prt_log("\n");
-         prt_log ("Output file '%s' cannot be written!\n\n", filename);
-         Quit();
-      }
-      n++;
-      prt_logonly ("Generating: %s\n", filename);
-      fprintf (fp, "\n");
-      fprintf (fp, "///////////////////////////////////////////////////////////////////////////////\n");
-      fprintf (fp, "//                                                                           //\n");
-      fprintf (fp, "\n");
-      fprintf (fp, "#include \"%s_Parser.h\"\n", gfn);
-      fprintf (fp, "#include \"%s_ParserTables.hpp\"\n", gfn);
-      if (lrstar_linux) {
-         fprintf (fp, "#include \"lrstar_parser.cpp\"\n");
-      } else {
-         assert(lrstar_windows);
-         fprintf (fp, "#include \"../../code/parser.cpp\"\n");
-      }
-      fprintf (fp, "\n");
-      fprintf (fp, "//                                                                           //\n");
-      fprintf (fp, "///////////////////////////////////////////////////////////////////////////////\n\n");
-      fclose (fp);
-   }
-   else close (fd);
+   n++;
+   write_file(gdn, gfn, "_Main.cpp", main_cpp_fn);
 
+   n++;
+   write_file(gdn, gfn, "_Parser.cpp", parser_cpp_fn);
+
+   if (lrstar_windows) {
+      n++;
+      write_file(gdn, "make.bat", "", make_bat_fn);
+   }
    strcpy (filename, gdn);
    strcat (filename, "make.bat");
    fd = open (filename, 0);
@@ -1229,15 +1229,6 @@ void  PG_Main::GenerateOtherFiles ()
       }
       n++;
       prt_logonly ("Generating: %s\n", filename);
-      fprintf (fp, "rem  This make.bat must be in the same directory as the Visual Studio project files,\n");
-      fprintf (fp, "rem  or else the error messages will not have the correct directory name preceeding\n");
-      fprintf (fp, "rem  the file name, and clicking on the error messages will not work.\n");
-      fprintf (fp, "\n");
-      fprintf (fp, "@echo off\n");
-      fprintf (fp, "prompt $g$s\n");
-      fprintf (fp, "\n");
-      fprintf (fp, "..\\..\\bin\\lrstar %s d dt\n", gfn);
-      fprintf (fp, "..\\..\\bin\\dfa    %s d\n\n", gfn);
       fclose (fp);
    }
    else close (fd);

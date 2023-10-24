@@ -3,7 +3,7 @@
 //                                                                           //
 
 #include "Kotlin_Parser.h"
-#include "../../code/main.cpp"
+#include "lrstar_main.cpp"
 
 //                                                                           //
 ///////////////////////////////////////////////////////////////////////////////

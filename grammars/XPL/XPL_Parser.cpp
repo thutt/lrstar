@@ -4,7 +4,7 @@
 
 #include "XPL_Parser.h"
 #include "XPL_ParserTables.hpp"
-#include "../../code/parser.cpp"
+#include "lrstar_parser.cpp"
 
 //                                                                           //
 ///////////////////////////////////////////////////////////////////////////////

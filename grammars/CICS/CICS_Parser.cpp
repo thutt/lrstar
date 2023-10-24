@@ -4,7 +4,7 @@
 
 #include "CICS_Parser.h"
 #include "CICS_ParserTables.hpp"
-#include "../../code/parser.cpp"
+#include "lrstar_parser.cpp"
 
 //                                                                           //
 ///////////////////////////////////////////////////////////////////////////////

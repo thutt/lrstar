@@ -15,6 +15,12 @@ N matrix      34 x   35 x 1 =     1,190 ->     580 +     303 =     883
 R matrix       1 x    1 x 1 =         1 ->       1 +     146 =     147  
 Total                                          843 +     790 =   1,633
 
+Generating: XPL_Actions.h
+Generating: XPL_Parser.h
+Generating: XPL_Actions.cpp
+Generating: XPL_Lexer.cpp
+Generating: XPL_Main.cpp
+Generating: XPL_Parser.cpp
 Generating: XPL_ParserTables.h
 Generating: XPL_ParserTables.hpp
 

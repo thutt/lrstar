@@ -4,7 +4,7 @@
 
 #include "C11_Parser.h"
 #include "C11_ParserTables.hpp"
-#include "../../code/parser.cpp"
+#include "lrstar_parser.cpp"
 
 //                                                                           //
 ///////////////////////////////////////////////////////////////////////////////

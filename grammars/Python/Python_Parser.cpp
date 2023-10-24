@@ -4,7 +4,7 @@
 
 #include "Python_Parser.h"
 #include "Python_ParserTables.hpp"
-#include "../../code/parser.cpp"
+#include "lrstar_parser.cpp"
 
 //                                                                           //
 ///////////////////////////////////////////////////////////////////////////////

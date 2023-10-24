@@ -4,7 +4,7 @@
 
 #include "SQL_Parser.h"
 #include "SQL_ParserTables.hpp"
-#include "../../code/parser.cpp"
+#include "lrstar_parser.cpp"
 
 //                                                                           //
 ///////////////////////////////////////////////////////////////////////////////

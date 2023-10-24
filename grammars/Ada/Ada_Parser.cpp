@@ -4,7 +4,7 @@
 
 #include "Ada_Parser.h"
 #include "Ada_ParserTables.hpp"
-#include "../../code/parser.cpp"
+#include "lrstar_parser.cpp"
 
 //                                                                           //
 ///////////////////////////////////////////////////////////////////////////////

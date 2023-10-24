@@ -8,7 +8,7 @@
 
 #ifdef ACTIONS
 
-      class ACTIONS : public PARSER 
+      class ACTIONS : public PARSER
       {
          public:
          static void init_actions ();
@@ -18,25 +18,17 @@
 #endif
 #ifdef TERM_ACTIONS
 
-      class TERM_ACTIONS : public ACTIONS 
+      class TERM_ACTIONS : public ACTIONS
       {
          public:
-         static int  error		(int& t);
-         static int  lookup	(int& t);
-      };
-
-#endif
-#ifdef PARSE_ACTIONS
-
-      class PARSE_ACTIONS : public TERM_ACTIONS 
-      {
-         public:
+         static int  error     (int& t);
+         static int  lookup (int& t);
       };
 
 #endif
 #ifdef NODE_ACTIONS
 
-      class NODE_ACTIONS : public PARSE_ACTIONS 
+      class NODE_ACTIONS : public ACTIONS
       {
          public:
       };

@@ -15,6 +15,12 @@ N matrix      86 x  100 x 2 =    17,200 ->   6,480 +   1,067 =   7,547
 R matrix       3 x    5 x 2 =        24 ->      24 +     801 =     825  
 Total                                        8,440 +   3,583 =  12,023
 
+Generating: Pascal_Actions.h
+Generating: Pascal_Parser.h
+Generating: Pascal_Actions.cpp
+Generating: Pascal_Lexer.cpp
+Generating: Pascal_Main.cpp
+Generating: Pascal_Parser.cpp
 Generating: Pascal_ParserTables.h
 Generating: Pascal_ParserTables.hpp
 
@@ -33,5 +39,5 @@ Includes in LALR computation         1,600  inc  =  1,000,000    0%
 Child nodes in graph                 2,534  ch   =  1,000,000    0% 
 Nondeterministic/conflict items         26  nd   =  1,000,000    0% 
 
-0 min 0.030 sec, 31.572 MB, 0 warnings, 0 errors.
+0 min 0.022 sec, 31.572 MB, 0 warnings, 0 errors.
 

@@ -4,7 +4,7 @@
 
 #include "Fortran_Parser.h"
 #include "Fortran_ParserTables.hpp"
-#include "../../code/parser.cpp"
+#include "lrstar_parser.cpp"
 
 //                                                                           //
 ///////////////////////////////////////////////////////////////////////////////

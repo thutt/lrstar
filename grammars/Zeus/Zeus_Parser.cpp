@@ -4,7 +4,7 @@
 
 #include "Zeus_Parser.h"
 #include "Zeus_ParserTables.hpp"
-#include "../../code/parser.cpp"
+#include "lrstar_parser.cpp"
 
 //                                                                           //
 ///////////////////////////////////////////////////////////////////////////////

@@ -15,6 +15,12 @@ N matrix      83 x   58 x 2 =     9,628 ->   6,270 +     742 =   7,012
 R matrix       6 x    9 x 1 =        49 ->      49 +     571 =     620  
 Total                                        7,801 +   2,554 =  10,355
 
+Generating: Java1_Actions.h
+Generating: Java1_Parser.h
+Generating: Java1_Actions.cpp
+Generating: Java1_Lexer.cpp
+Generating: Java1_Main.cpp
+Generating: Java1_Parser.cpp
 Generating: Java1_ParserTables.h
 Generating: Java1_ParserTables.hpp
 
@@ -33,5 +39,5 @@ Includes in LALR computation         2,249  inc  =  1,000,000    0%
 Child nodes in graph                 3,975  ch   =  1,000,000    0% 
 Nondeterministic/conflict items          4  nd   =  1,000,000    0% 
 
-0 min 0.029 sec, 31.446 MB, 0 warnings, 0 errors.
+0 min 0.022 sec, 31.446 MB, 0 warnings, 0 errors.
 

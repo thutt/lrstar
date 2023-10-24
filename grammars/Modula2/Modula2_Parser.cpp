@@ -4,7 +4,7 @@
 
 #include "Modula2_Parser.h"
 #include "Modula2_ParserTables.hpp"
-#include "../../code/parser.cpp"
+#include "lrstar_parser.cpp"
 
 //                                                                           //
 ///////////////////////////////////////////////////////////////////////////////
