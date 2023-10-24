@@ -22,13 +22,13 @@
 #include <time.h>
 #include <stdarg.h>
 
-#if defined(WINDOWS)
+#if defined(LRSTAR_WINDOWS)
 #include "wtypes.h"
 #include <io.h>
 #include "malloc.h"
 #endif
 
-#ifdef LINUX
+#if defined(LRSTAR_LINUX)
 #include <limits.h>
 #include <unistd.h>
 #endif
@@ -105,7 +105,7 @@ enum options
    N_OPTIONS
 };
 
-#if defined(WINDOWS)
+#if defined(LRSTAR_WINDOWS)
 #define read   _read
 #define write  _write
 #define open   _open
@@ -369,7 +369,7 @@ void C_CAMEFROM(int  N_states,
 
 extern int    close_log();
 
-#ifdef LINUX
+#if defined(LRSTAR_LINUX)
 extern long   _filelength (int fd);
 #endif
 

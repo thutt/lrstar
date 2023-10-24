@@ -218,7 +218,7 @@ static int GetMaxValues (char *dn)
    int   filedesc = -1;
    int   filesize;
 
-#if defined(WINDOWS)
+#if defined(LRSTAR_WINDOWS)
    strcpy (exefid, getenv ("USERPROFILE"));
    strcat (exefid, "\\AppData\\Local\\LRSTAR");
    strcat (exefid, "\\memory.txt");

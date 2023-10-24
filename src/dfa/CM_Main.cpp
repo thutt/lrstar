@@ -10,7 +10,7 @@ const char* bits = "32b";
 #endif
 const char* copywrt = "Copyright Paul B Mann";
 
-#if defined(WINDOWS)
+#if defined(LRSTAR_WINDOWS)
 #include "conio.h"
 #include <windows.h>
 #endif
@@ -293,7 +293,7 @@ void  InitOptions ()
 /*
   void  wait (int na)
   {
-  #ifdef WINDOWS
+  #if defined(LRSTAR_WINDOWS)
   double dsec;
   int time1, time2, min, sec, thou, limit;
   if (na == 1) return;
@@ -322,7 +322,7 @@ void  InitOptions ()
 
 void  Quit (int rc)
 {
-#if defined(WINDOWS)
+#if defined(LRSTAR_WINDOWS)
 #ifdef _DEBUG
    {
       printf("Waiting for a key to be pressed ...\n");

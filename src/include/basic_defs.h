@@ -11,19 +11,14 @@
    #error Compiler not recognized.
 #endif
 
-#if defined(__linux)
-   #define LRSTAR_LINUX
+#if defined(LRSTAR_LINUX)
    #define lrstar_linux   (1)
    #define lrstar_windows (0)
-#else
-   #undef LRSTAR_LINUX
-   #define lrstar_linux   (0)
-#endif
-
-#if defined(WINDOWS)
-   #define LRSTAR_WINDOWS
+#elif defined(LRSTAR_WINDOWS)
    #define lrstar_linux   (0)
    #define lrstar_windows (1)
+#else
+#error The host operating system is not { Linux, Windows }.
 #endif
 
 #if defined(_DEBUG)

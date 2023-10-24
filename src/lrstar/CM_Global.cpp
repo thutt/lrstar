@@ -3,7 +3,7 @@
 #define MAIN
 #include <assert.h>
 #include "CM_Global.h"
-#if defined(WINDOWS)
+#if defined(LRSTAR_WINDOWS)
 #include "conio.h"
 #include <windows.h>
 #include "direct.h"
@@ -138,7 +138,7 @@ int   main (int na, char *arg[])
    fprintf (fp, "%d\n", n_errors);
    fclose (fp);
 
-#if defined(WINDOWS)
+#if defined(LRSTAR_WINDOWS)
 #ifdef _DEBUG
    printf ("Waiting for a key to be pressed ...\n");
    while (!_kbhit());
@@ -223,7 +223,7 @@ void  MemCrash (const char* value, int n)
 
 void  Wait ()
 {
-#if defined(WINDOWS)
+#if defined(LRSTAR_WINDOWS)
    double dsec;
    int    time1, time2, sec, limit;
    limit = 3; // Seconds.
@@ -1173,7 +1173,7 @@ char  oper_char (Node* np)
    return oper;
 }
 
-#ifdef LINUX
+#if defined(LRSTAR_LINUX)
 ///////////////////////////////////////////////////////////////////////////////
 //                                                                           //
 //    _filelength function supplied by Vasko Mitanov, Feb 2012.               //

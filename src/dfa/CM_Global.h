@@ -26,13 +26,13 @@
 #include <time.h>
 #include <stdarg.h>
 
-#if defined(WINDOWS)
+#if defined(LRSTAR_WINDOWS)
 #include <wtypes.h>
 #include <io.h>
 #include <malloc.h>
 #endif
 
-#ifdef LINUX
+#if defined(LRSTAR_LINUX)
 #include <unistd.h>
 #include <limits.h>
 #endif
@@ -94,7 +94,7 @@ enum options
    N_OPTIONS
 };
 
-#if defined(WINDOWS)
+#if defined(LRSTAR_WINDOWS)
 #define read   _read
 #define write  _write
 #define open   _open
@@ -410,7 +410,7 @@ EXTERN CHILD* child;
 EXTERN int*   f_child;
 EXTERN int    n_childs;
 
-#ifdef LINUX
+#if defined(LRSTAR_LINUX)
 long   _filelength (int fd);
 #endif
 

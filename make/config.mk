@@ -10,6 +10,7 @@ SPACE	:= $(SPACE) $(SPACE)
 CC	:=	\
 	g++
 
+# HOSTOS must be in { LINUX, WINDOWS }.
 HOSTOS	:=	\
 	LINUX
 
@@ -54,7 +55,8 @@ OPT	:=							\
 
 
 PREPROCESSOR	:=						\
-	$(if $(filter debug,$(LRSTAR_BUILD_TYPE)),_DEBUG)
+	$(if $(filter debug,$(LRSTAR_BUILD_TYPE)),_DEBUG)	\
+	LRSTAR_$(HOSTOS)
 
 
 ERROR_FORMAT	:=				\
@@ -76,10 +78,9 @@ WARNINGS	:=				\
 
 
 CXXFLAGS	=					\
-	-D$(HOSTOS)					\
 	-DBUILD_TYPE_$(LRSTAR_BUILD_TYPE)		\
-	$(addprefix -I,$(INCLUDE))			\
 	$(addprefix -D,$(PREPROCESSOR))			\
+	$(addprefix -I,$(INCLUDE))			\
 	$(OPT)						\
 	$(PROFILE)					\
 	$(DEBUG)					\

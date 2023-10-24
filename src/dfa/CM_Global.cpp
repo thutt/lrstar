@@ -58,7 +58,7 @@ char spaces [256] =             /* TODO: This should either be const,
    "                                                               "; // 255
 
 
-#ifdef LINUX
+#if defined(LRSTAR_LINUX)
 ///////////////////////////////////////////////////////////////////////////////
 //                                                                           //
 //    _filelength function supplied by Vasko Mitanov, Feb 2012.               //
@@ -175,7 +175,7 @@ int   GetMaxValues (char* dn)
    int   filedesc = -1;
    int   filesize;
 
-#if defined(WINDOWS)
+#if defined(LRSTAR_WINDOWS)
    strcpy (exefid, getenv ("USERPROFILE"));
    strcat (exefid, "\\AppData\\Local\\LRSTAR");
    strcat (exefid, "\\memory.txt");
