@@ -1188,50 +1188,15 @@ static void write_file(const char       *gdn,
 
 void  PG_Main::GenerateOtherFiles ()
 {
-   char  filename[PATH_MAX];
-   int   fd;
-   int   n = 0;
-   FILE* fp;
-
-   n++;
    write_file(gdn, gfn, "_Actions.h", actions_header_fn);
-
-   n++;
    write_file(gdn, gfn, "_Parser.h", parsertables_header_fn);
-
-   n++;
    write_file(gdn, gfn, "_Actions.cpp", actions_cpp_fn);
-
-   n++;
    write_file(gdn, gfn, "_Lexer.cpp", lexer_cpp_fn);
-
-   n++;
    write_file(gdn, gfn, "_Main.cpp", main_cpp_fn);
-
-   n++;
    write_file(gdn, gfn, "_Parser.cpp", parser_cpp_fn);
-
    if (lrstar_windows) {
-      n++;
       write_file(gdn, "make.bat", "", make_bat_fn);
    }
-   strcpy (filename, gdn);
-   strcat (filename, "make.bat");
-   fd = open (filename, 0);
-   if (fd < 0) // Does not exist?
-   {
-      FILE* fp = fopen (filename, "w");
-      if (fp == NULL)
-      {
-         if (++n_errors == 1) prt_log("\n");
-         prt_log ("Output file '%s' cannot be written!\n\n", filename);
-         Quit();
-      }
-      n++;
-      prt_logonly ("Generating: %s\n", filename);
-      fclose (fp);
-   }
-   else close (fd);
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
