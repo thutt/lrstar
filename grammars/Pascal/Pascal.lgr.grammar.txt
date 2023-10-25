@@ -1,0 +1,4 @@
+
+/* Pascal.lgr grammar */
+
+/* 'g' option was not specified */

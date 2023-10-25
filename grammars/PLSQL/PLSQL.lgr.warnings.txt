@@ -1,0 +1,14 @@
+
+PLSQL.lgr(0006) :  <constant>       -> literal 
+PLSQL.lgr(0006) : .^^^^^^^^^^...................
+PLSQL.lgr(0006) : Warning, <constant> assumed to be {constant} because it's not in the tokens list in PLSQL.lex.
+
+PLSQL.lgr(0011) :  <identifier>     -> letter (letter|digit)* 
+PLSQL.lgr(0011) : .^^^^^^^^^^^^................................
+PLSQL.lgr(0011) : Warning, <identifier> assumed to be {identifier} because it's not in the tokens list in PLSQL.lex.
+
+PLSQL.lgr(0044) :  <string>         -> '"' schar* '"'
+PLSQL.lgr(0044) : .^^^^^^^^...........................
+PLSQL.lgr(0044) : Warning, <string> assumed to be {string} because it's not in the tokens list in PLSQL.lex.
+
+3 warnings.

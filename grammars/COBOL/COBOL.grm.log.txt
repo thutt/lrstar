@@ -39,5 +39,5 @@ Includes in LALR computation         3,761  inc  =  1,000,000    0%
 Child nodes in graph                10,321  ch   =  1,000,000    1% 
 Nondeterministic/conflict items      1,556  nd   =  1,000,000    0% 
 
-0 min 0.062 sec, 31.985 MB, 0 warnings, 0 errors.
+0 min 0.058 sec, 31.985 MB, 0 warnings, 0 errors.
 

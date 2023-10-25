@@ -1,0 +1,33 @@
+
+DFA 24.0.016 32b Copyright Paul B Mann.
+
+verilog.lgr 
+
+Grammar      497 rules, 256 terminals, 160 nonterminals.
+States      2075 states before converting to a DFA.
+             500 states in final DFA state machine.
+Conflicts      0 states, 0 shift-reduce, 0 reduce-reduce.
+
+            rows   cols          matrix       list      vect     total
+T matrix     457 x   61 x 2 =    55,754 ->  55,754 +   1,756 =  57,510 
+
+Generating: verilog_LexerTables.h
+Generating: verilog_LexerTables.hpp
+
+Symbols in the grammar                 417  sym  =    100,000    0% 
+Productions in the grammar             865  pro  =    100,000    1% 
+Tail symbols in the grammar          2,768  tail =    500,000    1% 
+States created                       2,075  sta  =    100,000    2% 
+Final state items                    2,142  fin  =    100,000    2% 
+Kernel state items                   2,365  ker  =  1,000,000    0% 
+Nonterminal transitions                230  ntt  =  1,000,000    0% 
+Terminal transitions                 1,850  tt   =  1,000,000    0% 
+Terminal transitions added          24,126  tta  =  1,000,000    2% 
+Lookaheads in LALR computation       6,448  la   =  1,000,000    1% 
+Lookbacks in LALR computation        2,141  lb   =  1,000,000    0% 
+Includes in LALR computation           230  inc  =  1,000,000    0% 
+Child nodes in graph                 3,671  ch   =  1,000,000    0% 
+Nondeterministic/conflict items          0  nd   =  1,000,000    0% 
+
+0 min 0.042 sec, 31.866 MB, 0 warnings, 0 errors.
+

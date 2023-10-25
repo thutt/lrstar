@@ -1,0 +1,33 @@
+
+DFA 24.0.016 32b Copyright Paul B Mann.
+
+ANTLR.lgr 
+
+Grammar     1603 rules, 256 terminals, 63 nonterminals.
+States      5338 states before converting to a DFA.
+             136 states in final DFA state machine.
+Conflicts      0 states, 0 shift-reduce, 0 reduce-reduce.
+
+            rows   cols          matrix       list      vect     total
+T matrix     113 x   57 x 1 =     6,441 ->   6,441 +     664 =   7,105 
+
+Generating: ANTLR_LexerTables.h
+Generating: ANTLR_LexerTables.hpp
+
+Symbols in the grammar                 320  sym  =    100,000    0% 
+Productions in the grammar           1,676  pro  =    100,000    2% 
+Tail symbols in the grammar          2,044  tail =    500,000    0% 
+States created                       5,338  sta  =    100,000    5% 
+Final state items                    5,328  fin  =    100,000    5% 
+Kernel state items                   5,417  ker  =  1,000,000    1% 
+Nonterminal transitions                 98  ntt  =  1,000,000    0% 
+Terminal transitions                 5,240  tt   =  1,000,000    1% 
+Terminal transitions added           7,250  tta  =  1,000,000    1% 
+Lookaheads in LALR computation         882  la   =  1,000,000    0% 
+Lookbacks in LALR computation        5,327  lb   =  1,000,000    1% 
+Includes in LALR computation            98  inc  =  1,000,000    0% 
+Child nodes in graph                10,545  ch   =  1,000,000    1% 
+Nondeterministic/conflict items          0  nd   =  1,000,000    0% 
+
+0 min 0.093 sec, 38.784 MB, 0 warnings, 0 errors.
+

@@ -1,0 +1,33 @@
+
+DFA 24.0.016 32b Copyright Paul B Mann.
+
+Modula2.lgr 
+
+Grammar     1269 rules, 256 terminals, 75 nonterminals.
+States      2905 states before converting to a DFA.
+             218 states in final DFA state machine.
+Conflicts      0 states, 0 shift-reduce, 0 reduce-reduce.
+
+            rows   cols          matrix       list      vect     total
+T matrix     195 x   54 x 1 =    10,530 ->  10,530 +     910 =  11,440 
+
+Generating: Modula2_LexerTables.h
+Generating: Modula2_LexerTables.hpp
+
+Symbols in the grammar                 332  sym  =    100,000    0% 
+Productions in the grammar           1,465  pro  =    100,000    1% 
+Tail symbols in the grammar          2,305  tail =    500,000    0% 
+States created                       2,905  sta  =    100,000    3% 
+Final state items                    2,982  fin  =    100,000    3% 
+Kernel state items                   3,030  ker  =  1,000,000    0% 
+Nonterminal transitions                140  ntt  =  1,000,000    0% 
+Terminal transitions                 2,766  tt   =  1,000,000    0% 
+Terminal transitions added          19,735  tta  =  1,000,000    2% 
+Lookaheads in LALR computation       2,519  la   =  1,000,000    0% 
+Lookbacks in LALR computation        2,981  lb   =  1,000,000    0% 
+Includes in LALR computation           140  inc  =  1,000,000    0% 
+Child nodes in graph                 5,616  ch   =  1,000,000    1% 
+Nondeterministic/conflict items          0  nd   =  1,000,000    0% 
+
+0 min 0.046 sec, 26.1008 MB, 0 warnings, 0 errors.
+

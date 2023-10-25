@@ -1,0 +1,33 @@
+
+DFA 24.0.016 32b Copyright Paul B Mann.
+
+Pascal.lgr 
+
+Grammar     1341 rules, 256 terminals, 112 nonterminals.
+States      3075 states before converting to a DFA.
+             353 states in final DFA state machine.
+Conflicts      0 states, 0 shift-reduce, 0 reduce-reduce.
+
+            rows   cols          matrix       list      vect     total
+T matrix     332 x   56 x 2 =    37,184 ->  37,184 +   1,315 =  38,499 
+
+Generating: Pascal_LexerTables.h
+Generating: Pascal_LexerTables.hpp
+
+Symbols in the grammar                 369  sym  =    100,000    0% 
+Productions in the grammar           1,672  pro  =    100,000    2% 
+Tail symbols in the grammar          3,134  tail =    500,000    1% 
+States created                       3,075  sta  =    100,000    3% 
+Final state items                    3,189  fin  =    100,000    3% 
+Kernel state items                   3,263  ker  =  1,000,000    0% 
+Nonterminal transitions                177  ntt  =  1,000,000    0% 
+Terminal transitions                 2,899  tt   =  1,000,000    0% 
+Terminal transitions added          28,231  tta  =  1,000,000    3% 
+Lookaheads in LALR computation       4,905  la   =  1,000,000    0% 
+Lookbacks in LALR computation        3,188  lb   =  1,000,000    0% 
+Includes in LALR computation           177  inc  =  1,000,000    0% 
+Child nodes in graph                 5,824  ch   =  1,000,000    1% 
+Nondeterministic/conflict items          0  nd   =  1,000,000    0% 
+
+0 min 0.055 sec, 27.010 MB, 0 warnings, 0 errors.
+
