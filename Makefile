@@ -4,37 +4,44 @@
 $(if $(LRSTAR_DIR),,$(error 'LRSTAR_DIR' is not defined.))
 
 include $(LRSTAR_DIR)/make/config.mk
+include $(LRSTAR_DIR)/make/toplevel.mk
+include $(LRSTAR_DIR)/make/distribution.mk
 
-.DEFAULT_GOAL	:= all
+.DEFAULT_GOAL	:= distribution
 
 
-.PHONY:	src/dfa src/lrstar
-all:	src/dfa src/lrstar
+all:	$(DFA) $(LRSTAR)
 	$(PROLOG);					\
 	echo "Master: All targets built.";
 
-src/dfa src/lrstar:				\
-		build-directories
-	$(PROLOG);				\
-	$(MAKE)					\
-	    -C $(_BUILD_DIR)/$@			\
-	    -f $(LRSTAR_DIR)/$@/Makefile	\
-	    --no-print-directory		\
-	    VPATH=$(LRSTAR_DIR)/$@		\
-	    _BUILD_DIR=$(_BUILD_DIR)/$@		\
-	    $@__;
+.PHONY:	$(DFA) $(LRSTAR)
+$(DFA) $(LRSTAR):		\
+		| build-directories
+	$(PROLOG);							\
+	src_dir="$(subst $(_BUILD_DIR),$(LRSTAR_DIR),$(dir $@))";	\
+	$(MAKE)								\
+	    -C $(dir $@)						\
+	    -f $${src_dir}Makefile					\
+	    --no-print-directory					\
+	    VPATH=$${src_dir}						\
+	    _BUILD_DIR=$(dir $@)					\
+	    SHELL=$(SHELL)						\
+	    $@.d;
+
 
 clean:
 	$(PROLOG);	\
 	rm -rf $(_BUILD_DIR);
 
-$(addprefix $(_BUILD_DIR)/,src/dfa src/lrstar):
+
+$(DFA_BUILD_DIR) $(LRSTAR_BUILD_DIR):
 	$(PROLOG);	\
 	mkdir -p $@;
 
+
 build-directories:				\
-	| $(_BUILD_DIR)/src/dfa			\
-	  $(_BUILD_DIR)/src/lrstar
+	| $(DFA_BUILD_DIR)			\
+	  $(LRSTAR_BUILD_DIR)
 
 
 # Show predefined preprocessor symbols for this compiler.  This is

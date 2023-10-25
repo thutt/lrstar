@@ -143,13 +143,20 @@ function lrstar-build-path ()
 export -f lrstar-build-path;
 
 
+function lrstar-install-root ()
+{
+    local bp="$(lrstar-build-path)/usr/local";
+    echo "${bp}";
+}
+export -f lrstar-install-root;
+
 function lrstar-path ()
 {
     # This pathname construction must match the pathname construction
     # in the lrstar build process.
 
-    local obp=$(lrstar-build-path);
-    path="${obp}/src/lrstar";
+    local ip="$(lrstar-install-root)";
+    local path="${ip}/bin/lrstar"
     echo "${path}";
 }
 export -f lrstar-path;
@@ -160,11 +167,25 @@ function dfa-path ()
     # This pathname construction must match the pathname construction
     # in the lrstar build process.
 
-    local obp=$(lrstar-build-path);
-    path="${obp}/src/dfa";
+    local ip=$(lrstar-install-path);
+    local path="${ip}/bin/dfa";
     echo "${path}";
 }
 export -f dfa-path;
+
+
+function lrstar ()
+{
+    "$(lrstar-path)" "${@}";
+}
+export -f lrstar;
+
+
+function dfa ()
+{
+    "$(dfa-path)" "${@}";
+}
+export -f lrstar;
 
 
 function lrstar-show-config ()

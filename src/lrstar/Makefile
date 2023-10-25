@@ -1,6 +1,5 @@
 # Copyright (c) 2000, 2020-2023 Logic Magicians Software
 MAKEFILE	:= $(lastword $(MAKEFILE_LIST))
-include $(LRSTAR_DIR)/make/config.mk
 
 
 SOURCE	:=					\
@@ -22,7 +21,6 @@ SOURCE	:=					\
 	PG_PrintStates.cpp
 
 
-
 OBJ	= $(SOURCE:.cpp=.o)
 
 
@@ -34,10 +32,12 @@ fail:
 	echo "This Makefile must be used via $(LRSTAR_DIR)/Makefile";	\
 	false;
 
-
-src/lrstar__:	$(OBJ)
-	$(PROLOG);					\
+$(LRSTAR):	$(OBJ)
+	$(PROLOG);				\
 	$(CC) -g $(PROFILE) $(OBJ) -o lrstar;
 
+$(LRSTAR).d:	$(LRSTAR)
+	$(PROLOG);				\
+	true;
 
 -include $(SOURCE:.cpp=.d)

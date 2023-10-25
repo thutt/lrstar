@@ -1,6 +1,6 @@
 # Copyright (c) 2000, 2020-2023 Logic Magicians Software
 MAKEFILE	:= $(lastword $(MAKEFILE_LIST))
-include $(LRSTAR_DIR)/make/config.mk
+
 
 SOURCE	:=					\
 	CM_Global.cpp				\
@@ -32,9 +32,13 @@ fail:
 	false;
 
 
-src/dfa__:	$(OBJ)
-	$(PROLOG);					\
+$(DFA):	$(OBJ)
+	$(PROLOG);				\
 	$(CC) -g $(PROFILE) $(OBJ) -o dfa;
 
+
+$(DFA).d:	$(DFA)
+	$(PROLOG);				\
+	true;
 
 -include $(SOURCE:.cpp=.d)
