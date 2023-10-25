@@ -25,3 +25,37 @@ in a business setting.
 Paul has given his approval for this repository and the changes to
 make it build & run well on Linux.
 
+
+--- >8 ------ >8 ------ >8 (cut here)
+
+
+To get started, you must set up an environment by sourcing the setup
+file into your Bash environment, like so:
+
+
+  git clone https://github.com/thutt/lrstar.git
+
+  cd lrstar
+
+  git checkout linux-port
+
+  source ./scripts/setup --build-type release --bod /tmp/lrstar
+  LRSTAR_DIR          : '/tmp/x/lrstar'
+  LRSTAR_ARCHITECTURE : ''
+  LRSTAR_BUILD_OPTIONS: ''
+  LRSTAR_BUILD_DIR    : '/tmp/lrstar'
+
+  Build types         : debug release
+  Build options       : profile strict
+
+Sourcing the setup file sets several environment variables that are
+used by the build process and the shell functions in
+'${LRSTAR_DIR}/scripts/functions.
+
+To build:
+
+  lrstar-build -j20
+
+The exported build artifacts will be placed in:
+
+   ${LRSTAR_BUILD_DIR}/${LRSTAR_BUILD_TYPE}/usr/local
