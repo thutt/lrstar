@@ -21,6 +21,7 @@ Generating: Fortran_Actions.cpp
 Generating: Fortran_Lexer.cpp
 Generating: Fortran_Main.cpp
 Generating: Fortran_Parser.cpp
+Generating: Makefile
 Generating: Fortran_ParserTables.h
 Generating: Fortran_ParserTables.hpp
 
@@ -39,5 +40,5 @@ Includes in LALR computation         1,500  inc  =  1,000,000    0%
 Child nodes in graph                 2,001  ch   =  1,000,000    0% 
 Nondeterministic/conflict items        122  nd   =  1,000,000    0% 
 
-0 min 0.032 sec, 31.981 MB, 0 warnings, 0 errors.
+0 min 0.034 sec, 31.981 MB, 0 warnings, 0 errors.
 

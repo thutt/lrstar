@@ -21,6 +21,7 @@ Generating: PLM_Actions.cpp
 Generating: PLM_Lexer.cpp
 Generating: PLM_Main.cpp
 Generating: PLM_Parser.cpp
+Generating: Makefile
 Generating: PLM_ParserTables.h
 Generating: PLM_ParserTables.hpp
 

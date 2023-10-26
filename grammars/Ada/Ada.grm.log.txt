@@ -21,6 +21,7 @@ Generating: Ada_Actions.cpp
 Generating: Ada_Lexer.cpp
 Generating: Ada_Main.cpp
 Generating: Ada_Parser.cpp
+Generating: Makefile
 Generating: Ada_ParserTables.h
 Generating: Ada_ParserTables.hpp
 

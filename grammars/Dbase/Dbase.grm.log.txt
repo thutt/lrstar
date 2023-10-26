@@ -21,6 +21,7 @@ Generating: Dbase_Actions.cpp
 Generating: Dbase_Lexer.cpp
 Generating: Dbase_Main.cpp
 Generating: Dbase_Parser.cpp
+Generating: Makefile
 Generating: Dbase_ParserTables.h
 Generating: Dbase_ParserTables.hpp
 
@@ -39,5 +40,5 @@ Includes in LALR computation           734  inc  =  1,000,000    0%
 Child nodes in graph                 2,507  ch   =  1,000,000    0% 
 Nondeterministic/conflict items          0  nd   =  1,000,000    0% 
 
-0 min 0.024 sec, 31.701 MB, 0 warnings, 0 errors.
+0 min 0.025 sec, 31.701 MB, 0 warnings, 0 errors.
 

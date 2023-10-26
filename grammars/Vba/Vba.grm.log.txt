@@ -21,6 +21,7 @@ Generating: Vba_Actions.cpp
 Generating: Vba_Lexer.cpp
 Generating: Vba_Main.cpp
 Generating: Vba_Parser.cpp
+Generating: Makefile
 Generating: Vba_ParserTables.h
 Generating: Vba_ParserTables.hpp
 

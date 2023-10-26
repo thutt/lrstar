@@ -21,6 +21,7 @@ Generating: C11_Actions.cpp
 Generating: C11_Lexer.cpp
 Generating: C11_Main.cpp
 Generating: C11_Parser.cpp
+Generating: Makefile
 Generating: C11_ParserTables.h
 Generating: C11_ParserTables.hpp
 
@@ -39,5 +40,5 @@ Includes in LALR computation         2,122  inc  =  1,000,000    0%
 Child nodes in graph                 4,093  ch   =  1,000,000    0% 
 Nondeterministic/conflict items          4  nd   =  1,000,000    0% 
 
-0 min 0.020 sec, 31.455 MB, 0 warnings, 0 errors.
+0 min 0.019 sec, 31.455 MB, 0 warnings, 0 errors.
 

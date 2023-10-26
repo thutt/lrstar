@@ -21,6 +21,7 @@ Generating: XPL_Actions.cpp
 Generating: XPL_Lexer.cpp
 Generating: XPL_Main.cpp
 Generating: XPL_Parser.cpp
+Generating: Makefile
 Generating: XPL_ParserTables.h
 Generating: XPL_ParserTables.hpp
 
@@ -39,5 +40,5 @@ Includes in LALR computation           395  inc  =  1,000,000    0%
 Child nodes in graph                   462  ch   =  1,000,000    0% 
 Nondeterministic/conflict items          0  nd   =  1,000,000    0% 
 
-0 min 0.012 sec, 31.347 MB, 0 warnings, 0 errors.
+0 min 0.011 sec, 31.347 MB, 0 warnings, 0 errors.
 

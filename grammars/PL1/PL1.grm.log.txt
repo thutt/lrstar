@@ -21,6 +21,7 @@ Generating: PL1_Actions.cpp
 Generating: PL1_Lexer.cpp
 Generating: PL1_Main.cpp
 Generating: PL1_Parser.cpp
+Generating: Makefile
 Generating: PL1_ParserTables.h
 Generating: PL1_ParserTables.hpp
 

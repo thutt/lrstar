@@ -21,6 +21,7 @@ Generating: Modula2_Actions.cpp
 Generating: Modula2_Lexer.cpp
 Generating: Modula2_Main.cpp
 Generating: Modula2_Parser.cpp
+Generating: Makefile
 Generating: Modula2_ParserTables.h
 Generating: Modula2_ParserTables.hpp
 
@@ -39,5 +40,5 @@ Includes in LALR computation           625  inc  =  1,000,000    0%
 Child nodes in graph                   741  ch   =  1,000,000    0% 
 Nondeterministic/conflict items          4  nd   =  1,000,000    0% 
 
-0 min 0.014 sec, 31.422 MB, 0 warnings, 0 errors.
+0 min 0.012 sec, 31.422 MB, 0 warnings, 0 errors.
 

@@ -21,6 +21,7 @@ Generating: Zeus_Actions.cpp
 Generating: Zeus_Lexer.cpp
 Generating: Zeus_Main.cpp
 Generating: Zeus_Parser.cpp
+Generating: Makefile
 Generating: Zeus_ParserTables.h
 Generating: Zeus_ParserTables.hpp
 
@@ -39,5 +40,5 @@ Includes in LALR computation           725  inc  =  1,000,000    0%
 Child nodes in graph                   963  ch   =  1,000,000    0% 
 Nondeterministic/conflict items         64  nd   =  1,000,000    0% 
 
-0 min 0.015 sec, 31.412 MB, 0 warnings, 0 errors.
+0 min 0.013 sec, 31.412 MB, 0 warnings, 0 errors.
 

@@ -21,6 +21,7 @@ Generating: CPP5_Actions.cpp
 Generating: CPP5_Lexer.cpp
 Generating: CPP5_Main.cpp
 Generating: CPP5_Parser.cpp
+Generating: Makefile
 Generating: CPP5_ParserTables.h
 Generating: CPP5_ParserTables.hpp
 
