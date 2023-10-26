@@ -73,6 +73,7 @@ function main ()
     if [ -v LRSTAR_DIR ] ; then
         local grammars="${LRSTAR_DIR}/grammars";
 
+        cd ${LRSTAR_DIR};
         for grm in ${grammars}/*; do
             # The Kotlin lexical grammer is not a dfa grammer, so skip
             # testing until that can be sorted out.

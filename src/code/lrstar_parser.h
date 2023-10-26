@@ -99,7 +99,7 @@
 
 		// Expecting functions ...
          static int     restore      ();
-         static void    syntax_error (char*, Token*, char*);
+         static void    syntax_error (const char*, Token*, const char *);
          static void    expecting    (int x);
          static void    reduction    (int p, int x);
          static void    print_terms	 (int x);

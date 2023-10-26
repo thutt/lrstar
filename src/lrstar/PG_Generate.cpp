@@ -2,13 +2,14 @@
 
 #include <assert.h>
 
-#include "basic_defs.h"
+#include "lrstar_basic_defs.h"
 #include "CM_Global.h"
 #include "PG_Main.h"
 #include "PG_CreateTables.h"
 
 typedef void (*file_writer_fn_t)(FILE       *fp,
                                  const char *pathname,
+                                 const char *grammar,
                                  const char *fname);
 
 
@@ -186,11 +187,7 @@ void  PG_Main::GenerateParserTables ()
       fprintf (header, "\n      };\n\n");
    }
 
-   if (lrstar_linux) {
-      fprintf (header, "      typedef unsigned int   uint;\n");
-      fprintf (header, "      typedef unsigned char  uchar;\n");
-      fprintf (header, "      typedef unsigned short ushort;\n");
-   } else {
+   if (lrstar_windows) {
       assert(lrstar_windows);
       fprintf (header, "      #define uint   unsigned int\n");
       fprintf (header, "      #define uchar  unsigned char\n");
@@ -207,14 +204,14 @@ void  PG_Main::GenerateParserTables ()
    fprintf (header, "         friend class %s_Parser;\n", gfn);
 
    fprintf (header, "         public:\n");
-   fprintf (header, "         static char*  term_symb[%6d]; // Terminal symbols of the grammar.\n", N_terms);
-   fprintf (header, "         static char*  head_symb[%6d]; // Nonterminal symbols of the grammar.\n", N_heads);
+   fprintf (header, "         static const char *term_symb[%6d]; // Terminal symbols of the grammar.\n", N_terms);
+   fprintf (header, "         static const char *head_symb[%6d]; // Nonterminal symbols of the grammar.\n", N_heads);
    if (N_tacts > 0)
-      fprintf (header, "         static char*  tact_name[%6d]; // Terminal action names found in the grammar.\n", N_tacts);
+      fprintf (header, "         static const char *tact_name[%6d]; // Terminal action names found in the grammar.\n", N_tacts);
    if (N_nodes > 0)
-      fprintf (header, "         static char*  node_name[%6d]; // Node names found in the grammar.\n", N_nodes);
+      fprintf (header, "         static const char *node_name[%6d]; // Node names found in the grammar.\n", N_nodes);
    if (N_strings > 0)
-      fprintf (header, "         static char*  text_str [%6d]; // Text strings found in the grammar.\n", N_strings);
+      fprintf (header, "         static const char *text_str [%6d]; // Text strings found in the grammar.\n", N_strings);
 
    nd_optimize ();
 
@@ -240,7 +237,7 @@ void  PG_Main::GenerateParserTables ()
 
    // Terminal symbols ...
    fprintf (tables, "   // Terminal symbols of the grammar ...\n");
-   fprintf (tables, "      char* %s%s::term_symb[%d] = \n", gfn, name, N_terms);
+   fprintf (tables, "      const char* %s%s::term_symb[%d] = \n", gfn, name, N_terms);
    fprintf (tables, "      {\n");
    for (int i = 0; i < N_terms; i++)
    {
@@ -251,7 +248,7 @@ void  PG_Main::GenerateParserTables ()
 
    // Head symbols ...
    fprintf (tables, "   // Nonterminal symbols of the grammar ...\n");
-   fprintf (tables, "      char* %s%s::head_symb[%d] = \n", gfn, name, N_heads);
+   fprintf (tables, "      const char *%s%s::head_symb[%d] = \n", gfn, name, N_heads);
    fprintf (tables, "      {\n");
    for (int i = 0; i < N_heads; i++)
    {
@@ -264,7 +261,7 @@ void  PG_Main::GenerateParserTables ()
    {
       // Terminal action names ...
       fprintf (tables, "   // Terninal action names found in the grammar ...\n");
-      fprintf (tables, "      char* %s%s::tact_name[%d] = \n", gfn, name, N_tacts);
+      fprintf (tables, "      const char *%s%s::tact_name[%d] = \n", gfn, name, N_tacts);
       fprintf (tables, "      {\n");
       for (int i = 0; i < N_tacts; i++)
       {
@@ -278,7 +275,7 @@ void  PG_Main::GenerateParserTables ()
    {
       // Node names ...
       fprintf (tables, "   // Node names found in the grammar ...\n");
-      fprintf (tables, "      char* %s%s::node_name[%d] = \n", gfn, name, N_nodes);
+      fprintf (tables, "      const char * %s%s::node_name[%d] = \n", gfn, name, N_nodes);
       fprintf (tables, "      {\n");
       for (int i = 0; i < N_nodes; i++)
       {
@@ -292,7 +289,7 @@ void  PG_Main::GenerateParserTables ()
    {
       // Argument text strings ...
       fprintf (tables, "   // Text strings for any arguments ...\n");
-      fprintf (tables, "      char* %s%s::text_str[%d] = \n", gfn, name, N_strings);
+      fprintf (tables, "      const char *%s%s::text_str[%d] = \n", gfn, name, N_strings);
       fprintf (tables, "      {\n");
       for (int i = 0; i < N_strings; i++)
       {
@@ -929,6 +926,7 @@ void  PG_Main::GenerateParserTables ()
 
 void actions_header_fn(FILE       *fp,
                        const char *pathname,
+                       const char *grammar,
                        const char *fname)
 {
    fprintf (fp, "\n");
@@ -937,7 +935,7 @@ void actions_header_fn(FILE       *fp,
    fprintf (fp, "\n");
    fprintf (fp, "#pragma once\n");
    fprintf (fp, "\n");
-   fprintf (fp, "#include \"%s_Parser.h\"\n", fname);
+   fprintf (fp, "#include \"%s_Parser.h\"\n", grammar);
    fprintf (fp, "\n");
    fprintf (fp, "#ifdef ACTIONS\n");
    fprintf (fp, "\n");
@@ -975,13 +973,14 @@ void actions_header_fn(FILE       *fp,
 
 static void parsertables_header_fn(FILE       *fp,
                                    const char *pathname,
+                                   const char *grammar,
                                    const char *fname)
 {
    fprintf (fp, "\n");
    fprintf (fp, "///////////////////////////////////////////////////////////////////////////////\n");
    fprintf (fp, "//                                                                           //\n");
    fprintf (fp, "\n");
-   fprintf (fp, "#include \"%s_ParserTables.h\"\n", fname);
+   fprintf (fp, "#include \"%s_ParserTables.h\"\n", grammar);
    if (lrstar_linux) {
       fprintf (fp, ("#include \"lrstar_lexer.h\"\n"
                     "#include \"lrstar_parser.h\"\n"));
@@ -998,13 +997,15 @@ static void parsertables_header_fn(FILE       *fp,
 
 static void actions_cpp_fn(FILE       *fp,
                            const char *pathname,
+                           const char *grammar,
                            const char *fname)
 {
    fprintf (fp, "\n");
    fprintf (fp, "///////////////////////////////////////////////////////////////////////////////\n");
    fprintf (fp, "//                                                                           //\n");
    fprintf (fp, "\n");
-   fprintf (fp, "#include \"%s_Actions.h\"\n", fname);
+   fprintf (fp, ("#include \"lrstar_basic_defs.h\"\n"
+                 "#include \"%s_Actions.h\"\n"), grammar);
    if (lrstar_linux) {
       fprintf (fp, "#include \"lrstar_main.h\"\n");
    } else {
@@ -1078,14 +1079,17 @@ static void actions_cpp_fn(FILE       *fp,
 
 static void lexer_cpp_fn(FILE       *fp,
                          const char *pathname,
+                         const char *grammar,
                          const char *fname)
 {
    fprintf (fp, "\n");
    fprintf (fp, "///////////////////////////////////////////////////////////////////////////////\n");
    fprintf (fp, "//                                                                           //\n");
    fprintf (fp, "\n");
-   fprintf (fp, "#include \"%s_LexerTables.h\"\n", fname);
-   fprintf (fp, "#include \"%s_LexerTables.hpp\"\n", fname);
+
+   fprintf (fp, ("#include \"lrstar_basic_defs.h\"\n"
+                 "#include \"%s_LexerTables.h\"\n"
+                 "#include \"%s_LexerTables.hpp\"\n"), grammar, grammar);
    if (lrstar_linux) {
       fprintf (fp, ("#include \"lrstar_lexer.h\"\n"
                     "#include \"lrstar_lexer.cpp\"\n"));
@@ -1102,13 +1106,15 @@ static void lexer_cpp_fn(FILE       *fp,
 
 static void main_cpp_fn(FILE       *fp,
                         const char *pathname,
+                        const char *grammar,
                         const char *fname)
 {
    fprintf (fp, "\n");
    fprintf (fp, "///////////////////////////////////////////////////////////////////////////////\n");
    fprintf (fp, "//                                                                           //\n");
    fprintf (fp, "\n");
-   fprintf (fp, "#include \"%s_Parser.h\"\n", fname);
+   fprintf (fp, ("#include \"lrstar_basic_defs.h\"\n"
+                 "#include \"%s_Parser.h\"\n"), grammar);
    if (lrstar_linux) {
       fprintf (fp, "#include \"lrstar_main.cpp\"\n");
    } else {
@@ -1122,15 +1128,17 @@ static void main_cpp_fn(FILE       *fp,
 
 
 static void parser_cpp_fn(FILE       *fp,
-                         const char *pathname,
-                         const char *fname)
+                          const char *pathname,
+                          const char *grammar,
+                          const char *fname)
 {
    fprintf (fp, "\n");
    fprintf (fp, "///////////////////////////////////////////////////////////////////////////////\n");
    fprintf (fp, "//                                                                           //\n");
    fprintf (fp, "\n");
-   fprintf (fp, "#include \"%s_Parser.h\"\n", fname);
-   fprintf (fp, "#include \"%s_ParserTables.hpp\"\n", fname);
+   fprintf (fp, ("#include \"lrstar_basic_defs.h\"\n"
+                 "#include \"%s_Parser.h\"\n"
+                 "#include \"%s_ParserTables.hpp\"\n"), grammar, grammar);
    if (lrstar_linux) {
       fprintf (fp, "#include \"lrstar_parser.cpp\"\n");
    } else {
@@ -1145,22 +1153,68 @@ static void parser_cpp_fn(FILE       *fp,
 
 static void make_bat_fn(FILE       *fp,
                         const char *pathname,
+                        const char *grammar,
                         const char *fname)
 {
-      fprintf (fp, "rem  This make.bat must be in the same directory as the Visual Studio project files,\n");
-      fprintf (fp, "rem  or else the error messages will not have the correct directory name preceeding\n");
-      fprintf (fp, "rem  the file name, and clicking on the error messages will not work.\n");
-      fprintf (fp, "\n");
-      fprintf (fp, "@echo off\n");
-      fprintf (fp, "prompt $g$s\n");
-      fprintf (fp, "\n");
-      fprintf (fp, "..\\..\\bin\\lrstar %s d dt\n", fname);
-      fprintf (fp, "..\\..\\bin\\dfa    %s d\n\n", fname);
+   // TODO: need grammar name to be passed, too
+   fprintf (fp, "rem  This make.bat must be in the same directory as the Visual Studio project files,\n");
+   fprintf (fp, "rem  or else the error messages will not have the correct directory name preceeding\n");
+   fprintf (fp, "rem  the file name, and clicking on the error messages will not work.\n");
+   fprintf (fp, "\n");
+   fprintf (fp, "@echo off\n");
+   fprintf (fp, "prompt $g$s\n");
+   fprintf (fp, "\n");
+   fprintf (fp, "..\\..\\bin\\lrstar %s d dt\n", grammar);
+   fprintf (fp, "..\\..\\bin\\dfa    %s d\n\n", grammar);
+}
+
+
+static void makefile_fn(FILE       *fp,
+                        const char *pathname,
+                        const char *grammar,
+                        const char *fname)
+{
+   static const char *make = ("# Build '%s' parser.\n" /* grammar */
+                              "\n\n"
+                              "CC	:=\t\t\t\\\n"
+                              "\tg++\n"
+                              "\n\n"
+                              "INCLUDES\t:=\t\t\t\\\n"
+                              "\t$(LRSTAR_INSTALL_ROOT)/include\n"
+                              "\n\n"
+                              "DEFINES\t:=\t\t\t\\\n"
+                              "\tLRSTAR_LINUX\n"
+                              "\n\n"
+                              "ERROR_FORMAT\t:=\t\t\t\\\n"
+                              "\t-fdiagnostics-color=never\t\t\t\\\n"
+                              "\t-fno-diagnostics-show-caret\t\t\t\\\n"
+                              "\n\n"
+                              "CXXFLAGS\t:=\t\t\t\\\n"
+                              "\t$(ERROR_FORMAT)\t\t\t\\\n"
+                              "\t$(addprefix -I,$(INCLUDES))\t\t\t\\\n"
+                              "\t$(addprefix -D,$(DEFINES))\t\t\t\\\n"
+                              "\n\n"
+                              "SOURCE\t:=\t\t\t\\\n"
+                              "\t%s_Actions.cpp\t\t\t\\\n" /* grammar */
+                              "\t%s_Lexer.cpp\t\t\t\\\n"   /* grammar */
+                              "\t%s_Main.cpp\t\t\t\\\n"    /* grammar */
+                              "\t%s_Parser.cpp\n"          /* grammar */
+                              "\n\n"
+                              "OBJS\t:= $\t$(SOURCE:.cpp=.o)\n"
+                              "\n\n"
+                              "%s:\t$(OBJS)\n"          /* grammar */
+                              "\t$(CC) -o $@ $(OBJS);\n"
+                              "\n\n"
+                              "clean:\n"
+                              "\trm $(SOURCE) $(OBJS) %s;"); /* grammar */
+   fprintf(fp, make, grammar, grammar, grammar,
+           grammar, grammar, grammar, grammar);
 }
 
 
 static void write_file(const char       *gdn,
-                       const char       *gfn,
+                       const char       *grammar,
+                       const char       *fname,
                        const char       *suffix,
                        file_writer_fn_t  fn)
 {
@@ -1168,13 +1222,22 @@ static void write_file(const char       *gdn,
    FILE *fp;
 
    strcpy(pathname, gdn);
-   strcat(pathname, gfn);
-   strcat(pathname, suffix);
+
+   /* If a filename is provided, it overrides the gammar + suffix in
+    * the filename.
+    */
+   if (fname != NULL) {
+      strcat(pathname, fname);
+   } else {
+      strcat(pathname, grammar);
+      strcat(pathname, suffix);
+   }
    fp = fopen(pathname, "w");
 
    if (fp != NULL) {
       prt_logonly ("Generating: %s\n", pathname);
-      fn(fp, pathname, gfn);
+
+      fn(fp, pathname, grammar, fname);
       fclose(fp);
    } else {
       if (++n_errors == 1) {
@@ -1188,14 +1251,17 @@ static void write_file(const char       *gdn,
 
 void  PG_Main::GenerateOtherFiles ()
 {
-   write_file(gdn, gfn, "_Actions.h", actions_header_fn);
-   write_file(gdn, gfn, "_Parser.h", parsertables_header_fn);
-   write_file(gdn, gfn, "_Actions.cpp", actions_cpp_fn);
-   write_file(gdn, gfn, "_Lexer.cpp", lexer_cpp_fn);
-   write_file(gdn, gfn, "_Main.cpp", main_cpp_fn);
-   write_file(gdn, gfn, "_Parser.cpp", parser_cpp_fn);
-   if (lrstar_windows) {
-      write_file(gdn, "make.bat", "", make_bat_fn);
+   write_file(gdn, gfn, NULL, "_Actions.h", actions_header_fn);
+   write_file(gdn, gfn, NULL, "_Parser.h", parsertables_header_fn);
+   write_file(gdn, gfn, NULL, "_Actions.cpp", actions_cpp_fn);
+   write_file(gdn, gfn, NULL, "_Lexer.cpp", lexer_cpp_fn);
+   write_file(gdn, gfn, NULL, "_Main.cpp", main_cpp_fn);
+   write_file(gdn, gfn, NULL, "_Parser.cpp", parser_cpp_fn);
+   if (lrstar_linux) {
+      write_file(gdn, gfn,  "Makefile", "", makefile_fn);
+   } else {
+      assert(lrstar_windows);
+      write_file(gdn, gfn, "make.bat", "", make_bat_fn);
    }
 }
 

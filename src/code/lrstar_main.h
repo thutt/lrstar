@@ -5,7 +5,7 @@
 
 		#pragma once
 		#include <stdio.h>
-      #include "basic_defs.h"
+      #include "lrstar_basic_defs.h"
 
       #if defined(LRSTAR_LINUX)
       #define _read		read
@@ -16,9 +16,9 @@
       #define _unlink	unlink
       #endif
 
-		extern FILE* output;
+		extern FILE *output;
 		extern int   n_errors;
-		extern void  quit (int rc);
+		extern void  quit(int rc);
 
 //
 ////////////////////////////////////////////////////////////////////////////////////////////////////

@@ -1,4 +1,3 @@
-
 /////////////////////////////////////////////////////////////////////////////////////////////////////
 //                                                                                                 //
 //    LRSTAR Parser Code
@@ -704,7 +703,7 @@ int   PARSER::restore ()
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////
 
-void  PARSER::syntax_error (char *msg, Token* T, char* symb)
+void  PARSER::syntax_error (const char *msg, Token* T, const char* symb)
 {
       char  c;
 		char* p;
@@ -885,11 +884,12 @@ void  PARSER::sort_terms (int* seq)
 	/* seq - the sorted sequence:
 	         name[seq[0]] gives the first name in the sorted list.
 	*/
-		char**P, *P_temp;
+      const char **P;
+      const char *P_temp;
 		int*  L, L_temp, seq_temp, i, j, leng, c;
 
 		L = new int  [n_terms];
-		P = new char*[n_terms];
+		P = new const char *[n_terms];
 		for (i = 0; i < n_terms; i++)
       {
          P[i] = term_symb[i];
@@ -928,7 +928,7 @@ void  PARSER::sort_terms (int* seq)
 
 void	PARSER::print_prod (char* prefix, int p, int dot)
 {
-		char* symb;
+		const char* symb;
 		int len = f_tail[p+1] - f_tail[p];
 		printf ("%s %4d %s -> ", prefix, p, head_symb [head_numb[p]]);
 		for (int i = f_tail[p]; i < f_tail[p+1]; i++)
@@ -951,7 +951,8 @@ void	PARSER::print_stack () // Print parser stack.
 		printf ("\nParse stack:\n");
 		for (PStack* ps = PSstart + 1; ps <= PS; ps++)
 		{
-			char *name, *name2;
+			const char *name;
+         const char *name2;
 			int sym = ps->sym;
 			if (sym <= 0) // Terminal?
 			{
@@ -1182,7 +1183,7 @@ int   PARSER::linkup (int p)
       {
          for (i = PL[p]; i >= 0; i--)				         // For each tail pointer.
          {
-            if (PS[i].node > 0)                          // If tail points to node.
+            if (PS[i].node != NULL)                      // If tail points to node.
             {
                if (next >= 0)                            // If one waiting.
                {

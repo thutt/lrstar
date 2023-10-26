@@ -9,7 +9,7 @@
       #include <string.h>
       #include <time.h>
 
-      #include "basic_defs.h"
+      #include "lrstar_basic_defs.h"
       #if defined(LRSTAR_LINUX)
       #include <sys/types.h>
       #include <sys/stat.h>
@@ -150,7 +150,7 @@ int   main (int na, char **arg)
       sec  = thou / 1000;
       thou -= sec * 1000;
 
-      printf ("\nSucess ...\n");
+      printf ("\nSuccess ...\n");
       printf ("%10s symbols in symbol table.\n",  number (PARSER::n_symbols));
       printf ("%10s nodes in AST.\n",				  number (PARSER::n_nodes));
       printf ("%10s lines read in input file.\n", number (nl));

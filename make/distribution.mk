@@ -19,6 +19,11 @@ DISTRIB_LRSTAR	:=	\
 DISTRIB_DFA	:=	\
 	$(DISTRIB_ROOT)/bin/dfa
 
+
+DISTRIB_BASIC_DEFS_HEADER	:=	\
+	$(DISTRIB_ROOT)/include/lrstar_basic_defs.h
+
+
 DISTRIB_LEXER_CODE	:=	\
 	$(DISTRIB_ROOT)/include/lrstar_lexer.cpp
 
@@ -58,6 +63,16 @@ $(DISTRIB_PARSER_CODE)	$(DISTRIB_PARSER_HEADER):
 	echo "LIBRARY: $@";
 
 
+$(DISTRIB_BASIC_DEFS_HEADER):	$(LRSTAR_DIR)/src/include/lrstar_basic_defs.h
+	$(PROLOG);				\
+	$(INSTALL)				\
+		--mode=444			\
+		-D				\
+		"$<"				\
+		$@;				\
+	echo "BASIC DEFS: $@";
+
+
 $(DISTRIB_LRSTAR):	$(LRSTAR)
 	$(PROLOG);				\
 	$(INSTALL)				\
@@ -89,6 +104,7 @@ distribution:					\
 		$(DISTRIB_MAIN_CODE)		\
 		$(DISTRIB_MAIN_HEADER)		\
 		$(DISTRIB_PARSER_CODE)		\
-		$(DISTRIB_PARSER_HEADER)
+		$(DISTRIB_PARSER_HEADER)	\
+		$(DISTRIB_BASIC_DEFS_HEADER)
 	$(PROLOG);	\
 	true;

@@ -33,7 +33,7 @@
 #include <unistd.h>
 #endif
 
-#include "basic_defs.h"
+#include "lrstar_basic_defs.h"
 
 enum options
 {
