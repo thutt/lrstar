@@ -4,8 +4,8 @@
  */
 
 
-#if !defined(_BASIC_DEFS_H)
-#define _BASIC_DEFS_H
+#if !defined(_LRSTAR_BASIC_DEFS_H)
+#define _LRSTAR_BASIC_DEFS_H
 
 #if !defined(__GNUC__)
    #error Compiler not recognized.
