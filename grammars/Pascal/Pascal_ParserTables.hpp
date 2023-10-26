@@ -18,7 +18,7 @@
       static int err_used     =    0; // <error> used in grammar?
 
    // Terminal symbols of the grammar ...
-      char* Pascal_ParserTables::term_symb[113] = 
+      const char* Pascal_ParserTables::term_symb[113] = 
       {
          "<error>",
          "<eof>",
@@ -136,7 +136,7 @@
       };
 
    // Nonterminal symbols of the grammar ...
-      char* Pascal_ParserTables::head_symb[194] = 
+      const char *Pascal_ParserTables::head_symb[194] = 
       {
          "Goal",
          "Unit",
@@ -335,14 +335,14 @@
       };
 
    // Terninal action names found in the grammar ...
-      char* Pascal_ParserTables::tact_name[2] = 
+      const char *Pascal_ParserTables::tact_name[2] = 
       {
          "error",
          "lookup"
       };
 
    // Node names found in the grammar ...
-      char* Pascal_ParserTables::node_name[185] = 
+      const char * Pascal_ParserTables::node_name[185] = 
       {
          "Comp_Unit",
          "Unit_Tree",

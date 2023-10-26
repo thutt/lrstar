@@ -18,7 +18,7 @@
       static int err_used     =    0; // <error> used in grammar?
 
    // Terminal symbols of the grammar ...
-      char* YACC_ParserTables::term_symb[27] = 
+      const char* YACC_ParserTables::term_symb[27] = 
       {
          "<error>",
          "<eof>",
@@ -50,7 +50,7 @@
       };
 
    // Nonterminal symbols of the grammar ...
-      char* YACC_ParserTables::head_symb[17] = 
+      const char *YACC_ParserTables::head_symb[17] = 
       {
          "start",
          "grammar",

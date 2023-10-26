@@ -18,7 +18,7 @@
       static int err_used     =    0; // <error> used in grammar?
 
    // Terminal symbols of the grammar ...
-      char* Modula2_ParserTables::term_symb[71] = 
+      const char* Modula2_ParserTables::term_symb[71] = 
       {
          "<error>",
          "<eof>",
@@ -94,7 +94,7 @@
       };
 
    // Nonterminal symbols of the grammar ...
-      char* Modula2_ParserTables::head_symb[122] = 
+      const char *Modula2_ParserTables::head_symb[122] = 
       {
          "Goal",
          "CompilationUnit",
@@ -221,7 +221,7 @@
       };
 
    // Terninal action names found in the grammar ...
-      char* Modula2_ParserTables::tact_name[2] = 
+      const char *Modula2_ParserTables::tact_name[2] = 
       {
          "error",
          "lookup"

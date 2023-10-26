@@ -18,7 +18,7 @@
       static int err_used     =    1; // <error> used in grammar?
 
    // Terminal symbols of the grammar ...
-      char* COBOL_ParserTables::term_symb[351] = 
+      const char* COBOL_ParserTables::term_symb[351] = 
       {
          "<error>",
          "<eof>",
@@ -374,7 +374,7 @@
       };
 
    // Nonterminal symbols of the grammar ...
-      char* COBOL_ParserTables::head_symb[425] = 
+      const char *COBOL_ParserTables::head_symb[425] = 
       {
          "Goal",
          "Program",
@@ -804,7 +804,7 @@
       };
 
    // Terninal action names found in the grammar ...
-      char* COBOL_ParserTables::tact_name[2] = 
+      const char *COBOL_ParserTables::tact_name[2] = 
       {
          "error",
          "lookup"

@@ -18,7 +18,7 @@
       static int err_used     =    0; // <error> used in grammar?
 
    // Terminal symbols of the grammar ...
-      char* Python_ParserTables::term_symb[94] = 
+      const char* Python_ParserTables::term_symb[94] = 
       {
          "<error>",
          "<eof>",
@@ -117,7 +117,7 @@
       };
 
    // Nonterminal symbols of the grammar ...
-      char* Python_ParserTables::head_symb[220] = 
+      const char *Python_ParserTables::head_symb[220] = 
       {
          "Goal",
          "single_input",

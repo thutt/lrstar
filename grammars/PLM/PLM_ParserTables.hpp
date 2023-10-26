@@ -18,7 +18,7 @@
       static int err_used     =    0; // <error> used in grammar?
 
    // Terminal symbols of the grammar ...
-      char* PLM_ParserTables::term_symb[70] = 
+      const char* PLM_ParserTables::term_symb[70] = 
       {
          "<error>",
          "<eof>",
@@ -93,7 +93,7 @@
       };
 
    // Nonterminal symbols of the grammar ...
-      char* PLM_ParserTables::head_symb[152] = 
+      const char *PLM_ParserTables::head_symb[152] = 
       {
          "Goal",
          "Compiland",
@@ -250,7 +250,7 @@
       };
 
    // Terninal action names found in the grammar ...
-      char* PLM_ParserTables::tact_name[1] = 
+      const char *PLM_ParserTables::tact_name[1] = 
       {
          "error"
       };

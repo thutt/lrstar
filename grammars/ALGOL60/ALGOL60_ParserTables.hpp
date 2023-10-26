@@ -18,7 +18,7 @@
       static int err_used     =    0; // <error> used in grammar?
 
    // Terminal symbols of the grammar ...
-      char* ALGOL60_ParserTables::term_symb[57] = 
+      const char* ALGOL60_ParserTables::term_symb[57] = 
       {
          "<error>",
          "<eof>",
@@ -80,7 +80,7 @@
       };
 
    // Nonterminal symbols of the grammar ...
-      char* ALGOL60_ParserTables::head_symb[77] = 
+      const char *ALGOL60_ParserTables::head_symb[77] = 
       {
          "start",
          "a60program",

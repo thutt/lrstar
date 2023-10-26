@@ -30,9 +30,6 @@
       #define LOOKAHEADS    1
       #define EXPECTING
 
-      typedef unsigned int   uint;
-      typedef unsigned char  uchar;
-      typedef unsigned short ushort;
 
       #define TOP_DOWN  0
       #define PASS_OVER 1
@@ -42,8 +39,8 @@
       {
          friend class PLSQL_Parser;
          public:
-         static char*  term_symb[  2285]; // Terminal symbols of the grammar.
-         static char*  head_symb[  2242]; // Nonterminal symbols of the grammar.
+         static const char *term_symb[  2285]; // Terminal symbols of the grammar.
+         static const char *head_symb[  2242]; // Nonterminal symbols of the grammar.
          static ushort head_numb[  6574]; // Head symbol number for a production.
          static ushort f_tail   [  6575]; // First tail in a production.
          static short  tail     [  9789]; // Tail symbol number.

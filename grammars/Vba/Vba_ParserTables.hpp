@@ -18,7 +18,7 @@
       static int err_used     =    1; // <error> used in grammar?
 
    // Terminal symbols of the grammar ...
-      char* Vba_ParserTables::term_symb[139] = 
+      const char* Vba_ParserTables::term_symb[139] = 
       {
          "<error>",
          "<eof>",
@@ -162,7 +162,7 @@
       };
 
    // Nonterminal symbols of the grammar ...
-      char* Vba_ParserTables::head_symb[181] = 
+      const char *Vba_ParserTables::head_symb[181] = 
       {
          "ScriptFile",
          "GlobalStmtEOL",
@@ -348,14 +348,14 @@
       };
 
    // Terninal action names found in the grammar ...
-      char* Vba_ParserTables::tact_name[2] = 
+      const char *Vba_ParserTables::tact_name[2] = 
       {
          "error",
          "lookup"
       };
 
    // Node names found in the grammar ...
-      char* Vba_ParserTables::node_name[81] = 
+      const char * Vba_ParserTables::node_name[81] = 
       {
          "label",
          "RemStmt",

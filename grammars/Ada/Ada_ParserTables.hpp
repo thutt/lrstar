@@ -18,7 +18,7 @@
       static int err_used     =    0; // <error> used in grammar?
 
    // Terminal symbols of the grammar ...
-      char* Ada_ParserTables::term_symb[93] = 
+      const char* Ada_ParserTables::term_symb[93] = 
       {
          "<error>",
          "<eof>",
@@ -116,7 +116,7 @@
       };
 
    // Nonterminal symbols of the grammar ...
-      char* Ada_ParserTables::head_symb[205] = 
+      const char *Ada_ParserTables::head_symb[205] = 
       {
          "Goal",
          "Units",
@@ -326,7 +326,7 @@
       };
 
    // Terninal action names found in the grammar ...
-      char* Ada_ParserTables::tact_name[2] = 
+      const char *Ada_ParserTables::tact_name[2] = 
       {
          "error",
          "lookup"

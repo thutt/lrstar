@@ -2,6 +2,7 @@
 ///////////////////////////////////////////////////////////////////////////////
 //                                                                           //
 
+#include "lrstar_basic_defs.h"
 #include "ALGOL60_Actions.h"
 #include "lrstar_main.h"
 

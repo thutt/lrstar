@@ -18,7 +18,7 @@
       static int err_used     =    0; // <error> used in grammar?
 
    // Terminal symbols of the grammar ...
-      char* CICS_ParserTables::term_symb[216] = 
+      const char* CICS_ParserTables::term_symb[216] = 
       {
          "<error>",
          "<eof>",
@@ -239,7 +239,7 @@
       };
 
    // Nonterminal symbols of the grammar ...
-      char* CICS_ParserTables::head_symb[369] = 
+      const char *CICS_ParserTables::head_symb[369] = 
       {
          "Goal",
          "CICS",
@@ -613,7 +613,7 @@
       };
 
    // Terninal action names found in the grammar ...
-      char* CICS_ParserTables::tact_name[2] = 
+      const char *CICS_ParserTables::tact_name[2] = 
       {
          "error",
          "lookup"

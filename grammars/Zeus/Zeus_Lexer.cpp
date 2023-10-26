@@ -2,6 +2,7 @@
 ///////////////////////////////////////////////////////////////////////////////
 //                                                                           //
 
+#include "lrstar_basic_defs.h"
 #include "Zeus_LexerTables.h"
 #include "Zeus_LexerTables.hpp"
 #include "lrstar_lexer.h"

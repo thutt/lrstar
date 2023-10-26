@@ -18,7 +18,7 @@
       static int err_used     =    0; // <error> used in grammar?
 
    // Terminal symbols of the grammar ...
-      char* Dbase_ParserTables::term_symb[280] = 
+      const char* Dbase_ParserTables::term_symb[280] = 
       {
          "<error>",
          "<eof>",
@@ -303,7 +303,7 @@
       };
 
    // Nonterminal symbols of the grammar ...
-      char* Dbase_ParserTables::head_symb[174] = 
+      const char *Dbase_ParserTables::head_symb[174] = 
       {
          "goal",
          "cmdlist",
@@ -482,7 +482,7 @@
       };
 
    // Terninal action names found in the grammar ...
-      char* Dbase_ParserTables::tact_name[2] = 
+      const char *Dbase_ParserTables::tact_name[2] = 
       {
          "error",
          "lookup"

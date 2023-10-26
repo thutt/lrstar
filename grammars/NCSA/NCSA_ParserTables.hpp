@@ -18,7 +18,7 @@
       static int err_used     =    1; // <error> used in grammar?
 
    // Terminal symbols of the grammar ...
-      char* NCSA_ParserTables::term_symb[24] = 
+      const char* NCSA_ParserTables::term_symb[24] = 
       {
          "<error>",
          "<eof>",
@@ -47,7 +47,7 @@
       };
 
    // Nonterminal symbols of the grammar ...
-      char* NCSA_ParserTables::head_symb[25] = 
+      const char *NCSA_ParserTables::head_symb[25] = 
       {
          "Start",
          "Day",
@@ -77,14 +77,14 @@
       };
 
    // Terninal action names found in the grammar ...
-      char* NCSA_ParserTables::tact_name[2] = 
+      const char *NCSA_ParserTables::tact_name[2] = 
       {
          "error",
          "lookup"
       };
 
    // Node names found in the grammar ...
-      char* NCSA_ParserTables::node_name[11] = 
+      const char * NCSA_ParserTables::node_name[11] = 
       {
          "Report",
          "Day",

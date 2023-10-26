@@ -32,9 +32,6 @@
       #define LOOKAHEADS    1
       #define EXPECTING
 
-      typedef unsigned int   uint;
-      typedef unsigned char  uchar;
-      typedef unsigned short ushort;
 
       #define TOP_DOWN  0
       #define PASS_OVER 1
@@ -44,9 +41,9 @@
       {
          friend class Modula2_Parser;
          public:
-         static char*  term_symb[    71]; // Terminal symbols of the grammar.
-         static char*  head_symb[   122]; // Nonterminal symbols of the grammar.
-         static char*  tact_name[     2]; // Terminal action names found in the grammar.
+         static const char *term_symb[    71]; // Terminal symbols of the grammar.
+         static const char *head_symb[   122]; // Nonterminal symbols of the grammar.
+         static const char *tact_name[     2]; // Terminal action names found in the grammar.
          static uchar  head_numb[   226]; // Head symbol number for a production.
          static ushort f_tail   [   227]; // First tail in a production.
          static char   tail     [   397]; // Tail symbol number.

@@ -2,6 +2,7 @@
 ///////////////////////////////////////////////////////////////////////////////
 //                                                                           //
 
+#include "lrstar_basic_defs.h"
 #include "CPP5_Actions.h"
 #include "lrstar_main.h"
 

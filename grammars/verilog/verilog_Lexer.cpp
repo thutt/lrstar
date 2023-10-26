@@ -2,6 +2,7 @@
 ///////////////////////////////////////////////////////////////////////////////
 //                                                                           //
 
+#include "lrstar_basic_defs.h"
 #include "verilog_LexerTables.h"
 #include "verilog_LexerTables.hpp"
 #include "lrstar_lexer.h"

@@ -30,9 +30,6 @@
       #define LOOKAHEADS    1
       #define EXPECTING
 
-      typedef unsigned int   uint;
-      typedef unsigned char  uchar;
-      typedef unsigned short ushort;
 
       #define TOP_DOWN  0
       #define PASS_OVER 1
@@ -42,8 +39,8 @@
       {
          friend class delphi_Parser;
          public:
-         static char*  term_symb[   101]; // Terminal symbols of the grammar.
-         static char*  head_symb[   166]; // Nonterminal symbols of the grammar.
+         static const char *term_symb[   101]; // Terminal symbols of the grammar.
+         static const char *head_symb[   166]; // Nonterminal symbols of the grammar.
          static uchar  head_numb[   355]; // Head symbol number for a production.
          static ushort f_tail   [   356]; // First tail in a production.
          static short  tail     [   678]; // Tail symbol number.

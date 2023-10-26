@@ -2,6 +2,7 @@
 ///////////////////////////////////////////////////////////////////////////////
 //                                                                           //
 
+#include "lrstar_basic_defs.h"
 #include "Fortran_LexerTables.h"
 #include "Fortran_LexerTables.hpp"
 #include "lrstar_lexer.h"

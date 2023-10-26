@@ -18,7 +18,7 @@
       static int err_used     =    1; // <error> used in grammar?
 
    // Terminal symbols of the grammar ...
-      char* ANTLR_ParserTables::term_symb[43] = 
+      const char* ANTLR_ParserTables::term_symb[43] = 
       {
          "<error>",
          "<eof>",
@@ -66,7 +66,7 @@
       };
 
    // Nonterminal symbols of the grammar ...
-      char* ANTLR_ParserTables::head_symb[126] = 
+      const char *ANTLR_ParserTables::head_symb[126] = 
       {
          "Goal",
          "grammarSpec",
@@ -197,7 +197,7 @@
       };
 
    // Terninal action names found in the grammar ...
-      char* ANTLR_ParserTables::tact_name[2] = 
+      const char *ANTLR_ParserTables::tact_name[2] = 
       {
          "error",
          "lookup"

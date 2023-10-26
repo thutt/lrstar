@@ -18,7 +18,7 @@
       static int err_used     =    0; // <error> used in grammar?
 
    // Terminal symbols of the grammar ...
-      char* PLSQL_ParserTables::term_symb[2285] = 
+      const char* PLSQL_ParserTables::term_symb[2285] = 
       {
          "<error>",
          "<eof>",
@@ -2308,7 +2308,7 @@
       };
 
    // Nonterminal symbols of the grammar ...
-      char* PLSQL_ParserTables::head_symb[2242] = 
+      const char *PLSQL_ParserTables::head_symb[2242] = 
       {
          "sql_script",
          "unit_statement",

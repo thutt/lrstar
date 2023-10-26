@@ -18,7 +18,7 @@
       static int err_used     =    0; // <error> used in grammar?
 
    // Terminal symbols of the grammar ...
-      char* delphi_ParserTables::term_symb[101] = 
+      const char* delphi_ParserTables::term_symb[101] = 
       {
          "<error>",
          "<eof>",
@@ -124,7 +124,7 @@
       };
 
    // Nonterminal symbols of the grammar ...
-      char* delphi_ParserTables::head_symb[166] = 
+      const char *delphi_ParserTables::head_symb[166] = 
       {
          "start",
          "compilation_unit",

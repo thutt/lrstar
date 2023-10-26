@@ -18,7 +18,7 @@
       static int err_used     =    0; // <error> used in grammar?
 
    // Terminal symbols of the grammar ...
-      char* verilog_ParserTables::term_symb[177] = 
+      const char* verilog_ParserTables::term_symb[177] = 
       {
          "<error>",
          "<eof>",
@@ -200,7 +200,7 @@
       };
 
    // Nonterminal symbols of the grammar ...
-      char* verilog_ParserTables::head_symb[230] = 
+      const char *verilog_ParserTables::head_symb[230] = 
       {
          "source_text",
          "description",
@@ -435,7 +435,7 @@
       };
 
    // Terninal action names found in the grammar ...
-      char* verilog_ParserTables::tact_name[2] = 
+      const char *verilog_ParserTables::tact_name[2] = 
       {
          "error",
          "lookup"

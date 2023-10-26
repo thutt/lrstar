@@ -50,9 +50,6 @@
          N_Query = 10
       };
 
-      typedef unsigned int   uint;
-      typedef unsigned char  uchar;
-      typedef unsigned short ushort;
 
       #define TOP_DOWN  0
       #define PASS_OVER 1
@@ -62,10 +59,10 @@
       {
          friend class NCSA_Parser;
          public:
-         static char*  term_symb[    24]; // Terminal symbols of the grammar.
-         static char*  head_symb[    25]; // Nonterminal symbols of the grammar.
-         static char*  tact_name[     2]; // Terminal action names found in the grammar.
-         static char*  node_name[    11]; // Node names found in the grammar.
+         static const char *term_symb[    24]; // Terminal symbols of the grammar.
+         static const char *head_symb[    25]; // Nonterminal symbols of the grammar.
+         static const char *tact_name[     2]; // Terminal action names found in the grammar.
+         static const char *node_name[    11]; // Node names found in the grammar.
          static uchar  head_numb[    62]; // Head symbol number for a production.
          static uchar  f_tail   [    63]; // First tail in a production.
          static char   tail     [   114]; // Tail symbol number.

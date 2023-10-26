@@ -2,6 +2,7 @@
 ///////////////////////////////////////////////////////////////////////////////
 //                                                                           //
 
+#include "lrstar_basic_defs.h"
 #include "Ada_LexerTables.h"
 #include "Ada_LexerTables.hpp"
 #include "lrstar_lexer.h"

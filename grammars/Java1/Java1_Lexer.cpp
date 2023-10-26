@@ -2,6 +2,7 @@
 ///////////////////////////////////////////////////////////////////////////////
 //                                                                           //
 
+#include "lrstar_basic_defs.h"
 #include "Java1_LexerTables.h"
 #include "Java1_LexerTables.hpp"
 #include "lrstar_lexer.h"

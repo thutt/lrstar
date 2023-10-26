@@ -18,7 +18,7 @@
       static int err_used     =    0; // <error> used in grammar?
 
    // Terminal symbols of the grammar ...
-      char* Fortran_ParserTables::term_symb[268] = 
+      const char* Fortran_ParserTables::term_symb[268] = 
       {
          "<error>",
          "<eof>",
@@ -291,7 +291,7 @@
       };
 
    // Nonterminal symbols of the grammar ...
-      char* Fortran_ParserTables::head_symb[572] = 
+      const char *Fortran_ParserTables::head_symb[572] = 
       {
          "Goal",
          "TranUnit",
@@ -868,7 +868,7 @@
       };
 
    // Terninal action names found in the grammar ...
-      char* Fortran_ParserTables::tact_name[2] = 
+      const char *Fortran_ParserTables::tact_name[2] = 
       {
          "error",
          "lookup"

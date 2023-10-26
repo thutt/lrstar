@@ -18,7 +18,7 @@
       static int err_used     =    0; // <error> used in grammar?
 
    // Terminal symbols of the grammar ...
-      char* Zeus_ParserTables::term_symb[71] = 
+      const char* Zeus_ParserTables::term_symb[71] = 
       {
          "<error>",
          "<eof>",
@@ -94,7 +94,7 @@
       };
 
    // Nonterminal symbols of the grammar ...
-      char* Zeus_ParserTables::head_symb[114] = 
+      const char *Zeus_ParserTables::head_symb[114] = 
       {
          "Grammar",
          "HardwareCompilationUnit",
@@ -213,7 +213,7 @@
       };
 
    // Terninal action names found in the grammar ...
-      char* Zeus_ParserTables::tact_name[2] = 
+      const char *Zeus_ParserTables::tact_name[2] = 
       {
          "error",
          "lookup"

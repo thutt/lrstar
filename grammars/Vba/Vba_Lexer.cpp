@@ -2,6 +2,7 @@
 ///////////////////////////////////////////////////////////////////////////////
 //                                                                           //
 
+#include "lrstar_basic_defs.h"
 #include "Vba_LexerTables.h"
 #include "Vba_LexerTables.hpp"
 #include "lrstar_lexer.h"

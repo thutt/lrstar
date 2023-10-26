@@ -30,9 +30,6 @@
       #define LOOKAHEADS    1
       #define EXPECTING
 
-      typedef unsigned int   uint;
-      typedef unsigned char  uchar;
-      typedef unsigned short ushort;
 
       #define TOP_DOWN  0
       #define PASS_OVER 1
@@ -42,8 +39,8 @@
       {
          friend class CPP5_Parser;
          public:
-         static char*  term_symb[   103]; // Terminal symbols of the grammar.
-         static char*  head_symb[   164]; // Nonterminal symbols of the grammar.
+         static const char *term_symb[   103]; // Terminal symbols of the grammar.
+         static const char *head_symb[   164]; // Nonterminal symbols of the grammar.
          static uchar  head_numb[   643]; // Head symbol number for a production.
          static ushort f_tail   [   644]; // First tail in a production.
          static short  tail     [  1532]; // Tail symbol number.

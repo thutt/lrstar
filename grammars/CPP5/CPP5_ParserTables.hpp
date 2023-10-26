@@ -18,7 +18,7 @@
       static int err_used     =    0; // <error> used in grammar?
 
    // Terminal symbols of the grammar ...
-      char* CPP5_ParserTables::term_symb[103] = 
+      const char* CPP5_ParserTables::term_symb[103] = 
       {
          "<error>",
          "<eof>",
@@ -126,7 +126,7 @@
       };
 
    // Nonterminal symbols of the grammar ...
-      char* CPP5_ParserTables::head_symb[164] = 
+      const char *CPP5_ParserTables::head_symb[164] = 
       {
          "Start",
          "constant",

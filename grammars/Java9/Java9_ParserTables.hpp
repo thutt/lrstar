@@ -18,7 +18,7 @@
       static int err_used     =    0; // <error> used in grammar?
 
    // Terminal symbols of the grammar ...
-      char* Java9_ParserTables::term_symb[110] = 
+      const char* Java9_ParserTables::term_symb[110] = 
       {
          "<error>",
          "<eof>",
@@ -133,7 +133,7 @@
       };
 
    // Nonterminal symbols of the grammar ...
-      char* Java9_ParserTables::head_symb[366] = 
+      const char *Java9_ParserTables::head_symb[366] = 
       {
          "Start",
          "primitiveType",
@@ -504,14 +504,14 @@
       };
 
    // Terninal action names found in the grammar ...
-      char* Java9_ParserTables::tact_name[2] = 
+      const char *Java9_ParserTables::tact_name[2] = 
       {
          "error",
          "lookup"
       };
 
    // Node names found in the grammar ...
-      char* Java9_ParserTables::node_name[1] = 
+      const char * Java9_ParserTables::node_name[1] = 
       {
          "start"
       };
