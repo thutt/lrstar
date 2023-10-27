@@ -1041,412 +1041,412 @@ int   PARSER::add_symbol (int t, char* token_start, char* token_end)
          do
          {
 #ifdef INSENSITIVE
-            if (lowercase[*p] != lowercase[*start) goto Cont;
+            if (lowercase[*p] != lowercase[*start]) goto Cont;
 #else
-                if (*p != *start) goto Cont;    // If characters not equal ...
+            if (*p != *start) goto Cont;    // If characters not equal ...
 #endif
-                start++;
-                p++;
-                }
-            while (start < end);                // while end not reached.
-            return sti;                         // Return sti.
+            start++;
+            p++;
          }
-      Cont:    cell = (hash *= 65549)/hashdiv;        // Get new cell number.
-         sti  = hashvec[cell];                     // Get symbol table index.
+         while (start < end);                // while end not reached.
+         return sti;                         // Return sti.
       }
-      // NEW SYMBOL ...
-      if (n_symbols >= max_symbols)             // Reached maximum number?
-      {
-         printf("\nNumber of symbols exceeds %d.\n\n", max_symbols);
-         quit (1); // Failure.
-      }
-      sti = hashvec[cell] = n_symbols;          // Put symbol number into hash vector.
-      symbol[sti].start   = token_start;        // Pointer to original location in input file.
-      symbol[sti].length  = length;             // Length of symbol.
-      symbol[sti].cell    = cell;               // Cell in the hash vector.
-      symbol[sti].type    = 0;                  // Type of symbol: int, char, float, short, ...
-      symbol[sti].term    = t;                  // Terminal number for lookup funciton.
-      symbol[sti].scope   = 0;                  // Scope: global, local, inner loop, ...
-      n_symbols++;
-      return sti;                               // Return symbol table index.
+   Cont:    cell = (hash *= 65549)/hashdiv;        // Get new cell number.
+      sti  = hashvec[cell];                     // Get symbol table index.
    }
+   // NEW SYMBOL ...
+   if (n_symbols >= max_symbols)             // Reached maximum number?
+   {
+      printf("\nNumber of symbols exceeds %d.\n\n", max_symbols);
+      quit (1); // Failure.
+   }
+   sti = hashvec[cell] = n_symbols;          // Put symbol number into hash vector.
+   symbol[sti].start   = token_start;        // Pointer to original location in input file.
+   symbol[sti].length  = length;             // Length of symbol.
+   symbol[sti].cell    = cell;               // Cell in the hash vector.
+   symbol[sti].type    = 0;                  // Type of symbol: int, char, float, short, ...
+   symbol[sti].term    = t;                  // Terminal number for lookup funciton.
+   symbol[sti].scope   = 0;                  // Scope: global, local, inner loop, ...
+   n_symbols++;
+   return sti;                               // Return symbol table index.
+}
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////
 
-   void  PARSER::print_symtab ()
-   {
+void  PARSER::print_symtab ()
+{
 #ifdef DEBUG_PARSER
-      fprintf (output, "\nSymbol Table ...\n\n");
-      if (n_symbols > 1)
+   fprintf (output, "\nSymbol Table ...\n\n");
+   if (n_symbols > 1)
+   {
+      fprintf (output, "   sti  leng  type     name                                terminal\n");
+      for (int i = 1; i < n_symbols; i++)
       {
-         fprintf (output, "   sti  leng  type     name                                terminal\n");
-         for (int i = 1; i < n_symbols; i++)
-         {
-            fprintf(output, " %5d %5d %5d     %-30s %4d %s\n",
-                    i,
-                    symbol[i].length,
-                    symbol[i].type,
-                    symbol_name(i),
-                    symbol[i].term,
-                    term_symb[symbol[i].term]);
-         }
+         fprintf(output, " %5d %5d %5d     %-30s %4d %s\n",
+                 i,
+                 symbol[i].length,
+                 symbol[i].type,
+                 symbol_name(i),
+                 symbol[i].term,
+                 term_symb[symbol[i].term]);
       }
-      else // No symbols in the table.
-      {
-         fprintf (output, "   Symbol Table is empty.\n");
-      }
-#endif
    }
+   else // No symbols in the table.
+   {
+      fprintf (output, "   Symbol Table is empty.\n");
+   }
+#endif
+}
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////
 
-   char* PARSER::symbol_name (int sti)
+char* PARSER::symbol_name (int sti)
+{
+   int i;
+   char* p;
+   static char name[100];
+   if (sti < 0) // Terminal symbol?
    {
-      int i;
-      char* p;
-      static char name[100];
-      if (sti < 0) // Terminal symbol?
+      p = (char *)term_symb[-sti];
+      for (i = 0; p[i] != 0; i++) name[i] = p[i];
+      name[i] = 0;
+   }
+   else // Input file symbol.
+   {
+      int L;
+      p = symbol[sti].start;
+      L = symbol[sti].length;
+      if (L >= 100)
       {
-         p = (char *)term_symb[-sti];
-         for (i = 0; p[i] != 0; i++) name[i] = p[i];
+         L = 95;
+         for (i = 0; i < L; i++) name[i] = p[i];
+         name[i++] = ' ';
+         name[i++] = '.';
+         name[i++] = '.';
+         name[i++] = '.';
          name[i] = 0;
       }
-      else // Input file symbol.
+      else
       {
-         int L;
-         p = symbol[sti].start;
-         L = symbol[sti].length;
-         if (L >= 100)
-         {
-            L = 95;
-            for (i = 0; i < L; i++) name[i] = p[i];
-            name[i++] = ' ';
-            name[i++] = '.';
-            name[i++] = '.';
-            name[i++] = '.';
-            name[i] = 0;
-         }
-         else
-         {
-            for (i = 0; i < L; i++) name[i] = p[i];
-            name[i] = 0;
-         }
+         for (i = 0; i < L; i++) name[i] = p[i];
+         name[i] = 0;
       }
-      return name;
    }
+   return name;
+}
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////
 
-   char* PARSER::symbol_name (char* start, char* end)
+char* PARSER::symbol_name (char* start, char* end)
+{
+   char *p, *q;
+   static char name[100];
+   if (end - start > 99) end = start + 99;
+   p = start;
+   q = name;
+   do
    {
-      char *p, *q;
-      static char name[100];
-      if (end - start > 99) end = start + 99;
-      p = start;
-      q = name;
-      do
-      {
-         *q++ = *p++;
-      }
-      while (p < end);
-      *q = 0;
-      return name;
+      *q++ = *p++;
    }
+   while (p < end);
+   *q = 0;
+   return name;
+}
 
 #ifdef MAKE_AST
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////
 
-   int   PARSER::linkup (int p)
-   {
-      int i;
-      int next = -1;
+int   PARSER::linkup (int p)
+{
+   int i;
+   int next = -1;
 #ifdef REVERSABLE
-      if (reverse[p] != 0)                               // IF NOT TO REVERSE THE ORDER.
+   if (reverse[p] != 0)                               // IF NOT TO REVERSE THE ORDER.
+   {
+      for (i = 0; i <= PL[p]; i++)                    // For each tail pointer.
       {
-         for (i = 0; i <= PL[p]; i++)                    // For each tail pointer.
+         if (PS[i].node != 0)                         // If tail points to node.
          {
-            if (PS[i].node > 0)                          // If tail points to node.
+            if (next >= 0)                            // If one waiting.
             {
-               if (next >= 0)                            // If one waiting.
-               {
-                  PS[i   ].last->next = PS[next].node;   // Define next node.
-                  PS[next].node->prev = PS[i].last;      // Define previous node.
-                  PS[i   ].last       = PS[next].last;   // Change last to next last.
-               }
-               next = i;                                 // Next = Curr.
+               PS[i   ].last->next = PS[next].node;   // Define next node.
+               PS[next].node->prev = PS[i].last;      // Define previous node.
+               PS[i   ].last       = PS[next].last;   // Change last to next last.
             }
+            next = i;                                 // Next = Curr.
          }
       }
-      else                                               // REVERSE THE ORDER.
-#endif
-      {
-         for (i = PL[p]; i >= 0; i--)                    // For each tail pointer.
-         {
-            if (PS[i].node != NULL)                      // If tail points to node.
-            {
-               if (next >= 0)                            // If one waiting.
-               {
-                  PS[i   ].last->next = PS[next].node;   // Define next node.
-                  PS[next].node->prev = PS[i   ].last;   // Define previous node.
-                  PS[i   ].last       = PS[next].last;   // Change last to next last.
-               }
-               next = i;                                 // Next = Curr.
-            }
-         }
-      }
-      return (next);
    }
+   else                                               // REVERSE THE ORDER.
+#endif
+   {
+      for (i = PL[p]; i >= 0; i--)                    // For each tail pointer.
+      {
+         if (PS[i].node != NULL)                      // If tail points to node.
+         {
+            if (next >= 0)                            // If one waiting.
+            {
+               PS[i   ].last->next = PS[next].node;   // Define next node.
+               PS[next].node->prev = PS[i   ].last;   // Define previous node.
+               PS[i   ].last       = PS[next].last;   // Change last to next last.
+            }
+            next = i;                                 // Next = Curr.
+         }
+      }
+   }
+   return (next);
+}
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////
 
-   void  PARSER::tracer (Node* n)
-   {
+void  PARSER::tracer (Node* n)
+{
 #ifdef DEBUG_TRACE
 #ifdef NODE_ACTIONS
-      char* dir;
-      if      (direction == TOP_DOWN ) dir = "*>";
-      else if (direction == PASS_OVER) dir = "**";
-      else                             dir = "<*";
-      printf ("   %d %s %s (%s)\n", traversal, dir, node_name[n->id], symbol_name(n->sti));
+   char* dir;
+   if      (direction == TOP_DOWN ) dir = "*>";
+   else if (direction == PASS_OVER) dir = "**";
+   else                             dir = "<*";
+   printf ("   %d %s %s (%s)\n", traversal, dir, node_name[n->id], symbol_name(n->sti));
 #endif
 #endif
-   }
+}
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////
 
-   int   PARSER::init_ast (int max)
+int   PARSER::init_ast (int max)
+{
+   n_nodes   = 1;
+   max_nodes = max;  // max_nodes to allocate as needed.
+   nodearea  = new Node[max_nodes];
+   if (nodearea == NULL)
    {
-      n_nodes   = 1;
-      max_nodes = max;  // max_nodes to allocate as needed.
-      nodearea  = new Node[max_nodes];
-      if (nodearea == NULL)
+      printf ("Not enough memory available for %d PARSER nodes.\n", max_nodes);
+      quit (1); // Failure.
+   }
+   node         =  new_node();
+   node->id     = -1; // Undefined.
+   node->sti    =  0;
+   node->line   =  0;
+   node->start  =  0;
+   node->next   =  0;
+   node->prev   =  0;
+   node->child  =  0;
+   node->parent =  0;
+
+   strcpy (draw_plus,  "+ ");
+   strcpy (draw_vbar,  "| ");
+   strcpy (draw_last,  "+ ");
+   strcpy (draw_space, "  ");
+   return 1; // Success.
+}
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////
+
+void  PARSER::term_ast ()
+{
+   n_nodes--;
+   delete [] stack;
+   delete [] counter;
+}
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////
+
+Node* PARSER::new_node()
+{
+   if (n_nodes % max_nodes == 0)                   // Filled up nodearea?
+   {
+      nodearea = new Node[max_nodes];              // Get another nodearea.
+      if (nodearea == NULL)                        // Not got?
       {
-         printf ("Not enough memory available for %d PARSER nodes.\n", max_nodes);
+         printf ("\nNot enough memory available for %d PARSER nodes.\n\n", max_nodes);
          quit (1); // Failure.
       }
-      node         =  new_node();
-      node->id     = -1; // Undefined.
-      node->sti    =  0;
-      node->line   =  0;
-      node->start  =  0;
-      node->next   =  0;
-      node->prev   =  0;
-      node->child  =  0;
-      node->parent =  0;
-
-      strcpy (draw_plus,  "+ ");
-      strcpy (draw_vbar,  "| ");
-      strcpy (draw_last,  "+ ");
-      strcpy (draw_space, "  ");
-      return 1; // Success.
    }
+   Node* n = &(nodearea[n_nodes % max_nodes]);
+   n_nodes++;
+   return n;
+}
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////
 
-   void  PARSER::term_ast ()
+void  PARSER::find_root (Node* last_node)
+{
+   root = last_node;                // Define root node.
+   if (root != 0)
    {
-      n_nodes--;
-      delete [] stack;
-      delete [] counter;
-   }
-
-/////////////////////////////////////////////////////////////////////////////////////////////////////
-
-   Node* PARSER::new_node()
-   {
-      if (n_nodes % max_nodes == 0)                   // Filled up nodearea?
+      while (root->prev != 0)       // In case of a list only.
       {
-         nodearea = new Node[max_nodes];              // Get another nodearea.
-         if (nodearea == NULL)                        // Not got?
-         {
-            printf ("\nNot enough memory available for %d PARSER nodes.\n\n", max_nodes);
-            quit (1); // Failure.
-         }
-      }
-      Node* n = &(nodearea[n_nodes % max_nodes]);
-      n_nodes++;
-      return n;
-   }
-
-/////////////////////////////////////////////////////////////////////////////////////////////////////
-
-   void  PARSER::find_root (Node* last_node)
-   {
-      root = last_node;                // Define root node.
-      if (root != 0)
-      {
-         while (root->prev != 0)       // In case of a list only.
-         {
-            root = root->prev;         // Go up the list to first node.
-         }
+         root = root->prev;         // Go up the list to first node.
       }
    }
+}
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////
 
-   void  PARSER::print_ast ()
-   {
+void  PARSER::print_ast ()
+{
 #ifdef DEBUG_PARSER
-      print_ast (root);
+   print_ast (root);
 #endif
-   }
+}
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////
 
-   void  PARSER::print_ast (Node* n) // Print subtree.
+void  PARSER::print_ast (Node* n) // Print subtree.
+{
+   char indent [512];
+   strcpy (indent, draw_space);
+   fprintf (output, "\nAbstract Syntax Tree ...\n\n");
+   if (n != 0)
    {
-      char indent [512];
-      strcpy (indent, draw_space);
-      fprintf (output, "\nAbstract Syntax Tree ...\n\n");
-      if (n != 0)
-      {
-         fprintf (output, "   sti  line   col  \n");
-         traverse (indent, n); // Start PARSER traversal.
-      }
-      else
-      {
-         fprintf (output, "   PARSER is empty.\n");
-      }
+      fprintf (output, "   sti  line   col  \n");
+      traverse (indent, n); // Start PARSER traversal.
    }
+   else
+   {
+      fprintf (output, "   PARSER is empty.\n");
+   }
+}
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////
 
-   void  PARSER::traverse (int trav)
-   {
+void  PARSER::traverse (int trav)
+{
 #ifdef NODE_ACTIONS
-      if (n_nodes > 1) // Any nodes in the tree?
+   if (n_nodes > 1) // Any nodes in the tree?
+   {
+      if (n_nodeactns > 0) // Any node actions?
       {
-         if (n_nodeactns > 0) // Any node actions?
+         stacki  = -1;
+         stack   = new Stack [STKSIZE];
+         counter = new int [n_nodenames];
+         for (int i = 0; i < n_nodenames; i++)
          {
-            stacki  = -1;
-            stack   = new Stack [STKSIZE];
-            counter = new int [n_nodenames];
-            for (int i = 0; i < n_nodenames; i++)
-            {
-               counter[i] = 0;
-            }
+            counter[i] = 0;
+         }
 #ifdef DEBUG_PARSER
-            fprintf (output, "\nDoing Tree Traversal ...\n\n");
+         fprintf (output, "\nDoing Tree Traversal ...\n\n");
 #else
-            fprintf (output, "\n");
+         fprintf (output, "\n");
 #endif
-            traversal = trav;
-            Node* n = root;
-            do
-            {
-               traverse (n);
-               n = n->next;
-            }
-            while (n != 0);
-         }
-      }
-#endif
-   }
-
-/////////////////////////////////////////////////////////////////////////////////////////////////////
-
-   void  PARSER::traverse (Node* n)
-   {
-#ifdef NODE_ACTIONS
-      int   i  = n->id;             // Node id.
-      Node* c  = n->child;          // Child nove pointer.
-      stacki++;
-      counter[i]++;
-      stack[stacki].id = i;
-      stack[stacki].counter = counter[i];
-      if (nact_func[i] != 0) // Got a node action ?
-      {
-         direction = TOP_DOWN;
-         tracer (n);
-         (*nact_func[i]) (n);
-      }
-      while (c != 0)
-      {
-         traverse (c);
-         c = c->next;
-         /* if (c != 0)
-            {
-            if (nact_func[i] != 0) // Got a node action ?
-            {
-            direction = PASS_OVER;
-            tracer (n);
-            (*nact_func[i])(n);
-            }
-            } */
-      }
-      if (nact_func[i] != 0) // Got a node action ?
-      {
-         direction = BOTTOM_UP;
-         tracer (n);
-         (*nact_func[i]) (n);
-      }
-      stacki--;
-#endif
-   }
-
-/////////////////////////////////////////////////////////////////////////////////////////////////////
-
-   void  PARSER::traverse (char *indent, Node* n)
-   {
-      while (n->next != 0)
-      {
-         strcat (indent, draw_plus);
-         print_node (indent, n);
-         indent [strlen(indent)-2] = 0;
-         if (n->child != 0)
+         traversal = trav;
+         Node* n = root;
+         do
          {
-            strcat (indent, draw_vbar);
-            traverse (indent, n->child);
-            indent [strlen(indent)-2] = 0;
+            traverse (n);
+            n = n->next;
          }
-         n = n->next;
+         while (n != 0);
       }
+   }
+#endif
+}
 
-      strcat (indent, draw_last);
+/////////////////////////////////////////////////////////////////////////////////////////////////////
+
+void  PARSER::traverse (Node* n)
+{
+#ifdef NODE_ACTIONS
+   int   i  = n->id;             // Node id.
+   Node* c  = n->child;          // Child nove pointer.
+   stacki++;
+   counter[i]++;
+   stack[stacki].id = i;
+   stack[stacki].counter = counter[i];
+   if (nact_func[i] != 0) // Got a node action ?
+   {
+      direction = TOP_DOWN;
+      tracer (n);
+      (*nact_func[i]) (n);
+   }
+   while (c != 0)
+   {
+      traverse (c);
+      c = c->next;
+      /* if (c != 0)
+         {
+         if (nact_func[i] != 0) // Got a node action ?
+         {
+         direction = PASS_OVER;
+         tracer (n);
+         (*nact_func[i])(n);
+         }
+         } */
+   }
+   if (nact_func[i] != 0) // Got a node action ?
+   {
+      direction = BOTTOM_UP;
+      tracer (n);
+      (*nact_func[i]) (n);
+   }
+   stacki--;
+#endif
+}
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////
+
+void  PARSER::traverse (char *indent, Node* n)
+{
+   while (n->next != 0)
+   {
+      strcat (indent, draw_plus);
       print_node (indent, n);
       indent [strlen(indent)-2] = 0;
       if (n->child != 0)
       {
-         strcat (indent, draw_space);
+         strcat (indent, draw_vbar);
          traverse (indent, n->child);
          indent [strlen(indent)-2] = 0;
       }
+      n = n->next;
    }
+
+   strcat (indent, draw_last);
+   print_node (indent, n);
+   indent [strlen(indent)-2] = 0;
+   if (n->child != 0)
+   {
+      strcat (indent, draw_space);
+      traverse (indent, n->child);
+      indent [strlen(indent)-2] = 0;
+   }
+}
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////
 
-   void  PARSER::print_node (char *indent, Node* n)
+void  PARSER::print_node (char *indent, Node* n)
+{
+   int id  = n->id;
+   int sti = n->sti;
+   if (sti != 0) // zero means no symbol.
    {
-      int id  = n->id;
-      int sti = n->sti;
-      if (sti != 0) // zero means no symbol.
+      int line = n->line;
+      char* p = n->start - 1;
+      while (*p != '\n') p--;
+      int col = (int)(n->start - p);
+
+      fprintf (output, "  %4d  %4d  %4d  %s%s", sti, line, col, indent, node_name[id]);
+
+      if (sti > 0) // In the symbol table?
       {
-         int line = n->line;
-         char* p = n->start - 1;
-         while (*p != '\n') p--;
-         int col = (int)(n->start - p);
-
-         fprintf (output, "  %4d  %4d  %4d  %s%s", sti, line, col, indent, node_name[id]);
-
-         if (sti > 0) // In the symbol table?
-         {
-            char* p = symbol[sti].start + symbol[sti].length;
-            char ch = *p;
-            *p = 0;
-            fprintf (output, " (%s)\n", symbol[sti].start);
-            *p = ch;
-         }
-         else // A terminal symbol of the grammar!
-         {
-            fprintf (output, " (%s)\n", term_symb[-sti]);
-         }
+         char* p = symbol[sti].start + symbol[sti].length;
+         char ch = *p;
+         *p = 0;
+         fprintf (output, " (%s)\n", symbol[sti].start);
+         *p = ch;
       }
-      else
+      else // A terminal symbol of the grammar!
       {
-         fprintf(output, "     .     .     .  %s%s\n", indent, node_name[id]);
+         fprintf (output, " (%s)\n", term_symb[-sti]);
       }
    }
+   else
+   {
+      fprintf(output, "     .     .     .  %s%s\n", indent, node_name[id]);
+   }
+}
 
 #endif
 
