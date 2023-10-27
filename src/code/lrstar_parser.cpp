@@ -3,6 +3,7 @@
 //    LRSTAR Parser Code
 
 #include <string.h>
+#include "lrstar_library_defs.h"
 #include "lrstar_main.h"
 
 #define  UINT_MAX  0xffffffff

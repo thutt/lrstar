@@ -24,6 +24,10 @@ DISTRIB_BASIC_DEFS_HEADER	:=	\
 	$(DISTRIB_ROOT)/include/lrstar_basic_defs.h
 
 
+DISTRIB_LIBRARY_DEFS_HEADER	:=	\
+	$(DISTRIB_ROOT)/include/lrstar_library_defs.h
+
+
 DISTRIB_LEXER_CODE	:=	\
 	$(DISTRIB_ROOT)/include/lrstar_lexer.cpp
 
@@ -73,6 +77,16 @@ $(DISTRIB_BASIC_DEFS_HEADER):	$(LRSTAR_DIR)/src/include/lrstar_basic_defs.h
 	echo "BASIC DEFS: $@";
 
 
+$(DISTRIB_LIBRARY_DEFS_HEADER):	$(LRSTAR_DIR)/src/include/lrstar_library_defs.h
+	$(PROLOG);				\
+	$(INSTALL)				\
+		--mode=444			\
+		-D				\
+		"$<"				\
+		$@;				\
+	echo "LIBRARY DEFS: $@";
+
+
 $(DISTRIB_LRSTAR):	$(LRSTAR)
 	$(PROLOG);				\
 	$(INSTALL)				\
@@ -97,14 +111,15 @@ $(DISTRIB_DFA):		$(DFA)
 # put all the delivered build artifacts into the '/usr/local'
 # directory tree.
 distribution:					\
-		$(DISTRIB_LRSTAR)		\
+		$(DISTRIB_BASIC_DEFS_HEADER)	\
 		$(DISTRIB_DFA)			\
 		$(DISTRIB_LEXER_CODE)		\
 		$(DISTRIB_LEXER_HEADER)		\
+		$(DISTRIB_LIBRARY_DEFS_HEADER)	\
+		$(DISTRIB_LRSTAR)		\
 		$(DISTRIB_MAIN_CODE)		\
 		$(DISTRIB_MAIN_HEADER)		\
 		$(DISTRIB_PARSER_CODE)		\
-		$(DISTRIB_PARSER_HEADER)	\
-		$(DISTRIB_BASIC_DEFS_HEADER)
+		$(DISTRIB_PARSER_HEADER)
 	$(PROLOG);	\
 	true;

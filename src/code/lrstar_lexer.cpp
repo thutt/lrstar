@@ -3,6 +3,7 @@
 //                                                                                                 //
 //    DFA Lexer Code
 
+#include "lrstar_library_defs.h"
 #include "lrstar_main.h"
 
 Token   LEXER::token;            // Token.
@@ -41,9 +42,9 @@ int   LEXER::get_token ()           // Medium size lexer.
          if (*token.end == '\n')
          {
             linenumb++;
-#ifdef DEBUG_LEXER
-            prt_line();
-#endif
+            if (debug_lexer_) {
+               prt_line();
+            }
          }
          token.end++;
       }
@@ -119,64 +120,68 @@ char* LEXER::untabify (char* ls, char*& ts)
    return string;
 }
 
-#ifdef DEBUG_LEXER
 /////////////////////////////////////////////////////////////////////////////////////////////////////
 
 void  LEXER::prt_line() // Print current line.
 {
-   if (linenumb > linenumb_printed)
-   {
-      if (linenumb == 1)
+   if (debug_lexer_) {
+      if (linenumb > linenumb_printed)
       {
-         printf  (        "\n");
-         fprintf (output, "\nInput File ...\n\n");
-      }
-      char* str;
-      char* ls = token.end+1;
-      linenumb_printed = linenumb;
-      if (*ls != 26) // Not end of file?
-      {
-         str = untabify (ls);
-         printf  (        "%6d  %s\n", linenumb, str);
-         fprintf (output, "%6d  %s\n", linenumb, str);
+         if (linenumb == 1)
+         {
+            printf  (        "\n");
+            fprintf (output, "\nInput File ...\n\n");
+         }
+         char* str;
+         char* ls = token.end+1;
+         linenumb_printed = linenumb;
+         if (*ls != 26) // Not end of file?
+         {
+            str = untabify (ls);
+            printf  (        "%6d  %s\n", linenumb, str);
+            fprintf (output, "%6d  %s\n", linenumb, str);
+         }
       }
    }
 }
 
 char* LEXER::untabify (char* ls) // Untabify this line.
 {
-   int ns;
-   int col;
-   char* p;
-   char* s;
-   static char string [256];
-   char*  stringend = string + 250;
-   col = 0;
-   for (p = ls, s = string; *p != '\n'; p++)
-   {
-      if (*p == '\t')             // col = 0 1 2 3 4 5
-      {                           // ns  = 3 2 1 3 2 1
-         ns = 3 - (col % 3);
-         switch (ns)
-         {
-         case 3: *s++ = ' ';
-         case 2: *s++ = ' ';
-         case 1: *s++ = ' ';
-         }
-         col += ns;
-      }
-      else
+   if (debug_lexer_) {
+      int ns;
+      int col;
+      char* p;
+      char* s;
+      static char string [256];
+      char*  stringend = string + 250;
+      col = 0;
+      for (p = ls, s = string; *p != '\n'; p++)
       {
-         *s++ = *p;
-         col++;
+         if (*p == '\t')             // col = 0 1 2 3 4 5
+         {                           // ns  = 3 2 1 3 2 1
+            ns = 3 - (col % 3);
+            switch (ns)
+            {
+            case 3: *s++ = ' ';
+            case 2: *s++ = ' ';
+            case 1: *s++ = ' ';
+            }
+            col += ns;
+         }
+         else
+         {
+            *s++ = *p;
+            col++;
+         }
+         if (s > stringend) break;
       }
-      if (s > stringend) break;
+      *s = 0;
+      return string;
+   } else {
+      return ls;
    }
-   *s = 0;
-   return string;
 }
 
-#endif
 
 //                                                                                                 //
 /////////////////////////////////////////////////////////////////////////////////////////////////////

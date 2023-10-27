@@ -9,6 +9,7 @@
 #include <string.h>
 #include <time.h>
 
+#include "lrstar_library_defs.h"
 #include "lrstar_basic_defs.h"
 #if defined(LRSTAR_LINUX)
 #include <sys/types.h>
