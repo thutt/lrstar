@@ -6,6 +6,7 @@
 
 #if !defined(_LRSTAR_BASIC_DEFS_H)
 #define _LRSTAR_BASIC_DEFS_H
+#include <stdlib.h>
 
 #if !defined(__GNUC__)
    #error Compiler not recognized.
@@ -44,7 +45,26 @@
     do {                                                        \
         fprintf(stderr, "%s: not implemented\n", __func__);     \
         exit(1);                                                \
-    } while (0);
+    } while (0)
+
+
+#if defined(LRSTAR_DEBUG)
+#define lrstar_debug   (1)
+#define lrstar_release (0)
+#define UNREACHABLE_CODE()                                              \
+   do {                                                                 \
+      fprintf(stderr, "%s:%d: unreachable code\n", __FILE__, __LINE__); \
+      exit(1);                                                          \
+   } while (0)
+#elif defined(LRSTAR_RELEASE)
+#define lrstar_debug   (0)
+#define lrstar_release (1)
+#define UNREACHABLE_CODE()                      \
+   __builtin_unreachable()
+#else
+#warning Unknown build type; LRSTAR_DEBUG nor LRSTAR_RELEASE set
+#error Unable to define UNREACHABLE_CODE.
+#endif
 
 
 typedef unsigned char       uchar;
@@ -53,8 +73,9 @@ typedef unsigned short int  ushort;
 
 
 #endif
-/* Local Variables:  */
-/* mode: c         */
-/* c-basic-offset: 3 */
-/* tab-width: 3      */
-/* End:              */
+/* Local Variables:      */
+/* mode: c               */
+/* c-basic-offset: 3     */
+/* tab-width: 3          */
+/* indent-tabs-mode: nil */
+/* End:                  */

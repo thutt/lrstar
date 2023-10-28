@@ -64,9 +64,14 @@ OPT	:=							\
 export OPT
 
 
+BUILD_TYPE	:=						\
+	$(if $(filter debug,$(LRSTAR_BUILD_TYPE)),DEBUG,RELEASE)
+export BUILD_TYPE
+
 PREPROCESSOR	:=						\
 	$(if $(filter debug,$(LRSTAR_BUILD_TYPE)),_DEBUG)	\
-	LRSTAR_$(HOSTOS)
+	LRSTAR_$(HOSTOS)					\
+	LRSTAR_$(BUILD_TYPE)
 export PREPROCESSOR
 
 
