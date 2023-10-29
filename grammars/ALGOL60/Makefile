@@ -18,10 +18,14 @@ ERROR_FORMAT	:=			\
 	-fno-diagnostics-show-caret			\
 
 
+BUILD_TYPE	:=	\
+	$(if $(LRSTAR_BUILD_TYPE),$(if $(filter debug,$(LRSTAR_BUILD_TYPE)),DEBUG,RELEASE),RELEASE)
+
+
 CXXFLAGS	:=			\
 	$(ERROR_FORMAT)			\
 	$(addprefix -I,$(INCLUDES))			\
-	$(addprefix -D,$(DEFINES))			\
+	$(addprefix -D,LRSTAR_$(BUILD_TYPE) $(DEFINES))			\
 
 
 SOURCE	:=			\
