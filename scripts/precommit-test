@@ -52,6 +52,7 @@ function process ()
     local grm_name="$(basename "${grm_dir}")";
     local grm="${grm_dir}/${grm_name}.grm";
     local lgr="${grm_dir}/${grm_name}.lgr";
+    local makefile="${grm_dir}/Makefile"
 
     if [ -r "${grm}" ] ; then
         lrstar "${grm}";
@@ -65,6 +66,14 @@ function process ()
         echo "${lgr} does not exist.";
     fi;
 
+    if [ -r "${lgr}" ] ; then
+        # The lexical grammer exists, the project should be able to
+        # build into an executable with the generated Makefile.
+        rm -f "${grm_dir}/*.o";
+        make \
+            -C "${grm_dir}" \
+            LRSTAR_INSTALL_ROOT=/tmp/lrstar/release/usr/local
+    fi;
 }
 
 
@@ -72,9 +81,10 @@ function main ()
 {
     if [ -v LRSTAR_DIR ] ; then
         local grammars="${LRSTAR_DIR}/grammars";
+        local examples="${LRSTAR_DIR}/examples";
 
         cd ${LRSTAR_DIR};
-        for grm in ${grammars}/*; do
+        for grm in ${grammars}/* ${examples}/*; do
             # The Kotlin lexical grammer is not a dfa grammer, so skip
             # testing until that can be sorted out.
             if [ "$(basename ${grm})" != "Kotlin" ] ; then
