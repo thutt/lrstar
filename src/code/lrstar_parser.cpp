@@ -3,6 +3,7 @@
 //    LRSTAR Parser Code
 
 #include <string.h>
+#include "lrstar_basic_defs.h"
 #include "lrstar_library_defs.h"
 #include "lrstar_main.h"
 
