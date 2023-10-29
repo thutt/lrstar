@@ -1,29 +1,29 @@
-   
-/* LR(k) grammar. 
 
-   k is theoretically infinite in this grammar, therefore the grammar is ambiguous. 
-   At runtime, k is finite because no input can be infinite, however k may differ 
-   from one statement to another.  k can be set to 100 or more. 
+/* LR(k) grammar.
+
+   k is theoretically infinite in this grammar, therefore the grammar is ambiguous.
+   At runtime, k is finite because no input can be infinite, however k may differ
+   from one statement to another.  k can be set to 100 or more.
 */
 
-/* Token Actions */   
+/* Token Actions */
 
-   <error>        => error ();
-   <identifier>   => lookup();
+<error>        => error ();
+<identifier>   => lookup();
 
 /* Rules */
 
-   Goal           -> (FunctionDecl | FunctionDef | TypedefDecl)+ <eof>		   +> goal_  
-	
-	TypedefDecl		-> typedef TypeSpec+ TypeIdent ';'     
-	
-	TypeIdent		-> <identifier>^{typename}
+   Goal           -> (FunctionDecl | FunctionDef | TypedefDecl)+ <eof>        +> goal_
 
-   FunctionDecl   -> TypeSpec FuncDecl '(' [Arg/','+] ')' ';'   	            +> function_decl_
+   TypedefDecl    -> typedef TypeSpec+ TypeIdent ';'
 
-   FunctionDef    -> TypeSpec FuncDef  '(' [Arg/','+] ')' '{' FuncBody '}'	   +> function_def_
+   TypeIdent      -> <identifier>^{typename}
 
-   TypeSpec       -> int                    +> type_spec_                  
+   FunctionDecl   -> TypeSpec FuncDecl '(' [Arg/','+] ')' ';'                 +> function_decl_
+
+   FunctionDef    -> TypeSpec FuncDef  '(' [Arg/','+] ')' '{' FuncBody '}'    +> function_def_
+
+   TypeSpec       -> int                    +> type_spec_
                   -> char                   +> type_spec_
                   -> long                   +> type_spec_
                   -> short                  +> type_spec_
@@ -31,19 +31,25 @@
                   -> {typename}             +> type_spec_
                   -> TypeSpec '*'           +> type_spec_
 
-   FuncDecl       -> FunctionName	        +> function_ 
+   FuncDecl       -> FunctionName           +> function_
                   -> {function_name}        +> function_
 
-   FuncDef        -> FunctionName	        +> function_ 
+   FuncDef        -> FunctionName           +> function_
                   -> {function_name}        +> function_
 
-   Arg            -> TypeSpec ArgName		  +> arg_
+   Arg            -> TypeSpec ArgName       +> arg_
 
    ArgName        -> <identifier>           +> arg_name_
 
-	FunctionName	-> <identifier>^{function_name}
-   
-   FuncBody       -> 
+   FunctionName   -> <identifier>^{function_name}
+
+   FuncBody       ->
                   -> '...'                  +> function_body_
- 
+
 /* End of grammar */
+/* Local Variables:      */
+/* mode: c               */
+/* c-basic-offset: 3     */
+/* tab-width: 3          */
+/* indent-tabs-mode: nil */
+/* End:                  */

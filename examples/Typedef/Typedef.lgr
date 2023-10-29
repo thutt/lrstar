@@ -1,28 +1,34 @@
 
-/* C Typedef Solution. */ 
+/* C Typedef Solution. */
 
-  	<eof>						-> \z
+<eof>                -> \z
 
-	<identifier>   		-> letter (letter|digit)* 
-		           
-	{spaces}       		-> ( \t | \n | ' ' )+
-	{commentline}  		-> '/' '/' neol*
-	{commentblock} 		-> '/' '*' na* '*'+ (nans na* '*'+)* '/'
+<identifier>         -> letter (letter|digit)*
+
+{spaces}             -> ( \t | \n | ' ' )+
+{commentline}        -> '/' '/' neol*
+{commentblock}       -> '/' '*' na* '*'+ (nans na* '*'+)* '/'
 
 /* Character-Set Definitions. */
 
-	letter	      		= 'a'..'z' | 'A'..'Z' | '_' 
-	digit	         		= '0'..'9'						 
+letter               = 'a'..'z' | 'A'..'Z' | '_'
+digit                = '0'..'9'
 
-	any						= 0..255 - \z			// any character except end of file
-	na             		= any - '*'				// not asterisk
-	nans           		= any - '*' - '/'		// not asterisk not slash
-	neol           		= any - \n			   // not end of line
+any                  = 0..255 - \z        // any character except end of file
+na                   = any - '*'          // not asterisk
+nans                 = any - '*' - '/'    // not asterisk not slash
+neol                 = any - \n           // not end of line
 
-	\t							=  9						// tab
-	\n							= 10						// newline
-	\f							= 12						// form feed
-	\r							= 13						// return
-	\z							= 26						// end of file
-	
+\t                   =  9                 // tab
+\n                   = 10                 // newline
+\f                   = 12                 // form feed
+\r                   = 13                 // return
+\z                   = 26                 // end of file
+
 /* End Of Grammar. */
+/* Local Variables:      */
+/* mode: c               */
+/* c-basic-offset: 3     */
+/* tab-width: 3          */
+/* indent-tabs-mode: nil */
+/* End:                  */

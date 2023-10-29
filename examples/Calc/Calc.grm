@@ -1,75 +1,81 @@
- 
-/* Calc Grammar.  
+
+/* Calc Grammar.
 
    This generates a translator which translates simple calculator
-   expressions and if statements into a pseudo code intermediate 
+   expressions and if statements into a pseudo code intermediate
    language.  This style of if statements avoids the dangling else
-   conflict in the C and C++ languages.  
+   conflict in the C and C++ languages.
 
    The generated parser builds an AST directly. No need to build
-   a parse tree first and later reduce it to an AST. The pseudo 
-   code is generated while traversing the AST, by calling the node 
-   actions defined by the user.  
-   
-   Professional compiler/language engineers build an AST and work 
-   with that, in a top-down manner.  
+   a parse tree first and later reduce it to an AST. The pseudo
+   code is generated while traversing the AST, by calling the node
+   actions defined by the user.
+
+   Professional compiler/language engineers build an AST and work
+   with that, in a top-down manner.
 */
 
 /* Input Tokens. */
 
-	EOF	<eof>          ;
-	ERR	<error>			=> error();
-	ID		<identifier>	=> lookup();  // Lookup & store in symbol table.
-	INT	<integer>		=> lookup();  // Lookup & store in symbol table. 
+EOF   <eof>          ;
+ERR   <error>        => error();
+ID    <identifier>   => lookup();  // Lookup & store in symbol table.
+INT   <integer>      => lookup();  // Lookup & store in symbol table.
 
 /* Operator precedence. */
-  
-   { '==' '!=' }  <<    // Lowest priority.
-   { '+'  '-'  }  <<         
-   { '*'  '/'  }  <<    
-   { '^'       }  >>    // Highest priority.
+
+{ '==' '!=' }  <<    // Lowest priority.
+{ '+'  '-'  }  <<
+{ '*'  '/'  }  <<
+{ '^'       }  >>    // Highest priority.
 
 /* Productions. */
 
-   Goal     : Program* EOF 		   						*> goal_
-            ;
+Goal     : Program* EOF                            *> goal_
+         ;
 
-   Program  : 'program' ID '{' Stmt* '}'	            *> program_(2)
-            ;
-            
-   Stmt     : Target '=' Exp ';'                  		*> store_~			
-            | 'if' RelExp Then 'endif'              	*> if_				
-            | 'if' RelExp Then2 Else2 'endif'       	*> if_	
-            ;
-            
-   Target   : ID                           	         *> target_(1)		
-            ;
-            
-   RelExp   : Exp '==' Exp                        		*> eq_				
-            | Exp '!=' Exp                        		*> ne_				
-            ;
-            
-   Exp      : Primary
-				| Exp '+' Exp                         		*> add_				
-            | Exp '-' Exp                         		*> sub_				
-            | Exp '*' Exp                         		*> mul_				
-            | Exp '/' Exp                         		*> div_		
-            | Exp '^' Exp                         		*> pwr_		
-            ;
-            
-	Primary  : INT                             	      *> int_(1)			
-            | ID                           	         *> ident_(1)		
-            | '(' Exp ')'  
-            ;
-            
-   Then     : 'then' Stmt+                        		*> then_				
-            ;
+Program  : 'program' ID '{' Stmt* '}'              *> program_(2)
+         ;
 
-   Then2    : 'then' Stmt+                        		*> then2_				
-            ;
+Stmt     : Target '=' Exp ';'                      *> store_~
+         | 'if' RelExp Then 'endif'                *> if_
+         | 'if' RelExp Then2 Else2 'endif'         *> if_
+         ;
 
-   Else2    : 'else' Stmt+                        		*> else2_				
-            ;
+Target   : ID                                      *> target_(1)
+         ;
+
+RelExp   : Exp '==' Exp                            *> eq_
+         | Exp '!=' Exp                            *> ne_
+         ;
+
+Exp      : Primary
+         | Exp '+' Exp                             *> add_
+         | Exp '-' Exp                             *> sub_
+         | Exp '*' Exp                             *> mul_
+         | Exp '/' Exp                             *> div_
+         | Exp '^' Exp                             *> pwr_
+         ;
+
+Primary  : INT                                     *> int_(1)
+         | ID                                      *> ident_(1)
+         | '(' Exp ')'
+         ;
+
+Then     : 'then' Stmt+                            *> then_
+         ;
+
+Then2    : 'then' Stmt+                            *> then2_
+         ;
+
+Else2    : 'else' Stmt+                            *> else2_
+         ;
 
 /* End of Grammar. */
 
+/* Local Variables:      */
+/* mode: c               */
+/* c-basic-offset: 3     */
+/* tab-width: 3          */
+/* indent-tabs-mode: nil */
+/* End:                  */

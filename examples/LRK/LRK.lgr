@@ -1,33 +1,39 @@
 
 /* C Lexical Grammar */
 
-  	<eof>						-> \z
+<eof>                   -> \z
 
-	<identifier>   		-> letter (letter|digit)* 
-		           
-	{whitespace}       	-> whitechar+
+<identifier>            -> letter (letter|digit)*
 
-	{commentline}  		-> '/' '/' neol*
+{whitespace}            -> whitechar+
 
-	{commentblock} 		-> '/' '*' na* '*'+ (nans na* '*'+)* '/'
+{commentline}           -> '/' '/' neol*
+
+{commentblock}          -> '/' '*' na* '*'+ (nans na* '*'+)* '/'
 
 /* Character-Set Definitions */
 
-	letter	      		= 'a'..'z' | 'A'..'Z' | '_' 
-	digit	         		= '0'..'9' 
+letter                  = 'a'..'z' | 'A'..'Z' | '_'
+digit                   = '0'..'9'
 
-	whitechar     			= \t | \n | \r | \f | \v | ' ' 
+whitechar               = \t | \n | \r | \f | \v | ' '
 
-	any						= 0..255 - \z  		// any character except end of file
-	na             		= any - '*' 			// not asterisk
-	nans           		= any - '*' - '/'	   // not asterisk not slash
-	neol           		= any - \n 			   // not end of line
+any                     = 0..255 - \z       // any character except end of file
+na                      = any - '*'         // not asterisk
+nans                    = any - '*' - '/'   // not asterisk not slash
+neol                    = any - \n          // not end of line
 
-	\t							=  9						// tab
-	\n							= 10						// newline
-	\v							= 11						// vertical feed?
-	\f							= 12						// form feed
-	\r							= 13						// return
-	\z							= 26						// end of file
-	\b							= 32						// blank/space
-	
+\t                      =  9 // tab
+\n                      = 10 // newline
+\v                      = 11 // vertical feed?
+\f                      = 12 // form feed
+\r                      = 13 // return
+\z                      = 26 // end of file
+\b                      = 32 // blank/space
+
+/* Local Variables:      */
+/* mode: c               */
+/* c-basic-offset: 3     */
+/* tab-width: 3          */
+/* indent-tabs-mode: nil */
+/* End:                  */

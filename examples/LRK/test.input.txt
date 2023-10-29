@@ -1,22 +1,21 @@
 
 int   main (int na, char** arg);
 
-int   main (int na, char** arg) 
-{ 
+int   main (int na, char** arg)
+{
    /* function body goes here	*/
 }
 
 typedef unsigned char uchar;
-		  
+
 int   function_x (int x);
 int   function_y (int x, int y);
 int   function_z (int x, int y, uchar* name, uchar* addr, uchar* city);
 
-int   function_z (int x, int y, 
-uchar* name, 
-uchar* addr, 
+int   function_z (int x, int y,
+uchar* name,
+uchar* addr,
 uchar* city)
 {
    ... /* function body goes here	*/
 }
-

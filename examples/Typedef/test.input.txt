@@ -4,4 +4,4 @@ x * y;
 
 typedef unsigned int uint, *uintptr;
 uint    a, b, c;
-uintptr p, q, r;	
+uintptr p, q, r;
