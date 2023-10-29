@@ -1194,7 +1194,7 @@ static void makefile_fn(FILE       *fp,
                               "BUILD_TYPE\t:=\t\\\n"
                               "\t$(if $(LRSTAR_BUILD_TYPE),"
                               "$(if $(filter debug,$(LRSTAR_BUILD_TYPE)),"
-                              "DEBUG,RELEASE),RELEASE)\t\n"
+                              "DEBUG,RELEASE),RELEASE)\n"
                               "\n\n"
                               "CXXFLAGS\t:=\t\t\t\\\n"
                               "\t$(ERROR_FORMAT)\t\t\t\\\n"
