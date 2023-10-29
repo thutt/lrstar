@@ -1189,10 +1189,15 @@ static void makefile_fn(FILE       *fp,
                               "\t-fdiagnostics-color=never\t\t\t\\\n"
                               "\t-fno-diagnostics-show-caret\t\t\t\\\n"
                               "\n\n"
+                              "BUILD_TYPE\t:=\t\\\n"
+                              "\t$(if $(LRSTAR_BUILD_TYPE),"
+                              "$(if $(filter debug,$(LRSTAR_BUILD_TYPE)),"
+                              "DEBUG,RELEASE),RELEASE)\t\n"
+                              "\n\n"
                               "CXXFLAGS\t:=\t\t\t\\\n"
                               "\t$(ERROR_FORMAT)\t\t\t\\\n"
                               "\t$(addprefix -I,$(INCLUDES))\t\t\t\\\n"
-                              "\t$(addprefix -D,$(DEFINES))\t\t\t\\\n"
+                              "\t$(addprefix -D,LRSTAR_$(BUILD_TYPE) $(DEFINES))\t\t\t\\\n"
                               "\n\n"
                               "SOURCE\t:=\t\t\t\\\n"
                               "\t%s_Actions.cpp\t\t\t\\\n" /* grammar */
@@ -1216,10 +1221,14 @@ static void write_file(const char       *gdn,
                        const char       *grammar,
                        const char       *fname,
                        const char       *suffix,
+                       bool              overwrite,
                        file_writer_fn_t  fn)
 {
-   char  pathname[PATH_MAX];
-   FILE *fp;
+   char         pathname[PATH_MAX];
+   FILE        *fp;
+   int          stat_res;
+   struct stat  statbuf;
+   bool         exists;
 
    strcpy(pathname, gdn);
 
@@ -1232,36 +1241,42 @@ static void write_file(const char       *gdn,
       strcat(pathname, grammar);
       strcat(pathname, suffix);
    }
-   fp = fopen(pathname, "w");
 
-   if (fp != NULL) {
-      prt_logonly ("Generating: %s\n", pathname);
+   stat_res = stat(pathname, &statbuf);
+   exists   = stat_res != -1;
 
-      fn(fp, pathname, grammar, fname);
-      fclose(fp);
-   } else {
-      if (++n_errors == 1) {
-         prt_log("\n");
+   if (!exists || overwrite) {
+      fp = fopen(pathname, "w");
+
+      if (fp != NULL) {
+         prt_logonly ("Generating: %s\n", pathname);
+
+         fn(fp, pathname, grammar, fname);
+         fclose(fp);
+      } else {
+         if (++n_errors == 1) {
+            prt_log("\n");
+         }
+         prt_log("Output file '%s' cannot be written!\n\n", pathname);
+         Quit();
       }
-      prt_log("Output file '%s' cannot be written!\n\n", pathname);
-      Quit();
    }
 }
 
 
 void  PG_Main::GenerateOtherFiles ()
 {
-   write_file(gdn, gfn, NULL, "_Actions.h", actions_header_fn);
-   write_file(gdn, gfn, NULL, "_Parser.h", parsertables_header_fn);
-   write_file(gdn, gfn, NULL, "_Actions.cpp", actions_cpp_fn);
-   write_file(gdn, gfn, NULL, "_Lexer.cpp", lexer_cpp_fn);
-   write_file(gdn, gfn, NULL, "_Main.cpp", main_cpp_fn);
-   write_file(gdn, gfn, NULL, "_Parser.cpp", parser_cpp_fn);
+   write_file(gdn, gfn, NULL, "_Actions.h", false, actions_header_fn);
+   write_file(gdn, gfn, NULL, "_Parser.h", true, parsertables_header_fn);
+   write_file(gdn, gfn, NULL, "_Actions.cpp", false, actions_cpp_fn);
+   write_file(gdn, gfn, NULL, "_Lexer.cpp", true, lexer_cpp_fn);
+   write_file(gdn, gfn, NULL, "_Main.cpp", true, main_cpp_fn);
+   write_file(gdn, gfn, NULL, "_Parser.cpp", true, parser_cpp_fn);
    if (lrstar_linux) {
-      write_file(gdn, gfn,  "Makefile", "", makefile_fn);
+      write_file(gdn, gfn,  "Makefile", "", true, makefile_fn);
    } else {
       assert(lrstar_windows);
-      write_file(gdn, gfn, "make.bat", "", make_bat_fn);
+      write_file(gdn, gfn, "make.bat", "", true, make_bat_fn);
    }
 }
 
