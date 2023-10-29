@@ -30,8 +30,9 @@
 //
 ////////////////////////////////////////////////////////////////////////////////
 
-/* Local Variables:  */
-/* mode: c         */
-/* c-basic-offset: 3 */
-/* tab-width: 3      */
-/* End:              */
+/* Local Variables:      */
+/* mode: c               */
+/* c-basic-offset: 3     */
+/* tab-width: 3          */
+/* indent-tabs-mode: nil */
+/* End:                  */

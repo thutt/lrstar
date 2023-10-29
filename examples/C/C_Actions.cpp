@@ -2,8 +2,9 @@
 ///////////////////////////////////////////////////////////////////////////////
 //                                                                           //
 
+#include "lrstar_basic_defs.h"
 #include "C_Actions.h"
-#include "../../code/main.h"
+#include "lrstar_main.h"
 
 ///////////////////////////////////////////////////////////////////////////////
 
@@ -58,8 +59,9 @@ int   TERM_ACTIONS::lookup (int& t)				// Lookup in symbol table.
 //                                                                           //
 ///////////////////////////////////////////////////////////////////////////////
 
-/* Local Variables:  */
-/* mode: c         */
-/* c-basic-offset: 3 */
-/* tab-width: 3      */
-/* End:              */
+/* Local Variables:      */
+/* mode: c               */
+/* c-basic-offset: 3     */
+/* tab-width: 3          */
+/* indent-tabs-mode: nil */
+/* End:                  */

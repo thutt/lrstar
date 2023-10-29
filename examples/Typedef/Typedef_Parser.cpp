@@ -1,4 +1,12 @@
 
+///////////////////////////////////////////////////////////////////////////////
+//                                                                           //
+
+#include "lrstar_basic_defs.h"
 #include "Typedef_Parser.h"
 #include "Typedef_ParserTables.hpp"
-#include "../../code/parser.cpp"
+#include "lrstar_parser.cpp"
+
+//                                                                           //
+///////////////////////////////////////////////////////////////////////////////
+
