@@ -1,0 +1,88 @@
+
+/* Typedef grammar */
+
+/* Terminal Symbols */
+
+    0  <error>
+    1  <eof>
+    2  <identifier>
+    3  ';'
+    4  'typedef'
+    5  ','
+    6  {typename}
+    7  '*'
+    8  'char'
+    9  'int'
+   10  'short'
+   11  'unsigned'
+
+/* Productions */
+
+    0       Goal
+        0      : Declaration* <eof> 
+               ;
+
+    1       Declaration
+        1      : Type+ VarList ';' 
+        2      | 'typedef' Type+ TypeVarList ';' 
+               ;
+
+    2       VarList
+        3      : Var/','+ 
+               ;
+
+    3       TypeVarList
+        4      : TypeVar/','+ 
+               ;
+
+    4       Var
+        5      : Ptr* <identifier> 
+               ;
+
+    5       TypeVar
+        6      : Ptr* TypeIdent 
+               ;
+
+    6       TypeIdent
+        7      : <identifier> 
+               ;
+
+    7       Ptr
+        8      : '*' 
+               ;
+
+    8       Type
+        9      : 'char' 
+       10      | 'int' 
+       11      | 'short' 
+       12      | 'unsigned' 
+       13      | {typename} 
+               ;
+
+    9       Declaration*
+       14      : 
+       15      | Declaration* Declaration 
+               ;
+
+   10       Type+
+       16      : Type 
+       17      | Type+ Type 
+               ;
+
+   11       Var/','+
+       18      : Var 
+       19      | Var/','+ ',' Var 
+               ;
+
+   12       TypeVar/','+
+       20      : TypeVar 
+       21      | TypeVar/','+ ',' TypeVar 
+               ;
+
+   13       Ptr*
+       22      : 
+       23      | Ptr* Ptr 
+               ;
+
+/* End of Typedef grammar 
+

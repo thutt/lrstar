@@ -1,0 +1,108 @@
+
+/* LRK grammar */
+
+/* Terminal Symbols */
+
+    0  <error>
+    1  <eof>
+    2  <identifier>
+    3  'typedef'
+    4  ';'
+    5  {typename}
+    6  '('
+    7  ','
+    8  ')'
+    9  '{'
+   10  '}'
+   11  'int'
+   12  'char'
+   13  'long'
+   14  'short'
+   15  'unsigned'
+   16  '*'
+   17  {function_name}
+   18  '...'
+
+/* Productions */
+
+    0       Goal
+        0      : (FunctionDecl | FunctionDef | TypedefDecl)+ <eof> 
+               ;
+
+    1       TypedefDecl
+        1      : 'typedef' TypeSpec+ TypeIdent ';' 
+               ;
+
+    2       TypeIdent
+        2      : <identifier> 
+               ;
+
+    3       FunctionDecl
+        3      : TypeSpec FuncDecl '(' Arg/','* ')' ';' 
+               ;
+
+    4       FunctionDef
+        4      : TypeSpec FuncDef '(' Arg/','* ')' '{' FuncBody '}' 
+               ;
+
+    5       TypeSpec
+        5      : 'int' 
+        6      | 'char' 
+        7      | 'long' 
+        8      | 'short' 
+        9      | 'unsigned' 
+       10      | {typename} 
+       11      | TypeSpec '*' 
+               ;
+
+    6       FuncDecl
+       12      : FunctionName 
+       13      | {function_name} 
+               ;
+
+    7       FuncDef
+       14      : FunctionName 
+       15      | {function_name} 
+               ;
+
+    8       Arg
+       16      : TypeSpec ArgName 
+               ;
+
+    9       ArgName
+       17      : <identifier> 
+               ;
+
+   10       FunctionName
+       18      : <identifier> 
+               ;
+
+   11       FuncBody
+       19      : 
+       20      | '...' 
+               ;
+
+   12       (FunctionDecl | FunctionDef | TypedefDecl)
+       21      : FunctionDecl 
+       22      | FunctionDef 
+       23      | TypedefDecl 
+               ;
+
+   13       (FunctionDecl | FunctionDef | TypedefDecl)+
+       24      : (FunctionDecl | FunctionDef | TypedefDecl) 
+       25      | (FunctionDecl | FunctionDef | TypedefDecl)+ (FunctionDecl | FunctionDef | TypedefDecl) 
+               ;
+
+   14       TypeSpec+
+       26      : TypeSpec 
+       27      | TypeSpec+ TypeSpec 
+               ;
+
+   15       Arg/','*
+       28      : 
+       29      | Arg 
+       30      | Arg/','* ',' Arg 
+               ;
+
+/* End of LRK grammar 
+

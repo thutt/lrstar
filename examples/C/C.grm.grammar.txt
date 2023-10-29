@@ -1,0 +1,508 @@
+
+/* C grammar */
+
+/* Terminal Symbols */
+
+    0  <error>
+    1  <eof>
+    2  <identifier>
+    3  <string>
+    4  <constant>
+    5  '?'
+    6  '||'
+    7  '&&'
+    8  '|'
+    9  '^'
+   10  '&'
+   11  '=='
+   12  '!='
+   13  '<'
+   14  '>'
+   15  '<='
+   16  '>='
+   17  '<<'
+   18  '>>'
+   19  '+'
+   20  '-'
+   21  '*'
+   22  '/'
+   23  '%'
+   24  'typedef'
+   25  ','
+   26  ';'
+   27  'int'
+   28  'char'
+   29  'long'
+   30  'void'
+   31  'short'
+   32  'const'
+   33  'float'
+   34  'double'
+   35  'signed'
+   36  'unsigned'
+   37  {typename}
+   38  'extern'
+   39  'static'
+   40  'auto'
+   41  '='
+   42  'struct'
+   43  '{'
+   44  '}'
+   45  'union'
+   46  ':'
+   47  'enum'
+   48  '('
+   49  ')'
+   50  '['
+   51  ']'
+   52  '...'
+   53  'goto'
+   54  'continue'
+   55  'break'
+   56  'return'
+   57  'if'
+   58  'else'
+   59  'switch'
+   60  'while'
+   61  'do'
+   62  'for'
+   63  'case'
+   64  'default'
+   65  '*='
+   66  '/='
+   67  '%='
+   68  '+='
+   69  '-='
+   70  '<<='
+   71  '>>='
+   72  '&='
+   73  '^='
+   74  '|='
+   75  '++'
+   76  '--'
+   77  '~'
+   78  '!'
+   79  'sizeof'
+   80  '.'
+   81  '->'
+
+/* Productions */
+
+    0       Goal
+        0      : ExternalDef* <eof> 
+               ;
+
+    1       ExternalDef
+        1      : ExtDeclaration 
+        2      | FunctionDef 
+               ;
+
+    2       ExtDeclaration
+        3      : 'typedef' TypeSpec+ (Pointer? TypedefIdentifier)/','+ ';' 
+        4      | DeclarationSpec* InitDeclarator/','* ';' 
+               ;
+
+    3       Declaration
+        5      : DeclarationSpec+ InitDeclarator/','+ ';' 
+               ;
+
+    4       FunctionDef
+        6      : FunctionDecl FunctionBody 
+               ;
+
+    5       FunctionDecl
+        7      : DeclarationSpec* Declarator Declaration* 
+               ;
+
+    6       FunctionBody
+        8      : Block 
+               ;
+
+    7       DeclarationSpec
+        9      : TypeSpec 
+       10      | StorageClassSpec 
+               ;
+
+    8       TypeSpec
+       11      : 'int' 
+       12      | 'char' 
+       13      | 'long' 
+       14      | 'void' 
+       15      | 'short' 
+       16      | 'const' 
+       17      | 'float' 
+       18      | 'double' 
+       19      | 'signed' 
+       20      | 'unsigned' 
+       21      | {typename} 
+       22      | EnumSpec 
+       23      | StructSpec 
+       24      | UnionSpec 
+               ;
+
+    9       StorageClassSpec
+       25      : 'extern' 
+       26      | 'static' 
+       27      | 'auto' 
+               ;
+
+   10       InitDeclarator
+       28      : Declarator 
+       29      | Declarator '=' Init 
+               ;
+
+   11       StructSpec
+       30      : 'struct' <identifier> 
+       31      | 'struct' '{' StructDeclaration+ '}' 
+       32      | 'struct' <identifier> '{' StructDeclaration+ '}' 
+               ;
+
+   12       UnionSpec
+       33      : 'union' <identifier> 
+       34      | 'union' '{' StructDeclaration+ '}' 
+       35      | 'union' <identifier> '{' StructDeclaration+ '}' 
+               ;
+
+   13       StructDeclaration
+       36      : TypeSpec+ StructDeclarator/','+ ';' 
+               ;
+
+   14       StructDeclarator
+       37      : ':' ConstExp 
+       38      | Declarator ':' ConstExp 
+       39      | Declarator 
+               ;
+
+   15       EnumSpec
+       40      : 'enum' <identifier> 
+       41      | 'enum' '{' Enumerator/','+ '}' 
+       42      | 'enum' <identifier> '{' Enumerator/','+ '}' 
+               ;
+
+   16       Enumerator
+       43      : <identifier> 
+       44      | <identifier> '=' ConstExp 
+               ;
+
+   17       Declarator
+       45      : DirectDeclarator 
+       46      | Pointer DirectDeclarator 
+               ;
+
+   18       DirectDeclarator
+       47      : Identifier 
+       48      | '(' Declarator ')' 
+       49      | DirectDeclarator '[' ConstExp? ']' 
+       50      | DirectDeclarator '(' Arguments ')' 
+       51      | DirectDeclarator '(' AbsArguments ')' 
+               ;
+
+   19       Pointer
+       52      : '*' TypeSpec* 
+       53      | '*' TypeSpec* Pointer 
+               ;
+
+   20       Arguments
+       54      : ArgDecl/','+ 
+       55      | ArgDecl/','+ ',' '...' 
+               ;
+
+   21       AbsArguments
+       56      : AbsArgDecl/','+ 
+       57      | AbsArgDecl/','+ ',' '...' 
+               ;
+
+   22       ArgDecl
+       58      : Declarator 
+       59      | DeclarationSpec+ Declarator 
+               ;
+
+   23       AbsArgDecl
+       60      : 
+       61      | DeclarationSpec+ 
+       62      | AbstractDeclarator 
+       63      | DeclarationSpec+ AbstractDeclarator 
+               ;
+
+   24       TypeName
+       64      : TypeSpec+ 
+       65      | TypeSpec+ AbstractDeclarator 
+               ;
+
+   25       AbstractDeclarator
+       66      : Pointer 
+       67      | DirectAbstractDeclarator 
+       68      | Pointer DirectAbstractDeclarator 
+               ;
+
+   26       DirectAbstractDeclarator
+       69      : '[' ConstExp? ']' 
+       70      | '(' AbstractDeclarator ')' 
+       71      | DirectAbstractDeclarator '[' ConstExp? ']' 
+       72      | DirectAbstractDeclarator '(' AbsArguments ')' 
+               ;
+
+   27       Init
+       73      : AssignExp 
+       74      | '{' Init/','+ ','? '}' 
+               ;
+
+   28       Stmt
+       75      : ';' 
+       76      | Exp ';' 
+       77      | 'goto' Identifier ';' 
+       78      | 'continue' ';' 
+       79      | 'break' ';' 
+       80      | 'return' Exp? ';' 
+       81      | Label Stmt 
+       82      | Block 
+       83      | 'if' '(' Exp ')' Stmt 
+       84      | 'if' '(' Exp ')' Stmt 'else' Stmt 
+       85      | 'switch' '(' Exp ')' '{' Case Default '}' 
+       86      | 'while' '(' Exp ')' Stmt 
+       87      | 'do' Stmt 'while' '(' Exp ')' ';' 
+       88      | 'for' '(' Exp? ';' Exp? ';' Exp? ')' Stmt 
+               ;
+
+   29       Case
+       89      : ('case' ConstExp ':' Stmt*)* 
+               ;
+
+   30       Default
+       90      : ('default' ':' Stmt*)? 
+               ;
+
+   31       Label
+       91      : Identifier ':' 
+               ;
+
+   32       Block
+       92      : '{' Declaration* Stmt* '}' 
+               ;
+
+   33       ConstExp
+       93      : CondExp 
+               ;
+
+   34       Exp
+       94      : AssignExp 
+       95      | Exp ',' AssignExp 
+               ;
+
+   35       AssignExp
+       96      : CondExp 
+       97      | UnaryExp '=' AssignExp 
+       98      | UnaryExp '*=' AssignExp 
+       99      | UnaryExp '/=' AssignExp 
+      100      | UnaryExp '%=' AssignExp 
+      101      | UnaryExp '+=' AssignExp 
+      102      | UnaryExp '-=' AssignExp 
+      103      | UnaryExp '<<=' AssignExp 
+      104      | UnaryExp '>>=' AssignExp 
+      105      | UnaryExp '&=' AssignExp 
+      106      | UnaryExp '^=' AssignExp 
+      107      | UnaryExp '|=' AssignExp 
+               ;
+
+   36       CondExp
+      108      : CastExp 
+      109      | CondExp '?' CondExp ':' CondExp 
+      110      | CondExp '||' CondExp 
+      111      | CondExp '&&' CondExp 
+      112      | CondExp '|' CondExp 
+      113      | CondExp '^' CondExp 
+      114      | CondExp '&' CondExp 
+      115      | CondExp '==' CondExp 
+      116      | CondExp '!=' CondExp 
+      117      | CondExp '<' CondExp 
+      118      | CondExp '>' CondExp 
+      119      | CondExp '<=' CondExp 
+      120      | CondExp '>=' CondExp 
+      121      | CondExp '<<' CondExp 
+      122      | CondExp '>>' CondExp 
+      123      | CondExp '+' CondExp 
+      124      | CondExp '-' CondExp 
+      125      | CondExp '*' CondExp 
+      126      | CondExp '/' CondExp 
+      127      | CondExp '%' CondExp 
+               ;
+
+   37       CastExp
+      128      : UnaryExp 
+      129      | '(' TypeName ')' CastExp 
+               ;
+
+   38       UnaryExp
+      130      : PostfixExp 
+      131      | '++' UnaryExp 
+      132      | '--' UnaryExp 
+      133      | '~' CastExp 
+      134      | '&' CastExp 
+      135      | '*' CastExp 
+      136      | '+' CastExp 
+      137      | '-' CastExp 
+      138      | '!' CastExp 
+      139      | 'sizeof' UnaryExp 
+      140      | 'sizeof' '(' TypeName ')' 
+               ;
+
+   39       PostfixExp
+      141      : PrimaryExp 
+      142      | PostfixExp '[' Subscript ']' 
+      143      | PostfixExp '.' Identifier 
+      144      | PostfixExp '(' Args ')' 
+      145      | PostfixExp '->' Identifier 
+      146      | PostfixExp '++' 
+      147      | PostfixExp '--' 
+               ;
+
+   40       Subscript
+      148      : Exp 
+               ;
+
+   41       Args
+      149      : AssignExp/','* 
+               ;
+
+   42       PrimaryExp
+      150      : <string> 
+      151      | <constant> 
+      152      | Identifier 
+      153      | '(' Exp ')' 
+               ;
+
+   43       Identifier
+      154      : <identifier> 
+               ;
+
+   44       TypedefIdentifier
+      155      : <identifier> 
+               ;
+
+   45       ExternalDef*
+      156      : 
+      157      | ExternalDef* ExternalDef 
+               ;
+
+   46       TypeSpec+
+      158      : TypeSpec 
+      159      | TypeSpec+ TypeSpec 
+               ;
+
+   47       Pointer?
+      160      : 
+      161      | Pointer 
+               ;
+
+   48       (Pointer? TypedefIdentifier)
+      162      : Pointer? TypedefIdentifier 
+               ;
+
+   49       (Pointer? TypedefIdentifier)/','+
+      163      : (Pointer? TypedefIdentifier) 
+      164      | (Pointer? TypedefIdentifier)/','+ ',' (Pointer? TypedefIdentifier) 
+               ;
+
+   50       DeclarationSpec*
+      165      : 
+      166      | DeclarationSpec* DeclarationSpec 
+               ;
+
+   51       InitDeclarator/','*
+      167      : 
+      168      | InitDeclarator 
+      169      | InitDeclarator/','* ',' InitDeclarator 
+               ;
+
+   52       DeclarationSpec+
+      170      : DeclarationSpec 
+      171      | DeclarationSpec+ DeclarationSpec 
+               ;
+
+   53       InitDeclarator/','+
+      172      : InitDeclarator 
+      173      | InitDeclarator/','+ ',' InitDeclarator 
+               ;
+
+   54       Declaration*
+      174      : 
+      175      | Declaration* Declaration 
+               ;
+
+   55       StructDeclaration+
+      176      : StructDeclaration 
+      177      | StructDeclaration+ StructDeclaration 
+               ;
+
+   56       StructDeclarator/','+
+      178      : StructDeclarator 
+      179      | StructDeclarator/','+ ',' StructDeclarator 
+               ;
+
+   57       Enumerator/','+
+      180      : Enumerator 
+      181      | Enumerator/','+ ',' Enumerator 
+               ;
+
+   58       ConstExp?
+      182      : 
+      183      | ConstExp 
+               ;
+
+   59       TypeSpec*
+      184      : 
+      185      | TypeSpec* TypeSpec 
+               ;
+
+   60       ArgDecl/','+
+      186      : ArgDecl 
+      187      | ArgDecl/','+ ',' ArgDecl 
+               ;
+
+   61       AbsArgDecl/','+
+      188      : AbsArgDecl 
+      189      | AbsArgDecl/','+ ',' AbsArgDecl 
+               ;
+
+   62       Init/','+
+      190      : Init 
+      191      | Init/','+ ',' Init 
+               ;
+
+   63       ','?
+      192      : 
+      193      | ',' 
+               ;
+
+   64       Exp?
+      194      : 
+      195      | Exp 
+               ;
+
+   65       Stmt*
+      196      : 
+      197      | Stmt* Stmt 
+               ;
+
+   66       ('case' ConstExp ':' Stmt*)
+      198      : 'case' ConstExp ':' Stmt* 
+               ;
+
+   67       ('case' ConstExp ':' Stmt*)*
+      199      : 
+      200      | ('case' ConstExp ':' Stmt*)* ('case' ConstExp ':' Stmt*) 
+               ;
+
+   68       ('default' ':' Stmt*)?
+      201      : 
+      202      | 'default' ':' Stmt* 
+               ;
+
+   69       AssignExp/','*
+      203      : 
+      204      | AssignExp 
+      205      | AssignExp/','* ',' AssignExp 
+               ;
+
+/* End of C grammar 
+

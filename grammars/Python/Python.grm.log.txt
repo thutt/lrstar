@@ -15,9 +15,7 @@ N matrix      67 x  173 x 2 =    23,182 ->   6,092 +     910 =   7,002
 R matrix      23 x   16 x 2 =       664 ->     664 +     608 =   1,272  
 Total                                        7,707 +   2,571 =  10,278
 
-Generating: Python_Actions.h
 Generating: Python_Parser.h
-Generating: Python_Actions.cpp
 Generating: Python_Lexer.cpp
 Generating: Python_Main.cpp
 Generating: Python_Parser.cpp

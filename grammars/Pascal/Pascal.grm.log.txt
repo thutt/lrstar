@@ -15,9 +15,7 @@ N matrix      86 x  100 x 2 =    17,200 ->   6,480 +   1,067 =   7,547
 R matrix       3 x    5 x 2 =        24 ->      24 +     801 =     825  
 Total                                        8,440 +   3,583 =  12,023
 
-Generating: Pascal_Actions.h
 Generating: Pascal_Parser.h
-Generating: Pascal_Actions.cpp
 Generating: Pascal_Lexer.cpp
 Generating: Pascal_Main.cpp
 Generating: Pascal_Parser.cpp

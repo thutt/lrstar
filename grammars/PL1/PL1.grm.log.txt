@@ -15,9 +15,7 @@ N matrix     168 x  336 x 2 =   112,896 ->  24,802 +   4,264 =  29,066
 R matrix      11 x   13 x 2 =       242 ->     242 +   1,946 =   2,188  
 Total                                       30,420 +  10,328 =  40,748
 
-Generating: PL1_Actions.h
 Generating: PL1_Parser.h
-Generating: PL1_Actions.cpp
 Generating: PL1_Lexer.cpp
 Generating: PL1_Main.cpp
 Generating: PL1_Parser.cpp
@@ -40,5 +38,5 @@ Includes in LALR computation         6,594  inc  =  1,000,000    1%
 Child nodes in graph                 9,383  ch   =  1,000,000    1% 
 Nondeterministic/conflict items        434  nd   =  1,000,000    0% 
 
-0 min 0.116 sec, 32.007 MB, 0 warnings, 0 errors.
+0 min 0.114 sec, 32.007 MB, 0 warnings, 0 errors.
 

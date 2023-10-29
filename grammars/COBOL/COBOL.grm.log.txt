@@ -15,9 +15,7 @@ N matrix     119 x  343 x 2 =    81,634 ->  12,366 +   3,784 =  16,150
 R matrix      12 x   21 x 2 =       478 ->     478 +   2,125 =   2,603  
 Total                                       23,100 +  10,861 =  33,961
 
-Generating: COBOL_Actions.h
 Generating: COBOL_Parser.h
-Generating: COBOL_Actions.cpp
 Generating: COBOL_Lexer.cpp
 Generating: COBOL_Main.cpp
 Generating: COBOL_Parser.cpp
@@ -40,5 +38,5 @@ Includes in LALR computation         3,761  inc  =  1,000,000    0%
 Child nodes in graph                10,321  ch   =  1,000,000    1% 
 Nondeterministic/conflict items      1,556  nd   =  1,000,000    0% 
 
-0 min 0.059 sec, 31.985 MB, 0 warnings, 0 errors.
+0 min 0.058 sec, 31.985 MB, 0 warnings, 0 errors.
 

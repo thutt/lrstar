@@ -15,9 +15,7 @@ N matrix       6 x   15 x 1 =        90 ->      48 +     102 =     150
 R matrix       1 x    1 x 1 =         1 ->       1 +      70 =      71  
 Total                                          179 +     339 =     518
 
-Generating: YACC_Actions.h
 Generating: YACC_Parser.h
-Generating: YACC_Actions.cpp
 Generating: YACC_Lexer.cpp
 Generating: YACC_Main.cpp
 Generating: YACC_Parser.cpp

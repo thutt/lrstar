@@ -15,9 +15,7 @@ N matrix      56 x   60 x 2 =     6,720 ->   2,338 +     636 =   2,974
 R matrix      13 x   20 x 1 =       239 ->     239 +     481 =     720  
 Total                                        3,193 +   1,740 =   4,933
 
-Generating: Modula2_Actions.h
 Generating: Modula2_Parser.h
-Generating: Modula2_Actions.cpp
 Generating: Modula2_Lexer.cpp
 Generating: Modula2_Main.cpp
 Generating: Modula2_Parser.cpp

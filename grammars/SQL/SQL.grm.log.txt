@@ -15,9 +15,7 @@ N matrix      58 x  102 x 2 =    11,832 ->   1,962 +   1,463 =   3,425
 R matrix       4 x    8 x 2 =        56 ->      56 +   1,202 =   1,258  
 Total                                        4,900 +   5,207 =  10,107
 
-Generating: SQL_Actions.h
 Generating: SQL_Parser.h
-Generating: SQL_Actions.cpp
 Generating: SQL_Lexer.cpp
 Generating: SQL_Main.cpp
 Generating: SQL_Parser.cpp
@@ -40,5 +38,5 @@ Includes in LALR computation           606  inc  =  1,000,000    0%
 Child nodes in graph                   649  ch   =  1,000,000    0% 
 Nondeterministic/conflict items        274  nd   =  1,000,000    0% 
 
-0 min 0.018 sec, 31.550 MB, 0 warnings, 0 errors.
+0 min 0.019 sec, 31.550 MB, 0 warnings, 0 errors.
 

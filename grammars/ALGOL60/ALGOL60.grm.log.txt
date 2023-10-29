@@ -15,9 +15,7 @@ N matrix      70 x   36 x 2 =     5,040 ->   2,274 +     465 =   2,739
 R matrix       5 x    8 x 1 =        36 ->      36 +     353 =     389  
 Total                                        2,815 +   1,285 =   4,100
 
-Generating: ALGOL60_Actions.h
 Generating: ALGOL60_Parser.h
-Generating: ALGOL60_Actions.cpp
 Generating: ALGOL60_Lexer.cpp
 Generating: ALGOL60_Main.cpp
 Generating: ALGOL60_Parser.cpp

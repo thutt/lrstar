@@ -15,9 +15,7 @@ N matrix      29 x   76 x 2 =     4,408 ->   1,038 +     509 =   1,547
 R matrix       9 x   14 x 1 =       121 ->     121 +     339 =     460  
 Total                                        1,730 +   1,273 =   3,003
 
-Generating: ANTLR_Actions.h
 Generating: ANTLR_Parser.h
-Generating: ANTLR_Actions.cpp
 Generating: ANTLR_Lexer.cpp
 Generating: ANTLR_Main.cpp
 Generating: ANTLR_Parser.cpp
@@ -40,5 +38,5 @@ Includes in LALR computation           302  inc  =  1,000,000    0%
 Child nodes in graph                   352  ch   =  1,000,000    0% 
 Nondeterministic/conflict items         12  nd   =  1,000,000    0% 
 
-0 min 0.010 sec, 31.415 MB, 0 warnings, 0 errors.
+0 min 0.012 sec, 31.415 MB, 0 warnings, 0 errors.
 

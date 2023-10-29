@@ -15,9 +15,7 @@ N matrix      88 x   46 x 2 =     8,096 ->   6,364 +     787 =   7,151
 R matrix       1 x    1 x 1 =         1 ->       1 +     355 =     356  
 Total                                        9,238 +   2,463 =  11,701
 
-Generating: C11_Actions.h
 Generating: C11_Parser.h
-Generating: C11_Actions.cpp
 Generating: C11_Lexer.cpp
 Generating: C11_Main.cpp
 Generating: C11_Parser.cpp

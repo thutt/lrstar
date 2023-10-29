@@ -15,9 +15,7 @@ N matrix      53 x  313 x 2 =    33,178 ->   6,810 +   3,714 =  10,524
 R matrix      17 x   20 x 2 =       596 ->     596 +   1,716 =   2,312  
 Total                                       11,668 +   9,130 =  20,798
 
-Generating: Fortran_Actions.h
 Generating: Fortran_Parser.h
-Generating: Fortran_Actions.cpp
 Generating: Fortran_Lexer.cpp
 Generating: Fortran_Main.cpp
 Generating: Fortran_Parser.cpp
@@ -40,5 +38,5 @@ Includes in LALR computation         1,500  inc  =  1,000,000    0%
 Child nodes in graph                 2,001  ch   =  1,000,000    0% 
 Nondeterministic/conflict items        122  nd   =  1,000,000    0% 
 
-0 min 0.034 sec, 31.981 MB, 0 warnings, 0 errors.
+0 min 0.032 sec, 31.981 MB, 0 warnings, 0 errors.
 

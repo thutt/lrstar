@@ -1,0 +1,33 @@
+
+DFA 24.0.016 32b Copyright Paul B Mann.
+
+Calc.lgr 
+
+Grammar      690 rules, 256 terminals, 42 nonterminals.
+States      2348 states before converting to a DFA.
+              55 states in final DFA state machine.
+Conflicts      0 states, 0 shift-reduce, 0 reduce-reduce.
+
+            rows   cols          matrix       list      vect     total
+T matrix      42 x   34 x 1 =     1,428 ->   1,428 +     421 =   1,849 
+
+Generating: Calc_LexerTables.h
+Generating: Calc_LexerTables.hpp
+
+Symbols in the grammar                 299  sym  =    100,000    0% 
+Productions in the grammar             705  pro  =    100,000    1% 
+Tail symbols in the grammar            799  tail =    500,000    0% 
+States created                       2,348  sta  =    100,000    2% 
+Final state items                    2,336  fin  =    100,000    2% 
+Kernel state items                   2,393  ker  =  1,000,000    0% 
+Nonterminal transitions                 72  ntt  =  1,000,000    0% 
+Terminal transitions                 2,276  tt   =  1,000,000    0% 
+Terminal transitions added           2,314  tta  =  1,000,000    0% 
+Lookaheads in LALR computation         315  la   =  1,000,000    0% 
+Lookbacks in LALR computation        2,335  lb   =  1,000,000    0% 
+Includes in LALR computation            72  inc  =  1,000,000    0% 
+Child nodes in graph                 4,641  ch   =  1,000,000    0% 
+Nondeterministic/conflict items          0  nd   =  1,000,000    0% 
+
+0 min 0.030 sec, 26.923 MB, 0 warnings, 0 errors.
+

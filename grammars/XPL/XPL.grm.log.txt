@@ -15,9 +15,7 @@ N matrix      34 x   35 x 1 =     1,190 ->     580 +     303 =     883
 R matrix       1 x    1 x 1 =         1 ->       1 +     146 =     147  
 Total                                          843 +     790 =   1,633
 
-Generating: XPL_Actions.h
 Generating: XPL_Parser.h
-Generating: XPL_Actions.cpp
 Generating: XPL_Lexer.cpp
 Generating: XPL_Main.cpp
 Generating: XPL_Parser.cpp
@@ -40,5 +38,5 @@ Includes in LALR computation           395  inc  =  1,000,000    0%
 Child nodes in graph                   462  ch   =  1,000,000    0% 
 Nondeterministic/conflict items          0  nd   =  1,000,000    0% 
 
-0 min 0.011 sec, 31.347 MB, 0 warnings, 0 errors.
+0 min 0.013 sec, 31.347 MB, 0 warnings, 0 errors.
 

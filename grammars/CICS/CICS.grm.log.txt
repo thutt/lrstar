@@ -15,9 +15,7 @@ N matrix       2 x  368 x 2 =     1,472 ->   1,466 +   2,978 =   4,444
 R matrix       1 x    1 x 1 =         1 ->       1 +   1,552 =   1,553  
 Total                                        4,385 +   7,850 =  12,235
 
-Generating: CICS_Actions.h
 Generating: CICS_Parser.h
-Generating: CICS_Actions.cpp
 Generating: CICS_Lexer.cpp
 Generating: CICS_Main.cpp
 Generating: CICS_Parser.cpp
@@ -40,5 +38,5 @@ Includes in LALR computation           407  inc  =  1,000,000    0%
 Child nodes in graph                   164  ch   =  1,000,000    0% 
 Nondeterministic/conflict items          0  nd   =  1,000,000    0% 
 
-0 min 0.022 sec, 31.765 MB, 3 WARNINGS, 0 errors.
+0 min 0.023 sec, 31.765 MB, 3 WARNINGS, 0 errors.
 

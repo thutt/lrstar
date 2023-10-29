@@ -15,9 +15,7 @@ N matrix     265 x   80 x 2 =    42,400 ->  31,528 +   2,045 =  33,573
 R matrix      48 x   18 x 2 =     1,668 ->   1,668 +   1,505 =   3,173  
 Total                                       46,549 +   6,663 =  53,212
 
-Generating: CPP5_Actions.h
 Generating: CPP5_Parser.h
-Generating: CPP5_Actions.cpp
 Generating: CPP5_Lexer.cpp
 Generating: CPP5_Main.cpp
 Generating: CPP5_Parser.cpp
@@ -40,5 +38,5 @@ Includes in LALR computation         9,366  inc  =  1,000,000    1%
 Child nodes in graph                18,777  ch   =  1,000,000    2% 
 Nondeterministic/conflict items         84  nd   =  1,000,000    0% 
 
-0 min 0.094 sec, 31.642 MB, 0 warnings, 0 errors.
+0 min 0.093 sec, 31.642 MB, 0 warnings, 0 errors.
 

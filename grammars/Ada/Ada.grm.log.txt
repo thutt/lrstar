@@ -15,9 +15,7 @@ N matrix     102 x   97 x 2 =    19,788 ->   9,472 +   1,342 =  10,814
 R matrix      19 x   21 x 2 =       748 ->     748 +   1,021 =   1,769  
 Total                                       12,747 +   4,498 =  17,245
 
-Generating: Ada_Actions.h
 Generating: Ada_Parser.h
-Generating: Ada_Actions.cpp
 Generating: Ada_Lexer.cpp
 Generating: Ada_Main.cpp
 Generating: Ada_Parser.cpp
@@ -40,5 +38,5 @@ Includes in LALR computation         2,013  inc  =  1,000,000    0%
 Child nodes in graph                 2,779  ch   =  1,000,000    0% 
 Nondeterministic/conflict items        114  nd   =  1,000,000    0% 
 
-0 min 0.026 sec, 31.535 MB, 0 warnings, 0 errors.
+0 min 0.024 sec, 31.535 MB, 0 warnings, 0 errors.
 

@@ -15,9 +15,7 @@ N matrix      62 x  146 x 2 =    18,104 ->   2,188 +   1,888 =   4,076
 R matrix       3 x    5 x 2 =        26 ->      26 +   1,550 =   1,576  
 Total                                        6,991 +   6,818 =  13,809
 
-Generating: Dbase_Actions.h
 Generating: Dbase_Parser.h
-Generating: Dbase_Actions.cpp
 Generating: Dbase_Lexer.cpp
 Generating: Dbase_Main.cpp
 Generating: Dbase_Parser.cpp
