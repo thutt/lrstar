@@ -29,11 +29,7 @@ int      PG_Parser::N_nodes;
 int      PG_Parser::N_tacts;  // token actions.
 int      PG_Parser::N_nacts;
 int      PG_Parser::N_ints;
-#ifdef TRIAL
-uchar    PG_Parser::N_prods;
-#else
 int      PG_Parser::N_prods;
-#endif
 int      PG_Parser::N_semantics;
 const char**   PG_Parser::Str_start;
 int*     PG_Parser::f_eri;

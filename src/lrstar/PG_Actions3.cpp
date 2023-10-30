@@ -157,13 +157,6 @@ int   PG_NodeActions::prod_ (void* v)
          priority = 0;
          break;
       case BOTTOM_UP:
-#ifdef TRIAL
-         if (N_prods == 255)
-         {
-            prt_error ("Number of expanded rules exceeds 255 in trial version (2)", 0, 0, 0);
-            Quit();
-         }
-#endif
          prod_line[N_prods++] = np->line;
          break;
       }
@@ -819,13 +812,6 @@ void  PG_NodeActions::make_prod (int terminal)
    np->child  = NULL;
    lastsection = np;
    lasttail   = NULL;
-#ifdef TRIAL
-   if (N_prods == 255)
-   {
-      prt_error ("Number of expanded rules exceeds 255 in trial version (1)", 0, 0, 0);
-      Quit();
-   }
-#endif
    N_prods++;
 }
 

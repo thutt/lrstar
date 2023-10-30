@@ -5,11 +5,8 @@
 #include "PG_Main.h"
 
 const char* program = "LRSTAR";
-#ifdef TRIAL
-const char* version = "24.0.017T";
-#else
 const char* version = "24.0.017";
-#endif
+
 #ifdef x64
 const char* bits    = "64b";
 #else

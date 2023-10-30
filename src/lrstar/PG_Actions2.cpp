@@ -209,14 +209,6 @@ int   PG_ParseActions::prod_(int p)
    production_length = 0;
    nodename_sti = 0;
    N_prods++;
-#ifdef TRIAL
-   if (N_prods > 200)
-   {
-      int x = argx[p];
-      prt_error ("Number of rules exceeds 200 in trial version", PS[x].start, PS[x].end, PS[x].line);
-      Quit();
-   }
-#endif
    return 0;
 }
 

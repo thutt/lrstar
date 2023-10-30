@@ -49,11 +49,7 @@ public:
    static int     N_tacts;       // terminal actions.
    static int     N_nacts;       // node actions.
    static int     N_ints;
-#ifdef TRIAL
-   static uchar   N_prods;
-#else
    static int     N_prods;
-#endif
    static int     N_semantics;
    static const char**  Str_start;
    static int*    f_eri;
