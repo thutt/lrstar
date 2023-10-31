@@ -194,6 +194,7 @@ function lrstar-show-config ()
     echo "LRSTAR_ARCHITECTURE : '${LRSTAR_ARCHITECTURE}'";
     echo "LRSTAR_BUILD_OPTIONS: '${LRSTAR_BUILD_OPTIONS}'";
     echo "LRSTAR_BUILD_DIR    : '${LRSTAR_BUILD_DIR}'";
+    echo "LRSTAR_BUILD_TYPE   : '${LRSTAR_BUILD_TYPE}'";
     echo "";
     echo "Build types         : ${LRSTAR_BUILD_TYPE_VALID[*]}";
     echo "Build options       : ${LRSTAR_BUILD_OPTIONS_VALID[*]}";

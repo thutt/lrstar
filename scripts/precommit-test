@@ -72,7 +72,7 @@ function process ()
         rm -f "${grm_dir}/*.o";
         make \
             -C "${grm_dir}" \
-            LRSTAR_INSTALL_ROOT=/tmp/lrstar/release/usr/local
+            LRSTAR_INSTALL_ROOT=/tmp/lrstar/${LRSTAR_BUILD_TYPE}/usr/local
     fi;
 }
 
