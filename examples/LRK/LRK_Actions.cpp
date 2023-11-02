@@ -35,11 +35,11 @@ int   TERM_ACTIONS::error (int& t)
    return 0;
 }
 
-int   TERM_ACTIONS::lookup (int& t)          // Lookup in symbol table.
+int   TERM_ACTIONS::lookup (int& t)       // Lookup in symbol table.
 {
    int sti;
 #ifdef ND_PARSING
-   if (lookahead.start > 0)               // In lookahead mode?
+   if (lookahead.start != 0)              // In lookahead mode?
    {
       sti = add_symbol (t, lookahead.start, lookahead.end);
    }
