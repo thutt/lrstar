@@ -158,7 +158,7 @@ int   main (int na, char **arg)
    printf ("%10s lines per second.\n",         number (nlps));
    printf ("%6d.%03d seconds.\n",              sec, thou);
 
-   quit (rc);
+   quit (0);
    return 0;
 }
 
