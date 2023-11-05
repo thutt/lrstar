@@ -302,9 +302,9 @@ void  PG_Main::GenerateParserTables ()
 
    // Head numbers for the productions ...
    vartype = get_typestr (head_sym, N_prods);
-   fprintf (header, "         static %-6s head_numb[%6d]; // Head symbol number for a production.\n", vartype, N_prods);
+   fprintf (header, "         static const %-6s head_numb[%6d]; // Head symbol number for a production.\n", vartype, N_prods);
    fprintf (tables, "   // Head symbol numbers for the productions ...\n");
-   fprintf (tables, "      %s %s%s::head_numb[%d] = \n", vartype, gfn, name, N_prods);
+   fprintf (tables, "      const %s %s%s::head_numb[%d] = \n", vartype, gfn, name, N_prods);
    fprintf (tables, "      {");
    for (int i = 0; i < N_prods; i++)
    {
@@ -319,9 +319,9 @@ void  PG_Main::GenerateParserTables ()
 
    // Index to first tail symbol for a production ...
    vartype = get_typestr (F_tail, N_prods+1);
-   fprintf (header, "         static %-6s f_tail   [%6d]; // First tail in a production.\n", vartype, N_prods + 1);
+   fprintf (header, "         static const %-6s f_tail   [%6d]; // First tail in a production.\n", vartype, N_prods + 1);
    fprintf (tables, "   // First tail symbol index into the tail list ...\n");
-   fprintf (tables, "      %s %s%s::f_tail[%d] = \n", vartype, gfn, name, N_prods+1);
+   fprintf (tables, "      const %s %s%s::f_tail[%d] = \n", vartype, gfn, name, N_prods+1);
    fprintf (tables, "      {");
    for (int i = 0; i < N_prods+1; i++)
    {
@@ -336,9 +336,9 @@ void  PG_Main::GenerateParserTables ()
 
    // Tail symbol numbers ...
    vartype = get_typestr (Tail, N_tails);
-   fprintf (header, "         static %-6s tail     [%6d]; // Tail symbol number.\n", vartype, N_tails);
+   fprintf (header, "         static const %-6s tail     [%6d]; // Tail symbol number.\n", vartype, N_tails);
    fprintf (tables, "   // Tail symbol numbers ...\n");
-   fprintf (tables, "      %s %s%s::tail[%d] = \n", vartype, gfn, name, N_tails);
+   fprintf (tables, "      const %s %s%s::tail[%d] = \n", vartype, gfn, name, N_tails);
    fprintf (tables, "      {");
    for (int i = 0; i < N_tails; i++)
    {
@@ -363,9 +363,9 @@ void  PG_Main::GenerateParserTables ()
             Arga[i] = -1;
       }
       vartype = get_typestr (Arga, N_terms);
-      fprintf (header, "         static %-6s arga     [%6d]; // Arguments for terminal actions.\n", vartype, N_terms);
+      fprintf (header, "         static const %-6s arga     [%6d]; // Arguments for terminal actions.\n", vartype, N_terms);
       fprintf (tables, "   // Arguments for token actions ...\n");
-      fprintf (tables, "      %s %s%s::arga[%d] = \n", vartype, gfn, name, N_terms);
+      fprintf (tables, "      const %s %s%s::arga[%d] = \n", vartype, gfn, name, N_terms);
       fprintf (tables, "      {");
       for (int i = 0; i < N_terms; i++)
       {
@@ -441,9 +441,9 @@ void  PG_Main::GenerateParserTables ()
    {
       // B_matrix ...
       fprintf (header, "         private:\n");
-      fprintf (header, "         static uchar  Bm[%6d]       ; // Boolean matrix.\n", B_size);
+      fprintf (header, "         static const uchar  Bm[%6d]       ; // Boolean matrix.\n", B_size);
       fprintf (tables, "   // Boolean matrix ...\n");
-      fprintf (tables, "      uchar %s%s::Bm[%d] = \n", gfn, name, B_size);
+      fprintf (tables, "      const uchar %s%s::Bm[%d] = \n", gfn, name, B_size);
       fprintf (tables, "      {");
       if (optn[PG_BOOLMATRIX] == 1) // char
       {
@@ -475,9 +475,9 @@ void  PG_Main::GenerateParserTables ()
 
       // B_matrix row ...
       vartype = get_typestr (B_row, N_states);
-      fprintf (header, "         static %-6s Br[%6d]       ; // Boolean matrix row.\n", vartype, N_states);
-      fprintf (tables, "   // Booeal matrix row (for state)...\n");
-      fprintf (tables, "      %s %s%s::Br[%d] = \n", vartype, gfn, name, N_states);
+      fprintf (header, "         static const %-6s Br[%6d]       ; // Boolean matrix row.\n", vartype, N_states);
+      fprintf (tables, "   // Boolean matrix row (for state)...\n");
+      fprintf (tables, "      const %s %s%s::Br[%d] = \n", vartype, gfn, name, N_states);
       fprintf (tables, "      {");
       for (int i = 0; i < N_states; i++)
       {
@@ -492,9 +492,9 @@ void  PG_Main::GenerateParserTables ()
 
       // B_matrix column ...
       vartype = get_typestr (B_col, N_terms);
-      fprintf (header, "         static %-6s Bc[%6d]       ; // Boolean matrix column.\n", vartype, N_terms);
-      fprintf (tables, "   // Booolean matrix column (displacement) ...\n");
-      fprintf (tables, "      %s %s%s::Bc[%d] = \n", vartype, gfn, name, N_terms);
+      fprintf (header, "         static const %-6s Bc[%6d]       ; // Boolean matrix column.\n", vartype, N_terms);
+      fprintf (tables, "   // Boolean matrix column (displacement) ...\n");
+      fprintf (tables, "      const %s %s%s::Bc[%d] = \n", vartype, gfn, name, N_terms);
       fprintf (tables, "      {");
       for (int i = 0; i < N_terms; i++)
       {
@@ -510,9 +510,9 @@ void  PG_Main::GenerateParserTables ()
       if (optn[PG_BOOLMATRIX] > 1)
       {
          // B_matrix mask ...
-         fprintf (header, "         static uchar  Bf[%6d]       ; // Boolean matrix filter/mask.\n", N_terms);
+         fprintf (header, "         static const uchar Bf[%6d]       ; // Boolean matrix filter/mask.\n", N_terms);
          fprintf (tables, "   // Boolean matrix filter/mask value ...\n");
-         fprintf (tables, "      uchar %s%s::Bf[%d] = \n", gfn, name, N_terms);
+         fprintf (tables, "      const uchar %s%s::Bf[%d] = \n", gfn, name, N_terms);
          fprintf (tables, "      {");
          for (int i = 0; i < N_terms; i++)
          {
@@ -529,9 +529,9 @@ void  PG_Main::GenerateParserTables ()
 
    // T_matrix ...
    vartype = get_typestr (T_matrix, T_size);
-   fprintf (header, "         static %-6s Tm[%6d]       ; // Terminal transition matrix.\n", vartype, T_size);
+   fprintf (header, "         static const %-6s Tm[%6d]       ; // Terminal transition matrix.\n", vartype, T_size);
    fprintf (tables, "   // Terminal transition matrix ...\n");
-   fprintf (tables, "      %s %s%s::Tm[%d] = \n", vartype, gfn, name, T_size);
+   fprintf (tables, "      const %s %s%s::Tm[%d] = \n", vartype, gfn, name, T_size);
    fprintf (tables, "      {");
    for (int i = 0; i < T_size; i++)
    {
@@ -546,9 +546,9 @@ void  PG_Main::GenerateParserTables ()
 
    // T_matrix row ...
    vartype = get_typestr (T_row, tt_states);
-   fprintf (header, "         static %-6s Tr[%6d]       ; // Terminal transition matrix row.\n", vartype, tt_states);
+   fprintf (header, "         static const %-6s Tr[%6d]       ; // Terminal transition matrix row.\n", vartype, tt_states);
    fprintf (tables, "   // Terminal transition matrix row ...\n");
-   fprintf (tables, "      %s %s%s::Tr[%d] = \n", vartype, gfn, name, tt_states);
+   fprintf (tables, "      const %s %s%s::Tr[%d] = \n", vartype, gfn, name, tt_states);
    fprintf (tables, "      {");
    for (int i = 0; i < tt_states; i++)
    {
@@ -563,9 +563,9 @@ void  PG_Main::GenerateParserTables ()
 
    // T_matrix column ...
    vartype = get_typestr (T_col, N_terms);
-   fprintf (header, "         static %-6s Tc[%6d]       ; // Terminal transition matrix column.\n", vartype, N_terms);
+   fprintf (header, "         static const %-6s Tc[%6d]       ; // Terminal transition matrix column.\n", vartype, N_terms);
    fprintf (tables, "   // Terminal transition matrix column ...\n");
-   fprintf (tables, "      %s %s%s::Tc[%d] = \n", vartype, gfn, name, N_terms);
+   fprintf (tables, "      const %s %s%s::Tc[%d] = \n", vartype, gfn, name, N_terms);
    fprintf (tables, "      {");
    for (int i = 0; i < N_terms; i++)
    {
@@ -580,9 +580,9 @@ void  PG_Main::GenerateParserTables ()
 
    // N_matrix ...
    vartype = get_typestr (N_matrix, N_size);
-   fprintf (header, "         static %-6s Nm[%6d]       ; // Nonterminal transition matrix.\n", vartype, N_size);
+   fprintf (header, "         static const %-6s Nm[%6d]       ; // Nonterminal transition matrix.\n", vartype, N_size);
    fprintf (tables, "   // Nonterminal transition matrix ...\n");
-   fprintf (tables, "      %s %s%s::Nm[%d] = \n", vartype, gfn, name, N_size);
+   fprintf (tables, "      const %s %s%s::Nm[%d] = \n", vartype, gfn, name, N_size);
    fprintf (tables, "      {");
    for (int i = 0; i < N_size; i++)
    {
@@ -597,9 +597,9 @@ void  PG_Main::GenerateParserTables ()
 
    // N_matrix row ...
    vartype = get_typestr (N_row, ntt_states);
-   fprintf (header, "         static %-6s Nr[%6d]       ; // Nonterminal transition matrix row.\n", vartype, ntt_states);
+   fprintf (header, "         static const %-6s Nr[%6d]       ; // Nonterminal transition matrix row.\n", vartype, ntt_states);
    fprintf (tables, "   // Nonterminal transition matrix row ...\n");
-   fprintf (tables, "      %s %s%s::Nr[%d] = \n", vartype, gfn, name, ntt_states);
+   fprintf (tables, "      const %s %s%s::Nr[%d] = \n", vartype, gfn, name, ntt_states);
    fprintf (tables, "      {");
    for (int i = 0; i < ntt_states; i++)
    {
@@ -614,9 +614,9 @@ void  PG_Main::GenerateParserTables ()
 
    // N_matrix column ...
    vartype = get_typestr (N_col, N_prods);
-   fprintf (header, "         static %-6s Nc[%6d]       ; // Nonterminal transition matrix column.\n", vartype, N_prods);
+   fprintf (header, "         static const %-6s Nc[%6d]       ; // Nonterminal transition matrix column.\n", vartype, N_prods);
    fprintf (tables, "   // Nonterminal transition matrix column ...\n");
-   fprintf (tables, "      %s %s%s::Nc[%d] = \n", vartype, gfn, name, N_prods);
+   fprintf (tables, "      const %s %s%s::Nc[%d] = \n", vartype, gfn, name, N_prods);
    fprintf (tables, "      {");
    for (int i = 0; i < N_prods; i++)
    {
@@ -631,9 +631,9 @@ void  PG_Main::GenerateParserTables ()
 
    // R_matrix ...
    vartype = get_typestr (R_matrix, R_size);
-   fprintf (header, "         static %-6s Rm[%6d]       ; // Reduction matrix.\n", vartype, R_size);
+   fprintf (header, "         static const %-6s Rm[%6d]       ; // Reduction matrix.\n", vartype, R_size);
    fprintf (tables, "   // Reduction matrix ...\n");
-   fprintf (tables, "      %s %s%s::Rm[%d] = \n", vartype, gfn, name, R_size);
+   fprintf (tables, "      const %s %s%s::Rm[%d] = \n", vartype, gfn, name, R_size);
    fprintf (tables, "      {");
    for (int i = 0; i < R_size; i++)
    {
@@ -648,9 +648,9 @@ void  PG_Main::GenerateParserTables ()
 
    // R_matrix row ...
    vartype = get_typestr (R_row, N_states);
-   fprintf (header, "         static %-6s Rr[%6d]       ; // Reduction matrix row.\n", vartype, N_states);
+   fprintf (header, "         static const %-6s Rr[%6d]       ; // Reduction matrix row.\n", vartype, N_states);
    fprintf (tables, "   // Reduction matrix row ...\n");
-   fprintf (tables, "      %s %s%s::Rr[%d] = \n", vartype, gfn, name, N_states);
+   fprintf (tables, "      const %s %s%s::Rr[%d] = \n", vartype, gfn, name, N_states);
    fprintf (tables, "      {");
    for (int i = 0; i < N_states; i++)
    {
@@ -665,9 +665,9 @@ void  PG_Main::GenerateParserTables ()
 
    // R_matrix column ...
    vartype = get_typestr (R_col, N_terms);
-   fprintf (header, "         static %-6s Rc[%6d]       ; // Reduction matrix column.\n", vartype, N_terms);
+   fprintf (header, "         static const %-6s Rc[%6d]       ; // Reduction matrix column.\n", vartype, N_terms);
    fprintf (tables, "   // Reduction matrix column ...\n");
-   fprintf (tables, "      %s %s%s::Rc[%d] = \n", vartype, gfn, name, N_terms);
+   fprintf (tables, "      const %s %s%s::Rc[%d] = \n", vartype, gfn, name, N_terms);
    fprintf (tables, "      {");
    for (int i = 0; i < N_terms; i++)
    {
@@ -682,9 +682,9 @@ void  PG_Main::GenerateParserTables ()
 
    // Production length - 1 ...
    vartype = get_typestr (prod_len, N_prods);
-   fprintf (header, "         static %-6s PL[%6d]       ; // Production length minus one.\n", vartype, N_prods);
+   fprintf (header, "         static const %-6s PL[%6d]       ; // Production length minus one.\n", vartype, N_prods);
    fprintf (tables, "   // Production lengths (minus one) ...\n");
-   fprintf (tables, "      %s %s%s::PL[%d] = \n", vartype, gfn, name, N_prods);
+   fprintf (tables, "      const %s %s%s::PL[%d] = \n", vartype, gfn, name, N_prods);
    fprintf (tables, "      {");
    for (int i = 0; i < N_prods; i++)
    {
@@ -705,9 +705,9 @@ void  PG_Main::GenerateParserTables ()
       // Nondeterministic Items (terminals) in a state ...
       count = N_states + 1;
       vartype = get_typestr (nd_item, count);
-      fprintf (header, "         static %-6s nd_fterm  [%5d]; // ND: first terminal in the list.\n", vartype, count);
+      fprintf (header, "         static const %-6s nd_fterm  [%5d]; // ND: first terminal in the list.\n", vartype, count);
       fprintf (tables, "   // Nondeterministic first terminal in the list ...\n");
-      fprintf (tables, "      %s %s%s::nd_fterm[%d] = \n", vartype, gfn, name, count);
+      fprintf (tables, "      const %s %s%s::nd_fterm[%d] = \n", vartype, gfn, name, count);
       fprintf (tables, "      {");
       for (int i = 0; i < count; i++)
       {
@@ -723,9 +723,9 @@ void  PG_Main::GenerateParserTables ()
       // Nondeterministic Terminal List ...
       count = n_ndterms;
       vartype = get_typestr (nd_term, count);
-      fprintf (header, "         static %-6s nd_term   [%5d]; // ND: terminal list. \n", vartype, count);
+      fprintf (header, "         static const %-6s nd_term   [%5d]; // ND: terminal list. \n", vartype, count);
       fprintf (tables, "   // Nondeterministic terminal list ...\n");
-      fprintf (tables, "      %s %s%s::nd_term[%d] = \n", vartype, gfn, name, count);
+      fprintf (tables, "      const %s %s%s::nd_term[%d] = \n", vartype, gfn, name, count);
       fprintf (tables, "      {");
       for (int i = 0; i < count; i++)
       {
@@ -741,11 +741,11 @@ void  PG_Main::GenerateParserTables ()
       // Nondeterministic Start of a terminal's actions for state ...
       count = n_ndterms + 1;
       vartype = get_typestr (nd_start, count);
-      fprintf (header, "         static %-6s nd_faction[%5d]; // ND: first action in the list.\n", vartype, count);
+      fprintf (header, "         static const %-6s nd_faction[%5d]; // ND: first action in the list.\n", vartype, count);
       fprintf (tables, "   // Nondeterministic first action in the list ...\n");
       count = n_ndterms+1;
       vartype = get_typestr (nd_start, count);
-      fprintf (tables, "      %s %s%s::nd_faction[%d] = \n", vartype, gfn, name, count);
+      fprintf (tables, "      const %s %s%s::nd_faction[%d] = \n", vartype, gfn, name, count);
       fprintf (tables, "      {");
       for (int i = 0; i < count; i++)
       {
@@ -761,9 +761,9 @@ void  PG_Main::GenerateParserTables ()
       // Nondeterministic Action ...
       count = n_nditems;
       vartype = get_typestr (nd_action, count);
-      fprintf (header, "         static %-6s nd_action [%5d]; // ND: action list.\n", vartype, count);
+      fprintf (header, "         static const %-6s nd_action [%5d]; // ND: action list.\n", vartype, count);
       fprintf (tables, "   // Nondeterministic actions list ...\n");
-      fprintf (tables, "      %s %s%s::nd_action[%d] = \n", vartype, gfn, name, count);
+      fprintf (tables, "      const %s %s%s::nd_action[%d] = \n", vartype, gfn, name, count);
       fprintf (tables, "      {");
       for (int i = 0; i < count; i++)
       {
@@ -784,9 +784,9 @@ void  PG_Main::GenerateParserTables ()
       fprintf (header, "\n");
       // Token Action numbers ...
       vartype = get_typestr (Tact_numb, N_terms);
-      fprintf (header, "         static %-6s tact_numb[%6d]; // Terminal action numbers.\n", vartype, N_terms);
+      fprintf (header, "         static const %-6s tact_numb[%6d]; // Terminal action numbers.\n", vartype, N_terms);
       fprintf (tables, "   // Terminal action number ...\n");
-      fprintf (tables, "      %s %s%s::tact_numb[%d] = \n", vartype, gfn, name, N_terms);
+      fprintf (tables, "      const %s %s%s::tact_numb[%d] = \n", vartype, gfn, name, N_terms);
       fprintf (tables, "      {");
       for (int i = 0; i < N_terms; i++)
       {
@@ -805,9 +805,9 @@ void  PG_Main::GenerateParserTables ()
       if (newline == 0) { fprintf (header, "\n"); newline = 1; }
       // Node Number for each production ...
       vartype = get_typestr (Node_numb, N_prods);
-      fprintf (header, "         static %-6s node_numb[%6d]; // Node numbers for the productions.\n", vartype, N_prods);
+      fprintf (header, "         static const %-6s node_numb[%6d]; // Node numbers for the productions.\n", vartype, N_prods);
       fprintf (tables, "   // Node number for each production ...\n");
-      fprintf (tables, "      %s %s%s::node_numb[%d] = \n", vartype, gfn, name, N_prods);
+      fprintf (tables, "      const %s %s%s::node_numb[%d] = \n", vartype, gfn, name, N_prods);
       fprintf (tables, "      {");
       for (int i = 0; i < N_prods; i++)
       {
@@ -824,9 +824,9 @@ void  PG_Main::GenerateParserTables ()
       {
          // Node Action numbers ...
          vartype = get_typestr (Nact_numb, N_prods);
-         fprintf (header, "         static %-6s nact_numb[%6d]; // Node action numbers for the productions.\n", vartype, N_prods);
+         fprintf (header, "         static const %-6s nact_numb[%6d]; // Node action numbers for the productions.\n", vartype, N_prods);
          fprintf (tables, "   // Node action numbers ...\n");
-         fprintf (tables, "      %s %s%s::nact_numb[%d] = \n", vartype, gfn, name, N_prods);
+         fprintf (tables, "      const %s %s%s::nact_numb[%d] = \n", vartype, gfn, name, N_prods);
          fprintf (tables, "      {");
          for (int i = 0; i < N_prods; i++)
          {
@@ -843,9 +843,9 @@ void  PG_Main::GenerateParserTables ()
       if (N_reverses > 0)
       {
          // Reverse the order of nodes (for a production/rule) ...
-         fprintf (header, "         static uchar  reverse  [%6d]; // Reverse the child nodes.\n", N_prods);
+         fprintf (header, "         static const uchar  reverse  [%6d]; // Reverse the child nodes.\n", N_prods);
          fprintf (tables, "   // Reverse the order of nodes ...\n");
-         fprintf (tables, "      uchar %s%s::reverse[%d] = \n", gfn, name, N_prods);
+         fprintf (tables, "      const uchar %s%s::reverse[%d] = \n", gfn, name, N_prods);
          fprintf (tables, "      {");
          for (int i = 0; i < N_prods; i++)
          {

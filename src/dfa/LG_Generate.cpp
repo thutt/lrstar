@@ -127,9 +127,9 @@ void  LG::GenerateLexerDefines ()
 
    // T_matrix ...
    vartype = get_typestr (T_matrix, T_size);
-   fprintf (header, "      static %-6s Tm[%6d]        ; // Terminal transition matrix.\n", vartype, T_size);
+   fprintf (header, "      static const %-6s Tm[%6d]        ; // Terminal transition matrix.\n", vartype, T_size);
    fprintf (tables, "   // Terminal transition matrix ...\n");
-   fprintf (tables, "      static %s Tm[%d] = \n", vartype,T_size);
+   fprintf (tables, "      static const %s Tm[%d] = \n", vartype,T_size);
    fprintf (tables, "      {");
    for (int i = 0; i < T_size; i++)
    {
@@ -153,9 +153,9 @@ void  LG::GenerateLexerDefines ()
    if (optn[LG_TABL_MEDIUM])
    {
       vartype = get_typestr (T_row, tt_states);
-      fprintf (header, "      static %-6s Tr[%6d]        ; // Terminal transition matrix row.\n", vartype, tt_states);
+      fprintf (header, "      static const %-6s Tr[%6d]        ; // Terminal transition matrix row.\n", vartype, tt_states);
       fprintf (tables, "   // Terminal transition matrix row ...\n");
-      fprintf (tables, "      static %s Tr[%d] = \n", vartype, tt_states);
+      fprintf (tables, "      static const %s Tr[%d] = \n", vartype, tt_states);
       fprintf (tables, "      {");
       for (int i = 0; i < tt_states; i++)
       {
@@ -173,9 +173,9 @@ void  LG::GenerateLexerDefines ()
    if (optn[LG_TABL_MEDIUM])
    {
       vartype = get_typestr (T_col, N_terms);
-      fprintf (header, "      static %-6s Tc[%6d]        ; // Terminal transition matrix column.\n", vartype, N_terms);
+      fprintf (header, "      static const %-6s Tc[%6d]        ; // Terminal transition matrix column.\n", vartype, N_terms);
       fprintf (tables, "   // Terminal transition matrix column ...\n");
-      fprintf (tables, "      static %s Tc[%d] = \n", vartype, N_terms);
+      fprintf (tables, "      static const %s Tc[%d] = \n", vartype, N_terms);
       fprintf (tables, "      {");
       for (int i = 0; i < N_terms; i++)
       {
@@ -193,9 +193,9 @@ void  LG::GenerateLexerDefines ()
    if (optn[LG_TABL_MEDIUM])
    {
       vartype = get_typestr (D_red, N_states);
-      fprintf (header, "      static %-6s term_numb[%6d] ; // Terminal number.\n", vartype, N_states);
+      fprintf (header, "      static const %-6s term_numb[%6d] ; // Terminal number.\n", vartype, N_states);
       fprintf (tables, "   // Terminal number ...\n");
-      fprintf (tables, "      static %s term_numb[%d] = \n", vartype, N_states);
+      fprintf (tables, "      static const %s term_numb[%d] = \n", vartype, N_states);
       fprintf (tables, "      {");
       for (int i = 0; i < N_states; i++)
       {
