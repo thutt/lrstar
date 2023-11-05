@@ -490,7 +490,7 @@
           0,    0,    0,    4,    0,    0,    1,    0,    0,    8,    0,    0,    0,    0,    0,    0
       };
 
-   // Booeal matrix row (for state)...
+   // Boolean matrix row (for state)...
       const ushort SQL_ParserTables::Br[532] = 
       {
          11,   22,   33,   44,   51,   57,   68,   79,   85,   92,  103,  103,  114,  114,  125,  114,  134,   11,  145,  114,
@@ -522,7 +522,7 @@
         114,  609,   79,    0,  520,   79,  432,  704,  671,  108,   79,    0
       };
 
-   // Booolean matrix column (displacement) ...
+   // Boolean matrix column (displacement) ...
       const uchar SQL_ParserTables::Bc[138] = 
       {
           0,    0,    0,    0,    0,    0,    0,    0,    1,    0,    0,    1,    1,    1,    1,    1,    1,    1,    0,    2,

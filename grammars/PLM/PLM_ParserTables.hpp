@@ -342,7 +342,7 @@
          68,    0,    4,   64,    0,    0,    0,    0,   32,    0
       };
 
-   // Booeal matrix row (for state)...
+   // Boolean matrix row (for state)...
       const uchar PLM_ParserTables::Br[148] = 
       {
           4,    9,    4,   11,   16,   21,   25,   28,   10,   28,   33,   38,   38,   38,   38,    0,   43,    0,    0,    0,
@@ -355,7 +355,7 @@
         119,    7,  166,    7,    0,    7,   16,    0
       };
 
-   // Booolean matrix column (displacement) ...
+   // Boolean matrix column (displacement) ...
       const uchar PLM_ParserTables::Bc[70] = 
       {
           0,    0,    0,    0,    0,    0,    0,    0,    1,    1,    1,    1,    0,    1,    1,    1,    1,    0,    1,    1,

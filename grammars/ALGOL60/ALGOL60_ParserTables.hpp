@@ -224,7 +224,7 @@
         224,    6,    0,    4,    0,    1,    0,    0,    0,   64,    2,    0,    4,    2,    0,    0,    0,    4,    0
       };
 
-   // Booeal matrix row (for state)...
+   // Boolean matrix row (for state)...
       const uchar ALGOL60_ParserTables::Br[148] = 
       {
           4,    9,    7,    4,   11,   15,   15,   19,   24,   29,   33,   37,   40,   44,   37,   48,    0,   51,   56,   58,
@@ -237,7 +237,7 @@
          56,   67,  151,   67,  154,  151,   24,    0
       };
 
-   // Booolean matrix column (displacement) ...
+   // Boolean matrix column (displacement) ...
       const uchar ALGOL60_ParserTables::Bc[57] = 
       {
           0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    1,    1,    1,    1,    1,    1,    1,    1,    1,    1,

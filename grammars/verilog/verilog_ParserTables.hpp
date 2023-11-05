@@ -611,7 +611,7 @@
           0,    0,    0,    0,    0
       };
 
-   // Booeal matrix row (for state)...
+   // Boolean matrix row (for state)...
       const ushort verilog_ParserTables::Br[569] = 
       {
           0,    9,   16,   16,   16,   23,   23,   23,   30,   37,   44,   16,   44,    0,   43,   16,   16,    0,    0,    0,
@@ -645,7 +645,7 @@
          59,   44,   44,   44,   59,   44,   44,    7,    0
       };
 
-   // Booolean matrix column (displacement) ...
+   // Boolean matrix column (displacement) ...
       const uchar verilog_ParserTables::Bc[177] = 
       {
           0,    0,    0,    0,    0,    0,    0,    0,    1,    1,    1,    1,    1,    1,    0,    1,    1,    1,    0,    1,

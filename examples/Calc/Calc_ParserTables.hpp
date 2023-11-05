@@ -136,14 +136,14 @@
          16,  224,   64,  224,    0,  192,    0,  128,    0,    0
       };
 
-   // Booeal matrix row (for state)...
+   // Boolean matrix row (for state)...
       const uchar Calc_ParserTables::Br[36] = 
       {
           0,    2,    4,    6,    0,    8,    3,   10,   10,   11,   13,   10,   15,   17,    5,   19,   10,   10,   10,   10,
          10,   10,   10,   21,   17,   19,   19,   23,   23,   25,   25,   27,   27,   27,   19,    0
       };
 
-   // Booolean matrix column (displacement) ...
+   // Boolean matrix column (displacement) ...
       const uchar Calc_ParserTables::Bc[22] = 
       {
           0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    1,    1,    1,    1,    1,    1,    0,    1,

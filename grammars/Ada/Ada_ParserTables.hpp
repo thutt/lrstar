@@ -492,7 +492,7 @@
          10,    0,    0,    0,    0
       };
 
-   // Booeal matrix row (for state)...
+   // Boolean matrix row (for state)...
       const ushort Ada_ParserTables::Br[464] = 
       {
           0,   10,   19,   28,   38,    0,   47,   57,   47,   66,   75,   38,   85,   95,   85,  104,   46,  114,   47,   47,
@@ -521,7 +521,7 @@
          47,  463,  236,    0
       };
 
-   // Booolean matrix column (displacement) ...
+   // Boolean matrix column (displacement) ...
       const uchar Ada_ParserTables::Bc[93] = 
       {
           0,    0,    0,    0,    0,    0,    0,    0,    1,    1,    1,    1,    1,    1,    1,    1,    2,    2,    2,    2,

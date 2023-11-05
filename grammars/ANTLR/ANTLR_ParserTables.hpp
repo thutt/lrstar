@@ -280,7 +280,7 @@
           0,   32,    0,    9,    0,    0,    4,    0,    2
       };
 
-   // Booeal matrix row (for state)...
+   // Boolean matrix row (for state)...
       const uchar ANTLR_ParserTables::Br[148] = 
       {
           4,    9,   14,   18,   18,    7,    0,   22,    0,   27,   29,   14,   29,   29,   34,   37,   41,   29,    0,    0,
@@ -293,7 +293,7 @@
          29,  137,    0,  164,   29,  108,   36,    0
       };
 
-   // Booolean matrix column (displacement) ...
+   // Boolean matrix column (displacement) ...
       const uchar ANTLR_ParserTables::Bc[43] = 
       {
           0,    0,    0,    0,    0,    0,    0,    0,    1,    1,    1,    1,    1,    1,    1,    1,    1,    1,    1,    1,

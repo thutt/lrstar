@@ -114,13 +114,13 @@
           0,   34,   32,    8,   16,    4
       };
 
-   // Booeal matrix row (for state)...
+   // Boolean matrix row (for state)...
       const uchar Typedef_ParserTables::Br[14] = 
       {
           0,    1,    2,    2,    3,    4,    5,    2,    0,    3,    4,    5,    0,    0
       };
 
-   // Booolean matrix column (displacement) ...
+   // Boolean matrix column (displacement) ...
       const uchar Typedef_ParserTables::Bc[12] = 
       {
           0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0

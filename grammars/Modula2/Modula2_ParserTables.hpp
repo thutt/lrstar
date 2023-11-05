@@ -309,7 +309,7 @@
           0,   32,    8,    0,    0,    0,    3,    0,    0,  128,    0,    0,    0,    8,    0,    0,    0,    0
       };
 
-   // Booeal matrix row (for state)...
+   // Boolean matrix row (for state)...
       const uchar Modula2_ParserTables::Br[205] = 
       {
           6,   12,   18,   18,   24,   24,   17,   29,   29,   30,    0,    0,   28,   33,   39,   44,   11,   30,    0,    0,
@@ -325,7 +325,7 @@
          61,  134,   30,  134,    0
       };
 
-   // Booolean matrix column (displacement) ...
+   // Boolean matrix column (displacement) ...
       const uchar Modula2_ParserTables::Bc[71] = 
       {
           0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    1,    1,    1,    1,    1,    1,    1,    1,    1,

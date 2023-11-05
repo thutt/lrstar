@@ -1163,7 +1163,7 @@
           0,    2
       };
 
-   // Booeal matrix row (for state)...
+   // Boolean matrix row (for state)...
       const ushort Fortran_ParserTables::Br[724] = 
       {
           8,   18,    8,    0,   28,   37,    0,    4,   16,   16,    0,   28,    0,   28,   45,   53,   62,   71,   79,   28,
@@ -1205,7 +1205,7 @@
         104,  209,    0,    0
       };
 
-   // Booolean matrix column (displacement) ...
+   // Boolean matrix column (displacement) ...
       const uchar Fortran_ParserTables::Bc[268] = 
       {
           0,    0,    0,    0,    0,    0,    0,    0,    1,    1,    1,    1,    1,    1,    1,    1,    1,    2,    2,    2,

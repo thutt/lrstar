@@ -318,7 +318,7 @@
           0,    0,    0
       };
 
-   // Booeal matrix row (for state)...
+   // Boolean matrix row (for state)...
       const ushort C11_ParserTables::Br[256] = 
       {
           5,   10,   15,   20,   20,   25,   20,   20,   20,   29,   25,   29,   29,   32,   37,   42,   45,   49,   54,   59,
@@ -336,7 +336,7 @@
         206,  206,  181,  206,  181,  145,  145,  269,  274,   81,   81,  181,  186,  181,  181,    0
       };
 
-   // Booolean matrix column (displacement) ...
+   // Boolean matrix column (displacement) ...
       const uchar C11_ParserTables::Bc[99] = 
       {
           0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    1,    0,    1,    1,    1,    1,    1,    1,    1,

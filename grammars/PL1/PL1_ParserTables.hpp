@@ -1202,7 +1202,7 @@
           0,   32,    0,    0,    0,    0,    0,    0
       };
 
-   // Booeal matrix row (for state)...
+   // Boolean matrix row (for state)...
       const ushort PL1_ParserTables::Br[860] = 
       {
          10,   20,   10,   30,   39,   42,    0,   39,   50,   53,   62,   72,   81,   78,   91,   62,  101,  101,   50,   42,
@@ -1250,7 +1250,7 @@
         319,  319,  168,  101,  101,  451,   62,  503,  503,  356,  319,  356,   62,  503,  451,  503,  503,  503,  503,    0
       };
 
-   // Booolean matrix column (displacement) ...
+   // Boolean matrix column (displacement) ...
       const uchar PL1_ParserTables::Bc[226] = 
       {
           0,    0,    0,    0,    0,    0,    0,    0,    1,    1,    1,    1,    1,    1,    1,    1,    1,    2,    2,    1,

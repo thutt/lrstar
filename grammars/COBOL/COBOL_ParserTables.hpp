@@ -1264,7 +1264,7 @@
           0,    0,    0,    0
       };
 
-   // Booeal matrix row (for state)...
+   // Boolean matrix row (for state)...
       const ushort COBOL_ParserTables::Br[887] = 
       {
          29,   59,   86,   58,  105,   58,  134,  148,   58,  134,  176,   43,  206,   58,  227,  254,  134,  282,  312,  312,
@@ -1314,7 +1314,7 @@
         371,  371,  371,  274, 2022,  134,    0
       };
 
-   // Booolean matrix column (displacement) ...
+   // Boolean matrix column (displacement) ...
       const uchar COBOL_ParserTables::Bc[351] = 
       {
           0,    0,    0,    0,    0,    0,    0,    0,    0,    1,    1,    1,    1,    1,    1,    1,    1,    2,    2,    2,

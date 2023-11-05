@@ -132,14 +132,14 @@
           0,    2
       };
 
-   // Booeal matrix row (for state)...
+   // Boolean matrix row (for state)...
       const uchar LRK_ParserTables::Br[23] = 
       {
           2,    4,    6,    8,    9,    0,    9,    0,   11,    5,    8,    8,   13,    5,   14,   16,   14,   13,    8,   18,
          12,   20,    0
       };
 
-   // Booolean matrix column (displacement) ...
+   // Boolean matrix column (displacement) ...
       const uchar LRK_ParserTables::Bc[19] = 
       {
           0,    0,    0,    0,    0,    0,    0,    0,    0,    1,    1,    0,    0,    0,    0,    0,    1,    1,    1

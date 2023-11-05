@@ -405,7 +405,7 @@
           2,    0,    0,    0,    0,    0,   16,    0,    0,    8,    0,    0,    0,    0
       };
 
-   // Booeal matrix row (for state)...
+   // Boolean matrix row (for state)...
       const ushort delphi_ParserTables::Br[343] = 
       {
           8,   16,   23,   30,   23,   33,   33,   33,    0,   33,   41,   23,    0,   33,   49,   57,   57,   65,   71,   79,
@@ -428,7 +428,7 @@
          82,   33,    0
       };
 
-   // Booolean matrix column (displacement) ...
+   // Boolean matrix column (displacement) ...
       const uchar delphi_ParserTables::Bc[101] = 
       {
           0,    0,    0,    0,    0,    0,    0,    0,    0,    1,    1,    1,    1,    0,    1,    1,    1,    1,    0,    2,

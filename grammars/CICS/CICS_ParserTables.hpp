@@ -831,7 +831,7 @@
           0,    0,   12,    0,    0,    0,    0,    0,    0,    0
       };
 
-   // Booeal matrix row (for state)...
+   // Boolean matrix row (for state)...
       const ushort CICS_ParserTables::Br[668] = 
       {
           8,   16,   24,   31,   38,   46,   53,   59,   66,   72,   77,   82,   88,   72,   82,   94,   76,  100,  108,  114,
@@ -870,7 +870,7 @@
         235,  235,  235,  235,  235,  235,  235,    0
       };
 
-   // Booolean matrix column (displacement) ...
+   // Boolean matrix column (displacement) ...
       const uchar CICS_ParserTables::Bc[216] = 
       {
           0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    1,    1,    1,    1,    1,    1,    1,    1,    1,

@@ -7624,7 +7624,7 @@
           0,    0,    0,    0,    0,    0
       };
 
-   // Booeal matrix row (for state)...
+   // Boolean matrix row (for state)...
       const ushort PLSQL_ParserTables::Br[3750] = 
       {
           0,   83,  166,    0,  246,  321,    0,  403,  482,  564,    0,  647,  730,  341,  341,  813,  896,  975,  479,    0,
@@ -7817,7 +7817,7 @@
       17822,  467,  730,    0,  730, 5729,23219, 5729,17751,    0
       };
 
-   // Booolean matrix column (displacement) ...
+   // Boolean matrix column (displacement) ...
       const uchar PLSQL_ParserTables::Bc[2285] = 
       {
           0,    0,    0,    0,    0,    0,    0,    0,    1,    1,    1,    1,    1,    1,    1,    1,    2,    2,    2,    2,

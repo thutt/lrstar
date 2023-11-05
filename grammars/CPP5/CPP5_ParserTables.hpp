@@ -493,7 +493,7 @@
           0,    0,    0,   64,    0
       };
 
-   // Booeal matrix row (for state)...
+   // Boolean matrix row (for state)...
       const ushort CPP5_ParserTables::Br[701] = 
       {
           0,    7,   12,   19,   25,   30,   35,   41,   47,   52,   58,   64,   47,   70,   76,   76,   70,   82,   88,   88,
@@ -534,7 +534,7 @@
           0
       };
 
-   // Booolean matrix column (displacement) ...
+   // Boolean matrix column (displacement) ...
       const uchar CPP5_ParserTables::Bc[103] = 
       {
           0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    1,    0,

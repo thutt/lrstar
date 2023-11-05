@@ -191,7 +191,7 @@
           0,  160,    0,    0,   24,    0,    0,    0,    8,    0,    0,    0,    2,  128,    0,    4,  128,    0
       };
 
-   // Booeal matrix row (for state)...
+   // Boolean matrix row (for state)...
       const uchar XPL_ParserTables::Br[97] = 
       {
           4,    8,   12,   14,   18,   22,   12,   26,   12,    4,   30,   34,   12,   12,   12,   22,   38,    4,   40,   44,
@@ -201,7 +201,7 @@
          69,  100,   11,  108,   57,  105,   65,    9,    9,  111,  100,   66,   18,  114,   18,   13,    0
       };
 
-   // Booolean matrix column (displacement) ...
+   // Boolean matrix column (displacement) ...
       const uchar XPL_ParserTables::Bc[49] = 
       {
           0,    0,    0,    0,    0,    0,    0,    0,    1,    0,    1,    1,    1,    1,    1,    1,    1,    1,    2,    2,

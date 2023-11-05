@@ -445,7 +445,7 @@
           0,    4,    0,    0,   64,    4,    0,    0,    0
       };
 
-   // Booeal matrix row (for state)...
+   // Boolean matrix row (for state)...
       const uchar Python_ParserTables::Br[257] = 
       {
           6,   12,    0,   17,    0,    0,   21,    0,    0,    0,   27,   34,   40,   46,    6,    0,   51,   57,   62,   67,
@@ -463,7 +463,7 @@
          87,   45,  134,   98,   78,   78,   78,  216,  242,   57,   67,    0,   67,   87,   45,   67,    0
       };
 
-   // Booolean matrix column (displacement) ...
+   // Boolean matrix column (displacement) ...
       const uchar Python_ParserTables::Bc[94] = 
       {
           0,    0,    0,    0,    0,    0,    0,    0,    1,    1,    1,    1,    1,    1,    1,    1,    1,    1,    1,    1,

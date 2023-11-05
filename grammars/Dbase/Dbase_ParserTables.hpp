@@ -694,7 +694,7 @@
           0,    0,    4,   16,    0
       };
 
-   // Booeal matrix row (for state)...
+   // Boolean matrix row (for state)...
       const ushort Dbase_ParserTables::Br[635] = 
       {
          12,   24,   12,   35,   45,    0,   12,   57,   57,   69,   81,    0,    0,    0,   93,    0,  102,  111,  119,    0,
@@ -731,7 +731,7 @@
         770,   93,  576,   71,   84,   71,   44,   84,  254,   81,   57,   70,   71,  263,    0
       };
 
-   // Booolean matrix column (displacement) ...
+   // Boolean matrix column (displacement) ...
       const uchar Dbase_ParserTables::Bc[280] = 
       {
           0,    0,    0,    0,    0,    0,    0,    0,    1,    0,    0,    1,    1,    1,    1,    1,    1,    1,    1,    0,

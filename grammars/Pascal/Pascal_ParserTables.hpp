@@ -711,7 +711,7 @@
           4,    0,    0,    0,    0,    0,    0,    0,  128,    0
       };
 
-   // Booeal matrix row (for state)...
+   // Boolean matrix row (for state)...
       const ushort Pascal_ParserTables::Br[344] = 
       {
           0,    9,   15,    7,    7,   24,   24,   30,    0,   38,   45,   22,    3,   48,    7,   56,    7,   65,   24,   24,
@@ -734,7 +734,7 @@
         158,   24,  386,    0
       };
 
-   // Booolean matrix column (displacement) ...
+   // Boolean matrix column (displacement) ...
       const uchar Pascal_ParserTables::Bc[113] = 
       {
           0,    0,    0,    0,    0,    0,    0,    0,    1,    1,    1,    1,    1,    1,    1,    1,    1,    1,    1,    1,

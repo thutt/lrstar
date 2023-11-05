@@ -162,14 +162,14 @@
          16,    8,    1,    0,    0,  253,   51,   17,  253,   55,    1,  253,   51,    1,    0,    0,   32
       };
 
-   // Booeal matrix row (for state)...
+   // Boolean matrix row (for state)...
       const uchar NCSA_ParserTables::Br[38] = 
       {
           3,    6,    3,    3,    9,   11,   14,    9,   16,   18,   14,   21,   23,   26,   26,   27,   30,   27,   27,   33,
          36,   36,   15,   15,   39,   42,   42,   45,   48,   51,    0,   51,   48,   54,   51,   51,   51,    0
       };
 
-   // Booolean matrix column (displacement) ...
+   // Boolean matrix column (displacement) ...
       const uchar NCSA_ParserTables::Bc[24] = 
       {
           0,    0,    0,    0,    0,    0,    0,    0,    1,    1,    1,    1,    1,    1,    1,    1,    2,    2,    2,    2,

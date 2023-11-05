@@ -314,7 +314,7 @@
           0,    0,    0,    0,  128,    2,    0,    0,    0,    0,    0,    0,    1,   64,    0,    0,    0,    0,    0,    0
       };
 
-   // Booeal matrix row (for state)...
+   // Boolean matrix row (for state)...
       const ushort Zeus_ParserTables::Br[229] = 
       {
           7,   14,   21,   21,   28,   28,   34,   34,    0,    0,   40,   47,   53,   28,   28,   60,   28,   28,   28,   28,
@@ -331,7 +331,7 @@
          30,  333,    0,    0,   17,  192,   26,   26,    0
       };
 
-   // Booolean matrix column (displacement) ...
+   // Boolean matrix column (displacement) ...
       const uchar Zeus_ParserTables::Bc[71] = 
       {
           0,    0,    0,    0,    0,    0,    0,    0,    0,    1,    1,    1,    1,    1,    1,    1,    1,    2,    2,    2,

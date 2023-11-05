@@ -107,7 +107,7 @@
           5,   32,    8,    0
       };
 
-   // Booeal matrix row (for state)...
+   // Boolean matrix row (for state)...
       const uchar YACC_ParserTables::Br[43] = 
       {
           0,    3,    6,    9,   12,   14,   16,   16,   16,   16,   16,   19,   14,   22,   24,   22,   22,   22,   12,   25,
@@ -115,7 +115,7 @@
          15,   15,    0
       };
 
-   // Booolean matrix column (displacement) ...
+   // Boolean matrix column (displacement) ...
       const uchar YACC_ParserTables::Bc[27] = 
       {
           0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    1,    1,    1,    1,    1,    1,    1,

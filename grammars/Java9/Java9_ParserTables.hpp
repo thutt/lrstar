@@ -770,7 +770,7 @@
           0,    0,    0
       };
 
-   // Booeal matrix row (for state)...
+   // Boolean matrix row (for state)...
       const ushort Java9_ParserTables::Br[745] = 
       {
           0,    9,    0,   17,   24,   24,   33,   33,   40,   49,   57,   66,   75,   82,   66,   33,   89,   96,   33,   33,
@@ -813,7 +813,7 @@
           4,    4,   57,   57,    0
       };
 
-   // Booolean matrix column (displacement) ...
+   // Boolean matrix column (displacement) ...
       const uchar Java9_ParserTables::Bc[110] = 
       {
           0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    1,    1,    1,    1,    1,

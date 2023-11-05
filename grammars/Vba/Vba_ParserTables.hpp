@@ -654,7 +654,7 @@
           0,    0,    0,    0,    4,    0,    0,    0,    0,    0,    0,    0
       };
 
-   // Booeal matrix row (for state)...
+   // Boolean matrix row (for state)...
       const ushort Vba_ParserTables::Br[453] = 
       {
           0,   11,   20,   27,   38,   49,   60,   60,   71,    0,    0,   82,   60,   90,   97,   97,  103,  114,   49,  122,
@@ -682,7 +682,7 @@
          20,   20,   20,   20,   20,  122,   20,   20,   20,   20,   20,   20,    0
       };
 
-   // Booolean matrix column (displacement) ...
+   // Boolean matrix column (displacement) ...
       const uchar Vba_ParserTables::Bc[139] = 
       {
           0,    0,    0,    0,    0,    0,    0,    0,    0,    1,    1,    1,    1,    1,    1,    1,    1,    1,    1,    1,
