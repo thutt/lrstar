@@ -621,7 +621,7 @@
       };
 
    // Head symbol numbers for the productions ...
-      ushort CICS_ParserTables::head_numb[821] = 
+      const ushort CICS_ParserTables::head_numb[821] = 
       {
           0,    1,    2,    2,    2,    2,    2,    2,    2,    2,    2,    2,    2,    2,    2,    2,    2,    2,    2,    2,
           2,    2,    2,    2,    2,    2,    2,    2,    2,    2,    2,    2,    2,    2,    2,    2,    2,    2,    2,    2,
@@ -668,7 +668,7 @@
       };
 
    // First tail symbol index into the tail list ...
-      ushort CICS_ParserTables::f_tail[822] = 
+      const ushort CICS_ParserTables::f_tail[822] = 
       {
           0,    2,    5,    6,    7,    8,    9,   10,   11,   12,   13,   14,   15,   16,   17,   18,   19,   20,   21,   22,
          23,   24,   25,   26,   27,   28,   29,   30,   31,   32,   33,   34,   35,   36,   37,   38,   39,   40,   41,   42,
@@ -715,7 +715,7 @@
       };
 
    // Tail symbol numbers ...
-      short CICS_ParserTables::tail[1488] = 
+      const short CICS_ParserTables::tail[1488] = 
       {
          -1,    1,   -2,   -3,    8,   -4,   -9,  -17,  -18,  -24,  -30,  -40,  -47,  -50,  -55,  -61,  -68,  -71,  -77,  -83,
         -86,  -93, -164, -170, -181, -188, -195, -203, -205, -215, -225, -235, -244, -253, -256, -263, -270, -277, -284, -295,
@@ -795,7 +795,7 @@
       };
 
    // Arguments for token actions ...
-      char CICS_ParserTables::arga[216] = 
+      const char CICS_ParserTables::arga[216] = 
       {
          -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,
          -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,
@@ -811,7 +811,7 @@
       };
 
    // Boolean matrix ...
-      uchar CICS_ParserTables::Bm[310] = 
+      const uchar CICS_ParserTables::Bm[310] = 
       {
           0,    0,    0,    0,    0,    0,    0,    0,  128,   17,    0,   64,    0,   10,  192,    0,    2,    0,    0,    0,
           0,    0,    0,    0,   64,    0,    0,    0,    0,    0,    0,    0,    3,    0,    0,    0,    0,    0,    0,   32,
@@ -832,7 +832,7 @@
       };
 
    // Booeal matrix row (for state)...
-      ushort CICS_ParserTables::Br[668] = 
+      const ushort CICS_ParserTables::Br[668] = 
       {
           8,   16,   24,   31,   38,   46,   53,   59,   66,   72,   77,   82,   88,   72,   82,   94,   76,  100,  108,  114,
         121,  127,  133,  140,   69,  146,  153,  153,  160,  167,  174,  180,  187,  194,  200,  207,  215,  223,  180,  229,
@@ -871,7 +871,7 @@
       };
 
    // Booolean matrix column (displacement) ...
-      uchar CICS_ParserTables::Bc[216] = 
+      const uchar CICS_ParserTables::Bc[216] = 
       {
           0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    1,    1,    1,    1,    1,    1,    1,    1,    1,
           1,    1,    1,    1,    1,    2,    2,    2,    2,    2,    2,    2,    2,    1,    2,    2,    2,    1,    1,    3,
@@ -887,7 +887,7 @@
       };
 
    // Boolean matrix filter/mask value ...
-      uchar CICS_ParserTables::Bf[216] = 
+      const uchar CICS_ParserTables::Bf[216] = 
       {
           1,    2,    4,    8,    1,    1,   16,    1,   32,   64,  128,    1,    2,    4,    8,   16,   32,   32,   32,   32,
          16,   16,   64,  128,   16,    1,    1,    2,    4,    8,   16,    4,   32,   16,   64,   64,  128,   16,   16,    1,
@@ -903,7 +903,7 @@
       };
 
    // Terminal transition matrix ...
-      short CICS_ParserTables::Tm[1304] = 
+      const short CICS_ParserTables::Tm[1304] = 
       {
           0,  504, -350,  505, -382,  506, -383, -160,  243, -156, -173,  246, -171, -184,  249, -181, -187,  250, -185, -195,
         251, -192, -399,  253, -194, -418,  316, -407, -421,  318, -409, -435,  322, -413, -447,  325, -432, -462,  329, -454,
@@ -974,7 +974,7 @@
       };
 
    // Terminal transition matrix row ...
-      ushort CICS_ParserTables::Tr[668] = 
+      const ushort CICS_ParserTables::Tr[668] = 
       {
        1197, 1197, 1197, 1091, 1197, 1197, 1197, 1197, 1091, 1197, 1197, 1197, 1091, 1091,  974,  974, 1197,  909, 1091, 1091,
         864,  801,  675,  974, 1197,  833,  748,  722,  815,  734, 1197,  974,  681,  698,  703,  909, 1005,  793,  909, 1197,
@@ -1013,7 +1013,7 @@
       };
 
    // Terminal transition matrix column ...
-      uchar CICS_ParserTables::Tc[216] = 
+      const uchar CICS_ParserTables::Tc[216] = 
       {
          59,   59,    0,   23,   59,    0,   59,   23,   14,   26,   61,   24,   14,    1,    2,   27,   35,   36,   37,   39,
          40,   47,   38,   56,   48,   57,   58,   29,   62,   63,   64,   65,   25,   66,   26,   27,   44,   67,   68,   69,
@@ -1029,7 +1029,7 @@
       };
 
    // Nonterminal transition matrix ...
-      short CICS_ParserTables::Nm[733] = 
+      const short CICS_ParserTables::Nm[733] = 
       {
           0,    0,    0,    0,    0,    0,  -51,    0,    0,    0,    0,  -59,    0,    0,    0,    0,    0,    0,    0,    0,
         -72,   55,    0,    0,    0,    0,  -79,    0,    0,    0,    0,    0,  -89,    0,    0,    0,    0,    0,    0,    0,
@@ -1071,7 +1071,7 @@
       };
 
    // Nonterminal transition matrix row ...
-      ushort CICS_ParserTables::Nr[668] = 
+      const ushort CICS_ParserTables::Nr[668] = 
       {
         365,  365,  365,  365,  365,  365,  365,  365,  365,  365,  365,  365,  365,  365,  365,  365,  365,  365,  365,  365,
         365,  365,  365,  365,  365,  365,  365,  365,  365,  365,  365,  365,  365,  365,  365,  365,  365,  365,  365,  365,
@@ -1110,7 +1110,7 @@
       };
 
    // Nonterminal transition matrix column ...
-      ushort CICS_ParserTables::Nc[821] = 
+      const ushort CICS_ParserTables::Nc[821] = 
       {
           0,    0,    1,    1,    1,    1,    1,    1,    1,    1,    1,    1,    1,    1,    1,    1,    1,    1,    1,    1,
           1,    1,    1,    1,    1,    1,    1,    1,    1,    1,    1,    1,    1,    1,    1,    1,    1,    1,    1,    1,
@@ -1157,13 +1157,13 @@
       };
 
    // Reduction matrix ...
-      uchar CICS_ParserTables::Rm[1] = 
+      const uchar CICS_ParserTables::Rm[1] = 
       {
           0
       };
 
    // Reduction matrix row ...
-      ushort CICS_ParserTables::Rr[668] = 
+      const ushort CICS_ParserTables::Rr[668] = 
       {
           0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,
           0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,  745,
@@ -1202,7 +1202,7 @@
       };
 
    // Reduction matrix column ...
-      uchar CICS_ParserTables::Rc[216] = 
+      const uchar CICS_ParserTables::Rc[216] = 
       {
           0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,
           0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,
@@ -1218,7 +1218,7 @@
       };
 
    // Production lengths (minus one) ...
-      char CICS_ParserTables::PL[821] = 
+      const char CICS_ParserTables::PL[821] = 
       {
           1,    2,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,
           0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,
@@ -1265,7 +1265,7 @@
       };
 
    // Terminal action number ...
-      char CICS_ParserTables::tact_numb[216] = 
+      const char CICS_ParserTables::tact_numb[216] = 
       {
           0,   -1,    1,    1,    1,    1,    1,    1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,
          -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,

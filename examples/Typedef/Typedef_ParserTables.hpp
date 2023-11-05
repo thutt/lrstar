@@ -68,28 +68,28 @@
       };
 
    // Head symbol numbers for the productions ...
-      uchar Typedef_ParserTables::head_numb[24] = 
+      const uchar Typedef_ParserTables::head_numb[24] = 
       {
           0,    1,    1,    2,    3,    4,    5,    6,    7,    8,    8,    8,    8,    8,    9,    9,   10,   10,   11,   11,
          12,   12,   13,   13
       };
 
    // First tail symbol index into the tail list ...
-      uchar Typedef_ParserTables::f_tail[25] = 
+      const uchar Typedef_ParserTables::f_tail[25] = 
       {
           0,    2,    5,    9,   10,   11,   13,   15,   16,   17,   18,   19,   20,   21,   22,   22,   24,   25,   27,   28,
          31,   32,   35,   35,   37
       };
 
    // Tail symbol numbers ...
-      char Typedef_ParserTables::tail[37] = 
+      const char Typedef_ParserTables::tail[37] = 
       {
          -9,    1,  -10,   -2,    3,    4,  -10,   -3,    3,  -11,  -12,  -13,    2,  -13,   -6,    2,    7,    8,    9,   10,
          11,    6,   -9,   -1,   -8,  -10,   -8,   -4,  -11,    5,   -4,   -5,  -12,    5,   -5,  -13,   -7
       };
 
    // Arguments for token actions ...
-      char Typedef_ParserTables::arga[12] = 
+      const char Typedef_ParserTables::arga[12] = 
       {
          -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1
       };
@@ -109,107 +109,107 @@
       };
 
    // Boolean matrix ...
-      uchar Typedef_ParserTables::Bm[6] = 
+      const uchar Typedef_ParserTables::Bm[6] = 
       {
           0,   34,   32,    8,   16,    4
       };
 
    // Booeal matrix row (for state)...
-      uchar Typedef_ParserTables::Br[14] = 
+      const uchar Typedef_ParserTables::Br[14] = 
       {
           0,    1,    2,    2,    3,    4,    5,    2,    0,    3,    4,    5,    0,    0
       };
 
    // Booolean matrix column (displacement) ...
-      uchar Typedef_ParserTables::Bc[12] = 
+      const uchar Typedef_ParserTables::Bc[12] = 
       {
           0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0
       };
 
    // Boolean matrix filter/mask value ...
-      uchar Typedef_ParserTables::Bf[12] = 
+      const uchar Typedef_ParserTables::Bf[12] = 
       {
           1,    2,    4,    8,    2,   16,   32,    4,   32,   32,   32,   32
       };
 
    // Terminal transition matrix ...
-      char Typedef_ParserTables::Tm[18] = 
+      const char Typedef_ParserTables::Tm[18] = 
       {
           0,   -7,   -2,    0,   12,    0,   -8,   13,   -5,   -1,    3,    8,  -13,   -8,   -9,  -10,  -11,  -12
       };
 
    // Terminal transition matrix row ...
-      uchar Typedef_ParserTables::Tr[14] = 
+      const uchar Typedef_ParserTables::Tr[14] = 
       {
           7,    7,    7,    7,    7,    7,    7,    7,    7,    0,    0,    0,    7,    7
       };
 
    // Terminal transition matrix column ...
-      uchar Typedef_ParserTables::Tc[12] = 
+      const uchar Typedef_ParserTables::Tc[12] = 
       {
           0,    0,    1,    2,    3,    4,    5,    6,    7,    8,    9,   10
       };
 
    // Nonterminal transition matrix ...
-      char Typedef_ParserTables::Nm[32] = 
+      const char Typedef_ParserTables::Nm[32] = 
       {
           0,  -21,  -16,    0,    7,    0,    0,   11,    4,  -18,  -17,    0,    0,    5,    0,    6,    9,  -20,  -17,    0,
           0,    0,   10,   11,  -15,  -19,  -16,    1,    2,   -6,  -23,    6
       };
 
    // Nonterminal transition matrix row ...
-      uchar Typedef_ParserTables::Nr[14] = 
+      const uchar Typedef_ParserTables::Nr[14] = 
       {
          24,   24,    8,    0,   24,   24,   24,   16,   24,   24,   24,   24,    0,   24
       };
 
    // Nonterminal transition matrix column ...
-      uchar Typedef_ParserTables::Nc[24] = 
+      const uchar Typedef_ParserTables::Nc[24] = 
       {
           0,    0,    0,    0,    0,    1,    1,    5,    6,    2,    2,    2,    2,    2,    3,    3,    4,    4,    5,    5,
           6,    6,    7,    7
       };
 
    // Reduction matrix ...
-      uchar Typedef_ParserTables::Rm[1] = 
+      const uchar Typedef_ParserTables::Rm[1] = 
       {
           0
       };
 
    // Reduction matrix row ...
-      uchar Typedef_ParserTables::Rr[14] = 
+      const uchar Typedef_ParserTables::Rr[14] = 
       {
          14,    0,   22,    0,    0,    3,    0,   22,   22,    0,    4,    0,   22,    0
       };
 
    // Reduction matrix column ...
-      uchar Typedef_ParserTables::Rc[12] = 
+      const uchar Typedef_ParserTables::Rc[12] = 
       {
           0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0
       };
 
    // Production lengths (minus one) ...
-      char Typedef_ParserTables::PL[24] = 
+      const char Typedef_ParserTables::PL[24] = 
       {
           1,    2,    3,    0,    0,    1,    1,    0,    0,    0,    0,    0,    0,    0,   -1,    1,    0,    1,    0,    2,
           0,    2,   -1,    1
       };
 
    // Terminal action number ...
-      char Typedef_ParserTables::tact_numb[12] = 
+      const char Typedef_ParserTables::tact_numb[12] = 
       {
           0,   -1,    1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1
       };
 
    // Node number for each production ...
-      char Typedef_ParserTables::node_numb[24] = 
+      const char Typedef_ParserTables::node_numb[24] = 
       {
          -1,   -1,   -1,   -1,   -1,   -1,   -1,    0,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,
          -1,   -1,   -1,   -1
       };
 
    // Node action numbers ...
-      char Typedef_ParserTables::nact_numb[24] = 
+      const char Typedef_ParserTables::nact_numb[24] = 
       {
          -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,
          -1,   -1,   -1,   -1

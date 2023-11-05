@@ -11,10 +11,10 @@
       #define LEXER         PLSQL_Lexer
 
 /*
-      static ushort Tm[1071672]        ; // Terminal transition matrix.
-      static uint   Tr[ 13027]        ; // Terminal transition matrix row.
-      static uchar  Tc[   256]        ; // Terminal transition matrix column.
-      static short  term_numb[ 13027] ; // Terminal number.
+      static const ushort Tm[1071672]        ; // Terminal transition matrix.
+      static const uint   Tr[ 13027]        ; // Terminal transition matrix row.
+      static const uchar  Tc[   256]        ; // Terminal transition matrix column.
+      static const short  term_numb[ 13027] ; // Terminal number.
 */
 
 //

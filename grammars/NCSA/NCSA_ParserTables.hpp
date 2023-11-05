@@ -101,7 +101,7 @@
       };
 
    // Head symbol numbers for the productions ...
-      uchar NCSA_ParserTables::head_numb[62] = 
+      const uchar NCSA_ParserTables::head_numb[62] = 
       {
           0,    1,    2,    3,    3,    4,    4,    5,    5,    5,    5,    6,    6,    7,    7,    8,    9,    9,   10,   10,
          10,   10,   10,   11,   12,   13,   13,   14,   14,   14,   14,   15,   15,   16,   16,   16,   17,   17,   17,   17,
@@ -110,7 +110,7 @@
       };
 
    // First tail symbol index into the tail list ...
-      uchar NCSA_ParserTables::f_tail[63] = 
+      const uchar NCSA_ParserTables::f_tail[63] = 
       {
           0,    2,    3,    4,   14,   25,   26,   27,   28,   30,   32,   33,   34,   35,   38,   41,   42,   46,   50,   51,
          54,   57,   60,   63,   64,   65,   66,   67,   68,   69,   70,   71,   72,   73,   74,   76,   80,   81,   82,   83,
@@ -119,7 +119,7 @@
       };
 
    // Tail symbol numbers ...
-      char NCSA_ParserTables::tail[114] = 
+      const char NCSA_ParserTables::tail[114] = 
       {
         -19,    1,  -20,  -21,   -4,   -5,   -7,   -9,  -10,  -12,  -13,  -14,  -16,   10,   -4,   -5,   -7,   -9,  -10,  -12,
         -13,  -14,  -15,  -16,   10,    4,   11,   12,   12,   12,   12,  -22,  -22,    5,    6,   13,   -8,   14,   13,   15,
@@ -130,7 +130,7 @@
       };
 
    // Arguments for token actions ...
-      char NCSA_ParserTables::arga[24] = 
+      const char NCSA_ParserTables::arga[24] = 
       {
          -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,
          -1,   -1,   -1,   -1
@@ -155,7 +155,7 @@
       };
 
    // Boolean matrix ...
-      uchar NCSA_ParserTables::Bm[57] = 
+      const uchar NCSA_ParserTables::Bm[57] = 
       {
           0,    0,    0,   16,    8,    0,   18,    8,    0,   96,   16,    0,   32,    0,   96,    0,    0,    1,  128,  128,
           0,   32,   16,    0,   16,    2,    0,   64,    0,    0,    8,    0,    4,   64,   16,    0,   17,    0,    0,   36,
@@ -163,28 +163,28 @@
       };
 
    // Booeal matrix row (for state)...
-      uchar NCSA_ParserTables::Br[38] = 
+      const uchar NCSA_ParserTables::Br[38] = 
       {
           3,    6,    3,    3,    9,   11,   14,    9,   16,   18,   14,   21,   23,   26,   26,   27,   30,   27,   27,   33,
          36,   36,   15,   15,   39,   42,   42,   45,   48,   51,    0,   51,   48,   54,   51,   51,   51,    0
       };
 
    // Booolean matrix column (displacement) ...
-      uchar NCSA_ParserTables::Bc[24] = 
+      const uchar NCSA_ParserTables::Bc[24] = 
       {
           0,    0,    0,    0,    0,    0,    0,    0,    1,    1,    1,    1,    1,    1,    1,    1,    2,    2,    2,    2,
           2,    1,    2,    2
       };
 
    // Boolean matrix filter/mask value ...
-      uchar NCSA_ParserTables::Bf[24] = 
+      const uchar NCSA_ParserTables::Bf[24] = 
       {
           1,    2,    4,    8,   16,   32,   64,  128,    1,    2,    4,    8,   16,   32,   64,  128,    1,    2,    4,    8,
          16,    4,   32,   32
       };
 
    // Terminal transition matrix ...
-      char NCSA_ParserTables::Tm[99] = 
+      const char NCSA_ParserTables::Tm[99] = 
       {
           0,    0,    0,  -26,   22,    0,    0,  -25,   17,    0,    0,   18,  -21,   16,  -24,    0,    0,  -29,  -18,  -28,
          23,  -58,    0,    0,  -27,  -19,  -11,  -12,    0,  -30,    0,   -8,    0,  -17,  -58,    0,    0,  -14,  -36,  -38,
@@ -194,21 +194,21 @@
       };
 
    // Terminal transition matrix row ...
-      uchar NCSA_ParserTables::Tr[38] = 
+      const uchar NCSA_ParserTables::Tr[38] = 
       {
          82,   82,   82,   82,   82,   82,   82,   24,   82,   82,   82,   11,    1,   82,   24,   11,   82,    1,   17,    0,
          24,   11,   82,   24,   17,   82,   82,   38,   52,   52,   82,   52,   67,   82,   52,   52,   52,   82
       };
 
    // Terminal transition matrix column ...
-      uchar NCSA_ParserTables::Tc[24] = 
+      const uchar NCSA_ParserTables::Tc[24] = 
       {
          10,    0,    0,   12,    1,    2,    3,    4,    5,    6,   13,    6,    7,    8,   13,   14,    9,   10,   11,   12,
          13,   14,   15,   16
       };
 
    // Nonterminal transition matrix ...
-      char NCSA_ParserTables::Nm[72] = 
+      const char NCSA_ParserTables::Nm[72] = 
       {
           0,    0,  -55,    4,    0,    0,  -54,    4,    0,  -56,    0,    0,    0,    0,  -61,  -60,  -60,   33,    0,   32,
         -33,    0,   36,   34,    3,   10,    0,  -53,  -54,    4,    0,  -57,    0,    0,    0,    0,    0,    0,    0,    0,
@@ -217,14 +217,14 @@
       };
 
    // Nonterminal transition matrix row ...
-      uchar NCSA_ParserTables::Nr[38] = 
+      const uchar NCSA_ParserTables::Nr[38] = 
       {
          50,   28,    6,    2,   50,   50,   28,    6,   50,   50,   28,   50,   50,   50,   50,   50,   50,   50,   50,   50,
          50,   28,   50,   50,   50,   50,   50,   50,   28,    6,   50,    2,   28,   50,    0,    1,    0,   50
       };
 
    // Nonterminal transition matrix column ...
-      uchar NCSA_ParserTables::Nc[62] = 
+      const uchar NCSA_ParserTables::Nc[62] = 
       {
          15,   15,   21,    0,    0,    1,    1,    2,    2,    2,    2,    3,    3,    4,    4,    5,    6,    6,    7,    7,
           7,    7,    7,    8,    9,   10,   10,   11,   11,   11,   11,   12,   12,   13,   13,   13,   14,   14,   14,   14,
@@ -233,27 +233,27 @@
       };
 
    // Reduction matrix ...
-      uchar NCSA_ParserTables::Rm[6] = 
+      const uchar NCSA_ParserTables::Rm[6] = 
       {
           0,    0,    0,   31,    0,   43
       };
 
    // Reduction matrix row ...
-      char NCSA_ParserTables::Rr[38] = 
+      const char NCSA_ParserTables::Rr[38] = 
       {
           0,    0,    1,    2,    0,    0,   10,    7,    0,    0,    9,    0,    0,    0,    0,    0,    0,    0,    0,    0,
           0,    0,    0,    0,    0,   20,   22,    0,    0,    0,   -3,    0,    0,    0,   48,    0,   49,    0
       };
 
    // Reduction matrix column ...
-      uchar NCSA_ParserTables::Rc[24] = 
+      const uchar NCSA_ParserTables::Rc[24] = 
       {
           0,    1,    0,    0,    0,    0,    0,    0,    0,    0,    2,    1,    0,    0,    1,    1,    0,    1,    1,    1,
           1,    2,    1,    1
       };
 
    // Production lengths (minus one) ...
-      uchar NCSA_ParserTables::PL[62] = 
+      const uchar NCSA_ParserTables::PL[62] = 
       {
           1,    0,    0,    9,   10,    0,    0,    0,    1,    1,    0,    0,    0,    2,    2,    0,    3,    3,    0,    2,
           2,    2,    2,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    1,    3,    0,    0,    0,    0,
@@ -262,14 +262,14 @@
       };
 
    // Terminal action number ...
-      char NCSA_ParserTables::tact_numb[24] = 
+      const char NCSA_ParserTables::tact_numb[24] = 
       {
           0,   -1,    1,    1,    1,    1,    1,    1,    1,    1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,
          -1,   -1,   -1,   -1
       };
 
    // Node number for each production ...
-      char NCSA_ParserTables::node_numb[62] = 
+      const char NCSA_ParserTables::node_numb[62] = 
       {
           0,    1,    2,   -1,   -1,   -1,   -1,   -1,   -1,    3,    3,    4,    4,   -1,   -1,   -1,    5,    5,    6,   -1,
          -1,    6,    6,   -1,    7,    8,    8,   -1,    9,    9,    9,   10,   10,   -1,   -1,   -1,   -1,   -1,   -1,   -1,
@@ -278,7 +278,7 @@
       };
 
    // Node action numbers ...
-      char NCSA_ParserTables::nact_numb[62] = 
+      const char NCSA_ParserTables::nact_numb[62] = 
       {
          -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,
          -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,

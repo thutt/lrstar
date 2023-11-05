@@ -533,7 +533,7 @@
       };
 
    // Head symbol numbers for the productions ...
-      uchar Pascal_ParserTables::head_numb[379] = 
+      const uchar Pascal_ParserTables::head_numb[379] = 
       {
           0,    1,    2,    3,    4,    5,    6,    7,    7,    7,    7,    8,    8,    9,   10,   11,   11,   11,   11,   11,
          12,   12,   13,   14,   15,   16,   17,   18,   19,   20,   20,   20,   21,   22,   23,   24,   24,   24,   24,   24,
@@ -557,7 +557,7 @@
       };
 
    // First tail symbol index into the tail list ...
-      ushort Pascal_ParserTables::f_tail[380] = 
+      const ushort Pascal_ParserTables::f_tail[380] = 
       {
           0,    2,    8,   12,   15,   17,   19,   22,   23,   24,   25,   26,   29,   32,   35,   37,   38,   39,   40,   41,
          42,   44,   47,   48,   50,   51,   52,   54,   58,   63,   64,   65,   66,   69,   72,   75,   76,   77,   78,   79,
@@ -581,7 +581,7 @@
       };
 
    // Tail symbol numbers ...
-      short Pascal_ParserTables::tail[695] = 
+      const short Pascal_ParserTables::tail[695] = 
       {
        -119,    1,   -5,   23,   -6,   -9, -100,   24, -120, -121,  -10,   24,   25, -104, -123,   29, -125,   30, -104,   31,
        -121, -126,  -14,  -17,  -44,   -8,  -84,   23, -127,  -82,   23, -127,   32, -121, -128, -129,  -62,  -12,  -14,  -17,
@@ -621,7 +621,7 @@
       };
 
    // Arguments for token actions ...
-      char Pascal_ParserTables::arga[113] = 
+      const char Pascal_ParserTables::arga[113] = 
       {
          -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,
          -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,
@@ -680,7 +680,7 @@
       };
 
    // Boolean matrix ...
-      uchar Pascal_ParserTables::Bm[530] = 
+      const uchar Pascal_ParserTables::Bm[530] = 
       {
           0,    0,    0,    0,    0,    0,    0,    0,    0,    2,    0,    0,    0,    0,    0,    0,    0,   64,    0,    0,
           0,    0,    0,    0,    4,    0,    0,    0,    0,    0,    0,    0,    0,   10,    0,   32,    0,    5,    0,    0,
@@ -712,7 +712,7 @@
       };
 
    // Booeal matrix row (for state)...
-      ushort Pascal_ParserTables::Br[344] = 
+      const ushort Pascal_ParserTables::Br[344] = 
       {
           0,    9,   15,    7,    7,   24,   24,   30,    0,   38,   45,   22,    3,   48,    7,   56,    7,   65,   24,   24,
          24,   24,   24,   24,   71,   15,   24,   21,   75,   83,   91,   24,   24,   99,   24,   73,   24,  104,   45,   45,
@@ -735,7 +735,7 @@
       };
 
    // Booolean matrix column (displacement) ...
-      uchar Pascal_ParserTables::Bc[113] = 
+      const uchar Pascal_ParserTables::Bc[113] = 
       {
           0,    0,    0,    0,    0,    0,    0,    0,    1,    1,    1,    1,    1,    1,    1,    1,    1,    1,    1,    1,
           1,    1,    2,    2,    2,    0,    2,    2,    2,    2,    0,    2,    3,    3,    3,    3,    3,    3,    3,    3,
@@ -746,7 +746,7 @@
       };
 
    // Boolean matrix filter/mask value ...
-      uchar Pascal_ParserTables::Bf[113] = 
+      const uchar Pascal_ParserTables::Bf[113] = 
       {
           1,    2,    4,    8,   16,   32,   64,  128,    1,    2,    4,    4,    8,    8,   16,   16,   32,   32,   64,  128,
          64,   64,    1,    2,    4,    2,    8,   16,   32,   64,    2,  128,    1,    2,    4,    8,   16,    8,   32,   64,
@@ -757,7 +757,7 @@
       };
 
    // Terminal transition matrix ...
-      short Pascal_ParserTables::Tm[703] = 
+      const short Pascal_ParserTables::Tm[703] = 
       {
           0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0, -252,  341,  163,  179, -132,  166,  329, -345,
         174,  312, -190,  207, -173,  -33,  162,  340, -131, -355,  339,  161,  297, -130,    0,  324, -217, -218,    0,  -27,
@@ -798,7 +798,7 @@
       };
 
    // Terminal transition matrix row ...
-      ushort Pascal_ParserTables::Tr[344] = 
+      const ushort Pascal_ParserTables::Tr[344] = 
       {
         630,  630,  630,  630,  366,  630,  630,  630,  630,  630,  630,  630,  630,  630,  184,  630,  557,  436,  366,  630,
         184,  557,  177,  630,  630,  630,  630,  630,  630,  630,  177,  366,  366,  630,  630,  366,  184,  366,  366,  366,
@@ -821,7 +821,7 @@
       };
 
    // Terminal transition matrix column ...
-      uchar Pascal_ParserTables::Tc[113] = 
+      const uchar Pascal_ParserTables::Tc[113] = 
       {
           3,    3,   38,    0,    1,   39,   53,   16,    2,    3,    4,    5,    6,    7,   21,   22,    8,    9,   23,   24,
          25,   26,   10,   11,   12,   27,   13,   14,   15,   28,   29,   30,   31,   32,   33,   34,   16,   40,   17,   50,
@@ -832,7 +832,7 @@
       };
 
    // Nonterminal transition matrix ...
-      short Pascal_ParserTables::Nm[3240] = 
+      const short Pascal_ParserTables::Nm[3240] = 
       {
           0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0, -231,  217,    0,    0,    0,    0,    0, -360,
         242, -363,  197,  310, -142, -143,   85, -126,    0,  180,    0, -205, -142, -143,   85, -126,    0,    0,  228, -142,
@@ -999,7 +999,7 @@
       };
 
    // Nonterminal transition matrix row ...
-      ushort Pascal_ParserTables::Nr[344] = 
+      const ushort Pascal_ParserTables::Nr[344] = 
       {
        3140, 3140, 3140, 3140, 3140, 3140, 2851, 3140, 3140, 3140, 3140, 3140, 3140, 2851, 3140, 2851, 3140, 3140, 3140, 2940,
        3140, 3140, 3140, 2508, 3140, 2851, 2706, 3140, 3140, 2940, 3140, 2851, 2940, 3140, 2778, 3140, 2851, 3140, 3140, 2851,
@@ -1022,7 +1022,7 @@
       };
 
    // Nonterminal transition matrix column ...
-      uchar Pascal_ParserTables::Nc[379] = 
+      const uchar Pascal_ParserTables::Nc[379] = 
       {
          10,   10,   41,   57,    6,   92,   98,   10,   10,   10,   10,   41,   41,   44,   47,   90,   90,   90,   90,   90,
           2,    2,   97,    3,    4,   42,   59,   57,    5,    6,    6,    6,   92,   98,   22,   10,   10,   10,   10,   10,
@@ -1046,13 +1046,13 @@
       };
 
    // Reduction matrix ...
-      ushort Pascal_ParserTables::Rm[12] = 
+      const ushort Pascal_ParserTables::Rm[12] = 
       {
           0,    0,    0,    0,    0,  308,  326,    0,  287,  285,    0,    0
       };
 
    // Reduction matrix row ...
-      short Pascal_ParserTables::Rr[344] = 
+      const short Pascal_ParserTables::Rr[344] = 
       {
         225,  227,  229,    0,    0,    0,    0,  244,  236,    0,  233,    0,    0,  170,    0,  171,    0,    0,    0,    0,
           0,    0,    0,    4,    0,  229,    0,  317,  354,  244,    0,   23,   24,    0,   26,    0,   71,    0,  344,  344,
@@ -1075,7 +1075,7 @@
       };
 
    // Reduction matrix column ...
-      uchar Pascal_ParserTables::Rc[113] = 
+      const uchar Pascal_ParserTables::Rc[113] = 
       {
           0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,
           0,    0,    0,    0,    0,    0,    0,    0,    1,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,
@@ -1086,7 +1086,7 @@
       };
 
    // Production lengths (minus one) ...
-      char Pascal_ParserTables::PL[379] = 
+      const char Pascal_ParserTables::PL[379] = 
       {
           1,    5,    3,    2,    1,    1,    2,    0,    0,    0,    0,    2,    2,    2,    1,    0,    0,    0,    0,    0,
           1,    2,    0,    1,    0,    0,    1,    3,    4,    0,    0,    0,    2,    2,    2,    0,    0,    0,    0,    0,
@@ -1110,7 +1110,7 @@
       };
 
    // Terminal action number ...
-      char Pascal_ParserTables::tact_numb[113] = 
+      const char Pascal_ParserTables::tact_numb[113] = 
       {
           0,   -1,    1,    1,    1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,
          -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,
@@ -1121,7 +1121,7 @@
       };
 
    // Node number for each production ...
-      short Pascal_ParserTables::node_numb[379] = 
+      const short Pascal_ParserTables::node_numb[379] = 
       {
           0,    1,    2,    3,    4,    5,    6,    7,    8,    9,   10,   11,   12,   13,   14,   15,   16,   17,   18,   19,
          -1,   -1,   -1,   20,   -1,   -1,   -1,   -1,   -1,   21,   22,   23,   24,   25,   26,   27,   28,   29,   30,   31,
@@ -1145,7 +1145,7 @@
       };
 
    // Node action numbers ...
-      char Pascal_ParserTables::nact_numb[379] = 
+      const char Pascal_ParserTables::nact_numb[379] = 
       {
          -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,
          -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,

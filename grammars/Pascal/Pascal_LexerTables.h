@@ -11,10 +11,10 @@
       #define LEXER         Pascal_Lexer
 
 /*
-      static ushort Tm[ 18592]        ; // Terminal transition matrix.
-      static ushort Tr[   353]        ; // Terminal transition matrix row.
-      static uchar  Tc[   256]        ; // Terminal transition matrix column.
-      static char   term_numb[   353] ; // Terminal number.
+      static const ushort Tm[ 18592]        ; // Terminal transition matrix.
+      static const ushort Tr[   353]        ; // Terminal transition matrix row.
+      static const uchar  Tc[   256]        ; // Terminal transition matrix column.
+      static const char   term_numb[   353] ; // Terminal number.
 */
 
 //

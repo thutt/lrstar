@@ -44,28 +44,28 @@
          static const char *term_symb[   280]; // Terminal symbols of the grammar.
          static const char *head_symb[   174]; // Nonterminal symbols of the grammar.
          static const char *tact_name[     2]; // Terminal action names found in the grammar.
-         static uchar  head_numb[   618]; // Head symbol number for a production.
-         static ushort f_tail   [   619]; // First tail in a production.
-         static short  tail     [  1265]; // Tail symbol number.
-         static char   arga     [   280]; // Arguments for terminal actions.
+         static const uchar  head_numb[   618]; // Head symbol number for a production.
+         static const ushort f_tail   [   619]; // First tail in a production.
+         static const short  tail     [  1265]; // Tail symbol number.
+         static const char   arga     [   280]; // Arguments for terminal actions.
 
          private:
-         static uchar  Bm[   785]       ; // Boolean matrix.
-         static ushort Br[   635]       ; // Boolean matrix row.
-         static uchar  Bc[   280]       ; // Boolean matrix column.
-         static uchar  Bf[   280]       ; // Boolean matrix filter/mask.
-         static short  Tm[  1996]       ; // Terminal transition matrix.
-         static ushort Tr[   635]       ; // Terminal transition matrix row.
-         static uchar  Tc[   280]       ; // Terminal transition matrix column.
-         static short  Nm[  1094]       ; // Nonterminal transition matrix.
-         static ushort Nr[   635]       ; // Nonterminal transition matrix row.
-         static uchar  Nc[   618]       ; // Nonterminal transition matrix column.
-         static ushort Rm[    13]       ; // Reduction matrix.
-         static short  Rr[   635]       ; // Reduction matrix row.
-         static uchar  Rc[   280]       ; // Reduction matrix column.
-         static char   PL[   618]       ; // Production length minus one.
+         static const uchar  Bm[   785]       ; // Boolean matrix.
+         static const ushort Br[   635]       ; // Boolean matrix row.
+         static const uchar  Bc[   280]       ; // Boolean matrix column.
+         static const uchar Bf[   280]       ; // Boolean matrix filter/mask.
+         static const short  Tm[  1996]       ; // Terminal transition matrix.
+         static const ushort Tr[   635]       ; // Terminal transition matrix row.
+         static const uchar  Tc[   280]       ; // Terminal transition matrix column.
+         static const short  Nm[  1094]       ; // Nonterminal transition matrix.
+         static const ushort Nr[   635]       ; // Nonterminal transition matrix row.
+         static const uchar  Nc[   618]       ; // Nonterminal transition matrix column.
+         static const ushort Rm[    13]       ; // Reduction matrix.
+         static const short  Rr[   635]       ; // Reduction matrix row.
+         static const uchar  Rc[   280]       ; // Reduction matrix column.
+         static const char   PL[   618]       ; // Production length minus one.
 
-         static char   tact_numb[   280]; // Terminal action numbers.
+         static const char   tact_numb[   280]; // Terminal action numbers.
 
          static void   (*init_func[    2]) ()       ; // Init action function pointers.
          static int    (*tact_func[    2]) (int& t) ; // Terminal action function pointers.

@@ -11,10 +11,10 @@
       #define LEXER         Java9_Lexer
 
 /*
-      static ushort Tm[ 27393]        ; // Terminal transition matrix.
-      static ushort Tr[   433]        ; // Terminal transition matrix row.
-      static uchar  Tc[   256]        ; // Terminal transition matrix column.
-      static char   term_numb[   433] ; // Terminal number.
+      static const ushort Tm[ 27393]        ; // Terminal transition matrix.
+      static const ushort Tr[   433]        ; // Terminal transition matrix row.
+      static const uchar  Tc[   256]        ; // Terminal transition matrix column.
+      static const char   term_numb[   433] ; // Terminal number.
 */
 
 //

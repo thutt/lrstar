@@ -296,7 +296,7 @@
       };
 
    // Head symbol numbers for the productions ...
-      uchar CPP5_ParserTables::head_numb[643] = 
+      const uchar CPP5_ParserTables::head_numb[643] = 
       {
           0,    1,    1,    1,    1,    1,    2,    2,    3,    3,    3,    4,    4,    4,    4,    4,    4,    5,    5,    5,
           5,    5,    5,    6,    6,    6,    7,    7,    7,    8,    8,    8,    8,    8,    8,    8,    8,    8,    8,    8,
@@ -334,7 +334,7 @@
       };
 
    // First tail symbol index into the tail list ...
-      ushort CPP5_ParserTables::f_tail[644] = 
+      const ushort CPP5_ParserTables::f_tail[644] = 
       {
           0,    2,    3,    4,    5,    6,    7,    8,   10,   11,   12,   15,   16,   17,   18,   19,   20,   23,   24,   25,
          26,   27,   28,   29,   31,   34,   37,   37,   39,   41,   42,   43,   44,   45,   46,   47,   48,   49,   50,   51,
@@ -372,7 +372,7 @@
       };
 
    // Tail symbol numbers ...
-      short CPP5_ParserTables::tail[1532] = 
+      const short CPP5_ParserTables::tail[1532] = 
       {
        -113,    1,   49,   48,   51,   52,   50,   47,   -2,   47, -156, -157,   79,   -3,   80, -159, -160,   36,   -1,   -2,
          79,  -37,   80,  -58,  -55,  -60,  -62,   53, -162,   37,   -8,   37,  -51,   -7,   37,   -5,   -7, -150,   -7, -149,
@@ -454,7 +454,7 @@
       };
 
    // Boolean matrix ...
-      uchar CPP5_ParserTables::Bm[685] = 
+      const uchar CPP5_ParserTables::Bm[685] = 
       {
           0,    0,    0,    0,    0,    0,    0,  158,  161,    9,  144,  164,    0,    0,    0,    0,    0,  128,    1,    0,
           0,    0,  128,    0,    2,   16,   32,    9,    0,  132,    0,    0,    0,   16,    0,    0,    0,    9,    0,    0,
@@ -494,7 +494,7 @@
       };
 
    // Booeal matrix row (for state)...
-      ushort CPP5_ParserTables::Br[701] = 
+      const ushort CPP5_ParserTables::Br[701] = 
       {
           0,    7,   12,   19,   25,   30,   35,   41,   47,   52,   58,   64,   47,   70,   76,   76,   70,   82,   88,   88,
          94,  100,  104,   93,   88,  111,  111,   47,  117,  124,  124,  130,    0,   58,  137,  143,   47,  149,    0,  152,
@@ -535,7 +535,7 @@
       };
 
    // Booolean matrix column (displacement) ...
-      uchar CPP5_ParserTables::Bc[103] = 
+      const uchar CPP5_ParserTables::Bc[103] = 
       {
           0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    1,    0,
           0,    0,    0,    0,    0,    0,    0,    0,    1,    1,    0,    0,    0,    1,    1,    1,    1,    1,    0,    1,
@@ -546,7 +546,7 @@
       };
 
    // Boolean matrix filter/mask value ...
-      uchar CPP5_ParserTables::Bf[103] = 
+      const uchar CPP5_ParserTables::Bf[103] = 
       {
           1,    2,    4,    8,    8,   16,   32,   64,    8,   32,   32,  128,    4,    4,    8,    4,   32,   16,    1,    8,
           8,    8,   32,   32,    8,    8,   32,   32,    2,    1,   32,   32,    4,    4,    8,   16,    2,   32,   16,   64,
@@ -557,7 +557,7 @@
       };
 
    // Terminal transition matrix ...
-      short CPP5_ParserTables::Tm[6334] = 
+      const short CPP5_ParserTables::Tm[6334] = 
       {
           0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,
           0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,
@@ -879,7 +879,7 @@
       };
 
    // Terminal transition matrix row ...
-      ushort CPP5_ParserTables::Tr[701] = 
+      const ushort CPP5_ParserTables::Tr[701] = 
       {
        6186, 6186, 6186, 6038, 6038, 6038, 1932, 4876, 4876, 6038, 2005, 1075, 2005, 6038, 3468, 4949, 6038, 3540, 1932, 4876,
        6186, 6038, 1932, 6038, 2005, 6038, 6038, 3540, 3051, 1075, 3468, 4249, 6186, 3540,  329, 6260, 4876, 6186, 6186, 6186,
@@ -920,7 +920,7 @@
       };
 
    // Terminal transition matrix column ...
-      uchar CPP5_ParserTables::Tc[103] = 
+      const uchar CPP5_ParserTables::Tc[103] = 
       {
          28,   28,    0,    1,    2,    3,   28,   41,    4,   41,   43,    5,    6,    7,    8,    9,   44,   10,   11,   12,
          13,   14,   45,   30,   15,   16,   31,   32,   33,   17,   34,   35,   18,   42,   19,   20,   36,   56,   21,   43,
@@ -931,7 +931,7 @@
       };
 
    // Nonterminal transition matrix ...
-      short CPP5_ParserTables::Nm[15764] = 
+      const short CPP5_ParserTables::Nm[15764] = 
       {
           0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,   51,    0,    0,    0,  655,    0,    0,
           0,    0,    0,    0,    0,    0,    0,   51,    0,    0,    0,    0,    0,    0,    0,   51,    0,    0,  607,   51,
@@ -1725,7 +1725,7 @@
       };
 
    // Nonterminal transition matrix row ...
-      ushort CPP5_ParserTables::Nr[701] = 
+      const ushort CPP5_ParserTables::Nr[701] = 
       {
       15444,15444,15444,15444, 3283,15444,  738, 4600, 4163,15444, 8795,  610, 7789, 3283,11236,11316,  738, 8872, 4163,  610,
       15444,15444,  226,15444, 7789,  226, 7933, 7933,12028,15444,15444,13126,15444, 7861,15444, 4241, 2060,15444,15444,15444,
@@ -1766,7 +1766,7 @@
       };
 
    // Nonterminal transition matrix column ...
-      uchar CPP5_ParserTables::Nc[643] = 
+      const uchar CPP5_ParserTables::Nc[643] = 
       {
          30,   30,   30,   30,   30,   30,   31,   31,   22,   22,   22,   18,   18,   18,   18,   18,   18,   30,   30,   30,
          30,   30,   30,    5,    5,    5,   31,   31,   31,   22,   22,   22,   22,   22,   22,   22,   22,   22,   22,   22,
@@ -1804,7 +1804,7 @@
       };
 
    // Reduction matrix ...
-      ushort CPP5_ParserTables::Rm[834] = 
+      const ushort CPP5_ParserTables::Rm[834] = 
       {
           0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,  284,    0,
         284,  284,    0,  284,    0,  284,  284,  284,  284,    0,  284,    0,  284,  284,  292,    0,    0,    0,    0,    0,
@@ -1851,7 +1851,7 @@
       };
 
    // Reduction matrix row ...
-      short CPP5_ParserTables::Rr[701] = 
+      const short CPP5_ParserTables::Rr[701] = 
       {
         472,    0,    0,  582,  625,    0,  292,    0,    0,    0,    0,  624,    0,  216,    0,    0,  219,    0,  217,  220,
         -17,  285,    0,    0,  221,  218,  222,    0,    0,    0,    0,    0,  -35,  622,    0,    0,    0,  264,  456,  600,
@@ -1892,7 +1892,7 @@
       };
 
    // Reduction matrix column ...
-      uchar CPP5_ParserTables::Rc[103] = 
+      const uchar CPP5_ParserTables::Rc[103] = 
       {
           0,    0,    1,    2,    2,    3,    0,    0,    2,    0,    0,    2,    1,    1,    2,    1,    0,    3,    1,    2,
           2,    2,    0,    0,    2,    2,    0,    0,    0,    1,    0,    0,    1,    0,    0,    0,    0,    4,    3,    0,
@@ -1903,7 +1903,7 @@
       };
 
    // Production lengths (minus one) ...
-      char CPP5_ParserTables::PL[643] = 
+      const char CPP5_ParserTables::PL[643] = 
       {
           1,    0,    0,    0,    0,    0,    0,    1,    0,    0,    2,    0,    0,    0,    0,    0,    2,    0,    0,    0,
           0,    0,    0,    1,    2,    2,   -1,    1,    1,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,

@@ -876,7 +876,7 @@
       };
 
    // Head symbol numbers for the productions ...
-      ushort Fortran_ParserTables::head_numb[1133] = 
+      const ushort Fortran_ParserTables::head_numb[1133] = 
       {
           0,    1,    1,    2,    2,    3,    3,    3,    3,    4,    4,    5,    6,    7,    8,    9,    9,   10,   11,   11,
          12,   12,   12,   12,   12,   12,   12,   13,   13,   14,   14,   14,   14,   14,   14,   14,   14,   14,   14,   14,
@@ -938,7 +938,7 @@
       };
 
    // First tail symbol index into the tail list ...
-      ushort Fortran_ParserTables::f_tail[1134] = 
+      const ushort Fortran_ParserTables::f_tail[1134] = 
       {
           0,    2,    2,    3,    4,    6,    7,    8,    9,   10,   12,   13,   15,   17,   19,   24,   26,   27,   28,   28,
          30,   32,   34,   35,   37,   38,   40,   41,   41,   43,   45,   47,   48,   50,   51,   53,   54,   56,   57,   59,
@@ -1000,7 +1000,7 @@
       };
 
    // Tail symbol numbers ...
-      short Fortran_ParserTables::tail[1911] = 
+      const short Fortran_ParserTables::tail[1911] = 
       {
          -1,    1,   -2,   -3,   -2,   -3,   -4,   -5,   -6,   -7, -324,   -8,   -8, -189,   -8, -395,   -8,  -38,   -8,  -11,
         -13,  -15,  -17,   -9,  -10, -128, -128,    6,  -11,  -12,  -10, -167,  -10, -146, -146,  -10, -221, -221,  -10, -291,
@@ -1101,7 +1101,7 @@
       };
 
    // Arguments for token actions ...
-      char Fortran_ParserTables::arga[268] = 
+      const char Fortran_ParserTables::arga[268] = 
       {
          -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,
          -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,
@@ -1120,7 +1120,7 @@
       };
 
    // Boolean matrix ...
-      uchar Fortran_ParserTables::Bm[762] = 
+      const uchar Fortran_ParserTables::Bm[762] = 
       {
           0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    4,    0,    0,  192,    2,   32,    0,    0,    2,    0,
           0,    0,    0,    0,    0,    0,    0,    0,    4,    0,    0,    0,    0,    0,    0,    0,    0,   64,    0,    0,
@@ -1164,7 +1164,7 @@
       };
 
    // Booeal matrix row (for state)...
-      ushort Fortran_ParserTables::Br[724] = 
+      const ushort Fortran_ParserTables::Br[724] = 
       {
           8,   18,    8,    0,   28,   37,    0,    4,   16,   16,    0,   28,    0,   28,   45,   53,   62,   71,   79,   28,
          87,   96,   28,  105,  114,   96,   62,  123,  130,  137,    0,   62,   96,   28,   28,   28,    0,   28,   28,   16,
@@ -1206,7 +1206,7 @@
       };
 
    // Booolean matrix column (displacement) ...
-      uchar Fortran_ParserTables::Bc[268] = 
+      const uchar Fortran_ParserTables::Bc[268] = 
       {
           0,    0,    0,    0,    0,    0,    0,    0,    1,    1,    1,    1,    1,    1,    1,    1,    1,    2,    2,    2,
           2,    1,    1,    2,    2,    2,    2,    1,    3,    3,    1,    2,    1,    1,    3,    3,    3,    3,    1,    3,
@@ -1225,7 +1225,7 @@
       };
 
    // Boolean matrix filter/mask value ...
-      uchar Fortran_ParserTables::Bf[268] = 
+      const uchar Fortran_ParserTables::Bf[268] = 
       {
           1,    2,    4,    8,   16,   32,   64,  128,    1,    2,    4,    8,   16,    4,   32,   64,  128,    1,    2,    4,
           8,    4,    4,   16,   32,   64,  128,    4,    1,    2,    4,   64,    4,    4,    4,    8,   16,   32,    4,   64,
@@ -1244,7 +1244,7 @@
       };
 
    // Terminal transition matrix ...
-      short Fortran_ParserTables::Tm[1750] = 
+      const short Fortran_ParserTables::Tm[1750] = 
       {
           0,    0,    0,  555,  556,  557,  558,  559,  564,  565,  566,  568,  569,  570,  571,  576,  577,  578,  579,  580,
         581,  582,  583,  584,  585,  586,  587,  622,  660,  719,  552,  553,    0,  712,  715, -976, -787,  535,  538,    0,
@@ -1337,7 +1337,7 @@
       };
 
    // Terminal transition matrix row ...
-      ushort Fortran_ParserTables::Tr[724] = 
+      const ushort Fortran_ParserTables::Tr[724] = 
       {
        1542, 1542, 1542, 1542, 1542, 1542, 1542, 1542, 1542, 1480, 1542, 1480, 1542, 1418, 1542, 1542, 1542, 1480, 1542,  538,
        1418, 1542,  475, 1542, 1480, 1418, 1480, 1480, 1480,  492, 1542, 1418,  538, 1294, 1186,  583, 1542,  795,  795, 1418,
@@ -1379,7 +1379,7 @@
       };
 
    // Terminal transition matrix column ...
-      uchar Fortran_ParserTables::Tc[268] = 
+      const uchar Fortran_ParserTables::Tc[268] = 
       {
          14,   14,    0,   32,    1,   14,   58,    2,    3,    8,   32,    4,    5,   14,    6,   31,   30,   58,    7,   10,
          61,    8,   30,   32,   34,   14,   44,   10,   33,   12,   34,   31,   12,   11,   11,   28,    9,   29,   29,   51,
@@ -1398,7 +1398,7 @@
       };
 
    // Nonterminal transition matrix ...
-      short Fortran_ParserTables::Nm[3405] = 
+      const short Fortran_ParserTables::Nm[3405] = 
       {
           0,    0,    0,    0,    0,    0,    0,    0,    0,    0, -477,    0,    0,    0,    0,    0,    0,    0,    0,    0,
           0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0, -521,    0,    0,    0,    0,
@@ -1574,7 +1574,7 @@
       };
 
    // Nonterminal transition matrix row ...
-      ushort Fortran_ParserTables::Nr[724] = 
+      const ushort Fortran_ParserTables::Nr[724] = 
       {
        3092, 3092, 2782, 1865, 3092, 3092, 1365, 3092, 3092, 3092, 1640, 3092, 2173, 3092, 3092, 3092, 3092, 2782, 1865, 3092,
        3092, 3092, 3092, 3092, 3092, 3092, 3092, 1365, 1640, 3092, 2782, 3092, 3092, 3092, 3092, 3092, 3092, 1865, 1365, 3092,
@@ -1616,7 +1616,7 @@
       };
 
    // Nonterminal transition matrix column ...
-      ushort Fortran_ParserTables::Nc[1133] = 
+      const ushort Fortran_ParserTables::Nc[1133] = 
       {
           1,    1,    1,  307,  307,  309,  309,  309,  309,    0,    0,    2,   55,   84,    3,    1,    1,  302,   13,   13,
           4,    4,    4,    4,    4,    4,    4,  168,  168,  307,  307,  307,  307,  307,  307,  307,  307,  307,  307,  307,
@@ -1678,7 +1678,7 @@
       };
 
    // Reduction matrix ...
-      ushort Fortran_ParserTables::Rm[298] = 
+      const ushort Fortran_ParserTables::Rm[298] = 
       {
           0,    1,   18,    0,   18,    0,    0,    0,    0,    0,    0,   18,    0,    0,    0,    0,    0,    0,    0,    0,
           0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    2,   18,    0,   18,    0,    0,    0,    0,
@@ -1698,7 +1698,7 @@
       };
 
    // Reduction matrix row ...
-      short Fortran_ParserTables::Rr[724] = 
+      const short Fortran_ParserTables::Rr[724] = 
       {
           0,  -12,  -31,   18,  -12,   27,   18,  -12,  379,  383,   18,  -12,   18,  -12,  -12,  -12,  -12,   52,  -12,  -12,
         -12,  -12,  -12,  -12,  -12,  716,  -12,   59,  -12,  -12,  840,  -12,  -12,  -12,  -12,  -12,  688,  -12,  -12,  731,
@@ -1740,7 +1740,7 @@
       };
 
    // Reduction matrix column ...
-      uchar Fortran_ParserTables::Rc[268] = 
+      const uchar Fortran_ParserTables::Rc[268] = 
       {
           0,    1,    2,    3,    3,    0,    4,    5,    0,    0,    4,    6,    7,    4,    8,    4,    0,    0,    9,    0,
           4,    4,    4,    0,    0,    4,   10,    4,   11,    0,    4,    4,    4,    4,    0,    4,    4,    4,    4,    4,
@@ -1759,7 +1759,7 @@
       };
 
    // Production lengths (minus one) ...
-      char Fortran_ParserTables::PL[1133] = 
+      const char Fortran_ParserTables::PL[1133] = 
       {
           1,   -1,    0,    0,    1,    0,    0,    0,    0,    1,    0,    1,    1,    1,    4,    1,    0,    0,   -1,    1,
           1,    1,    0,    1,    0,    1,    0,   -1,    1,    1,    1,    0,    1,    0,    1,    0,    1,    0,    1,    0,
@@ -1821,7 +1821,7 @@
       };
 
    // Terminal action number ...
-      char Fortran_ParserTables::tact_numb[268] = 
+      const char Fortran_ParserTables::tact_numb[268] = 
       {
           0,   -1,    1,    1,    1,    1,    1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,
          -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,

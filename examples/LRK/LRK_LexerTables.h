@@ -11,10 +11,10 @@
       #define LEXER         LRK_Lexer
 
 /*
-      static uchar  Tm[  1632]        ; // Terminal transition matrix.
-      static ushort Tr[    61]        ; // Terminal transition matrix row.
-      static uchar  Tc[   256]        ; // Terminal transition matrix column.
-      static char   term_numb[    61] ; // Terminal number.
+      static const uchar  Tm[  1632]        ; // Terminal transition matrix.
+      static const ushort Tr[    61]        ; // Terminal transition matrix row.
+      static const uchar  Tc[   256]        ; // Terminal transition matrix column.
+      static const char   term_numb[    61] ; // Terminal number.
 */
 
 //

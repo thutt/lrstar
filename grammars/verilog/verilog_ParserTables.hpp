@@ -443,7 +443,7 @@
       };
 
    // Head symbol numbers for the productions ...
-      uchar verilog_ParserTables::head_numb[521] = 
+      const uchar verilog_ParserTables::head_numb[521] = 
       {
           0,    1,    1,    2,    2,    3,    4,    5,    5,    6,    6,    7,    7,    7,    8,    9,    9,    9,    9,    9,
           9,    9,    9,    9,    9,    9,    9,    9,    9,    9,    9,    9,    9,    9,    9,   10,   11,   11,   11,   12,
@@ -475,7 +475,7 @@
       };
 
    // First tail symbol index into the tail list ...
-      ushort verilog_ParserTables::f_tail[522] = 
+      const ushort verilog_ParserTables::f_tail[522] = 
       {
           0,    2,    3,    4,   11,   17,   18,   22,   23,   28,   29,   33,   34,   38,   44,   45,   46,   47,   48,   49,
          50,   51,   52,   53,   54,   55,   56,   57,   58,   59,   60,   61,   62,   63,   64,   65,   76,   77,   78,   79,
@@ -507,7 +507,7 @@
       };
 
    // Tail symbol numbers ...
-      short verilog_ParserTables::tail[1093] = 
+      const short verilog_ParserTables::tail[1093] = 
       {
        -153,    1,   -2,  -10,   14,   -3, -154,   15,   16, -155,   17,   18,   -3, -154,   16, -155,   17, -147,   19,   -5,
        -157,   21, -158,   22,   -8,   19, -158,   21,   -7,   23,   -7, -160,   24,  -50,  -50,   25, -129,   26,  -50,   25,
@@ -567,7 +567,7 @@
       };
 
    // Arguments for token actions ...
-      char verilog_ParserTables::arga[177] = 
+      const char verilog_ParserTables::arga[177] = 
       {
          -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,
          -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,
@@ -581,7 +581,7 @@
       };
 
    // Boolean matrix ...
-      uchar verilog_ParserTables::Bm[505] = 
+      const uchar verilog_ParserTables::Bm[505] = 
       {
           0,    0,    0,    0,    0,    0,    0,    0,    0,    2,    0,    0,    0,    0,    0,    0,    0,    8,    0,    0,
           0,    0,    0,    0,  128,    0,    0,    0,    0,    0,    0,   16,    0,    0,    0,    0,    0,    0,    8,   12,
@@ -612,7 +612,7 @@
       };
 
    // Booeal matrix row (for state)...
-      ushort verilog_ParserTables::Br[569] = 
+      const ushort verilog_ParserTables::Br[569] = 
       {
           0,    9,   16,   16,   16,   23,   23,   23,   30,   37,   44,   16,   44,    0,   43,   16,   16,    0,    0,    0,
          51,   59,    0,   23,   68,   51,   68,   37,   74,   79,    8,   43,    0,   23,   23,   88,   59,   59,   95,  102,
@@ -646,7 +646,7 @@
       };
 
    // Booolean matrix column (displacement) ...
-      uchar verilog_ParserTables::Bc[177] = 
+      const uchar verilog_ParserTables::Bc[177] = 
       {
           0,    0,    0,    0,    0,    0,    0,    0,    1,    1,    1,    1,    1,    1,    0,    1,    1,    1,    0,    1,
           2,    2,    2,    2,    2,    2,    2,    2,    0,    3,    3,    3,    3,    3,    3,    3,    3,    3,    3,    3,
@@ -660,7 +660,7 @@
       };
 
    // Boolean matrix filter/mask value ...
-      uchar verilog_ParserTables::Bf[177] = 
+      const uchar verilog_ParserTables::Bf[177] = 
       {
           1,    2,    4,    8,   16,   32,   64,  128,    1,    2,    1,    1,    4,    8,    2,   16,   32,   64,    2,  128,
           1,    2,    4,    8,   16,   32,   64,  128,    2,    1,    2,    4,    8,    8,    8,    8,    8,   16,   32,   64,
@@ -674,7 +674,7 @@
       };
 
    // Terminal transition matrix ...
-      short verilog_ParserTables::Tm[1592] = 
+      const short verilog_ParserTables::Tm[1592] = 
       {
        -297, -298, -265,    0, -259, -256,  532,  549, -260,    0,  534, -255, -263,    0,  542,  550, -264,    0,  551,  553,
        -290,    0,  552,  554, -291,    0,  564,  563, -201,  205,  403,  389, -204,  254,  224,  406,  290,  255,  408,  407,
@@ -759,7 +759,7 @@
       };
 
    // Terminal transition matrix row ...
-      ushort verilog_ParserTables::Tr[569] = 
+      const ushort verilog_ParserTables::Tr[569] = 
       {
        1467, 1467, 1467, 1467, 1467, 1467, 1467, 1342, 1467, 1467, 1467, 1467, 1342, 1467, 1467, 1467, 1467, 1467, 1467, 1467,
        1467,  978, 1467, 1217, 1467, 1342, 1342, 1467, 1467, 1467, 1467, 1342, 1467,  853,  131,  978,  978,  978,  978, 1467,
@@ -793,7 +793,7 @@
       };
 
    // Terminal transition matrix column ...
-      uchar verilog_ParserTables::Tc[177] = 
+      const uchar verilog_ParserTables::Tc[177] = 
       {
          57,   57,   78,   55,   57,   78,   59,   55,   57,   60,   78,   59,   60,   79,    9,   10,    0,   19,   20,    1,
           2,    3,   61,   82,   83,   84,    4,    5,   21,   22,   62,    6,   23,   24,   25,   26,   58,   63,   64,    7,
@@ -807,7 +807,7 @@
       };
 
    // Nonterminal transition matrix ...
-      short verilog_ParserTables::Nm[3577] = 
+      const short verilog_ParserTables::Nm[3577] = 
       {
           0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,  100,    0,    0,  206,  362,  286,
         287, -432, -397,    0,    0,    0,    0, -379, -514,  433, -115,  -64, -109, -115, -220, -220,  -45, -115, -171, -109,
@@ -991,7 +991,7 @@
       };
 
    // Nonterminal transition matrix row ...
-      ushort verilog_ParserTables::Nr[569] = 
+      const ushort verilog_ParserTables::Nr[569] = 
       {
        3467, 3467, 3467, 3361, 3064, 3467, 3361, 3467, 3467, 3262, 3467, 2829, 3467, 3467, 3467,  327,  317, 3467, 3467, 3361,
        3467, 2924, 3467, 3467, 3163, 3467, 3163,  308, 3467, 3467, 3467, 3467, 3467, 3467, 3467, 2509, 2797, 2349, 3467,  131,
@@ -1025,7 +1025,7 @@
       };
 
    // Nonterminal transition matrix column ...
-      uchar verilog_ParserTables::Nc[521] = 
+      const uchar verilog_ParserTables::Nc[521] = 
       {
          50,   50,   50,    2,    2,    9,   17,   50,   50,    2,    2,    9,    9,    9,   17,   50,   50,   50,   50,   50,
          50,   50,   50,   50,   50,   50,   50,   50,   50,   50,   50,   50,   50,   50,   50,   32,    0,    0,    0,    2,
@@ -1057,7 +1057,7 @@
       };
 
    // Reduction matrix ...
-      ushort verilog_ParserTables::Rm[153] = 
+      const ushort verilog_ParserTables::Rm[153] = 
       {
           0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,  350,
         350,  369,  350,  350,    0,  350,  350,    0,    0,    0,  350,    0,  350,    0,    0,  350,    0,    0,  426,    0,
@@ -1070,7 +1070,7 @@
       };
 
    // Reduction matrix row ...
-      short verilog_ParserTables::Rr[569] = 
+      const short verilog_ParserTables::Rr[569] = 
       {
         386,    0,    0,    0,    0,  388,  388,    0,    0,  395,    0,    0,    0,  393,   11,    0,    0,  390,  401,  390,
           0,    0,  398,    0,    0,    0,    0,  395,    0,  307,    0,  -17,  515,    0,  368,    0,    0,    0,    0,  395,
@@ -1104,7 +1104,7 @@
       };
 
    // Reduction matrix column ...
-      uchar verilog_ParserTables::Rc[177] = 
+      const uchar verilog_ParserTables::Rc[177] = 
       {
           0,    0,    0,    0,    1,    0,    0,    0,    0,    0,    0,    0,    0,    2,    0,    0,    3,    0,    0,    4,
           5,    6,    7,    8,    9,   10,    9,    9,    0,    0,    0,   11,    0,    0,    0,    0,    0,    0,   12,   13,
@@ -1118,7 +1118,7 @@
       };
 
    // Production lengths (minus one) ...
-      char verilog_ParserTables::PL[521] = 
+      const char verilog_ParserTables::PL[521] = 
       {
           1,    0,    0,    6,    5,    0,    3,    0,    4,    0,    3,    0,    3,    5,    0,    0,    0,    0,    0,    0,
           0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,   10,    0,    0,    0,    4,
@@ -1150,7 +1150,7 @@
       };
 
    // Terminal action number ...
-      char verilog_ParserTables::tact_numb[177] = 
+      const char verilog_ParserTables::tact_numb[177] = 
       {
           0,    1,    1,    1,    1,    1,    1,    1,    1,    1,    1,    1,    1,    1,   -1,   -1,   -1,   -1,   -1,   -1,
          -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,

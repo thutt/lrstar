@@ -11,10 +11,10 @@
       #define LEXER         ANTLR_Lexer
 
 /*
-      static uchar  Tm[  6441]        ; // Terminal transition matrix.
-      static ushort Tr[   136]        ; // Terminal transition matrix row.
-      static uchar  Tc[   256]        ; // Terminal transition matrix column.
-      static char   term_numb[   136] ; // Terminal number.
+      static const uchar  Tm[  6441]        ; // Terminal transition matrix.
+      static const ushort Tr[   136]        ; // Terminal transition matrix row.
+      static const uchar  Tc[   256]        ; // Terminal transition matrix column.
+      static const char   term_numb[   136] ; // Terminal number.
 */
 
 //

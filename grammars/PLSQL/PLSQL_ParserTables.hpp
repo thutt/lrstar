@@ -4556,7 +4556,7 @@
       };
 
    // Head symbol numbers for the productions ...
-      ushort PLSQL_ParserTables::head_numb[6574] = 
+      const ushort PLSQL_ParserTables::head_numb[6574] = 
       {
           0,    1,    1,    1,    1,    1,    1,    1,    1,    1,    1,    1,    1,    1,    1,    1,    1,    1,    1,    1,
           1,    1,    1,    1,    1,    1,    1,    1,    1,    1,    1,    1,    1,    1,    1,    1,    1,    1,    1,    1,
@@ -4890,7 +4890,7 @@
       };
 
    // First tail symbol index into the tail list ...
-      ushort PLSQL_ParserTables::f_tail[6575] = 
+      const ushort PLSQL_ParserTables::f_tail[6575] = 
       {
           0,    2,    3,    4,    5,    6,    7,    8,    9,   10,   11,   12,   13,   14,   15,   16,   17,   18,   19,   20,
          21,   22,   23,   24,   25,   26,   27,   28,   29,   30,   31,   32,   33,   34,   35,   36,   37,   38,   39,   40,
@@ -5224,7 +5224,7 @@
       };
 
    // Tail symbol numbers ...
-      short PLSQL_ParserTables::tail[9789] = 
+      const short PLSQL_ParserTables::tail[9789] = 
       {
        -755,    1, -512, -328, -331,   -3,  -11,  -19,  -83,  -84,  -24,  -43, -375, -212, -114, -195, -237, -242, -135, -201,
        -153, -160, -175, -173,   -4,  -22,  -12,  -13,  -89, -258, -220, -257, -255, -203, -192, -253, -250, -134,  -86,  -25,
@@ -5719,7 +5719,7 @@
       };
 
    // Boolean matrix ...
-      uchar PLSQL_ParserTables::Bm[38006] = 
+      const uchar PLSQL_ParserTables::Bm[38006] = 
       {
           0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,
           0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,
@@ -7625,7 +7625,7 @@
       };
 
    // Booeal matrix row (for state)...
-      ushort PLSQL_ParserTables::Br[3750] = 
+      const ushort PLSQL_ParserTables::Br[3750] = 
       {
           0,   83,  166,    0,  246,  321,    0,  403,  482,  564,    0,  647,  730,  341,  341,  813,  896,  975,  479,    0,
         986, 1069,    0, 1148,  475,    0, 1213, 1292, 1302, 1381,    0,  647, 1464, 1546, 1629, 1292,  813, 1711, 1791, 1854,
@@ -7818,7 +7818,7 @@
       };
 
    // Booolean matrix column (displacement) ...
-      uchar PLSQL_ParserTables::Bc[2285] = 
+      const uchar PLSQL_ParserTables::Bc[2285] = 
       {
           0,    0,    0,    0,    0,    0,    0,    0,    1,    1,    1,    1,    1,    1,    1,    1,    2,    2,    2,    2,
           2,    2,    2,    2,    3,    2,    3,    3,    3,    3,    3,    3,    3,    4,    4,    4,    4,    4,    4,    4,
@@ -7938,7 +7938,7 @@
       };
 
    // Boolean matrix filter/mask value ...
-      uchar PLSQL_ParserTables::Bf[2285] = 
+      const uchar PLSQL_ParserTables::Bf[2285] = 
       {
           1,    2,    4,    8,   16,   32,   64,  128,    1,    2,    4,    8,   16,   32,   64,  128,    1,    2,    4,    8,
          16,   32,   64,  128,    1,  128,    2,    4,    8,   16,   32,   64,  128,    1,    2,    4,    8,   16,   32,   64,
@@ -8058,7 +8058,7 @@
       };
 
    // Terminal transition matrix ...
-      short PLSQL_ParserTables::Tm[74585] = 
+      const short PLSQL_ParserTables::Tm[74585] = 
       {
           0,    0,    0,    0,-4904,-4900, 2424, 2431,  -98,-6087, 2560, 2718, 3055,-5800, 2719, 2867,-6564, -316, 2972, 3054,
        3275,-5372, 3067, 3071, -728, 3288, 3105, 3126, 3314, 3317, 3142, 3143, -921, -900, 3151, 3183,-4755,-4729, 3222, 3260,
@@ -11793,7 +11793,7 @@
       };
 
    // Terminal transition matrix row ...
-      uint PLSQL_ParserTables::Tr[3750] = 
+      const uint PLSQL_ParserTables::Tr[3750] = 
       {
       72332,72332,72332,72332,10656,10656,72332,72332,10656,10656,72332,70079,67826,10656,10656,72332,10656, 9795,10656,72332,
       72332, 9795,72332,10656,72332,72332,10656, 9005,10656,72332,72332,70079, 8144, 9005, 6733, 6162,72332, 7318,10656,72332,
@@ -11986,7 +11986,7 @@
       };
 
    // Terminal transition matrix column ...
-      ushort PLSQL_ParserTables::Tc[2285] = 
+      const ushort PLSQL_ParserTables::Tc[2285] = 
       {
         784,  784,   36,  533,  448,    0,  144,    1,  489,  629,  554,  537,  551,  631,    2,    3,    4,    5,  637,  638,
         658,    6,  639,   45,    7,  273,    8,  660,    9,   10,   11,   12,   13,  386,  667,   14,   15,   16,   17,  580,
@@ -12106,7 +12106,7 @@
       };
 
    // Nonterminal transition matrix ...
-      short PLSQL_ParserTables::Nm[33159] = 
+      const short PLSQL_ParserTables::Nm[33159] = 
       {
           0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0, 2813,    0, 2827,    0, 2828,    0, -104,    0,  522,
           0,  698,    0,  260,    0,  275,    0,  272,    0,    0,-1170,    0,-1169,    0,    0,    0,    0, 2815,    0,  406,
@@ -13769,7 +13769,7 @@
       };
 
    // Nonterminal transition matrix row ...
-      ushort PLSQL_ParserTables::Nr[3750] = 
+      const ushort PLSQL_ParserTables::Nr[3750] = 
       {
       31651,31651,31651,31651,31651,31651,31651,31651,31651,31651,31651,30152,28678,31651,30152,30152,31651,31651,31651,31651,
       31651,28678,31651,31651,31651,31651,31651,31651,31651,31651,31651,27209,30152,31651,31651,31651,27209,24837,31651,31651,
@@ -13962,7 +13962,7 @@
       };
 
    // Nonterminal transition matrix column ...
-      ushort PLSQL_ParserTables::Nc[6574] = 
+      const ushort PLSQL_ParserTables::Nc[6574] = 
       {
          51,   51,   51,   51,   51,   51,   51,   51,   51,   51,   51,   51,   51,   51,   51,   51,   51,   51,   51,   51,
          51,   51,   51,   51,   51,   51,   51,   51,   51,   51,   51,   51,   51,   51,   51,   51,   51,   51,   51,   51,
@@ -14296,7 +14296,7 @@
       };
 
    // Reduction matrix ...
-      ushort PLSQL_ParserTables::Rm[42894] = 
+      const ushort PLSQL_ParserTables::Rm[42894] = 
       {
           0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,
           0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,
@@ -16446,7 +16446,7 @@
       };
 
    // Reduction matrix row ...
-      int PLSQL_ParserTables::Rr[3750] = 
+      const int PLSQL_ParserTables::Rr[3750] = 
       {
        3572, 5707, 3569, 4068,    0,    0, 5713,    0,    0, 3692, 6349,    0, 1482, -177, -354, -531,    0, 1434, 1856, 1436,
        1970, -708, 1451, 2168, 2447, 1476, 2999, 3412, 3508, -885,-1062, 1477,-1239,-1414,    0,    0, 6359, 6359, 5948, 4267,
@@ -16639,7 +16639,7 @@
       };
 
    // Reduction matrix column ...
-      uchar PLSQL_ParserTables::Rc[2285] = 
+      const uchar PLSQL_ParserTables::Rc[2285] = 
       {
           0,    1,    1,    2,    3,    4,    5,    6,    7,    8,    9,    5,   10,    9,   11,   12,   13,    9,   14,    9,
          15,   16,    9,   17,   18,   17,   19,   20,   21,    9,    9,    9,   22,    0,   23,   24,   25,    9,   26,    9,
@@ -16759,7 +16759,7 @@
       };
 
    // Production lengths (minus one) ...
-      char PLSQL_ParserTables::PL[6574] = 
+      const char PLSQL_ParserTables::PL[6574] = 
       {
           1,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,
           0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,

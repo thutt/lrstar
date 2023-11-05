@@ -93,21 +93,21 @@
       };
 
    // Head symbol numbers for the productions ...
-      uchar Calc_ParserTables::head_numb[26] = 
+      const uchar Calc_ParserTables::head_numb[26] = 
       {
           0,    1,    2,    2,    2,    3,    4,    4,    5,    5,    5,    5,    5,    5,    6,    6,    6,    7,    8,    9,
          10,   10,   11,   11,   12,   12
       };
 
    // First tail symbol index into the tail list ...
-      uchar Calc_ParserTables::f_tail[27] = 
+      const uchar Calc_ParserTables::f_tail[27] = 
       {
           0,    2,    7,   11,   15,   20,   21,   24,   27,   28,   31,   34,   37,   40,   43,   44,   45,   48,   50,   52,
          54,   54,   56,   56,   58,   59,   61
       };
 
    // Tail symbol numbers ...
-      char Calc_ParserTables::tail[61] = 
+      const char Calc_ParserTables::tail[61] = 
       {
         -10,    1,   11,    2,   12,  -11,   13,   -3,   14,   -5,   15,   16,   -4,   -7,   17,   16,   -4,   -8,   -9,   17,
           2,   -5,    4,   -5,   -5,    5,   -5,   -6,   -5,    6,   -5,   -5,    7,   -5,   -5,    8,   -5,   -5,    9,   -5,
@@ -116,7 +116,7 @@
       };
 
    // Arguments for token actions ...
-      char Calc_ParserTables::arga[22] = 
+      const char Calc_ParserTables::arga[22] = 
       {
          -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,
          -1,   -1
@@ -130,56 +130,56 @@
       };
 
    // Boolean matrix ...
-      uchar Calc_ParserTables::Bm[30] = 
+      const uchar Calc_ParserTables::Bm[30] = 
       {
           0,    0,    2,    0,    4,    0,    0,    1,    4,   18,   12,    0,  128,  240,    0,  224,    8,    0,   32,    4,
          16,  224,   64,  224,    0,  192,    0,  128,    0,    0
       };
 
    // Booeal matrix row (for state)...
-      uchar Calc_ParserTables::Br[36] = 
+      const uchar Calc_ParserTables::Br[36] = 
       {
           0,    2,    4,    6,    0,    8,    3,   10,   10,   11,   13,   10,   15,   17,    5,   19,   10,   10,   10,   10,
          10,   10,   10,   21,   17,   19,   19,   23,   23,   25,   25,   27,   27,   27,   19,    0
       };
 
    // Booolean matrix column (displacement) ...
-      uchar Calc_ParserTables::Bc[22] = 
+      const uchar Calc_ParserTables::Bc[22] = 
       {
           0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    1,    1,    1,    1,    1,    1,    0,    1,
           1,    2
       };
 
    // Boolean matrix filter/mask value ...
-      uchar Calc_ParserTables::Bf[22] = 
+      const uchar Calc_ParserTables::Bf[22] = 
       {
           1,    2,    4,    8,   16,   16,   32,   32,   64,   64,  128,    2,    1,    2,    4,    8,   16,   32,    8,   64,
         128,    1
       };
 
    // Terminal transition matrix ...
-      char Calc_ParserTables::Tm[33] = 
+      const char Calc_ParserTables::Tm[33] = 
       {
         -15,    0,    0,   -5,    0,    0,    0,    0,  -14,    0,    0,   -1,    0,   11,    7,   -4,    3,   18,   19,   20,
          21,   22,    2,    4,   35,    8,   -2,   16,   -3,   17,  -16,   15,   25
       };
 
    // Terminal transition matrix row ...
-      uchar Calc_ParserTables::Tr[36] = 
+      const uchar Calc_ParserTables::Tr[36] = 
       {
          16,   16,   16,   16,   16,    3,   16,    0,    0,   16,   16,    0,   16,   16,   16,    3,    0,    0,    0,    0,
           0,    0,    0,   16,    3,    3,    3,   16,   16,   16,   16,   16,   16,   16,    3,   16
       };
 
    // Terminal transition matrix column ...
-      uchar Calc_ParserTables::Tc[22] = 
+      const uchar Calc_ParserTables::Tc[22] = 
       {
           8,    8,    0,    8,   11,   13,    1,    2,    3,    4,    5,    6,    7,    8,    9,   10,   11,   12,   13,   14,
          15,   16
       };
 
    // Nonterminal transition matrix ...
-      char Calc_ParserTables::Nm[47] = 
+      const char Calc_ParserTables::Nm[47] = 
       {
           0,    0,    0,   28,   -8,   29,   -8,   30,   -8,   31,   -8,   32,   -8,   33,   -8,  -25,    6,    0,   27,   -8,
         -24,    6,    0,   12,   -8,  -24,    6,    0,   23,   -8,   26,    0,    0,    0,    0,   34,  -23,    6,    9,   10,
@@ -187,69 +187,69 @@
       };
 
    // Nonterminal transition matrix row ...
-      uchar Calc_ParserTables::Nr[36] = 
+      const uchar Calc_ParserTables::Nr[36] = 
       {
          36,   36,   36,   36,   36,   36,   36,   36,   20,   36,   36,   25,   36,   36,   36,   20,   15,    0,    2,    4,
           6,    8,   10,   36,   36,   25,   15,   36,   36,   36,   36,   36,   36,   36,   15,   36
       };
 
    // Nonterminal transition matrix column ...
-      uchar Calc_ParserTables::Nc[26] = 
+      const uchar Calc_ParserTables::Nc[26] = 
       {
          10,   10,    0,    0,    0,    1,    2,    2,    3,    3,    3,    3,    3,    3,    4,    4,    4,    5,    6,    7,
           8,    8,    9,    9,   10,   10
       };
 
    // Reduction matrix ...
-      uchar Calc_ParserTables::Rm[5] = 
+      const uchar Calc_ParserTables::Rm[5] = 
       {
           0,    0,    0,   17,   18
       };
 
    // Reduction matrix row ...
-      char Calc_ParserTables::Rr[36] = 
+      const char Calc_ParserTables::Rr[36] = 
       {
          20,    0,    0,    0,   22,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,
           0,    0,    0,    0,    0,    0,   -2,    6,    7,    9,   10,   11,   12,   13,   19,    0
       };
 
    // Reduction matrix column ...
-      uchar Calc_ParserTables::Rc[22] = 
+      const uchar Calc_ParserTables::Rc[22] = 
       {
           0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    1,    0,    0,
           0,    2
       };
 
    // Production lengths (minus one) ...
-      char Calc_ParserTables::PL[26] = 
+      const char Calc_ParserTables::PL[26] = 
       {
           1,    4,    3,    3,    4,    0,    2,    2,    0,    2,    2,    2,    2,    2,    0,    0,    2,    1,    1,    1,
          -1,    1,   -1,    1,    0,    1
       };
 
    // Terminal action number ...
-      char Calc_ParserTables::tact_numb[22] = 
+      const char Calc_ParserTables::tact_numb[22] = 
       {
           0,   -1,    1,    1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,
          -1,   -1
       };
 
    // Node number for each production ...
-      char Calc_ParserTables::node_numb[26] = 
+      const char Calc_ParserTables::node_numb[26] = 
       {
           0,    1,    2,    3,    3,    4,    5,    6,   -1,    7,    8,    9,   10,   11,   12,   13,   -1,   14,   15,   16,
          -1,   -1,   -1,   -1,   -1,   -1
       };
 
    // Node action numbers ...
-      char Calc_ParserTables::nact_numb[26] = 
+      const char Calc_ParserTables::nact_numb[26] = 
       {
           0,    1,    2,    3,    3,    4,    5,    6,   -1,    7,    8,    9,   10,   11,   12,   13,   -1,   14,   15,   16,
          -1,   -1,   -1,   -1,   -1,   -1
       };
 
    // Reverse the order of nodes ...
-      uchar Calc_ParserTables::reverse[26] = 
+      const uchar Calc_ParserTables::reverse[26] = 
       {
           0,    0,    1,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,
           0,    0,    0,    0,    0,    0

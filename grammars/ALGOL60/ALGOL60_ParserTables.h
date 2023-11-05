@@ -41,25 +41,25 @@
          public:
          static const char *term_symb[    57]; // Terminal symbols of the grammar.
          static const char *head_symb[    77]; // Nonterminal symbols of the grammar.
-         static uchar  head_numb[   169]; // Head symbol number for a production.
-         static ushort f_tail   [   170]; // First tail in a production.
-         static char   tail     [   317]; // Tail symbol number.
+         static const uchar  head_numb[   169]; // Head symbol number for a production.
+         static const ushort f_tail   [   170]; // First tail in a production.
+         static const char   tail     [   317]; // Tail symbol number.
 
          private:
-         static uchar  Bm[   159]       ; // Boolean matrix.
-         static uchar  Br[   148]       ; // Boolean matrix row.
-         static uchar  Bc[    57]       ; // Boolean matrix column.
-         static uchar  Bf[    57]       ; // Boolean matrix filter/mask.
-         static short  Tm[   173]       ; // Terminal transition matrix.
-         static uchar  Tr[   148]       ; // Terminal transition matrix row.
-         static uchar  Tc[    57]       ; // Terminal transition matrix column.
-         static short  Nm[  1137]       ; // Nonterminal transition matrix.
-         static ushort Nr[   148]       ; // Nonterminal transition matrix row.
-         static uchar  Nc[   169]       ; // Nonterminal transition matrix column.
-         static uchar  Rm[    36]       ; // Reduction matrix.
-         static short  Rr[   148]       ; // Reduction matrix row.
-         static uchar  Rc[    57]       ; // Reduction matrix column.
-         static char   PL[   169]       ; // Production length minus one.
+         static const uchar  Bm[   159]       ; // Boolean matrix.
+         static const uchar  Br[   148]       ; // Boolean matrix row.
+         static const uchar  Bc[    57]       ; // Boolean matrix column.
+         static const uchar Bf[    57]       ; // Boolean matrix filter/mask.
+         static const short  Tm[   173]       ; // Terminal transition matrix.
+         static const uchar  Tr[   148]       ; // Terminal transition matrix row.
+         static const uchar  Tc[    57]       ; // Terminal transition matrix column.
+         static const short  Nm[  1137]       ; // Nonterminal transition matrix.
+         static const ushort Nr[   148]       ; // Nonterminal transition matrix row.
+         static const uchar  Nc[   169]       ; // Nonterminal transition matrix column.
+         static const uchar  Rm[    36]       ; // Reduction matrix.
+         static const short  Rr[   148]       ; // Reduction matrix row.
+         static const uchar  Rc[    57]       ; // Reduction matrix column.
+         static const char   PL[   169]       ; // Production length minus one.
       };
 
 //

@@ -11,10 +11,10 @@
       #define LEXER         Typedef_Lexer
 
 /*
-      static uchar  Tm[  1170]        ; // Terminal transition matrix.
-      static ushort Tr[    50]        ; // Terminal transition matrix row.
-      static uchar  Tc[   256]        ; // Terminal transition matrix column.
-      static char   term_numb[    50] ; // Terminal number.
+      static const uchar  Tm[  1170]        ; // Terminal transition matrix.
+      static const ushort Tr[    50]        ; // Terminal transition matrix row.
+      static const uchar  Tc[   256]        ; // Terminal transition matrix column.
+      static const char   term_numb[    50] ; // Terminal number.
 */
 
 //
