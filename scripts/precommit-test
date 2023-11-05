@@ -20,6 +20,15 @@ SCRIPT="${0}";
 PN=${SCRIPT##*/};      # Program name (remove all before last '/').
 DN=${SCRIPT%/*};       # Directory name (removall all after last '/').
 
+
+function fatal ()
+{
+    local msg="${1}";
+    echo "fatal: ${msg}";
+    exit 1;
+}
+
+
 function lrstar ()
 {
     local lrstar="$(lrstar-path)";
@@ -46,6 +55,16 @@ function dfa ()
 }
 
 
+function build ()
+{
+    local grm_dir="${1}";
+
+    rm -f "${grm_dir}/*.o";
+    make \
+        -C "${grm_dir}" \
+        LRSTAR_INSTALL_ROOT=/tmp/lrstar/${LRSTAR_BUILD_TYPE}/usr/local
+ }
+
 function process ()
 {
     local grm_dir="${1}";
@@ -67,28 +86,64 @@ function process ()
     fi;
 
     if [ -r "${lgr}" ] ; then
-        # The lexical grammer exists, the project should be able to
-        # build into an executable with the generated Makefile.
-        rm -f "${grm_dir}/*.o";
-        make \
-            -C "${grm_dir}" \
-            LRSTAR_INSTALL_ROOT=/tmp/lrstar/${LRSTAR_BUILD_TYPE}/usr/local
-    fi;
+        # The lexical grammer exists, the project should build into an
+        # executable with the generated Makefile.
+        build "${grm_dir}";
+   fi;
 }
 
+
+function cleanup ()
+{
+    # Remove all generated files.
+    local grm_dir="${1}";
+    rm -f                                       \
+       ${grm_dir}/*.o                           \
+       ${grm_dir}/$(basename "${grm_dir}");
+}
 
 function main ()
 {
     if [ -v LRSTAR_DIR ] ; then
         local grammars="${LRSTAR_DIR}/grammars";
         local examples="${LRSTAR_DIR}/examples";
+        local grm_name;
 
         cd ${LRSTAR_DIR};
         for grm in ${grammars}/* ${examples}/*; do
             # The Kotlin lexical grammer is not a dfa grammer, so skip
             # testing until that can be sorted out.
             if [ "$(basename ${grm})" != "Kotlin" ] ; then
+                    # Pre-cleanup in case last build & test failed.
+                cleanup "${grm}";
                 process "${grm}";
+
+                # Java1 and Java9 test files do not parse
+                # correctly.  They are both identical, so
+                # I suspect that they both cannot be
+                # correct.
+                #
+                # Similarly, the LRK grammar fails with the default
+                # 'k=<val>'.  Up to at least k=5 fails; so skip it.
+                #
+                grm_name=$(basename "${grm}");
+                if [ "${grm_name}" != "Java1" ] &&
+                   [ "${grm_name}" != "Java9" ] &&
+                   [ "${grm_name}" != "LRK" ]; then
+                    if [ -r "${grm}/test.input.txt" ] ; then
+                        (cd ${grm};
+                         grm_name=$(basename "${grm}");
+                         rc=0;
+                         if ! "${grm}/${grm_name}" test.input.txt; then
+                             rc=1;
+                             echo "${grm}: test parse failed.";
+                         fi;
+                         rm test.output.txt;
+                         exit ${rc});
+                    fi;
+                fi;
+
+                cleanup "${grm}";
             fi;
         done;
     else
