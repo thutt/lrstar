@@ -75,7 +75,7 @@ public:
    static int     init_parser  (char* path, char* input, int max_syms, int max_nodes);
    static int     parse        ();
    static void    term_parser  ();
-   static void    print_prod   (char* prefix, int p, int dot);
+   static void    print_prod   (const char* prefix, int p, int dot);
 
 public:
    // Parser variables
@@ -121,7 +121,7 @@ private:
    static void    nd_optimize       ();
    static int     nd_parser         (int x, int t, int i);
    static int     nd_parser_la      (int i, int la);
-   static void    print_action      (char* str, int i);
+   static void    print_action      (const char* str, int i);
    static void    print_actions     (int na);
    static void    print_lookaheads  ();
 #endif

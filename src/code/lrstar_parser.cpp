@@ -544,9 +544,9 @@ void  PARSER::print_actions (int na)
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////
 
-void  PARSER::print_action (char* str, int i)
+void  PARSER::print_action (const char* str, int i)
 {
-   printf (str);
+   printf ("%s", str);
    int y = Action[i];
    if (y > 0)
    {
@@ -676,7 +676,7 @@ void  PARSER::print_lookaheads()
    {
       if (LAcount[i] != 0)
       {
-         char* msg;
+         const char* msg;
          if (n++ == 0) printf ("\n");
          if (LAcount[i] == 1) msg = "time";
          else                 msg = "times";
@@ -928,7 +928,7 @@ void  PARSER::sort_terms (int* seq)
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////
 
-void  PARSER::print_prod (char* prefix, int p, int dot)
+void  PARSER::print_prod (const char* prefix, int p, int dot)
 {
    const char* symb;
    int len = f_tail[p+1] - f_tail[p];
