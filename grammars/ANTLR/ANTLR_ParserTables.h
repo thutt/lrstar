@@ -5,32 +5,6 @@
 
       #pragma once
 
-      #undef  GRAMMAR
-      #undef  PARSER
-      #undef  PARSER_TABLES
-      #undef  LEXER
-      #undef  ACTIONS
-      #undef  TERM_ACTIONS
-      #undef  NODE_ACTIONS
-      #undef  INSENSITIVE
-      #undef  LOOKAHEADS
-      #undef  DEBUG_PARSER
-      #undef  DEBUG_TRACE
-      #undef  MAKE_AST
-      #undef  EXPECTING
-      #undef  REVERSABLE
-      #undef  SEMANTICS
-      #undef  ND_PARSING
-      #undef  ND_THREADS
-
-      #define GRAMMAR      "ANTLR"
-      #define PARSER        ANTLR_Parser
-      #define PARSER_TABLES ANTLR_ParserTables
-      #define LEXER         ANTLR_Lexer
-      #define ACTIONS       ANTLR_Actions
-      #define TERM_ACTIONS  ANTLR_TermActions
-      #define LOOKAHEADS    1
-      #define EXPECTING
 
       enum termcon
       {
