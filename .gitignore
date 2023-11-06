@@ -1,0 +1,9 @@
+*.grm.conflicts.txt
+*.grm.grammar.txt
+*.grm.log.txt
+*.grm.states.txt
+*.grm.warnings.txt
+*.lgr.conflicts.txt
+*.lgr.grammar.txt
+*.lgr.states.txt
+*.lgr.warnings.txt
