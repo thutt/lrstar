@@ -1,4 +1,0 @@
-
-/* Modula2.lgr grammar */
-
-/* 'g' option was not specified */

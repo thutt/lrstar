@@ -1,4 +1,0 @@
-
-/* ANTLR.lgr grammar */
-
-/* 'g' option was not specified */
