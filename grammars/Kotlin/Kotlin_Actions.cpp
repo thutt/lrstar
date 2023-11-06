@@ -9,12 +9,12 @@
 
 #ifdef ACTIONS
 
-void  ACTIONS::init_actions ()
+void  lrstar_parser_actions::init_actions ()
 {
       /* Initialization code goes here */
 }
 
-void  ACTIONS::term_actions ()
+void  lrstar_parser_actions::term_actions ()
 {
       /* Termination code goes here */
 }
@@ -25,7 +25,7 @@ void  ACTIONS::term_actions ()
 
 #ifdef TERM_ACTIONS
 
-int   TERM_ACTIONS::error (int& t)
+int   lrstar_term_actions::error (int& t)
 {
       if (token.end == token.start)        // Illegal character?
       {
@@ -34,7 +34,7 @@ int   TERM_ACTIONS::error (int& t)
       return 0;
 }
 
-int   TERM_ACTIONS::lookup (int& t)             // Lookup in symbol table.
+int   lrstar_term_actions::lookup (int& t)             // Lookup in symbol table.
 {
       int sti;
       #ifdef ND_PARSING

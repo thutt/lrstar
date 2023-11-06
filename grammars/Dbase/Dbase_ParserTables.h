@@ -11,9 +11,9 @@
       #define PASS_OVER 1
       #define BOTTOM_UP 2
 
-      class Dbase_ParserTables
+      class lrstar_parser_tables
       {
-         friend class Dbase_Parser;
+         friend class lrstar_parser;
          public:
          static const char *term_symb[   280]; // Terminal symbols of the grammar.
          static const char *head_symb[   174]; // Nonterminal symbols of the grammar.

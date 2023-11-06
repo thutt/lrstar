@@ -5,10 +5,8 @@
 
       #pragma once
 
-      #undef  LEXER
       #undef  DEBUG_LEXER
 
-      #define LEXER         verilog_Lexer
 
 /*
       static const ushort Tm[ 27877]        ; // Terminal transition matrix.

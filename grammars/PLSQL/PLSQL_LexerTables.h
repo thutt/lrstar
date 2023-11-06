@@ -5,10 +5,8 @@
 
       #pragma once
 
-      #undef  LEXER
       #undef  DEBUG_LEXER
 
-      #define LEXER         PLSQL_Lexer
 
 /*
       static const ushort Tm[1071672]        ; // Terminal transition matrix.

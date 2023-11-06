@@ -14,54 +14,54 @@
 #define  STKSIZE          100       // Parser-stack size.
 
 // Parser variables ...
-char     PARSER::path[256];         // Path of input file.
-PStack   PARSER::PSstart[STKSIZE];  // Parser stack.
-PStack*  PARSER::PS;                // Parser stack pointer.
-int      PARSER::n_nodes;           // Number of nodes in AST.
-int      PARSER::n_symbols;         // Number of symbols in symbol table.
+char     lrstar_parser::path[256];         // Path of input file.
+PStack   lrstar_parser::PSstart[STKSIZE];  // Parser stack.
+PStack*  lrstar_parser::PS;                // Parser stack pointer.
+int      lrstar_parser::n_nodes;           // Number of nodes in AST.
+int      lrstar_parser::n_symbols;         // Number of symbols in symbol table.
 
 // Expecting list variables ...
-RStack*  PARSER::RS;
-RStack   PARSER::RSstart[STKSIZE];
-uchar*   PARSER::T_exp;
-uchar*   PARSER::S_exam;
+RStack*  lrstar_parser::RS;
+RStack   lrstar_parser::RSstart[STKSIZE];
+uchar*   lrstar_parser::T_exp;
+uchar*   lrstar_parser::S_exam;
 
 // Symbol-table variables ...
-Symbol*  PARSER::symbol;
-uint     PARSER::hashdiv;           // Hash divisor.
-int*     PARSER::hashvec;           // Hash vector.
-int      PARSER::max_cells;         // Maximum number of cells in the hash vector.
-int      PARSER::max_symbols;       // Maximum number of symbols.
+Symbol*  lrstar_parser::symbol;
+uint     lrstar_parser::hashdiv;           // Hash divisor.
+int*     lrstar_parser::hashvec;           // Hash vector.
+int      lrstar_parser::max_cells;         // Maximum number of cells in the hash vector.
+int      lrstar_parser::max_symbols;       // Maximum number of symbols.
 
 // Look-ahead parsing variables ...
 #ifdef ND_PARSING
-int      PARSER::LA;                   // Look Ahead token.
-int      PARSER::last_line;            // Last line from previous ND start.
-int      PARSER::n_warnings;           // Number of warnings.
-SStack*  PARSER::SS      [ND_THREADS]; // State stack pointer.
-SStack*  PARSER::SSstart [ND_THREADS]; // State stack.
-int      PARSER::State   [ND_THREADS]; // State.
-int      PARSER::Action  [ND_THREADS]; // Action.
-int      PARSER::Parsed  [ND_THREADS]; // Parsed (0 or 1).
-int      PARSER::LAcount [LOOKAHEADS+1];
+int      lrstar_parser::LA;                   // Look Ahead token.
+int      lrstar_parser::last_line;            // Last line from previous ND start.
+int      lrstar_parser::n_warnings;           // Number of warnings.
+SStack*  lrstar_parser::SS      [ND_THREADS]; // State stack pointer.
+SStack*  lrstar_parser::SSstart [ND_THREADS]; // State stack.
+int      lrstar_parser::State   [ND_THREADS]; // State.
+int      lrstar_parser::Action  [ND_THREADS]; // Action.
+int      lrstar_parser::Parsed  [ND_THREADS]; // Parsed (0 or 1).
+int      lrstar_parser::LAcount [LOOKAHEADS+1];
 #endif
 
 // AST variables ...
 #ifdef MAKE_AST
-Node*    PARSER::root;           // Current root node.
-Node*    PARSER::node;           // Current PARSER node.
-int      PARSER::max_nodes;      // Maximum number of nodes in PARSER.
-int*     PARSER::counter;        // Node counter array.
-Node*    PARSER::nodearea;       // Node area or Node block allocated.
-char     PARSER::indent[256];    // Indentation for printing current node.
-int      PARSER::traversal;      // PARSER traversal number: 1, 2, 3 ...
-int      PARSER::direction;      // Node direction: TOP_DOWN, BOTTOM_UP.
-Stack*   PARSER::stack;          // PARSER stack array.
-int      PARSER::stacki;         // PARSER stack index.
-char     PARSER::draw_plus[3];
-char     PARSER::draw_vbar[3];
-char     PARSER::draw_last[3];
-char     PARSER::draw_space[3];
+Node*    lrstar_parser::root;           // Current root node.
+Node*    lrstar_parser::node;           // Current parser node.
+int      lrstar_parser::max_nodes;      // Maximum number of nodes in parser.
+int*     lrstar_parser::counter;        // Node counter array.
+Node*    lrstar_parser::nodearea;       // Node area or Node block allocated.
+char     lrstar_parser::indent[256];    // Indentation for printing current node.
+int      lrstar_parser::traversal;      // Parser traversal number: 1, 2, 3 ...
+int      lrstar_parser::direction;      // Node direction: TOP_DOWN, BOTTOM_UP.
+Stack*   lrstar_parser::stack;          // Parser stack array.
+int      lrstar_parser::stacki;         // Parser stack index.
+char     lrstar_parser::draw_plus[3];
+char     lrstar_parser::draw_vbar[3];
+char     lrstar_parser::draw_last[3];
+char     lrstar_parser::draw_space[3];
 #endif
 
 // lowercase[x] is x.
@@ -90,7 +90,7 @@ uchar lowercase[256] =
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////
 
-int   PARSER::init_parser (char* patharg, char* input_start, int max_syms, int max_nodes)
+int   lrstar_parser::init_parser (char* patharg, char* input_start, int max_syms, int max_nodes)
 {
 #ifdef ND_PARSING
    for (int i = 0; i < ND_THREADS; i++)
@@ -108,13 +108,13 @@ int   PARSER::init_parser (char* patharg, char* input_start, int max_syms, int m
    strcpy (path, patharg);
    PS           = PSstart;             // Set parse-stack pointer.
    n_errors     = 0;                   // Set number of errors.
-   n_nodes      = 0;                   // In case of no PARSER creation.
+   n_nodes      = 0;                   // In case of no parser creation.
 
    init_lexer (input_start, 3);        // Initialize the lexer.
    init_symtab (max_syms);             // Initialize the symbol table.
 
 #ifdef MAKE_AST
-   init_ast (max_nodes);               // Initialize the PARSER.
+   init_ast (max_nodes);               // Initialize the parser.
 #endif
 
 #ifdef ACTIONS
@@ -136,7 +136,7 @@ Err:  n_errors++;
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////
 
-void  PARSER::term_parser ()
+void  lrstar_parser::term_parser ()
 {
 #ifdef MAKE_AST
    term_ast ();
@@ -151,7 +151,7 @@ void  PARSER::term_parser ()
 //                                                                                                 //
 //    LR Parser
 
-int   PARSER::parse ()
+int   lrstar_parser::parse ()
 {
    int x, t, T, p;
    x = 0;                                          // State = 0 to start.
@@ -312,7 +312,7 @@ Test: if (Bm [Br[x] + Bc[t]] & Bf[t])              // Check B-matrix for shift a
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////
 
-void  PARSER::reduce (int p)
+void  lrstar_parser::reduce (int p)
 {
 #ifdef SEMANTICS
    if (argy[p] >= 0)
@@ -368,7 +368,7 @@ void  PARSER::reduce (int p)
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////
 
-int   PARSER::nd_parser (int x, int t, int na)
+int   lrstar_parser::nd_parser (int x, int t, int na)
 {
    int  i;
    int  la;             // Lookaheads to try.
@@ -532,7 +532,7 @@ int   PARSER::nd_parser (int x, int t, int na)
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////
 
-void  PARSER::print_actions (int na)
+void  lrstar_parser::print_actions (int na)
 {
    int i = 0;
    do
@@ -544,7 +544,7 @@ void  PARSER::print_actions (int na)
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////
 
-void  PARSER::print_action (const char* str, int i)
+void  lrstar_parser::print_action (const char* str, int i)
 {
    printf ("%s", str);
    int y = Action[i];
@@ -566,7 +566,7 @@ void  PARSER::print_action (const char* str, int i)
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////
 
-int   PARSER::nd_parser_la (int i, int la)            // ND LA Parser.
+int   lrstar_parser::nd_parser_la (int i, int la)            // ND LA Parser.
 {
    int p;                                          // Production (rule).
    if (la == 0) // LA is first one?
@@ -669,7 +669,7 @@ Shft: if (Bm [Br[State[i]] + Bc[LA]] & Bf[LA])        // Check B-matrix for shif
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////
 
-void  PARSER::print_lookaheads()
+void  lrstar_parser::print_lookaheads()
 {
    int n = 0;
    for (int i = 0; i <= LOOKAHEADS; i++)
@@ -691,7 +691,7 @@ void  PARSER::print_lookaheads()
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////
 
-int   PARSER::restore ()
+int   lrstar_parser::restore ()
 {
    while (RS > RSstart)   // Restore PS, RS and states.
    {
@@ -705,7 +705,7 @@ int   PARSER::restore ()
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////
 
-void  PARSER::syntax_error (const char *msg, Token* T, const char* symb)
+void  lrstar_parser::syntax_error (const char *msg, Token* T, const char* symb)
 {
    char  c;
    char* p;
@@ -755,7 +755,7 @@ void  PARSER::syntax_error (const char *msg, Token* T, const char* symb)
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////
 
-void  PARSER::expecting (int x)
+void  lrstar_parser::expecting (int x)
 {
    int t;                                       // Terminal number.
    S_exam[x] = 1;                               // Mark this state as seen.
@@ -802,7 +802,7 @@ void  PARSER::expecting (int x)
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////
 
-void  PARSER::reduction (int q, int x)
+void  lrstar_parser::reduction (int q, int x)
 {
    // Save parse stack pointers.
    RStack* RSx = RS;                // Reset restore-stack pointer.
@@ -839,7 +839,7 @@ Done: PS = PSx;                           // Restore PS.
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////
 
-void  PARSER::print_terms (int state)
+void  lrstar_parser::print_terms (int state)
 {
    printf ("\n");
    if (state >= 0)
@@ -881,7 +881,7 @@ void  PARSER::print_terms (int state)
 
 ////////////////////////////////////////////////////////////////////////////////
 
-void  PARSER::sort_terms (int* seq)
+void  lrstar_parser::sort_terms (int* seq)
 {
    /* seq - the sorted sequence:
       name[seq[0]] gives the first name in the sorted list.
@@ -928,7 +928,7 @@ void  PARSER::sort_terms (int* seq)
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////
 
-void  PARSER::print_prod (const char* prefix, int p, int dot)
+void  lrstar_parser::print_prod (const char* prefix, int p, int dot)
 {
    const char* symb;
    int len = f_tail[p+1] - f_tail[p];
@@ -947,7 +947,7 @@ void  PARSER::print_prod (const char* prefix, int p, int dot)
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////
 
-void  PARSER::print_stack () // Print parser stack.
+void  lrstar_parser::print_stack () // Print parser stack.
 {
 #ifdef DEBUG_PARSER
    printf ("\nParse stack:\n");
@@ -977,7 +977,7 @@ void  PARSER::print_stack () // Print parser stack.
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////
 
-int   PARSER::init_symtab (int max_symb)
+int   lrstar_parser::init_symtab (int max_symb)
 {
    int i;
    n_symbols = 1;                // 0 is reserved for null symbol.
@@ -1005,7 +1005,7 @@ int   PARSER::init_symtab (int max_symb)
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////
 
-void  PARSER::term_symtab ()
+void  lrstar_parser::term_symtab ()
 {
    n_symbols--;
    delete [] symbol;
@@ -1014,7 +1014,7 @@ void  PARSER::term_symtab ()
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////
 
-int   PARSER::add_symbol (int t, char* token_start, char* token_end)
+int   lrstar_parser::add_symbol (int t, char* token_start, char* token_end)
 {
    char* p = token_start;                    // Point at start.
    int   length = (int)(token_end - p);      // Set length.
@@ -1075,7 +1075,7 @@ int   PARSER::add_symbol (int t, char* token_start, char* token_end)
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////
 
-void  PARSER::print_symtab ()
+void  lrstar_parser::print_symtab ()
 {
 #ifdef DEBUG_PARSER
    fprintf (output, "\nSymbol Table ...\n\n");
@@ -1102,7 +1102,7 @@ void  PARSER::print_symtab ()
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////
 
-char* PARSER::symbol_name (int sti)
+char* lrstar_parser::symbol_name (int sti)
 {
    int i;
    char* p;
@@ -1139,7 +1139,7 @@ char* PARSER::symbol_name (int sti)
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////
 
-char* PARSER::symbol_name (char* start, char* end)
+char* lrstar_parser::symbol_name (char* start, char* end)
 {
    char *p, *q;
    static char name[100];
@@ -1159,7 +1159,7 @@ char* PARSER::symbol_name (char* start, char* end)
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////
 
-int   PARSER::linkup (int p)
+int   lrstar_parser::linkup (int p)
 {
    int i;
    int next = -1;
@@ -1202,7 +1202,7 @@ int   PARSER::linkup (int p)
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////
 
-void  PARSER::tracer (Node* n)
+void  lrstar_parser::tracer (Node* n)
 {
 #ifdef DEBUG_TRACE
 #ifdef NODE_ACTIONS
@@ -1217,14 +1217,14 @@ void  PARSER::tracer (Node* n)
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////
 
-int   PARSER::init_ast (int max)
+int   lrstar_parser::init_ast (int max)
 {
    n_nodes   = 1;
    max_nodes = max;  // max_nodes to allocate as needed.
    nodearea  = new Node[max_nodes];
    if (nodearea == NULL)
    {
-      printf ("Not enough memory available for %d PARSER nodes.\n", max_nodes);
+      printf ("Not enough memory available for %d parser nodes.\n", max_nodes);
       quit (1); // Failure.
    }
    node         =  new_node();
@@ -1246,7 +1246,7 @@ int   PARSER::init_ast (int max)
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////
 
-void  PARSER::term_ast ()
+void  lrstar_parser::term_ast ()
 {
    n_nodes--;
    delete [] stack;
@@ -1255,14 +1255,14 @@ void  PARSER::term_ast ()
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////
 
-Node* PARSER::new_node()
+Node* lrstar_parser::new_node()
 {
    if (n_nodes % max_nodes == 0)                   // Filled up nodearea?
    {
       nodearea = new Node[max_nodes];              // Get another nodearea.
       if (nodearea == NULL)                        // Not got?
       {
-         printf ("\nNot enough memory available for %d PARSER nodes.\n\n", max_nodes);
+         printf ("\nNot enough memory available for %d parser nodes.\n\n", max_nodes);
          quit (1); // Failure.
       }
    }
@@ -1273,7 +1273,7 @@ Node* PARSER::new_node()
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////
 
-void  PARSER::find_root (Node* last_node)
+void  lrstar_parser::find_root (Node* last_node)
 {
    root = last_node;                // Define root node.
    if (root != 0)
@@ -1287,7 +1287,7 @@ void  PARSER::find_root (Node* last_node)
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////
 
-void  PARSER::print_ast ()
+void  lrstar_parser::print_ast ()
 {
 #ifdef DEBUG_PARSER
    print_ast (root);
@@ -1296,7 +1296,7 @@ void  PARSER::print_ast ()
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////
 
-void  PARSER::print_ast (Node* n) // Print subtree.
+void  lrstar_parser::print_ast (Node* n) // Print subtree.
 {
    char indent [512];
    strcpy (indent, draw_space);
@@ -1304,17 +1304,17 @@ void  PARSER::print_ast (Node* n) // Print subtree.
    if (n != 0)
    {
       fprintf (output, "   sti  line   col  \n");
-      traverse (indent, n); // Start PARSER traversal.
+      traverse (indent, n); // Start parser traversal.
    }
    else
    {
-      fprintf (output, "   PARSER is empty.\n");
+      fprintf (output, "   Parser is empty.\n");
    }
 }
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////
 
-void  PARSER::traverse (int trav)
+void  lrstar_parser::traverse (int trav)
 {
 #ifdef NODE_ACTIONS
    if (n_nodes > 1) // Any nodes in the tree?
@@ -1348,7 +1348,7 @@ void  PARSER::traverse (int trav)
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////
 
-void  PARSER::traverse (Node* n)
+void  lrstar_parser::traverse (Node* n)
 {
 #ifdef NODE_ACTIONS
    int   i  = n->id;             // Node id.
@@ -1389,7 +1389,7 @@ void  PARSER::traverse (Node* n)
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////
 
-void  PARSER::traverse (char *indent, Node* n)
+void  lrstar_parser::traverse (char *indent, Node* n)
 {
    while (n->next != 0)
    {
@@ -1418,7 +1418,7 @@ void  PARSER::traverse (char *indent, Node* n)
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////
 
-void  PARSER::print_node (char *indent, Node* n)
+void  lrstar_parser::print_node (char *indent, Node* n)
 {
    int id  = n->id;
    int sti = n->sti;

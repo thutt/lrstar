@@ -19,7 +19,7 @@
       static int err_used     =    0; // <error> used in grammar?
 
    // Terminal symbols of the grammar ...
-      const char* Typedef_ParserTables::term_symb[12] = 
+      const char* lrstar_parser_tables::term_symb[12] = 
       {
          "<error>",
          "<eof>",
@@ -36,7 +36,7 @@
       };
 
    // Nonterminal symbols of the grammar ...
-      const char *Typedef_ParserTables::head_symb[14] = 
+      const char *lrstar_parser_tables::head_symb[14] = 
       {
          "Goal",
          "Declaration",
@@ -55,182 +55,182 @@
       };
 
    // Terninal action names found in the grammar ...
-      const char *Typedef_ParserTables::tact_name[2] = 
+      const char *lrstar_parser_tables::tact_name[2] = 
       {
          "error",
          "lookup"
       };
 
    // Node names found in the grammar ...
-      const char * Typedef_ParserTables::node_name[1] = 
+      const char * lrstar_parser_tables::node_name[1] = 
       {
          "hello_"
       };
 
    // Head symbol numbers for the productions ...
-      const uchar Typedef_ParserTables::head_numb[24] = 
+      const uchar lrstar_parser_tables::head_numb[24] = 
       {
           0,    1,    1,    2,    3,    4,    5,    6,    7,    8,    8,    8,    8,    8,    9,    9,   10,   10,   11,   11,
          12,   12,   13,   13
       };
 
    // First tail symbol index into the tail list ...
-      const uchar Typedef_ParserTables::f_tail[25] = 
+      const uchar lrstar_parser_tables::f_tail[25] = 
       {
           0,    2,    5,    9,   10,   11,   13,   15,   16,   17,   18,   19,   20,   21,   22,   22,   24,   25,   27,   28,
          31,   32,   35,   35,   37
       };
 
    // Tail symbol numbers ...
-      const char Typedef_ParserTables::tail[37] = 
+      const char lrstar_parser_tables::tail[37] = 
       {
          -9,    1,  -10,   -2,    3,    4,  -10,   -3,    3,  -11,  -12,  -13,    2,  -13,   -6,    2,    7,    8,    9,   10,
          11,    6,   -9,   -1,   -8,  -10,   -8,   -4,  -11,    5,   -4,   -5,  -12,    5,   -5,  -13,   -7
       };
 
    // Arguments for token actions ...
-      const char Typedef_ParserTables::arga[12] = 
+      const char lrstar_parser_tables::arga[12] = 
       {
          -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1
       };
 
    // First arguments for productions ...
-      char Typedef_ParserTables::argx[24] = 
+      char lrstar_parser_tables::argx[24] = 
       {
          -1,   -1,   -1,   -1,   -1,   -1,   -1,    0,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,
          -1,   -1,   -1,   -1
       };
 
    // Second arguments for productions ...
-      char Typedef_ParserTables::argy[24] = 
+      char lrstar_parser_tables::argy[24] = 
       {
          -1,   -1,   -1,   -1,   -1,   -1,   -1,    6,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,
          -1,   -1,   -1,   -1
       };
 
    // Boolean matrix ...
-      const uchar Typedef_ParserTables::Bm[6] = 
+      const uchar lrstar_parser_tables::Bm[6] = 
       {
           0,   34,   32,    8,   16,    4
       };
 
    // Boolean matrix row (for state)...
-      const uchar Typedef_ParserTables::Br[14] = 
+      const uchar lrstar_parser_tables::Br[14] = 
       {
           0,    1,    2,    2,    3,    4,    5,    2,    0,    3,    4,    5,    0,    0
       };
 
    // Boolean matrix column (displacement) ...
-      const uchar Typedef_ParserTables::Bc[12] = 
+      const uchar lrstar_parser_tables::Bc[12] = 
       {
           0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0
       };
 
    // Boolean matrix filter/mask value ...
-      const uchar Typedef_ParserTables::Bf[12] = 
+      const uchar lrstar_parser_tables::Bf[12] = 
       {
           1,    2,    4,    8,    2,   16,   32,    4,   32,   32,   32,   32
       };
 
    // Terminal transition matrix ...
-      const char Typedef_ParserTables::Tm[18] = 
+      const char lrstar_parser_tables::Tm[18] = 
       {
           0,   -7,   -2,    0,   12,    0,   -8,   13,   -5,   -1,    3,    8,  -13,   -8,   -9,  -10,  -11,  -12
       };
 
    // Terminal transition matrix row ...
-      const uchar Typedef_ParserTables::Tr[14] = 
+      const uchar lrstar_parser_tables::Tr[14] = 
       {
           7,    7,    7,    7,    7,    7,    7,    7,    7,    0,    0,    0,    7,    7
       };
 
    // Terminal transition matrix column ...
-      const uchar Typedef_ParserTables::Tc[12] = 
+      const uchar lrstar_parser_tables::Tc[12] = 
       {
           0,    0,    1,    2,    3,    4,    5,    6,    7,    8,    9,   10
       };
 
    // Nonterminal transition matrix ...
-      const char Typedef_ParserTables::Nm[32] = 
+      const char lrstar_parser_tables::Nm[32] = 
       {
           0,  -21,  -16,    0,    7,    0,    0,   11,    4,  -18,  -17,    0,    0,    5,    0,    6,    9,  -20,  -17,    0,
           0,    0,   10,   11,  -15,  -19,  -16,    1,    2,   -6,  -23,    6
       };
 
    // Nonterminal transition matrix row ...
-      const uchar Typedef_ParserTables::Nr[14] = 
+      const uchar lrstar_parser_tables::Nr[14] = 
       {
          24,   24,    8,    0,   24,   24,   24,   16,   24,   24,   24,   24,    0,   24
       };
 
    // Nonterminal transition matrix column ...
-      const uchar Typedef_ParserTables::Nc[24] = 
+      const uchar lrstar_parser_tables::Nc[24] = 
       {
           0,    0,    0,    0,    0,    1,    1,    5,    6,    2,    2,    2,    2,    2,    3,    3,    4,    4,    5,    5,
           6,    6,    7,    7
       };
 
    // Reduction matrix ...
-      const uchar Typedef_ParserTables::Rm[1] = 
+      const uchar lrstar_parser_tables::Rm[1] = 
       {
           0
       };
 
    // Reduction matrix row ...
-      const uchar Typedef_ParserTables::Rr[14] = 
+      const uchar lrstar_parser_tables::Rr[14] = 
       {
          14,    0,   22,    0,    0,    3,    0,   22,   22,    0,    4,    0,   22,    0
       };
 
    // Reduction matrix column ...
-      const uchar Typedef_ParserTables::Rc[12] = 
+      const uchar lrstar_parser_tables::Rc[12] = 
       {
           0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0
       };
 
    // Production lengths (minus one) ...
-      const char Typedef_ParserTables::PL[24] = 
+      const char lrstar_parser_tables::PL[24] = 
       {
           1,    2,    3,    0,    0,    1,    1,    0,    0,    0,    0,    0,    0,    0,   -1,    1,    0,    1,    0,    2,
           0,    2,   -1,    1
       };
 
    // Terminal action number ...
-      const char Typedef_ParserTables::tact_numb[12] = 
+      const char lrstar_parser_tables::tact_numb[12] = 
       {
           0,   -1,    1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1
       };
 
    // Node number for each production ...
-      const char Typedef_ParserTables::node_numb[24] = 
+      const char lrstar_parser_tables::node_numb[24] = 
       {
          -1,   -1,   -1,   -1,   -1,   -1,   -1,    0,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,
          -1,   -1,   -1,   -1
       };
 
    // Node action numbers ...
-      const char Typedef_ParserTables::nact_numb[24] = 
+      const char lrstar_parser_tables::nact_numb[24] = 
       {
          -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,
          -1,   -1,   -1,   -1
       };
 
    // Init action function pointers ...
-      void (*Typedef_ParserTables::init_func[2]) () =
+      void (*lrstar_parser_tables::init_func[2]) () =
       {
-         Typedef_Actions::init_actions,
-         Typedef_Actions::term_actions
+         lrstar_parser_actions::init_actions,
+         lrstar_parser_actions::term_actions
       };
 
    // Terminal action function pointers ...
-      int (*Typedef_ParserTables::tact_func[2]) (int& t) =
+      int (*lrstar_parser_tables::tact_func[2]) (int& t) =
       {
-         Typedef_TermActions::error,
-         Typedef_TermActions::lookup
+         lrstar_term_actions::error,
+         lrstar_term_actions::lookup
       };
 
    // Node action function pointers ...
-      int (*Typedef_ParserTables::nact_func[1]) (void* v) = 
+      int (*lrstar_parser_tables::nact_func[1]) (void* v) = 
       {
          0
       };

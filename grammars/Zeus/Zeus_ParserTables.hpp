@@ -19,7 +19,7 @@
       static int err_used     =    0; // <error> used in grammar?
 
    // Terminal symbols of the grammar ...
-      const char* Zeus_ParserTables::term_symb[71] = 
+      const char* lrstar_parser_tables::term_symb[71] = 
       {
          "<error>",
          "<eof>",
@@ -95,7 +95,7 @@
       };
 
    // Nonterminal symbols of the grammar ...
-      const char *Zeus_ParserTables::head_symb[114] = 
+      const char *lrstar_parser_tables::head_symb[114] = 
       {
          "Grammar",
          "HardwareCompilationUnit",
@@ -214,14 +214,14 @@
       };
 
    // Terninal action names found in the grammar ...
-      const char *Zeus_ParserTables::tact_name[2] = 
+      const char *lrstar_parser_tables::tact_name[2] = 
       {
          "error",
          "lookup"
       };
 
    // Head symbol numbers for the productions ...
-      const uchar Zeus_ParserTables::head_numb[222] = 
+      const uchar lrstar_parser_tables::head_numb[222] = 
       {
           0,    1,    1,    2,    3,    4,    4,    5,    5,    6,    6,    7,    7,    8,    8,    9,    9,   10,   10,   11,
          11,   12,   12,   13,   13,   14,   14,   15,   15,   16,   17,   17,   18,   18,   19,   20,   20,   21,   21,   22,
@@ -238,7 +238,7 @@
       };
 
    // First tail symbol index into the tail list ...
-      const ushort Zeus_ParserTables::f_tail[223] = 
+      const ushort lrstar_parser_tables::f_tail[223] = 
       {
           0,    2,    3,    4,   13,   15,   23,   32,   32,   34,   35,   36,   37,   38,   39,   42,   43,   46,   46,   48,
          51,   56,   59,   63,   64,   65,   66,   69,   70,   73,   78,   79,   80,   81,   84,   87,   89,   93,   94,   95,
@@ -255,7 +255,7 @@
       };
 
    // Tail symbol numbers ...
-      const char Zeus_ParserTables::tail[479] = 
+      const char lrstar_parser_tables::tail[479] = 
       {
          -1,    1,   -2,   -3,    3,    4,    2,    5,  -10,   -5,    6,    2,    7,    8,   -4,    4,    2,    5,  -10,  -58,
           6,    2,  -13,    4,    2,    5,  -10,  -12,  -58,    6,    2,  -13,   -5,   -6,   -7,  -61,   -8,   -9,    9,   -8,
@@ -284,7 +284,7 @@
       };
 
    // Arguments for token actions ...
-      const char Zeus_ParserTables::arga[71] = 
+      const char lrstar_parser_tables::arga[71] = 
       {
          -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,
          -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,
@@ -293,7 +293,7 @@
       };
 
    // Boolean matrix ...
-      const uchar Zeus_ParserTables::Bm[340] = 
+      const uchar lrstar_parser_tables::Bm[340] = 
       {
           0,    0,    0,    0,    0,    0,    0,    8,    0,    0,    0,    0,    0,    0,    2,    0,    0,    0,    0,    0,
           0,   16,    0,    0,    0,    0,    0,    0,    4,    0,    0,    0,    0,    0,   32,    0,    0,    0,    0,    0,
@@ -315,7 +315,7 @@
       };
 
    // Boolean matrix row (for state)...
-      const ushort Zeus_ParserTables::Br[229] = 
+      const ushort lrstar_parser_tables::Br[229] = 
       {
           7,   14,   21,   21,   28,   28,   34,   34,    0,    0,   40,   47,   53,   28,   28,   60,   28,   28,   28,   28,
          67,    0,    0,   74,   81,   28,   28,   87,   27,   28,   34,   11,   34,   11,   34,   92,   34,   97,   60,  102,
@@ -332,7 +332,7 @@
       };
 
    // Boolean matrix column (displacement) ...
-      const uchar Zeus_ParserTables::Bc[71] = 
+      const uchar lrstar_parser_tables::Bc[71] = 
       {
           0,    0,    0,    0,    0,    0,    0,    0,    0,    1,    1,    1,    1,    1,    1,    1,    1,    2,    2,    2,
           2,    2,    2,    2,    2,    2,    2,    2,    2,    3,    3,    3,    3,    3,    3,    3,    3,    3,    3,    3,
@@ -341,7 +341,7 @@
       };
 
    // Boolean matrix filter/mask value ...
-      const uchar Zeus_ParserTables::Bf[71] = 
+      const uchar lrstar_parser_tables::Bf[71] = 
       {
           1,    2,    4,    8,   16,   32,   64,  128,    8,    1,    2,    4,    8,   16,   32,   64,  128,    1,    2,    4,
           8,   16,   32,   32,   64,   64,   64,  128,  128,    1,    2,    4,    4,    4,    4,    4,    8,   16,   32,   64,
@@ -350,7 +350,7 @@
       };
 
    // Terminal transition matrix ...
-      const short Zeus_ParserTables::Tm[400] = 
+      const short lrstar_parser_tables::Tm[400] = 
       {
         110,  114,  154,  -26,  178,  -36, -121,  107,    0,   65, -126, -177,  176,   51,    0, -217,    0,  125,   57,  -24,
         166,    0,  -23,   51,  -22,   55,   51,    0,  -34,  -43,  124,    0,    0,  -25,  -20,   55,   99,  132,   65,  -43,
@@ -375,7 +375,7 @@
       };
 
    // Terminal transition matrix row ...
-      const ushort Zeus_ParserTables::Tr[229] = 
+      const ushort lrstar_parser_tables::Tr[229] = 
       {
         357,  357,  357,  314,  357,  314,  357,  314,  357,  357,  357,  314,  357,  228,  271,  314,  126,  156,   45,  228,
         314,  357,  357,  185,  228,   45,   56,  228,  228,   18,  271,  357,  126,  314,  156,  228,   45,  357,  228,  314,
@@ -392,7 +392,7 @@
       };
 
    // Terminal transition matrix column ...
-      const uchar Zeus_ParserTables::Tc[71] = 
+      const uchar lrstar_parser_tables::Tc[71] = 
       {
           6,    6,    0,    7,    3,    1,    8,    4,   39,   13,   14,   42,    5,    6,    7,   15,   16,   17,   36,    2,
          40,   18,    3,    4,   22,   24,   25,   27,   34,   28,   29,   39,   42,    5,    6,    7,    8,    9,   10,   11,
@@ -401,7 +401,7 @@
       };
 
    // Nonterminal transition matrix ...
-      const short Zeus_ParserTables::Nm[1154] = 
+      const short lrstar_parser_tables::Nm[1154] = 
       {
         -42, -194,  -42,  206,  -42, -193,  -42,   47,    0,    0,  -90,  -87,  -42,   47,    0,  123,  -90,  -86,  -42,   47,
           0,  -42,  102,  -42,  102,    0,    0,    0,    0,    0,    0,    0,    0,  -89,  -42,  102,  -42,  102,    0,  -89,
@@ -464,7 +464,7 @@
       };
 
    // Nonterminal transition matrix row ...
-      const ushort Zeus_ParserTables::Nr[229] = 
+      const ushort lrstar_parser_tables::Nr[229] = 
       {
        1089, 1089, 1089, 1089, 1089, 1089, 1089, 1089, 1089, 1024, 1089, 1024, 1089, 1089, 1089,  848, 1089, 1089, 1089, 1024,
         735, 1089, 1089, 1089,  848, 1089, 1089, 1089, 1089, 1089, 1089, 1089, 1089, 1089, 1089, 1089, 1089, 1089,  848, 1089,
@@ -481,7 +481,7 @@
       };
 
    // Nonterminal transition matrix column ...
-      const uchar Zeus_ParserTables::Nc[222] = 
+      const uchar lrstar_parser_tables::Nc[222] = 
       {
           5,    5,    5,   50,   11,   18,   18,   13,   13,   48,   48,    2,    2,    3,    3,    4,    4,   49,   49,   62,
          62,    5,    5,    6,    6,   17,   17,   50,   50,   11,   18,   18,   13,   13,   14,   15,   15,   61,   61,   20,
@@ -498,13 +498,13 @@
       };
 
    // Reduction matrix ...
-      const uchar Zeus_ParserTables::Rm[1] = 
+      const uchar lrstar_parser_tables::Rm[1] = 
       {
           0
       };
 
    // Reduction matrix row ...
-      const uchar Zeus_ParserTables::Rr[229] = 
+      const uchar lrstar_parser_tables::Rr[229] = 
       {
           0,    0,    0,    0,    0,    0,    0,    0,   17,   17,    7,    0,    0,    0,    0,    0,   11,   12,  114,  115,
           0,  173,  180,    0,    0,   10,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,
@@ -521,7 +521,7 @@
       };
 
    // Reduction matrix column ...
-      const uchar Zeus_ParserTables::Rc[71] = 
+      const uchar lrstar_parser_tables::Rc[71] = 
       {
           0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,
           0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,
@@ -530,7 +530,7 @@
       };
 
    // Production lengths (minus one) ...
-      const char Zeus_ParserTables::PL[222] = 
+      const char lrstar_parser_tables::PL[222] = 
       {
           1,    0,    0,    8,    1,    7,    8,   -1,    1,    0,    0,    0,    0,    0,    2,    0,    2,   -1,    1,    2,
           4,    2,    3,    0,    0,    0,    2,    0,    2,    4,    0,    0,    0,    2,    2,    1,    3,    0,    0,   -1,
@@ -547,7 +547,7 @@
       };
 
    // Terminal action number ...
-      const char Zeus_ParserTables::tact_numb[71] = 
+      const char lrstar_parser_tables::tact_numb[71] = 
       {
           0,   -1,    1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,
          -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,
@@ -556,17 +556,17 @@
       };
 
    // Init action function pointers ...
-      void (*Zeus_ParserTables::init_func[2]) () =
+      void (*lrstar_parser_tables::init_func[2]) () =
       {
-         Zeus_Actions::init_actions,
-         Zeus_Actions::term_actions
+         lrstar_parser_actions::init_actions,
+         lrstar_parser_actions::term_actions
       };
 
    // Terminal action function pointers ...
-      int (*Zeus_ParserTables::tact_func[2]) (int& t) =
+      int (*lrstar_parser_tables::tact_func[2]) (int& t) =
       {
-         Zeus_TermActions::error,
-         Zeus_TermActions::lookup
+         lrstar_term_actions::error,
+         lrstar_term_actions::lookup
       };
 
 //

@@ -10,12 +10,12 @@
 
 #ifdef ACTIONS
 
-void    ACTIONS::init_actions ()
+void    lrstar_parser_actions::init_actions ()
 {
     /* Initialization code goes here */
 }
 
-void    ACTIONS::term_actions ()
+void    lrstar_parser_actions::term_actions ()
 {
     /* Termination code goes here */
 }
@@ -26,7 +26,7 @@ void    ACTIONS::term_actions ()
 
 #ifdef TERM_ACTIONS
 
-int   TERM_ACTIONS::error (int& t)
+int   lrstar_term_actions::error (int& t)
 {
     if (token.end == token.start) // Illegal character?
     {
@@ -35,7 +35,7 @@ int   TERM_ACTIONS::error (int& t)
     return 0;
 }
 
-int   TERM_ACTIONS::lookup (int& t)                             // Lookup in symbol table.
+int   lrstar_term_actions::lookup (int& t)                             // Lookup in symbol table.
 {
     int sti;
 #ifdef ND_PARSING
@@ -60,7 +60,7 @@ int   TERM_ACTIONS::lookup (int& t)                             // Lookup in sym
 
 #ifdef NODE_ACTIONS
 
-int     NODE_ACTIONS::goal_ (void* v)
+int     lrstar_node_actions::goal_ (void* v)
 {
     Node* n = (Node*)v;
     if (traversal == FIRST_PASS)
@@ -76,7 +76,7 @@ int     NODE_ACTIONS::goal_ (void* v)
     return 1; // OK
 }
 
-int     NODE_ACTIONS::program_ (void* v)
+int     lrstar_node_actions::program_ (void* v)
 {
     Node* n = (Node*)v;
     if (traversal == FIRST_PASS)
@@ -92,7 +92,7 @@ int     NODE_ACTIONS::program_ (void* v)
     return 1; // OK
 }
 
-int     NODE_ACTIONS::ident_ (void* v)
+int     lrstar_node_actions::ident_ (void* v)
 {
     Node* n = (Node*)v;
     if (traversal == FIRST_PASS)
@@ -107,7 +107,7 @@ int     NODE_ACTIONS::ident_ (void* v)
     return 1; // OK
 }
 
-int     NODE_ACTIONS::int_ (void* v)
+int     lrstar_node_actions::int_ (void* v)
 {
     Node* n = (Node*)v;
     if (traversal == FIRST_PASS)
@@ -122,7 +122,7 @@ int     NODE_ACTIONS::int_ (void* v)
     return 1; // OK
 }
 
-int     NODE_ACTIONS::add_ (void* v)
+int     lrstar_node_actions::add_ (void* v)
 {
     Node* n = (Node*)v;
     if (traversal == FIRST_PASS)
@@ -137,7 +137,7 @@ int     NODE_ACTIONS::add_ (void* v)
     return 1; // OK
 }
 
-int     NODE_ACTIONS::sub_ (void* v)
+int     lrstar_node_actions::sub_ (void* v)
 {
     Node* n = (Node*)v;
     if (traversal == FIRST_PASS)
@@ -152,7 +152,7 @@ int     NODE_ACTIONS::sub_ (void* v)
     return 1; // OK
 }
 
-int     NODE_ACTIONS::mul_ (void* v)
+int     lrstar_node_actions::mul_ (void* v)
 {
     Node* n = (Node*)v;
     if (traversal == FIRST_PASS)
@@ -167,7 +167,7 @@ int     NODE_ACTIONS::mul_ (void* v)
     return 1; // OK
 }
 
-int     NODE_ACTIONS::div_ (void* v)
+int     lrstar_node_actions::div_ (void* v)
 {
     Node* n = (Node*)v;
     if (traversal == FIRST_PASS)
@@ -182,7 +182,7 @@ int     NODE_ACTIONS::div_ (void* v)
     return 1; // OK
 }
 
-int     NODE_ACTIONS::pwr_ (void* v)
+int     lrstar_node_actions::pwr_ (void* v)
 {
     Node* n = (Node*)v;
     if (traversal == FIRST_PASS)
@@ -197,7 +197,7 @@ int     NODE_ACTIONS::pwr_ (void* v)
     return 1; // OK
 }
 
-int     NODE_ACTIONS::if_ (void* v)
+int     lrstar_node_actions::if_ (void* v)
 {
     Node* n = (Node*)v;
     if (traversal == FIRST_PASS)
@@ -213,7 +213,7 @@ int     NODE_ACTIONS::if_ (void* v)
     return 1; // OK
 }
 
-int     NODE_ACTIONS::then_ (void* v)
+int     lrstar_node_actions::then_ (void* v)
 {
     Node* n = (Node*)v;
     if (traversal == FIRST_PASS)
@@ -229,7 +229,7 @@ int     NODE_ACTIONS::then_ (void* v)
     return 1; // OK
 }
 
-int     NODE_ACTIONS::then2_ (void* v)
+int     lrstar_node_actions::then2_ (void* v)
 {
     Node* n = (Node*)v;
     if (traversal == FIRST_PASS)
@@ -245,7 +245,7 @@ int     NODE_ACTIONS::then2_ (void* v)
     return 1; // OK
 }
 
-int     NODE_ACTIONS::else2_ (void* v)
+int     lrstar_node_actions::else2_ (void* v)
 {
     Node* n = (Node*)v;
     if (traversal == FIRST_PASS)
@@ -261,7 +261,7 @@ int     NODE_ACTIONS::else2_ (void* v)
     return 1; // OK
 }
 
-int     NODE_ACTIONS::eq_ (void* v)
+int     lrstar_node_actions::eq_ (void* v)
 {
     Node* n = (Node*)v;
     if (traversal == FIRST_PASS)
@@ -276,7 +276,7 @@ int     NODE_ACTIONS::eq_ (void* v)
     return 1; // OK
 }
 
-int     NODE_ACTIONS::ne_ (void* v)
+int     lrstar_node_actions::ne_ (void* v)
 {
     Node* n = (Node*)v;
     if (traversal == FIRST_PASS)
@@ -291,7 +291,7 @@ int     NODE_ACTIONS::ne_ (void* v)
     return 1; // OK
 }
 
-int     NODE_ACTIONS::store_ (void* v)
+int     lrstar_node_actions::store_ (void* v)
 {
     Node* n = (Node*)v;
     if (traversal == FIRST_PASS)
@@ -306,7 +306,7 @@ int     NODE_ACTIONS::store_ (void* v)
     return 1; // OK
 }
 
-int     NODE_ACTIONS::target_ (void* v)
+int     lrstar_node_actions::target_ (void* v)
 {
     Node* n = (Node*)v;
     if (traversal == FIRST_PASS)

@@ -4,9 +4,6 @@
 
 #include "lrstar_basic_defs.h"
       #undef  GRAMMAR
-      #undef  PARSER
-      #undef  PARSER_TABLES
-      #undef  LEXER
       #undef  ACTIONS
       #undef  TERM_ACTIONS
       #undef  NODE_ACTIONS
@@ -22,9 +19,6 @@
       #undef  ND_THREADS
 
       #define GRAMMAR      "COBOL"
-      #define PARSER        COBOL_Parser
-      #define PARSER_TABLES COBOL_ParserTables
-      #define LEXER         COBOL_Lexer
       #define ACTIONS       COBOL_Actions
       #define TERM_ACTIONS  COBOL_TermActions
       #define LOOKAHEADS    1

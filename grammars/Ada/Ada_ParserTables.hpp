@@ -19,7 +19,7 @@
       static int err_used     =    0; // <error> used in grammar?
 
    // Terminal symbols of the grammar ...
-      const char* Ada_ParserTables::term_symb[93] = 
+      const char* lrstar_parser_tables::term_symb[93] = 
       {
          "<error>",
          "<eof>",
@@ -117,7 +117,7 @@
       };
 
    // Nonterminal symbols of the grammar ...
-      const char *Ada_ParserTables::head_symb[205] = 
+      const char *lrstar_parser_tables::head_symb[205] = 
       {
          "Goal",
          "Units",
@@ -327,14 +327,14 @@
       };
 
    // Terninal action names found in the grammar ...
-      const char *Ada_ParserTables::tact_name[2] = 
+      const char *lrstar_parser_tables::tact_name[2] = 
       {
          "error",
          "lookup"
       };
 
    // Head symbol numbers for the productions ...
-      const uchar Ada_ParserTables::head_numb[414] = 
+      const uchar lrstar_parser_tables::head_numb[414] = 
       {
           0,    1,    1,    2,    3,    3,    4,    4,    5,    5,    6,    7,    8,    8,    9,    9,    9,    9,    9,    9,
          10,   11,   11,   11,   11,   11,   12,   13,   14,   15,   15,   15,   16,   16,   16,   17,   17,   18,   18,   19,
@@ -360,7 +360,7 @@
       };
 
    // First tail symbol index into the tail list ...
-      const ushort Ada_ParserTables::f_tail[415] = 
+      const ushort lrstar_parser_tables::f_tail[415] = 
       {
           0,    2,    3,    5,    8,   11,   17,   18,   21,   22,   25,   27,   30,   31,   34,   35,   36,   37,   38,   39,
          40,   43,   44,   45,   46,   47,   48,   53,   61,   70,   72,   73,   74,   76,   77,   78,   79,   80,   82,   84,
@@ -386,7 +386,7 @@
       };
 
    // Tail symbol numbers ...
-      const short Ada_ParserTables::tail[903] = 
+      const short lrstar_parser_tables::tail[903] = 
       {
          -1,    1,   -2,   -1,   -2, -166, -167,  -11,    5,    2,    6,    5,    2,    7,   -4,    8,    6,   -5,   -4,    9,
          -5,  -72,    2,   10,  -72,   -7, -168,   11,   -8,    6,   -9,   -8,    9,   -9, -122,  -67,  -63,  -66, -127,    2,
@@ -437,7 +437,7 @@
       };
 
    // Arguments for token actions ...
-      const char Ada_ParserTables::arga[93] = 
+      const char lrstar_parser_tables::arga[93] = 
       {
          -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,
          -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,
@@ -447,7 +447,7 @@
       };
 
    // Boolean matrix ...
-      const uchar Ada_ParserTables::Bm[805] = 
+      const uchar lrstar_parser_tables::Bm[805] = 
       {
           0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    2,    0,    0,    0,    0,    0,    0,    0,    0,   32,
           0,    0,    0,    0,    0,    0,    0,    0,    0,   40,    1,    0,    0,    0,    0,    0,    8,    8,    4,    0,
@@ -493,7 +493,7 @@
       };
 
    // Boolean matrix row (for state)...
-      const ushort Ada_ParserTables::Br[464] = 
+      const ushort lrstar_parser_tables::Br[464] = 
       {
           0,   10,   19,   28,   38,    0,   47,   57,   47,   66,   75,   38,   85,   95,   85,  104,   46,  114,   47,   47,
          47,  124,   38,   85,   38,  128,   38,   85,   85,  137,  137,   38,  145,  154,  163,  173,   19,  180,    0,   18,
@@ -522,7 +522,7 @@
       };
 
    // Boolean matrix column (displacement) ...
-      const uchar Ada_ParserTables::Bc[93] = 
+      const uchar lrstar_parser_tables::Bc[93] = 
       {
           0,    0,    0,    0,    0,    0,    0,    0,    1,    1,    1,    1,    1,    1,    1,    1,    2,    2,    2,    2,
           2,    2,    2,    2,    2,    3,    3,    3,    3,    3,    3,    3,    3,    4,    4,    4,    4,    4,    4,    4,
@@ -532,7 +532,7 @@
       };
 
    // Boolean matrix filter/mask value ...
-      const uchar Ada_ParserTables::Bf[93] = 
+      const uchar lrstar_parser_tables::Bf[93] = 
       {
           1,    2,    4,    8,   16,   32,   64,  128,    1,    2,    4,    8,   16,   32,   64,  128,    1,    2,    4,    8,
          16,   32,   64,   64,  128,    1,    2,    4,    8,   16,   32,   64,  128,    1,    2,    4,    8,   16,   32,   64,
@@ -542,7 +542,7 @@
       };
 
    // Terminal transition matrix ...
-      const short Ada_ParserTables::Tm[861] = 
+      const short lrstar_parser_tables::Tm[861] = 
       {
        -321, -101, -102, -103, -291, -292,  -96, -323,  -65,  -28, -237, -232, -267, -269, -229, -282, -285, -324, -273, -288,
        -322, -238, -225, -289, -270, -268, -325,  -72, -231, -214,  -67, -306, -208, -209, -272, -217,  -81,  -99, -211,  -27,
@@ -591,7 +591,7 @@
       };
 
    // Terminal transition matrix row ...
-      const ushort Ada_ParserTables::Tr[464] = 
+      const ushort lrstar_parser_tables::Tr[464] = 
       {
         802,  802,  802,  802,  802,  802,  802,  746,  746,  802,  802,  540,  590,  687,  418,  540,  802,  648,  590,  687,
         418,  802,  182,  590,  133,  540,  318,  418,  418,  746,  590,  158,  802,  648,  687,  345,  802,  802,  802,  746,
@@ -620,7 +620,7 @@
       };
 
    // Terminal transition matrix column ...
-      const uchar Ada_ParserTables::Tc[93] = 
+      const uchar lrstar_parser_tables::Tc[93] = 
       {
          22,   22,   54,   22,    2,   23,    0,   32,   13,   34,    7,    2,   21,    9,   10,   36,   37,   38,   44,    6,
           1,   11,   22,    2,   21,   12,   51,   14,    8,    3,    4,    5,   23,    6,    7,    8,   24,    9,   25,   10,
@@ -630,7 +630,7 @@
       };
 
    // Nonterminal transition matrix ...
-      const short Ada_ParserTables::Nm[4736] = 
+      const short lrstar_parser_tables::Nm[4736] = 
       {
           0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0, -277, -275, -248, -248, -248,
        -194,  258,  292, -337,    0,    0,    0,    0, -407,  -14,  -14, -137,  251,  -18,  -18,  -17,  -17,  -14,  -14,    0,
@@ -872,7 +872,7 @@
       };
 
    // Nonterminal transition matrix row ...
-      const ushort Ada_ParserTables::Nr[464] = 
+      const ushort lrstar_parser_tables::Nr[464] = 
       {
        4639, 4452, 4639, 4639, 4639, 4639, 4639, 4452, 4639, 4639, 4639, 4639, 4639, 4639, 4452, 4639, 4639, 4542, 4639, 4639,
        4639, 4639, 4639, 4542, 4639, 4364, 4639, 4364, 4109, 4639, 4452, 4639, 4639, 4639, 4639, 4188, 4452, 4639, 4452, 4639,
@@ -901,7 +901,7 @@
       };
 
    // Nonterminal transition matrix column ...
-      const uchar Ada_ParserTables::Nc[414] = 
+      const uchar lrstar_parser_tables::Nc[414] = 
       {
          67,   67,   67,   79,    4,    4,   67,   67,   79,   79,   31,   41,   67,   67,   31,   31,   31,   31,   31,   31,
          38,   46,   46,   46,   46,   46,    7,    0,   96,   61,   61,   61,    2,    2,    2,   79,   79,   41,   41,   38,
@@ -927,7 +927,7 @@
       };
 
    // Reduction matrix ...
-      const ushort Ada_ParserTables::Rm[374] = 
+      const ushort lrstar_parser_tables::Rm[374] = 
       {
           0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,
           0,  141,  249,  141,  141,  141,    0,    0,  141,  141,  249,    0,    0,  141,  141,  141,  141,    0,    0,  141,
@@ -951,7 +951,7 @@
       };
 
    // Reduction matrix row ...
-      const short Ada_ParserTables::Rr[464] = 
+      const short lrstar_parser_tables::Rr[464] = 
       {
         328,  328,  330,    0,    0,  354,    0,    0,    0,  332,    0,    0,    0,    0,    0,    0,    0,  356,    0,    0,
           0,    0,    0,    0,    0,    0,    0,    0,    0,  394,  394,    0,    0,    0,   12,    0,  376,  358,  358,  354,
@@ -980,7 +980,7 @@
       };
 
    // Reduction matrix column ...
-      const uchar Ada_ParserTables::Rc[93] = 
+      const uchar lrstar_parser_tables::Rc[93] = 
       {
           0,    0,    1,    0,    1,    0,    2,    3,    4,    5,    6,    0,    0,    0,    7,    8,    0,    0,    2,    0,
           9,   10,   11,   11,    0,    0,    0,    0,    1,   12,    1,   13,    0,   14,    0,    0,    0,    0,   15,    0,
@@ -990,7 +990,7 @@
       };
 
    // Production lengths (minus one) ...
-      const char Ada_ParserTables::PL[414] = 
+      const char lrstar_parser_tables::PL[414] = 
       {
           1,    0,    1,    2,    2,    5,    0,    2,    0,    2,    1,    2,    0,    2,    0,    0,    0,    0,    0,    0,
           2,    0,    0,    0,    0,    0,    4,    7,    8,    1,    0,    0,    1,    0,    0,    0,    0,    1,    1,    1,
@@ -1016,7 +1016,7 @@
       };
 
    // Terminal action number ...
-      const char Ada_ParserTables::tact_numb[93] = 
+      const char lrstar_parser_tables::tact_numb[93] = 
       {
           0,   -1,    1,    1,    1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,
          -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,
@@ -1026,17 +1026,17 @@
       };
 
    // Init action function pointers ...
-      void (*Ada_ParserTables::init_func[2]) () =
+      void (*lrstar_parser_tables::init_func[2]) () =
       {
-         Ada_Actions::init_actions,
-         Ada_Actions::term_actions
+         lrstar_parser_actions::init_actions,
+         lrstar_parser_actions::term_actions
       };
 
    // Terminal action function pointers ...
-      int (*Ada_ParserTables::tact_func[2]) (int& t) =
+      int (*lrstar_parser_tables::tact_func[2]) (int& t) =
       {
-         Ada_TermActions::error,
-         Ada_TermActions::lookup
+         lrstar_term_actions::error,
+         lrstar_term_actions::lookup
       };
 
 //

@@ -11,9 +11,9 @@
       #define PASS_OVER 1
       #define BOTTOM_UP 2
 
-      class XPL_ParserTables
+      class lrstar_parser_tables
       {
-         friend class XPL_Parser;
+         friend class lrstar_parser;
          public:
          static const char *term_symb[    49]; // Terminal symbols of the grammar.
          static const char *head_symb[    49]; // Nonterminal symbols of the grammar.

@@ -19,7 +19,7 @@
       static int err_used     =    0; // <error> used in grammar?
 
    // Terminal symbols of the grammar ...
-      const char* Dbase_ParserTables::term_symb[280] = 
+      const char* lrstar_parser_tables::term_symb[280] = 
       {
          "<error>",
          "<eof>",
@@ -304,7 +304,7 @@
       };
 
    // Nonterminal symbols of the grammar ...
-      const char *Dbase_ParserTables::head_symb[174] = 
+      const char *lrstar_parser_tables::head_symb[174] = 
       {
          "goal",
          "cmdlist",
@@ -483,14 +483,14 @@
       };
 
    // Terninal action names found in the grammar ...
-      const char *Dbase_ParserTables::tact_name[2] = 
+      const char *lrstar_parser_tables::tact_name[2] = 
       {
          "error",
          "lookup"
       };
 
    // Head symbol numbers for the productions ...
-      const uchar Dbase_ParserTables::head_numb[618] = 
+      const uchar lrstar_parser_tables::head_numb[618] = 
       {
           0,    1,    2,    3,    3,    3,    3,    3,    3,    3,    3,    3,    3,    3,    3,    3,    3,    3,    3,    3,
           3,    3,    3,    3,    3,    3,    3,    3,    3,    3,    3,    3,    3,    3,    3,    3,    3,    3,    3,    3,
@@ -526,7 +526,7 @@
       };
 
    // First tail symbol index into the tail list ...
-      const ushort Dbase_ParserTables::f_tail[619] = 
+      const ushort lrstar_parser_tables::f_tail[619] = 
       {
           0,    2,    3,    5,    7,    9,   11,   13,   18,   23,   28,   33,   36,   40,   42,   43,   45,   47,   50,   51,
          53,   55,   57,   58,   61,   63,   65,   69,   71,   73,   75,   77,   80,   83,   86,   92,   98,  100,  101,  103,
@@ -562,7 +562,7 @@
       };
 
    // Tail symbol numbers ...
-      const short Dbase_ParserTables::tail[1265] = 
+      const short lrstar_parser_tables::tail[1265] = 
       {
          -1,    1,  -57,  -58,    5,    6,   -5,    7,   -2,    8,  -59,    9,  -24,   10,  -14,   11,   12,  -14,   10,  -14,
          13,  -54,  -61,   10,  -14,   16,  -11,  -62,   10,  -14,   12,  -14,  -63,  -54,   18,  -11,   19,  -64,   12,  -54,
@@ -631,7 +631,7 @@
       };
 
    // Arguments for token actions ...
-      const char Dbase_ParserTables::arga[280] = 
+      const char lrstar_parser_tables::arga[280] = 
       {
          -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,
          -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,
@@ -650,7 +650,7 @@
       };
 
    // Boolean matrix ...
-      const uchar Dbase_ParserTables::Bm[785] = 
+      const uchar lrstar_parser_tables::Bm[785] = 
       {
           0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,  196,    3,    8,  192,    8,    0,   36,    0,
          10,    0,    0,    0,    2,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,   32,    0,    0,    0,    0,
@@ -695,7 +695,7 @@
       };
 
    // Boolean matrix row (for state)...
-      const ushort Dbase_ParserTables::Br[635] = 
+      const ushort lrstar_parser_tables::Br[635] = 
       {
          12,   24,   12,   35,   45,    0,   12,   57,   57,   69,   81,    0,    0,    0,   93,    0,  102,  111,  119,    0,
         127,    0,   93,  136,  148,    0,  160,   92,  172,  184,  184,   93,   57,   22,    0,   81,    0,    0,    0,  136,
@@ -732,7 +732,7 @@
       };
 
    // Boolean matrix column (displacement) ...
-      const uchar Dbase_ParserTables::Bc[280] = 
+      const uchar lrstar_parser_tables::Bc[280] = 
       {
           0,    0,    0,    0,    0,    0,    0,    0,    1,    0,    0,    1,    1,    1,    1,    1,    1,    1,    1,    0,
           0,    2,    2,    2,    2,    0,    0,    2,    0,    2,    2,    2,    2,    2,    2,    2,    0,    2,    0,    0,
@@ -751,7 +751,7 @@
       };
 
    // Boolean matrix filter/mask value ...
-      const uchar Dbase_ParserTables::Bf[280] = 
+      const uchar lrstar_parser_tables::Bf[280] = 
       {
           1,    2,    4,    8,   16,   32,   64,  128,    1,  128,  128,    2,    4,    8,   16,   32,    8,   64,  128,  128,
         128,    1,    2,    4,    8,  128,  128,   16,  128,   32,   64,   64,   64,   64,   64,   64,  128,  128,  128,  128,
@@ -770,7 +770,7 @@
       };
 
    // Terminal transition matrix ...
-      const short Dbase_ParserTables::Tm[1996] = 
+      const short lrstar_parser_tables::Tm[1996] = 
       {
           0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,
           0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,  597,    0,  598,    0,
@@ -875,7 +875,7 @@
       };
 
    // Terminal transition matrix row ...
-      const ushort Dbase_ParserTables::Tr[635] = 
+      const ushort lrstar_parser_tables::Tr[635] = 
       {
        1861, 1861, 1861, 1861, 1861, 1861, 1861, 1726, 1726, 1861, 1861, 1861, 1861, 1861,  817, 1861, 1861, 1726, 1861, 1861,
        1726, 1861,  868, 1726,  933, 1861,  868, 1861,  817,  868,  868,  739, 1591, 1861, 1861, 1861, 1861, 1861, 1861,  817,
@@ -912,7 +912,7 @@
       };
 
    // Terminal transition matrix column ...
-      const uchar Dbase_ParserTables::Tc[280] = 
+      const uchar lrstar_parser_tables::Tc[280] = 
       {
          23,   23,    5,    0,    9,   14,   10,   26,   13,    3,    8,   22,    1,   23,   11,   24,   26,   27,   16,   28,
          45,   34,   21,    3,   25,   37,   39,    8,   41,    2,   22,   23,   24,   26,   27,   28,    6,   29,   63,   15,
@@ -931,7 +931,7 @@
       };
 
    // Nonterminal transition matrix ...
-      const short Dbase_ParserTables::Nm[1094] = 
+      const short lrstar_parser_tables::Nm[1094] = 
       {
        -171, -171, -171, -171, -171, -171, -171,    0, -171, -171,  509,  510, -171, -171, -171,  511,  512,    0, -171,    0,
         517, -171, -171,  523,  524,    0,    0,    0, -177, -177, -177, -177, -177, -177, -177,    0, -177, -177,    0,    0,
@@ -991,7 +991,7 @@
       };
 
    // Nonterminal transition matrix row ...
-      const ushort Dbase_ParserTables::Nr[635] = 
+      const ushort lrstar_parser_tables::Nr[635] = 
       {
         948,  948,  815,  948,  948,  948,  699,  948,  815,  948,  948,  948,  948,  948,  948,  948,  948,  948,  948,  948,
         948,  948,  948,  948,  948,  815,  815,  948,  948,  948,  815,  948,  699,  948,  948,  815,  948,  948,  948,  815,
@@ -1028,7 +1028,7 @@
       };
 
    // Nonterminal transition matrix column ...
-      const uchar Dbase_ParserTables::Nc[618] = 
+      const uchar lrstar_parser_tables::Nc[618] = 
       {
          79,   79,   86,    1,    1,    1,    1,    1,    1,    1,    1,    1,    1,    1,    1,    1,    1,    1,    1,    1,
           1,    1,    1,    1,    1,    1,    1,    1,    1,    1,    1,    1,    1,    1,    1,    1,    1,    1,    1,    1,
@@ -1064,13 +1064,13 @@
       };
 
    // Reduction matrix ...
-      const ushort Dbase_ParserTables::Rm[13] = 
+      const ushort lrstar_parser_tables::Rm[13] = 
       {
           0,    0,    0,    0,    0,    1,    0,  298,    0,    0,  373,  382,  382
       };
 
    // Reduction matrix row ...
-      const short Dbase_ParserTables::Rr[635] = 
+      const short lrstar_parser_tables::Rr[635] = 
       {
         298,    0,   -4,    0,    0,  568,  298,  300,    0,    0,  310,  316,  323,  332,    0,  340,    0,    0,  365,  371,
          -8,  387,  389,  396,    0,  340,    0,    0,    0,    0,    0,  416,    0,    0,  423,  310,  427,  433,  442,  450,
@@ -1107,7 +1107,7 @@
       };
 
    // Reduction matrix column ...
-      const uchar Dbase_ParserTables::Rc[280] = 
+      const uchar lrstar_parser_tables::Rc[280] = 
       {
           0,    1,    2,    0,    0,    3,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,
           0,    0,    4,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,
@@ -1126,7 +1126,7 @@
       };
 
    // Production lengths (minus one) ...
-      const char Dbase_ParserTables::PL[618] = 
+      const char lrstar_parser_tables::PL[618] = 
       {
           1,    0,    1,    1,    1,    1,    1,    4,    4,    4,    4,    2,    3,    1,    0,    1,    1,    2,    0,    1,
           1,    1,    0,    2,    1,    1,    3,    1,    1,    1,    1,    2,    2,    2,    5,    5,    1,    0,    1,    1,
@@ -1162,7 +1162,7 @@
       };
 
    // Terminal action number ...
-      const char Dbase_ParserTables::tact_numb[280] = 
+      const char lrstar_parser_tables::tact_numb[280] = 
       {
           0,   -1,    1,    1,    1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,
          -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,
@@ -1181,17 +1181,17 @@
       };
 
    // Init action function pointers ...
-      void (*Dbase_ParserTables::init_func[2]) () =
+      void (*lrstar_parser_tables::init_func[2]) () =
       {
-         Dbase_Actions::init_actions,
-         Dbase_Actions::term_actions
+         lrstar_parser_actions::init_actions,
+         lrstar_parser_actions::term_actions
       };
 
    // Terminal action function pointers ...
-      int (*Dbase_ParserTables::tact_func[2]) (int& t) =
+      int (*lrstar_parser_tables::tact_func[2]) (int& t) =
       {
-         Dbase_TermActions::error,
-         Dbase_TermActions::lookup
+         lrstar_term_actions::error,
+         lrstar_term_actions::lookup
       };
 
 //

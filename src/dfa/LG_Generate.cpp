@@ -78,10 +78,8 @@ void  LG::GenerateLexerDefines ()
 
    fprintf (header, "      #pragma once\n\n");
 
-   fprintf (header, "      #undef  LEXER\n");            // In case of multiple lexers.
    fprintf (header, "      #undef  DEBUG_LEXER\n\n");    // In case of multiple lexers.
 
-   fprintf (header, "      #define LEXER         %s_Lexer\n", gfn);
    if (optn [LG_DEBUG]) fprintf (header, "      #define DEBUG_LEXER\n");
 
    fprintf (header, "\n/*\n");

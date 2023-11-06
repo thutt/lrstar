@@ -4,9 +4,6 @@
 
 #include "lrstar_basic_defs.h"
       #undef  GRAMMAR
-      #undef  PARSER
-      #undef  PARSER_TABLES
-      #undef  LEXER
       #undef  ACTIONS
       #undef  TERM_ACTIONS
       #undef  NODE_ACTIONS
@@ -22,9 +19,6 @@
       #undef  ND_THREADS
 
       #define GRAMMAR      "Calc"
-      #define PARSER        Calc_Parser
-      #define PARSER_TABLES Calc_ParserTables
-      #define LEXER         Calc_Lexer
       #define ACTIONS       Calc_Actions
       #define TERM_ACTIONS  Calc_TermActions
       #define NODE_ACTIONS  Calc_NodeActions

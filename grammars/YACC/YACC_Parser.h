@@ -4,9 +4,6 @@
 
 #include "lrstar_basic_defs.h"
       #undef  GRAMMAR
-      #undef  PARSER
-      #undef  PARSER_TABLES
-      #undef  LEXER
       #undef  ACTIONS
       #undef  TERM_ACTIONS
       #undef  NODE_ACTIONS
@@ -22,9 +19,6 @@
       #undef  ND_THREADS
 
       #define GRAMMAR      "YACC"
-      #define PARSER        YACC_Parser
-      #define PARSER_TABLES YACC_ParserTables
-      #define LEXER         YACC_Lexer
       #define LOOKAHEADS    1
       #define EXPECTING
 #include "YACC_ParserTables.h"

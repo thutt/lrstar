@@ -5,10 +5,8 @@
 
       #pragma once
 
-      #undef  LEXER
       #undef  DEBUG_LEXER
 
-      #define LEXER         LRK_Lexer
 
 /*
       static const uchar  Tm[  1632]        ; // Terminal transition matrix.

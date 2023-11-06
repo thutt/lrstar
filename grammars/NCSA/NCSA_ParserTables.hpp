@@ -19,7 +19,7 @@
       static int err_used     =    1; // <error> used in grammar?
 
    // Terminal symbols of the grammar ...
-      const char* NCSA_ParserTables::term_symb[24] = 
+      const char* lrstar_parser_tables::term_symb[24] = 
       {
          "<error>",
          "<eof>",
@@ -48,7 +48,7 @@
       };
 
    // Nonterminal symbols of the grammar ...
-      const char *NCSA_ParserTables::head_symb[25] = 
+      const char *lrstar_parser_tables::head_symb[25] = 
       {
          "Start",
          "Day",
@@ -78,14 +78,14 @@
       };
 
    // Terninal action names found in the grammar ...
-      const char *NCSA_ParserTables::tact_name[2] = 
+      const char *lrstar_parser_tables::tact_name[2] = 
       {
          "error",
          "lookup"
       };
 
    // Node names found in the grammar ...
-      const char * NCSA_ParserTables::node_name[11] = 
+      const char * lrstar_parser_tables::node_name[11] = 
       {
          "Report",
          "Day",
@@ -101,7 +101,7 @@
       };
 
    // Head symbol numbers for the productions ...
-      const uchar NCSA_ParserTables::head_numb[62] = 
+      const uchar lrstar_parser_tables::head_numb[62] = 
       {
           0,    1,    2,    3,    3,    4,    4,    5,    5,    5,    5,    6,    6,    7,    7,    8,    9,    9,   10,   10,
          10,   10,   10,   11,   12,   13,   13,   14,   14,   14,   14,   15,   15,   16,   16,   16,   17,   17,   17,   17,
@@ -110,7 +110,7 @@
       };
 
    // First tail symbol index into the tail list ...
-      const uchar NCSA_ParserTables::f_tail[63] = 
+      const uchar lrstar_parser_tables::f_tail[63] = 
       {
           0,    2,    3,    4,   14,   25,   26,   27,   28,   30,   32,   33,   34,   35,   38,   41,   42,   46,   50,   51,
          54,   57,   60,   63,   64,   65,   66,   67,   68,   69,   70,   71,   72,   73,   74,   76,   80,   81,   82,   83,
@@ -119,7 +119,7 @@
       };
 
    // Tail symbol numbers ...
-      const char NCSA_ParserTables::tail[114] = 
+      const char lrstar_parser_tables::tail[114] = 
       {
         -19,    1,  -20,  -21,   -4,   -5,   -7,   -9,  -10,  -12,  -13,  -14,  -16,   10,   -4,   -5,   -7,   -9,  -10,  -12,
         -13,  -14,  -15,  -16,   10,    4,   11,   12,   12,   12,   12,  -22,  -22,    5,    6,   13,   -8,   14,   13,   15,
@@ -130,14 +130,14 @@
       };
 
    // Arguments for token actions ...
-      const char NCSA_ParserTables::arga[24] = 
+      const char lrstar_parser_tables::arga[24] = 
       {
          -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,
          -1,   -1,   -1,   -1
       };
 
    // First arguments for productions ...
-      char NCSA_ParserTables::argx[62] = 
+      char lrstar_parser_tables::argx[62] = 
       {
          -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,    0,   -1,   -1,   -1,   -1,
          -1,   -1,   -1,    0,   -1,   -1,   -1,   -1,    0,    0,   -1,    0,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,
@@ -146,7 +146,7 @@
       };
 
    // Second arguments for productions ...
-      char NCSA_ParserTables::argy[62] = 
+      char lrstar_parser_tables::argy[62] = 
       {
          -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   15,   -1,   -1,   -1,   -1,
          -1,   -1,   -1,   18,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,
@@ -155,7 +155,7 @@
       };
 
    // Boolean matrix ...
-      const uchar NCSA_ParserTables::Bm[57] = 
+      const uchar lrstar_parser_tables::Bm[57] = 
       {
           0,    0,    0,   16,    8,    0,   18,    8,    0,   96,   16,    0,   32,    0,   96,    0,    0,    1,  128,  128,
           0,   32,   16,    0,   16,    2,    0,   64,    0,    0,    8,    0,    4,   64,   16,    0,   17,    0,    0,   36,
@@ -163,28 +163,28 @@
       };
 
    // Boolean matrix row (for state)...
-      const uchar NCSA_ParserTables::Br[38] = 
+      const uchar lrstar_parser_tables::Br[38] = 
       {
           3,    6,    3,    3,    9,   11,   14,    9,   16,   18,   14,   21,   23,   26,   26,   27,   30,   27,   27,   33,
          36,   36,   15,   15,   39,   42,   42,   45,   48,   51,    0,   51,   48,   54,   51,   51,   51,    0
       };
 
    // Boolean matrix column (displacement) ...
-      const uchar NCSA_ParserTables::Bc[24] = 
+      const uchar lrstar_parser_tables::Bc[24] = 
       {
           0,    0,    0,    0,    0,    0,    0,    0,    1,    1,    1,    1,    1,    1,    1,    1,    2,    2,    2,    2,
           2,    1,    2,    2
       };
 
    // Boolean matrix filter/mask value ...
-      const uchar NCSA_ParserTables::Bf[24] = 
+      const uchar lrstar_parser_tables::Bf[24] = 
       {
           1,    2,    4,    8,   16,   32,   64,  128,    1,    2,    4,    8,   16,   32,   64,  128,    1,    2,    4,    8,
          16,    4,   32,   32
       };
 
    // Terminal transition matrix ...
-      const char NCSA_ParserTables::Tm[99] = 
+      const char lrstar_parser_tables::Tm[99] = 
       {
           0,    0,    0,  -26,   22,    0,    0,  -25,   17,    0,    0,   18,  -21,   16,  -24,    0,    0,  -29,  -18,  -28,
          23,  -58,    0,    0,  -27,  -19,  -11,  -12,    0,  -30,    0,   -8,    0,  -17,  -58,    0,    0,  -14,  -36,  -38,
@@ -194,21 +194,21 @@
       };
 
    // Terminal transition matrix row ...
-      const uchar NCSA_ParserTables::Tr[38] = 
+      const uchar lrstar_parser_tables::Tr[38] = 
       {
          82,   82,   82,   82,   82,   82,   82,   24,   82,   82,   82,   11,    1,   82,   24,   11,   82,    1,   17,    0,
          24,   11,   82,   24,   17,   82,   82,   38,   52,   52,   82,   52,   67,   82,   52,   52,   52,   82
       };
 
    // Terminal transition matrix column ...
-      const uchar NCSA_ParserTables::Tc[24] = 
+      const uchar lrstar_parser_tables::Tc[24] = 
       {
          10,    0,    0,   12,    1,    2,    3,    4,    5,    6,   13,    6,    7,    8,   13,   14,    9,   10,   11,   12,
          13,   14,   15,   16
       };
 
    // Nonterminal transition matrix ...
-      const char NCSA_ParserTables::Nm[72] = 
+      const char lrstar_parser_tables::Nm[72] = 
       {
           0,    0,  -55,    4,    0,    0,  -54,    4,    0,  -56,    0,    0,    0,    0,  -61,  -60,  -60,   33,    0,   32,
         -33,    0,   36,   34,    3,   10,    0,  -53,  -54,    4,    0,  -57,    0,    0,    0,    0,    0,    0,    0,    0,
@@ -217,14 +217,14 @@
       };
 
    // Nonterminal transition matrix row ...
-      const uchar NCSA_ParserTables::Nr[38] = 
+      const uchar lrstar_parser_tables::Nr[38] = 
       {
          50,   28,    6,    2,   50,   50,   28,    6,   50,   50,   28,   50,   50,   50,   50,   50,   50,   50,   50,   50,
          50,   28,   50,   50,   50,   50,   50,   50,   28,    6,   50,    2,   28,   50,    0,    1,    0,   50
       };
 
    // Nonterminal transition matrix column ...
-      const uchar NCSA_ParserTables::Nc[62] = 
+      const uchar lrstar_parser_tables::Nc[62] = 
       {
          15,   15,   21,    0,    0,    1,    1,    2,    2,    2,    2,    3,    3,    4,    4,    5,    6,    6,    7,    7,
           7,    7,    7,    8,    9,   10,   10,   11,   11,   11,   11,   12,   12,   13,   13,   13,   14,   14,   14,   14,
@@ -233,27 +233,27 @@
       };
 
    // Reduction matrix ...
-      const uchar NCSA_ParserTables::Rm[6] = 
+      const uchar lrstar_parser_tables::Rm[6] = 
       {
           0,    0,    0,   31,    0,   43
       };
 
    // Reduction matrix row ...
-      const char NCSA_ParserTables::Rr[38] = 
+      const char lrstar_parser_tables::Rr[38] = 
       {
           0,    0,    1,    2,    0,    0,   10,    7,    0,    0,    9,    0,    0,    0,    0,    0,    0,    0,    0,    0,
           0,    0,    0,    0,    0,   20,   22,    0,    0,    0,   -3,    0,    0,    0,   48,    0,   49,    0
       };
 
    // Reduction matrix column ...
-      const uchar NCSA_ParserTables::Rc[24] = 
+      const uchar lrstar_parser_tables::Rc[24] = 
       {
           0,    1,    0,    0,    0,    0,    0,    0,    0,    0,    2,    1,    0,    0,    1,    1,    0,    1,    1,    1,
           1,    2,    1,    1
       };
 
    // Production lengths (minus one) ...
-      const uchar NCSA_ParserTables::PL[62] = 
+      const uchar lrstar_parser_tables::PL[62] = 
       {
           1,    0,    0,    9,   10,    0,    0,    0,    1,    1,    0,    0,    0,    2,    2,    0,    3,    3,    0,    2,
           2,    2,    2,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    1,    3,    0,    0,    0,    0,
@@ -262,14 +262,14 @@
       };
 
    // Terminal action number ...
-      const char NCSA_ParserTables::tact_numb[24] = 
+      const char lrstar_parser_tables::tact_numb[24] = 
       {
           0,   -1,    1,    1,    1,    1,    1,    1,    1,    1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,
          -1,   -1,   -1,   -1
       };
 
    // Node number for each production ...
-      const char NCSA_ParserTables::node_numb[62] = 
+      const char lrstar_parser_tables::node_numb[62] = 
       {
           0,    1,    2,   -1,   -1,   -1,   -1,   -1,   -1,    3,    3,    4,    4,   -1,   -1,   -1,    5,    5,    6,   -1,
          -1,    6,    6,   -1,    7,    8,    8,   -1,    9,    9,    9,   10,   10,   -1,   -1,   -1,   -1,   -1,   -1,   -1,
@@ -278,7 +278,7 @@
       };
 
    // Node action numbers ...
-      const char NCSA_ParserTables::nact_numb[62] = 
+      const char lrstar_parser_tables::nact_numb[62] = 
       {
          -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,
          -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,
@@ -287,21 +287,21 @@
       };
 
    // Init action function pointers ...
-      void (*NCSA_ParserTables::init_func[2]) () =
+      void (*lrstar_parser_tables::init_func[2]) () =
       {
-         NCSA_Actions::init_actions,
-         NCSA_Actions::term_actions
+         lrstar_parser_actions::init_actions,
+         lrstar_parser_actions::term_actions
       };
 
    // Terminal action function pointers ...
-      int (*NCSA_ParserTables::tact_func[2]) (int& t) =
+      int (*lrstar_parser_tables::tact_func[2]) (int& t) =
       {
-         NCSA_TermActions::error,
-         NCSA_TermActions::lookup
+         lrstar_term_actions::error,
+         lrstar_term_actions::lookup
       };
 
    // Node action function pointers ...
-      int (*NCSA_ParserTables::nact_func[11]) (void* v) = 
+      int (*lrstar_parser_tables::nact_func[11]) (void* v) = 
       {
          0,
          0,

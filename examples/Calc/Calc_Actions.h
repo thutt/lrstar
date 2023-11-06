@@ -5,7 +5,7 @@
 
 #ifdef ACTIONS
 
-class ACTIONS : public PARSER
+class lrstar_parser_actions : public lrstar_parser
 {
 public:
     static void init_actions ();
@@ -15,7 +15,7 @@ public:
 #endif
 #ifdef TERM_ACTIONS
 
-class TERM_ACTIONS : public ACTIONS
+class lrstar_term_actions : public lrstar_parser_actions
 {
 public:
     static int  error           (int& t);
@@ -25,7 +25,7 @@ public:
 #endif
 #ifdef NODE_ACTIONS
 
-class NODE_ACTIONS : public ACTIONS
+class lrstar_node_actions : public lrstar_parser_actions
 {
 public:
     static int  eq_      (void* v);

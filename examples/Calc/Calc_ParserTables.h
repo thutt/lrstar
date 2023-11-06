@@ -40,9 +40,9 @@
       #define PASS_OVER 1
       #define BOTTOM_UP 2
 
-      class Calc_ParserTables
+      class lrstar_parser_tables
       {
-         friend class Calc_Parser;
+         friend class lrstar_parser;
          public:
          static const char *term_symb[    22]; // Terminal symbols of the grammar.
          static const char *head_symb[    13]; // Nonterminal symbols of the grammar.

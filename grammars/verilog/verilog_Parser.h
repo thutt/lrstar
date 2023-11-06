@@ -4,9 +4,6 @@
 
 #include "lrstar_basic_defs.h"
       #undef  GRAMMAR
-      #undef  PARSER
-      #undef  PARSER_TABLES
-      #undef  LEXER
       #undef  ACTIONS
       #undef  TERM_ACTIONS
       #undef  NODE_ACTIONS
@@ -22,9 +19,6 @@
       #undef  ND_THREADS
 
       #define GRAMMAR      "verilog"
-      #define PARSER        verilog_Parser
-      #define PARSER_TABLES verilog_ParserTables
-      #define LEXER         verilog_Lexer
       #define ACTIONS       verilog_Actions
       #define TERM_ACTIONS  verilog_TermActions
       #define LOOKAHEADS    1

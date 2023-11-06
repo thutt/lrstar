@@ -5,10 +5,8 @@
 
       #pragma once
 
-      #undef  LEXER
       #undef  DEBUG_LEXER
 
-      #define LEXER         ANTLR_Lexer
 
 /*
       static const uchar  Tm[  6441]        ; // Terminal transition matrix.

@@ -6,16 +6,16 @@
 #include "lrstar_library_defs.h"
 #include "lrstar_main.h"
 
-Token   LEXER::token;            // Token.
-Token   LEXER::lookahead;        // Token.
-int     LEXER::linenumb;         // Line number of token.
-int     LEXER::lookahead_linenumb;  // Line number of token.
-int     LEXER::linenumb_printed; // Line number printed already.
-int     LEXER::tab;              // Tab setting for the input file.
+Token   lrstar_lexer::token;            // Token.
+Token   lrstar_lexer::lookahead;        // Token.
+int     lrstar_lexer::linenumb;         // Line number of token.
+int     lrstar_lexer::lookahead_linenumb;  // Line number of token.
+int     lrstar_lexer::linenumb_printed; // Line number printed already.
+int     lrstar_lexer::tab;              // Tab setting for the input file.
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////
 
-void  LEXER::init_lexer (char* input_start, int tab_setting)
+void  lrstar_lexer::init_lexer (char* input_start, int tab_setting)
 {
    linenumb          = 0;
    linenumb_printed  = 0;
@@ -28,7 +28,7 @@ void  LEXER::init_lexer (char* input_start, int tab_setting)
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////
 
-int   LEXER::get_token ()           // Medium size lexer.
+int   lrstar_lexer::get_token ()           // Medium size lexer.
 {
    int x, y;                     // State, next state.
    do
@@ -55,7 +55,7 @@ int   LEXER::get_token ()           // Medium size lexer.
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////
 
-int   LEXER::get_lookahead ()       // Medium size lexer.
+int   lrstar_lexer::get_lookahead ()       // Medium size lexer.
 {
    int x, y;                     // State, next state.
    do
@@ -79,7 +79,7 @@ int   LEXER::get_lookahead ()       // Medium size lexer.
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////
 
-char* LEXER::untabify (char* ls, char*& ts)
+char* lrstar_lexer::untabify (char* ls, char*& ts)
 {
    // ls = line start.
    // ts = token start within this line.;
@@ -122,7 +122,7 @@ char* LEXER::untabify (char* ls, char*& ts)
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////
 
-void  LEXER::prt_line() // Print current line.
+void  lrstar_lexer::prt_line() // Print current line.
 {
    if (debug_lexer_) {
       if (linenumb > linenumb_printed)
@@ -145,7 +145,7 @@ void  LEXER::prt_line() // Print current line.
    }
 }
 
-char* LEXER::untabify (char* ls) // Untabify this line.
+char* lrstar_lexer::untabify (char* ls) // Untabify this line.
 {
    if (debug_lexer_) {
       int ns;

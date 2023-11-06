@@ -4,9 +4,6 @@
 
 #include "lrstar_basic_defs.h"
       #undef  GRAMMAR
-      #undef  PARSER
-      #undef  PARSER_TABLES
-      #undef  LEXER
       #undef  ACTIONS
       #undef  TERM_ACTIONS
       #undef  NODE_ACTIONS
@@ -22,9 +19,6 @@
       #undef  ND_THREADS
 
       #define GRAMMAR      "Ada"
-      #define PARSER        Ada_Parser
-      #define PARSER_TABLES Ada_ParserTables
-      #define LEXER         Ada_Lexer
       #define ACTIONS       Ada_Actions
       #define TERM_ACTIONS  Ada_TermActions
       #define LOOKAHEADS    1

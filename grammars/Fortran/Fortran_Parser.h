@@ -4,9 +4,6 @@
 
 #include "lrstar_basic_defs.h"
       #undef  GRAMMAR
-      #undef  PARSER
-      #undef  PARSER_TABLES
-      #undef  LEXER
       #undef  ACTIONS
       #undef  TERM_ACTIONS
       #undef  NODE_ACTIONS
@@ -22,9 +19,6 @@
       #undef  ND_THREADS
 
       #define GRAMMAR      "Fortran"
-      #define PARSER        Fortran_Parser
-      #define PARSER_TABLES Fortran_ParserTables
-      #define LEXER         Fortran_Lexer
       #define ACTIONS       Fortran_Actions
       #define TERM_ACTIONS  Fortran_TermActions
       #define LOOKAHEADS    1

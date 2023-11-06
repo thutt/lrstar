@@ -4,9 +4,6 @@
 
 #include "lrstar_basic_defs.h"
       #undef  GRAMMAR
-      #undef  PARSER
-      #undef  PARSER_TABLES
-      #undef  LEXER
       #undef  ACTIONS
       #undef  TERM_ACTIONS
       #undef  NODE_ACTIONS
@@ -22,9 +19,6 @@
       #undef  ND_THREADS
 
       #define GRAMMAR      "NCSA"
-      #define PARSER        NCSA_Parser
-      #define PARSER_TABLES NCSA_ParserTables
-      #define LEXER         NCSA_Lexer
       #define ACTIONS       NCSA_Actions
       #define TERM_ACTIONS  NCSA_TermActions
       #define NODE_ACTIONS  NCSA_NodeActions

@@ -5,10 +5,8 @@
 
       #pragma once
 
-      #undef  LEXER
       #undef  DEBUG_LEXER
 
-      #define LEXER         Pascal_Lexer
 
 /*
       static const ushort Tm[ 18592]        ; // Terminal transition matrix.

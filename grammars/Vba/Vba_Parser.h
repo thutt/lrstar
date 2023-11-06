@@ -4,9 +4,6 @@
 
 #include "lrstar_basic_defs.h"
       #undef  GRAMMAR
-      #undef  PARSER
-      #undef  PARSER_TABLES
-      #undef  LEXER
       #undef  ACTIONS
       #undef  TERM_ACTIONS
       #undef  NODE_ACTIONS
@@ -22,9 +19,6 @@
       #undef  ND_THREADS
 
       #define GRAMMAR      "Vba"
-      #define PARSER        Vba_Parser
-      #define PARSER_TABLES Vba_ParserTables
-      #define LEXER         Vba_Lexer
       #define ACTIONS       Vba_Actions
       #define TERM_ACTIONS  Vba_TermActions
       #define NODE_ACTIONS  Vba_NodeActions

@@ -6,9 +6,7 @@
       #pragma once
 
       #undef  GRAMMAR
-      #undef  PARSER
       #undef  PARSER_TABLES
-      #undef  LEXER
       #undef  ACTIONS
       #undef  TERM_ACTIONS
       #undef  NODE_ACTIONS
@@ -24,9 +22,7 @@
       #undef  ND_THREADS
 
       #define GRAMMAR      "Kotlin"
-      #define PARSER        Kotlin_Parser
       #define PARSER_TABLES Kotlin_ParserTables
-      #define LEXER         Kotlin_Lexer
       #define LOOKAHEADS    1
       #define EXPECTING
 

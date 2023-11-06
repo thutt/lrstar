@@ -19,7 +19,7 @@
       static int err_used     =    0; // <error> used in grammar?
 
    // Terminal symbols of the grammar ...
-      const char* Java1_ParserTables::term_symb[99] = 
+      const char* lrstar_parser_tables::term_symb[99] = 
       {
          "<error>",
          "<eof>",
@@ -123,7 +123,7 @@
       };
 
    // Nonterminal symbols of the grammar ...
-      const char *Java1_ParserTables::head_symb[99] = 
+      const char *lrstar_parser_tables::head_symb[99] = 
       {
          "Goal",
          "TypeSpecifier",
@@ -227,14 +227,14 @@
       };
 
    // Terninal action names found in the grammar ...
-      const char *Java1_ParserTables::tact_name[2] = 
+      const char *lrstar_parser_tables::tact_name[2] = 
       {
          "error",
          "lookup"
       };
 
    // Head symbol numbers for the productions ...
-      const uchar Java1_ParserTables::head_numb[270] = 
+      const uchar lrstar_parser_tables::head_numb[270] = 
       {
           0,    1,    1,    2,    2,    3,    3,    4,    4,    4,    4,    4,    4,    4,    4,    4,    5,    6,    6,    6,
           6,    6,    6,    6,    7,    8,    8,    9,    9,   10,   10,   11,   11,   11,   12,   12,   13,   13,   13,   13,
@@ -253,7 +253,7 @@
       };
 
    // First tail symbol index into the tail list ...
-      const ushort Java1_ParserTables::f_tail[271] = 
+      const ushort lrstar_parser_tables::f_tail[271] = 
       {
           0,    2,    3,    5,    6,    7,    8,   11,   12,   13,   14,   15,   16,   17,   18,   19,   20,   21,   24,   26,
          28,   30,   31,   32,   33,   36,   37,   39,   40,   42,   46,   52,   53,   56,   59,   63,   66,   71,   75,   79,
@@ -272,7 +272,7 @@
       };
 
    // Tail symbol numbers ...
-      const char Java1_ParserTables::tail[568] = 
+      const char lrstar_parser_tables::tail[568] = 
       {
          -5,    1,   -2,   -2,  -72,   -4,  -11,  -11,   -3,   52,  -11,    4,    5,    6,    7,    8,    9,   10,   11,   12,
          -6,   -7,   -9,   -8,   -7,   -9,   -7,   -8,   -9,   -8,   -7,   -9,   -8,   14,  -11,   53,  -12,   -8,  -12,  -10,
@@ -306,7 +306,7 @@
       };
 
    // Arguments for token actions ...
-      const char Java1_ParserTables::arga[99] = 
+      const char lrstar_parser_tables::arga[99] = 
       {
          -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,
          -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,
@@ -316,7 +316,7 @@
       };
 
    // Boolean matrix ...
-      const uchar Java1_ParserTables::Bm[266] = 
+      const uchar lrstar_parser_tables::Bm[266] = 
       {
           0,    0,    0,    0,    0,  224,    3,    0,    0,    0,    0,    2,    0,    0,    0,    0,  160,    3,    0,    0,
           0,   32,    3,    0,    0,    0,    0,    1,    0,    0,    4,    0,    0,    0,    0,    0,    1,   32,    0,    0,
@@ -335,7 +335,7 @@
       };
 
    // Boolean matrix row (for state)...
-      const ushort Java1_ParserTables::Br[236] = 
+      const ushort lrstar_parser_tables::Br[236] = 
       {
           5,   11,   16,   16,   21,   24,   21,   30,   30,   35,   16,   21,   21,   41,   30,   46,   49,   30,   30,   21,
          41,   52,   58,   30,   62,   65,   69,   24,   60,   75,   46,   80,   86,   30,   92,   49,   65,   30,   69,   61,
@@ -352,7 +352,7 @@
       };
 
    // Boolean matrix column (displacement) ...
-      const uchar Java1_ParserTables::Bc[99] = 
+      const uchar lrstar_parser_tables::Bc[99] = 
       {
           0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,
           0,    1,    0,    0,    0,    1,    0,    0,    1,    1,    1,    1,    1,    1,    1,    1,    1,    2,    1,    1,
@@ -362,7 +362,7 @@
       };
 
    // Boolean matrix filter/mask value ...
-      const uchar Java1_ParserTables::Bf[99] = 
+      const uchar lrstar_parser_tables::Bf[99] = 
       {
           1,    2,    4,    8,   16,   16,   16,   16,   16,   16,   16,   16,   16,   32,   64,  128,   32,   32,   32,   32,
          32,    1,   32,   32,   32,    2,   32,   32,    4,    8,   16,   32,   64,   64,   64,  128,   64,    1,   64,   64,
@@ -372,7 +372,7 @@
       };
 
    // Terminal transition matrix ...
-      const short Java1_ParserTables::Tm[608] = 
+      const short lrstar_parser_tables::Tm[608] = 
       {
        -171,  234, -170,    0,  152,    0,  153,    0,    0,    0,    0,    0,    0,    0,  -32,    0,    0,    0,    0,  -90,
           0,    0,    0,    0,    0, -135,    0,  -30,  -32, -141,  212, -143,    0, -155,  233,  190,  223,  219, -188, -146,
@@ -408,7 +408,7 @@
       };
 
    // Terminal transition matrix row ...
-      const ushort Java1_ParserTables::Tr[236] = 
+      const ushort lrstar_parser_tables::Tr[236] = 
       {
         540,  540,  540,  540,  540,  540,  540,  540,  151,  151,  540,  540,  540,  417,   54,  540,  540,  151,  151,  540,
         376,  151,  307,   19,  540,  540,  151,  151,  540,  499,  540,  540,  151,  151,   28,  417,  151,   19,  151,  151,
@@ -425,7 +425,7 @@
       };
 
    // Terminal transition matrix column ...
-      const uchar Java1_ParserTables::Tc[99] = 
+      const uchar lrstar_parser_tables::Tc[99] = 
       {
           4,    4,    0,    4,    1,    2,    3,    5,    9,   19,   20,   23,   28,    6,    1,    2,    7,    8,   10,   12,
          13,   14,   15,   16,   17,   26,   18,   21,    3,   22,    4,    5,    6,    7,    8,    9,   10,   11,   12,   13,
@@ -435,7 +435,7 @@
       };
 
    // Nonterminal transition matrix ...
-      const short Java1_ParserTables::Nm[3135] = 
+      const short lrstar_parser_tables::Nm[3135] = 
       {
         208,   93,   25,   25,   25,  157,   25,   25,   25,    0,   93,  -81,    0,    0,  -93,   -3,   -3,   -3,  160,   -3,
          -3,   -3,    0,    0,    0,    0,   25,  141, -104,   24,  -95,   24,   24,   24,    0,    0,    0,    0,    0,   -3,
@@ -597,7 +597,7 @@
       };
 
    // Nonterminal transition matrix row ...
-      const ushort Java1_ParserTables::Nr[236] = 
+      const ushort lrstar_parser_tables::Nr[236] = 
       {
        1266, 1266,  251,  112, 3077, 1266,   70, 1266, 1266, 1266,   85, 3077, 3077,  190, 1266, 1266, 1266,  251,  112, 3077,
         132, 1266,   70, 1266, 1266, 1266, 1266,  251, 1266, 3077,  251,  112,   85,    1, 1266, 1266, 1266,  251,  112, 1266,
@@ -614,7 +614,7 @@
       };
 
    // Nonterminal transition matrix column ...
-      const uchar Java1_ParserTables::Nc[270] = 
+      const uchar lrstar_parser_tables::Nc[270] = 
       {
          39,   39,   39,   25,   25,   39,   39,   13,   13,   13,   13,   13,   13,   13,   13,   13,   25,   39,   39,   39,
          39,   39,   39,   39,   13,    5,    5,    6,    6,    7,    7,    0,    0,    0,   40,   40,   55,   55,   55,   55,
@@ -633,7 +633,7 @@
       };
 
    // Reduction matrix ...
-      const uchar Java1_ParserTables::Rm[49] = 
+      const uchar lrstar_parser_tables::Rm[49] = 
       {
           0,    0,    0,    0,    0,    0,    0,    0,    0,    4,  157,  157,    0,    0,  176,    0,    0,  159,  159,  159,
         159,  175,  159,    0,    0,  163,  163,  163,  163,  174,  163,  163,    0,    0,  157,  157,    0,  157,  176,  157,
@@ -641,7 +641,7 @@
       };
 
    // Reduction matrix row ...
-      const short Java1_ParserTables::Rr[236] = 
+      const short lrstar_parser_tables::Rr[236] = 
       {
           0,    0,   21,   22,   23,    0,    0,    0,    0,  266,   18,   19,   20,    0,    0,   43,    0,    0,    0,   17,
           0,    0,    0,    0,    1,    4,    0,   51,   31,    0,   40,   41,    0,    0,    0,    0,    0,    0,    0,   69,
@@ -658,7 +658,7 @@
       };
 
    // Reduction matrix column ...
-      const uchar Java1_ParserTables::Rc[99] = 
+      const uchar lrstar_parser_tables::Rc[99] = 
       {
           0,    0,    1,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,
           0,    0,    0,    0,    0,    0,    0,    0,    0,    1,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,
@@ -668,7 +668,7 @@
       };
 
    // Production lengths (minus one) ...
-      const char Java1_ParserTables::PL[270] = 
+      const char lrstar_parser_tables::PL[270] = 
       {
           1,    0,    1,    0,    0,    0,    2,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    2,    1,    1,
           1,    0,    0,    0,    2,    0,    1,    0,    1,    3,    5,    0,    2,    2,    3,    2,    4,    3,    3,    3,
@@ -687,7 +687,7 @@
       };
 
    // Terminal action number ...
-      const char Java1_ParserTables::tact_numb[99] = 
+      const char lrstar_parser_tables::tact_numb[99] = 
       {
           0,   -1,    1,    1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,
          -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,
@@ -697,17 +697,17 @@
       };
 
    // Init action function pointers ...
-      void (*Java1_ParserTables::init_func[2]) () =
+      void (*lrstar_parser_tables::init_func[2]) () =
       {
-         Java1_Actions::init_actions,
-         Java1_Actions::term_actions
+         lrstar_parser_actions::init_actions,
+         lrstar_parser_actions::term_actions
       };
 
    // Terminal action function pointers ...
-      int (*Java1_ParserTables::tact_func[2]) (int& t) =
+      int (*lrstar_parser_tables::tact_func[2]) (int& t) =
       {
-         Java1_TermActions::error,
-         Java1_TermActions::lookup
+         lrstar_term_actions::error,
+         lrstar_term_actions::lookup
       };
 
 //

@@ -4,9 +4,6 @@
 
 #include "lrstar_basic_defs.h"
       #undef  GRAMMAR
-      #undef  PARSER
-      #undef  PARSER_TABLES
-      #undef  LEXER
       #undef  ACTIONS
       #undef  TERM_ACTIONS
       #undef  NODE_ACTIONS
@@ -22,9 +19,6 @@
       #undef  ND_THREADS
 
       #define GRAMMAR      "Python"
-      #define PARSER        Python_Parser
-      #define PARSER_TABLES Python_ParserTables
-      #define LEXER         Python_Lexer
       #define LOOKAHEADS    1
       #define EXPECTING
 #include "Python_ParserTables.h"

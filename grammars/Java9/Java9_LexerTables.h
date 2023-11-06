@@ -5,10 +5,8 @@
 
       #pragma once
 
-      #undef  LEXER
       #undef  DEBUG_LEXER
 
-      #define LEXER         Java9_Lexer
 
 /*
       static const ushort Tm[ 27393]        ; // Terminal transition matrix.
