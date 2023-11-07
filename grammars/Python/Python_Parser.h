@@ -3,6 +3,7 @@
 //                                                                           //
 
 #include "lrstar_basic_defs.h"
+#include "lrstar_lexer.h"
       #undef  GRAMMAR
       #undef  ACTIONS
       #undef  TERM_ACTIONS
@@ -22,7 +23,6 @@
       #define LOOKAHEADS    1
       #define EXPECTING
 #include "Python_ParserTables.h"
-#include "lrstar_lexer.h"
 #include "lrstar_parser.h"
 
 //                                                                           //
