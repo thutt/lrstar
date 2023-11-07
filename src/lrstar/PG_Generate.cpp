@@ -1013,11 +1013,13 @@ static void parsertables_header_fn(FILE       *fp,
    fprintf (fp, "//                                                                           //\n");
    fprintf (fp, "\n");
    fprintf (fp, "#include \"lrstar_basic_defs.h\"\n");
+   if (lrstar_linux) {
+      fprintf (fp, "#include \"lrstar_lexer.h\"\n");
+   }
    print_defines(fp);
    fprintf (fp, "#include \"%s_ParserTables.h\"\n", grammar);
    if (lrstar_linux) {
-      fprintf (fp, ("#include \"lrstar_lexer.h\"\n"
-                    "#include \"lrstar_parser.h\"\n"));
+      fprintf (fp, "#include \"lrstar_parser.h\"\n");
    } else {
       assert(lrstar_windows);
       fprintf (fp, "#include \"../../code/lexer.h\"\n");
@@ -1121,12 +1123,14 @@ static void lexer_cpp_fn(FILE       *fp,
    fprintf (fp, "//                                                                           //\n");
    fprintf (fp, "\n");
 
-   fprintf (fp, ("#include \"lrstar_basic_defs.h\"\n"
-                 "#include \"%s_LexerTables.h\"\n"
+   fprintf (fp, "#include \"lrstar_basic_defs.h\"\n");
+   if (lrstar_linux) {
+      fprintf (fp, "#include \"lrstar_lexer.h\"\n");
+   }
+   fprintf (fp, ("#include \"%s_LexerTables.h\"\n"
                  "#include \"%s_LexerTables.hpp\"\n"), grammar, grammar);
    if (lrstar_linux) {
-      fprintf (fp, ("#include \"lrstar_lexer.h\"\n"
-                    "#include \"lrstar_lexer.cpp\"\n"));
+      fprintf (fp, "#include \"lrstar_lexer.cpp\"\n");
    } else {
       assert(lrstar_windows);
       fprintf (fp, "#include \"../../code/lexer.h\"\n");

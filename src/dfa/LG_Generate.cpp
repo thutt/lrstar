@@ -5,6 +5,21 @@
 #include "LG_Global.h"
 #include "LG_CreateTables.h"
 
+enum {
+   ts_TermNumb,
+   ts_Tm,
+   ts_Tr,
+   ts_Tc,
+   ts_N_ELEMENTS
+} type_sizes;
+
+struct data_types_t {           /* Tm, Tr, Tc, term_numb */
+   const char *type;            /* C type, string form. */
+   int         n_elem;          /* Number of elements in array. */
+};
+static data_types_t data_types[ts_N_ELEMENTS];
+
+
 static const char *
 get_typestr(int *x, int n)
 {
@@ -39,12 +54,82 @@ get_typestr(int *x, int n)
 }
 
 
-void  LG::GenerateLexerDefines ()
-{
-   FILE* header;
-   char filename_h[PATH_MAX];
 
-   const char* lexer_class = "_LexerTables";
+static void
+declare_lexer(FILE *fp)
+{
+   static const char *template_decl = ("template<typename T_term_numb, "
+                                       "typename T_Tm, "
+                                       "typename T_Tr, "
+                                       "typename T_Tc>");
+   static const char *template_inst = ("templ_lrstar_lexer<T_term_numb, "
+                                       "T_Tm, T_Tr, T_Tc>");
+
+   fprintf(fp, ("%s\n"
+                "const int %s::n_term_numb = %d;\n\n"
+                ""), template_decl, template_inst, data_types[ts_TermNumb].n_elem);
+   fprintf(fp, ("%s\n"
+                "const int %s::n_Tm = %d;\n\n"
+                ""), template_decl, template_inst, data_types[ts_Tm].n_elem);
+   fprintf(fp, ("%s\n"
+                "const int %s::n_Tr = %d;\n\n"
+                ""), template_decl, template_inst, data_types[ts_Tr].n_elem);
+   fprintf(fp, ("%s\n"
+                "const int %s::n_Tc = %d;\n\n"
+                ""), template_decl, template_inst, data_types[ts_Tc].n_elem);
+
+   fprintf(fp, ("%s\n"
+                "const T_term_numb *%s::term_numb = &term_numb[0];\n\n"
+                ""), template_decl, template_inst);
+   fprintf(fp, ("%s\n"
+                "const T_Tm *%s::Tm = &Tm[0];\n\n"
+                ""), template_decl, template_inst);
+   fprintf(fp, ("%s\n"
+                "const T_Tr *%s::Tr = &Tr[0];\n\n"
+                ""), template_decl, template_inst);
+   fprintf(fp, ("%s\n"
+                "const T_Tc *%s::Tc = &Tc[0];\n\n"
+                ""), template_decl, template_inst);
+
+   fprintf(fp, ("%s\n"
+                "Token %s::token;\n\n"), template_decl, template_inst);
+
+   fprintf(fp, ("%s\n"
+                "Token %s::lookahead;\n\n"), template_decl, template_inst);
+
+   fprintf(fp, ("%s\n"
+                "int %s::tab;\n\n"), template_decl, template_inst);
+
+   fprintf(fp, ("%s\n"
+                "int %s::linenumb;\n\n"), template_decl, template_inst);
+
+   fprintf(fp, ("%s\n"
+                "int %s::linenumb_printed;\n\n"), template_decl, template_inst);
+
+   fprintf(fp, ("%s\n"
+                "int %s::lookahead_linenumb;\n\n"), template_decl, template_inst);
+
+   fprintf(fp, "template class templ_lrstar_lexer<%s, %s, %s, %s>;\n",
+           data_types[ts_TermNumb].type,
+           data_types[ts_Tr].type,
+           data_types[ts_Tm].type,
+           data_types[ts_Tc].type);
+   fprintf(fp, "typedef templ_lrstar_lexer<%s, %s, %s, %s> lexer_t;\n",
+           data_types[ts_TermNumb].type,
+           data_types[ts_Tr].type,
+           data_types[ts_Tm].type,
+           data_types[ts_Tc].type);
+}
+
+
+void LG::GenerateLexerDefines ()
+{
+   FILE       *tables;
+   FILE       *header;
+   char        filename_hpp[PATH_MAX];
+   char        filename_h[PATH_MAX];
+   const char *lexer_class = "_LexerTables";
+
 
    strcpy (filename_h, gdn);
    strcat (filename_h, gfn);
@@ -84,11 +169,6 @@ void  LG::GenerateLexerDefines ()
 
    fprintf (header, "\n/*\n");
 
-   FILE* tables;
-   char filename_hpp[PATH_MAX];
-   char* make_term (char*);
-   const char* vartype;
-
    strcpy (filename_hpp, gdn);
    strcat (filename_hpp, gfn);
    strcat (filename_hpp, lexer_class);
@@ -126,10 +206,15 @@ void  LG::GenerateLexerDefines ()
    fprintf (tables, "      #define MAX    0x80000000\n\n");
 
    // T_matrix ...
-   vartype = get_typestr (T_matrix, T_size);
-   fprintf (header, "      static const %-6s Tm[%6d]        ; // Terminal transition matrix.\n", vartype, T_size);
+
+   data_types[ts_Tm].type   = get_typestr (T_matrix, T_size);
+   data_types[ts_Tm].n_elem = T_size;
+   fprintf (header, "      static const %-6s Tm[%6d]        ; "
+            "// Terminal transition matrix.\n",
+            data_types[ts_Tm].type, T_size);
    fprintf (tables, "   // Terminal transition matrix ...\n");
-   fprintf (tables, "      static const %s Tm[%d] = \n", vartype,T_size);
+   fprintf (tables, "      static const %s Tm[%d] = \n",
+            data_types[ts_Tm].type, T_size);
    fprintf (tables, "      {");
    for (int i = 0; i < T_size; i++)
    {
@@ -152,10 +237,14 @@ void  LG::GenerateLexerDefines ()
    // T_matrix row ...
    if (optn[LG_TABL_MEDIUM])
    {
-      vartype = get_typestr (T_row, tt_states);
-      fprintf (header, "      static const %-6s Tr[%6d]        ; // Terminal transition matrix row.\n", vartype, tt_states);
+      data_types[ts_Tr].type = get_typestr (T_row, tt_states);
+      data_types[ts_Tr].n_elem = tt_states;
+      fprintf (header, "      static const %-6s Tr[%6d]        ; "
+               "// Terminal transition matrix row.\n",
+               data_types[ts_Tr].type, tt_states);
       fprintf (tables, "   // Terminal transition matrix row ...\n");
-      fprintf (tables, "      static const %s Tr[%d] = \n", vartype, tt_states);
+      fprintf (tables, "      static const %s Tr[%d] = \n",
+               data_types[ts_Tr].type, tt_states);
       fprintf (tables, "      {");
       for (int i = 0; i < tt_states; i++)
       {
@@ -172,10 +261,14 @@ void  LG::GenerateLexerDefines ()
    // T_matrix column ...
    if (optn[LG_TABL_MEDIUM])
    {
-      vartype = get_typestr (T_col, N_terms);
-      fprintf (header, "      static const %-6s Tc[%6d]        ; // Terminal transition matrix column.\n", vartype, N_terms);
+      data_types[ts_Tc].type = get_typestr (T_col, N_terms);
+      data_types[ts_Tc].n_elem = N_terms;
+      fprintf (header, "      static const %-6s Tc[%6d]        ; "
+               "// Terminal transition matrix column.\n",
+               data_types[ts_Tc].type, N_terms);
       fprintf (tables, "   // Terminal transition matrix column ...\n");
-      fprintf (tables, "      static const %s Tc[%d] = \n", vartype, N_terms);
+      fprintf (tables, "      static const %s Tc[%d] = \n",
+               data_types[ts_Tc].type, N_terms);
       fprintf (tables, "      {");
       for (int i = 0; i < N_terms; i++)
       {
@@ -192,10 +285,14 @@ void  LG::GenerateLexerDefines ()
    // Terminal Numbers (one for for each state) ...
    if (optn[LG_TABL_MEDIUM])
    {
-      vartype = get_typestr (D_red, N_states);
-      fprintf (header, "      static const %-6s term_numb[%6d] ; // Terminal number.\n", vartype, N_states);
+      data_types[ts_TermNumb].type = get_typestr (D_red, N_states);
+      data_types[ts_TermNumb].n_elem = N_states;
+      fprintf (header, "      static const %-6s term_numb[%6d] ; "
+               "// Terminal number.\n",
+               data_types[ts_TermNumb].type, N_states);
       fprintf (tables, "   // Terminal number ...\n");
-      fprintf (tables, "      static const %s term_numb[%d] = \n", vartype, N_states);
+      fprintf (tables, "      static const %s term_numb[%d] = \n",
+               data_types[ts_TermNumb].type, N_states);
       fprintf (tables, "      {");
       for (int i = 0; i < N_states; i++)
       {
@@ -212,6 +309,8 @@ void  LG::GenerateLexerDefines ()
    fprintf (tables, "//\n");
    fprintf (tables, "////////////////////////////////////////////////////////////////////////////////////////////////////\n");
    fprintf (tables, "\n");
+
+   declare_lexer(tables);
 
    fclose (tables);
    chmod (filename_hpp, S_IREAD); // Make output file read-only.
