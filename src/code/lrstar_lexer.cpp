@@ -1,6 +1,3 @@
-
-/////////////////////////////////////////////////////////////////////////////////////////////////////
-//                                                                                                 //
 //    DFA Lexer Code
 
 #include "lrstar_library_defs.h"
@@ -13,7 +10,6 @@ int     lrstar_lexer::lookahead_linenumb;  // Line number of token.
 int     lrstar_lexer::linenumb_printed; // Line number printed already.
 int     lrstar_lexer::tab;              // Tab setting for the input file.
 
-/////////////////////////////////////////////////////////////////////////////////////////////////////
 
 void  lrstar_lexer::init_lexer (char* input_start, int tab_setting)
 {
@@ -26,7 +22,6 @@ void  lrstar_lexer::init_lexer (char* input_start, int tab_setting)
    lookahead.end     = 0;           // Not activated.
 }
 
-/////////////////////////////////////////////////////////////////////////////////////////////////////
 
 int   lrstar_lexer::get_token ()           // Medium size lexer.
 {
@@ -53,7 +48,6 @@ int   lrstar_lexer::get_token ()           // Medium size lexer.
    return term_numb[x];       // Return token_number.
 }
 
-/////////////////////////////////////////////////////////////////////////////////////////////////////
 
 int   lrstar_lexer::get_lookahead ()       // Medium size lexer.
 {
@@ -77,7 +71,6 @@ int   lrstar_lexer::get_lookahead ()       // Medium size lexer.
    return term_numb[x];       // Return token_number.
 }
 
-/////////////////////////////////////////////////////////////////////////////////////////////////////
 
 char* lrstar_lexer::untabify (char* ls, char*& ts)
 {
@@ -120,7 +113,6 @@ char* lrstar_lexer::untabify (char* ls, char*& ts)
    return string;
 }
 
-/////////////////////////////////////////////////////////////////////////////////////////////////////
 
 void  lrstar_lexer::prt_line() // Print current line.
 {
@@ -182,9 +174,6 @@ char* lrstar_lexer::untabify (char* ls) // Untabify this line.
    }
 }
 
-
-//                                                                                                 //
-/////////////////////////////////////////////////////////////////////////////////////////////////////
 
 /* Local Variables:      */
 /* mode: c               */
