@@ -28,6 +28,11 @@
 #define _debug (0)
 #endif
 
+
+#define LRSTAR_FALLTHROUGH()                    \
+   __attribute__((fallthrough))
+
+
 /* COMPILE_TIME_ASSERT
  *
  *  Compile-time assert.  Checks if _expr, which must be a
