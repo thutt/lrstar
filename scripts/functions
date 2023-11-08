@@ -224,6 +224,7 @@ function lrstar-build ()
     local architecture="$(uname -m)";
     local arch;
 
+    export LANG=C;              # Make gcc not use UTF-8.
     case "${architecture}" in
         aarch64)
             arch="Arm64";

@@ -104,6 +104,8 @@ function cleanup ()
 
 function main ()
 {
+    export LANG=C;              # Make gcc not use UTF-8.
+
     if [ -v LRSTAR_DIR ] ; then
         local grammars="${LRSTAR_DIR}/grammars";
         local examples="${LRSTAR_DIR}/examples";
