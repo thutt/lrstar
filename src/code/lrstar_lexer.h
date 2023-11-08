@@ -15,32 +15,6 @@ public:
    int   line;                  // Line number.
 };
 
-class lrstar_lexer
-{
-public:
-   static Token   token;               // Token being read.
-   static Token   lookahead;           // Lookahead being read.
-   static int     tab;                 // Tab setting in input file.
-   static int     linenumb;            // Line number in input file.
-   static int     linenumb_printed;    // Line number already printed.
-   static int     lookahead_linenumb;  // Line number in input file.
-
-   static void    init_lexer (char* input_start, int tab);
-   static int     get_token ();
-   static int     get_lookahead ();
-   static void    prt_line ();
-   static char*   untabify (char* ls);
-   static char*   untabify (char* ls, char*& token);
-};
-
-/* templ_lrstar_lexer
- *
- *  This template is intended to be used to replace the suboptimal
- *  lrstar_lexer class.  Initially it will be fully static, like
- *  lrstar_lexer, but it will be converted to only non-static after
- *  the lrstar system is updated to use it.
- */
-
 template<typename T_term_numb, typename T_Tm, typename T_Tr, typename T_Tc>
 class templ_lrstar_lexer
 {
@@ -50,11 +24,10 @@ private:
     static const int n_Tr;
     static const int n_Tc;
 
-public:
-    static const T_term_numb *term_numb_;
-    static const T_Tm        *Tm_;
-    static const T_Tr        *Tr_;
-    static const T_Tc        *Tc_;
+    static const T_term_numb *l_term_numb;
+    static const T_Tm        *l_Tm;
+    static const T_Tr        *l_Tr;
+    static const T_Tc        *l_Tc;
 
 public:
    static Token   token;               // Token being read.
@@ -83,7 +56,7 @@ public:
          x = 0;
          token.start = token.end;
          token.line  = linenumb;
-         while ((y = Tm_[Tr_[x] + Tc_[*(uchar*)token.end]]) > 0) {
+         while ((y = l_Tm[l_Tr[x] + l_Tc[*(uchar*)token.end]]) > 0) {
             x = y;
             if (*token.end == '\n') {
                linenumb++;
@@ -93,8 +66,8 @@ public:
             }
             token.end++;
          }
-      } while (term_numb_[x] < 0);  // Ignore whitespace.
-      return term_numb_[x];       // Return token_number.
+      } while (l_term_numb[x] < 0);  // Ignore whitespace.
+      return l_term_numb[x];       // Return token_number.
    }
 
    static char *untabify(char *ls)
@@ -218,15 +191,15 @@ public:
          x = 0;
          lookahead.start = lookahead.end;
          lookahead.line  = lookahead_linenumb;
-         while ((y = Tm_[Tr_[x] + Tc_[*(uchar*)lookahead.end]]) > 0) {
+         while ((y = l_Tm[l_Tr[x] + l_Tc[*(uchar*)lookahead.end]]) > 0) {
             x = y;
             if (*lookahead.end == '\n') {
                lookahead_linenumb++;
             }
             lookahead.end++;
          }
-      } while (term_numb_[x] < 0);  // Ignore whitespace.
-      return term_numb_[x];       // Return token_number.
+      } while (l_term_numb[x] < 0);  // Ignore whitespace.
+      return l_term_numb[x];       // Return token_number.
    }
 
 };

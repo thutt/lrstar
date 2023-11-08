@@ -28,12 +28,8 @@ DISTRIB_LIBRARY_DEFS_HEADER	:=	\
 	$(DISTRIB_ROOT)/include/lrstar_library_defs.h
 
 
-DISTRIB_LEXER_CODE	:=	\
-	$(DISTRIB_ROOT)/include/lrstar_lexer.cpp
-
 DISTRIB_LEXER_HEADER	:=	\
 	$(DISTRIB_ROOT)/include/lrstar_lexer.h
-$(DISTRIB_LEXER_CODE):		$(LRSTAR_DIR)/src/code/lrstar_lexer.cpp
 $(DISTRIB_LEXER_HEADER):	$(LRSTAR_DIR)/src/code/lrstar_lexer.h
 
 
@@ -55,7 +51,7 @@ $(DISTRIB_PARSER_CODE):		$(LRSTAR_DIR)/src/code/lrstar_parser.cpp
 $(DISTRIB_PARSER_HEADER):	$(LRSTAR_DIR)/src/code/lrstar_parser.h
 
 
-$(DISTRIB_LEXER_CODE)	$(DISTRIB_LEXER_HEADER)		\
+$(DISTRIB_LEXER_HEADER)					\
 $(DISTRIB_MAIN_CODE)	$(DISTRIB_MAIN_HEADER)		\
 $(DISTRIB_PARSER_CODE)	$(DISTRIB_PARSER_HEADER):
 	$(PROLOG);					\
@@ -113,7 +109,6 @@ $(DISTRIB_DFA):		$(DFA)
 distribution:					\
 		$(DISTRIB_BASIC_DEFS_HEADER)	\
 		$(DISTRIB_DFA)			\
-		$(DISTRIB_LEXER_CODE)		\
 		$(DISTRIB_LEXER_HEADER)		\
 		$(DISTRIB_LIBRARY_DEFS_HEADER)	\
 		$(DISTRIB_LRSTAR)		\

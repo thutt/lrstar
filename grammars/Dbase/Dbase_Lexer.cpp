@@ -6,7 +6,6 @@
 #include "lrstar_lexer.h"
 #include "Dbase_LexerTables.h"
 #include "Dbase_LexerTables.hpp"
-#include "lrstar_lexer.cpp"
 
 //                                                                           //
 ///////////////////////////////////////////////////////////////////////////////

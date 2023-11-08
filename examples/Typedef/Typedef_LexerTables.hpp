@@ -6,7 +6,7 @@
       #define MAX    0x80000000
 
    // Terminal transition matrix ...
-      static const uchar Tm[1170] = 
+      static const uchar Tm_[1170] = 
       {
          49,    2,    2,   47,   44,   45,   17,   49,   46,    1,    1,   12,    1,    1,    1,    1,    1,   13,    1,    1,
           1,    1,   14,   15,   16,    1,    0,    0,    0,    0,    0,    0,    0,    1,    0,    1,    1,    1,    1,    1,
@@ -70,7 +70,7 @@
       };
 
    // Terminal transition matrix row ...
-      static const ushort Tr[50] = 
+      static const ushort Tr_[50] = 
       {
           0,   26,   52,   78,  104,  130,  156,  182,  208,  234,  260,  286,  312,  338,  364,  390,  416,  442,  468,  494,
         520,  546,  572,  598,  624,  650,  676,  702,  728,  754,  780,  806,  832,  858,  884,  910,  936,  962,  988, 1014,
@@ -78,7 +78,7 @@
       };
 
    // Terminal transition matrix column ...
-      static const uchar Tc[256] = 
+      static const uchar Tc_[256] = 
       {
           0,    0,    0,    0,    0,    0,    0,    0,    0,    1,    2,    0,    0,    0,    0,    0,    0,    0,    0,    0,
           0,    0,    0,    0,    0,    0,    3,    0,    0,    0,    0,    0,    1,    0,    0,    0,    0,    0,    0,    0,
@@ -96,7 +96,7 @@
       };
 
    // Terminal number ...
-      static const char term_numb[50] = 
+      static const char term_numb_[50] = 
       {
           0,    2,   -1,   -1,    0,    0,    0,    0,    0,    0,    0,    0,    2,    2,    2,    2,    2,    0,    2,    2,
           2,    2,    2,    2,    2,    2,    2,    2,    2,    2,    2,    2,    0,    2,    2,    0,    0,    2,    0,    9,

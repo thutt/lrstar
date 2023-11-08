@@ -6,7 +6,6 @@
 #include "lrstar_lexer.h"
 #include "Typedef_LexerTables.h"
 #include "Typedef_LexerTables.hpp"
-#include "lrstar_lexer.cpp"
 
 //                                                                           //
 ///////////////////////////////////////////////////////////////////////////////

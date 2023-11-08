@@ -1,4 +1,3 @@
-
 /* Copyright 2018, 2023 Paul B Mann.  BSD License. */
 
 #include "CM_Global.h"
@@ -177,16 +176,16 @@ instantiate_lexer(const char *dname,
                 ""), template_decl(), lexer_decl(), data_types[ts_Tc].n_elem);
 
    fprintf(fp, ("%s\n"
-                "const T_term_numb *%s::term_numb_ = &term_numb[0];\n\n"
+                "const T_term_numb *%s::l_term_numb = &term_numb_[0];\n\n"
                 ""), template_decl(), lexer_decl());
    fprintf(fp, ("%s\n"
-                "const T_Tm *%s::Tm_ = &Tm[0];\n\n"
+                "const T_Tm *%s::l_Tm = &Tm_[0];\n\n"
                 ""), template_decl(), lexer_decl());
    fprintf(fp, ("%s\n"
-                "const T_Tr *%s::Tr_ = &Tr[0];\n\n"
+                "const T_Tr *%s::l_Tr = &Tr_[0];\n\n"
                 ""), template_decl(), lexer_decl());
    fprintf(fp, ("%s\n"
-                "const T_Tc *%s::Tc_ = &Tc[0];\n\n"
+                "const T_Tc *%s::l_Tc = &Tc_[0];\n\n"
                 ""), template_decl(), lexer_decl());
 
    fprintf(fp, ("%s\n"
@@ -333,11 +332,11 @@ void LG::GenerateLexerDefines ()
 
    data_types[ts_Tm].type   = get_typestr (T_matrix, T_size);
    data_types[ts_Tm].n_elem = T_size;
-   fprintf (header, "      static const %-6s Tm[%6d]        ; "
+   fprintf (header, "      static const %-6s Tm_[%6d]        ; "
             "// Terminal transition matrix.\n",
             data_types[ts_Tm].type, T_size);
    fprintf (tables, "   // Terminal transition matrix ...\n");
-   fprintf (tables, "      static const %s Tm[%d] = \n",
+   fprintf (tables, "      static const %s Tm_[%d] = \n",
             data_types[ts_Tm].type, T_size);
    fprintf (tables, "      {");
    for (int i = 0; i < T_size; i++)
@@ -363,11 +362,11 @@ void LG::GenerateLexerDefines ()
    {
       data_types[ts_Tr].type = get_typestr (T_row, tt_states);
       data_types[ts_Tr].n_elem = tt_states;
-      fprintf (header, "      static const %-6s Tr[%6d]        ; "
+      fprintf (header, "      static const %-6s Tr_[%6d]        ; "
                "// Terminal transition matrix row.\n",
                data_types[ts_Tr].type, tt_states);
       fprintf (tables, "   // Terminal transition matrix row ...\n");
-      fprintf (tables, "      static const %s Tr[%d] = \n",
+      fprintf (tables, "      static const %s Tr_[%d] = \n",
                data_types[ts_Tr].type, tt_states);
       fprintf (tables, "      {");
       for (int i = 0; i < tt_states; i++)
@@ -387,11 +386,11 @@ void LG::GenerateLexerDefines ()
    {
       data_types[ts_Tc].type = get_typestr (T_col, N_terms);
       data_types[ts_Tc].n_elem = N_terms;
-      fprintf (header, "      static const %-6s Tc[%6d]        ; "
+      fprintf (header, "      static const %-6s Tc_[%6d]        ; "
                "// Terminal transition matrix column.\n",
                data_types[ts_Tc].type, N_terms);
       fprintf (tables, "   // Terminal transition matrix column ...\n");
-      fprintf (tables, "      static const %s Tc[%d] = \n",
+      fprintf (tables, "      static const %s Tc_[%d] = \n",
                data_types[ts_Tc].type, N_terms);
       fprintf (tables, "      {");
       for (int i = 0; i < N_terms; i++)
@@ -411,11 +410,11 @@ void LG::GenerateLexerDefines ()
    {
       data_types[ts_TermNumb].type = get_typestr (D_red, N_states);
       data_types[ts_TermNumb].n_elem = N_states;
-      fprintf (header, "      static const %-6s term_numb[%6d] ; "
+      fprintf (header, "      static const %-6s term_numb_[%6d] ; "
                "// Terminal number.\n",
                data_types[ts_TermNumb].type, N_states);
       fprintf (tables, "   // Terminal number ...\n");
-      fprintf (tables, "      static const %s term_numb[%d] = \n",
+      fprintf (tables, "      static const %s term_numb_[%d] = \n",
                data_types[ts_TermNumb].type, N_states);
       fprintf (tables, "      {");
       for (int i = 0; i < N_states; i++)

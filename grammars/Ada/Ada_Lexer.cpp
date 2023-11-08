@@ -6,7 +6,6 @@
 #include "lrstar_lexer.h"
 #include "Ada_LexerTables.h"
 #include "Ada_LexerTables.hpp"
-#include "lrstar_lexer.cpp"
 
 //                                                                           //
 ///////////////////////////////////////////////////////////////////////////////

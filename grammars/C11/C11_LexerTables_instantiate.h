@@ -18,16 +18,16 @@ template<typename T_term_numb, typename T_Tm, typename T_Tr, typename T_Tc>
 const int templ_lrstar_lexer<T_term_numb, T_Tm, T_Tr, T_Tc>::n_Tc = 256;
 
 template<typename T_term_numb, typename T_Tm, typename T_Tr, typename T_Tc>
-const T_term_numb *templ_lrstar_lexer<T_term_numb, T_Tm, T_Tr, T_Tc>::term_numb_ = &term_numb[0];
+const T_term_numb *templ_lrstar_lexer<T_term_numb, T_Tm, T_Tr, T_Tc>::l_term_numb = &term_numb_[0];
 
 template<typename T_term_numb, typename T_Tm, typename T_Tr, typename T_Tc>
-const T_Tm *templ_lrstar_lexer<T_term_numb, T_Tm, T_Tr, T_Tc>::Tm_ = &Tm[0];
+const T_Tm *templ_lrstar_lexer<T_term_numb, T_Tm, T_Tr, T_Tc>::l_Tm = &Tm_[0];
 
 template<typename T_term_numb, typename T_Tm, typename T_Tr, typename T_Tc>
-const T_Tr *templ_lrstar_lexer<T_term_numb, T_Tm, T_Tr, T_Tc>::Tr_ = &Tr[0];
+const T_Tr *templ_lrstar_lexer<T_term_numb, T_Tm, T_Tr, T_Tc>::l_Tr = &Tr_[0];
 
 template<typename T_term_numb, typename T_Tm, typename T_Tr, typename T_Tc>
-const T_Tc *templ_lrstar_lexer<T_term_numb, T_Tm, T_Tr, T_Tc>::Tc_ = &Tc[0];
+const T_Tc *templ_lrstar_lexer<T_term_numb, T_Tm, T_Tr, T_Tc>::l_Tc = &Tc_[0];
 
 template<typename T_term_numb, typename T_Tm, typename T_Tr, typename T_Tc>
 Token templ_lrstar_lexer<T_term_numb, T_Tm, T_Tr, T_Tc>::token;

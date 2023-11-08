@@ -1130,10 +1130,7 @@ static void lexer_cpp_fn(FILE       *fp,
    }
    fprintf (fp, ("#include \"%s_LexerTables.h\"\n"
                  "#include \"%s_LexerTables.hpp\"\n"), grammar, grammar);
-   if (lrstar_linux) {
-      fprintf (fp, "#include \"lrstar_lexer.cpp\"\n");
-   } else {
-      assert(lrstar_windows);
+   if (lrstar_windows) {
       fprintf (fp, "#include \"../../code/lexer.h\"\n");
       fprintf (fp, "#include \"../../code/lexer.cpp\"\n");
    }

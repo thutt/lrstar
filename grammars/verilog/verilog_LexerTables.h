@@ -9,10 +9,10 @@
 
 
 /*
-      static const ushort Tm[ 27877]        ; // Terminal transition matrix.
-      static const ushort Tr[   500]        ; // Terminal transition matrix row.
-      static const uchar  Tc[   256]        ; // Terminal transition matrix column.
-      static const uchar  term_numb[   500] ; // Terminal number.
+      static const ushort Tm_[ 27877]        ; // Terminal transition matrix.
+      static const ushort Tr_[   500]        ; // Terminal transition matrix row.
+      static const uchar  Tc_[   256]        ; // Terminal transition matrix column.
+      static const uchar  term_numb_[   500] ; // Terminal number.
 */
 
 //
