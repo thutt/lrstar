@@ -7,3 +7,4 @@
 *.lgr.grammar.txt
 *.lgr.states.txt
 *.lgr.warnings.txt
+*.lgr.log.txt
