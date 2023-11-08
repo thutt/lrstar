@@ -176,16 +176,16 @@ instantiate_lexer(const char *dname,
                 ""), template_decl(), lexer_decl(), data_types[ts_Tc].n_elem);
 
    fprintf(fp, ("%s\n"
-                "const T_term_numb *%s::l_term_numb = &term_numb_[0];\n\n"
+                "const T_term_numb *%s::term_numb = &term_numb_[0];\n\n"
                 ""), template_decl(), lexer_decl());
    fprintf(fp, ("%s\n"
-                "const T_Tm *%s::l_Tm = &Tm_[0];\n\n"
+                "const T_Tm *%s::Tm = &Tm_[0];\n\n"
                 ""), template_decl(), lexer_decl());
    fprintf(fp, ("%s\n"
-                "const T_Tr *%s::l_Tr = &Tr_[0];\n\n"
+                "const T_Tr *%s::Tr = &Tr_[0];\n\n"
                 ""), template_decl(), lexer_decl());
    fprintf(fp, ("%s\n"
-                "const T_Tc *%s::l_Tc = &Tc_[0];\n\n"
+                "const T_Tc *%s::Tc = &Tc_[0];\n\n"
                 ""), template_decl(), lexer_decl());
 
    fprintf(fp, ("%s\n"

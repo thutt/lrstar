@@ -24,10 +24,10 @@ private:
     static const int n_Tr;
     static const int n_Tc;
 
-    static const T_term_numb *l_term_numb;
-    static const T_Tm        *l_Tm;
-    static const T_Tr        *l_Tr;
-    static const T_Tc        *l_Tc;
+    static const T_term_numb *term_numb;
+    static const T_Tm        *Tm;
+    static const T_Tr        *Tr;
+    static const T_Tc        *Tc;
 
 public:
    static Token   token;               // Token being read.
@@ -56,7 +56,7 @@ public:
          x = 0;
          token.start = token.end;
          token.line  = linenumb;
-         while ((y = l_Tm[l_Tr[x] + l_Tc[*(uchar*)token.end]]) > 0) {
+         while ((y = Tm[Tr[x] + Tc[*(uchar*)token.end]]) > 0) {
             x = y;
             if (*token.end == '\n') {
                linenumb++;
@@ -66,8 +66,8 @@ public:
             }
             token.end++;
          }
-      } while (l_term_numb[x] < 0);  // Ignore whitespace.
-      return l_term_numb[x];       // Return token_number.
+      } while (term_numb[x] < 0);  // Ignore whitespace.
+      return term_numb[x];       // Return token_number.
    }
 
    static char *untabify(char *ls)
@@ -191,15 +191,15 @@ public:
          x = 0;
          lookahead.start = lookahead.end;
          lookahead.line  = lookahead_linenumb;
-         while ((y = l_Tm[l_Tr[x] + l_Tc[*(uchar*)lookahead.end]]) > 0) {
+         while ((y = Tm[Tr[x] + Tc[*(uchar*)lookahead.end]]) > 0) {
             x = y;
             if (*lookahead.end == '\n') {
                lookahead_linenumb++;
             }
             lookahead.end++;
          }
-      } while (l_term_numb[x] < 0);  // Ignore whitespace.
-      return l_term_numb[x];       // Return token_number.
+      } while (term_numb[x] < 0);  // Ignore whitespace.
+      return term_numb[x];       // Return token_number.
    }
 
 };
