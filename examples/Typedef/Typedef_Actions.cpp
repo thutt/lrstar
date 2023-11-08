@@ -3,6 +3,7 @@
 //                                                                           //
 
 #include "lrstar_basic_defs.h"
+#include "Typedef_LexerTables_typedef.h"
 #include "Typedef_Actions.h"
 #include "lrstar_main.h"
 

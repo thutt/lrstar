@@ -3,6 +3,7 @@
 //                                                                           //
 
 #include "lrstar_basic_defs.h"
+#include "Java9_LexerTables_typedef.h"
 #include "Java9_Actions.h"
 #include "lrstar_main.h"
 

@@ -1452,31 +1452,7 @@
          84,   81,   88,   99,   97,  100,   89,   90,   92,   93,   94,   -1,    0
       };
 
+#include "Java9_LexerTables_instantiate.h"
 //
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
-template<typename T_term_numb, typename T_Tm, typename T_Tr, typename T_Tc>
-const int templ_lrstar_lexer<T_term_numb, T_Tm, T_Tr, T_Tc>::n_term_numb = 433;
-
-template<typename T_term_numb, typename T_Tm, typename T_Tr, typename T_Tc>
-const int templ_lrstar_lexer<T_term_numb, T_Tm, T_Tr, T_Tc>::n_Tm = 27393;
-
-template<typename T_term_numb, typename T_Tm, typename T_Tr, typename T_Tc>
-const int templ_lrstar_lexer<T_term_numb, T_Tm, T_Tr, T_Tc>::n_Tr = 433;
-
-template<typename T_term_numb, typename T_Tm, typename T_Tr, typename T_Tc>
-const int templ_lrstar_lexer<T_term_numb, T_Tm, T_Tr, T_Tc>::n_Tc = 256;
-
-template<typename T_term_numb, typename T_Tm, typename T_Tr, typename T_Tc>
-const T_term_numb *templ_lrstar_lexer<T_term_numb, T_Tm, T_Tr, T_Tc>::term_numb = &term_numb[0];
-
-template<typename T_term_numb, typename T_Tm, typename T_Tr, typename T_Tc>
-const T_Tm *templ_lrstar_lexer<T_term_numb, T_Tm, T_Tr, T_Tc>::Tm = &Tm[0];
-
-template<typename T_term_numb, typename T_Tm, typename T_Tr, typename T_Tc>
-const T_Tr *templ_lrstar_lexer<T_term_numb, T_Tm, T_Tr, T_Tc>::Tr = &Tr[0];
-
-template<typename T_term_numb, typename T_Tm, typename T_Tr, typename T_Tc>
-const T_Tc *templ_lrstar_lexer<T_term_numb, T_Tm, T_Tr, T_Tc>::Tc = &Tc[0];
-
-typedef templ_lrstar_lexer<char, ushort, ushort, uchar> lexer_t;

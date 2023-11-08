@@ -1041,7 +1041,8 @@ static void actions_cpp_fn(FILE       *fp,
    fprintf (fp, "//                                                                           //\n");
    fprintf (fp, "\n");
    fprintf (fp, ("#include \"lrstar_basic_defs.h\"\n"
-                 "#include \"%s_Actions.h\"\n"), grammar);
+                 "#include \"%s_LexerTables_typedef.h\"\n"
+                 "#include \"%s_Actions.h\"\n"), grammar, grammar);
    if (lrstar_linux) {
       fprintf (fp, "#include \"lrstar_main.h\"\n");
    } else {
@@ -1152,7 +1153,8 @@ static void main_cpp_fn(FILE       *fp,
    fprintf (fp, "//                                                                           //\n");
    fprintf (fp, "\n");
    fprintf (fp, ("#include \"lrstar_basic_defs.h\"\n"
-                 "#include \"%s_Parser.h\"\n"), grammar);
+                 "#include \"%s_LexerTables_typedef.h\"\n"
+                 "#include \"%s_Parser.h\"\n"), grammar, grammar);
    if (lrstar_linux) {
       fprintf (fp, "#include \"lrstar_main.cpp\"\n");
    } else {
@@ -1175,8 +1177,9 @@ static void parser_cpp_fn(FILE       *fp,
    fprintf (fp, "//                                                                           //\n");
    fprintf (fp, "\n");
    fprintf (fp, ("#include \"lrstar_basic_defs.h\"\n"
+                 "#include \"%s_LexerTables_typedef.h\"\n"
                  "#include \"%s_Parser.h\"\n"
-                 "#include \"%s_ParserTables.hpp\"\n"), grammar, grammar);
+                 "#include \"%s_ParserTables.hpp\"\n"), grammar, grammar, grammar);
    if (lrstar_linux) {
       fprintf (fp, "#include \"lrstar_parser.cpp\"\n");
    } else {

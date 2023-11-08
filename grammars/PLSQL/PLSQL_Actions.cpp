@@ -3,6 +3,7 @@
 //                                                                           //
 
 #include "lrstar_basic_defs.h"
+#include "PLSQL_LexerTables_typedef.h"
 #include "PLSQL_Actions.h"
 #include "lrstar_main.h"
 
