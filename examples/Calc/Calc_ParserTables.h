@@ -5,6 +5,7 @@
 
       #pragma once
 
+      #include "lrstar_library_defs.h"
 
       enum termcon
       {
@@ -35,10 +36,6 @@
          N_else2_ = 16
       };
 
-
-      #define TOP_DOWN  0
-      #define PASS_OVER 1
-      #define BOTTOM_UP 2
 
       class lrstar_parser_tables
       {

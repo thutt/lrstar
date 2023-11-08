@@ -186,6 +186,7 @@ void  PG_Main::GenerateParserTables ()
    fprintf (header, "\n");
 
    fprintf (header, "      #pragma once\n\n");
+   fprintf (header, "      #include \"lrstar_library_defs.h\"\n");
 
    fprintf (header, "\n");
    if (n_constants > 0)
@@ -226,9 +227,6 @@ void  PG_Main::GenerateParserTables ()
    }
 
    fprintf (header, "\n");
-   fprintf (header, "      #define TOP_DOWN  0\n");
-   fprintf (header, "      #define PASS_OVER 1\n");
-   fprintf (header, "      #define BOTTOM_UP 2\n\n");
 
    fprintf (header, "      class lrstar_parser_tables\n");
    fprintf (header, "      {\n");
