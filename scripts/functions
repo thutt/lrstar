@@ -167,7 +167,7 @@ function dfa-path ()
     # This pathname construction must match the pathname construction
     # in the lrstar build process.
 
-    local ip=$(lrstar-install-path);
+    local ip=$(lrstar-install-root);
     local path="${ip}/bin/dfa";
     echo "${path}";
 }
