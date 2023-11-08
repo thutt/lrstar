@@ -110,7 +110,7 @@ int   lrstar_parser::init_parser (char* patharg, char* input_start, int max_syms
    n_errors     = 0;                   // Set number of errors.
    n_nodes      = 0;                   // In case of no parser creation.
 
-   init_lexer (input_start, 3);        // Initialize the lexer.
+   lexer.init_lexer (input_start, 3);        // Initialize the lexer.
    init_symtab (max_syms);             // Initialize the symbol table.
 
 #ifdef MAKE_AST
@@ -155,12 +155,13 @@ int   lrstar_parser::parse ()
 {
    int x, t, T, p;
    x = 0;                                          // State = 0 to start.
-Read: T = t = get_token ();                           // Get incoming token.
+Read:
+   T = t = lexer.get_token ();                     // Get incoming token.
 #ifdef TERM_ACTIONS
    if (tact_numb[t] >= 0)                          // If token action ...
-      token.sti = (*tact_func[tact_numb[t]]) (t);  // Call token-action function.
+      lexer.token.sti = (*tact_func[tact_numb[t]]) (t);  // Call token-action function.
 #else
-   token.sti = -t;
+   lexer.token.sti = -t;
 #endif
 #ifdef EXPECTING
    RS = RSstart;
@@ -172,10 +173,10 @@ Test: if (Bm [Br[x] + Bc[t]] & Bf[t])              // Check B-matrix for shift a
    {
       PS++;
       PS->state = x;                            // Put current state on stack.
-      PS->sti   = token.sti;                    // Put symbol-table index on stack.
+      PS->sti   = lexer.token.sti;                    // Put symbol-table index on stack.
 #ifdef MAKE_AST
-      PS->line  = token.line;                   // Put line number on stack.
-      PS->start = token.start;                  // Put start address on stack.
+      PS->line  = lexer.token.line;                   // Put line number on stack.
+      PS->start = lexer.token.start;                  // Put start address on stack.
       PS->node  = 0;                            // Set node on stack to zero.
 #endif
 #ifdef EXPECTING
@@ -283,7 +284,7 @@ Test: if (Bm [Br[x] + Bc[t]] & Bf[t])              // Check B-matrix for shift a
 #ifdef DEBUG_PARSER
       fprintf (output, "\nDone.\n\n");
 #endif
-      return linenumb-1;                        // Success.
+      return lexer.linenumb - 1;                // Success.
    }
 #ifdef EXPECTING
    x = restore ();
@@ -298,13 +299,13 @@ Test: if (Bm [Br[x] + Bc[t]] & Bf[t])              // Check B-matrix for shift a
 #ifdef EXPECTING
       print_stack ();
 #endif
-      syntax_error ("Error", &token, term_symb[T]);
+      syntax_error ("Error", &lexer.token, term_symb[T]);
 #ifdef EXPECTING
       expecting (x);
       print_terms (x);
 #endif
    }
-   return -linenumb; // Failure.
+   return -lexer.linenumb; // Failure.
 
    goto SR;  // Stops compiler from complaining.
    goto Red; // Stops compiler from complaining.
@@ -728,7 +729,7 @@ void  lrstar_parser::syntax_error (const char *msg, Token* T, const char* symb)
 
    // Get untabified line ...
    pointer = T->start;
-   lineout = untabify (linestart, pointer);
+   lineout = lexer.untabify (linestart, pointer);
 
    // Make pointer line ...
    int i = 0;
