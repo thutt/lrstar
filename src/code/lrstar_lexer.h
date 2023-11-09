@@ -1,7 +1,9 @@
 //
 //    DFA Lexer Header
 
-#pragma once
+#if !defined(__LRSTAR_LEXER_H__)
+#define __LRSTAR_LEXER_H__
+
 #include <assert.h>
 #include "lrstar_basic_defs.h"
 #include "lrstar_library_defs.h"
@@ -56,7 +58,8 @@ public:
          x = 0;
          token.start = token.end;
          token.line  = linenumb;
-         while ((y = Tm[Tr[x] + Tc[*(uchar*)token.end]]) > 0) {
+         while ((y = Tm[Tr[x] +
+                        Tc[*reinterpret_cast<uint8 *>(token.end)]]) > 0) {
             x = y;
             if (*token.end == '\n') {
                linenumb++;
@@ -161,8 +164,10 @@ public:
    static void  prt_line()
    {
 #if 1
-      assert(0);                /* XXX test this function */
+      assert(false);
 #else
+      // This requires <stdio.h>, but that defines EOF.  EOF is used
+      // by some of the grammars.  That produces syntax errors.
       if (debug_lexer_) {
          char *str;
          char *ls;
@@ -191,7 +196,8 @@ public:
          x = 0;
          lookahead.start = lookahead.end;
          lookahead.line  = lookahead_linenumb;
-         while ((y = Tm[Tr[x] + Tc[*(uchar*)lookahead.end]]) > 0) {
+         while ((y = Tm[Tr[x] +
+                        Tc[*reinterpret_cast<uint8 *>(lookahead.end)]]) > 0) {
             x = y;
             if (*lookahead.end == '\n') {
                lookahead_linenumb++;
@@ -201,9 +207,8 @@ public:
       } while (term_numb[x] < 0);  // Ignore whitespace.
       return term_numb[x];       // Return token_number.
    }
-
 };
-
+#endif
 /* Local Variables:      */
 /* mode: c               */
 /* c-basic-offset: 3     */
