@@ -153,10 +153,6 @@
          WHILE = 123
       };
 
-      typedef unsigned int   uint;
-      typedef unsigned char  uchar;
-      typedef unsigned short ushort;
-
       class Kotlin_ParserTables
       {
          friend class Kotlin_Parser;

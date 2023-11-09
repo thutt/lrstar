@@ -343,7 +343,7 @@
       };
 
    // Head symbol numbers for the productions ...
-      const uchar lrstar_parser_tables::head_numb[396] = 
+      const uint8 lrstar_parser_tables::head_numb[396] = 
       {
           0,    1,    1,    1,    2,    3,    4,    5,    6,    7,    8,    9,    9,    9,   10,   11,   11,   11,   12,   13,
          13,   14,   15,   15,   15,   15,   15,   15,   15,   15,   16,   17,   18,   18,   18,   18,   18,   18,   18,   18,
@@ -368,7 +368,7 @@
       };
 
    // First tail symbol index into the tail list ...
-      const ushort lrstar_parser_tables::f_tail[397] = 
+      const uint16 lrstar_parser_tables::f_tail[397] = 
       {
           0,    2,    3,    4,    6,    7,    9,   13,   14,   16,   22,   25,   29,   33,   35,   37,   41,   45,   47,   48,
          49,   50,   54,   55,   56,   57,   58,   59,   60,   61,   62,   64,   67,   68,   69,   70,   71,   72,   73,   74,
@@ -393,7 +393,7 @@
       };
 
    // Tail symbol numbers ...
-      const short lrstar_parser_tables::tail[600] = 
+      const int16 lrstar_parser_tables::tail[600] = 
       {
         -85,    1,    2,  -14,  -38,    2,  -87,  -72,  -88,    3,  -34,  -91,    2,  -92,   -5,  -93,    6,    7,   -8,  -95,
           9,  -46,    4,  -96,    5,  -10,  -98, -100, -107,   12, -101, -100, -103,   13,  -10,    7, -109,  -12,  -98, -111,
@@ -428,7 +428,7 @@
       };
 
    // Boolean matrix ...
-      const uchar lrstar_parser_tables::Bm[249] = 
+      const uint8 lrstar_parser_tables::Bm[249] = 
       {
           0,    0,    0,    0,    0,    0,   76,   16,   71,    6,    9,  128,    2,    0,    0,    0,    0,    0,  128,    0,
           0,    0,    0,   64,    0,    0,    0,  144,    0,   16,    0,    0,   26,    1,    4,    0,    0,    0,    0,    0,
@@ -446,7 +446,7 @@
       };
 
    // Boolean matrix row (for state)...
-      const uchar lrstar_parser_tables::Br[257] = 
+      const uint8 lrstar_parser_tables::Br[257] = 
       {
           6,   12,    0,   17,    0,    0,   21,    0,    0,    0,   27,   34,   40,   46,    6,    0,   51,   57,   62,   67,
          67,   72,   78,   82,   78,   78,   67,   67,   67,   62,   87,   67,   78,   78,   78,   39,   92,   98,   45,   45,
@@ -464,7 +464,7 @@
       };
 
    // Boolean matrix column (displacement) ...
-      const uchar lrstar_parser_tables::Bc[94] = 
+      const uint8 lrstar_parser_tables::Bc[94] = 
       {
           0,    0,    0,    0,    0,    0,    0,    0,    1,    1,    1,    1,    1,    1,    1,    1,    1,    1,    1,    1,
           1,    1,    1,    1,    1,    1,    1,    1,    2,    2,    2,    2,    2,    2,    2,    2,    2,    2,    2,    2,
@@ -474,7 +474,7 @@
       };
 
    // Boolean matrix filter/mask value ...
-      const uchar lrstar_parser_tables::Bf[94] = 
+      const uint8 lrstar_parser_tables::Bf[94] = 
       {
           1,    2,    4,    8,   16,   32,   64,  128,    1,    2,    4,    8,   16,   32,   64,  128,  128,  128,  128,  128,
         128,  128,  128,  128,  128,  128,  128,  128,    1,    1,    1,    1,    1,    1,    2,    4,    8,   16,   32,    1,
@@ -484,7 +484,7 @@
       };
 
    // Terminal transition matrix ...
-      const short lrstar_parser_tables::Tm[351] = 
+      const int16 lrstar_parser_tables::Tm[351] = 
       {
           0,    0,  250,  255, -133,  202,  225, -270,  204,  228, -273,  211,  231,  177,  242,    0,    0,  246,  -18,  234,
         236,    0,  217,  161,  198,  191, -258,  177,  200,  218,  178,  179,  -18,  220,  235,  215,  216,  177,  238,  247,
@@ -507,7 +507,7 @@
       };
 
    // Terminal transition matrix row ...
-      const ushort lrstar_parser_tables::Tr[257] = 
+      const uint16 lrstar_parser_tables::Tr[257] = 
       {
         270,  270,  270,  270,  270,  270,  204,  270,  270,  270,  270,  204,  270,  270,  152,  270,  270,  204,  270,  270,
         270,   66,  152,  204,   66,  116,  270,  270,  270,  270,  270,  270,   53,   47,  152,  270,  270,  270,  270,  204,
@@ -525,7 +525,7 @@
       };
 
    // Terminal transition matrix column ...
-      const uchar lrstar_parser_tables::Tc[94] = 
+      const uint8 lrstar_parser_tables::Tc[94] = 
       {
          30,   30,    0,   45,   60,   61,   46,    1,   47,    2,   62,    3,    4,    5,   48,   49,   50,   51,   52,    6,
           7,    8,    9,   10,   11,   12,   13,   14,   15,   16,   17,   18,   19,   20,   21,   22,   23,   24,   25,   26,
@@ -535,7 +535,7 @@
       };
 
    // Nonterminal transition matrix ...
-      const short lrstar_parser_tables::Nm[3046] = 
+      const int16 lrstar_parser_tables::Nm[3046] = 
       {
           0,    0,    0,    0,    0,    0,    0,    0,    0, -315, -370,   64, -312,  -95,    0,   59, -309,    8,  -95,    0,
          59,    0,  230,    7,    8,  -95,  188,   59, -276,    0,  -87,    0,    6,    7,    8,  -95,  -90,   59,  -87,    0,
@@ -693,7 +693,7 @@
       };
 
    // Nonterminal transition matrix row ...
-      const ushort lrstar_parser_tables::Nr[257] = 
+      const uint16 lrstar_parser_tables::Nr[257] = 
       {
        2873, 2873, 2873, 2873, 2873, 2873, 2873, 2873, 2873, 2873, 2873, 2873, 2536, 2536, 2701, 2873, 2536, 2873,  772,  882,
        2163,  968, 2873, 2873, 2873, 2873,  711,  591,  482,  284, 2873,  505, 2873, 2873, 2536, 2873,  614, 2873, 2873, 2536,
@@ -711,7 +711,7 @@
       };
 
    // Nonterminal transition matrix column ...
-      const uchar lrstar_parser_tables::Nc[396] = 
+      const uint8 lrstar_parser_tables::Nc[396] = 
       {
          30,   30,   30,   30,  153,  172,    1,    3,   19,   21,   22,   24,   24,   24,   26,   29,   29,   29,   75,   30,
          30,   32,   34,   34,   34,   34,   34,   34,   34,   34,   46,   54,   39,   39,   39,   39,   39,   39,   39,   39,
@@ -736,7 +736,7 @@
       };
 
    // Reduction matrix ...
-      const ushort lrstar_parser_tables::Rm[332] = 
+      const uint16 lrstar_parser_tables::Rm[332] = 
       {
           0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,  359,  235,    0,    0,
           0,  235,  235,    0,  235,  235,    0,    0,    0,    0,    0,  316,  236,    0,    0,    0,  236,  236,    0,  236,
@@ -758,7 +758,7 @@
       };
 
    // Reduction matrix row ...
-      const short lrstar_parser_tables::Rr[257] = 
+      const int16 lrstar_parser_tables::Rr[257] = 
       {
         167,    0,  222,  231,  238,  -15,  305,  310,  313,  -30,    0,    0,    0,    7,  -45,  169,  318,  307,  318,  -59,
         -73,  -87,    0,  252,    0,    0,  318,  318,  318,  318,    0,  318,    0,    0,    0,  224,  318,  234,  240,  240,
@@ -776,7 +776,7 @@
       };
 
    // Reduction matrix column ...
-      const uchar lrstar_parser_tables::Rc[94] = 
+      const uint8 lrstar_parser_tables::Rc[94] = 
       {
           0,    1,    2,    0,    3,    4,    0,    3,    0,    5,    6,    7,    8,    8,    9,   10,   10,   10,   10,   10,
          10,   10,   10,   10,   10,   10,   10,   10,    0,    0,    0,    0,    0,    0,    0,    0,    0,    3,    0,    0,
@@ -786,7 +786,7 @@
       };
 
    // Production lengths (minus one) ...
-      const char lrstar_parser_tables::PL[396] = 
+      const int8 lrstar_parser_tables::PL[396] = 
       {
           1,    0,    0,    1,    0,    1,    3,    0,    1,    5,    2,    3,    3,    1,    1,    3,    3,    1,    0,    0,
           0,    3,    0,    0,    0,    0,    0,    0,    0,    0,    1,    2,    0,    0,    0,    0,    0,    0,    0,    0,

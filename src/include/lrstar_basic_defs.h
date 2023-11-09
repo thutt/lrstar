@@ -72,10 +72,37 @@
 #endif
 
 
+#if defined(__GNUC__) && (__GNUC__ >= 9)
+typedef unsigned char      uint8;
+typedef signed char        int8;
+
+#if __SIZEOF_SHORT__ == 2
+typedef unsigned short int uint16;
+typedef signed short int   int16;
+#else
+#error A short integer is not 16-bits with this Gcc.
+#endif
+
+#if __SIZEOF_INT__ == 4
+typedef unsigned long int  uint32;
+typedef signed long int    int32;
+#else
+#error An integer is not 32-bits with this Gcc.
+#endif
+
+#if __SIZEOF_LONG__ == 8
+typedef unsigned long int  uint64;
+typedef signed long int    int64;
+#else
+#error A long integer is not 64-bits with this Gcc.
+#endif
+#else
+#error Unknown compiler; Sized integer types not defined.
+#endif
+
 typedef unsigned char       uchar;
 typedef unsigned int        uint;
 typedef unsigned short int  ushort;
-
 
 #endif
 /* Local Variables:      */

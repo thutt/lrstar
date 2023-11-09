@@ -14,25 +14,25 @@
          public:
          static const char *term_symb[   103]; // Terminal symbols of the grammar.
          static const char *head_symb[   164]; // Nonterminal symbols of the grammar.
-         static const uchar  head_numb[   643]; // Head symbol number for a production.
-         static const ushort f_tail   [   644]; // First tail in a production.
-         static const short  tail     [  1532]; // Tail symbol number.
+         static const uint8  head_numb[   643]; // Head symbol number for a production.
+         static const uint16 f_tail   [   644]; // First tail in a production.
+         static const int16  tail     [  1532]; // Tail symbol number.
 
          private:
-         static const uchar  Bm[   685]       ; // Boolean matrix.
-         static const ushort Br[   701]       ; // Boolean matrix row.
-         static const uchar  Bc[   103]       ; // Boolean matrix column.
-         static const uchar Bf[   103]       ; // Boolean matrix filter/mask.
-         static const short  Tm[  6334]       ; // Terminal transition matrix.
-         static const ushort Tr[   701]       ; // Terminal transition matrix row.
-         static const uchar  Tc[   103]       ; // Terminal transition matrix column.
-         static const short  Nm[ 15764]       ; // Nonterminal transition matrix.
-         static const ushort Nr[   701]       ; // Nonterminal transition matrix row.
-         static const uchar  Nc[   643]       ; // Nonterminal transition matrix column.
-         static const ushort Rm[   834]       ; // Reduction matrix.
-         static const short  Rr[   701]       ; // Reduction matrix row.
-         static const uchar  Rc[   103]       ; // Reduction matrix column.
-         static const char   PL[   643]       ; // Production length minus one.
+         static const uint8  Bm[   685]       ; // Boolean matrix.
+         static const uint16 Br[   701]       ; // Boolean matrix row.
+         static const uint8  Bc[   103]       ; // Boolean matrix column.
+         static const uint8 Bf[   103]       ; // Boolean matrix filter/mask.
+         static const int16  Tm[  6334]       ; // Terminal transition matrix.
+         static const uint16 Tr[   701]       ; // Terminal transition matrix row.
+         static const uint8  Tc[   103]       ; // Terminal transition matrix column.
+         static const int16  Nm[ 15764]       ; // Nonterminal transition matrix.
+         static const uint16 Nr[   701]       ; // Nonterminal transition matrix row.
+         static const uint8  Nc[   643]       ; // Nonterminal transition matrix column.
+         static const uint16 Rm[   834]       ; // Reduction matrix.
+         static const int16  Rr[   701]       ; // Reduction matrix row.
+         static const uint8  Rc[   103]       ; // Reduction matrix column.
+         static const int8   PL[   643]       ; // Production length minus one.
       };
 
 //

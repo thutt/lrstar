@@ -590,7 +590,7 @@
       };
 
    // Head symbol numbers for the productions ...
-      ushort Kotlin_ParserTables::head_numb[753] = 
+      uint16 Kotlin_ParserTables::head_numb[753] = 
       {
           0,    1,    2,    3,    4,    5,    6,    7,    8,    9,   10,   11,   11,   11,   11,   11,   12,   13,   14,   15,
          16,   17,   18,   18,   18,   18,   19,   20,   21,   22,   23,   24,   25,   26,   27,   27,   27,   27,   28,   29,
@@ -633,7 +633,7 @@
       };
 
    // First tail symbol index into the tail list ...
-      ushort Kotlin_ParserTables::f_tail[754] = 
+      uint16 Kotlin_ParserTables::f_tail[754] = 
       {
           0,    2,    8,   14,   16,   23,   24,   25,   29,   31,   33,   42,   43,   44,   45,   46,   47,   56,   58,   63,
          68,   76,   78,   79,   80,   81,   82,   84,   87,   92,   99,  103,  107,  113,  114,  115,  116,  117,  118,  121,
@@ -676,7 +676,7 @@
       };
 
    // Tail symbol numbers ...
-      short Kotlin_ParserTables::tail[1283] = 
+      int16 Kotlin_ParserTables::tail[1283] = 
       {
        -174,    1, -175, -176, -177,   -5,   -6, -178, -175, -176, -177,   -5,   -6, -180,  125, -181, -182,   48, -176,   17,
        -176, -184, -176, -187, -188,   57, -173, -190, -185,    8, -172,  -11, -191, -192,  116, -176, -172, -194, -176,    9,
@@ -746,7 +746,7 @@
       };
 
    // Boolean matrix ...
-      uchar Kotlin_ParserTables::Bm[790] = 
+      uint8 Kotlin_ParserTables::Bm[790] = 
       {
           0,    0,    0,    0,    0,    0,    0,    0,    0,    2,    0,    0,    0,    0,    0,    0,    0,    0,    0,    1,
           0,    2,    0,    0,    0,  128,    0,    0,    4,    0,    0,    0,  128,    0,    0,    0,    0,    0,    4,   24,
@@ -791,7 +791,7 @@
       };
 
    // Booeal matrix row (for state)...
-      ushort Kotlin_ParserTables::Br[670] = 
+      uint16 Kotlin_ParserTables::Br[670] = 
       {
           1,    9,    0,   11,   11,   11,   20,    0,   29,   38,    0,   46,    0,   51,    0,   60,    0,   38,   69,    0,
           0,   51,   78,   60,    0,   87,    0,   95,    0,    0,    0,   51,  104,  113,    0,   11,  119,  128,    0,  137,
@@ -830,7 +830,7 @@
       };
 
    // Booolean matrix column (displacement) ...
-      uchar Kotlin_ParserTables::Bc[155] = 
+      uint8 Kotlin_ParserTables::Bc[155] = 
       {
           0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    1,    1,    1,    1,    1,    1,    1,    1,    1,    2,
           2,    2,    0,    2,    1,    1,    2,    0,    2,    2,    2,    3,    0,    3,    3,    0,    0,    3,    3,    0,
@@ -843,7 +843,7 @@
       };
 
    // Boolean matrix filter/mask value ...
-      uchar Kotlin_ParserTables::Bf[155] = 
+      uint8 Kotlin_ParserTables::Bf[155] = 
       {
           1,    2,    4,    4,    8,   16,    4,   32,   64,  128,    1,    2,    4,    4,    8,   16,   32,   64,  128,    1,
           2,    4,    4,    8,    4,    4,   16,    4,   32,   64,  128,    1,   16,    2,    4,    1,    1,    8,   16,    4,
@@ -856,7 +856,7 @@
       };
 
    // Terminal transition matrix ...
-      short Kotlin_ParserTables::Tm[1244] = 
+      int16 Kotlin_ParserTables::Tm[1244] = 
       {
           0,    0,    0,    0,    0,    0,    0,    0,    0,    0, -402,  651,  609,  618,  626,  577,    0,    0,    0,    0,
           0,    0,  510,  599,  622,  130,  481,  621,  434,  446,  479,  303,   29,    0,    0,    0,    0,    0,  250,  234,
@@ -924,7 +924,7 @@
       };
 
    // Terminal transition matrix row ...
-      ushort Kotlin_ParserTables::Tr[670] = 
+      uint16 Kotlin_ParserTables::Tr[670] = 
       {
         740,  740,  740,  740,  840,  244,  740,  740,  740,  840,  740,  740,  740, 1040,  740,  244,  740,  840,  840,  740,
         740,  341,  740,  244,  740,  840,  740,  740,  740,  740,  740, 1040, 1040,  740,  740,  840,  840, 1040,  740,  740,
@@ -963,7 +963,7 @@
       };
 
    // Terminal transition matrix column ...
-      uchar Kotlin_ParserTables::Tc[155] = 
+      uint8 Kotlin_ParserTables::Tc[155] = 
       {
           4,    4,    4,    5,   15,    5,    2,   41,   23,   13,   15,   17,   23,   46,    6,    7,   46,   54,    0,    8,
           9,   27,   21,   62,    0,   27,   28,   34,   76,    1,   76,   14,    2,   41,    3,    4,    5,   55,   18,   72,
@@ -976,7 +976,7 @@
       };
 
    // Nonterminal transition matrix ...
-      short Kotlin_ParserTables::Nm[4648] = 
+      int16 Kotlin_ParserTables::Nm[4648] = 
       {
           0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,
           0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,
@@ -1214,7 +1214,7 @@
       };
 
    // Nonterminal transition matrix row ...
-      ushort Kotlin_ParserTables::Nr[670] = 
+      uint16 Kotlin_ParserTables::Nr[670] = 
       {
        4501, 4501, 4501, 4501, 4501, 4501, 4501, 4501, 4501, 4501, 4501, 4501, 4211, 4501, 4501, 4211, 4501, 4211, 4501, 3801,
        4355, 4211, 4501, 3801, 2331, 3801, 3522, 4501, 4068, 4501, 4501, 3801, 4355, 4501, 2970, 4501, 4501, 4355, 2428, 4501,
@@ -1253,7 +1253,7 @@
       };
 
    // Nonterminal transition matrix column ...
-      uchar Kotlin_ParserTables::Nc[753] = 
+      uint8 Kotlin_ParserTables::Nc[753] = 
       {
          36,   36,   52,   96,   12,  119,   35,   18,   42,   36,   52,   96,   96,   96,   96,   96,   12,  119,    4,    1,
          35,   18,   42,   42,   42,   42,   36,   52,   96,   50,   12,  111,  119,  118,    4,    4,    4,    4,    1,   35,
@@ -1296,7 +1296,7 @@
       };
 
    // Reduction matrix ...
-      ushort Kotlin_ParserTables::Rm[5540] = 
+      uint16 Kotlin_ParserTables::Rm[5540] = 
       {
           0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,
           0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,
@@ -1578,7 +1578,7 @@
       };
 
    // Reduction matrix row ...
-      short Kotlin_ParserTables::Rr[670] = 
+      int16 Kotlin_ParserTables::Rr[670] = 
       {
         341,    0,  343,    0,  345,    3,  363,  365,    0,    0,  -52,    6,  343,  360,  751, -104, -156,    0,    0,  343,
         338,  371,  379,  244,  343,    0,  343,    0,  343, -207, -258,    0, -308,  369,  343,   92,    0,   94,  343,    0,
@@ -1617,7 +1617,7 @@
       };
 
    // Reduction matrix column ...
-      uchar Kotlin_ParserTables::Rc[155] = 
+      uint8 Kotlin_ParserTables::Rc[155] = 
       {
           0,    1,    2,    2,    3,    4,    2,    5,    6,    7,    6,    8,    9,    9,   10,   11,   12,   13,   14,   15,
          16,    6,    2,   17,    9,    9,   18,    2,   19,   20,    6,    6,    4,   21,   22,    0,    0,   23,   24,    2,

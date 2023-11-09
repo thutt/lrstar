@@ -31,32 +31,32 @@
          static const char *head_symb[    25]; // Nonterminal symbols of the grammar.
          static const char *tact_name[     2]; // Terminal action names found in the grammar.
          static const char *node_name[    11]; // Node names found in the grammar.
-         static const uchar  head_numb[    62]; // Head symbol number for a production.
-         static const uchar  f_tail   [    63]; // First tail in a production.
-         static const char   tail     [   114]; // Tail symbol number.
-         static const char   arga     [    24]; // Arguments for terminal actions.
-         static char   argx     [    62]; // First arguments for productions.
-         static char   argy     [    62]; // Second arguments for productions.
+         static const uint8  head_numb[    62]; // Head symbol number for a production.
+         static const uint8  f_tail   [    63]; // First tail in a production.
+         static const int8   tail     [   114]; // Tail symbol number.
+         static const int8   arga     [    24]; // Arguments for terminal actions.
+         static int8   argx     [    62]; // First arguments for productions.
+         static int8   argy     [    62]; // Second arguments for productions.
 
          private:
-         static const uchar  Bm[    57]       ; // Boolean matrix.
-         static const uchar  Br[    38]       ; // Boolean matrix row.
-         static const uchar  Bc[    24]       ; // Boolean matrix column.
-         static const uchar Bf[    24]       ; // Boolean matrix filter/mask.
-         static const char   Tm[    99]       ; // Terminal transition matrix.
-         static const uchar  Tr[    38]       ; // Terminal transition matrix row.
-         static const uchar  Tc[    24]       ; // Terminal transition matrix column.
-         static const char   Nm[    72]       ; // Nonterminal transition matrix.
-         static const uchar  Nr[    38]       ; // Nonterminal transition matrix row.
-         static const uchar  Nc[    62]       ; // Nonterminal transition matrix column.
-         static const uchar  Rm[     6]       ; // Reduction matrix.
-         static const char   Rr[    38]       ; // Reduction matrix row.
-         static const uchar  Rc[    24]       ; // Reduction matrix column.
-         static const uchar  PL[    62]       ; // Production length minus one.
+         static const uint8  Bm[    57]       ; // Boolean matrix.
+         static const uint8  Br[    38]       ; // Boolean matrix row.
+         static const uint8  Bc[    24]       ; // Boolean matrix column.
+         static const uint8 Bf[    24]       ; // Boolean matrix filter/mask.
+         static const int8   Tm[    99]       ; // Terminal transition matrix.
+         static const uint8  Tr[    38]       ; // Terminal transition matrix row.
+         static const uint8  Tc[    24]       ; // Terminal transition matrix column.
+         static const int8   Nm[    72]       ; // Nonterminal transition matrix.
+         static const uint8  Nr[    38]       ; // Nonterminal transition matrix row.
+         static const uint8  Nc[    62]       ; // Nonterminal transition matrix column.
+         static const uint8  Rm[     6]       ; // Reduction matrix.
+         static const int8   Rr[    38]       ; // Reduction matrix row.
+         static const uint8  Rc[    24]       ; // Reduction matrix column.
+         static const uint8  PL[    62]       ; // Production length minus one.
 
-         static const char   tact_numb[    24]; // Terminal action numbers.
-         static const char   node_numb[    62]; // Node numbers for the productions.
-         static const char   nact_numb[    62]; // Node action numbers for the productions.
+         static const int8   tact_numb[    24]; // Terminal action numbers.
+         static const int8   node_numb[    62]; // Node numbers for the productions.
+         static const int8   nact_numb[    62]; // Node action numbers for the productions.
 
          static void   (*init_func[    2]) ()       ; // Init action function pointers.
          static int    (*tact_func[    2]) (int& t) ; // Terminal action function pointers.

@@ -40,24 +40,24 @@ static const char *get_typestr(int *x, int n)
 
    if (min >= 0)
    {
-      if      (max <=        127) return ("uchar"  ); // 1 byte
-      else if (max <=        255) return ("uchar"  ); // 1 byte
-      else if (max <=      32767) return ("ushort" ); // 2 bytes
-      else if (max <=      65535) return ("ushort" ); // 2 bytes
-      else if (max <= 2147483647) return ("uint"   ); // 4 bytes
-      else                        return ("uint"   ); // 4 bytes
+      if      (max <=        127) return ("uint8"  ); // 1 byte
+      else if (max <=        255) return ("uint8"  ); // 1 byte
+      else if (max <=      32767) return ("uint16" ); // 2 bytes
+      else if (max <=      65535) return ("uint16" ); // 2 bytes
+      else if (max <= 2147483647) return ("uint32" ); // 4 bytes
+      else                        return ("uint32" ); // 4 bytes
    }
    else if (max > -min)
    {
-      if      (max <=        127) return ("char"   ); // 1 byte
-      else if (max <=      32767) return ("short"  ); // 2 bytes
-      else                        return ("int"    ); // 4 bytes
+      if      (max <=        127) return ("int8"   ); // 1 byte
+      else if (max <=      32767) return ("int16"  ); // 2 bytes
+      else                        return ("int32"  ); // 4 bytes
    }
    else
    {
-      if      (min >=       -127) return ("char"   ); // 1 byte
-      else if (min >=     -32767) return ("short"  ); // 2 bytes
-      else                        return ("int"    ); // 4 bytes
+      if      (min >=       -127) return ("int8"   ); // 1 byte
+      else if (min >=     -32767) return ("int16"  ); // 2 bytes
+      else                        return ("int32"  ); // 4 bytes
    }
    return (""); // never gets here, avoid compiler error.
 }
@@ -470,9 +470,9 @@ void  PG_Main::GenerateParserTables ()
    {
       // B_matrix ...
       fprintf (header, "         private:\n");
-      fprintf (header, "         static const uchar  Bm[%6d]       ; // Boolean matrix.\n", B_size);
+      fprintf (header, "         static const uint8  Bm[%6d]       ; // Boolean matrix.\n", B_size);
       fprintf (tables, "   // Boolean matrix ...\n");
-      fprintf (tables, "      const uchar lrstar_parser_tables::Bm[%d] = \n", B_size);
+      fprintf (tables, "      const uint8 lrstar_parser_tables::Bm[%d] = \n", B_size);
       fprintf (tables, "      {");
       if (optn[PG_BOOLMATRIX] == 1) // char
       {
@@ -539,9 +539,9 @@ void  PG_Main::GenerateParserTables ()
       if (optn[PG_BOOLMATRIX] > 1)
       {
          // B_matrix mask ...
-         fprintf (header, "         static const uchar Bf[%6d]       ; // Boolean matrix filter/mask.\n", N_terms);
+         fprintf (header, "         static const uint8 Bf[%6d]       ; // Boolean matrix filter/mask.\n", N_terms);
          fprintf (tables, "   // Boolean matrix filter/mask value ...\n");
-         fprintf (tables, "      const uchar lrstar_parser_tables::Bf[%d] = \n", N_terms);
+         fprintf (tables, "      const uint8 lrstar_parser_tables::Bf[%d] = \n", N_terms);
          fprintf (tables, "      {");
          for (int i = 0; i < N_terms; i++)
          {
@@ -872,9 +872,9 @@ void  PG_Main::GenerateParserTables ()
       if (N_reverses > 0)
       {
          // Reverse the order of nodes (for a production/rule) ...
-         fprintf (header, "         static const uchar  reverse  [%6d]; // Reverse the child nodes.\n", N_prods);
+         fprintf (header, "         static const uint8  reverse  [%6d]; // Reverse the child nodes.\n", N_prods);
          fprintf (tables, "   // Reverse the order of nodes ...\n");
-         fprintf (tables, "      const uchar lrstar_parser_tables::reverse[%d] = \n", N_prods);
+         fprintf (tables, "      const uint8 lrstar_parser_tables::reverse[%d] = \n", N_prods);
          fprintf (tables, "      {");
          for (int i = 0; i < N_prods; i++)
          {

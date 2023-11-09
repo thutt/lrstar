@@ -47,6 +47,6 @@ int templ_lrstar_lexer<T_term_numb, T_Tm, T_Tr, T_Tc>::linenumb_printed;
 template<typename T_term_numb, typename T_Tm, typename T_Tr, typename T_Tc>
 int templ_lrstar_lexer<T_term_numb, T_Tm, T_Tr, T_Tc>::lookahead_linenumb;
 
-template class templ_lrstar_lexer<char, ushort, ushort, uchar>;
+template class templ_lrstar_lexer<int8, uint16, uint16, uint8>;
 
 #endif
