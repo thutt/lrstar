@@ -110,7 +110,7 @@ int   lrstar_parser::init_parser (char* patharg, char* input_start, int max_syms
    n_errors     = 0;                   // Set number of errors.
    n_nodes      = 0;                   // In case of no parser creation.
 
-   lexer.init_lexer (input_start, 3);        // Initialize the lexer.
+   lt.init_lexer (input_start, 3);     // Initialize the lexer.
    init_symtab (max_syms);             // Initialize the symbol table.
 
 #ifdef MAKE_AST
@@ -156,12 +156,12 @@ int   lrstar_parser::parse ()
    int x, t, T, p;
    x = 0;                                          // State = 0 to start.
 Read:
-   T = t = lexer.get_token ();                     // Get incoming token.
+   T = t = lt.get_token ();                        // Get incoming token.
 #ifdef TERM_ACTIONS
    if (tact_numb[t] >= 0)                          // If token action ...
-      lexer.token.sti = (*tact_func[tact_numb[t]]) (t);  // Call token-action function.
+      lt.token.sti = (*tact_func[tact_numb[t]]) (t);  // Call token-action function.
 #else
-   lexer.token.sti = -t;
+   lt.token.sti = -t;
 #endif
 #ifdef EXPECTING
    RS = RSstart;
@@ -173,10 +173,10 @@ Test: if (Bm [Br[x] + Bc[t]] & Bf[t])              // Check B-matrix for shift a
    {
       PS++;
       PS->state = x;                            // Put current state on stack.
-      PS->sti   = lexer.token.sti;                    // Put symbol-table index on stack.
+      PS->sti   = lt.token.sti;                 // Put symbol-table index on stack.
 #ifdef MAKE_AST
-      PS->line  = lexer.token.line;                   // Put line number on stack.
-      PS->start = lexer.token.start;                  // Put start address on stack.
+      PS->line  = lt.token.line;                // Put line number on stack.
+      PS->start = lt.token.start;               // Put start address on stack.
       PS->node  = 0;                            // Set node on stack to zero.
 #endif
 #ifdef EXPECTING
@@ -243,10 +243,10 @@ Test: if (Bm [Br[x] + Bc[t]] & Bf[t])              // Check B-matrix for shift a
          {
             PS++;                               // Increment parser stack pointer.
             PS->state = x;                      // Put current state on stack.
-            PS->sti   = token.sti;              // Put symbol table index on stack.
+            PS->sti   = lt.token.sti;              // Put symbol table index on stack.
 #ifdef MAKE_AST
-            PS->line  = token.line;             // Put line number on stack.
-            PS->start = token.start;            // Put start address on stack.
+            PS->line  = lt.token.line;             // Put line number on stack.
+            PS->start = lt.token.start;            // Put start address on stack.
             PS->node  = 0;                      // Set node on stack to zero.
 #endif
             if (y > accept_state)               // Shift and reduce action?
@@ -284,7 +284,7 @@ Test: if (Bm [Br[x] + Bc[t]] & Bf[t])              // Check B-matrix for shift a
 #ifdef DEBUG_PARSER
       fprintf (output, "\nDone.\n\n");
 #endif
-      return lexer.linenumb - 1;                // Success.
+      return lt.linenumb - 1;                // Success.
    }
 #ifdef EXPECTING
    x = restore ();
@@ -299,13 +299,13 @@ Test: if (Bm [Br[x] + Bc[t]] & Bf[t])              // Check B-matrix for shift a
 #ifdef EXPECTING
       print_stack ();
 #endif
-      syntax_error ("Error", &lexer.token, term_symb[T]);
+      syntax_error ("Error", &lt.token, term_symb[T]);
 #ifdef EXPECTING
       expecting (x);
       print_terms (x);
 #endif
    }
-   return -lexer.linenumb; // Failure.
+   return -lt.linenumb; // Failure.
 
    goto SR;  // Stops compiler from complaining.
    goto Red; // Stops compiler from complaining.
@@ -378,11 +378,11 @@ int   lrstar_parser::nd_parser (int x, int t, int na)
    char string[64];
 
 #ifdef DEBUG_PARSER
-   if (token.line > last_line) printf ("\n");
-   last_line = token.line;
+   if (lt.token.line > last_line) printf ("\n");
+   last_line = lt.token.line;
    sprintf (string, "In state %d", x);
    printf ("/////////////////////////////////////////////////////////////////////////////////////////////////////\n");
-   syntax_error (string, &token, term_symb [t]);
+   syntax_error (string, &lt.token, term_symb [t]);
    printf ("\n   STARTED LR(*) parsing for the following choices:\n\n");
    print_actions (na);
    n_warnings++;
@@ -438,14 +438,14 @@ int   lrstar_parser::nd_parser (int x, int t, int na)
       while (++i < na);
    }
 
-   lookahead.end = token.end; // Prime get_lookahead().
-   lookahead_linenumb = linenumb;
+   lt.lookahead.end = lt.token.end; // Prime get_lookahead().
+   lt.lookahead_linenumb = lt.linenumb;
    limit = LOOKAHEADS;
    la = 1;
    do
    {
       total = 0;
-      LA = get_lookahead();
+      LA = lt.get_lookahead();
 #ifdef TERM_ACTIONS
       if (tact_numb[LA] >= 0)                // If term action ...
          (*tact_func[tact_numb[LA]]) (LA);   // Call term-action function.
@@ -480,7 +480,7 @@ int   lrstar_parser::nd_parser (int x, int t, int na)
                printf("\n");
 #endif
 #endif
-               lookahead.start = 0; // Stop lookahead mode in lookup().
+               lt.lookahead.start = 0; // Stop lookahead mode in lookup().
                return Action[i];
             }
          }
@@ -492,7 +492,7 @@ int   lrstar_parser::nd_parser (int x, int t, int na)
       {
          if (n_warnings == 0)
          {
-            syntax_error ("Error", &lookahead, term_symb[LA]);
+            syntax_error ("Error", &lt.lookahead, term_symb[LA]);
             printf ("\n   AMBIGUITY after %d lookaheads, unable to choose from:\n\n", la+1);
             print_actions(na);
          }
@@ -512,7 +512,7 @@ int   lrstar_parser::nd_parser (int x, int t, int na)
       printf("\n");
       n_warnings = 0;
 #endif
-      lookahead.start = 0; // Stop lookahead mode in lookup().
+      lt.lookahead.start = 0; // Stop lookahead mode in lookup().
       return Action[0];
    }
 
@@ -523,7 +523,7 @@ int   lrstar_parser::nd_parser (int x, int t, int na)
    printf("\n   AMBIGUITY after %d lookaheads, unable to decide.\n", limit);
 #else
    sprintf (string, "In state %d", x);
-   syntax_error (string, &token, term_symb[t]);
+   syntax_error (string, &lt.token, term_symb[t]);
    printf ("\n   AMBIGUITY after %d lookaheads, unable to choose from:\n\n", limit);
    print_actions (na);
 #endif
@@ -551,7 +551,7 @@ void  lrstar_parser::print_action (const char* str, int i)
    int y = Action[i];
    if (y > 0)
    {
-      printf ("Shift %s and ", symbol_name (token.sti));
+      printf ("Shift %s and ", symbol_name (lt.token.sti));
       if (y > accept_state)            // Shift and reduce ?
       {
          int p = y - accept_state;     // Convert to production number.
@@ -644,8 +644,8 @@ Shft: if (Bm [Br[State[i]] + Bc[LA]] & Bf[LA])        // Check B-matrix for shif
          char string[16];
          sprintf (string, "In state %d", State[i]);
          if (la == 0)
-            syntax_error (string, &token,     term_symb[LA]);
-         else syntax_error (string, &lookahead, term_symb[LA]);
+            syntax_error (string, &lt.token, term_symb[LA]);
+         else syntax_error (string, &lt.lookahead, term_symb[LA]);
          printf ("\n   STOPPED LR(*) parsing after %d lookaheads, for conflicting actions:\n\n", la+1);
          do
          {
@@ -661,8 +661,8 @@ Shft: if (Bm [Br[State[i]] + Bc[LA]] & Bf[LA])        // Check B-matrix for shif
    char string[16];
    sprintf (string, "In state %d", State[i]);
    if (la == 0)
-      syntax_error (string, &token,     term_symb[LA]);
-   else syntax_error (string, &lookahead, term_symb[LA]);
+      syntax_error (string, &lt.token, term_symb[LA]);
+   else syntax_error (string, &lt.lookahead, term_symb[LA]);
    print_action ("\n   IGNORING ", i);
 #endif
    return 0; // Did not find a match for LA in this state.
@@ -729,7 +729,7 @@ void  lrstar_parser::syntax_error (const char *msg, Token* T, const char* symb)
 
    // Get untabified line ...
    pointer = T->start;
-   lineout = lexer.untabify (linestart, pointer);
+   lineout = lt.untabify (linestart, pointer);
 
    // Make pointer line ...
    int i = 0;

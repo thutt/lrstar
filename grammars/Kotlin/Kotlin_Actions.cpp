@@ -27,9 +27,9 @@ void  lrstar_parser_actions::term_actions ()
 
 int   lrstar_term_actions::error (int& t)
 {
-      if (lexer.token.end == lexer.token.start)        // Illegal character?
+      if (lt.token.end == lt.token.start)        // Illegal character?
       {
-         lexer.token.end++;
+         lt.token.end++;
       }
       return 0;
 }
@@ -38,14 +38,14 @@ int   lrstar_term_actions::lookup (int& t)             // Lookup in symbol table
 {
       int sti;
       #ifdef ND_PARSING
-      if (lexer.lookahead.start > 0)             // In lookahead mode?
+      if (lt.lookahead.start > 0)             // In lookahead mode?
       {
-         sti = add_symbol (t, lexer.lookahead.start, lexer.lookahead.end);
+         sti = add_symbol (t, lt.lookahead.start, lt.lookahead.end);
       }
       else                                 // Regular mode of parsing.
       #endif
       {
-         sti = add_symbol (t, lexer.token.start, lexer.token.end);
+         sti = add_symbol (t, lt.token.start, lt.token.end);
       }
       #ifdef SEMANTICS
       t = symbol[sti].term;                // Redefine terminal number?

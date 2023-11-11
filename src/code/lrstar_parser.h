@@ -71,7 +71,7 @@ public:
 class lrstar_parser : public parser_tables_t
 {
 public:
-   static lexer_t lexer;
+   static lexer_t lt;           /* Lexer tables. */
 
 public:
    // Parser functions
