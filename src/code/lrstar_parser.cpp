@@ -118,7 +118,7 @@ int   lrstar_parser::init_parser (char* patharg, char* input_start, int max_syms
 #endif
 
 #ifdef ACTIONS
-   (*init_func[0])();                  // init_action()
+   (*pt.init_func[0])();               // init_action()
 #endif
 
    T_exp  = new uchar[n_terms];
@@ -143,7 +143,7 @@ void  lrstar_parser::term_parser ()
 #endif
    term_symtab ();
 #ifdef ACTIONS
-   (*init_func[1])();                  // term_action()
+   (*pt.init_func[1])();               // term_action()
 #endif
 }
 
@@ -158,8 +158,8 @@ int   lrstar_parser::parse ()
 Read:
    T = t = lt.get_token ();                        // Get incoming token.
 #ifdef TERM_ACTIONS
-   if (tact_numb[t] >= 0)                          // If token action ...
-      lt.token.sti = (*tact_func[tact_numb[t]]) (t);  // Call token-action function.
+   if (pt.tact_numb[t] >= 0)                          // If token action ...
+      lt.token.sti = (*pt.tact_func[pt.tact_numb[t]]) (t);  // Call token-action function.
 #else
    lt.token.sti = -t;
 #endif
@@ -169,7 +169,9 @@ Read:
    RS->ptr = PS;
 #endif
 
-Test: if (Bm [Br[x] + Bc[t]] & Bf[t])              // Check B-matrix for shift action.
+Test:
+   if (pt.Bm[pt.Br[x] +
+             pt.Bc[t]] & pt.Bf[t])              // Check B-matrix for shift action.
    {
       PS++;
       PS->state = x;                            // Put current state on stack.
@@ -182,24 +184,28 @@ Test: if (Bm [Br[x] + Bc[t]] & Bf[t])              // Check B-matrix for shift a
 #ifdef EXPECTING
       PS->sym   = -t;                           // Put symbol on stack.
 #endif
-      x = Tm [Tr[x] + Tc[t]];                   // Get next state from terminal transition matrix.
+      x = pt.Tm[pt.Tr[x] +
+                pt.Tc[t]];                   // Get next state from terminal transition matrix.
       while (x < 0)                             // While shift-reduce actions.
       {
          p = -x;
-      SR:         PS -= PL[p];                           // Reduce stack ptr by production length.
+      SR:
+         PS -= pt.PL[p];                           // Reduce stack ptr by production length.
 #ifdef EXPECTING
-         PS->sym = head_numb[p];                // Put symbol on stack.
+         PS->sym = pt.head_numb[p];                // Put symbol on stack.
 #endif
          reduce (p);                            // Call reduce action with production number.
-         x = Nm [Nr[PS->state] + Nc[p]];        // Get next state from nonterminal transition.
+         x = pt.Nm[pt.Nr[PS->state] +
+                   pt.Nc[p]];        // Get next state from nonterminal transition.
       }
       goto Read;                                // Go to read next token.
    }
-   if ((p = Rr[x]) > 0                          // Default reduction 90% of the time.
-       ||  (p = Rm[Rc[t] - p]) > 0)                // Compute reduction?
+   if ((p = pt.Rr[x]) > 0 ||                    // Default reduction 90% of the time.
+       (p = pt.Rm[pt.Rc[t] - p]) > 0)           // Compute reduction?
    {
-   Red:     PS -= PL[p];                              // Reduce parse stack ptr by rule length - 1.
-      if (PL[p] < 0)                            // Null production?
+   Red:
+      PS -= pt.PL[p];                              // Reduce parse stack ptr by rule length - 1.
+      if (pt.PL[p] < 0)                            // Null production?
       {
 #ifdef EXPECTING
          RS++;
@@ -215,29 +221,30 @@ Test: if (Bm [Br[x] + Bc[t]] & Bf[t])              // Check B-matrix for shift a
       while (1)
       {
 #ifdef EXPECTING
-         PS->sym = head_numb[p];                // Put symbol on stack.
+         PS->sym = pt.head_numb[p];                // Put symbol on stack.
 #endif
          reduce (p);                            // Call reduce action with production number.
-         x = Nm [Nr[PS->state] + Nc[p]];        // Get next state from nonterminal transition.
+         x = pt.Nm[pt.Nr[PS->state] +
+                   pt.Nc[p]];                   // Get next state from nonterminal transition.
          if (x > 0) goto Test;                  // Continue parsing.
          p = -x;                                // Set production number.
-         PS -= PL[p];                           // Reduce parse stack ptr by rule length - 1.
+         PS -= pt.PL[p];                        // Reduce parse stack ptr by rule length - 1.
       }
    }
 #ifdef ND_PARSING
    int i, j, na, y;
-   for (i = nd_fterm[x]; i < nd_fterm[x+1]; i++)   // For all ND terminals in this state.
+   for (i = pt.nd_fterm[x]; i < pt.nd_fterm[x+1]; i++)   // For all ND terminals in this state.
    {
-      if (nd_term[i] == t)                      // Got a match?
+      if (pt.nd_term[i] == t)                      // Got a match?
       {
-         j = nd_faction[i];                     // Start of actions.
+         j = pt.nd_faction[i];                     // Start of actions.
          na = 0;                                // Number of actions.
          do
          {
             State[na] = x;                      // Copy this state.
-            Action[na++] = nd_action[j];        // Copy this action.
+            Action[na++] = pt.nd_action[j];        // Copy this action.
          }
-         while (++j < nd_faction[i+1]);         // While there's more.
+         while (++j < pt.nd_faction[i+1]);         // While there's more.
          y = nd_parser (x,t,na);                // ND lookahead parser.
          if (y > 0)                             // Shift?
          {
@@ -270,7 +277,7 @@ Test: if (Bm [Br[x] + Bc[t]] & Bf[t])              // Check B-matrix for shift a
 #endif
    if (x == accept_state)                       // If Goal production.
    {
-      PS -= PL[p];                              // Reduce parse stack ptr by rule length - 1.
+      PS -= pt.PL[p];                              // Reduce parse stack ptr by rule length - 1.
       reduce (p);                               // Call reduce action with production number.
 #ifdef ND_PARSING
       print_lookaheads();                       // Print lookahead statistics.
@@ -299,7 +306,7 @@ Test: if (Bm [Br[x] + Bc[t]] & Bf[t])              // Check B-matrix for shift a
 #ifdef EXPECTING
       print_stack ();
 #endif
-      syntax_error ("Error", &lt.token, term_symb[T]);
+      syntax_error ("Error", &lt.token, pt.term_symb[T]);
 #ifdef EXPECTING
       expecting (x);
       print_terms (x);
@@ -316,24 +323,24 @@ Test: if (Bm [Br[x] + Bc[t]] & Bf[t])              // Check B-matrix for shift a
 void  lrstar_parser::reduce (int p)
 {
 #ifdef SEMANTICS
-   if (argy[p] >= 0)
+   if (pt.argy[p] >= 0)
    {
-      symbol[PS[0].sti].term = argy[p];
+      symbol[PS[0].sti].term = pt.argy[p];
    }
 #endif
 #ifdef MAKE_AST
    int psi;                                           // Parse stack index.
-   if (node_numb[p] >= 0)                             // MAKE NODE ?
+   if (pt.node_numb[p] >= 0)                          // MAKE NODE ?
    {
       Node* n   = new_node ();                        // Get a new node.
-      n->id     = node_numb[p];                       // Set node id number.
+      n->id     = pt.node_numb[p];                       // Set node id number.
       n->prev   = 0;                                  // Set prev to nonexistent.
       n->next   = 0;                                  // Set next to nonexistent.
       n->child  = 0;                                  // Set child to nonexistent.
       n->parent = 0;                                  // Set parent to nonexistent.
-      if (argx[p] >= 0)                               // If first argument specified.
+      if (pt.argx[p] >= 0)                               // If first argument specified.
       {
-         psi      = argx[p];                          // Get parse-stack index.
+         psi      = pt.argx[p];                          // Get parse-stack index.
          n->sti   = PS[psi].sti;                      // Move sti from parse stack to node.
          n->line  = PS[psi].line;                     // Move line from parse stack to node.
          n->start = PS[psi].start;                    // Move start from parse stack to node.
@@ -382,7 +389,7 @@ int   lrstar_parser::nd_parser (int x, int t, int na)
    last_line = lt.token.line;
    sprintf (string, "In state %d", x);
    printf ("/////////////////////////////////////////////////////////////////////////////////////////////////////\n");
-   syntax_error (string, &lt.token, term_symb [t]);
+   syntax_error (string, &lt.token, pt.term_symb [t]);
    printf ("\n   STARTED LR(*) parsing for the following choices:\n\n");
    print_actions (na);
    n_warnings++;
@@ -447,8 +454,8 @@ int   lrstar_parser::nd_parser (int x, int t, int na)
       total = 0;
       LA = lt.get_lookahead();
 #ifdef TERM_ACTIONS
-      if (tact_numb[LA] >= 0)                // If term action ...
-         (*tact_func[tact_numb[LA]]) (LA);   // Call term-action function.
+      if (pt.tact_numb[LA] >= 0)                // If term action ...
+         (*pt.tact_func[pt.tact_numb[LA]]) (LA);   // Call term-action function.
 #endif
       if (LA == eof_symb) limit = la; // <eof> ?
       i = 0;
@@ -492,7 +499,7 @@ int   lrstar_parser::nd_parser (int x, int t, int na)
       {
          if (n_warnings == 0)
          {
-            syntax_error ("Error", &lt.lookahead, term_symb[LA]);
+            syntax_error ("Error", &lt.lookahead, pt.term_symb[LA]);
             printf ("\n   AMBIGUITY after %d lookaheads, unable to choose from:\n\n", la+1);
             print_actions(na);
          }
@@ -523,7 +530,7 @@ int   lrstar_parser::nd_parser (int x, int t, int na)
    printf("\n   AMBIGUITY after %d lookaheads, unable to decide.\n", limit);
 #else
    sprintf (string, "In state %d", x);
-   syntax_error (string, &lt.token, term_symb[t]);
+   syntax_error (string, &lt.token, pt.term_symb[t]);
    printf ("\n   AMBIGUITY after %d lookaheads, unable to choose from:\n\n", limit);
    print_actions (na);
 #endif
@@ -588,52 +595,61 @@ int   lrstar_parser::nd_parser_la (int i, int la)            // ND LA Parser.
       goto Red;                                    // Reduce.
    }
 
-Shft: if (Bm [Br[State[i]] + Bc[LA]] & Bf[LA])        // Check B-matrix for shift action.
+Shft:
+   if (pt.Bm[pt.Br[State[i]] +
+             pt.Bc[LA]] & pt.Bf[LA])               // Check B-matrix for shift action.
    {
       SS[i]++;
       SS[i]->state = State[i];                     // Put current state on stack.
-      State[i] = Tm [Tr[State[i]] + Tc[LA]];       // Get next state from terminal transition matrix.
+      State[i] = pt.Tm[pt.Tr[State[i]] +
+                       pt.Tc[LA]];       // Get next state from terminal transition matrix.
       while (State[i] < 0)                         // While shift-reduce actions.
       {
-      SR:         p = -State[i];
-         SS[i] -= PL[p];                           // Reduce stack ptr by production length.
-         State[i] = Nm [Nr[SS[i]->state] + Nc[p]]; // Get next state from nonterminal transition matrix.
+      SR:
+         p = -State[i];
+         SS[i] -= pt.PL[p];                           // Reduce stack ptr by production length.
+         State[i] = pt.Nm[pt.Nr[SS[i]->state] +
+                          pt.Nc[p]]; // Get next state from nonterminal transition matrix.
       }
       return 1;                                    // Return success.
    }
 
-   if ((p = Rr[State[i]]) > 0                      // Default reduction?
-       ||  (p = Rm [Rc[LA] - p]) > 0)                 // Compute reduction?
+   if ((p = pt.Rr[State[i]]) > 0 ||                      // Default reduction?
+       (p = pt.Rm[pt.Rc[LA] - p]) > 0)                 // Compute reduction?
    {
-   Red:     SS[i] -= PL[p];                              // Reduce parse stack ptr by rule length - 1.
-      if (PL[p] < 0) SS[i]->state = State[i];      // Stack current state.
-      while (1)
-      {
-         State[i] = Nm [Nr[SS[i]->state] + Nc[p]]; // Get next state from nonterminal transition.
+   Red:
+      SS[i] -= pt.PL[p];                              // Reduce parse stack ptr by rule length - 1.
+      if (pt.PL[p] < 0) {
+         SS[i]->state = State[i];      // Stack current state.
+      }
+      while (1) {
+         State[i] = pt.Nm[pt.Nr[SS[i]->state] +
+                          pt.Nc[p]]; // Get next state from nonterminal transition.
          if (State[i] > 0) goto Shft;              // If a state, continue parsing.
          p = -State[i];                            // Make the production number positive.
-         SS[i] -= PL[p];                           // Reduce parse stack ptr by rule length - 1.
+         SS[i] -= pt.PL[p];                           // Reduce parse stack ptr by rule length - 1.
       }
    }
 
    if (State[i] == accept_state) return 1;
 
    // LOOK FOR A SHIFT ACTION FOR THIS TOKEN ...
-   for (int j = nd_fterm [State[i]]; j < nd_fterm [State[i]+1]; j++)
+   for (int j = pt.nd_fterm [State[i]];
+        j < pt.nd_fterm [State[i]+1]; j++)
    {
-      if (nd_term[j] == LA)
+      if (pt.nd_term[j] == LA)
       {
-         int k = nd_faction[j];
-         if (nd_action[k] > 0)                        // Shift action (always first one)?
+         int k = pt.nd_faction[j];
+         if (pt.nd_action[k] > 0)                        // Shift action (always first one)?
          {
             SS[i]++;
             SS[i]->state = State[i];                  // Put State on stack.
-            if (nd_action[k] > accept_state)          // Shift and reduce?
+            if (pt.nd_action[k] > accept_state)          // Shift and reduce?
             {
-               State[i] = accept_state - nd_action[k];// Convert to production number.
+               State[i] = accept_state - pt.nd_action[k];// Convert to production number.
                goto SR;
             }
-            State[i] = nd_action[k];
+            State[i] = pt.nd_action[k];
             return 1;
          }
 #ifdef DEBUG_PARSER
@@ -643,15 +659,17 @@ Shft: if (Bm [Br[State[i]] + Bc[LA]] & Bf[LA])        // Check B-matrix for shif
          n_warnings++;
          char string[16];
          sprintf (string, "In state %d", State[i]);
-         if (la == 0)
-            syntax_error (string, &lt.token, term_symb[LA]);
-         else syntax_error (string, &lt.lookahead, term_symb[LA]);
+         if (la == 0) {
+            syntax_error (string, &lt.token, pt.term_symb[LA]);
+         } else {
+            syntax_error (string, &lt.lookahead, pt.term_symb[LA]);
+         }
          printf ("\n   STOPPED LR(*) parsing after %d lookaheads, for conflicting actions:\n\n", la+1);
          do
          {
             print_prod ("   * Reduce", -nd_action[k], 0);
          }
-         while (++k < nd_faction[j+1]);
+         while (++k < pt.nd_faction[j+1]);
          print_action ("\n   IGNORING ", i);
 #endif
          return 0;
@@ -660,9 +678,11 @@ Shft: if (Bm [Br[State[i]] + Bc[LA]] & Bf[LA])        // Check B-matrix for shif
 #ifdef DEBUG_PARSER
    char string[16];
    sprintf (string, "In state %d", State[i]);
-   if (la == 0)
-      syntax_error (string, &lt.token, term_symb[LA]);
-   else syntax_error (string, &lt.lookahead, term_symb[LA]);
+   if (la == 0) {
+      syntax_error (string, &lt.token, pt.term_symb[LA]);
+   } else {
+      syntax_error (string, &lt.lookahead, pt.term_symb[LA]);
+   }
    print_action ("\n   IGNORING ", i);
 #endif
    return 0; // Did not find a match for LA in this state.
@@ -762,41 +782,43 @@ void  lrstar_parser::expecting (int x)
    S_exam[x] = 1;                               // Mark this state as seen.
    for (t = 0; t < n_terms; t++)                // For all terminals.
    {
-      if (Bm [Br[x] + Bc[t]] & Bf[t])           // Check B-matrix for shift action.
+      if (pt.Bm[pt.Br[x] +
+                pt.Bc[t]] & pt.Bf[t])           // Check B-matrix for shift action.
       {
          T_exp[t] = 1;                          // Mark this terminal.
       }
    }
 #ifdef ND_PARSING
    int i, j;
-   for (i = nd_fterm[x]; i < nd_fterm[x+1]; i++)      // For all terminals in this state.
+   for (i = pt.nd_fterm[x]; i < pt.nd_fterm[x+1]; i++)      // For all terminals in this state.
    {
-      for (j = nd_faction[i]; j < nd_faction[i+1]; j++)  // For all actions for these terminals.
+      for (j = pt.nd_faction[i];
+           j < pt.nd_faction[i+1]; j++)  // For all actions for these terminals.
       {
-         if (nd_action[j] > 0)                        // Terminal transition.
+         if (pt.nd_action[j] > 0)                        // Terminal transition.
          {
-            T_exp[nd_term[i]] = 1;                    // Mark this terminal.
+            T_exp[pt.nd_term[i]] = 1;                    // Mark this terminal.
          }
-         else if (nd_action[j] < 0)
+         else if (pt.nd_action[j] < 0)
          {
-            int p = -nd_action[j];
+            int p = -pt.nd_action[j];
             reduction (p, x);
          }
       }
    }
 #endif
    int p, q;
-   if ((p = Rr[x]) > 0)                      // Default reduction?
+   if ((p = pt.Rr[x]) > 0)                      // Default reduction?
    {
       reduction (p, x);
       return;
    }
    for (t = 0; t < n_terms; t++)             // For all terminals.
    {
-      q = Rm [Rc[t] - p];                    // Reduction for this terminal.
+      q = pt.Rm[pt.Rc[t] - p];                    // Reduction for this terminal.
       if (q > 0)                             // If not zero production?
       {
-         reduction (q, x);
+         reduction(q, x);
       }
    }
 }
@@ -809,8 +831,8 @@ void  lrstar_parser::reduction (int q, int x)
    RStack* RSx = RS;                // Reset restore-stack pointer.
    PStack* PSx = PS;                // Save parse-stack pointer.
 
-   PS -= PL[q];                     // Reduce parse stack ptr by rule length - 1.
-   if (PL[q] < 0)                   // Null production?
+   PS -= pt.PL[q];                     // Reduce parse stack ptr by rule length - 1.
+   if (pt.PL[q] < 0)                   // Null production?
    {
       (++RS)->ptr = PS;             // Save parse-stack pointer.
       RS->state = PS->state;        // Save old state before replacing it.
@@ -818,7 +840,8 @@ void  lrstar_parser::reduction (int q, int x)
    }
    while (1)
    {
-      x = Nm[Nr[PS->state] + Nc[q]];   // Get next state from nonterminal transition.
+      x = pt.Nm[pt.Nr[PS->state] +
+                pt.Nc[q]];   // Get next state from nonterminal transition.
       if (x > 0)
       {
          if (S_exam[x] == 0)           // Not been there yet?
@@ -826,11 +849,12 @@ void  lrstar_parser::reduction (int q, int x)
          goto Done;
       }
       q = -x;                          // Set production number.
-      PS -= PL[q];                     // Reduce parse stack pointer.
+      PS -= pt.PL[q];                     // Reduce parse stack pointer.
    }
 
    // Restore parse stack.
-Done: PS = PSx;                           // Restore PS.
+Done:
+   PS = PSx;                           // Restore PS.
    while (RS > RSx)
    {
       RS->ptr->state = RS->state;      // Reset state to saved state.
@@ -859,9 +883,8 @@ void  lrstar_parser::print_terms (int state)
       // if (x == eof_symb) continue;
       if (T_exp[x] == 1)
       {
-         if (term_symb[x][0] == '<' ||  term_symb[x][0] == '{')
-         {
-            printf ("         %4d %-30s\n", x, term_symb[x]);
+         if (pt.term_symb[x][0] == '<' ||  pt.term_symb[x][0] == '{') {
+            printf ("         %4d %-30s\n", x, pt.term_symb[x]);
          }
       }
    }
@@ -871,9 +894,8 @@ void  lrstar_parser::print_terms (int state)
       if (x == eof_symb) continue;
       if (T_exp[x] == 1)
       {
-         if (term_symb[x][0] != '<' &&  term_symb[x][0] != '{')
-         {
-            printf ("         %4d %-30s\n", x, term_symb[x]);
+         if (pt.term_symb[x][0] != '<' && pt.term_symb[x][0] != '{') {
+            printf ("         %4d %-30s\n", x, pt.term_symb[x]);
          }
       }
    }
@@ -895,8 +917,8 @@ void  lrstar_parser::sort_terms (int* seq)
    P = new const char *[n_terms];
    for (i = 0; i < n_terms; i++)
    {
-      P[i] = term_symb[i];
-      L[i] = (int)strlen(term_symb[i]);
+      P[i] = pt.term_symb[i];
+      L[i] = (int)strlen(pt.term_symb[i]);
       seq[i] = i;
    }
    for (i = 1; i < n_terms; i++) // Bubble sort algorithm.
@@ -932,13 +954,17 @@ void  lrstar_parser::sort_terms (int* seq)
 void  lrstar_parser::print_prod (const char* prefix, int p, int dot)
 {
    const char* symb;
-   int len = f_tail[p+1] - f_tail[p];
-   printf ("%s %4d %s -> ", prefix, p, head_symb [head_numb[p]]);
-   for (int i = f_tail[p]; i < f_tail[p+1]; i++)
+   int len = pt.f_tail[p + 1] - pt.f_tail[p];
+
+   printf ("%s %4d %s -> ", prefix, p, pt.head_symb[pt.head_numb[p]]);
+   for (int i = pt.f_tail[p]; i < pt.f_tail[p + 1]; i++)
    {
-      int s = tail[i];
-      if (s >= 0) symb = term_symb[ s];
-      else        symb = head_symb[-s];
+      int s = pt.tail[i];
+      if (s >= 0) {
+         symb = pt.term_symb[ s];
+      } else {
+         symb = pt.head_symb[-s];
+      }
       if (len++ == dot) printf (". ");
       printf ("%s ", symb);
    }
@@ -959,7 +985,7 @@ void  lrstar_parser::print_stack () // Print parser stack.
       int sym = ps->sym;
       if (sym <= 0) // Terminal?
       {
-         name  = term_symb[-sym];
+         name  = pt.term_symb[-sym];
          name2 = "";
          if (*name == '<' || *name == '{')
          {
@@ -969,7 +995,7 @@ void  lrstar_parser::print_stack () // Print parser stack.
       }
       else // Nonterminal.
       {
-         name = head_symb[sym];
+         name = pt.head_symb[sym];
          printf ("   state%5d %4d %s\n", ps->state, sym, name);
       }
    }
@@ -1091,7 +1117,7 @@ void  lrstar_parser::print_symtab ()
                  symbol[i].type,
                  symbol_name(i),
                  symbol[i].term,
-                 term_symb[symbol[i].term]);
+                 pt.term_symb[symbol[i].term]);
       }
    }
    else // No symbols in the table.
@@ -1110,8 +1136,10 @@ char* lrstar_parser::symbol_name (int sti)
    static char name[100];
    if (sti < 0) // Terminal symbol?
    {
-      p = (char *)term_symb[-sti];
-      for (i = 0; p[i] != 0; i++) name[i] = p[i];
+      p = (char *)pt.term_symb[-sti];
+      for (i = 0; p[i] != 0; i++) {
+         name[i] = p[i];
+      }
       name[i] = 0;
    }
    else // Input file symbol.
@@ -1165,9 +1193,9 @@ int   lrstar_parser::linkup (int p)
    int i;
    int next = -1;
 #ifdef REVERSABLE
-   if (reverse[p] != 0)                               // IF NOT TO REVERSE THE ORDER.
+   if (pt.reverse[p] != 0)                               // IF NOT TO REVERSE THE ORDER.
    {
-      for (i = 0; i <= PL[p]; i++)                    // For each tail pointer.
+      for (i = 0; i <= pt.PL[p]; i++)                    // For each tail pointer.
       {
          if (PS[i].node != 0)                         // If tail points to node.
          {
@@ -1184,7 +1212,7 @@ int   lrstar_parser::linkup (int p)
    else                                               // REVERSE THE ORDER.
 #endif
    {
-      for (i = PL[p]; i >= 0; i--)                    // For each tail pointer.
+      for (i = pt.PL[p]; i >= 0; i--)                    // For each tail pointer.
       {
          if (PS[i].node != NULL)                      // If tail points to node.
          {
@@ -1211,7 +1239,8 @@ void  lrstar_parser::tracer (Node* n)
    if      (direction == TOP_DOWN ) dir = "*>";
    else if (direction == PASS_OVER) dir = "**";
    else                             dir = "<*";
-   printf ("   %d %s %s (%s)\n", traversal, dir, node_name[n->id], symbol_name(n->sti));
+   printf ("   %d %s %s (%s)\n", traversal, dir,
+           pt.node_name[n->id], symbol_name(n->sti));
 #endif
 #endif
 }
@@ -1430,7 +1459,8 @@ void  lrstar_parser::print_node (char *indent, Node* n)
       while (*p != '\n') p--;
       int col = (int)(n->start - p);
 
-      fprintf (output, "  %4d  %4d  %4d  %s%s", sti, line, col, indent, node_name[id]);
+      fprintf (output, "  %4d  %4d  %4d  %s%s", sti, line, col,
+               indent, pt.node_name[id]);
 
       if (sti > 0) // In the symbol table?
       {
@@ -1442,12 +1472,12 @@ void  lrstar_parser::print_node (char *indent, Node* n)
       }
       else // A terminal symbol of the grammar!
       {
-         fprintf (output, " (%s)\n", term_symb[-sti]);
+         fprintf (output, " (%s)\n", pt.term_symb[-sti]);
       }
    }
    else
    {
-      fprintf(output, "     .     .     .  %s%s\n", indent, node_name[id]);
+      fprintf(output, "     .     .     .  %s%s\n", indent, pt.node_name[id]);
    }
 }
 
