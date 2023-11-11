@@ -23,6 +23,7 @@
       #define LOOKAHEADS    1
       #define EXPECTING
 #include "PLSQL_ParserTables.h"
+#include "PLSQL_ParserTables_typedef.h"
 #include "lrstar_parser.h"
 
 //                                                                           //

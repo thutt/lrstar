@@ -25,6 +25,7 @@
       #define LOOKAHEADS    1
       #define EXPECTING
 #include "COBOL_ParserTables.h"
+#include "COBOL_ParserTables_typedef.h"
 #include "lrstar_parser.h"
 
 //                                                                           //

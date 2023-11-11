@@ -23,6 +23,7 @@
       #define LOOKAHEADS    1
       #define EXPECTING
 #include "YACC_ParserTables.h"
+#include "YACC_ParserTables_typedef.h"
 #include "lrstar_parser.h"
 
 //                                                                           //

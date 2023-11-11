@@ -25,6 +25,7 @@
       #define LOOKAHEADS    1
       #define EXPECTING
 #include "verilog_ParserTables.h"
+#include "verilog_ParserTables_typedef.h"
 #include "lrstar_parser.h"
 
 //                                                                           //

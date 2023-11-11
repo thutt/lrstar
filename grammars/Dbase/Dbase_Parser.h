@@ -25,6 +25,7 @@
       #define LOOKAHEADS    1
       #define EXPECTING
 #include "Dbase_ParserTables.h"
+#include "Dbase_ParserTables_typedef.h"
 #include "lrstar_parser.h"
 
 //                                                                           //

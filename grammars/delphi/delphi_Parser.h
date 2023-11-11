@@ -23,6 +23,7 @@
       #define LOOKAHEADS    1
       #define EXPECTING
 #include "delphi_ParserTables.h"
+#include "delphi_ParserTables_typedef.h"
 #include "lrstar_parser.h"
 
 //                                                                           //

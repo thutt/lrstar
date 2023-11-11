@@ -23,6 +23,7 @@
       #define LOOKAHEADS    1
       #define EXPECTING
 #include "CPP5_ParserTables.h"
+#include "CPP5_ParserTables_typedef.h"
 #include "lrstar_parser.h"
 
 //                                                                           //

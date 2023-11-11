@@ -25,6 +25,7 @@
       #define LOOKAHEADS    1
       #define EXPECTING
 #include "XPL_ParserTables.h"
+#include "XPL_ParserTables_typedef.h"
 #include "lrstar_parser.h"
 
 //                                                                           //

@@ -25,6 +25,7 @@
       #define LOOKAHEADS    1
       #define EXPECTING
 #include "Ada_ParserTables.h"
+#include "Ada_ParserTables_typedef.h"
 #include "lrstar_parser.h"
 
 //                                                                           //

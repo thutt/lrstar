@@ -28,6 +28,7 @@
       #define EXPECTING
       #define SEMANTICS
 #include "Pascal_ParserTables.h"
+#include "Pascal_ParserTables_typedef.h"
 #include "lrstar_parser.h"
 
 //                                                                           //

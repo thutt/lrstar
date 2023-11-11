@@ -23,6 +23,7 @@
       #define LOOKAHEADS    1
       #define EXPECTING
 #include "ALGOL60_ParserTables.h"
+#include "ALGOL60_ParserTables_typedef.h"
 #include "lrstar_parser.h"
 
 //                                                                           //

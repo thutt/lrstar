@@ -28,6 +28,7 @@
       #define EXPECTING
       #define REVERSABLE
 #include "Calc_ParserTables.h"
+#include "Calc_ParserTables_typedef.h"
 #include "lrstar_parser.h"
 
 //                                                                           //

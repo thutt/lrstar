@@ -25,6 +25,7 @@
       #define LOOKAHEADS    1
       #define EXPECTING
 #include "Zeus_ParserTables.h"
+#include "Zeus_ParserTables_typedef.h"
 #include "lrstar_parser.h"
 
 //                                                                           //

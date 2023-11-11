@@ -25,6 +25,7 @@
       #define LOOKAHEADS    1
       #define EXPECTING
 #include "Modula2_ParserTables.h"
+#include "Modula2_ParserTables_typedef.h"
 #include "lrstar_parser.h"
 
 //                                                                           //

@@ -28,6 +28,7 @@
       #define EXPECTING
       #define SEMANTICS
 #include "Vba_ParserTables.h"
+#include "Vba_ParserTables_typedef.h"
 #include "lrstar_parser.h"
 
 //                                                                           //

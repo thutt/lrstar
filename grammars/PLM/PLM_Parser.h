@@ -25,6 +25,7 @@
       #define LOOKAHEADS    1
       #define EXPECTING
 #include "PLM_ParserTables.h"
+#include "PLM_ParserTables_typedef.h"
 #include "lrstar_parser.h"
 
 //                                                                           //

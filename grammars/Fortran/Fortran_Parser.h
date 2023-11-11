@@ -25,6 +25,7 @@
       #define LOOKAHEADS    1
       #define EXPECTING
 #include "Fortran_ParserTables.h"
+#include "Fortran_ParserTables_typedef.h"
 #include "lrstar_parser.h"
 
 //                                                                           //

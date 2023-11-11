@@ -28,6 +28,7 @@
       #define EXPECTING
       #define SEMANTICS
 #include "NCSA_ParserTables.h"
+#include "NCSA_ParserTables_typedef.h"
 #include "lrstar_parser.h"
 
 //                                                                           //

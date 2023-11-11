@@ -23,6 +23,7 @@
       #define LOOKAHEADS    1
       #define EXPECTING
 #include "Python_ParserTables.h"
+#include "Python_ParserTables_typedef.h"
 #include "lrstar_parser.h"
 
 //                                                                           //

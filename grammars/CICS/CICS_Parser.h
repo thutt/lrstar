@@ -25,6 +25,7 @@
       #define LOOKAHEADS    1
       #define EXPECTING
 #include "CICS_ParserTables.h"
+#include "CICS_ParserTables_typedef.h"
 #include "lrstar_parser.h"
 
 //                                                                           //

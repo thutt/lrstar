@@ -27,6 +27,7 @@
       #define MAKE_AST
       #define EXPECTING
 #include "Java9_ParserTables.h"
+#include "Java9_ParserTables_typedef.h"
 #include "lrstar_parser.h"
 
 //                                                                           //

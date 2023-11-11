@@ -25,6 +25,7 @@
       #define LOOKAHEADS    1
       #define EXPECTING
 #include "Java1_ParserTables.h"
+#include "Java1_ParserTables_typedef.h"
 #include "lrstar_parser.h"
 
 //                                                                           //
