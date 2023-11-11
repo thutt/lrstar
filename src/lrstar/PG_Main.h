@@ -7,6 +7,42 @@
 #include "PG_PrintGrammar.h"
 #include "PG_PrintStates.h"
 
+#define PARSER_FIELDS                           \
+   PF(term_symb)                                \
+   PF(head_symb)                                \
+   PF(tact_name)                                \
+   PF(node_name)                                \
+   PF(text_str)                                 \
+   PF(head_numb)                                \
+   PF(f_tail)                                   \
+   PF(tail)                                     \
+   PF(arga)                                     \
+   PF(argx)                                     \
+   PF(argy)                                     \
+   PF(Bm)                                       \
+   PF(Br)                                       \
+   PF(Bc)                                       \
+   PF(Bf)                                       \
+   PF(Tm)                                       \
+   PF(Tr)                                       \
+   PF(Tc)                                       \
+   PF(Nm)                                       \
+   PF(Nr)                                       \
+   PF(Nc)                                       \
+   PF(Rm)                                       \
+   PF(Rr)                                       \
+   PF(Rc)                                       \
+   PF(PL)                                       \
+   PF(nd_fterm)                                 \
+   PF(nd_term)                                  \
+   PF(nd_faction)                               \
+   PF(nd_action)                                \
+   PF(tact_numb)                                \
+   PF(node_numb)                                \
+   PF(nact_numb)                                \
+   PFL(reverse) /* Last element in list. */
+
+
 class PG_Main : public PGCreateTables, public PG_PrintStates, public PG_PrintGrammar
 {
 public:
@@ -27,6 +63,25 @@ private:
    static void   GenerateOtherFiles    ();
    static void   DeleteLexFile ();
    static void   OutputLexFile ();
+
+private:
+   static void generate_tables(const char *dname,
+                               const char *fname,
+                               const char *cname);
+   static void instantiate_tables(const char *dname,
+                                  const char *fname,
+                                  const char *cname,
+                                  const char *parser);
+   static void typedef_tables(const char *dname,
+                              const char *fname,
+                              const char *cname,
+                              const char *parser);
+   static void instantiate_fields(FILE *fp);
+#define PFL(pfl_) PF(pfl_)
+#define PF(pf_) static void instantiate_##pf_##_data(FILE *fp);
+   PARSER_FIELDS
+#undef PF
+#undef PFL
 };
 
 
