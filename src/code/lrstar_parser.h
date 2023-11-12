@@ -68,8 +68,15 @@ public:
    int    counter;   // Counter of node accesses.     4   8 bytes
 };
 
+
+class lrstar_user_data_t {
+};
+
 class lrstar_parser
 {
+public:
+   lrstar_user_data_t *user_data;
+
 public:
    static lexer_t         lt;   /* Lexer tables. */
    static parser_tables_t pt;   /* Parser tables. */

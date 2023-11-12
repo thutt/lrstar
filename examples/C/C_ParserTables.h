@@ -153,8 +153,8 @@
          static const int8   node_numb[   206]; // Node numbers for the productions.
          static const int8   nact_numb[   206]; // Node action numbers for the productions.
 
-         static void   (*init_func[    2]) ()       ; // Init action function pointers.
-         static int    (*tact_func[    2]) (int& t) ; // Terminal action function pointers.
+         static void   (*init_func[    2])(void *parser); // Init action function pointers.
+         static int    (*tact_func[    2])(void *parser, int &t); // Terminal action function pointers.
          static int    (*nact_func[  106]) (void* v); // Node action function pointers.
       };
 

@@ -134,9 +134,8 @@ public:
     static const T_nact_numb  *nact_numb;
     static const T_reverse    *reverse;
 
-    static void   (*init_func[    2])()       ; // Init action function pointers.
-    static int    (*tact_func[    2])(int& t) ; // Terminal action function pointers.
+    static void   (*init_func[    2])(void *parser); // Init action function pointers.
+    static int    (*tact_func[    2])(void *parser, int &t); // Terminal action function pointers.
 //   nact_func[??]
 };
-
 #endif

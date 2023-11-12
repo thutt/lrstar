@@ -260,7 +260,7 @@ templ_init_functions(FILE *fp, int N_tacts, int N_nacts)
       fprintf(fp,
               "// Init action function pointers ...\n"
               "%s\n"
-              "void (*%s::init_func[2]) () =\n"
+              "void (*%s::init_func[2])(void *parser) =\n"
               "{\n"
               "   lrstar_parser_actions::init_actions,\n"
               "   lrstar_parser_actions::term_actions\n"
@@ -278,7 +278,7 @@ templ_tact_functions(FILE *fp, int N_tacts, const char **Tact_start)
       fprintf(fp,
               "// Terminal action function pointers ...\n"
               "%s\n"
-              "int (*%s::tact_func[%d]) (int& t) =\n"
+              "int (*%s::tact_func[%d])(void *parser, int &t) =\n"
               "{\n",
               template_decl(), parser_tables_decl(), N_tacts);
       for (int t = 0; t < N_tacts; t++) {
@@ -1063,10 +1063,10 @@ init_functions(FILE *header, FILE *tables, bool newline,
          newline = false;
       }
       fprintf(header,
-              "         static void   (*init_func[%5d]) ()       ; "
+              "         static void   (*init_func[%5d])(void *parser); "
               "// Init action function pointers.\n", 2);
       fprintf(tables, "   // Init action function pointers ...\n");
-      fprintf(tables, "      void (*lrstar_parser_tables::init_func[%d]) () =\n", 2);
+      fprintf(tables, "      void (*lrstar_parser_tables::init_func[%d])(void *parser) =\n", 2);
       fprintf(tables, "      {\n");
       fprintf(tables, "         lrstar_parser_actions::init_actions,\n");
       fprintf(tables, "         lrstar_parser_actions::term_actions");
@@ -1088,11 +1088,11 @@ tact_functions(FILE *header, FILE *tables, bool newline,
       }
       // Token Actions ...
       fprintf (header,
-               "         static int    (*tact_func[%5d]) (int& t) ; "
+               "         static int    (*tact_func[%5d])(void *parser, int &t); "
                "// Terminal action function pointers.\n", N_tacts);
 
       fprintf (tables, "   // Terminal action function pointers ...\n");
-      fprintf (tables, "      int (*lrstar_parser_tables::tact_func[%d]) (int& t) =\n", N_tacts);
+      fprintf (tables, "      int (*lrstar_parser_tables::tact_func[%d])(void *parser, int &t) =\n", N_tacts);
       fprintf (tables, "      {\n");
       for (int t = 0; t < N_tacts; t++) {
          if (t > 0) {
@@ -2205,8 +2205,8 @@ void actions_header_fn(FILE       *fp,
    fprintf (fp, "      class lrstar_parser_actions : public lrstar_parser\n");
    fprintf (fp, "      {\n");
    fprintf (fp, "         public:\n");
-   fprintf (fp, "         static void init_actions ();\n");
-   fprintf (fp, "         static void term_actions ();\n");
+   fprintf (fp, "         static void init_actions(void *parser);\n");
+   fprintf (fp, "         static void term_actions(void *parser);\n");
    fprintf (fp, "      };\n");
    fprintf (fp, "\n");
    fprintf (fp, "#endif\n");
@@ -2215,8 +2215,8 @@ void actions_header_fn(FILE       *fp,
    fprintf (fp, "      class lrstar_term_actions : public lrstar_parser_actions\n");
    fprintf (fp, "      {\n");
    fprintf (fp, "         public:\n");
-   fprintf (fp, "         static int  error     (int& t);\n");
-   fprintf (fp, "         static int  lookup (int& t);\n");
+   fprintf (fp, "         static int error(lrstar_parser &parser, int &t);\n");
+   fprintf (fp, "         static int lookup(lrstar_parser &parser, int &t);\n");
    fprintf (fp, "      };\n");
    fprintf (fp, "\n");
    fprintf (fp, "#endif\n");
@@ -2291,7 +2291,7 @@ static void actions_cpp_fn(FILE       *fp,
    fprintf (fp, "      /* Initialization code goes here */\n");
    fprintf (fp, "}\n");
    fprintf (fp, "\n");
-   fprintf (fp, "void  lrstar_parser_actions::term_actions ()\n");
+   fprintf (fp, "void  lrstar_parser_actions::term_actions(void *parser)\n");
    fprintf (fp, "{\n");
    fprintf (fp, "      /* Termination code goes here */\n");
    fprintf (fp, "}\n");
@@ -2302,7 +2302,7 @@ static void actions_cpp_fn(FILE       *fp,
    fprintf (fp, "\n");
    fprintf (fp, "#ifdef TERM_ACTIONS\n");
    fprintf (fp, "\n");
-   fprintf (fp, "int   lrstar_term_actions::error (int& t)\n");
+   fprintf (fp, "int   lrstar_term_actions::error(void *parser, int &t)\n");
    fprintf (fp, "{\n");
    fprintf (fp, "      if (lt.token.end == lt.token.start)        // Illegal character?\n");
    fprintf (fp, "      {\n");
@@ -2311,7 +2311,7 @@ static void actions_cpp_fn(FILE       *fp,
    fprintf (fp, "      return 0;\n");
    fprintf (fp, "}\n");
    fprintf (fp, "\n");
-   fprintf (fp, "int   lrstar_term_actions::lookup (int& t)             // Lookup in symbol table.\n");
+   fprintf (fp, "int   lrstar_term_actions::lookup(void *parser, int &t)             // Lookup in symbol table.\n");
    fprintf (fp, "{\n");
    fprintf (fp, "      int sti;\n");
    fprintf (fp, "      #ifdef ND_PARSING\n");

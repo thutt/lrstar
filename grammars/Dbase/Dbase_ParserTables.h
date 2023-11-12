@@ -38,8 +38,8 @@
 
          static const int8   tact_numb[   280]; // Terminal action numbers.
 
-         static void   (*init_func[    2]) ()       ; // Init action function pointers.
-         static int    (*tact_func[    2]) (int& t) ; // Terminal action function pointers.
+         static void   (*init_func[    2])(void *parser); // Init action function pointers.
+         static int    (*tact_func[    2])(void *parser, int &t); // Terminal action function pointers.
       };
 
 //
