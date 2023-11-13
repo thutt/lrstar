@@ -11,8 +11,8 @@
 class lrstar_term_actions : public lrstar_parser
 {
 public:
-   static int error(void *parser, int &t);
-   static int lookup(void *parser, int &t);
+   static int error(lrstar_parser *parser, int &t);
+   static int lookup(lrstar_parser *parser, int &t);
 };
 
 #endif

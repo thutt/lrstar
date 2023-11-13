@@ -5,7 +5,10 @@
 #include <string.h>
 #include "lrstar_basic_defs.h"
 #include "lrstar_library_defs.h"
+#include "lrstar_parser.h"
 #include "lrstar_main.h"
+
+static lrstar_parser parser_;   /* Used to pass pointer to callbacks. */
 
 #define  UINT_MAX  0xffffffff
 #define  INT_MAX   0x7fffffff
@@ -118,7 +121,7 @@ int   lrstar_parser::init_parser (char* patharg, char* input_start, int max_syms
 #endif
 
 #ifdef ACTIONS
-   (*pt.init_func[0])(NULL);          // init_action()
+   (*pt.init_func[0])(&parser_);          // init_action()
 #endif
 
    T_exp  = new uchar[n_terms];
@@ -143,7 +146,7 @@ void  lrstar_parser::term_parser ()
 #endif
    term_symtab ();
 #ifdef ACTIONS
-   (*pt.init_func[1])(NULL);               // term_action()
+   (*pt.init_func[1])(&parser_);               // term_action()
 #endif
 }
 
@@ -159,7 +162,7 @@ Read:
    T = t = lt.get_token ();                        // Get incoming token.
 #ifdef TERM_ACTIONS
    if (pt.tact_numb[t] >= 0)                          // If token action ...
-      lt.token.sti = (*pt.tact_func[pt.tact_numb[t]])(NULL, t);  // Call token-action function.
+      lt.token.sti = (*pt.tact_func[pt.tact_numb[t]])(&parser_, t);  // Call token-action function.
 #else
    lt.token.sti = -t;
 #endif

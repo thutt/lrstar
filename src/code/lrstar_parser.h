@@ -188,6 +188,7 @@ public:
    static void    tracer      (Node* n);
 
 };
+
 /* Local Variables:      */
 /* mode: c               */
 /* c-basic-offset: 3     */

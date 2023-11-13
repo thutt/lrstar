@@ -618,7 +618,7 @@
       };
 
    // Terminal action function pointers ...
-      int (*lrstar_parser_tables::tact_func[1])(void *parser, int &t) =
+      int (*lrstar_parser_tables::tact_func[1])(lrstar_parser *parser, int &t) =
       {
          lrstar_term_actions::error
       };

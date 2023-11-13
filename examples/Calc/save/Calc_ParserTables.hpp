@@ -257,14 +257,14 @@
       };
 
    // Init action function pointers ...
-      void (*lrstar_parser_tables::init_func[2])(void *parser) =
+      void (*lrstar_parser_tables::init_func[2])(lrstar_parser *parser) =
       {
          lrstar_parser_actions::init_actions,
          lrstar_parser_actions::term_actions
       };
 
    // Terminal action function pointers ...
-      int (*lrstar_parser_tables::tact_func[2])(void *parser, int &t) =
+      int (*lrstar_parser_tables::tact_func[2])(lrstar_parser *parser, int &t) =
       {
          lrstar_term_actions::error,
          lrstar_term_actions::lookup

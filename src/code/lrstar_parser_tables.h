@@ -4,8 +4,10 @@
 #if !defined(_LRSTAR_PARSER_TABLES_H_)
 #define _LRSTAR_PARSER_TABLES_H_
 
-typedef void (*init_func_t)(void *parser);
-typedef void (*tact_func_t)(void *parser, int &t);
+class lrstar_parser;
+
+typedef void (*init_func_t)(lrstar_parser *parser);
+typedef int  (*tact_func_t)(lrstar_parser *parser, int &t);
 
 template<typename T_term_symb,
          typename T_head_symb,
@@ -138,7 +140,7 @@ public:
     static const T_reverse    *reverse;
 
     static init_func_t        *init_func;   /* Pointer to table. */
-    static int    (*tact_func[    2])(void *parser, int &t); // Terminal action function pointers.
+    static int    (*tact_func[    2])(lrstar_parser *parser, int &t); // Terminal action function pointers.
 //   nact_func[??]
 };
 #endif

@@ -55,6 +55,8 @@
       };
 
 
+class lrstar_parser;
+
       class lrstar_parser_tables
       {
          friend class lrstar_parser;
@@ -85,7 +87,7 @@
 
          static const int8   tact_numb[    43]; // Terminal action numbers.
 
-         static int    (*tact_func[    2])(void *parser, int &t); // Terminal action function pointers.
+         static int    (*tact_func[    2])(lrstar_parser *parser, int &t); // Terminal action function pointers.
       };
 
 //

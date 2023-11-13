@@ -8,6 +8,8 @@
       #include "lrstar_library_defs.h"
 
 
+class lrstar_parser;
+
       class lrstar_parser_tables
       {
          friend class lrstar_parser;

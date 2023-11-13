@@ -20,6 +20,8 @@
       };
 
 
+class lrstar_parser;
+
       class lrstar_parser_tables
       {
          friend class lrstar_parser;
@@ -55,7 +57,7 @@
          static const int8   node_numb[    31]; // Node numbers for the productions.
          static const int8   nact_numb[    31]; // Node action numbers for the productions.
 
-         static int    (*tact_func[    2])(void *parser, int &t); // Terminal action function pointers.
+         static int    (*tact_func[    2])(lrstar_parser *parser, int &t); // Terminal action function pointers.
          static int    (*nact_func[    8]) (void* v); // Node action function pointers.
       };
 

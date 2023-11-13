@@ -8,8 +8,8 @@
 
 #ifdef ACTIONS
 
-void C_init_actions(void *parser);
-void C_term_actions(void *parser);
+void C_init_actions(lrstar_parser *parser);
+void C_term_actions(lrstar_parser *parser);
 
 #endif
 #ifdef TERM_ACTIONS
@@ -17,8 +17,8 @@ void C_term_actions(void *parser);
       class lrstar_term_actions : public lrstar_parser
       {
          public:
-         static int error(void *parser, int &t);
-         static int lookup(void *parser, int &t);
+         static int error(lrstar_parser *parser, int &t);
+         static int lookup(lrstar_parser *parser, int &t);
       };
 
 #endif

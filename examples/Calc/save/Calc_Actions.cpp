@@ -11,12 +11,12 @@
 
 #ifdef ACTIONS
 
-void    lrstar_parser_actions::init_actions(void *parser)
+void    lrstar_parser_actions::init_actions(lrstar_parser *parser)
 {
     /* Initialization code goes here */
 }
 
-void    lrstar_parser_actions::term_actions(void *parser)
+void    lrstar_parser_actions::term_actions(lrstar_parser *parser)
 {
     /* Termination code goes here */
 }
@@ -27,7 +27,7 @@ void    lrstar_parser_actions::term_actions(void *parser)
 
 #ifdef TERM_ACTIONS
 
-int   lrstar_term_actions::error(void *parser, int &t)
+int   lrstar_term_actions::error(lrstar_parser *parser, int &t)
 {
     if (lt.token.end == lt.token.start) // Illegal character?
     {
@@ -36,7 +36,7 @@ int   lrstar_term_actions::error(void *parser, int &t)
     return 0;
 }
 
-int   lrstar_term_actions::lookup(void *parser, int &t)                             // Lookup in symbol table.
+int   lrstar_term_actions::lookup(lrstar_parser *parser, int &t)                             // Lookup in symbol table.
 {
     int sti;
 #ifdef ND_PARSING
