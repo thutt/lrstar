@@ -11,12 +11,12 @@
 
 #ifdef ACTIONS
 
-void  lrstar_parser_actions::init_actions(void *parser)
+void verilog_init_actions(void *parser)
 {
       /* Initialization code goes here */
 }
 
-void  lrstar_parser_actions::term_actions(void *parser)
+void  verilog_term_actions(void *parser)
 {
       /* Termination code goes here */
 }

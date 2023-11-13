@@ -11,14 +11,14 @@
 
 #ifdef ACTIONS
 
-void  lrstar_parser_actions::init_actions(void *parser)
+void LRK_init_actions(void *parser)
 {
-   /* Initialization code goes here */
+      /* Initialization code goes here */
 }
 
-void  lrstar_parser_actions::term_actions(void *parser)
+void  LRK_term_actions(void *parser)
 {
-   /* Termination code goes here */
+      /* Termination code goes here */
 }
 
 #endif
@@ -29,30 +29,30 @@ void  lrstar_parser_actions::term_actions(void *parser)
 
 int   lrstar_term_actions::error(void *parser, int &t)
 {
-   if (lt.token.end == lt.token.start) // Illegal character?
-   {
-      lt.token.end++;
-   }
-   return 0;
+      if (lt.token.end == lt.token.start)        // Illegal character?
+      {
+         lt.token.end++;
+      }
+      return 0;
 }
 
-int   lrstar_term_actions::lookup(void *parser, int &t)       // Lookup in symbol table.
+int   lrstar_term_actions::lookup(void *parser, int &t)             // Lookup in symbol table.
 {
-   int sti;
-#ifdef ND_PARSING
-   if (lt.lookahead.start != 0)              // In lookahead mode?
-   {
-      sti = add_symbol (t, lt.lookahead.start, lt.lookahead.end);
-   }
-   else                                   // Regular mode of parsing.
-#endif
-   {
-      sti = add_symbol (t, lt.token.start, lt.token.end);
-   }
-#ifdef SEMANTICS
-   t = symbol[sti].term;                  // Redefine terminal number?
-#endif
-   return sti;                            // Return symbol-table index.
+      int sti;
+      #ifdef ND_PARSING
+      if (lt.lookahead.start > 0)             // In lookahead mode?
+      {
+         sti = add_symbol (t, lt.lookahead.start, lt.lookahead.end);
+      }
+      else                                 // Regular mode of parsing.
+      #endif
+      {
+         sti = add_symbol (t, lt.token.start, lt.token.end);
+      }
+      #ifdef SEMANTICS
+      t = symbol[sti].term;                // Redefine terminal number?
+      #endif
+    return sti;
 }
 
 #endif
@@ -61,14 +61,10 @@ int   lrstar_term_actions::lookup(void *parser, int &t)       // Lookup in symbo
 
 #ifdef NODE_ACTIONS
 
+
+
 #endif
 
 //                                                                           //
 ///////////////////////////////////////////////////////////////////////////////
 
-/* Local Variables:      */
-/* mode: c               */
-/* c-basic-offset: 3     */
-/* tab-width: 3          */
-/* indent-tabs-mode: nil */
-/* End:                  */

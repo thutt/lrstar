@@ -85,7 +85,6 @@
 
          static const int8   tact_numb[    43]; // Terminal action numbers.
 
-         static void   (*init_func[    2])(void *parser); // Init action function pointers.
          static int    (*tact_func[    2])(void *parser, int &t); // Terminal action function pointers.
       };
 

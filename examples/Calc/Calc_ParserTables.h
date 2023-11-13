@@ -72,7 +72,6 @@
          static const int8   nact_numb[    26]; // Node action numbers for the productions.
          static const uint8  reverse  [    26]; // Reverse the child nodes.
 
-         static void   (*init_func[    2])(void *parser); // Init action function pointers.
          static int    (*tact_func[    2])(void *parser, int &t); // Terminal action function pointers.
          static int    (*nact_func[   17]) (void* v); // Node action function pointers.
       };

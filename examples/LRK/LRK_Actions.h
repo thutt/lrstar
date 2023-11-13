@@ -8,31 +8,29 @@
 
 #ifdef ACTIONS
 
-class lrstar_parser_actions : public lrstar_parser
-{
-public:
-    static void init_actions(void *parser);
-    static void term_actions(void *parser);
-};
+void LRK_init_actions(void *parser);
+void LRK_term_actions(void *parser);
 
 #endif
 #ifdef TERM_ACTIONS
 
-class lrstar_term_actions : public lrstar_parser_actions
-{
-public:
-   static int  error(void *parser, int &t);
-   static int  lookup(void *parser, int &t);
-};
+      class lrstar_term_actions : public lrstar_parser
+      {
+         public:
+         static int error(void *parser, int &t);
+         static int lookup(void *parser, int &t);
+      };
+
+#endif
+#ifdef NODE_ACTIONS
+
+      class lrstar_node_actions : public lrstar_parser
+      {
+         public:
+      };
 
 #endif
 
 //                                                                           //
 ///////////////////////////////////////////////////////////////////////////////
 
-/* Local Variables:      */
-/* mode: c               */
-/* c-basic-offset: 3     */
-/* tab-width: 3          */
-/* indent-tabs-mode: nil */
-/* End:                  */

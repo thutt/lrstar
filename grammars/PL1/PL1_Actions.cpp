@@ -3,6 +3,7 @@
 //                                                                           //
 
 #include "lrstar_basic_defs.h"
+#include "PL1_LexerTables_typedef.h"
 #include "PL1_Actions.h"
 #include "lrstar_main.h"
 
@@ -10,12 +11,12 @@
 
 #ifdef ACTIONS
 
-void  lrstar_parser_actions::init_actions(void *parser)
+void PL1_init_actions(void *parser)
 {
       /* Initialization code goes here */
 }
 
-void  lrstar_parser_actions::term_actions(void *parser)
+void  PL1_term_actions(void *parser)
 {
       /* Termination code goes here */
 }
