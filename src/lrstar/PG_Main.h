@@ -51,6 +51,8 @@ public:
    static void   prt_prod (FILE* tables, int p, char* before, char* after);
    static void   nd_optimize();
 
+   static void   GenerateParserTableEnums(FILE *fp);
+
 private:
    static void   PrintStats ();
    static int    SetOptions   (int na, char** arg);
