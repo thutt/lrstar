@@ -4,10 +4,7 @@
 #if !defined(_LRSTAR_PARSER_TABLES_H_)
 #define _LRSTAR_PARSER_TABLES_H_
 
-class Node;                     /* XXX remove? */
-typedef void (*init_func_t)(lrstar_parser *parser);
-typedef int  (*tact_func_t)(lrstar_parser *parser, int &t);
-typedef int  (*nact_func_t)(lrstar_parser *parser, Node *t);
+#include "lrstar.h"
 
 template<typename T_term_symb,
          typename T_head_symb,
