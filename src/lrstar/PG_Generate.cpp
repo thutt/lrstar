@@ -1317,21 +1317,6 @@ void  PG_Main::GenerateParserTables ()
    fprintf (tables, "      #include \"%s_ParserTables.h\"\n", gfn);
    fprintf (tables, "      #include \"%s_Actions.h\"\n\n", gfn);
 
-   if (0) {
-   fprintf (tables, "\n");
-   fprintf (tables, "      static int n_terms      =%5d; // Number of terminals.\n",          N_terms);
-   fprintf (tables, "      static int n_heads      =%5d; // Number of nonterminals.\n",     N_heads);
-
-   fprintf (tables, "      static int n_prods      =%5d; // Number of productions.\n",     N_prods);
-   fprintf (tables, "      static int n_states     =%5d; // Number of states.\n",             N_states);
-   fprintf (tables, "      static int accept_state =%5d; // Accept state.\n",              Accept_state);
-   fprintf (tables, "      static int n_termactns  =%5d; // Number of terminal actions.\n", N_tacts);
-   fprintf (tables, "      static int n_nodenames  =%5d; // Number of node names.\n",      N_nodes);
-   fprintf (tables, "      static int n_nodeactns  =%5d; // Number of node actions.\n",     N_nacts);
-   fprintf (tables, "      static int eof_symb     =%5d; // <eof> symbol number.\n",          eof_term);
-   fprintf (tables, "      static int err_used     =%5d; // <error> used in grammar?\n\n",  error_used);
-   }
-
    // Head numbers for the productions ...
    data_types[ts_T_head_numb].type   = get_typestr (head_sym, N_prods);
    data_types[ts_T_head_numb].n_elem = N_prods;
