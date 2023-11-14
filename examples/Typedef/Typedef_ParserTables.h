@@ -49,8 +49,6 @@ class lrstar_parser;
          static const int8   tact_numb[    12]; // Terminal action numbers.
          static const int8   node_numb[    24]; // Node numbers for the productions.
          static const int8   nact_numb[    24]; // Node action numbers for the productions.
-
-         static int    (*nact_func[    1]) (void* v); // Node action function pointers.
       };
 
 //

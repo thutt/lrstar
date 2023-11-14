@@ -258,11 +258,11 @@ templ_init_functions(FILE *fp, int N_tacts, int N_nacts)
 {
    if (N_tacts > 0 || N_nacts > 0) {
       fprintf(fp,
-              "extern void %s_init_actions(lrstar_parser *parser); "
+              "void %s_init_actions(lrstar_parser *parser); "
               "/* User-supplied */\n"
-              "extern void %s_term_actions(lrstar_parser *parser); "
+              "void %s_term_actions(lrstar_parser *parser); "
               "/* User-supplied */\n"
-              "init_func_t %s_init_funcs_[2] = {\n"
+              "static init_func_t %s_init_funcs_[2] = {\n"
               "   %s_init_actions,\n"
               "   %s_term_actions\n"
               "};\n\n", gfn, gfn, gfn, gfn, gfn);
@@ -288,12 +288,12 @@ templ_tact_functions(FILE *fp, int N_tacts, const char **Tact_start)
    if (N_tacts > 0) { // Number of terminal actions.
       // Token Actions ...
       for (int t = 0; t < N_tacts; t++) {
-         fprintf (fp, "extern int %s_%s(lrstar_parser *parser, int &t);\n",
+         fprintf (fp, "int %s_%s(lrstar_parser *parser, int &t);\n",
                   gfn, Tact_start[t]);
       }
       fprintf(fp,
               "// Terminal action function pointers ...\n"
-              "tact_func_t %s_tact_funcs_[%d] = {\n",
+              "static tact_func_t %s_tact_funcs_[%d] = {\n",
               gfn, N_tacts);
       for (int t = 0; t < N_tacts; t++) {
          fprintf (fp, "   %s_%s,\n", gfn, Tact_start[t]);
@@ -319,19 +319,34 @@ static void
 templ_nact_functions(FILE *fp, int N_nacts, const char **Nact_start)
 {
    if (N_nacts > 0) {           // Number of node actions
-      fprintf(fp, "// Node action function pointers ...\n");
-      fprintf(fp, "      int (*nact_func[%d])(void *v) = {\n", N_nacts);
       for (int n = 0; n < N_nacts; n++) {
-         if (n > 0) {
-            fprintf(fp, ",\n");
-         }
-         if (strcmp (Nact_start[n], "NULL") == 0) {
-            fprintf(fp, "         0");
-         } else {
-            fprintf(fp, "         lrstar_node_actions::%s",  Nact_start[n]);
+         if (strcmp (Nact_start[n], "NULL") != 0) {
+            fprintf(fp, "int %s_%s(lrstar_parser *parser, Node *node);\n",
+                    gfn, Nact_start[n]);
          }
       }
-      fprintf(fp, "\n      };\n\n");
+
+      fprintf(fp, "// Node action function pointers ...\n");
+      fprintf(fp, "static nact_func_t %s_nact_func_[%d] = {\n", gfn, N_nacts);
+      for (int n = 0; n < N_nacts; n++) {
+         if (strcmp (Nact_start[n], "NULL") == 0) {
+            fprintf(fp, "   0,\n");
+         } else {
+            fprintf(fp, "   %s_%s,\n",  gfn, Nact_start[n]);
+         }
+      }
+      fprintf(fp, "};\n\n");
+      fprintf(fp,
+              "// Node action function pointers ...\n"
+              "%s\n"
+              "nact_func_t *%s::nact_func = &%s_nact_func_[0];\n\n",
+              template_decl(), parser_tables_decl(), gfn);
+   } else {
+      fprintf(fp,
+              "// Node action function pointers ...\n"
+              "%s\n"
+              "nact_func_t *%s::nact_func = 0;\n\n",
+              template_decl(), parser_tables_decl());
    }
 }
 
@@ -1126,17 +1141,18 @@ nact_functions(FILE *header, FILE *tables, bool newline,
                int N_nacts, const char **Nact_start)
 {
    if (N_nacts > 0) {           // Number of node actions
+#if 0
       if (newline) {
          fprintf(header, "\n");
          newline = false;
       }
       // Node Actions ...
       fprintf (header,
-               "         static int    (*nact_func[%5d]) (void* v); "
+               "         static int    (*nact_func[%5d])(lrstar_parser *parser, Node *v); "
                "// Node action function pointers.\n", N_nacts);
 
       fprintf (tables, "   // Node action function pointers ...\n");
-      fprintf (tables, "      int (*lrstar_parser_tables::nact_func[%d]) (void* v) = \n", N_nacts);
+      fprintf (tables, "      int (*lrstar_parser_tables::nact_func[%d])(lrstar_parser *parser, Node *v) = \n", N_nacts);
       fprintf (tables, "      {\n");
       for (int n = 0; n < N_nacts; n++) {
          if (n > 0) {
@@ -1149,6 +1165,7 @@ nact_functions(FILE *header, FILE *tables, bool newline,
          }
       }
       fprintf (tables, "\n      };\n\n");
+#endif
    }
    return newline;
 }

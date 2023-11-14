@@ -4,8 +4,10 @@
 #if !defined(_LRSTAR_PARSER_TABLES_H_)
 #define _LRSTAR_PARSER_TABLES_H_
 
+class Node;                     /* XXX remove? */
 typedef void (*init_func_t)(lrstar_parser *parser);
 typedef int  (*tact_func_t)(lrstar_parser *parser, int &t);
+typedef int  (*nact_func_t)(lrstar_parser *parser, Node *t);
 
 template<typename T_term_symb,
          typename T_head_symb,
@@ -139,6 +141,6 @@ public:
 
     static init_func_t        *init_func;   /* Pointer to init_func  table. */
     static tact_func_t        *tact_func;   /* Pointer to tact_func table.  */
-//   nact_func[??]
+    static nact_func_t        *nact_func;   /* Pointer to nact_func table.  */
 };
 #endif

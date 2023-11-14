@@ -61,11 +61,11 @@ int Calc_lookup(lrstar_parser *parser, int &t) // Lookup in symbol table.
 
 #ifdef NODE_ACTIONS
 
-int     lrstar_node_actions::goal_ (void* v)
+int Calc_goal_ (lrstar_parser *parser, Node *v)
 {
     Node* n = (Node*)v;
-    if (traversal == FIRST_PASS)
-        switch (direction)
+    if (parser->traversal == FIRST_PASS)
+        switch (parser->direction)
         {
         case TOP_DOWN:
             fprintf (output, "\t\tSTART\n");
@@ -77,57 +77,57 @@ int     lrstar_node_actions::goal_ (void* v)
     return 1; // OK
 }
 
-int     lrstar_node_actions::program_ (void* v)
+int Calc_program_ (lrstar_parser *parser, Node *v)
 {
     Node* n = (Node*)v;
-    if (traversal == FIRST_PASS)
-        switch (direction)
+    if (parser->traversal == FIRST_PASS)
+        switch (parser->direction)
         {
         case TOP_DOWN:
-            fprintf (output, "\t\tPROGRAM %s\n", symbol_name (n->sti));
+            fprintf (output, "\t\tPROGRAM %s\n", parser->symbol_name (n->sti));
             break;
         case BOTTOM_UP:
-            fprintf (output, "\t\tEND PROGRAM %s\n", symbol_name (n->sti));
+            fprintf (output, "\t\tEND PROGRAM %s\n", parser->symbol_name (n->sti));
             break;
         }
     return 1; // OK
 }
 
-int     lrstar_node_actions::ident_ (void* v)
+int Calc_ident_ (lrstar_parser *parser, Node *v)
 {
     Node* n = (Node*)v;
-    if (traversal == FIRST_PASS)
-        switch (direction)
+    if (parser->traversal == FIRST_PASS)
+        switch (parser->direction)
         {
         case TOP_DOWN:
             break;
         case BOTTOM_UP:
-            fprintf (output, "\t\tLOAD %s\n", symbol_name (n->sti));
+            fprintf (output, "\t\tLOAD %s\n", parser->symbol_name (n->sti));
             break;
         }
     return 1; // OK
 }
 
-int     lrstar_node_actions::int_ (void* v)
+int Calc_int_ (lrstar_parser *parser, Node *v)
 {
     Node* n = (Node*)v;
-    if (traversal == FIRST_PASS)
-        switch (direction)
+    if (parser->traversal == FIRST_PASS)
+        switch (parser->direction)
         {
         case TOP_DOWN:
             break;
         case BOTTOM_UP:
-            fprintf (output, "\t\tLOAD %s\n", symbol_name (n->sti));
+            fprintf (output, "\t\tLOAD %s\n", parser->symbol_name (n->sti));
             break;
         }
     return 1; // OK
 }
 
-int     lrstar_node_actions::add_ (void* v)
+int Calc_add_ (lrstar_parser *parser, Node *v)
 {
     Node* n = (Node*)v;
-    if (traversal == FIRST_PASS)
-        switch (direction)
+    if (parser->traversal == FIRST_PASS)
+        switch (parser->direction)
         {
         case TOP_DOWN:
             break;
@@ -138,11 +138,11 @@ int     lrstar_node_actions::add_ (void* v)
     return 1; // OK
 }
 
-int     lrstar_node_actions::sub_ (void* v)
+int Calc_sub_ (lrstar_parser *parser, Node *v)
 {
     Node* n = (Node*)v;
-    if (traversal == FIRST_PASS)
-        switch (direction)
+    if (parser->traversal == FIRST_PASS)
+        switch (parser->direction)
         {
         case TOP_DOWN:
             break;
@@ -153,11 +153,11 @@ int     lrstar_node_actions::sub_ (void* v)
     return 1; // OK
 }
 
-int     lrstar_node_actions::mul_ (void* v)
+int Calc_mul_ (lrstar_parser *parser, Node *v)
 {
     Node* n = (Node*)v;
-    if (traversal == FIRST_PASS)
-        switch (direction)
+    if (parser->traversal == FIRST_PASS)
+        switch (parser->direction)
         {
         case TOP_DOWN:
             break;
@@ -168,11 +168,11 @@ int     lrstar_node_actions::mul_ (void* v)
     return 1; // OK
 }
 
-int     lrstar_node_actions::div_ (void* v)
+int Calc_div_ (lrstar_parser *parser, Node *v)
 {
     Node* n = (Node*)v;
-    if (traversal == FIRST_PASS)
-        switch (direction)
+    if (parser->traversal == FIRST_PASS)
+        switch (parser->direction)
         {
         case TOP_DOWN:
             break;
@@ -183,11 +183,11 @@ int     lrstar_node_actions::div_ (void* v)
     return 1; // OK
 }
 
-int     lrstar_node_actions::pwr_ (void* v)
+int Calc_pwr_ (lrstar_parser *parser, Node *v)
 {
     Node* n = (Node*)v;
-    if (traversal == FIRST_PASS)
-        switch (direction)
+    if (parser->traversal == FIRST_PASS)
+        switch (parser->direction)
         {
         case TOP_DOWN:
             break;
@@ -198,47 +198,31 @@ int     lrstar_node_actions::pwr_ (void* v)
     return 1; // OK
 }
 
-int     lrstar_node_actions::if_ (void* v)
+int Calc_if_ (lrstar_parser *parser, Node *v)
 {
     Node* n = (Node*)v;
-    if (traversal == FIRST_PASS)
-        switch (direction)
+    if (parser->traversal == FIRST_PASS)
+        switch (parser->direction)
         {
         case TOP_DOWN:
-            fprintf (output, "if%d:\n", stack[stacki].counter);
+            fprintf (output, "if%d:\n", parser->stack[parser->stacki].counter);
             break;
         case BOTTOM_UP:
-            fprintf (output, "endif%d:\n", stack[stacki].counter);
+            fprintf (output, "endif%d:\n", parser->stack[parser->stacki].counter);
             break;
         }
     return 1; // OK
 }
 
-int     lrstar_node_actions::then_ (void* v)
+int Calc_then_ (lrstar_parser *parser, Node *v)
 {
     Node* n = (Node*)v;
-    if (traversal == FIRST_PASS)
-        switch (direction)
+    if (parser->traversal == FIRST_PASS)
+        switch (parser->direction)
         {
         case TOP_DOWN:
-            fprintf (output, "\t\tBR NZ endif%d\n", stack[stacki-1].counter);
-            fprintf (output, "then%d:\n",           stack[stacki-1].counter);
-            break;
-        case BOTTOM_UP:
-            break;
-        }
-    return 1; // OK
-}
-
-int     lrstar_node_actions::then2_ (void* v)
-{
-    Node* n = (Node*)v;
-    if (traversal == FIRST_PASS)
-        switch (direction)
-        {
-        case TOP_DOWN:
-            fprintf (output, "\t\tBR NZ else%d\n", stack[stacki-1].counter);
-            fprintf (output, "then%d:\n",          stack[stacki-1].counter);
+            fprintf (output, "\t\tBR NZ endif%d\n", parser->stack[parser->stacki-1].counter);
+            fprintf (output, "then%d:\n",           parser->stack[parser->stacki-1].counter);
             break;
         case BOTTOM_UP:
             break;
@@ -246,15 +230,15 @@ int     lrstar_node_actions::then2_ (void* v)
     return 1; // OK
 }
 
-int     lrstar_node_actions::else2_ (void* v)
+int Calc_then2_ (lrstar_parser *parser, Node *v)
 {
     Node* n = (Node*)v;
-    if (traversal == FIRST_PASS)
-        switch (direction)
+    if (parser->traversal == FIRST_PASS)
+        switch (parser->direction)
         {
         case TOP_DOWN:
-            fprintf (output, "\t\tBR endif%d\n", stack[stacki-1].counter);
-            fprintf (output, "else%d:\n",        stack[stacki-1].counter);
+            fprintf (output, "\t\tBR NZ else%d\n", parser->stack[parser->stacki-1].counter);
+            fprintf (output, "then%d:\n",          parser->stack[parser->stacki-1].counter);
             break;
         case BOTTOM_UP:
             break;
@@ -262,11 +246,27 @@ int     lrstar_node_actions::else2_ (void* v)
     return 1; // OK
 }
 
-int     lrstar_node_actions::eq_ (void* v)
+int Calc_else2_ (lrstar_parser *parser, Node *v)
 {
     Node* n = (Node*)v;
-    if (traversal == FIRST_PASS)
-        switch (direction)
+    if (parser->traversal == FIRST_PASS)
+        switch (parser->direction)
+        {
+        case TOP_DOWN:
+            fprintf (output, "\t\tBR endif%d\n", parser->stack[parser->stacki-1].counter);
+            fprintf (output, "else%d:\n",        parser->stack[parser->stacki-1].counter);
+            break;
+        case BOTTOM_UP:
+            break;
+        }
+    return 1; // OK
+}
+
+int Calc_eq_ (lrstar_parser *parser, Node *v)
+{
+    Node* n = (Node*)v;
+    if (parser->traversal == FIRST_PASS)
+        switch (parser->direction)
         {
         case TOP_DOWN:
             break;
@@ -277,11 +277,11 @@ int     lrstar_node_actions::eq_ (void* v)
     return 1; // OK
 }
 
-int     lrstar_node_actions::ne_ (void* v)
+int Calc_ne_ (lrstar_parser *parser, Node *v)
 {
     Node* n = (Node*)v;
-    if (traversal == FIRST_PASS)
-        switch (direction)
+    if (parser->traversal == FIRST_PASS)
+        switch (parser->direction)
         {
         case TOP_DOWN:
             break;
@@ -292,11 +292,11 @@ int     lrstar_node_actions::ne_ (void* v)
     return 1; // OK
 }
 
-int     lrstar_node_actions::store_ (void* v)
+int Calc_store_ (lrstar_parser *parser, Node *v)
 {
     Node* n = (Node*)v;
-    if (traversal == FIRST_PASS)
-        switch (direction)
+    if (parser->traversal == FIRST_PASS)
+        switch (parser->direction)
         {
         case TOP_DOWN:
             break;
@@ -307,16 +307,16 @@ int     lrstar_node_actions::store_ (void* v)
     return 1; // OK
 }
 
-int     lrstar_node_actions::target_ (void* v)
+int Calc_target_ (lrstar_parser *parser, Node *v)
 {
     Node* n = (Node*)v;
-    if (traversal == FIRST_PASS)
-        switch (direction)
+    if (parser->traversal == FIRST_PASS)
+        switch (parser->direction)
         {
         case TOP_DOWN:
             break;
         case BOTTOM_UP:
-            fprintf (output, "\t\tLADR %s\n", symbol_name (n->sti));
+            fprintf (output, "\t\tLADR %s\n", parser->symbol_name (n->sti));
             break;
         }
     return 1; // OK

@@ -14,27 +14,23 @@ int Calc_lookup(lrstar_parser *parser, int &t);
 #endif
 #ifdef NODE_ACTIONS
 
-class lrstar_node_actions : public lrstar_parser
-{
-public:
-    static int  eq_      (void* v);
-    static int  ne_      (void* v);
-    static int  add_     (void* v);
-    static int  sub_     (void* v);
-    static int  mul_     (void* v);
-    static int  div_     (void* v);
-    static int  pwr_     (void* v);
-    static int  goal_    (void* v);
-    static int  ident_   (void* v);
-    static int  if_      (void* v);
-    static int  then_    (void* v);
-    static int  then2_   (void* v);
-    static int  else2_   (void* v);
-    static int  program_ (void* v);
-    static int  int_     (void* v);
-    static int  store_   (void* v);
-    static int  target_  (void* v);
-};
+int Calc_eq_      (lrstar_parser *parser, Node *n);
+int Calc_ne_      (lrstar_parser *parser, Node *n);
+int Calc_add_     (lrstar_parser *parser, Node *n);
+int Calc_sub_     (lrstar_parser *parser, Node *n);
+int Calc_mul_     (lrstar_parser *parser, Node *n);
+int Calc_div_     (lrstar_parser *parser, Node *n);
+int Calc_pwr_     (lrstar_parser *parser, Node *n);
+int Calc_goal_    (lrstar_parser *parser, Node *n);
+int Calc_ident_   (lrstar_parser *parser, Node *n);
+int Calc_if_      (lrstar_parser *parser, Node *n);
+int Calc_then_    (lrstar_parser *parser, Node *n);
+int Calc_then2_   (lrstar_parser *parser, Node *n);
+int Calc_else2_   (lrstar_parser *parser, Node *n);
+int Calc_program_ (lrstar_parser *parser, Node *n);
+int Calc_int_     (lrstar_parser *parser, Node *n);
+int Calc_store_   (lrstar_parser *parser, Node *n);
+int Calc_target_  (lrstar_parser *parser, Node *n);
 
 #endif
 

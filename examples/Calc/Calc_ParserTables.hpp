@@ -256,28 +256,6 @@
           0,    0,    0,    0,    0,    0
       };
 
-   // Node action function pointers ...
-      int (*lrstar_parser_tables::nact_func[17]) (void* v) = 
-      {
-         lrstar_node_actions::goal_,
-         lrstar_node_actions::program_,
-         lrstar_node_actions::store_,
-         lrstar_node_actions::if_,
-         lrstar_node_actions::target_,
-         lrstar_node_actions::eq_,
-         lrstar_node_actions::ne_,
-         lrstar_node_actions::add_,
-         lrstar_node_actions::sub_,
-         lrstar_node_actions::mul_,
-         lrstar_node_actions::div_,
-         lrstar_node_actions::pwr_,
-         lrstar_node_actions::int_,
-         lrstar_node_actions::ident_,
-         lrstar_node_actions::then_,
-         lrstar_node_actions::then2_,
-         lrstar_node_actions::else2_
-      };
-
 //
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 

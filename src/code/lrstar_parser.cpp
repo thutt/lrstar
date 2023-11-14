@@ -1390,11 +1390,11 @@ void  lrstar_parser::traverse (Node* n)
    counter[i]++;
    stack[stacki].id = i;
    stack[stacki].counter = counter[i];
-   if (nact_func[i] != 0) // Got a node action ?
+   if (pt.nact_func[i] != 0) // Got a node action ?
    {
       direction = TOP_DOWN;
       tracer (n);
-      (*nact_func[i]) (n);
+      (*pt.nact_func[i])(&parser_, n);
    }
    while (c != 0)
    {
@@ -1410,11 +1410,11 @@ void  lrstar_parser::traverse (Node* n)
          }
          } */
    }
-   if (nact_func[i] != 0) // Got a node action ?
+   if (pt.nact_func[i] != 0) // Got a node action ?
    {
       direction = BOTTOM_UP;
       tracer (n);
-      (*nact_func[i]) (n);
+      (*pt.nact_func[i])(&parser_, n);
    }
    stacki--;
 #endif

@@ -22,11 +22,6 @@ int CICS_lookup(lrstar_parser *parser, int &t);
 #endif
 #ifdef NODE_ACTIONS
 
-      class lrstar_node_actions : public lrstar_parser
-      {
-         public:
-      };
-
 #endif
 
 //                                                                           //
