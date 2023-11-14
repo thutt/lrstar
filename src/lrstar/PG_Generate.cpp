@@ -153,48 +153,21 @@ parser_tables_decl(void)
 static void
 parser_tables_inst(char *buf, size_t buf_len)
 {
+
    snprintf(buf, buf_len,
             "templ_lrstar_parser_tables<"
-            "%s, %s, %s, %s, %s, "
-            "%s, %s, %s, %s, %s, "
-            "%s, %s, %s, %s, %s, "
-            "%s, %s, %s, %s, %s, "
-            "%s, %s, %s, %s, %s, "
-            "%s, %s, %s, %s, %s, "
-            "%s, %s, %s>",
-            data_types[ts_T_term_symb].type,
-            data_types[ts_T_head_symb].type,
-            data_types[ts_T_tact_name].type,
-            data_types[ts_T_node_name].type,
-            data_types[ts_T_text_str].type,
-            data_types[ts_T_head_numb].type,
-            data_types[ts_T_f_tail].type,
-            data_types[ts_T_tail].type,
-            data_types[ts_T_arga].type,
-            data_types[ts_T_argx].type,
-            data_types[ts_T_argy].type,
-            data_types[ts_T_Bm].type,
-            data_types[ts_T_Br].type,
-            data_types[ts_T_Bc].type,
-            data_types[ts_T_Bf].type,
-            data_types[ts_T_Tm].type,
-            data_types[ts_T_Tr].type,
-            data_types[ts_T_Tc].type,
-            data_types[ts_T_Nm].type,
-            data_types[ts_T_Nr].type,
-            data_types[ts_T_Nc].type,
-            data_types[ts_T_Rm].type,
-            data_types[ts_T_Rr].type,
-            data_types[ts_T_Rc].type,
-            data_types[ts_T_PL].type,
-            data_types[ts_T_nd_fterm].type,
-            data_types[ts_T_nd_term].type,
-            data_types[ts_T_nd_faction].type,
-            data_types[ts_T_nd_action].type,
-            data_types[ts_T_tact_numb].type,
-            data_types[ts_T_node_numb].type,
-            data_types[ts_T_nact_numb].type,
-            data_types[ts_T_reverse].type);
+#define PF(pf_) "%s, "
+#define PFL(pfl_) "%s"
+PARSER_FIELDS
+#undef PF
+#undef PFL
+            ">",
+#define PF(pf_)   data_types[ts_T_##pf_].type,
+#define PFL(pfl_) data_types[ts_T_##pfl_].type
+PARSER_FIELDS
+#undef PF
+#undef PFL
+      );
 }
 
 
@@ -368,6 +341,71 @@ instantiate_field_lengths(FILE *fp)
 }
 
 
+void
+PG_Main::instantiate_constants(FILE *fp)
+{
+   // Special constants in the parser.
+   fprintf(fp,
+           "%s\n"
+           "const int %s::n_terms = %d; "
+           "// Number of terminals.\n\n",
+           template_decl(), parser_tables_decl(), N_terms);
+
+   fprintf(fp,
+           "%s\n"
+            "const int %s::n_heads      =%5d; "
+            "// Number of nonterminals.\n",
+           template_decl(), parser_tables_decl(), N_heads);
+
+   fprintf(fp,
+           "%s\n"
+           "const int %s::n_prods = %d; "
+           "// Number of productions.\n",
+           template_decl(), parser_tables_decl(), N_prods);
+
+   fprintf(fp,
+           "%s\n"
+           "const int %s::n_states = %d; "
+           "// Number of states.\n",
+           template_decl(), parser_tables_decl(), N_states);
+
+   fprintf(fp,
+           "%s\n"
+           "const int %s::accept_state = %d; "
+           "// Accept state.\n",
+           template_decl(), parser_tables_decl(), Accept_state);
+
+   fprintf(fp,
+           "%s\n"
+           "const int %s::n_termactns = %d; "
+           "// Number of terminal actions.\n",
+           template_decl(), parser_tables_decl(), N_tacts);
+
+   fprintf(fp,
+           "%s\n"
+           "const int %s::n_nodenames = %d; "
+           "// Number of node names.\n",
+           template_decl(), parser_tables_decl(), N_nodes);
+
+   fprintf(fp,
+           "%s\n"
+           "const int %s::n_nodeactns = %d; "
+           "// Number of node actions.\n",
+           template_decl(), parser_tables_decl(), N_nacts);
+
+   fprintf(fp,
+           "%s\n"
+           "const int %s::eof_symb = %d; "
+           "// <eof> symbol number.\n",
+           template_decl(), parser_tables_decl(), eof_term);
+
+   fprintf(fp,
+           "%s\n"
+           "const int %s::err_used = %d; "
+           "// <error> used in grammar?\n\n",
+           template_decl(), parser_tables_decl(), error_used);
+}
+
 void PG_Main::instantiate_term_symb_data(FILE *fp)
 {
    fprintf(fp, "// Terminal symbols of the grammar.\n");
@@ -419,7 +457,7 @@ void PG_Main::instantiate_node_name_data(FILE *fp)
 
 void PG_Main::instantiate_text_str_data(FILE *fp)
 {
-   assert(false);
+   assert(false);               /* XXX this is not used? */
 }
 
 
@@ -1017,6 +1055,7 @@ PG_Main::instantiate_fields(FILE *fp)
    templ_nact_functions(fp, N_nacts, Nact_start);
 }
 
+
 void
 PG_Main::instantiate_tables(const char  *dname,
                             const char  *fname,
@@ -1041,6 +1080,7 @@ PG_Main::instantiate_tables(const char  *dname,
            "//  It instantiates a parser.\n");
 
    instantiate_field_lengths(fp);
+   instantiate_constants(fp);
    instantiate_fields(fp);
    close_guard(fp);
    fclose(fp);
@@ -1217,75 +1257,38 @@ void  PG_Main::GenerateParserTables ()
       prt_log ("Output file '%s' cannot be written!\n\n", filename_hpp);
       Quit ();
    }
+
    prt_logonly ("Generating: %s\n\n", filename_hpp);
 
    if (optn[PG_TERMACTIONS ] == 0) N_tacts = 0;
    if (optn[PG_NODEACTIONS ] == 0) N_nacts = 0;
 
+
    fprintf (header, "\n");
-   fprintf (header, "////////////////////////////////////////////////////////////////////////////////\n");
    fprintf (header, "//\n");
    fprintf (header, "//    %s (generated by %s %s)\n", filename_h, program, version);
    fprintf (header, "\n");
 
-   fprintf (header, "      #pragma once\n\n");
-   fprintf (header, "      #include \"lrstar_library_defs.h\"\n");
+   fprintf (header, "#pragma once\n\n");
+   fprintf (header, "#include \"lrstar_library_defs.h\"\n");
 
    fprintf (header, "\n");
-   if (n_constants > 0)
-   {
-      int n = 0;
-      fprintf (header,
-               "      enum termcon\n"
-               "      {\n");
-      for (i = 0; i < n_constants; i++)
-      {
-         if (n++ > 0)
-            fprintf (header, ",\n");
-         fprintf (header, "         %s = %d", Defcon_name[i], Defcon_value[i]);
+
+   if (n_constants > 0) {
+      fprintf(header, "enum termcon {\n");
+      for (i = 0; i < n_constants; i++) {
+         fprintf(header, "   %s = %d,\n", Defcon_name[i], Defcon_value[i]);
       }
-      fprintf (header, "\n      };\n\n");
+      fprintf (header, "};\n\n");
    }
 
-   if (N_nodes > 0 && optn[PG_ASTCONST] > 0)
-   {
-      int n = 0;
-      fprintf (header,
-               "      enum nodecon\n"
-               "      {\n");
-      for (int i = 0; i < N_nodes; i++)
-      {
-         if (n++ > 0)
-            fprintf (header, ",\n");
-         fprintf (header, "         N_%s = %d", Node_start[i], i);
+   if (N_nodes > 0 && optn[PG_ASTCONST] > 0) {
+      fprintf (header, "enum nodecon {\n");
+      for (int i = 0; i < N_nodes; i++) {
+         fprintf(header, "   N_%s = %d,\n", Node_start[i], i);
       }
-      fprintf (header, "\n      };\n\n");
+      fprintf (header, "};\n\n");
    }
-
-   if (lrstar_windows) {
-      assert(lrstar_windows);
-      fprintf (header, "      #define uint   unsigned int\n");
-      fprintf (header, "      #define uchar  unsigned char\n");
-      fprintf (header, "      #define ushort unsigned short\n");
-   }
-
-   fprintf (header, "\n");
-   fprintf (header, "class lrstar_parser;\n");
-   fprintf (header, "\n");
-
-   fprintf (header, "      class lrstar_parser_tables\n");
-   fprintf (header, "      {\n");
-   fprintf (header, "         friend class lrstar_parser;\n");
-
-   fprintf (header, "         public:\n");
-   fprintf (header, "         static const char *term_symb[%6d]; // Terminal symbols of the grammar.\n", N_terms);
-   fprintf (header, "         static const char *head_symb[%6d]; // Nonterminal symbols of the grammar.\n", N_heads);
-   if (N_tacts > 0)
-      fprintf (header, "         static const char *tact_name[%6d]; // Terminal action names found in the grammar.\n", N_tacts);
-   if (N_nodes > 0)
-      fprintf (header, "         static const char *node_name[%6d]; // Node names found in the grammar.\n", N_nodes);
-   if (N_strings > 0)
-      fprintf (header, "         static const char *text_str [%6d]; // Text strings found in the grammar.\n", N_strings);
 
    data_types[ts_T_term_symb].type   = "const char *";
    data_types[ts_T_term_symb].n_elem = N_terms;
@@ -1312,11 +1315,13 @@ void  PG_Main::GenerateParserTables ()
    fprintf (tables, "      #include \"lrstar_basic_defs.h\"\n");
    fprintf (tables, "      #include \"lrstar_parser_tables.h\"\n");
    fprintf (tables, "      #include \"%s_ParserTables.h\"\n", gfn);
-   fprintf (tables, "      #include \"%s_Actions.h\"\n", gfn);
+   fprintf (tables, "      #include \"%s_Actions.h\"\n\n", gfn);
 
+   if (0) {
    fprintf (tables, "\n");
    fprintf (tables, "      static int n_terms      =%5d; // Number of terminals.\n",          N_terms);
    fprintf (tables, "      static int n_heads      =%5d; // Number of nonterminals.\n",     N_heads);
+
    fprintf (tables, "      static int n_prods      =%5d; // Number of productions.\n",     N_prods);
    fprintf (tables, "      static int n_states     =%5d; // Number of states.\n",             N_states);
    fprintf (tables, "      static int accept_state =%5d; // Accept state.\n",              Accept_state);
@@ -1325,145 +1330,19 @@ void  PG_Main::GenerateParserTables ()
    fprintf (tables, "      static int n_nodeactns  =%5d; // Number of node actions.\n",     N_nacts);
    fprintf (tables, "      static int eof_symb     =%5d; // <eof> symbol number.\n",          eof_term);
    fprintf (tables, "      static int err_used     =%5d; // <error> used in grammar?\n\n",  error_used);
-
-   // Terminal symbols ...
-   fprintf (tables, "   // Terminal symbols of the grammar ...\n");
-   fprintf (tables, "      const char* lrstar_parser_tables::term_symb[%d] = \n", N_terms);
-   fprintf (tables, "      {\n");
-
-   for (int i = 0; i < N_terms; i++)
-   {
-      fprintf (tables, "         \"%s\"", make_term (term_name[i]));
-      if (i < N_terms-1) fprintf (tables, ",\n");
-   }
-   fprintf (tables, "\n      };\n\n");
-
-   // Head symbols ...
-   fprintf (tables, "   // Nonterminal symbols of the grammar ...\n");
-   fprintf (tables, "      const char *lrstar_parser_tables::head_symb[%d] = \n", N_heads);
-   fprintf (tables, "      {\n");
-   for (int i = 0; i < N_heads; i++)
-   {
-      fprintf (tables, "         \"%s\"", head_name[i]);
-      if (i < N_heads-1) fprintf (tables, ",\n");
-   }
-   fprintf (tables, "\n      };\n\n");
-
-   if (N_tacts > 0)
-   {
-      // Terminal action names ...
-      fprintf (tables, "   // Terninal action names found in the grammar ...\n");
-      fprintf (tables, "      const char *lrstar_parser_tables::tact_name[%d] = \n", N_tacts);
-      fprintf (tables, "      {\n");
-      for (int i = 0; i < N_tacts; i++)
-      {
-         fprintf (tables, "         \"%s\"", Tact_start[i]);
-         if (i < N_tacts -1) fprintf (tables, ",\n");
-      }
-      fprintf (tables, "\n      };\n\n");
-   }
-
-   if (N_nodes > 0)
-   {
-      // Node names ...
-      fprintf (tables, "   // Node names found in the grammar ...\n");
-      fprintf (tables, "      const char * lrstar_parser_tables::node_name[%d] = \n", N_nodes);
-      fprintf (tables, "      {\n");
-      for (int i = 0; i < N_nodes; i++)
-      {
-         fprintf (tables, "         \"%s\"", Node_start[i]);
-         if (i < N_nodes-1) fprintf (tables, ",\n");
-      }
-      fprintf (tables, "\n      };\n\n");
-   }
-
-   if (N_strings > 0)
-   {
-      // Argument text strings ...
-      fprintf (tables, "   // Text strings for any arguments ...\n");
-      fprintf (tables, "      const char *lrstar_parser_tables::text_str[%d] = \n", N_strings);
-      fprintf (tables, "      {\n");
-      for (int i = 0; i < N_strings; i++)
-      {
-         fprintf (tables, "         %s", Str_start[i]);
-         if (i < N_strings-1) fprintf (tables, ",\n");
-      }
-      fprintf (tables, "\n      };\n\n");
    }
 
    // Head numbers for the productions ...
    data_types[ts_T_head_numb].type   = get_typestr (head_sym, N_prods);
    data_types[ts_T_head_numb].n_elem = N_prods;
-   fprintf (header,
-            "         static const %-6s head_numb[%6d]; "
-            "// Head symbol number for a production.\n",
-            data_types[ts_T_head_numb].type,
-            data_types[ts_T_head_numb].n_elem);
-
-   fprintf (tables, "   // Head symbol numbers for the productions ...\n");
-   fprintf (tables, "      const %s lrstar_parser_tables::head_numb[%d] = \n",
-            data_types[ts_T_head_numb].type,
-            data_types[ts_T_head_numb].n_elem);
-   fprintf (tables, "      {");
-   for (int i = 0; i < N_prods; i++)
-   {
-      if (i % 20 == 0)
-      {
-         if (i > 0) fprintf (tables, ",");
-         fprintf (tables, "\n      %5d", head_sym[i]);
-      }
-      else fprintf (tables, ",%5d", head_sym[i]);
-   }
-   fprintf (tables, "\n      };\n\n");
 
    // Index to first tail symbol for a production ...
-   data_types[ts_T_f_tail].type   = get_typestr (F_tail, N_prods+1);
+   data_types[ts_T_f_tail].type   = get_typestr (F_tail, N_prods + 1);
    data_types[ts_T_f_tail].n_elem = N_prods + 1;
-   fprintf (header,
-            "         static const %-6s f_tail   [%6d]; "
-            "// First tail in a production.\n",
-            data_types[ts_T_f_tail].type,
-            data_types[ts_T_f_tail].n_elem);
-
-   fprintf (tables, "   // First tail symbol index into the tail list ...\n");
-   fprintf (tables, "      const %s lrstar_parser_tables::f_tail[%d] = \n",
-            data_types[ts_T_f_tail].type,
-            data_types[ts_T_f_tail].n_elem);
-   fprintf (tables, "      {");
-   for (int i = 0; i < N_prods+1; i++)
-   {
-      if (i % 20 == 0)
-      {
-         if (i > 0) fprintf (tables, ",");
-         fprintf (tables, "\n      %5d", F_tail[i]);
-      }
-      else fprintf (tables, ",%5d", F_tail[i]);
-   }
-   fprintf (tables, "\n      };\n\n");
 
    // Tail symbol numbers ...
    data_types[ts_T_tail].type   = get_typestr (Tail, N_tails);
    data_types[ts_T_tail].n_elem = N_tails;
-   fprintf (header,
-            "         static const %-6s tail     [%6d]; "
-            "// Tail symbol number.\n",
-            data_types[ts_T_tail].type,
-            data_types[ts_T_tail].n_elem);
-   fprintf (tables, "   // Tail symbol numbers ...\n");
-   fprintf (tables, "      const %s lrstar_parser_tables::tail[%d] = \n",
-            data_types[ts_T_tail].type,
-            data_types[ts_T_tail].n_elem);
-   fprintf (tables, "      {");
-   for (int i = 0; i < N_tails; i++)
-   {
-      if (i % 20 == 0)
-      {
-         if (i > 0) fprintf (tables, ",");
-         fprintf (tables, "\n      %5d", Tail[i]);
-      }
-      else fprintf (tables, ",%5d", Tail[i]);
-   }
-   fprintf (tables, "\n      };\n\n");
 
    // Arguments for terminal actions ...
    if (N_tacts > 0)
@@ -1478,26 +1357,6 @@ void  PG_Main::GenerateParserTables ()
       }
       data_types[ts_T_arga].type   = get_typestr (Arga, N_terms);
       data_types[ts_T_arga].n_elem = N_terms;
-      fprintf (header,
-               "         static const %-6s arga     [%6d]; "
-               "// Arguments for terminal actions.\n",
-               data_types[ts_T_arga].type,
-               data_types[ts_T_arga].n_elem);
-      fprintf (tables, "   // Arguments for token actions ...\n");
-      fprintf (tables, "      const %s lrstar_parser_tables::arga[%d] = \n",
-               data_types[ts_T_arga].type,
-               data_types[ts_T_arga].n_elem);
-      fprintf (tables, "      {");
-      for (int i = 0; i < N_terms; i++)
-      {
-         if (i % 20 == 0)
-         {
-            if (i > 0) fprintf (tables, ",");
-            fprintf (tables, "\n      %5d", Arga[i]);
-         }
-         else fprintf (tables, ",%5d", Arga[i]);
-      }
-      fprintf (tables, "\n      };\n\n");
    } else {
       set_data_type_void(ts_T_arga);
    }
@@ -1515,26 +1374,6 @@ void  PG_Main::GenerateParserTables ()
       }
       data_types[ts_T_argx].type   = get_typestr (Argx, N_prods);
       data_types[ts_T_argx].n_elem = N_prods;
-      fprintf (header,
-               "         static %-6s argx     [%6d]; "
-               "// First arguments for productions.\n",
-               data_types[ts_T_argx].type,
-               data_types[ts_T_argx].n_elem);
-      fprintf (tables, "   // First arguments for productions ...\n");
-      fprintf (tables, "      %s lrstar_parser_tables::argx[%d] = \n",
-               data_types[ts_T_argx].type,
-               data_types[ts_T_argx].n_elem);
-      fprintf (tables, "      {");
-      for (int i = 0; i < N_prods; i++)
-      {
-         if (i % 20 == 0)
-         {
-            if (i > 0) fprintf (tables, ",");
-            fprintf (tables, "\n      %5d", Argx[i]);
-         }
-         else fprintf (tables, ",%5d", Argx[i]);
-      }
-      fprintf (tables, "\n      };\n\n");
    } else {
       set_data_type_void(ts_T_argx);
    }
@@ -1553,512 +1392,95 @@ void  PG_Main::GenerateParserTables ()
 
       data_types[ts_T_argy].type   = get_typestr (Argy, N_prods);
       data_types[ts_T_argy].n_elem = N_prods;
-      fprintf (header,
-               "         static %-6s argy     [%6d]; "
-               "// Second arguments for productions.\n",
-               data_types[ts_T_argy].type,
-               data_types[ts_T_argy].n_elem);
-
-      fprintf (tables, "   // Second arguments for productions ...\n");
-      fprintf (tables, "      %s lrstar_parser_tables::argy[%d] = \n",
-               data_types[ts_T_argy].type,
-               data_types[ts_T_argy].n_elem);
-
-      fprintf (tables, "      {");
-      for (int i = 0; i < N_prods; i++)
-      {
-         if (i % 20 == 0)
-         {
-            if (i > 0) fprintf (tables, ",");
-            fprintf (tables, "\n      %5d", Argy[i]);
-         }
-         else fprintf (tables, ",%5d", Argy[i]);
-      }
-      fprintf (tables, "\n      };\n\n");
    } else {
       set_data_type_void(ts_T_argy);
    }
 
-   fprintf(header, "\n");
    if (optn[PG_BOOLMATRIX] > 0)
    {
       // B_matrix ...
-      fprintf (header, "         private:\n");
-
       data_types[ts_T_Bm].type   = "uint8";
       data_types[ts_T_Bm].n_elem = B_size;
-      fprintf (header,
-               "         static const %s  Bm[%6d]       ; "
-               "// Boolean matrix.\n",
-               data_types[ts_T_Bm].type,
-               data_types[ts_T_Bm].n_elem);
-
-      fprintf (tables, "   // Boolean matrix ...\n");
-      fprintf (tables, "      const uint8 lrstar_parser_tables::Bm[%d] = \n", B_size);
-      fprintf (tables, "      {");
-      if (optn[PG_BOOLMATRIX] == 1) // char
-      {
-         for (int i = 0; i < B_size; i++)
-         {
-            int x = (uchar)B_matrix[i];
-            if (i % 40 == 0)
-            {
-               if (i > 0) fprintf (tables, ",");
-               fprintf (tables, "\n       %d", x);
-            }
-            else fprintf (tables, ", %d", x);
-         }
-      }
-      if (optn[PG_BOOLMATRIX] == 2) // bits
-      {
-         for (int i = 0; i < B_size; i++)
-         {
-            int x = (uchar)B_matrix[i];
-            if (i % 20 == 0)
-            {
-               if (i > 0) fprintf (tables, ",");
-               fprintf(tables, "\n      %5d", x);
-            }
-            else fprintf(tables, ",%5d", x);
-         }
-      }
-      fprintf (tables, "\n      };\n\n");
 
       // B_matrix row ...
       data_types[ts_T_Br].type   = get_typestr (B_row, N_states);
       data_types[ts_T_Br].n_elem = N_states;
-      fprintf (header,
-               "         static const %-6s Br[%6d]       ; "
-               "// Boolean matrix row.\n",
-               data_types[ts_T_Br].type,
-               data_types[ts_T_Br].n_elem);
-
-      fprintf (tables, "   // Boolean matrix row (for state)...\n");
-      fprintf (tables, "      const %s lrstar_parser_tables::Br[%d] = \n",
-               data_types[ts_T_Br].type,
-               data_types[ts_T_Br].n_elem);
-      fprintf (tables, "      {");
-      for (int i = 0; i < N_states; i++)
-      {
-         if (i % 20 == 0)
-         {
-            if (i > 0) fprintf(tables, ",");
-            fprintf(tables, "\n      %5d", B_row[i]);
-         }
-         else fprintf(tables, ",%5d", B_row[i]);
-      }
-      fprintf(tables, "\n      };\n\n");
 
       // B_matrix column ...
       data_types[ts_T_Bc].type   = get_typestr (B_col, N_terms);
       data_types[ts_T_Bc].n_elem = N_terms;
-      fprintf (header,
-               "         static const %-6s Bc[%6d]       ; "
-               "// Boolean matrix column.\n",
-               data_types[ts_T_Bc].type,
-               data_types[ts_T_Bc].n_elem);
-
-      fprintf (tables, "   // Boolean matrix column (displacement) ...\n");
-      fprintf (tables, "      const %s lrstar_parser_tables::Bc[%d] = \n",
-               data_types[ts_T_Bc].type,
-               data_types[ts_T_Bc].n_elem);
-      fprintf (tables, "      {");
-      for (int i = 0; i < N_terms; i++)
-      {
-         if (i % 20 == 0)
-         {
-            if (i > 0) fprintf(tables, ",");
-            fprintf(tables, "\n      %5d", B_col[i]);
-         }
-         else fprintf(tables, ",%5d", B_col[i]);
-      }
-      fprintf(tables, "\n      };\n\n");
 
       if (optn[PG_BOOLMATRIX] > 1)
       {
          // B_matrix mask ...
          data_types[ts_T_Bf].type   = "uint8";
          data_types[ts_T_Bf].n_elem = N_terms;
-         fprintf (header,
-                  "         static const %s Bf[%6d]       ; "
-                  "// Boolean matrix filter/mask.\n",
-                  data_types[ts_T_Bf].type,
-                  data_types[ts_T_Bf].n_elem);
-
-         fprintf (tables, "   // Boolean matrix filter/mask value ...\n");
-         fprintf (tables, "      const uint8 lrstar_parser_tables::Bf[%d] = \n", N_terms);
-         fprintf (tables, "      {");
-         for (int i = 0; i < N_terms; i++)
-         {
-            if (i % 20 == 0)
-            {
-               if (i > 0) fprintf(tables, ",");
-               fprintf(tables, "\n      %5d", B_mask[i]);
-            }
-            else fprintf(tables, ",%5d", B_mask[i]);
-         }
-         fprintf(tables, "\n      };\n\n");
       }
    }
 
    // T_matrix ...
    data_types[ts_T_Tm].type   = get_typestr (T_matrix, T_size);
    data_types[ts_T_Tm].n_elem = T_size;
-   fprintf (header,
-            "         static const %-6s Tm[%6d]       ; "
-            "// Terminal transition matrix.\n",
-            data_types[ts_T_Tm].type,
-            data_types[ts_T_Tm].n_elem);
-
-   fprintf (tables, "   // Terminal transition matrix ...\n");
-   fprintf (tables, "      const %s lrstar_parser_tables::Tm[%d] = \n",
-            data_types[ts_T_Tm].type,
-            data_types[ts_T_Tm].n_elem);
-   fprintf (tables, "      {");
-   for (int i = 0; i < T_size; i++)
-   {
-      if (i % 20 == 0)
-      {
-         if (i > 0) fprintf (tables, ",");
-         fprintf (tables, "\n      %5d", T_matrix[i]);
-      }
-      else fprintf (tables, ",%5d", T_matrix[i]);
-   }
-   fprintf (tables, "\n      };\n\n");
 
    // T_matrix row ...
    data_types[ts_T_Tr].type   = get_typestr (T_row, tt_states);
    data_types[ts_T_Tr].n_elem = tt_states;
-   fprintf (header, "         static const %-6s Tr[%6d]       ; "
-            "// Terminal transition matrix row.\n",
-            data_types[ts_T_Tr].type,
-            data_types[ts_T_Tr].n_elem);
-
-   fprintf (tables, "   // Terminal transition matrix row ...\n");
-   fprintf (tables, "      const %s lrstar_parser_tables::Tr[%d] = \n",
-            data_types[ts_T_Tr].type,
-            data_types[ts_T_Tr].n_elem);
-   fprintf (tables, "      {");
-   for (int i = 0; i < tt_states; i++)
-   {
-      if (i % 20 == 0)
-      {
-         if (i > 0) fprintf (tables, ",");
-         fprintf (tables, "\n      %5d", T_row[i]);
-      }
-      else fprintf (tables, ",%5d", T_row[i]);
-   }
-   fprintf (tables, "\n      };\n\n");
 
    // T_matrix column ...
    data_types[ts_T_Tc].type   = get_typestr (T_col, N_terms);
    data_types[ts_T_Tc].n_elem = N_terms;
-   fprintf (header,
-            "         static const %-6s Tc[%6d]       ; "
-            "// Terminal transition matrix column.\n",
-            data_types[ts_T_Tc].type,
-            data_types[ts_T_Tc].n_elem);
-
-   fprintf (tables, "   // Terminal transition matrix column ...\n");
-   fprintf (tables, "      const %s lrstar_parser_tables::Tc[%d] = \n",
-            data_types[ts_T_Tc].type,
-            data_types[ts_T_Tc].n_elem);
-
-   fprintf (tables, "      {");
-   for (int i = 0; i < N_terms; i++)
-   {
-      if (i % 20 == 0)
-      {
-         if (i > 0) fprintf (tables, ",");
-         fprintf (tables, "\n      %5d", T_col[i]);
-      }
-      else fprintf (tables, ",%5d", T_col[i]);
-   }
-   fprintf (tables, "\n      };\n\n");
 
    // N_matrix ...
    data_types[ts_T_Nm].type   = get_typestr (N_matrix, N_size);
    data_types[ts_T_Nm].n_elem = N_size;
-   fprintf (header,
-            "         static const %-6s Nm[%6d]       ; "
-            "// Nonterminal transition matrix.\n",
-            data_types[ts_T_Nm].type,
-            data_types[ts_T_Nm].n_elem);
-
-   fprintf (tables, "   // Nonterminal transition matrix ...\n");
-   fprintf (tables, "      const %s lrstar_parser_tables::Nm[%d] = \n",
-            data_types[ts_T_Nm].type,
-            data_types[ts_T_Nm].n_elem);
-   fprintf (tables, "      {");
-   for (int i = 0; i < N_size; i++)
-   {
-      if (i % 20 == 0)
-      {
-         if (i > 0) fprintf (tables, ",");
-         fprintf (tables, "\n      %5d", N_matrix[i]);
-      }
-      else fprintf (tables, ",%5d", N_matrix[i]);
-   }
-   fprintf (tables, "\n      };\n\n");
 
    // N_matrix row ...
    data_types[ts_T_Nr].type   = get_typestr (N_row, ntt_states);
    data_types[ts_T_Nr].n_elem = ntt_states;
-   fprintf (header,
-            "         static const %-6s Nr[%6d]       ; "
-            "// Nonterminal transition matrix row.\n",
-            data_types[ts_T_Nr].type,
-            data_types[ts_T_Nr].n_elem);
-   fprintf (tables, "   // Nonterminal transition matrix row ...\n");
-   fprintf (tables, "      const %s lrstar_parser_tables::Nr[%d] = \n",
-            data_types[ts_T_Nr].type,
-            data_types[ts_T_Nr].n_elem);
-   fprintf (tables, "      {");
-   for (int i = 0; i < ntt_states; i++)
-   {
-      if (i % 20 == 0)
-      {
-         if (i > 0) fprintf (tables, ",");
-         fprintf (tables, "\n      %5d", N_row[i]);
-      }
-      else fprintf (tables, ",%5d", N_row[i]);
-   }
-   fprintf (tables, "\n      };\n\n");
 
    // N_matrix column ...
    data_types[ts_T_Nc].type   = get_typestr (N_col, N_prods);
    data_types[ts_T_Nc].n_elem = N_prods;
-   fprintf (header,
-            "         static const %-6s Nc[%6d]       ; "
-            "// Nonterminal transition matrix column.\n",
-            data_types[ts_T_Nc].type,
-            data_types[ts_T_Nc].n_elem);
-
-   fprintf (tables, "   // Nonterminal transition matrix column ...\n");
-   fprintf (tables, "      const %s lrstar_parser_tables::Nc[%d] = \n",
-            data_types[ts_T_Nc].type,
-            data_types[ts_T_Nc].n_elem);
-   fprintf (tables, "      {");
-   for (int i = 0; i < N_prods; i++)
-   {
-      if (i % 20 == 0)
-      {
-         if (i > 0) fprintf (tables, ",");
-         fprintf (tables, "\n      %5d", N_col[i]);
-      }
-      else fprintf (tables, ",%5d", N_col[i]);
-   }
-   fprintf (tables, "\n      };\n\n");
 
    // R_matrix ...
    data_types[ts_T_Rm].type   = get_typestr (R_matrix, R_size);
    data_types[ts_T_Rm].n_elem = R_size;
-   fprintf (header,
-            "         static const %-6s Rm[%6d]       ; "
-            "// Reduction matrix.\n",
-            data_types[ts_T_Rm].type,
-            data_types[ts_T_Rm].n_elem);
-
-   fprintf (tables, "   // Reduction matrix ...\n");
-   fprintf (tables, "      const %s lrstar_parser_tables::Rm[%d] = \n",
-            data_types[ts_T_Rm].type,
-            data_types[ts_T_Rm].n_elem);
-   fprintf (tables, "      {");
-   for (int i = 0; i < R_size; i++)
-   {
-      if (i % 20 == 0)
-      {
-         if (i > 0) fprintf (tables, ",");
-         fprintf (tables, "\n      %5d", R_matrix[i]);
-      }
-      else fprintf (tables, ",%5d", R_matrix[i]);
-   }
-   fprintf (tables, "\n      };\n\n");
 
    // R_matrix row ...
    data_types[ts_T_Rr].type   = get_typestr (R_row, N_states);
    data_types[ts_T_Rr].n_elem = N_states;
-   fprintf (header,
-            "         static const %-6s Rr[%6d]       ; "
-            "// Reduction matrix row.\n",
-            data_types[ts_T_Rr].type,
-            data_types[ts_T_Rr].n_elem);
-
-   fprintf (tables, "   // Reduction matrix row ...\n");
-   fprintf (tables, "      const %s lrstar_parser_tables::Rr[%d] = \n",
-            data_types[ts_T_Rr].type,
-            data_types[ts_T_Rr].n_elem);
-   fprintf (tables, "      {");
-   for (int i = 0; i < N_states; i++)
-   {
-      if (i % 20 == 0)
-      {
-         if (i > 0) fprintf (tables, ",");
-         fprintf (tables, "\n      %5d", R_row[i]);
-      }
-      else fprintf (tables, ",%5d", R_row[i]);
-   }
-   fprintf (tables, "\n      };\n\n");
 
    // R_matrix column ...
    data_types[ts_T_Rc].type   = get_typestr (R_col, N_terms);
    data_types[ts_T_Rc].n_elem = N_terms;
-   fprintf (header,
-            "         static const %-6s Rc[%6d]       ; "
-            "// Reduction matrix column.\n",
-            data_types[ts_T_Rc].type,
-            data_types[ts_T_Rc].n_elem);
-
-   fprintf (tables, "   // Reduction matrix column ...\n");
-   fprintf (tables, "      const %s lrstar_parser_tables::Rc[%d] = \n",
-            data_types[ts_T_Rc].type,
-            data_types[ts_T_Rc].n_elem);
-   fprintf (tables, "      {");
-   for (int i = 0; i < N_terms; i++)
-   {
-      if (i % 20 == 0)
-      {
-         if (i > 0) fprintf (tables, ",");
-         fprintf (tables, "\n      %5d", R_col[i]);
-      }
-      else fprintf (tables, ",%5d", R_col[i]);
-   }
-   fprintf (tables, "\n      };\n\n");
 
    // Production length - 1 ...
    data_types[ts_T_PL].type   = get_typestr (prod_len, N_prods);
    data_types[ts_T_PL].n_elem = N_prods;
-   fprintf (header,
-            "         static const %-6s PL[%6d]       ; "
-            "// Production length minus one.\n",
-            data_types[ts_T_PL].type,
-            data_types[ts_T_PL].n_elem);
-
-   fprintf (tables, "   // Production lengths (minus one) ...\n");
-   fprintf (tables, "      const %s lrstar_parser_tables::PL[%d] = \n",
-            data_types[ts_T_PL].type,
-            data_types[ts_T_PL].n_elem);
-   fprintf (tables, "      {");
-   for (int i = 0; i < N_prods; i++)
-   {
-      if (i % 20 == 0)
-      {
-         if (i > 0) fprintf (tables, ",");
-         fprintf (tables, "\n      %5d", prod_len[i]);
-      }
-      else fprintf (tables, ",%5d", prod_len[i]);
-   }
-   fprintf (tables, "\n      };\n\n");
 
    int newline = 0;
    if (n_ndstates > 0)
    {
       newline = 1;
-      fprintf (header, "\n");
       // Nondeterministic Items (terminals) in a state ...
       count = N_states + 1;
       data_types[ts_T_nd_fterm].type   = get_typestr (nd_item, count);
       data_types[ts_T_nd_fterm].n_elem = count;
-      fprintf (header,
-               "         static const %-6s nd_fterm  [%5d]; "
-               "// ND: first terminal in the list.\n",
-               data_types[ts_T_nd_fterm].type,
-               data_types[ts_T_nd_fterm].n_elem);
-
-
-      fprintf (tables, "   // Nondeterministic first terminal in the list ...\n");
-      fprintf (tables, "      const %s lrstar_parser_tables::nd_fterm[%d] = \n",
-               data_types[ts_T_nd_fterm].type,
-               data_types[ts_T_nd_fterm].n_elem);
-      fprintf (tables, "      {");
-      for (int i = 0; i < count; i++)
-      {
-         if (i % 20 == 0)
-         {
-            if (i > 0) fprintf (tables, ",");
-            fprintf (tables, "\n      %5d", nd_item[i]);
-         }
-         else fprintf (tables, ",%5d", nd_item[i]);
-      }
-      fprintf (tables, "\n      };\n\n");
 
       // Nondeterministic Terminal List ...
       count = n_ndterms;
       data_types[ts_T_nd_term].type   = get_typestr (nd_term, count);
       data_types[ts_T_nd_term].n_elem = count;
-      fprintf (header,
-               "         static const %-6s nd_term   [%5d]; "
-               "// ND: terminal list. \n",
-               data_types[ts_T_nd_term].type,
-               data_types[ts_T_nd_term].n_elem);
-
-      fprintf (tables, "   // Nondeterministic terminal list ...\n");
-      fprintf (tables, "      const %s lrstar_parser_tables::nd_term[%d] = \n",
-               data_types[ts_T_nd_term].type,
-               data_types[ts_T_nd_term].n_elem);
-      fprintf (tables, "      {");
-      for (int i = 0; i < count; i++)
-      {
-         if (i % 20 == 0)
-         {
-            if (i > 0) fprintf (tables, ",");
-            fprintf (tables, "\n      %5d", nd_term[i]);
-         }
-         else fprintf (tables, ",%5d", nd_term[i]);
-      }
-      fprintf (tables, "\n      };\n\n");
 
       // Nondeterministic Start of a terminal's actions for state ...
       count = n_ndterms + 1;
       data_types[ts_T_nd_faction].type   = get_typestr (nd_start, count);
       data_types[ts_T_nd_faction].n_elem = count;
-      fprintf (header,
-               "         static const %-6s nd_faction[%5d]; "
-               "// ND: first action in the list.\n",
-               data_types[ts_T_nd_faction].type,
-               data_types[ts_T_nd_faction].n_elem);
-
-      fprintf (tables, "   // Nondeterministic first action in the list ...\n");
-      fprintf (tables, "      const %s lrstar_parser_tables::nd_faction[%d] = \n",
-               data_types[ts_T_nd_faction].type,
-               data_types[ts_T_nd_faction].n_elem);
-      fprintf (tables, "      {");
-      for (int i = 0; i < count; i++)
-      {
-         if (i % 20 == 0)
-         {
-            if (i > 0) fprintf (tables, ",");
-            fprintf (tables, "\n      %5d", nd_start[i]);
-         }
-         else fprintf (tables, ",%5d", nd_start[i]);
-      }
-      fprintf (tables, "\n      };\n\n");
 
       // Nondeterministic Action ...
       count = n_nditems;
       data_types[ts_T_nd_action].type   = get_typestr (nd_action, count);
       data_types[ts_T_nd_action].n_elem = count;
-      fprintf (header,
-               "         static const %-6s nd_action [%5d]; "
-               "// ND: action list.\n",
-               data_types[ts_T_nd_action].type,
-               data_types[ts_T_nd_action].n_elem);
-
-      fprintf (tables, "   // Nondeterministic actions list ...\n");
-      fprintf (tables, "      const %s lrstar_parser_tables::nd_action[%d] = \n",
-               data_types[ts_T_nd_action].type,
-               data_types[ts_T_nd_action].n_elem);
-      fprintf (tables, "      {");
-      for (int i = 0; i < count; i++)
-      {
-         if (i % 20 == 0)
-         {
-            if (i > 0) fprintf (tables, ",");
-            fprintf (tables, "\n      %5d", nd_action[i]);
-         }
-         else fprintf (tables, ",%5d", nd_action[i]);
-      }
-      fprintf (tables, "\n      };\n");
    } else {
       set_data_type_void(ts_T_nd_fterm);
       set_data_type_void(ts_T_nd_term);
@@ -2070,31 +1492,9 @@ void  PG_Main::GenerateParserTables ()
    if (N_tacts > 0) // Number of terminal actions.
    {
       newline = 1;
-      fprintf (header, "\n");
       // Token Action numbers ...
       data_types[ts_T_tact_numb].type   = get_typestr (Tact_numb, N_terms);
       data_types[ts_T_tact_numb].n_elem = N_terms;
-      fprintf (header,
-               "         static const %-6s tact_numb[%6d]; "
-               "// Terminal action numbers.\n",
-               data_types[ts_T_tact_numb].type,
-               data_types[ts_T_tact_numb].n_elem);
-
-      fprintf (tables, "   // Terminal action number ...\n");
-      fprintf (tables, "      const %s lrstar_parser_tables::tact_numb[%d] = \n",
-               data_types[ts_T_tact_numb].type,
-               data_types[ts_T_tact_numb].n_elem);
-      fprintf (tables, "      {");
-      for (int i = 0; i < N_terms; i++)
-      {
-         if (i % 20 == 0)
-         {
-            if (i > 0) fprintf (tables, ",");
-            fprintf (tables, "\n      %5d", Tact_numb[i]);
-         }
-         else fprintf (tables, ",%5d", Tact_numb[i]);
-      }
-      fprintf (tables, "\n      };\n\n");
    } else {
       set_data_type_void(ts_T_tact_numb);
    }
@@ -2102,60 +1502,17 @@ void  PG_Main::GenerateParserTables ()
    if (optn[PG_ASTCONST] > 0 && N_nodes > 0)
    {
       if (newline == 0) {
-         fprintf (header, "\n");
          newline = 1;
       }
       // Node Number for each production ...
       data_types[ts_T_node_numb].type   = get_typestr (Node_numb, N_prods);
       data_types[ts_T_node_numb].n_elem = N_prods;
-      fprintf (header,
-               "         static const %-6s node_numb[%6d]; "
-               "// Node numbers for the productions.\n",
-               data_types[ts_T_node_numb].type,
-               data_types[ts_T_node_numb].n_elem);
-
-      fprintf (tables, "   // Node number for each production ...\n");
-      fprintf (tables, "      const %s lrstar_parser_tables::node_numb[%d] = \n",
-               data_types[ts_T_node_numb].type,
-               data_types[ts_T_node_numb].n_elem);
-      fprintf (tables, "      {");
-      for (int i = 0; i < N_prods; i++)
-      {
-         if (i % 20 == 0)
-         {
-            if (i > 0) fprintf (tables, ",");
-            fprintf (tables, "\n      %5d", Node_numb[i]);
-         }
-         else fprintf (tables, ",%5d", Node_numb[i]);
-      }
-      fprintf (tables, "\n      };\n\n");
 
       if (N_nacts > 0) // Number of node actions
       {
          // Node Action numbers ...
          data_types[ts_T_nact_numb].type   = get_typestr (Nact_numb, N_prods);
          data_types[ts_T_nact_numb].n_elem = N_prods;
-         fprintf (header,
-                  "         static const %-6s nact_numb[%6d]; "
-                  "// Node action numbers for the productions.\n",
-                  data_types[ts_T_nact_numb].type,
-                  data_types[ts_T_nact_numb].n_elem);
-
-         fprintf (tables, "   // Node action numbers ...\n");
-         fprintf (tables, "      const %s lrstar_parser_tables::nact_numb[%d] = \n",
-                  data_types[ts_T_nact_numb].type,
-                  data_types[ts_T_nact_numb].n_elem);
-         fprintf (tables, "      {");
-         for (int i = 0; i < N_prods; i++)
-         {
-            if (i % 20 == 0)
-            {
-               if (i > 0) fprintf (tables, ",");
-               fprintf (tables, "\n      %5d", Nact_numb[i]);
-            }
-            else fprintf (tables, ",%5d", Nact_numb[i]);
-         }
-         fprintf (tables, "\n      };\n\n");
       } else {
          set_data_type_void(ts_T_nact_numb);
       }
@@ -2166,25 +1523,6 @@ void  PG_Main::GenerateParserTables ()
          // Reverse the order of nodes (for a production/rule) ...
          data_types[ts_T_reverse].type   = "uint8";
          data_types[ts_T_reverse].n_elem = N_prods;
-         fprintf (header,
-                  "         static const %s  reverse  [%6d]; "
-                  "// Reverse the child nodes.\n",
-                  data_types[ts_T_reverse].type,
-                  data_types[ts_T_reverse].n_elem);
-
-         fprintf (tables, "   // Reverse the order of nodes ...\n");
-         fprintf (tables, "      const uint8 lrstar_parser_tables::reverse[%d] = \n", N_prods);
-         fprintf (tables, "      {");
-         for (int i = 0; i < N_prods; i++)
-         {
-            if (i % 20 == 0)
-            {
-               if (i > 0) fprintf (tables, ",");
-               fprintf (tables, "\n      %5d", Reverse[i]);
-            }
-            else fprintf (tables, ",%5d", Reverse[i]);
-         }
-         fprintf (tables, "\n      };\n\n");
       } else {
          set_data_type_void(ts_T_reverse);
       }
@@ -2194,27 +1532,12 @@ void  PG_Main::GenerateParserTables ()
       set_data_type_void(ts_T_reverse);
    }
 
-   {
-      bool newline = true;
-      newline = init_functions(header, tables, newline, N_tacts, N_nacts);
-      newline = tact_functions(header, tables, newline, N_tacts, Tact_start);
-      newline = nact_functions(header, tables, newline, N_nacts, Nact_start);
-   }
-
-   fprintf (tables, "//\n");
-   fprintf (tables, "////////////////////////////////////////////////////////////////////////////////////////////////////\n");
    fprintf (tables, "\n");
 
    fprintf(tables, "#include \"%s_ParserTables_instantiate.h\"\n", gfn);
-
    fclose  (tables);
    chmod   (filename_hpp, S_IREAD); // Make output file read-only.
 
-   fprintf (header, "      };\n\n");
-
-   fprintf (header, "//\n");
-   fprintf (header, "////////////////////////////////////////////////////////////////////////////////\n");
-   fprintf (header, "\n");
    fclose  (header);
    chmod   (filename_h, S_IREAD); // Make output file read-only.
    generate_tables(gdn, gfn, name);

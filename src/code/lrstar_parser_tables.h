@@ -11,6 +11,7 @@ template<typename T_term_symb,
          typename T_tact_name,
          typename T_node_name,
          typename T_text_str,
+
          typename T_head_numb,
          typename T_f_tail,
          typename T_tail,
@@ -48,7 +49,19 @@ template<typename T_term_symb,
          typename T_nact_numb,
          typename T_reverse>
 struct templ_lrstar_parser_tables {
-private:
+public:
+    static const int n_terms;
+    static const int n_heads;
+    static const int n_prods;
+    static const int n_states;
+    static const int accept_state;
+    static const int n_termactns;
+    static const int n_nodenames;
+    static const int n_nodeactns;
+    static const int eof_symb;
+    static const int err_used;
+
+public:
     static const int n_term_symb; // Terminal symbols of the grammar.
     static const int n_head_symb; // Nonterminal symbols of the grammar.
     static const int n_tact_name; // Terminal action names in grammar.

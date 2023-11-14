@@ -77,6 +77,7 @@ private:
                               const char *cname,
                               const char *parser);
    static void instantiate_fields(FILE *fp);
+   static void instantiate_constants(FILE *fp);
 #define PFL(pfl_) PF(pfl_)
 #define PF(pf_) static void instantiate_##pf_##_data(FILE *fp);
    PARSER_FIELDS

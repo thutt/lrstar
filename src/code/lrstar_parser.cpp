@@ -124,11 +124,11 @@ int   lrstar_parser::init_parser (char* patharg, char* input_start, int max_syms
    (*pt.init_func[0])(&parser_);          // init_action()
 #endif
 
-   T_exp  = new uchar[n_terms];
-   S_exam = new uchar[n_states];
+   T_exp  = new uchar[parser_.pt.n_terms];
+   S_exam = new uchar[parser_.pt.n_states];
 
-   memset (T_exp,  0, n_terms);
-   memset (S_exam, 0, n_states);
+   memset (T_exp,  0, parser_.pt.n_terms);
+   memset (S_exam, 0, parser_.pt.n_states);
    return 1; // Return OK.
 
 Err:  n_errors++;
@@ -259,9 +259,8 @@ Test:
             PS->start = lt.token.start;            // Put start address on stack.
             PS->node  = 0;                      // Set node on stack to zero.
 #endif
-            if (y > accept_state)               // Shift and reduce action?
-            {
-               p = y - accept_state;            // Shift and reduce.
+            if (y > parser_.pt.accept_state) { // Shift and reduce action?
+               p = y - parser_.pt.accept_state;            // Shift and reduce.
                goto SR;                         // Go to shift reduce.
             }
 #ifdef EXPECTING
@@ -278,7 +277,7 @@ Test:
       }
    }
 #endif
-   if (x == accept_state)                       // If Goal production.
+   if (x == parser_.pt.accept_state)                       // If Goal production.
    {
       PS -= pt.PL[p];                              // Reduce parse stack ptr by rule length - 1.
       reduce (p);                               // Call reduce action with production number.
@@ -460,7 +459,9 @@ int   lrstar_parser::nd_parser (int x, int t, int na)
       if (pt.tact_numb[LA] >= 0)                // If term action ...
          (*pt.tact_func[pt.tact_numb[LA]]) (LA);   // Call term-action function.
 #endif
-      if (LA == eof_symb) limit = la; // <eof> ?
+      if (LA == parser_.pt.eof_symb) {
+         limit = la; // <eof> ?
+      }
       i = 0;
       do
       {
@@ -562,9 +563,9 @@ void  lrstar_parser::print_action (const char* str, int i)
    if (y > 0)
    {
       printf ("Shift %s and ", symbol_name (lt.token.sti));
-      if (y > accept_state)            // Shift and reduce ?
+      if (y > parser_.pt.accept_state)            // Shift and reduce ?
       {
-         int p = y - accept_state;     // Convert to production number.
+         int p = y - parser_.pt.accept_state;     // Convert to production number.
          print_prod ("reduce", p, -1);
       }
       else printf ("goto %d\n", y);
@@ -586,9 +587,9 @@ int   lrstar_parser::nd_parser_la (int i, int la)            // ND LA Parser.
       {
          SS[i]++;
          SS[i]->state = State[i];                  // Put State stack.
-         if (Action[i] > accept_state)             // Shift and reduce?
+         if (Action[i] > parser_.pt.accept_state)             // Shift and reduce?
          {
-            State[i] = accept_state - Action[i];   // Convert to production number.
+            State[i] = parser_.pt.accept_state - Action[i];   // Convert to production number.
             goto SR;
          }
          State[i] = Action[i];                     // Get next state.
@@ -634,7 +635,9 @@ Shft:
       }
    }
 
-   if (State[i] == accept_state) return 1;
+   if (State[i] == parser_.pt.accept_state) {
+      return 1;
+   }
 
    // LOOK FOR A SHIFT ACTION FOR THIS TOKEN ...
    for (int j = pt.nd_fterm [State[i]];
@@ -647,9 +650,9 @@ Shft:
          {
             SS[i]++;
             SS[i]->state = State[i];                  // Put State on stack.
-            if (pt.nd_action[k] > accept_state)          // Shift and reduce?
+            if (pt.nd_action[k] > parser_.pt.accept_state)          // Shift and reduce?
             {
-               State[i] = accept_state - pt.nd_action[k];// Convert to production number.
+               State[i] = parser_.pt.accept_state - pt.nd_action[k];// Convert to production number.
                goto SR;
             }
             State[i] = pt.nd_action[k];
@@ -783,7 +786,7 @@ void  lrstar_parser::expecting (int x)
 {
    int t;                                       // Terminal number.
    S_exam[x] = 1;                               // Mark this state as seen.
-   for (t = 0; t < n_terms; t++)                // For all terminals.
+   for (t = 0; t < parser_.pt.n_terms; t++)                // For all terminals.
    {
       if (pt.Bm[pt.Br[x] +
                 pt.Bc[t]] & pt.Bf[t])           // Check B-matrix for shift action.
@@ -816,7 +819,7 @@ void  lrstar_parser::expecting (int x)
       reduction (p, x);
       return;
    }
-   for (t = 0; t < n_terms; t++)             // For all terminals.
+   for (t = 0; t < parser_.pt.n_terms; t++)             // For all terminals.
    {
       q = pt.Rm[pt.Rc[t] - p];                    // Reduction for this terminal.
       if (q > 0)                             // If not zero production?
@@ -877,13 +880,13 @@ void  lrstar_parser::print_terms (int state)
    printf ("Expecting one of the following:\n\n");
 
    int t, x;
-   int* seq = new int [n_terms];
+   int* seq = new int [parser_.pt.n_terms];
    sort_terms (seq);
 
-   for (t = 0; t < n_terms; t++)
+   for (t = 0; t < parser_.pt.n_terms; t++)
    {
       x = seq[t];
-      // if (x == eof_symb) continue;
+      // if (x == parser_.pt.eof_symb) continue;
       if (T_exp[x] == 1)
       {
          if (pt.term_symb[x][0] == '<' ||  pt.term_symb[x][0] == '{') {
@@ -891,10 +894,12 @@ void  lrstar_parser::print_terms (int state)
          }
       }
    }
-   for (t = 0; t < n_terms; t++)
+   for (t = 0; t < parser_.pt.n_terms; t++)
    {
       x = seq[t];
-      if (x == eof_symb) continue;
+      if (x == parser_.pt.eof_symb) {
+         continue;
+      }
       if (T_exp[x] == 1)
       {
          if (pt.term_symb[x][0] != '<' && pt.term_symb[x][0] != '{') {
@@ -916,15 +921,15 @@ void  lrstar_parser::sort_terms (int* seq)
    const char *P_temp;
    int*  L, L_temp, seq_temp, i, j, leng, c;
 
-   L = new int  [n_terms];
-   P = new const char *[n_terms];
-   for (i = 0; i < n_terms; i++)
+   L = new int  [parser_.pt.n_terms];
+   P = new const char *[parser_.pt.n_terms];
+   for (i = 0; i < parser_.pt.n_terms; i++)
    {
       P[i] = pt.term_symb[i];
       L[i] = (int)strlen(pt.term_symb[i]);
       seq[i] = i;
    }
-   for (i = 1; i < n_terms; i++) // Bubble sort algorithm.
+   for (i = 1; i < parser_.pt.n_terms; i++) // Bubble sort algorithm.
    {
       P_temp   = P[i];
       L_temp   = L[i];
@@ -1352,12 +1357,12 @@ void  lrstar_parser::traverse (int trav)
 #ifdef NODE_ACTIONS
    if (n_nodes > 1) // Any nodes in the tree?
    {
-      if (n_nodeactns > 0) // Any node actions?
+      if (parser_.pt.n_nodeactns > 0) // Any node actions?
       {
          stacki  = -1;
          stack   = new Stack [STKSIZE];
-         counter = new int [n_nodenames];
-         for (int i = 0; i < n_nodenames; i++)
+         counter = new int [parser_.pt.n_nodenames];
+         for (int i = 0; i < parser_.pt.n_nodenames; i++)
          {
             counter[i] = 0;
          }
