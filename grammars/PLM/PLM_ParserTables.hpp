@@ -617,12 +617,6 @@
          -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1
       };
 
-   // Terminal action function pointers ...
-      int (*lrstar_parser_tables::tact_func[1])(lrstar_parser *parser, int &t) =
-      {
-         lrstar_term_actions::error
-      };
-
 //
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 

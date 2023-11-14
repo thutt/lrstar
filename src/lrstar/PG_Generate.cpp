@@ -287,16 +287,30 @@ templ_tact_functions(FILE *fp, int N_tacts, const char **Tact_start)
 {
    if (N_tacts > 0) { // Number of terminal actions.
       // Token Actions ...
+      for (int t = 0; t < N_tacts; t++) {
+         fprintf (fp, "extern int %s_%s(lrstar_parser *parser, int &t);\n",
+                  gfn, Tact_start[t]);
+      }
+      fprintf(fp,
+              "// Terminal action function pointers ...\n"
+              "tact_func_t %s_tact_funcs_[%d] = {\n",
+              gfn, N_tacts);
+      for (int t = 0; t < N_tacts; t++) {
+         fprintf (fp, "   %s_%s,\n", gfn, Tact_start[t]);
+      }
+      fprintf (fp, "};\n\n");
+
       fprintf(fp,
               "// Terminal action function pointers ...\n"
               "%s\n"
-              "int (*%s::tact_func[%d])(lrstar_parser *parser, int &t) =\n"
-              "{\n",
-              template_decl(), parser_tables_decl(), N_tacts);
-      for (int t = 0; t < N_tacts; t++) {
-         fprintf (fp, "   lrstar_term_actions::%s,\n", Tact_start[t]);
-      }
-      fprintf (fp, "};\n\n");
+              "tact_func_t *%s::tact_func = &%s_tact_funcs_[0];\n\n",
+              template_decl(), parser_tables_decl(), gfn);
+   } else {
+      fprintf(fp,
+              "// Terminal action function pointeras ...\n"
+              "%s\n"
+              "tact_func_t *%s::tact_func = 0;\n\n",
+              template_decl(), parser_tables_decl());
    }
 }
 
@@ -1080,6 +1094,7 @@ static bool
 tact_functions(FILE *header, FILE *tables, bool newline,
                int N_tacts, const char **Tact_start)
 {
+#if 0
    if (N_tacts > 0) { // Number of terminal actions.
       if (newline) {
          fprintf(header, "\n");
@@ -1101,6 +1116,7 @@ tact_functions(FILE *header, FILE *tables, bool newline,
       }
       fprintf (tables, "\n      };\n\n");
    }
+#endif
    return newline;
 }
 
@@ -2201,7 +2217,7 @@ void actions_header_fn(FILE       *fp,
    fprintf (fp, "\n");
    fprintf (fp, "#include \"%s_Parser.h\"\n", grammar);
    fprintf (fp, "\n");
-   fprintf (fp, "class lrstar_parser\n");
+   fprintf (fp, "class lrstar_parser;\n");
    fprintf (fp, "\n");
    fprintf (fp, "#ifdef ACTIONS\n");
    fprintf (fp, "\n");
@@ -2211,12 +2227,8 @@ void actions_header_fn(FILE       *fp,
    fprintf (fp, "#endif\n");
    fprintf (fp, "#ifdef TERM_ACTIONS\n");
    fprintf (fp, "\n");
-   fprintf (fp, "      class lrstar_term_actions : public lrstar_parser\n");
-   fprintf (fp, "      {\n");
-   fprintf (fp, "         public:\n");
-   fprintf (fp, "         static int error(lrstar_parser *parser, int &t);\n");
-   fprintf (fp, "         static int lookup(lrstar_parser *parser, int &t);\n");
-   fprintf (fp, "      };\n");
+   fprintf (fp, "int %s_error(lrstar_parser *parser, int &t);\n", gfn);
+   fprintf (fp, "int %s_lookup(lrstar_parser *parser, int &t);\n", gfn);
    fprintf (fp, "\n");
    fprintf (fp, "#endif\n");
    fprintf (fp, "#ifdef NODE_ACTIONS\n");
@@ -2301,30 +2313,30 @@ static void actions_cpp_fn(FILE       *fp,
    fprintf (fp, "\n");
    fprintf (fp, "#ifdef TERM_ACTIONS\n");
    fprintf (fp, "\n");
-   fprintf (fp, "int   lrstar_term_actions::error(lrstar_parser *parser, int &t)\n");
+   fprintf (fp, "int %s_error(lrstar_parser *parser, int &t)\n", gfn);
    fprintf (fp, "{\n");
-   fprintf (fp, "      if (lt.token.end == lt.token.start)        // Illegal character?\n");
+   fprintf (fp, "      if (parser->lt.token.end == parser->lt.token.start)        // Illegal character?\n");
    fprintf (fp, "      {\n");
-   fprintf (fp, "         lt.token.end++;\n");
+   fprintf (fp, "         parser->lt.token.end++;\n");
    fprintf (fp, "      }\n");
    fprintf (fp, "      return 0;\n");
    fprintf (fp, "}\n");
    fprintf (fp, "\n");
-   fprintf (fp, "int   lrstar_term_actions::lookup(lrstar_parser *parser, int &t)             // Lookup in symbol table.\n");
+   fprintf (fp, "int %s_lookup(lrstar_parser *parser, int &t)             // Lookup in symbol table.\n", gfn);
    fprintf (fp, "{\n");
    fprintf (fp, "      int sti;\n");
    fprintf (fp, "      #ifdef ND_PARSING\n");
-   fprintf (fp, "      if (lt.lookahead.start > 0)             // In lookahead mode?\n");
+   fprintf (fp, "      if (parser->lt.lookahead.start > 0)             // In lookahead mode?\n");
    fprintf (fp, "      {\n");
-   fprintf (fp, "         sti = add_symbol (t, lt.lookahead.start, lt.lookahead.end);\n");
+   fprintf (fp, "         sti = parser->add_symbol(t, parser->lt.lookahead.start, parser->lt.lookahead.end);\n");
    fprintf (fp, "      }\n");
    fprintf (fp, "      else                                 // Regular mode of parsing.\n");
    fprintf (fp, "      #endif\n");
    fprintf (fp, "      {\n");
-   fprintf (fp, "         sti = add_symbol (t, lt.token.start, lt.token.end);\n");
+   fprintf (fp, "         sti = parser->add_symbol(t, parser->lt.token.start, parser->lt.token.end);\n");
    fprintf (fp, "      }\n");
    fprintf (fp, "      #ifdef SEMANTICS\n");
-   fprintf (fp, "      t = symbol[sti].term;                // Redefine terminal number?\n");
+   fprintf (fp, "      t = parser->symbol[sti].term;        // Redefine terminal number?\n");
    fprintf (fp, "      #endif\n");
    fprintf (fp, "    return sti;\n");                       // Return symbol-table index.\n");
    fprintf (fp, "}\n");

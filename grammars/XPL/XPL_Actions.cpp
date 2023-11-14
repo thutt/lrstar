@@ -27,30 +27,30 @@ void  XPL_term_actions(lrstar_parser *parser)
 
 #ifdef TERM_ACTIONS
 
-int   lrstar_term_actions::error(lrstar_parser *parser, int &t)
+int XPL_error(lrstar_parser *parser, int &t)
 {
-      if (lt.token.end == lt.token.start)        // Illegal character?
+      if (parser->lt.token.end == parser->lt.token.start)        // Illegal character?
       {
-         lt.token.end++;
+         parser->lt.token.end++;
       }
       return 0;
 }
 
-int   lrstar_term_actions::lookup(lrstar_parser *parser, int &t)             // Lookup in symbol table.
+int XPL_lookup(lrstar_parser *parser, int &t)             // Lookup in symbol table.
 {
       int sti;
       #ifdef ND_PARSING
-      if (lt.lookahead.start > 0)             // In lookahead mode?
+      if (parser->lt.lookahead.start > 0)             // In lookahead mode?
       {
-         sti = add_symbol (t, lt.lookahead.start, lt.lookahead.end);
+         sti = parser->add_symbol(t, parser->lt.lookahead.start, parser->lt.lookahead.end);
       }
       else                                 // Regular mode of parsing.
       #endif
       {
-         sti = add_symbol (t, lt.token.start, lt.token.end);
+         sti = parser->add_symbol(t, parser->lt.token.start, parser->lt.token.end);
       }
       #ifdef SEMANTICS
-      t = symbol[sti].term;                // Redefine terminal number?
+      t = parser->symbol[sti].term;        // Redefine terminal number?
       #endif
     return sti;
 }

@@ -239,13 +239,6 @@
          -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1
       };
 
-   // Terminal action function pointers ...
-      int (*lrstar_parser_tables::tact_func[2])(lrstar_parser *parser, int &t) =
-      {
-         lrstar_term_actions::error,
-         lrstar_term_actions::lookup
-      };
-
    // Node action function pointers ...
       int (*lrstar_parser_tables::nact_func[8]) (void* v) = 
       {

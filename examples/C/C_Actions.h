@@ -14,12 +14,8 @@ void C_term_actions(lrstar_parser *parser);
 #endif
 #ifdef TERM_ACTIONS
 
-      class lrstar_term_actions : public lrstar_parser
-      {
-         public:
-         static int error(lrstar_parser *parser, int &t);
-         static int lookup(lrstar_parser *parser, int &t);
-      };
+int C_error(lrstar_parser *parser, int &t);
+int C_lookup(lrstar_parser *parser, int &t);
 
 #endif
 #ifdef NODE_ACTIONS

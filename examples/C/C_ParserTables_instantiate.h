@@ -1036,13 +1036,17 @@ init_func_t C_init_funcs_[2] = {
 template<typename T_term_symb, typename T_head_symb, typename T_tact_name, typename T_node_name, typename T_text_str, typename T_head_numb, typename T_f_tail, typename T_tail, typename T_arga, typename T_argx, typename T_argy, typename T_Bm, typename T_Br, typename T_Bc, typename T_Bf, typename T_Tm, typename T_Tr, typename T_Tc, typename T_Nm, typename T_Nr, typename T_Nc, typename T_Rm, typename T_Rr, typename T_Rc, typename T_PL, typename T_nd_fterm, typename T_nd_term, typename T_nd_faction, typename T_nd_action, typename T_tact_numb, typename T_node_numb, typename T_nact_numb, typename T_reverse>
 init_func_t *templ_lrstar_parser_tables<T_term_symb, T_head_symb, T_tact_name, T_node_name, T_text_str, T_head_numb, T_f_tail, T_tail, T_arga, T_argx, T_argy, T_Bm, T_Br, T_Bc, T_Bf, T_Tm, T_Tr, T_Tc, T_Nm, T_Nr, T_Nc, T_Rm, T_Rr, T_Rc, T_PL, T_nd_fterm, T_nd_term, T_nd_faction, T_nd_action, T_tact_numb, T_node_numb, T_nact_numb, T_reverse>::init_func = &C_init_funcs_[0];
 
+extern int C_error(lrstar_parser *parser, int &t);
+extern int C_lookup(lrstar_parser *parser, int &t);
+// Terminal action function pointers ...
+tact_func_t C_tact_funcs_[2] = {
+   C_error,
+   C_lookup,
+};
+
 // Terminal action function pointers ...
 template<typename T_term_symb, typename T_head_symb, typename T_tact_name, typename T_node_name, typename T_text_str, typename T_head_numb, typename T_f_tail, typename T_tail, typename T_arga, typename T_argx, typename T_argy, typename T_Bm, typename T_Br, typename T_Bc, typename T_Bf, typename T_Tm, typename T_Tr, typename T_Tc, typename T_Nm, typename T_Nr, typename T_Nc, typename T_Rm, typename T_Rr, typename T_Rc, typename T_PL, typename T_nd_fterm, typename T_nd_term, typename T_nd_faction, typename T_nd_action, typename T_tact_numb, typename T_node_numb, typename T_nact_numb, typename T_reverse>
-int (*templ_lrstar_parser_tables<T_term_symb, T_head_symb, T_tact_name, T_node_name, T_text_str, T_head_numb, T_f_tail, T_tail, T_arga, T_argx, T_argy, T_Bm, T_Br, T_Bc, T_Bf, T_Tm, T_Tr, T_Tc, T_Nm, T_Nr, T_Nc, T_Rm, T_Rr, T_Rc, T_PL, T_nd_fterm, T_nd_term, T_nd_faction, T_nd_action, T_tact_numb, T_node_numb, T_nact_numb, T_reverse>::tact_func[2])(lrstar_parser *parser, int &t) =
-{
-   lrstar_term_actions::error,
-   lrstar_term_actions::lookup,
-};
+tact_func_t *templ_lrstar_parser_tables<T_term_symb, T_head_symb, T_tact_name, T_node_name, T_text_str, T_head_numb, T_f_tail, T_tail, T_arga, T_argx, T_argy, T_Bm, T_Br, T_Bc, T_Bf, T_Tm, T_Tr, T_Tc, T_Nm, T_Nr, T_Nc, T_Rm, T_Rr, T_Rc, T_PL, T_nd_fterm, T_nd_term, T_nd_faction, T_nd_action, T_tact_numb, T_node_numb, T_nact_numb, T_reverse>::tact_func = &C_tact_funcs_[0];
 
 // Node action function pointers ...
       int (*nact_func[106])(void *v) = {

@@ -39,8 +39,6 @@ class lrstar_parser;
          static const int8   PL[   255]       ; // Production length minus one.
 
          static const int8   tact_numb[    70]; // Terminal action numbers.
-
-         static int    (*tact_func[    1])(lrstar_parser *parser, int &t); // Terminal action function pointers.
       };
 
 //

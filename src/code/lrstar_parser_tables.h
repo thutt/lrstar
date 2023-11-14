@@ -4,8 +4,6 @@
 #if !defined(_LRSTAR_PARSER_TABLES_H_)
 #define _LRSTAR_PARSER_TABLES_H_
 
-class lrstar_parser;
-
 typedef void (*init_func_t)(lrstar_parser *parser);
 typedef int  (*tact_func_t)(lrstar_parser *parser, int &t);
 
@@ -139,8 +137,8 @@ public:
     static const T_nact_numb  *nact_numb;
     static const T_reverse    *reverse;
 
-    static init_func_t        *init_func;   /* Pointer to table. */
-    static int    (*tact_func[    2])(lrstar_parser *parser, int &t); // Terminal action function pointers.
+    static init_func_t        *init_func;   /* Pointer to init_func  table. */
+    static tact_func_t        *tact_func;   /* Pointer to tact_func table.  */
 //   nact_func[??]
 };
 #endif
