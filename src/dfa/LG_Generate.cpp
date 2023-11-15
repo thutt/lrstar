@@ -140,11 +140,11 @@ static void close_guard(FILE *fp)
 }
 
 
-static void
-instantiate_lexer(const char *dname,
-                  const char *fname,
-                  const char *cname,
-                  const char *lexer_instantiation)
+void
+LG::instantiate_lexer(const char *dname,
+                      const char *fname,
+                      const char *cname,
+                      const char *lexer_instantiation)
 {
    FILE *fp;
    char pathname[PATH_MAX];
@@ -162,6 +162,21 @@ instantiate_lexer(const char *dname,
    fprintf(fp, "// Include this file only once in a project.  It instantiates a "
            "lexer.\n");
 
+   if (optn [LG_DEBUG]) {
+      fprintf(fp, "      #define DEBUG_LEXER\n");
+   }
+   fprintf(fp, "#define MAX    0x80000000\n\n");
+
+   if (n_constants > 0) {
+      int i;
+      fprintf(fp, "enum terminal {\n");
+      for (i = 0; i < n_constants-1; i++) {
+         fprintf(fp, "   %s = %d,\n", Defcon_name[i], Defcon_value[i]);
+      }
+      fprintf(fp, "   %s = %d\n", Defcon_name[i], Defcon_value[i]);
+      fprintf(fp, "};\n\n");
+   }
+
    fprintf(fp, ("%s\n"
                 "const int %s::n_term_numb = %d;\n\n"
                 ""), template_decl(), lexer_decl(), data_types[ts_TermNumb].n_elem);
@@ -175,18 +190,95 @@ instantiate_lexer(const char *dname,
                 "const int %s::n_Tc = %d;\n\n"
                 ""), template_decl(), lexer_decl(), data_types[ts_Tc].n_elem);
 
+
+   fprintf(fp, "// Terminal number ...\n");
+   fprintf(fp, "static const %s term_numb_[%d] = { \n",
+           data_types[ts_TermNumb].type, N_states);
+   for (int i = 0; i < N_states; i++) {
+      if (i % 10 == 0) {
+         fprintf(fp, "\n   %5d, ", D_red[i]);
+      }
+      else fprintf(fp, "%5d, ", D_red[i]);
+   }
+   fprintf(fp, "\n};\n\n");
+
+
    fprintf(fp, ("%s\n"
                 "const T_term_numb *%s::term_numb = &term_numb_[0];\n\n"
                 ""), template_decl(), lexer_decl());
+
+
+   fprintf(fp, "// Terminal transition matrix ...\n");
+   fprintf(fp, "static const %s Tm_[%d] = {\n",
+           data_types[ts_Tm].type, T_size);
+   for (int i = 0; i < T_size; i++) {
+      if (i % 10 == 0) {
+         if (T_matrix[i] == INT_MAX) {
+            fprintf(fp, "\n   %5s, ", "  MAX");
+         } else {
+            fprintf(fp, "\n   %5d, ", T_matrix[i]);
+         }
+      } else {
+         if (T_matrix[i] == INT_MAX) {
+            fprintf(fp, "%5s, ", "  MAX");
+         } else {
+            fprintf(fp, "%5d, ", T_matrix[i]);
+         }
+      }
+   }
+   fprintf(fp, "\n};\n\n");
+
    fprintf(fp, ("%s\n"
                 "const T_Tm *%s::Tm = &Tm_[0];\n\n"
                 ""), template_decl(), lexer_decl());
-   fprintf(fp, ("%s\n"
-                "const T_Tr *%s::Tr = &Tr_[0];\n\n"
-                ""), template_decl(), lexer_decl());
-   fprintf(fp, ("%s\n"
-                "const T_Tc *%s::Tc = &Tc_[0];\n\n"
-                ""), template_decl(), lexer_decl());
+
+   if (optn[LG_TABL_MEDIUM])
+   {
+      fprintf(fp, "// Terminal transition matrix row ...\n");
+      fprintf(fp, "static const %s Tr_[%d] = { \n",
+              data_types[ts_Tr].type, tt_states);
+      for (int i = 0; i < tt_states; i++) {
+         if (i % 10 == 0) {
+            fprintf(fp, "\n   %5d, ", T_row[i]);
+         } else {
+            fprintf(fp, "%5d, ", T_row[i]);
+         }
+      }
+      fprintf(fp, "\n};\n\n");
+      fprintf(fp, ("%s\n"
+                   "const T_Tr *%s::Tr = &Tr_[0];\n\n"
+                   ""), template_decl(), lexer_decl());
+   } else {
+      fprintf(fp, ("%s\n"
+                   "const T_Tr *%s::Tr = 0;\n\n"
+                   ""), template_decl(), lexer_decl());
+   }
+
+
+   if (optn[LG_TABL_MEDIUM])
+   {
+      fprintf(fp, "// Terminal transition matrix column ...\n");
+      fprintf(fp, "static const %s Tc_[%d] = {\n",
+              data_types[ts_Tc].type, N_terms);
+      for (int i = 0; i < N_terms; i++) {
+         if (i % 10 == 0) {
+            fprintf(fp, "\n%5d, ", T_col[i]);
+         } else {
+            fprintf(fp, "%5d, ", T_col[i]);
+         }
+      }
+      fprintf(fp, "\n};\n\n");
+
+      fprintf(fp, ("%s\n"
+                   "const T_Tc *%s::Tc = &Tc_[0];\n\n"
+                   ""), template_decl(), lexer_decl());
+
+   } else {
+      fprintf(fp, ("%s\n"
+                   "const T_Tc *%s::Tc = 0;\n\n"
+                   ""), template_decl(), lexer_decl());
+   }
+
 
    fprintf(fp, ("%s\n"
                 "Token %s::token;\n\n"), template_decl(), lexer_decl());
@@ -238,147 +330,21 @@ typedef_lexer(const char *dname,
 }
 
 
-static void
-generate_lexer(const char *dname,
-               const char *fname,
-               const char *cname)
-{
-   char lexer_instantiation[128];
-
-   lexer_inst(lexer_instantiation, 128);
-   instantiate_lexer(dname, fname, cname, lexer_instantiation);
-   typedef_lexer(dname, fname, cname, lexer_instantiation);
-
-}
-
-
 void LG::GenerateLexerDefines ()
 {
-   FILE       *tables;
-   FILE       *header;
-   char        filename_hpp[PATH_MAX];
-   char        filename_h[PATH_MAX];
    const char *lexer_class = "_LexerTables";
-
-   create_filename(filename_h, PATH_MAX, gdn, gfn, lexer_class, "", ".h");
-
-   if (chmod (filename_h, S_IWRITE) == 0) // File can be written ?
-   {
-      if (unlink (filename_h) != 0) // Delete it?
-      {
-         if (++n_errors == 1) prt_log ("\n");
-         prt_log ("Output file '%s' cannot be written!\n", filename_h);
-         Quit();
-      }
-   }
-
-   header = fopen (filename_h, "w");
-   if (header == NULL)
-   {
-      if (++n_errors == 1) prt_log ("\n");
-      prt_log ("Output file '%s' cannot be written!\n", filename_h);
-      Quit();
-   }
-   prt_logonly ("Generating: %s\n", filename_h);
-
-   fprintf (header, "\n");
-   fprintf (header, "////////////////////////////////////////////////////////////////////////////////\n");
-   fprintf (header, "//\n");
-   fprintf (header, "//    %s (generated by %s %s)\n", filename_h, program, version);
-   fprintf (header, "\n");
-
-   fprintf (header, "      #pragma once\n\n");
-
-   fprintf (header, "      #undef  DEBUG_LEXER\n\n");    // In case of multiple lexers.
-
-   if (optn [LG_DEBUG]) fprintf (header, "      #define DEBUG_LEXER\n");
-
-   fprintf (header, "\n/*\n");
-
-   create_filename(filename_hpp, PATH_MAX, gdn, gfn, lexer_class, "", ".hpp");
-
-   if (chmod (filename_hpp, S_IWRITE) == 0) // File can be written ?
-   {
-      if (unlink (filename_hpp) != 0) // Delete it?
-      {
-         if (++n_errors == 1) prt_log ("\n");
-         prt_log ("Output file '%s' cannot be written!\n", filename_hpp);
-         Quit();
-      }
-   }
-
-   tables = fopen (filename_hpp, "w");
-   if (tables == NULL)
-   {
-      if (++n_errors == 1) prt_log ("\n");
-      prt_log ("Output file '%s' cannot be written!\n", filename_hpp);
-      Quit();
-   }
-   prt_logonly ("Generating: %s\n\n", filename_hpp);
-
-   fprintf (tables, "\n");
-   fprintf (tables, "////////////////////////////////////////////////////////////////////////////////////////////////////\n");
-   fprintf (tables, "//\n");
-   fprintf (tables, "//    %s (generated by %s %s)\n\n", filename_hpp, program, version);
-
-   if (lrstar_windows) {
-      fprintf (tables, "      #define uint   unsigned int\n");
-      fprintf (tables, "      #define uchar  unsigned char\n");
-      fprintf (tables, "      #define ushort unsigned short\n");
-   }
-   fprintf (tables, "      #define MAX    0x80000000\n\n");
+   char        lexer[128];
 
    // T_matrix ...
 
    data_types[ts_Tm].type   = get_typestr (T_matrix, T_size);
    data_types[ts_Tm].n_elem = T_size;
-   fprintf (header, "      static const %-6s Tm_[%6d]        ; "
-            "// Terminal transition matrix.\n",
-            data_types[ts_Tm].type, T_size);
-   fprintf (tables, "   // Terminal transition matrix ...\n");
-   fprintf (tables, "      static const %s Tm_[%d] = \n",
-            data_types[ts_Tm].type, T_size);
-   fprintf (tables, "      {");
-   for (int i = 0; i < T_size; i++)
-   {
-      if (i % 20 == 0)
-      {
-         if (i > 0) fprintf (tables, ",");
-         if (T_matrix[i] == INT_MAX)
-            fprintf (tables, "\n      %5s", "  MAX");
-         else fprintf (tables, "\n      %5d", T_matrix[i]);
-      }
-      else
-      {
-         if (T_matrix[i] == INT_MAX)
-            fprintf (tables, ",%5s", "  MAX");
-         else fprintf (tables, ",%5d", T_matrix[i]);
-      }
-   }
-   fprintf (tables, "\n      };\n\n");
 
    // T_matrix row ...
    if (optn[LG_TABL_MEDIUM])
    {
       data_types[ts_Tr].type = get_typestr (T_row, tt_states);
       data_types[ts_Tr].n_elem = tt_states;
-      fprintf (header, "      static const %-6s Tr_[%6d]        ; "
-               "// Terminal transition matrix row.\n",
-               data_types[ts_Tr].type, tt_states);
-      fprintf (tables, "   // Terminal transition matrix row ...\n");
-      fprintf (tables, "      static const %s Tr_[%d] = \n",
-               data_types[ts_Tr].type, tt_states);
-      fprintf (tables, "      {");
-      for (int i = 0; i < tt_states; i++)
-      {
-         if (i % 20 == 0)
-         {
-            if (i > 0) fprintf (tables, ",");
-            fprintf (tables, "\n      %5d", T_row[i]);
-         }
-         else fprintf (tables, ",%5d", T_row[i]);
-      }
-      fprintf (tables, "\n      };\n\n");
    }
 
    // T_matrix column ...
@@ -386,23 +352,6 @@ void LG::GenerateLexerDefines ()
    {
       data_types[ts_Tc].type = get_typestr (T_col, N_terms);
       data_types[ts_Tc].n_elem = N_terms;
-      fprintf (header, "      static const %-6s Tc_[%6d]        ; "
-               "// Terminal transition matrix column.\n",
-               data_types[ts_Tc].type, N_terms);
-      fprintf (tables, "   // Terminal transition matrix column ...\n");
-      fprintf (tables, "      static const %s Tc_[%d] = \n",
-               data_types[ts_Tc].type, N_terms);
-      fprintf (tables, "      {");
-      for (int i = 0; i < N_terms; i++)
-      {
-         if (i % 20 == 0)
-         {
-            if (i > 0) fprintf (tables, ",");
-            fprintf (tables, "\n      %5d", T_col[i]);
-         }
-         else fprintf (tables, ",%5d", T_col[i]);
-      }
-      fprintf (tables, "\n      };\n\n");
    }
 
    // Terminal Numbers (one for for each state) ...
@@ -410,57 +359,11 @@ void LG::GenerateLexerDefines ()
    {
       data_types[ts_TermNumb].type = get_typestr (D_red, N_states);
       data_types[ts_TermNumb].n_elem = N_states;
-      fprintf (header, "      static const %-6s term_numb_[%6d] ; "
-               "// Terminal number.\n",
-               data_types[ts_TermNumb].type, N_states);
-      fprintf (tables, "   // Terminal number ...\n");
-      fprintf (tables, "      static const %s term_numb_[%d] = \n",
-               data_types[ts_TermNumb].type, N_states);
-      fprintf (tables, "      {");
-      for (int i = 0; i < N_states; i++)
-      {
-         if (i % 20 == 0)
-         {
-            if (i > 0) fprintf (tables, ",");
-            fprintf (tables, "\n      %5d", D_red[i]);
-         }
-         else fprintf (tables, ",%5d", D_red[i]);
-      }
-      fprintf (tables, "\n      };\n\n");
    }
 
-   fprintf (tables, "#include \"%s_LexerTables_instantiate.h\"\n", gfn);
-
-   fprintf (tables, "//\n");
-   fprintf (tables, "////////////////////////////////////////////////////////////////////////////////////////////////////\n");
-   fprintf (tables, "\n");
-
-   generate_lexer(gdn, gfn, lexer_class);
-
-   fclose (tables);
-   chmod (filename_hpp, S_IREAD); // Make output file read-only.
-
-   fprintf (header, "*/\n\n");
-   if (n_constants > 0)
-   {
-      int i;
-      fprintf (header,
-               "      enum terminal\n"
-               "      {\n");
-      for (i = 0; i < n_constants-1; i++)
-      {
-         fprintf (header, "         %s = %d,\n", Defcon_name[i], Defcon_value[i]);
-      }
-      fprintf (header, "         %s = %d\n", Defcon_name[i], Defcon_value[i]);
-      fprintf (header,
-               "      };\n\n");
-   }
-
-   fprintf (header, "//\n");
-   fprintf (header, "////////////////////////////////////////////////////////////////////////////////\n");
-
-   fclose (header);
-   chmod (filename_h, S_IREAD); // Make output file read-only.
+   lexer_inst(lexer, 128);
+   LG::instantiate_lexer(gdn, gfn, lexer_class, lexer);
+   typedef_lexer(gdn, gfn, lexer_class, lexer);
 }
 
 //                                                                                                 //

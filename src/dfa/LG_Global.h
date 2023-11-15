@@ -53,6 +53,10 @@ public:
    static void GenerateLexerTables (char*);
    static void GenerateLexerCode   (char*);
    static void DELETE_LEX_FILE     ();
+   static void instantiate_lexer(const char *dname,
+                                 const char *fname,
+                                 const char *cname,
+                                 const char *lexer_instantiation);
 };
 
 /* Local Variables:      */

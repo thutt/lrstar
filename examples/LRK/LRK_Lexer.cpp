@@ -4,8 +4,7 @@
 
 #include "lrstar_basic_defs.h"
 #include "lrstar_lexer.h"
-#include "LRK_LexerTables.h"
-#include "LRK_LexerTables.hpp"
+#include "LRK_LexerTables_instantiate.h"
 
 //                                                                           //
 ///////////////////////////////////////////////////////////////////////////////

@@ -4,8 +4,7 @@
 
 #include "lrstar_basic_defs.h"
 #include "lrstar_lexer.h"
-#include "Vba_LexerTables.h"
-#include "Vba_LexerTables.hpp"
+#include "Vba_LexerTables_instantiate.h"
 
 //                                                                           //
 ///////////////////////////////////////////////////////////////////////////////

@@ -4,8 +4,7 @@
 
 #include "lrstar_basic_defs.h"
 #include "lrstar_lexer.h"
-#include "XPL_LexerTables.h"
-#include "XPL_LexerTables.hpp"
+#include "XPL_LexerTables_instantiate.h"
 
 //                                                                           //
 ///////////////////////////////////////////////////////////////////////////////

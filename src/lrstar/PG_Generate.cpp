@@ -1494,8 +1494,7 @@ static void lexer_cpp_fn(FILE       *fp,
    if (lrstar_linux) {
       fprintf (fp, "#include \"lrstar_lexer.h\"\n");
    }
-   fprintf (fp, ("#include \"%s_LexerTables.h\"\n"
-                 "#include \"%s_LexerTables.hpp\"\n"), grammar, grammar);
+   fprintf (fp, ("#include \"%s_LexerTables_instantiate.h\"\n"), grammar);
    if (lrstar_windows) {
       fprintf (fp, "#include \"../../code/lexer.h\"\n");
       fprintf (fp, "#include \"../../code/lexer.cpp\"\n");
