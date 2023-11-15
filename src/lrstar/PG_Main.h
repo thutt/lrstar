@@ -12,7 +12,6 @@
    PF(head_symb)                                \
    PF(tact_name)                                \
    PF(node_name)                                \
-   PF(text_str)                                 \
    PF(head_numb)                                \
    PF(f_tail)                                   \
    PF(tail)                                     \

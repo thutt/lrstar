@@ -455,12 +455,6 @@ void PG_Main::instantiate_node_name_data(FILE *fp)
 }
 
 
-void PG_Main::instantiate_text_str_data(FILE *fp)
-{
-   assert(false);               /* XXX this is not used? */
-}
-
-
 void PG_Main::instantiate_head_numb_data(FILE *fp)
 {
    fprintf(fp, "// Head symbol numbers for the productions.\n");
@@ -1133,9 +1127,6 @@ void  PG_Main::GenerateParserTables ()
 
    data_types[ts_T_node_name].type   = "const char *";
    data_types[ts_T_node_name].n_elem = N_nodes;
-
-   data_types[ts_T_text_str].type    = "const char *";
-   data_types[ts_T_text_str].n_elem  = N_strings;
 
    nd_optimize ();
 

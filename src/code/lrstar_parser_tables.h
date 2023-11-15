@@ -10,7 +10,6 @@ template<typename T_term_symb,
          typename T_head_symb,
          typename T_tact_name,
          typename T_node_name,
-         typename T_text_str,
 
          typename T_head_numb,
          typename T_f_tail,
@@ -66,7 +65,6 @@ public:
     static const int n_head_symb; // Nonterminal symbols of the grammar.
     static const int n_tact_name; // Terminal action names in grammar.
     static const int n_node_name; // Node names found in grammar.
-    static const int n_text_str; // Text strings found in grammar.
 
     static const int n_head_numb; // Head symbol number for production.
     static const int n_f_tail; // First tail in a production.
@@ -110,7 +108,6 @@ public:
     static const T_head_symb  *head_symb; // Nonterminal symbols of the grammar.
     static const T_tact_name  *tact_name; // Terminal action names in grammar.
     static const T_node_name  *node_name; // Node names found in grammar.
-    static const T_text_str   *text_str; // Text strings found in grammar.
 
     static const T_head_numb  *head_numb; // Head symbol number for production.
     static const T_f_tail     *f_tail; // First tail in a production.
