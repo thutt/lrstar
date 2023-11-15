@@ -32,14 +32,14 @@ private:
     static const T_Tc        *Tc;
 
 public:
-   static Token   token;               // Token being read.
-   static Token   lookahead;           // Lookahead being read.
-   static int     tab;                 // Tab setting in input file.
-   static int     linenumb;            // Line number in input file.
-   static int     linenumb_printed;    // Line number already printed.
-   static int     lookahead_linenumb;  // Line number in input file.
+    Token   token;               // Token being read.
+    Token   lookahead;           // Lookahead being read.
+    int     tab;                 // Tab setting in input file.
+    int     linenumb;            // Line number in input file.
+    int     linenumb_printed;    // Line number already printed.
+    int     lookahead_linenumb;  // Line number in input file.
 
-   static void init_lexer(char *input_start, int tab_setting)
+   void init_lexer(char *input_start, int tab_setting)
    {
       linenumb          = 0;
       linenumb_printed  = 0;
@@ -51,7 +51,7 @@ public:
    }
 
 
-   static int get_token()
+   int get_token()
    {
       int x, y;                     // State, next state.
       do {
@@ -73,7 +73,7 @@ public:
       return term_numb[x];       // Return token_number.
    }
 
-   static char *untabify(char *ls)
+   char *untabify(char *ls)
    {
       if (debug_lexer_) {
          int          ns;
@@ -114,7 +114,7 @@ public:
    }
 
 
-   static char *untabify(char *ls, char *&ts)
+   char *untabify(char *ls, char *&ts)
    {
       // ls = line start.
       // ts = token start within this line.;
@@ -161,7 +161,7 @@ public:
    }
 
 
-   static void  prt_line()
+   void  prt_line()
    {
 #if 1
       assert(false);
@@ -189,7 +189,7 @@ public:
    }
 
 
-   static int get_lookahead()
+   int get_lookahead()
    {
       int x, y;                     // State, next state.
       do {

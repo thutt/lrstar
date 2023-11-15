@@ -40,7 +40,7 @@ int LRK_lookup(lrstar_parser *parser, int &t)             // Lookup in symbol ta
 {
       int sti;
       #ifdef ND_PARSING
-      if (parser->lt.lookahead.start > 0)             // In lookahead mode?
+      if (parser->lt.lookahead.start != 0)             // In lookahead mode?
       {
          sti = parser->add_symbol(t, parser->lt.lookahead.start, parser->lt.lookahead.end);
       }
@@ -50,7 +50,7 @@ int LRK_lookup(lrstar_parser *parser, int &t)             // Lookup in symbol ta
          sti = parser->add_symbol(t, parser->lt.token.start, parser->lt.token.end);
       }
       #ifdef SEMANTICS
-      t = parser->symbol[sti].term;                // Redefine terminal number?
+      t = parser->symbol[sti].term;        // Redefine terminal number?
       #endif
     return sti;
 }

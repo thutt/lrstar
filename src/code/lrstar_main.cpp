@@ -122,7 +122,8 @@ int   main (int na, char **arg)
    output   = Output.filedesc;
 
    // Parse the input file ...
-   rc = lrstar_parser::init_parser (Input.path, Input.input_start, 100000, 1000000);
+   rc = generated_parser.init_parser(Input.path, Input.input_start,
+                                     100000, 1000000);
    if (rc <= 0)
    {
       nl = 0;
@@ -132,9 +133,9 @@ int   main (int na, char **arg)
    else
    {
       time1 = clock();  // Get start time.
-      nl = lrstar_parser::parse ();
+      nl = generated_parser.parse ();
       time2 = clock (); // Get end time.
-      lrstar_parser::term_parser ();
+      generated_parser.term_parser ();
       if (nl <= 0)
       {
          nl = -nl;
@@ -152,8 +153,8 @@ int   main (int na, char **arg)
    thou -= sec * 1000;
 
    printf ("\nSuccess ...\n");
-   printf ("%10s symbols in symbol table.\n",  number (lrstar_parser::n_symbols));
-   printf ("%10s nodes in AST.\n",             number (lrstar_parser::n_nodes));
+   printf ("%10s symbols in symbol table.\n",  number (generated_parser.n_symbols));
+   printf ("%10s nodes in AST.\n",             number (generated_parser.n_nodes));
    printf ("%10s lines read in input file.\n", number (nl));
    printf ("%10s lines per second.\n",         number (nlps));
    printf ("%6d.%03d seconds.\n",              sec, thou);

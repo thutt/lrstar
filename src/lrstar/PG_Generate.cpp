@@ -1449,7 +1449,7 @@ static void actions_cpp_fn(FILE       *fp,
    fprintf (fp, "{\n");
    fprintf (fp, "      int sti;\n");
    fprintf (fp, "      #ifdef ND_PARSING\n");
-   fprintf (fp, "      if (parser->lt.lookahead.start > 0)             // In lookahead mode?\n");
+   fprintf (fp, "      if (parser->lt.lookahead.start != 0)             // In lookahead mode?\n");
    fprintf (fp, "      {\n");
    fprintf (fp, "         sti = parser->add_symbol(t, parser->lt.lookahead.start, parser->lt.lookahead.end);\n");
    fprintf (fp, "      }\n");
@@ -1518,6 +1518,7 @@ static void main_cpp_fn(FILE       *fp,
                  "#include \"%s_LexerTables_typedef.h\"\n"
                  "#include \"%s_Parser.h\"\n"), grammar, grammar);
    if (lrstar_linux) {
+      fprintf(fp, "\nlrstar_parser generated_parser;\n\n");
       fprintf (fp, "#include \"lrstar_main.cpp\"\n");
    } else {
       assert(lrstar_windows);

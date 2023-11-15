@@ -6,6 +6,8 @@
 
 #include "LRK_Parser.h"
 
+class lrstar_parser;
+
 #ifdef ACTIONS
 
 void LRK_init_actions(lrstar_parser *parser);
@@ -19,6 +21,11 @@ int LRK_lookup(lrstar_parser *parser, int &t);
 
 #endif
 #ifdef NODE_ACTIONS
+
+      class lrstar_node_actions : public lrstar_parser
+      {
+         public:
+      };
 
 #endif
 

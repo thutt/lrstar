@@ -1174,24 +1174,6 @@ static const uint8 Tc_[256] = {
 template<typename T_term_numb, typename T_Tm, typename T_Tr, typename T_Tc>
 const T_Tc *templ_lrstar_lexer<T_term_numb, T_Tm, T_Tr, T_Tc>::Tc = &Tc_[0];
 
-template<typename T_term_numb, typename T_Tm, typename T_Tr, typename T_Tc>
-Token templ_lrstar_lexer<T_term_numb, T_Tm, T_Tr, T_Tc>::token;
-
-template<typename T_term_numb, typename T_Tm, typename T_Tr, typename T_Tc>
-Token templ_lrstar_lexer<T_term_numb, T_Tm, T_Tr, T_Tc>::lookahead;
-
-template<typename T_term_numb, typename T_Tm, typename T_Tr, typename T_Tc>
-int templ_lrstar_lexer<T_term_numb, T_Tm, T_Tr, T_Tc>::tab;
-
-template<typename T_term_numb, typename T_Tm, typename T_Tr, typename T_Tc>
-int templ_lrstar_lexer<T_term_numb, T_Tm, T_Tr, T_Tc>::linenumb;
-
-template<typename T_term_numb, typename T_Tm, typename T_Tr, typename T_Tc>
-int templ_lrstar_lexer<T_term_numb, T_Tm, T_Tr, T_Tc>::linenumb_printed;
-
-template<typename T_term_numb, typename T_Tm, typename T_Tr, typename T_Tc>
-int templ_lrstar_lexer<T_term_numb, T_Tm, T_Tr, T_Tc>::lookahead_linenumb;
-
 template class templ_lrstar_lexer<int8, uint8, uint16, uint8>;
 
 #endif

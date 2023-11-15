@@ -279,25 +279,6 @@ LG::instantiate_lexer(const char *dname,
                    ""), template_decl(), lexer_decl());
    }
 
-
-   fprintf(fp, ("%s\n"
-                "Token %s::token;\n\n"), template_decl(), lexer_decl());
-
-   fprintf(fp, ("%s\n"
-                "Token %s::lookahead;\n\n"), template_decl(), lexer_decl());
-
-   fprintf(fp, ("%s\n"
-                "int %s::tab;\n\n"), template_decl(), lexer_decl());
-
-   fprintf(fp, ("%s\n"
-                "int %s::linenumb;\n\n"), template_decl(), lexer_decl());
-
-   fprintf(fp, ("%s\n"
-                "int %s::linenumb_printed;\n\n"), template_decl(), lexer_decl());
-
-   fprintf(fp, ("%s\n"
-                "int %s::lookahead_linenumb;\n\n"), template_decl(), lexer_decl());
-
    fprintf(fp, "template class %s;\n", lexer_instantiation);
    close_guard(fp);
    fclose(fp);
