@@ -66,18 +66,10 @@ private:
    static void   DeleteLexFile ();
    static void   OutputLexFile ();
 
-private:
-   static void generate_tables(const char *dname,
-                               const char *fname,
-                               const char *cname);
-   static void instantiate_tables(const char *dname,
-                                  const char *fname,
-                                  const char *cname,
-                                  const char *parser);
+public:
    static void typedef_tables(const char *dname,
                               const char *fname,
-                              const char *cname,
-                              const char *parser);
+                              const char *cname);
    static void instantiate_fields(FILE *fp);
    static void instantiate_constants(FILE *fp);
 #define PFL(pfl_) PF(pfl_)

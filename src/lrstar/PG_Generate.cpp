@@ -1037,7 +1037,6 @@ PG_Main::instantiate_fields(FILE *fp)
                  #field_,                                         \
                  parser_tables_decl(),                            \
                  #field_ "_");                                    \
-         fflush(fp); /* XXX remove this */                        \
       } else {                                                    \
          fprintf(fp, ("%s\n"                                      \
                       "const T_%s *%s::" #field_ " = 0;\n\n"      \
@@ -1057,45 +1056,15 @@ PG_Main::instantiate_fields(FILE *fp)
 
 
 void
-PG_Main::instantiate_tables(const char  *dname,
-                            const char  *fname,
-                            const char  *cname,
-                            const char  *parser_instantiation)
-{
-   FILE *fp;
-   char pathname[PATH_MAX];
-
-   create_filename(pathname, PATH_MAX, dname, fname, cname,
-                   "_instantiate", ".h");
-
-   fp = fopen(pathname, "w");
-   if (fp == NULL) {
-      prt_log("Output file '%s' cannot be created.\n", pathname);
-      Quit();
-   }
-
-   open_guard(fp, fname, cname, "INSTANTIATE");
-   fprintf(fp,
-           "// Include this file only once in a project.\n"
-           "//  It instantiates a parser.\n");
-
-   instantiate_field_lengths(fp);
-   instantiate_constants(fp);
-   instantiate_fields(fp);
-   close_guard(fp);
-   fclose(fp);
-}
-
-
-void
 PG_Main::typedef_tables(const char *dname,
                         const char *fname,
-                        const char *cname,
-                        const char *tables_instantiation)
+                        const char *cname)
 {
    FILE *fp;
+   char parser[512];
    char pathname[PATH_MAX];
 
+   parser_tables_inst(parser, sizeof(parser) / sizeof(parser[0]));
    create_filename(pathname, PATH_MAX, dname, fname, cname,
                    "_typedef", ".h");
 
@@ -1107,22 +1076,9 @@ PG_Main::typedef_tables(const char *dname,
 
    open_guard(fp, fname, cname, "TYPEDEF");
    fprintf(fp, "#include \"lrstar_parser_tables.h\"\n");
-   fprintf(fp, "typedef %s parser_tables_t;\n", tables_instantiation);
+   fprintf(fp, "typedef %s parser_tables_t;\n", parser);
    close_guard(fp);
    fclose(fp);
-}
-
-
-void
-PG_Main::generate_tables(const char  *dname,
-                         const char  *fname,
-                         const char  *cname)
-{
-   char parser[512];
-
-   parser_tables_inst(parser, sizeof(parser) / sizeof(parser[0]));
-   instantiate_tables(dname, fname, cname, parser);
-   typedef_tables(dname, fname, cname, parser);
 }
 
 
@@ -1382,7 +1338,7 @@ void  PG_Main::GenerateParserTables ()
       set_data_type_void(ts_T_nact_numb);
       set_data_type_void(ts_T_reverse);
    }
-   generate_tables(gdn, gfn, name);
+   typedef_tables(gdn, gfn, name);
 };
 
 
@@ -1583,22 +1539,26 @@ static void main_cpp_fn(FILE       *fp,
 }
 
 
-static void parser_cpp_fn(FILE       *fp,
-                          const char *pathname,
-                          const char *grammar,
-                          const char *fname)
+static void
+parser_cpp_fn(FILE       *fp,
+              const char *pathname,
+              const char *grammar,
+              const char *fname)
 {
-   fprintf (fp, "\n");
-   fprintf (fp, "///////////////////////////////////////////////////////////////////////////////\n");
-   fprintf (fp, "//                                                                           //\n");
-   fprintf (fp, "\n");
+   char parser[512];
+
+   parser_tables_inst(parser, sizeof(parser) / sizeof(parser[0]));
+
    fprintf (fp, ("#include \"lrstar_basic_defs.h\"\n"
                  "#include \"lrstar_parser_tables.h\"\n"
                  "#include \"%s_LexerTables_typedef.h\"\n"
                  "#include \"%s_Parser.h\"\n"
-                 "#include \"%s_Actions.h\"\n"
-                 "#include \"%s_ParserTables_instantiate.h\"\n"),
-            grammar, grammar, grammar, grammar);
+                 "#include \"%s_Actions.h\"\n"),
+            grammar, grammar, grammar);
+
+   instantiate_field_lengths(fp);
+   PG_Main::instantiate_constants(fp);
+   PG_Main::instantiate_fields(fp);
 
    if (lrstar_linux) {
       fprintf (fp, "#include \"lrstar_parser.cpp\"\n");

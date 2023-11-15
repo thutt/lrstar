@@ -85,8 +85,8 @@ int   PG_Main::Main (int na, char** arg)
                      if (optn[PG_PARSERTABLES])
                      {
                         CreateTables();
-                        GenerateOtherFiles ();
                         GenerateParserTables ();
+                        GenerateOtherFiles ();
                      }
                   }
                   PrintStats();
