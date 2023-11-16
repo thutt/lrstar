@@ -3,7 +3,8 @@
 //                                                                                                 //
 //    LRSTAR Parser Header
 
-#pragma once
+#if !defined(_LRSTAR_PARSER_H_)
+#define _LRSTAR_PARSER_H_
 
 #define  STKSIZE          100       // Parser-stack size.
 
@@ -72,12 +73,16 @@ public:
 
 
 class lrstar_user_data_t {
+   /* Extend this class for storing user data in the parser.
+    * Use 'user_data' field.
+    */
 };
 
 class lrstar_parser
 {
 public:
    lrstar_user_data_t *user_data;
+
 
 public:
    lexer_t         lt;   /* Lexer tables. */
@@ -188,9 +193,8 @@ public:
    void    traverse    (char* indent, Node* n);
    void    print_node  (char* indent, Node* n);
    void    tracer      (Node* n);
-
 };
-
+#endif
 /* Local Variables:      */
 /* mode: c               */
 /* c-basic-offset: 3     */
