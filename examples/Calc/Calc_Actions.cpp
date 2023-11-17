@@ -19,8 +19,6 @@ void    Calc_term_actions(lrstar_parser *parser)
 }
 
 
-#ifdef TERM_ACTIONS
-
 int Calc_error(lrstar_parser *parser, int &t)
 {
     if (parser->lt.token.end == parser->lt.token.start) // Illegal character?
@@ -48,8 +46,6 @@ int Calc_lookup(lrstar_parser *parser, int &t) // Lookup in symbol table.
 #endif
     return sti;                 // Return symbol-table index.
 }
-
-#endif
 
 
 int Calc_goal_ (lrstar_parser *parser, Node *v)

@@ -15,8 +15,6 @@ void  Typedef_term_actions(lrstar_parser *parser)
 }
 
 
-#ifdef TERM_ACTIONS
-
 int Typedef_error(lrstar_parser *parser, int &t)
 {
       if (parser->lt.token.end == parser->lt.token.start)        // Illegal character?
@@ -44,5 +42,3 @@ int Typedef_lookup(lrstar_parser *parser, int &t)             // Lookup in symbo
       #endif
     return sti;
 }
-
-#endif

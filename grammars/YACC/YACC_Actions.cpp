@@ -15,8 +15,6 @@ void  YACC_term_actions(lrstar_parser *parser)
 }
 
 
-#ifdef TERM_ACTIONS
-
 int YACC_error(lrstar_parser *parser, int &t)
 {
       if (parser->lt.token.end == parser->lt.token.start)        // Illegal character?
@@ -44,5 +42,3 @@ int YACC_lookup(lrstar_parser *parser, int &t)             // Lookup in symbol t
       #endif
     return sti;
 }
-
-#endif

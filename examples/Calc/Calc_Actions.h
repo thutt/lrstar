@@ -1,12 +1,8 @@
 #pragma once
 #include "Calc_Parser.h"
 
-#ifdef TERM_ACTIONS
-
 int Calc_error(lrstar_parser *parser, int &t);
 int Calc_lookup(lrstar_parser *parser, int &t);
-
-#endif
 
 int Calc_eq_      (lrstar_parser *parser, Node *n);
 int Calc_ne_      (lrstar_parser *parser, Node *n);

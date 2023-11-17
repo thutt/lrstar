@@ -15,8 +15,6 @@ void  Fortran_term_actions(lrstar_parser *parser)
 }
 
 
-#ifdef TERM_ACTIONS
-
 int Fortran_error(lrstar_parser *parser, int &t)
 {
       if (parser->lt.token.end == parser->lt.token.start)        // Illegal character?
@@ -44,5 +42,4 @@ int Fortran_lookup(lrstar_parser *parser, int &t)             // Lookup in symbo
       #endif
     return sti;
 }
-
-#endif
+o

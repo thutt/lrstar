@@ -9,9 +9,5 @@ void Zeus_init_actions(lrstar_parser *parser);
 void Zeus_term_actions(lrstar_parser *parser);
 
 
-#ifdef TERM_ACTIONS
-
 int Zeus_error(lrstar_parser *parser, int &t);
 int Zeus_lookup(lrstar_parser *parser, int &t);
-
-#endif

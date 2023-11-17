@@ -15,8 +15,6 @@ void  Ada_term_actions(lrstar_parser *parser)
 }
 
 
-#ifdef TERM_ACTIONS
-
 int Ada_error(lrstar_parser *parser, int &t)
 {
       if (parser->lt.token.end == parser->lt.token.start)        // Illegal character?
@@ -44,6 +42,3 @@ int Ada_lookup(lrstar_parser *parser, int &t)             // Lookup in symbol ta
       #endif
     return sti;
 }
-
-#endif
-

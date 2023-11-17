@@ -91,6 +91,7 @@ private:
    bool insensitive;            /* Case insensitive parser.   */
    bool make_ast;               /* Build AST.                 */
    bool node_actions;           /* Node Actions.              */
+   bool term_actions;           /* Term Actions.              */
 
 public:
    lrstar_user_data_t *user_data;
@@ -210,12 +211,14 @@ public:
                  bool                actions_,
                  bool                insensitive_,
                  bool                make_ast_,
-                 bool                node_actions_) :
+                 bool                node_actions_,
+                 bool                term_actions_) :
          user_data(user_data_),
          actions(actions_),
          insensitive(insensitive),
          make_ast(make_ast_),
-         node_actions(node_actions_)
+         node_actions(node_actions_),
+         term_actions(term_actions_)
    {
    }
 

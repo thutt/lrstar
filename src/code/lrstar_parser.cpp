@@ -109,12 +109,13 @@ int   lrstar_parser::parse ()
    x = 0;                                          // State = 0 to start.
 Read:
    T = t = lt.get_token ();                        // Get incoming token.
-#ifdef TERM_ACTIONS
-   if (pt.tact_numb[t] >= 0)                          // If token action ...
-      lt.token.sti = (*pt.tact_func[pt.tact_numb[t]])(this, t);  // Call token-action function.
-#else
-   lt.token.sti = -t;
-#endif
+   if (term_actions) {
+      if (pt.tact_numb[t] >= 0) {                  // If token action ...
+         lt.token.sti = (*pt.tact_func[pt.tact_numb[t]])(this, t);  // Call token-action function.
+      }
+   } else {
+      lt.token.sti = -t;
+   }
 #ifdef EXPECTING
    RS = RSstart;
    RS->state = x;
@@ -406,10 +407,12 @@ int   lrstar_parser::nd_parser (int x, int t, int na)
    {
       total = 0;
       LA = lt.get_lookahead();
-#ifdef TERM_ACTIONS
-      if (pt.tact_numb[LA] >= 0)                // If term action ...
-         (*pt.tact_func[pt.tact_numb[LA]])(this, LA);   // Call term-action function.
-#endif
+      if (term_actions) {
+         if (pt.tact_numb[LA] >= 0) {                // If term action ...
+            (*pt.tact_func[pt.tact_numb[LA]])(this, LA);   // Call term-action function.
+         }
+      }
+
       if (LA == pt.eof_symb) {
          limit = la; // <eof> ?
       }

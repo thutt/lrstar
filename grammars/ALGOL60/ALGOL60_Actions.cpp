@@ -15,8 +15,6 @@ void  ALGOL60_term_actions(lrstar_parser *parser)
 }
 
 
-#ifdef TERM_ACTIONS
-
 int ALGOL60_error(lrstar_parser *parser, int &t)
 {
       if (parser->lt.token.end == parser->lt.token.start)        // Illegal character?
@@ -44,6 +42,3 @@ int ALGOL60_lookup(lrstar_parser *parser, int &t)             // Lookup in symbo
       #endif
     return sti;
 }
-
-#endif
-
