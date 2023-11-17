@@ -116,11 +116,11 @@ Read:
    } else {
       lt.token.sti = -t;
    }
-#ifdef EXPECTING
-   RS = RSstart;
-   RS->state = x;
-   RS->ptr = PS;
-#endif
+   if (opt_expecting) {
+      RS = RSstart;
+      RS->state = x;
+      RS->ptr = PS;
+   }
 
 Test:
    if (pt.Bm[pt.Br[x] +
@@ -135,22 +135,22 @@ Test:
          PS->node  = 0;                         // Set node on stack to zero.
       }
 
-#ifdef EXPECTING
-      PS->sym   = -t;                           // Put symbol on stack.
-#endif
+      if (opt_expecting) {
+         PS->sym   = -t;                        // Put symbol on stack.
+      }
       x = pt.Tm[pt.Tr[x] +
-                pt.Tc[t]];                   // Get next state from terminal transition matrix.
+                pt.Tc[t]];                      // Get next state from terminal transition matrix.
       while (x < 0)                             // While shift-reduce actions.
       {
          p = -x;
       SR:
-         PS -= pt.PL[p];                           // Reduce stack ptr by production length.
-#ifdef EXPECTING
-         PS->sym = pt.head_numb[p];                // Put symbol on stack.
-#endif
+         PS -= pt.PL[p];                        // Reduce stack ptr by production length.
+         if (opt_expecting) {
+            PS->sym = pt.head_numb[p];          // Put symbol on stack.
+         }
          reduce (p);                            // Call reduce action with production number.
          x = pt.Nm[pt.Nr[PS->state] +
-                   pt.Nc[p]];        // Get next state from nonterminal transition.
+                   pt.Nc[p]];                   // Get next state from nonterminal transition.
       }
       goto Read;                                // Go to read next token.
    }
@@ -161,12 +161,12 @@ Test:
       PS -= pt.PL[p];                              // Reduce parse stack ptr by rule length - 1.
       if (pt.PL[p] < 0)                            // Null production?
       {
-#ifdef EXPECTING
-         RS++;
-         RS->ptr   = PS;
-         RS->state = PS->state;
-         RS->sym   = PS->sym;
-#endif
+         if (opt_expecting) {
+            RS++;
+            RS->ptr   = PS;
+            RS->state = PS->state;
+            RS->sym   = PS->sym;
+         }
          PS->state = x;                         // Stack current state, replacing old state.
          if (make_ast) {
             PS->node  = 0;                      // Set node on stack to zero.
@@ -174,9 +174,9 @@ Test:
       }
       while (1)
       {
-#ifdef EXPECTING
-         PS->sym = pt.head_numb[p];                // Put symbol on stack.
-#endif
+         if (opt_expecting) {
+            PS->sym = pt.head_numb[p];                // Put symbol on stack.
+         }
          reduce (p);                            // Call reduce action with production number.
          x = pt.Nm[pt.Nr[PS->state] +
                    pt.Nc[p]];                   // Get next state from nonterminal transition.
@@ -214,9 +214,9 @@ Test:
                p = y - pt.accept_state;            // Shift and reduce.
                goto SR;                         // Go to shift reduce.
             }
-#ifdef EXPECTING
-            PS->sym = -t;                       // Put symbol on stack.
-#endif
+            if (opt_expecting) {
+               PS->sym = -t;                       // Put symbol on stack.
+            }
             x = y;                              // Shift and goto.
             goto Read;                          // Go to read another token.
          }
@@ -247,24 +247,24 @@ Test:
       }
       return lt.linenumb - 1;                // Success.
    }
-#ifdef EXPECTING
-   x = restore ();
-   if (t != 0)
-   {
-      t = 0;                                    // Try <error>
-      goto Test;
+
+   if (opt_expecting) {
+      x = restore ();
+      if (t != 0) {
+         t = 0;                                    // Try <error>
+         goto Test;
+      }
    }
-#endif
-   if (n_errors < INT_MAX)                      // Error message not printed?
-   {
-#ifdef EXPECTING
-      print_stack ();
-#endif
+
+   if (n_errors < INT_MAX) {                   // Error message not printed?
+      if (opt_expecting) {
+         print_stack ();
+      }
       syntax_error ("Error", &lt.token, pt.term_symb[T]);
-#ifdef EXPECTING
-      expecting (x);
-      print_terms (x);
-#endif
+      if (opt_expecting) {
+         expecting (x);
+         print_terms (x);
+      }
    }
    return -lt.linenumb; // Failure.
 

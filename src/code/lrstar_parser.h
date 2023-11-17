@@ -90,6 +90,7 @@ public:
    bool actions;                /* Init & terminate actions.  */
    bool debug_parser;           /* Debugging diagnostics.     */
    bool debug_trace;            /* Tracing.                   */
+   bool opt_expecting;          /* Expecting.                 */
    bool insensitive;            /* Case insensitive parser.   */
    bool make_ast;               /* Build AST.                 */
    bool node_actions;           /* Node Actions.              */
@@ -215,6 +216,7 @@ public:
                  bool                actions_,
                  bool                debug_parser_,
                  bool                debug_trace_,
+                 bool                expecting_,
                  bool                insensitive_,
                  bool                make_ast_,
                  bool                node_actions_,
@@ -225,6 +227,7 @@ public:
          actions(actions_),
          debug_parser(debug_parser_),
          debug_trace(debug_trace_),
+         opt_expecting(expecting_),
          insensitive(insensitive),
          make_ast(make_ast_),
          node_actions(node_actions_),

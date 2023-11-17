@@ -1486,6 +1486,10 @@ instantiate_generated_parser(FILE *fp)
            static_cast<int>(sizeof(templ) / sizeof(templ[0])) - 1, " ",
            b[!!optn[PG_DEBUGTRACE]]);
    fprintf(fp, ",\n%*s"
+           "/* expecting    */   %s",
+           static_cast<int>(sizeof(templ) / sizeof(templ[0])) - 1, " ",
+           b[optn[PG_EXPECTING] || PG_Main::error_used > 0]);
+   fprintf(fp, ",\n%*s"
            "/* insensitive  */   %s",
            static_cast<int>(sizeof(templ) / sizeof(templ[0])) - 1, " ",
            b[!!optn[PG_INSENSITIVE]]);
