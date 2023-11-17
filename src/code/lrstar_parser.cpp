@@ -68,9 +68,9 @@ int   lrstar_parser::init_parser (char* patharg, char* input_start, int max_syms
       init_ast (max_nodes);            // Initialize the parser.
    }
 
-#ifdef ACTIONS
-   (*pt.init_func[0])(this);          // init_action()
-#endif
+   if (actions) {
+      (*pt.init_func[0])(this);          // init_action()
+   }
 
    T_exp  = new uchar[pt.n_terms];
    S_exam = new uchar[pt.n_states];
@@ -94,9 +94,9 @@ void  lrstar_parser::term_parser ()
    }
 
    term_symtab ();
-#ifdef ACTIONS
-   (*pt.init_func[1])(this);               // term_action()
-#endif
+   if (actions) {
+      (*pt.init_func[1])(this);               // term_action()
+   }
 }
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////

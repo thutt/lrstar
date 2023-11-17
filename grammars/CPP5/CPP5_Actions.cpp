@@ -7,9 +7,6 @@
 #include "CPP5_Actions.h"
 #include "lrstar_main.h"
 
-///////////////////////////////////////////////////////////////////////////////
-
-#ifdef ACTIONS
 
 void CPP5_init_actions(lrstar_parser *parser)
 {
@@ -21,7 +18,6 @@ void  CPP5_term_actions(lrstar_parser *parser)
       /* Termination code goes here */
 }
 
-#endif
 
 ///////////////////////////////////////////////////////////////////////////////
 

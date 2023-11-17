@@ -1348,12 +1348,9 @@ void actions_header_fn(FILE       *fp,
    fprintf (fp, "\n");
    fprintf (fp, "class lrstar_parser;\n");
    fprintf (fp, "\n");
-   fprintf (fp, "#ifdef ACTIONS\n");
-   fprintf (fp, "\n");
    fprintf (fp, "void %s_init_actions(lrstar_parser *parser);\n", gfn);
    fprintf (fp, "void %s_term_actions(lrstar_parser *parser);\n", gfn);
    fprintf (fp, "\n");
-   fprintf (fp, "#endif\n");
    fprintf (fp, "#ifdef TERM_ACTIONS\n");
    fprintf (fp, "\n");
    fprintf (fp, "int %s_error(lrstar_parser *parser, int &t);\n", gfn);
@@ -1416,9 +1413,6 @@ static void actions_cpp_fn(FILE       *fp,
       fprintf (fp, "#include \"../../code/main.h\"\n");
    }
    fprintf (fp, "\n");
-   fprintf (fp, "///////////////////////////////////////////////////////////////////////////////\n");
-   fprintf (fp, "\n");
-   fprintf (fp, "#ifdef ACTIONS\n");
    fprintf (fp, "\n");
    fprintf (fp, "void %s_init_actions(lrstar_parser *parser)\n", gfn);
    fprintf (fp, "{\n");
@@ -1430,9 +1424,6 @@ static void actions_cpp_fn(FILE       *fp,
    fprintf (fp, "      /* Termination code goes here */\n");
    fprintf (fp, "}\n");
    fprintf (fp, "\n");
-   fprintf (fp, "#endif\n");
-   fprintf (fp, "\n");
-   fprintf (fp, "///////////////////////////////////////////////////////////////////////////////\n");
    fprintf (fp, "\n");
    fprintf (fp, "#ifdef TERM_ACTIONS\n");
    fprintf (fp, "\n");
@@ -1513,13 +1504,17 @@ instantiate_generated_parser(FILE *fp)
    fprintf(fp, "\n%s", templ);
    fprintf(fp, "/* user data   */   NULL");
    fprintf(fp, ",\n%*s"
+           "/* actions     */   %s",
+           static_cast<int>(sizeof(templ) / sizeof(templ[0])) - 1, " ",
+           b[PG_Main::N_tacts > 0 || PG_Main::N_nacts > 0]);
+   fprintf(fp, ",\n%*s"
            "/* insensitive */   %s",
            static_cast<int>(sizeof(templ) / sizeof(templ[0])) - 1, " ",
            b[!!optn[PG_INSENSITIVE]]);
    fprintf(fp, ",\n%*s"
            "/* make_ast    */   %s",
            static_cast<int>(sizeof(templ) / sizeof(templ[0])) - 1, " ",
-           b[!!(optn[PG_ASTCONST] && PG_Main::N_nodes > 0)]);
+           b[optn[PG_ASTCONST] && PG_Main::N_nodes > 0]);
    fprintf(fp, ");\n\n");
 }
 

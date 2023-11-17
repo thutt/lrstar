@@ -7,9 +7,6 @@
 #include "Java1_Actions.h"
 #include "lrstar_main.h"
 
-///////////////////////////////////////////////////////////////////////////////
-
-#ifdef ACTIONS
 
 void Java1_init_actions(lrstar_parser *parser)
 {
@@ -21,9 +18,6 @@ void  Java1_term_actions(lrstar_parser *parser)
       /* Termination code goes here */
 }
 
-#endif
-
-///////////////////////////////////////////////////////////////////////////////
 
 #ifdef TERM_ACTIONS
 

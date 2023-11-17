@@ -8,12 +8,11 @@
 
 class lrstar_parser;
 
-#ifdef ACTIONS
 
 void SQL_init_actions(lrstar_parser *parser);
 void SQL_term_actions(lrstar_parser *parser);
 
-#endif
+
 #ifdef TERM_ACTIONS
 
 int SQL_error(lrstar_parser *parser, int &t);

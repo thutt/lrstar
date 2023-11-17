@@ -7,6 +7,7 @@
 #include "Dbase_Parser.h"
 
 lrstar_parser generated_parser(/* user data   */   NULL,
+                               /* actions     */   true,
                                /* insensitive */   false,
                                /* make_ast    */   false);
 

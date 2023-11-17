@@ -7,9 +7,6 @@
 #include "Vba_Actions.h"
 #include "lrstar_main.h"
 
-///////////////////////////////////////////////////////////////////////////////
-
-#ifdef ACTIONS
 
 void Vba_init_actions(lrstar_parser *parser)
 {
@@ -21,9 +18,6 @@ void  Vba_term_actions(lrstar_parser *parser)
       /* Termination code goes here */
 }
 
-#endif
-
-///////////////////////////////////////////////////////////////////////////////
 
 #ifdef TERM_ACTIONS
 

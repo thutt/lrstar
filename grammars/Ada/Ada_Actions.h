@@ -8,12 +8,9 @@
 
 class lrstar_parser;
 
-#ifdef ACTIONS
-
 void Ada_init_actions(lrstar_parser *parser);
 void Ada_term_actions(lrstar_parser *parser);
 
-#endif
 #ifdef TERM_ACTIONS
 
 int Ada_error(lrstar_parser *parser, int &t);

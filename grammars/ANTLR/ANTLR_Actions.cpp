@@ -8,10 +8,6 @@
 #include "ANTLR_Actions.h"
 #include "lrstar_main.h"
 
-///////////////////////////////////////////////////////////////////////////////
-
-#ifdef ACTIONS
-
 void ANTLR_init_actions(lrstar_parser *parser)
 {
       /* Initialization code goes here */
@@ -21,8 +17,6 @@ void  ANTLR_term_actions(lrstar_parser *parser)
 {
       /* Termination code goes here */
 }
-
-#endif
 
 ///////////////////////////////////////////////////////////////////////////////
 

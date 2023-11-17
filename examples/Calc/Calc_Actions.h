@@ -3,9 +3,6 @@
 #pragma once
 #include "Calc_Parser.h"
 
-#ifdef ACTIONS
-
-#endif
 #ifdef TERM_ACTIONS
 
 int Calc_error(lrstar_parser *parser, int &t);

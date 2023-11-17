@@ -8,12 +8,9 @@
 
 class lrstar_parser;
 
-#ifdef ACTIONS
-
 void ALGOL60_init_actions(lrstar_parser *parser);
 void ALGOL60_term_actions(lrstar_parser *parser);
 
-#endif
 #ifdef TERM_ACTIONS
 
 int ALGOL60_error(lrstar_parser *parser, int &t);

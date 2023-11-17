@@ -8,12 +8,10 @@
 
 class lrstar_parser;
 
-#ifdef ACTIONS
 
 void Java1_init_actions(lrstar_parser *parser);
 void Java1_term_actions(lrstar_parser *parser);
 
-#endif
 #ifdef TERM_ACTIONS
 
 int Java1_error(lrstar_parser *parser, int &t);

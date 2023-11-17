@@ -7,9 +7,6 @@
 #include "Typedef_Actions.h"
 #include "lrstar_main.h"
 
-///////////////////////////////////////////////////////////////////////////////
-
-#ifdef ACTIONS
 
 void Typedef_init_actions(lrstar_parser *parser)
 {
@@ -21,9 +18,6 @@ void  Typedef_term_actions(lrstar_parser *parser)
       /* Termination code goes here */
 }
 
-#endif
-
-///////////////////////////////////////////////////////////////////////////////
 
 #ifdef TERM_ACTIONS
 

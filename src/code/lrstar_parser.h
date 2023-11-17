@@ -87,8 +87,9 @@ private:
     *     performance reasons.
     */
 
-   bool insensitive;            /* Case insensitive parser. */
-   bool make_ast;               /* Build AST.               */
+   bool insensitive;            /* Case insensitive parser.   */
+   bool make_ast;               /* Build AST.                 */
+   bool actions;                /* Init & terminate actions.  */
 
 public:
    lrstar_user_data_t *user_data;
@@ -205,9 +206,11 @@ public:
    void    tracer      (Node* n);
 
    lrstar_parser(lrstar_user_data_t *user_data_,
+                 bool                actions_,
                  bool                insensitive_,
                  bool                make_ast_) :
          user_data(user_data_),
+         actions(actions_),
          insensitive(insensitive),
          make_ast(make_ast_)
    {
