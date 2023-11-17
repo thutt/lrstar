@@ -14,6 +14,7 @@ lrstar_parser generated_parser(/* user data    */   NULL,
                                /* make_ast     */   true,
                                /* node_actions */   true,
                                /* reversable   */   false,
+                               /* semantics    */   false,
                                /* term_actions */   true);
 
 #include "lrstar_main.cpp"

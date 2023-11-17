@@ -37,8 +37,8 @@ int CICS_lookup(lrstar_parser *parser, int &t)             // Lookup in symbol t
       {
          sti = parser->add_symbol(t, parser->lt.token.start, parser->lt.token.end);
       }
-      #ifdef SEMANTICS
-      t = parser->symbol[sti].term;        // Redefine terminal number?
-      #endif
+      if (parser->opt_semantics) {
+          t = parser->symbol[sti].term;        // Redefine terminal number?
+      }
     return sti;
 }

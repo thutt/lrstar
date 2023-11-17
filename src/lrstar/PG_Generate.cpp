@@ -1502,6 +1502,10 @@ instantiate_generated_parser(FILE *fp)
            static_cast<int>(sizeof(templ) / sizeof(templ[0])) - 1, " ",
            b[PG_Main::N_reverses > 0]);
    fprintf(fp, ",\n%*s"
+           "/* semantics    */   %s",
+           static_cast<int>(sizeof(templ) / sizeof(templ[0])) - 1, " ",
+           b[PG_Main::N_semantics > 0]);
+   fprintf(fp, ",\n%*s"
            "/* term_actions */   %s",
            static_cast<int>(sizeof(templ) / sizeof(templ[0])) - 1, " ",
            b[PG_Main::N_tacts > 0]);

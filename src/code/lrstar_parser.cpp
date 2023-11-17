@@ -276,12 +276,11 @@ Test:
 
 void  lrstar_parser::reduce (int p)
 {
-#ifdef SEMANTICS
-   if (pt.argy[p] >= 0)
-   {
-      symbol[PS[0].sti].term = pt.argy[p];
+   if (semantics) {
+      if (pt.argy[p] >= 0) {
+         symbol[PS[0].sti].term = pt.argy[p];
+      }
    }
-#endif
    if (make_ast) {
       int psi;                                        // Parse stack index.
       if (pt.node_numb[p] >= 0)                       // MAKE NODE ?

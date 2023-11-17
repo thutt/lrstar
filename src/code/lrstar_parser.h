@@ -81,7 +81,7 @@ class lrstar_user_data_t {
 
 class lrstar_parser
 {
-private:
+public:
    /*
     * XXX This options should be resolved at compile time for
     *     performance reasons.
@@ -94,6 +94,7 @@ private:
    bool make_ast;               /* Build AST.                 */
    bool node_actions;           /* Node Actions.              */
    bool reversable;             /* Reversable grammar.        */
+   bool semantics;              /* Semantics.                 */
    bool term_actions;           /* Term Actions.              */
 
 public:
@@ -218,6 +219,7 @@ public:
                  bool                make_ast_,
                  bool                node_actions_,
                  bool                reversable_,
+                 bool                semantics_,
                  bool                term_actions_) :
          user_data(user_data_),
          actions(actions_),
@@ -227,6 +229,7 @@ public:
          make_ast(make_ast_),
          node_actions(node_actions_),
          reversable(reversable_),
+         semantics(semantics_),
          term_actions(term_actions_)
    {
    }
