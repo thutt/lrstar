@@ -1188,20 +1188,20 @@ int   lrstar_parser::linkup (int p)
 
 void  lrstar_parser::tracer (Node* n)
 {
-#ifdef DEBUG_TRACE
-   if (node_actions) {
-      char* dir;
-      if      (direction == TOP_DOWN ) {
-         dir = "*>";
-      } else if (direction == PASS_OVER) {
-         dir = "**";
-      } else {
-         dir = "<*";
+   if (debug_trace) {
+      if (node_actions) {
+         const char *dir;
+         if      (direction == TOP_DOWN ) {
+            dir = "*>";
+         } else if (direction == PASS_OVER) {
+            dir = "**";
+         } else {
+            dir = "<*";
+         }
+         printf("   %d %s %s (%s)\n", traversal, dir,
+                pt.node_name[n->id], symbol_name(n->sti));
       }
-      printf("   %d %s %s (%s)\n", traversal, dir,
-             pt.node_name[n->id], symbol_name(n->sti));
    }
-#endif
 }
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////
