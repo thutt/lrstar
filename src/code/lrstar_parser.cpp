@@ -1003,17 +1003,15 @@ int   lrstar_parser::add_symbol (int t, char* token_start, char* token_end)
    int   length = (int)(token_end - p);      // Set length.
    uint  hash = length;                      // Set hash to length.
    int   i = 0;                              // Set shift value to 0.
-   do                                        // Assume length != 0
-   {
-#ifdef INSENSITIVE
-      hash += lowercase[*p] << i;
-#else
-      hash += *p << i;
-#endif
+   do {                                      // Assume length != 0
+      if (insensitive) {
+         hash += lowercase[*p] << i;
+      } else {
+         hash += *p << i;
+      }
       i += 4;
       i %= 32;
-   }
-   while (++p < token_end);
+   } while (++p < token_end);
    int cell = hash % max_cells;              // Get first cell.
    int sti  = hashvec [cell];                // Get symbol table index.
    while (sti >= 0)                          // Symbol exists?
@@ -1025,11 +1023,15 @@ int   lrstar_parser::add_symbol (int t, char* token_start, char* token_end)
          char* end   = start + length;
          do
          {
-#ifdef INSENSITIVE
-            if (lowercase[*p] != lowercase[*start]) goto Cont;
-#else
-            if (*p != *start) goto Cont;    // If characters not equal ...
-#endif
+            if (insensitive) {
+               if (lowercase[*p] != lowercase[*start]) {
+                  goto Cont;
+               }
+            } else {
+               if (*p != *start) {
+                  goto Cont;                 // If characters not equal ...
+               }
+            }
             start++;
             p++;
          }

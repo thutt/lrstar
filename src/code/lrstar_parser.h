@@ -78,8 +78,17 @@ class lrstar_user_data_t {
     */
 };
 
+
 class lrstar_parser
 {
+private:
+   bool insensitive;            /* Case insensitive parser.
+                                 *
+                                 * XXX This option should be a
+                                 * resolved at compile time to not
+                                 * have to do a comparison on every
+                                 * character. */
+
 public:
    lrstar_user_data_t *user_data;
 
@@ -193,6 +202,14 @@ public:
    void    traverse    (char* indent, Node* n);
    void    print_node  (char* indent, Node* n);
    void    tracer      (Node* n);
+
+   lrstar_parser(lrstar_user_data_t *user_data_,
+                 bool insensitive_) :
+      user_data(user_data_),
+      insensitive(insensitive)
+   {
+   }
+
 };
 #endif
 /* Local Variables:      */

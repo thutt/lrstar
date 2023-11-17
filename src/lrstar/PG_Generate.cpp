@@ -1505,6 +1505,21 @@ static void lexer_cpp_fn(FILE       *fp,
 }
 
 
+static void
+instantiate_generated_parser(FILE *fp)
+{
+   static const char *b[] = { "false", "true" };
+   static const char templ[] = "lrstar_parser generated_parser(";
+   fprintf(fp, "\n%s", templ);
+   fprintf(fp, "/* user data   */   NULL");
+   fprintf(fp, ",\n%*s"
+           "/* insensitive */   %s",
+           static_cast<int>(sizeof(templ) / sizeof(templ[0])) - 1, " ",
+           b[!!optn[PG_INSENSITIVE]]);
+   fprintf(fp, ");\n\n");
+}
+
+
 static void main_cpp_fn(FILE       *fp,
                         const char *pathname,
                         const char *grammar,
@@ -1518,7 +1533,7 @@ static void main_cpp_fn(FILE       *fp,
                  "#include \"%s_LexerTables_typedef.h\"\n"
                  "#include \"%s_Parser.h\"\n"), grammar, grammar);
    if (lrstar_linux) {
-      fprintf(fp, "\nlrstar_parser generated_parser;\n\n");
+      instantiate_generated_parser(fp);
       fprintf (fp, "#include \"lrstar_main.cpp\"\n");
    } else {
       assert(lrstar_windows);

@@ -6,7 +6,8 @@
 #include "Fortran_LexerTables_typedef.h"
 #include "Fortran_Parser.h"
 
-lrstar_parser generated_parser;
+lrstar_parser generated_parser(/* user data   */   NULL,
+                               /* insensitive */   false);
 
 #include "lrstar_main.cpp"
 
