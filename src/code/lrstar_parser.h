@@ -93,6 +93,7 @@ private:
    bool insensitive;            /* Case insensitive parser.   */
    bool make_ast;               /* Build AST.                 */
    bool node_actions;           /* Node Actions.              */
+   bool reversable;             /* Reversable grammar.        */
    bool term_actions;           /* Term Actions.              */
 
 public:
@@ -216,6 +217,7 @@ public:
                  bool                insensitive_,
                  bool                make_ast_,
                  bool                node_actions_,
+                 bool                reversable_,
                  bool                term_actions_) :
          user_data(user_data_),
          actions(actions_),
@@ -224,6 +226,7 @@ public:
          insensitive(insensitive),
          make_ast(make_ast_),
          node_actions(node_actions_),
+         reversable(reversable_),
          term_actions(term_actions_)
    {
    }

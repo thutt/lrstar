@@ -1147,15 +1147,10 @@ int   lrstar_parser::linkup (int p)
 {
    int i;
    int next = -1;
-#ifdef REVERSABLE
-   if (pt.reverse[p] != 0)                               // IF NOT TO REVERSE THE ORDER.
-   {
-      for (i = 0; i <= pt.PL[p]; i++)                    // For each tail pointer.
-      {
-         if (PS[i].node != 0)                         // If tail points to node.
-         {
-            if (next >= 0)                            // If one waiting.
-            {
+   if (reversable && pt.reverse[p] != 0) {            // IF NOT TO REVERSE THE ORDER.
+      for (i = 0; i <= pt.PL[p]; i++) {               // For each tail pointer.
+         if (PS[i].node != 0) {                       // If tail points to node.
+            if (next >= 0) {                          // If one waiting.
                PS[i   ].last->next = PS[next].node;   // Define next node.
                PS[next].node->prev = PS[i].last;      // Define previous node.
                PS[i   ].last       = PS[next].last;   // Change last to next last.
@@ -1163,16 +1158,10 @@ int   lrstar_parser::linkup (int p)
             next = i;                                 // Next = Curr.
          }
       }
-   }
-   else                                               // REVERSE THE ORDER.
-#endif
-   {
-      for (i = pt.PL[p]; i >= 0; i--)                    // For each tail pointer.
-      {
-         if (PS[i].node != NULL)                      // If tail points to node.
-         {
-            if (next >= 0)                            // If one waiting.
-            {
+   } else {                                           // REVERSE THE ORDER.
+      for (i = pt.PL[p]; i >= 0; i--) {               // For each tail pointer.
+         if (PS[i].node != NULL) {                    // If tail points to node.
+            if (next >= 0) {                          // If one waiting.
                PS[i   ].last->next = PS[next].node;   // Define next node.
                PS[next].node->prev = PS[i   ].last;   // Define previous node.
                PS[i   ].last       = PS[next].last;   // Change last to next last.
