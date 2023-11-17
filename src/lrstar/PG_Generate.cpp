@@ -1471,11 +1471,16 @@ instantiate_generated_parser(FILE *fp)
    static const char *b[] = { "false", "true" };
    static const char templ[] = "lrstar_parser generated_parser(";
    fprintf(fp, "\n%s", templ);
-   fprintf(fp, "/* user data   */   NULL");
+   fprintf(fp,
+           "/* user data    */   NULL");
    fprintf(fp, ",\n%*s"
            "/* actions      */   %s",
            static_cast<int>(sizeof(templ) / sizeof(templ[0])) - 1, " ",
            b[PG_Main::N_tacts > 0 || PG_Main::N_nacts > 0]);
+   fprintf(fp, ",\n%*s"
+           "/* debug_parser */   %s",
+           static_cast<int>(sizeof(templ) / sizeof(templ[0])) - 1, " ",
+           b[!!optn[PG_DEBUG]]);
    fprintf(fp, ",\n%*s"
            "/* insensitive  */   %s",
            static_cast<int>(sizeof(templ) / sizeof(templ[0])) - 1, " ",

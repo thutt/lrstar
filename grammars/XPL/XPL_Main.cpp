@@ -6,8 +6,9 @@
 #include "XPL_LexerTables_typedef.h"
 #include "XPL_Parser.h"
 
-lrstar_parser generated_parser(/* user data   */   NULL,
+lrstar_parser generated_parser(/* user data    */   NULL,
                                /* actions      */   true,
+                               /* debug_parser */   false,
                                /* insensitive  */   false,
                                /* make_ast     */   false,
                                /* node_actions */   false,

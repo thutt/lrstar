@@ -242,9 +242,9 @@ Test:
          traverse (FIRST_PASS);
       }
 
-#ifdef DEBUG_PARSER
-      fprintf (output, "\nDone.\n\n");
-#endif
+      if (debug_parser) {
+         fprintf (output, "\nDone.\n\n");
+      }
       return lt.linenumb - 1;                // Success.
    }
 #ifdef EXPECTING
@@ -338,16 +338,18 @@ int   lrstar_parser::nd_parser (int x, int t, int na)
    int  limit;          // Lookahead limit.
    char string[64];
 
-#ifdef DEBUG_PARSER
-   if (lt.token.line > last_line) printf ("\n");
-   last_line = lt.token.line;
-   sprintf (string, "In state %d", x);
-   printf ("/////////////////////////////////////////////////////////////////////////////////////////////////////\n");
-   syntax_error (string, &lt.token, pt.term_symb [t]);
-   printf ("\n   STARTED LR(*) parsing for the following choices:\n\n");
-   print_actions (na);
-   n_warnings++;
-#endif
+   if (debug_parser) {
+      if (lt.token.line > last_line) {
+         printf ("\n");
+      }
+      last_line = lt.token.line;
+      sprintf (string, "In state %d", x);
+      printf ("////////////////////////////////////////////////////////////\n");
+      syntax_error (string, &lt.token, pt.term_symb [t]);
+      printf ("\n   STARTED LR(*) parsing for the following choices:\n\n");
+      print_actions (na);
+      n_warnings++;
+   }
 
    // COPY PARSE STACK TO ND STATE STACK FOR EACH ACTION ...
    for (i = 0; i < na; i++)
@@ -378,21 +380,18 @@ int   lrstar_parser::nd_parser (int x, int t, int na)
    if (total == 1)
    {
       LAcount[1]++;
-#ifdef DEBUG_PARSER
-      n_warnings = 0;
-#endif
+      if (debug_parser) {
+         n_warnings = 0;
+      }
       i = 0;
       do
       {
-         if (Parsed[i] > 0)
-         {
-#ifdef DEBUG_PARSER
-            printf ("   CHOOSING ");
-            print_action ("", i);
-#ifdef DEBUG_PARSER
-            printf ("\n");
-#endif
-#endif
+         if (Parsed[i] > 0) {
+            if (debug_parser) {
+               printf("   CHOOSING ");
+               print_action("", i);
+               printf ("\n");
+            }
             return Action[i];
          }
       }
@@ -430,21 +429,19 @@ int   lrstar_parser::nd_parser (int x, int t, int na)
       if (total == 1)
       {
          LAcount[la+1]++;
-#ifdef DEBUG_PARSER
-         n_warnings = 0;
-#endif
+         if (debug_parser) {
+            n_warnings = 0;
+         }
          i = 0;
          do
          {
             if (Parsed[i] > 0)
             {
-#ifdef DEBUG_PARSER
-               printf ("   CHOOSING ");
-               print_action ("", i);
-#ifdef DEBUG_PARSER
-               printf("\n");
-#endif
-#endif
+               if (debug_parser) {
+                  printf ("   CHOOSING ");
+                  print_action ("", i);
+                  printf("\n");
+               }
                lt.lookahead.start = 0; // Stop lookahead mode in lookup().
                return Action[i];
             }
@@ -472,11 +469,12 @@ int   lrstar_parser::nd_parser (int x, int t, int na)
    LAcount[limit]++;
    if (Action[0] > 0) // Shift action?
    {
-#ifdef DEBUG_PARSER
-      printf("\n   AMBIGUITY after %d lookaheads, choosing the Shift action.\n", limit);
-      printf("\n");
-      n_warnings = 0;
-#endif
+      if (debug_parser) {
+         printf("\n   AMBIGUITY after %d lookaheads, "
+                "choosing the Shift action.\n", limit);
+         printf("\n");
+         n_warnings = 0;
+      }
       lt.lookahead.start = 0; // Stop lookahead mode in lookup().
       return Action[0];
    }
@@ -484,14 +482,14 @@ int   lrstar_parser::nd_parser (int x, int t, int na)
    // Some parsers choose the lowest numbered reduction.
    // Not a good idea, because the grammar is ambiguous.
    // Fix the grammar or increase option /k, if necessary.
-#ifdef DEBUG_PARSER
-   printf("\n   AMBIGUITY after %d lookaheads, unable to decide.\n", limit);
-#else
-   sprintf (string, "In state %d", x);
-   syntax_error (string, &lt.token, pt.term_symb[t]);
-   printf ("\n   AMBIGUITY after %d lookaheads, unable to choose from:\n\n", limit);
-   print_actions (na);
-#endif
+   if (debug_parser) {
+      printf("\n   AMBIGUITY after %d lookaheads, unable to decide.\n", limit);
+   } else {
+      sprintf (string, "In state %d", x);
+      syntax_error (string, &lt.token, pt.term_symb[t]);
+      printf ("\n   AMBIGUITY after %d lookaheads, unable to choose from:\n\n", limit);
+      print_actions (na);
+   }
    n_errors = INT_MAX; // No more error messages.
    return FAILURE;
 }
@@ -612,39 +610,40 @@ Shft:
             State[i] = pt.nd_action[k];
             return 1;
          }
-#ifdef DEBUG_PARSER
-         // A recursive call to nd_parse() is needed to continue the ND lookahead parsing.
-         // This version of the LR(*) algorithm does not support 2nd, 3rd or more depths of
-         // recursion.  Probably the grammar has ambiguity that needs to be resolved.
-         n_warnings++;
-         char string[16];
-         sprintf (string, "In state %d", State[i]);
-         if (la == 0) {
-            syntax_error (string, &lt.token, pt.term_symb[LA]);
-         } else {
-            syntax_error (string, &lt.lookahead, pt.term_symb[LA]);
+         if (debug_parser) {
+            // A recursive call to nd_parse() is needed to continue
+            // the ND lookahead parsing.  This version of the LR(*)
+            // algorithm does not support 2nd, 3rd or more depths of
+            // recursion.  Probably the grammar has ambiguity that
+            // needs to be resolved.
+            n_warnings++;
+            char string[16];
+            sprintf (string, "In state %d", State[i]);
+            if (la == 0) {
+               syntax_error (string, &lt.token, pt.term_symb[LA]);
+            } else {
+               syntax_error (string, &lt.lookahead, pt.term_symb[LA]);
+            }
+            printf ("\n   STOPPED LR(*) parsing after %d lookaheads, "
+                    "for conflicting actions:\n\n", la + 1);
+            do {
+               print_prod ("   * Reduce", -nd_action[k], 0);
+            } while (++k < pt.nd_faction[j+1]);
+            print_action ("\n   IGNORING ", i);
          }
-         printf ("\n   STOPPED LR(*) parsing after %d lookaheads, for conflicting actions:\n\n", la+1);
-         do
-         {
-            print_prod ("   * Reduce", -nd_action[k], 0);
-         }
-         while (++k < pt.nd_faction[j+1]);
-         print_action ("\n   IGNORING ", i);
-#endif
          return 0;
       }
    }
-#ifdef DEBUG_PARSER
-   char string[16];
-   sprintf (string, "In state %d", State[i]);
-   if (la == 0) {
-      syntax_error (string, &lt.token, pt.term_symb[LA]);
-   } else {
-      syntax_error (string, &lt.lookahead, pt.term_symb[LA]);
+   if (debug_parser) {
+      char string[16];
+      sprintf (string, "In state %d", State[i]);
+      if (la == 0) {
+         syntax_error (string, &lt.token, pt.term_symb[LA]);
+      } else {
+         syntax_error (string, &lt.lookahead, pt.term_symb[LA]);
+      }
+      print_action ("\n   IGNORING ", i);
    }
-   print_action ("\n   IGNORING ", i);
-#endif
    return 0; // Did not find a match for LA in this state.
 }
 
@@ -938,30 +937,27 @@ void  lrstar_parser::print_prod (const char* prefix, int p, int dot)
 
 void  lrstar_parser::print_stack () // Print parser stack.
 {
-#ifdef DEBUG_PARSER
-   printf ("\nParse stack:\n");
-   for (PStack* ps = PSstart + 1; ps <= PS; ps++)
-   {
-      const char *name;
-      const char *name2;
-      int sym = ps->sym;
-      if (sym <= 0) // Terminal?
-      {
-         name  = pt.term_symb[-sym];
-         name2 = "";
-         if (*name == '<' || *name == '{')
-         {
-            if (ps->sti > 0) name2 = symbol_name (ps->sti);
+   if (debug_parser) {
+      printf ("\nParse stack:\n");
+      for (PStack* ps = PSstart + 1; ps <= PS; ps++) {
+         const char *name;
+         const char *name2;
+         int sym = ps->sym;
+         if (sym <= 0) { // Terminal?
+            name  = pt.term_symb[-sym];
+            name2 = "";
+            if (*name == '<' || *name == '{') {
+               if (ps->sti > 0) {
+                  name2 = symbol_name (ps->sti);
+               }
+            }
+            printf("   state%5d %4d %s %s\n",  ps->state, -sym, name, name2);
+         } else { // Nonterminal.
+            name = pt.head_symb[sym];
+            printf ("   state%5d %4d %s\n", ps->state, sym, name);
          }
-         printf ("   state%5d %4d %s %s\n",  ps->state, -sym, name, name2);
-      }
-      else // Nonterminal.
-      {
-         name = pt.head_symb[sym];
-         printf ("   state%5d %4d %s\n", ps->state, sym, name);
       }
    }
-#endif
 }
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -1068,27 +1064,24 @@ int   lrstar_parser::add_symbol (int t, char* token_start, char* token_end)
 
 void  lrstar_parser::print_symtab ()
 {
-#ifdef DEBUG_PARSER
-   fprintf (output, "\nSymbol Table ...\n\n");
-   if (n_symbols > 1)
-   {
-      fprintf (output, "   sti  leng  type     name                                terminal\n");
-      for (int i = 1; i < n_symbols; i++)
-      {
-         fprintf(output, " %5d %5d %5d     %-30s %4d %s\n",
-                 i,
-                 symbol[i].length,
-                 symbol[i].type,
-                 symbol_name(i),
-                 symbol[i].term,
-                 pt.term_symb[symbol[i].term]);
+   if (debug_parser) {
+      fprintf (output, "\nSymbol Table ...\n\n");
+      if (n_symbols > 1) {
+         fprintf (output, "   sti  leng  type     name "
+                  "                               terminal\n");
+         for (int i = 1; i < n_symbols; i++) {
+            fprintf(output, " %5d %5d %5d     %-30s %4d %s\n",
+                    i,
+                    symbol[i].length,
+                    symbol[i].type,
+                    symbol_name(i),
+                    symbol[i].term,
+                    pt.term_symb[symbol[i].term]);
+         }
+      } else { // No symbols in the table.
+         fprintf (output, "   Symbol Table is empty.\n");
       }
    }
-   else // No symbols in the table.
-   {
-      fprintf (output, "   Symbol Table is empty.\n");
-   }
-#endif
 }
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -1285,9 +1278,9 @@ void  lrstar_parser::find_root (Node* last_node)
 
 void  lrstar_parser::print_ast ()
 {
-#ifdef DEBUG_PARSER
-   print_ast (root);
-#endif
+   if (debug_parser) {
+      print_ast (root);
+   }
 }
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -1313,10 +1306,8 @@ void  lrstar_parser::print_ast (Node* n) // Print subtree.
 void  lrstar_parser::traverse (int trav)
 {
    if (node_actions) {
-      if (n_nodes > 1) // Any nodes in the tree?
-      {
-         if (pt.n_nodeactns > 0) // Any node actions?
-         {
+      if (n_nodes > 1) { // Any nodes in the tree?
+         if (pt.n_nodeactns > 0) { // Any node actions?
             stacki  = -1;
             stack   = new Stack [STKSIZE];
             counter = new int [pt.n_nodenames];
@@ -1324,19 +1315,17 @@ void  lrstar_parser::traverse (int trav)
             {
                counter[i] = 0;
             }
-#ifdef DEBUG_PARSER
-            fprintf (output, "\nDoing Tree Traversal ...\n\n");
-#else
-            fprintf (output, "\n");
-#endif
+            if (debug_parser) {
+               fprintf (output, "\nDoing Tree Traversal ...\n\n");
+            } else {
+               fprintf (output, "\n");
+            }
             traversal = trav;
             Node* n = root;
-            do
-            {
+            do {
                traverse (n);
                n = n->next;
-            }
-            while (n != 0);
+            } while (n != 0);
          }
       }
    }
