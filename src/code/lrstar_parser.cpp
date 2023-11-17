@@ -64,11 +64,11 @@ int   lrstar_parser::init_parser (char* patharg, char* input_start, int max_syms
    lt.init_lexer (input_start, 3);     // Initialize the lexer.
    init_symtab (max_syms);             // Initialize the symbol table.
 
-   if (make_ast) {
+   if (opt_make_ast) {
       init_ast (max_nodes);            // Initialize the parser.
    }
 
-   if (actions) {
+   if (opt_actions) {
       (*pt.init_func[0])(this);          // init_action()
    }
 
@@ -89,12 +89,12 @@ Err:  n_errors++;
 
 void  lrstar_parser::term_parser ()
 {
-   if (make_ast) {
+   if (opt_make_ast) {
       term_ast();
    }
 
    term_symtab ();
-   if (actions) {
+   if (opt_actions) {
       (*pt.init_func[1])(this);               // term_action()
    }
 }
@@ -109,7 +109,7 @@ int   lrstar_parser::parse ()
    x = 0;                                          // State = 0 to start.
 Read:
    T = t = lt.get_token ();                        // Get incoming token.
-   if (term_actions) {
+   if (opt_term_actions) {
       if (pt.tact_numb[t] >= 0) {                  // If token action ...
          lt.token.sti = (*pt.tact_func[pt.tact_numb[t]])(this, t);  // Call token-action function.
       }
@@ -129,7 +129,7 @@ Test:
       PS++;
       PS->state = x;                            // Put current state on stack.
       PS->sti   = lt.token.sti;                 // Put symbol-table index on stack.
-      if (make_ast) {
+      if (opt_make_ast) {
          PS->line  = lt.token.line;             // Put line number on stack.
          PS->start = lt.token.start;            // Put start address on stack.
          PS->node  = 0;                         // Set node on stack to zero.
@@ -168,7 +168,7 @@ Test:
             RS->sym   = PS->sym;
          }
          PS->state = x;                         // Stack current state, replacing old state.
-         if (make_ast) {
+         if (opt_make_ast) {
             PS->node  = 0;                      // Set node on stack to zero.
          }
       }
@@ -205,7 +205,7 @@ Test:
             PS++;                               // Increment parser stack pointer.
             PS->state = x;                      // Put current state on stack.
             PS->sti   = lt.token.sti;           // Put symbol table index on stack.
-            if (make_ast) {
+            if (opt_make_ast) {
                PS->line  = lt.token.line;       // Put line number on stack.
                PS->start = lt.token.start;      // Put start address on stack.
                PS->node  = 0;                   // Set node on stack to zero.
@@ -236,13 +236,13 @@ Test:
       print_lookaheads();                       // Print lookahead statistics.
 #endif
       print_symtab ();                          // Print the symbol table contents.
-      if (make_ast) {
+      if (opt_make_ast) {
          find_root (PS[0].node);
          print_ast ();
          traverse (FIRST_PASS);
       }
 
-      if (debug_parser) {
+      if (opt_debug_parser) {
          fprintf (output, "\nDone.\n\n");
       }
       return lt.linenumb - 1;                // Success.
@@ -276,12 +276,12 @@ Test:
 
 void  lrstar_parser::reduce (int p)
 {
-   if (semantics) {
+   if (opt_semantics) {
       if (pt.argy[p] >= 0) {
          symbol[PS[0].sti].term = pt.argy[p];
       }
    }
-   if (make_ast) {
+   if (opt_make_ast) {
       int psi;                                        // Parse stack index.
       if (pt.node_numb[p] >= 0)                       // MAKE NODE ?
       {
@@ -337,7 +337,7 @@ int   lrstar_parser::nd_parser (int x, int t, int na)
    int  limit;          // Lookahead limit.
    char string[64];
 
-   if (debug_parser) {
+   if (opt_debug_parser) {
       if (lt.token.line > last_line) {
          printf ("\n");
       }
@@ -379,14 +379,14 @@ int   lrstar_parser::nd_parser (int x, int t, int na)
    if (total == 1)
    {
       LAcount[1]++;
-      if (debug_parser) {
+      if (opt_debug_parser) {
          n_warnings = 0;
       }
       i = 0;
       do
       {
          if (Parsed[i] > 0) {
-            if (debug_parser) {
+            if (opt_debug_parser) {
                printf("   CHOOSING ");
                print_action("", i);
                printf ("\n");
@@ -405,7 +405,7 @@ int   lrstar_parser::nd_parser (int x, int t, int na)
    {
       total = 0;
       LA = lt.get_lookahead();
-      if (term_actions) {
+      if (opt_term_actions) {
          if (pt.tact_numb[LA] >= 0) {                // If term action ...
             (*pt.tact_func[pt.tact_numb[LA]])(this, LA);   // Call term-action function.
          }
@@ -428,7 +428,7 @@ int   lrstar_parser::nd_parser (int x, int t, int na)
       if (total == 1)
       {
          LAcount[la+1]++;
-         if (debug_parser) {
+         if (opt_debug_parser) {
             n_warnings = 0;
          }
          i = 0;
@@ -436,7 +436,7 @@ int   lrstar_parser::nd_parser (int x, int t, int na)
          {
             if (Parsed[i] > 0)
             {
-               if (debug_parser) {
+               if (opt_debug_parser) {
                   printf ("   CHOOSING ");
                   print_action ("", i);
                   printf("\n");
@@ -468,7 +468,7 @@ int   lrstar_parser::nd_parser (int x, int t, int na)
    LAcount[limit]++;
    if (Action[0] > 0) // Shift action?
    {
-      if (debug_parser) {
+      if (opt_debug_parser) {
          printf("\n   AMBIGUITY after %d lookaheads, "
                 "choosing the Shift action.\n", limit);
          printf("\n");
@@ -481,7 +481,7 @@ int   lrstar_parser::nd_parser (int x, int t, int na)
    // Some parsers choose the lowest numbered reduction.
    // Not a good idea, because the grammar is ambiguous.
    // Fix the grammar or increase option /k, if necessary.
-   if (debug_parser) {
+   if (opt_debug_parser) {
       printf("\n   AMBIGUITY after %d lookaheads, unable to decide.\n", limit);
    } else {
       sprintf (string, "In state %d", x);
@@ -609,7 +609,7 @@ Shft:
             State[i] = pt.nd_action[k];
             return 1;
          }
-         if (debug_parser) {
+         if (opt_debug_parser) {
             // A recursive call to nd_parse() is needed to continue
             // the ND lookahead parsing.  This version of the LR(*)
             // algorithm does not support 2nd, 3rd or more depths of
@@ -633,7 +633,7 @@ Shft:
          return 0;
       }
    }
-   if (debug_parser) {
+   if (opt_debug_parser) {
       char string[16];
       sprintf (string, "In state %d", State[i]);
       if (la == 0) {
@@ -936,7 +936,7 @@ void  lrstar_parser::print_prod (const char* prefix, int p, int dot)
 
 void  lrstar_parser::print_stack () // Print parser stack.
 {
-   if (debug_parser) {
+   if (opt_debug_parser) {
       printf ("\nParse stack:\n");
       for (PStack* ps = PSstart + 1; ps <= PS; ps++) {
          const char *name;
@@ -1005,7 +1005,7 @@ int   lrstar_parser::add_symbol (int t, char* token_start, char* token_end)
    uint  hash = length;                      // Set hash to length.
    int   i = 0;                              // Set shift value to 0.
    do {                                      // Assume length != 0
-      if (insensitive) {
+      if (opt_insensitive) {
          hash += lowercase[*p] << i;
       } else {
          hash += *p << i;
@@ -1024,7 +1024,7 @@ int   lrstar_parser::add_symbol (int t, char* token_start, char* token_end)
          char* end   = start + length;
          do
          {
-            if (insensitive) {
+            if (opt_insensitive) {
                if (lowercase[*p] != lowercase[*start]) {
                   goto Cont;
                }
@@ -1063,7 +1063,7 @@ int   lrstar_parser::add_symbol (int t, char* token_start, char* token_end)
 
 void  lrstar_parser::print_symtab ()
 {
-   if (debug_parser) {
+   if (opt_debug_parser) {
       fprintf (output, "\nSymbol Table ...\n\n");
       if (n_symbols > 1) {
          fprintf (output, "   sti  leng  type     name "
@@ -1146,7 +1146,7 @@ int   lrstar_parser::linkup (int p)
 {
    int i;
    int next = -1;
-   if (reversable && pt.reverse[p] != 0) {            // IF NOT TO REVERSE THE ORDER.
+   if (opt_reversable && pt.reverse[p] != 0) {        // IF NOT TO REVERSE THE ORDER.
       for (i = 0; i <= pt.PL[p]; i++) {               // For each tail pointer.
          if (PS[i].node != 0) {                       // If tail points to node.
             if (next >= 0) {                          // If one waiting.
@@ -1176,8 +1176,8 @@ int   lrstar_parser::linkup (int p)
 
 void  lrstar_parser::tracer (Node* n)
 {
-   if (debug_trace) {
-      if (node_actions) {
+   if (opt_debug_trace) {
+      if (opt_node_actions) {
          const char *dir;
          if      (direction == TOP_DOWN ) {
             dir = "*>";
@@ -1266,7 +1266,7 @@ void  lrstar_parser::find_root (Node* last_node)
 
 void  lrstar_parser::print_ast ()
 {
-   if (debug_parser) {
+   if (opt_debug_parser) {
       print_ast (root);
    }
 }
@@ -1293,7 +1293,7 @@ void  lrstar_parser::print_ast (Node* n) // Print subtree.
 
 void  lrstar_parser::traverse (int trav)
 {
-   if (node_actions) {
+   if (opt_node_actions) {
       if (n_nodes > 1) { // Any nodes in the tree?
          if (pt.n_nodeactns > 0) { // Any node actions?
             stacki  = -1;
@@ -1303,7 +1303,7 @@ void  lrstar_parser::traverse (int trav)
             {
                counter[i] = 0;
             }
-            if (debug_parser) {
+            if (opt_debug_parser) {
                fprintf (output, "\nDoing Tree Traversal ...\n\n");
             } else {
                fprintf (output, "\n");
@@ -1323,7 +1323,7 @@ void  lrstar_parser::traverse (int trav)
 
 void  lrstar_parser::traverse (Node* n)
 {
-   if (node_actions) {
+   if (opt_node_actions) {
       int   i  = n->id;             // Node id.
       Node* c  = n->child;          // Child nove pointer.
       stacki++;

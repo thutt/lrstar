@@ -87,16 +87,16 @@ public:
     *     performance reasons.
     */
 
-   bool actions;                /* Init & terminate actions.  */
-   bool debug_parser;           /* Debugging diagnostics.     */
-   bool debug_trace;            /* Tracing.                   */
+   bool opt_actions;            /* Init & terminate actions.  */
+   bool opt_debug_parser;       /* Debugging diagnostics.     */
+   bool opt_debug_trace;        /* Tracing.                   */
    bool opt_expecting;          /* Expecting.                 */
-   bool insensitive;            /* Case insensitive parser.   */
-   bool make_ast;               /* Build AST.                 */
-   bool node_actions;           /* Node Actions.              */
-   bool reversable;             /* Reversable grammar.        */
-   bool semantics;              /* Semantics.                 */
-   bool term_actions;           /* Term Actions.              */
+   bool opt_insensitive;        /* Case insensitive parser.   */
+   bool opt_make_ast;           /* Build AST.                 */
+   bool opt_node_actions;       /* Node Actions.              */
+   bool opt_reversable;         /* Reversable grammar.        */
+   bool opt_semantics;          /* Semantics.                 */
+   bool opt_term_actions;       /* Term Actions.              */
 
 public:
    lrstar_user_data_t *user_data;
@@ -224,16 +224,16 @@ public:
                  bool                semantics_,
                  bool                term_actions_) :
          user_data(user_data_),
-         actions(actions_),
-         debug_parser(debug_parser_),
-         debug_trace(debug_trace_),
+         opt_actions(actions_),
+         opt_debug_parser(debug_parser_),
+         opt_debug_trace(debug_trace_),
          opt_expecting(expecting_),
-         insensitive(insensitive),
-         make_ast(make_ast_),
-         node_actions(node_actions_),
-         reversable(reversable_),
-         semantics(semantics_),
-         term_actions(term_actions_)
+         opt_insensitive(insensitive_),
+         opt_make_ast(make_ast_),
+         opt_node_actions(node_actions_),
+         opt_reversable(reversable_),
+         opt_semantics(semantics_),
+         opt_term_actions(term_actions_)
    {
    }
 
