@@ -1,7 +1,3 @@
-
-///////////////////////////////////////////////////////////////////////////////
-//                                                                           //
-
 #include "lrstar_basic_defs.h"
 #include "Fortran_LexerTables_typedef.h"
 #include "Fortran_Actions.h"
@@ -50,15 +46,3 @@ int Fortran_lookup(lrstar_parser *parser, int &t)             // Lookup in symbo
 }
 
 #endif
-
-///////////////////////////////////////////////////////////////////////////////
-
-#ifdef NODE_ACTIONS
-
-
-
-#endif
-
-//                                                                           //
-///////////////////////////////////////////////////////////////////////////////
-

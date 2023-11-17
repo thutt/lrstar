@@ -1,7 +1,3 @@
-
-///////////////////////////////////////////////////////////////////////////////
-//                                                                           //
-
 #include "lrstar_basic_defs.h"
 #include "YACC_LexerTables_typedef.h"
 #include "YACC_Actions.h"
@@ -50,15 +46,3 @@ int YACC_lookup(lrstar_parser *parser, int &t)             // Lookup in symbol t
 }
 
 #endif
-
-///////////////////////////////////////////////////////////////////////////////
-
-#ifdef NODE_ACTIONS
-
-
-
-#endif
-
-//                                                                           //
-///////////////////////////////////////////////////////////////////////////////
-

@@ -1,7 +1,3 @@
-
-///////////////////////////////////////////////////////////////////////////////
-//                                                                           //
-
 #include "lrstar_basic_defs.h"
 #include "CPP5_LexerTables_typedef.h"
 #include "CPP5_Actions.h"
@@ -52,15 +48,3 @@ int CPP5_lookup(lrstar_parser *parser, int &t)             // Lookup in symbol t
 }
 
 #endif
-
-///////////////////////////////////////////////////////////////////////////////
-
-#ifdef NODE_ACTIONS
-
-
-
-#endif
-
-//                                                                           //
-///////////////////////////////////////////////////////////////////////////////
-

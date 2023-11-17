@@ -1,7 +1,3 @@
-
-///////////////////////////////////////////////////////////////////////////////
-//                                                                           //
-
 #pragma once
 
 #include "Typedef_Parser.h"
@@ -17,10 +13,3 @@ int Typedef_error(lrstar_parser *parser, int &t);
 int Typedef_lookup(lrstar_parser *parser, int &t);
 
 #endif
-#ifdef NODE_ACTIONS
-
-#endif
-
-//                                                                           //
-///////////////////////////////////////////////////////////////////////////////
-

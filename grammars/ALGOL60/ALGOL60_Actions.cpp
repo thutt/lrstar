@@ -1,7 +1,3 @@
-
-///////////////////////////////////////////////////////////////////////////////
-//                                                                           //
-
 #include "lrstar_basic_defs.h"
 #include "ALGOL60_LexerTables_typedef.h"
 #include "ALGOL60_Actions.h"
@@ -50,15 +46,4 @@ int ALGOL60_lookup(lrstar_parser *parser, int &t)             // Lookup in symbo
 }
 
 #endif
-
-///////////////////////////////////////////////////////////////////////////////
-
-#ifdef NODE_ACTIONS
-
-
-
-#endif
-
-//                                                                           //
-///////////////////////////////////////////////////////////////////////////////
 

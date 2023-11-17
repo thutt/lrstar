@@ -1,7 +1,3 @@
-
-///////////////////////////////////////////////////////////////////////////////
-//                                                                           //
-
 #include "lrstar_basic_defs.h"
 #include "C_LexerTables_typedef.h"
 #include "C_Actions.h"
@@ -50,15 +46,3 @@ int C_lookup(lrstar_parser *parser, int &t)             // Lookup in symbol tabl
 }
 
 #endif
-
-///////////////////////////////////////////////////////////////////////////////
-
-#ifdef NODE_ACTIONS
-
-
-
-#endif
-
-//                                                                           //
-///////////////////////////////////////////////////////////////////////////////
-

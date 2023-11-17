@@ -1339,9 +1339,6 @@ void actions_header_fn(FILE       *fp,
                        const char *fname)
 {
    fprintf (fp, "\n");
-   fprintf (fp, "///////////////////////////////////////////////////////////////////////////////\n");
-   fprintf (fp, "//                                                                           //\n");
-   fprintf (fp, "\n");
    fprintf (fp, "#pragma once\n");
    fprintf (fp, "\n");
    fprintf (fp, "#include \"%s_Parser.h\"\n", grammar);
@@ -1357,17 +1354,7 @@ void actions_header_fn(FILE       *fp,
    fprintf (fp, "int %s_lookup(lrstar_parser *parser, int &t);\n", gfn);
    fprintf (fp, "\n");
    fprintf (fp, "#endif\n");
-   fprintf (fp, "#ifdef NODE_ACTIONS\n");
    fprintf (fp, "\n");
-   fprintf (fp, "      class lrstar_node_actions : public lrstar_parser\n");
-   fprintf (fp, "      {\n");
-   fprintf (fp, "         public:\n");
-   fprintf (fp, "      };\n");
-   fprintf (fp, "\n");
-   fprintf (fp, "#endif\n");
-   fprintf (fp, "\n");
-   fprintf (fp, "//                                                                           //\n");
-   fprintf (fp, "///////////////////////////////////////////////////////////////////////////////\n\n");
 }
 
 
@@ -1459,14 +1446,6 @@ static void actions_cpp_fn(FILE       *fp,
    fprintf (fp, "\n");
    fprintf (fp, "///////////////////////////////////////////////////////////////////////////////\n");
    fprintf (fp, "\n");
-   fprintf (fp, "#ifdef NODE_ACTIONS\n");
-   fprintf (fp, "\n");
-   fprintf (fp, "\n");
-   fprintf (fp, "\n");
-   fprintf (fp, "#endif\n");
-   fprintf (fp, "\n");
-   fprintf (fp, "//                                                                           //\n");
-   fprintf (fp, "///////////////////////////////////////////////////////////////////////////////\n");
    fprintf (fp, "\n");
 }
 
@@ -1504,17 +1483,21 @@ instantiate_generated_parser(FILE *fp)
    fprintf(fp, "\n%s", templ);
    fprintf(fp, "/* user data   */   NULL");
    fprintf(fp, ",\n%*s"
-           "/* actions     */   %s",
+           "/* actions      */   %s",
            static_cast<int>(sizeof(templ) / sizeof(templ[0])) - 1, " ",
            b[PG_Main::N_tacts > 0 || PG_Main::N_nacts > 0]);
    fprintf(fp, ",\n%*s"
-           "/* insensitive */   %s",
+           "/* insensitive  */   %s",
            static_cast<int>(sizeof(templ) / sizeof(templ[0])) - 1, " ",
            b[!!optn[PG_INSENSITIVE]]);
    fprintf(fp, ",\n%*s"
-           "/* make_ast    */   %s",
+           "/* make_ast     */   %s",
            static_cast<int>(sizeof(templ) / sizeof(templ[0])) - 1, " ",
            b[optn[PG_ASTCONST] && PG_Main::N_nodes > 0]);
+   fprintf(fp, ",\n%*s"
+           "/* node_actions */   %s",
+           static_cast<int>(sizeof(templ) / sizeof(templ[0])) - 1, " ",
+           b[PG_Main::N_nacts > 0]);
    fprintf(fp, ");\n\n");
 }
 

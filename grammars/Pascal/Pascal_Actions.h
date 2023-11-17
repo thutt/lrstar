@@ -1,7 +1,3 @@
-
-///////////////////////////////////////////////////////////////////////////////
-//                                                                           //
-
 #pragma once
 
 #include "Pascal_Parser.h"
@@ -19,10 +15,3 @@ int Pascal_error(lrstar_parser *parser, int &t);
 int Pascal_lookup(lrstar_parser *parser, int &t);
 
 #endif
-#ifdef NODE_ACTIONS
-
-#endif
-
-//                                                                           //
-///////////////////////////////////////////////////////////////////////////////
-

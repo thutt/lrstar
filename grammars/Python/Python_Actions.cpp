@@ -1,7 +1,3 @@
-
-///////////////////////////////////////////////////////////////////////////////
-//                                                                           //
-
 #include "lrstar_basic_defs.h"
 #include "Python_LexerTables_typedef.h"
 #include "Python_Actions.h"
@@ -50,15 +46,3 @@ int Python_lookup(lrstar_parser *parser, int &t)             // Lookup in symbol
 }
 
 #endif
-
-///////////////////////////////////////////////////////////////////////////////
-
-#ifdef NODE_ACTIONS
-
-
-
-#endif
-
-//                                                                           //
-///////////////////////////////////////////////////////////////////////////////
-

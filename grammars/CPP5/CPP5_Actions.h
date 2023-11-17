@@ -1,7 +1,3 @@
-
-///////////////////////////////////////////////////////////////////////////////
-//                                                                           //
-
 #pragma once
 
 #include "CPP5_Parser.h"
@@ -19,10 +15,3 @@ int CPP5_error(lrstar_parser *parser, int &t);
 int CPP5_lookup(lrstar_parser *parser, int &t);
 
 #endif
-#ifdef NODE_ACTIONS
-
-#endif
-
-//                                                                           //
-///////////////////////////////////////////////////////////////////////////////
-

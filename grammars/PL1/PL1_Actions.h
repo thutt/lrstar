@@ -1,7 +1,3 @@
-
-///////////////////////////////////////////////////////////////////////////////
-//                                                                           //
-
 #pragma once
 
 #include "PL1_Parser.h"
@@ -19,10 +15,3 @@ int PL1_error(lrstar_parser *parser, int &t);
 int PL1_lookup(lrstar_parser *parser, int &t);
 
 #endif
-#ifdef NODE_ACTIONS
-
-#endif
-
-//                                                                           //
-///////////////////////////////////////////////////////////////////////////////
-

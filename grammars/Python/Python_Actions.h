@@ -1,7 +1,3 @@
-
-///////////////////////////////////////////////////////////////////////////////
-//                                                                           //
-
 #pragma once
 
 #include "Python_Parser.h"
@@ -19,10 +15,3 @@ int Python_error(lrstar_parser *parser, int &t);
 int Python_lookup(lrstar_parser *parser, int &t);
 
 #endif
-#ifdef NODE_ACTIONS
-
-#endif
-
-//                                                                           //
-///////////////////////////////////////////////////////////////////////////////
-

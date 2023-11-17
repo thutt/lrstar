@@ -1,7 +1,3 @@
-
-///////////////////////////////////////////////////////////////////////////////
-//                                                                           //
-
 #include "lrstar_basic_defs.h"
 #include "ANTLR_LexerTables_typedef.h"
 #include "ANTLR_ParserTables_typedef.h"
@@ -17,8 +13,6 @@ void  ANTLR_term_actions(lrstar_parser *parser)
 {
       /* Termination code goes here */
 }
-
-///////////////////////////////////////////////////////////////////////////////
 
 #ifdef TERM_ACTIONS
 
@@ -51,15 +45,3 @@ int ANTLR_lookup(lrstar_parser *parser, int &t)             // Lookup in symbol 
 }
 
 #endif
-
-///////////////////////////////////////////////////////////////////////////////
-
-#ifdef NODE_ACTIONS
-
-
-
-#endif
-
-//                                                                           //
-///////////////////////////////////////////////////////////////////////////////
-

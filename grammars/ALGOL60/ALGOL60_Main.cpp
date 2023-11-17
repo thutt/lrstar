@@ -7,9 +7,10 @@
 #include "ALGOL60_Parser.h"
 
 lrstar_parser generated_parser(/* user data   */   NULL,
-                               /* actions     */   false,
-                               /* insensitive */   false,
-                               /* make_ast    */   false);
+                               /* actions      */   false,
+                               /* insensitive  */   false,
+                               /* make_ast     */   false,
+                               /* node_actions */   false);
 
 #include "lrstar_main.cpp"
 

@@ -1,7 +1,3 @@
-
-///////////////////////////////////////////////////////////////////////////////
-//                                                                           //
-
 #include "lrstar_basic_defs.h"
 #include "Zeus_LexerTables_typedef.h"
 #include "Zeus_Actions.h"
@@ -50,15 +46,3 @@ int Zeus_lookup(lrstar_parser *parser, int &t)             // Lookup in symbol t
 }
 
 #endif
-
-///////////////////////////////////////////////////////////////////////////////
-
-#ifdef NODE_ACTIONS
-
-
-
-#endif
-
-//                                                                           //
-///////////////////////////////////////////////////////////////////////////////
-

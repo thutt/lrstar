@@ -1193,14 +1193,18 @@ int   lrstar_parser::linkup (int p)
 void  lrstar_parser::tracer (Node* n)
 {
 #ifdef DEBUG_TRACE
-#ifdef NODE_ACTIONS
-   char* dir;
-   if      (direction == TOP_DOWN ) dir = "*>";
-   else if (direction == PASS_OVER) dir = "**";
-   else                             dir = "<*";
-   printf ("   %d %s %s (%s)\n", traversal, dir,
-           pt.node_name[n->id], symbol_name(n->sti));
-#endif
+   if (node_actions) {
+      char* dir;
+      if      (direction == TOP_DOWN ) {
+         dir = "*>";
+      } else if (direction == PASS_OVER) {
+         dir = "**";
+      } else {
+         dir = "<*";
+      }
+      printf("   %d %s %s (%s)\n", traversal, dir,
+             pt.node_name[n->id], symbol_name(n->sti));
+   }
 #endif
 }
 
@@ -1305,75 +1309,75 @@ void  lrstar_parser::print_ast (Node* n) // Print subtree.
 
 void  lrstar_parser::traverse (int trav)
 {
-#ifdef NODE_ACTIONS
-   if (n_nodes > 1) // Any nodes in the tree?
-   {
-      if (pt.n_nodeactns > 0) // Any node actions?
+   if (node_actions) {
+      if (n_nodes > 1) // Any nodes in the tree?
       {
-         stacki  = -1;
-         stack   = new Stack [STKSIZE];
-         counter = new int [pt.n_nodenames];
-         for (int i = 0; i < pt.n_nodenames; i++)
+         if (pt.n_nodeactns > 0) // Any node actions?
          {
-            counter[i] = 0;
-         }
+            stacki  = -1;
+            stack   = new Stack [STKSIZE];
+            counter = new int [pt.n_nodenames];
+            for (int i = 0; i < pt.n_nodenames; i++)
+            {
+               counter[i] = 0;
+            }
 #ifdef DEBUG_PARSER
-         fprintf (output, "\nDoing Tree Traversal ...\n\n");
+            fprintf (output, "\nDoing Tree Traversal ...\n\n");
 #else
-         fprintf (output, "\n");
+            fprintf (output, "\n");
 #endif
-         traversal = trav;
-         Node* n = root;
-         do
-         {
-            traverse (n);
-            n = n->next;
+            traversal = trav;
+            Node* n = root;
+            do
+            {
+               traverse (n);
+               n = n->next;
+            }
+            while (n != 0);
          }
-         while (n != 0);
       }
    }
-#endif
 }
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////
 
 void  lrstar_parser::traverse (Node* n)
 {
-#ifdef NODE_ACTIONS
-   int   i  = n->id;             // Node id.
-   Node* c  = n->child;          // Child nove pointer.
-   stacki++;
-   counter[i]++;
-   stack[stacki].id = i;
-   stack[stacki].counter = counter[i];
-   if (pt.nact_func[i] != 0) // Got a node action ?
-   {
-      direction = TOP_DOWN;
-      tracer (n);
-      (*pt.nact_func[i])(this, n);
-   }
-   while (c != 0)
-   {
-      traverse (c);
-      c = c->next;
-      /* if (c != 0)
-         {
-         if (nact_func[i] != 0) // Got a node action ?
-         {
-         direction = PASS_OVER;
+   if (node_actions) {
+      int   i  = n->id;             // Node id.
+      Node* c  = n->child;          // Child nove pointer.
+      stacki++;
+      counter[i]++;
+      stack[stacki].id = i;
+      stack[stacki].counter = counter[i];
+      if (pt.nact_func[i] != 0) // Got a node action ?
+      {
+         direction = TOP_DOWN;
          tracer (n);
-         (*nact_func[i])(n);
-         }
-         } */
+         (*pt.nact_func[i])(this, n);
+      }
+      while (c != 0)
+      {
+         traverse (c);
+         c = c->next;
+         /* if (c != 0)
+            {
+            if (nact_func[i] != 0) // Got a node action ?
+            {
+            direction = PASS_OVER;
+            tracer (n);
+            (*nact_func[i])(n);
+            }
+            } */
+      }
+      if (pt.nact_func[i] != 0) // Got a node action ?
+      {
+         direction = BOTTOM_UP;
+         tracer (n);
+         (*pt.nact_func[i])(this, n);
+      }
+      stacki--;
    }
-   if (pt.nact_func[i] != 0) // Got a node action ?
-   {
-      direction = BOTTOM_UP;
-      tracer (n);
-      (*pt.nact_func[i])(this, n);
-   }
-   stacki--;
-#endif
 }
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////

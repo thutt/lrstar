@@ -1,7 +1,3 @@
-
-///////////////////////////////////////////////////////////////////////////////
-//                                                                           //
-
 #include "lrstar_basic_defs.h"
 #include "CICS_LexerTables_typedef.h"
 #include "CICS_Actions.h"
@@ -50,15 +46,3 @@ int CICS_lookup(lrstar_parser *parser, int &t)             // Lookup in symbol t
 }
 
 #endif
-
-///////////////////////////////////////////////////////////////////////////////
-
-#ifdef NODE_ACTIONS
-
-
-
-#endif
-
-//                                                                           //
-///////////////////////////////////////////////////////////////////////////////
-

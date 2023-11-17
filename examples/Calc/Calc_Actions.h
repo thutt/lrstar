@@ -1,5 +1,3 @@
-///////////////////////////////////////////////////////////////////////////////
-//                                                                           //
 #pragma once
 #include "Calc_Parser.h"
 
@@ -9,7 +7,6 @@ int Calc_error(lrstar_parser *parser, int &t);
 int Calc_lookup(lrstar_parser *parser, int &t);
 
 #endif
-#ifdef NODE_ACTIONS
 
 int Calc_eq_      (lrstar_parser *parser, Node *n);
 int Calc_ne_      (lrstar_parser *parser, Node *n);
@@ -28,11 +25,6 @@ int Calc_program_ (lrstar_parser *parser, Node *n);
 int Calc_int_     (lrstar_parser *parser, Node *n);
 int Calc_store_   (lrstar_parser *parser, Node *n);
 int Calc_target_  (lrstar_parser *parser, Node *n);
-
-#endif
-
-//                                                                           //
-///////////////////////////////////////////////////////////////////////////////
 
 /* Local Variables:      */
 /* mode: c               */

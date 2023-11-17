@@ -1,7 +1,3 @@
-
-///////////////////////////////////////////////////////////////////////////////
-//                                                                           //
-
 #include "lrstar_basic_defs.h"
 #include "C11_LexerTables_typedef.h"
 #include "C11_Actions.h"
@@ -50,15 +46,3 @@ int C11_lookup(lrstar_parser *parser, int &t)             // Lookup in symbol ta
 }
 
 #endif
-
-///////////////////////////////////////////////////////////////////////////////
-
-#ifdef NODE_ACTIONS
-
-
-
-#endif
-
-//                                                                           //
-///////////////////////////////////////////////////////////////////////////////
-

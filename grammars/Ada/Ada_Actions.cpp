@@ -1,7 +1,3 @@
-
-///////////////////////////////////////////////////////////////////////////////
-//                                                                           //
-
 #include "lrstar_basic_defs.h"
 #include "Ada_LexerTables_typedef.h"
 #include "Ada_Actions.h"
@@ -50,15 +46,4 @@ int Ada_lookup(lrstar_parser *parser, int &t)             // Lookup in symbol ta
 }
 
 #endif
-
-///////////////////////////////////////////////////////////////////////////////
-
-#ifdef NODE_ACTIONS
-
-
-
-#endif
-
-//                                                                           //
-///////////////////////////////////////////////////////////////////////////////
 

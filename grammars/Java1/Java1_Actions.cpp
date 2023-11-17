@@ -1,7 +1,3 @@
-
-///////////////////////////////////////////////////////////////////////////////
-//                                                                           //
-
 #include "lrstar_basic_defs.h"
 #include "Java1_LexerTables_typedef.h"
 #include "Java1_Actions.h"
@@ -50,15 +46,3 @@ int Java1_lookup(lrstar_parser *parser, int &t)             // Lookup in symbol 
 }
 
 #endif
-
-///////////////////////////////////////////////////////////////////////////////
-
-#ifdef NODE_ACTIONS
-
-
-
-#endif
-
-//                                                                           //
-///////////////////////////////////////////////////////////////////////////////
-

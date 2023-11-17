@@ -7,9 +7,10 @@
 #include "Vba_Parser.h"
 
 lrstar_parser generated_parser(/* user data   */   NULL,
-                               /* actions     */   true,
-                               /* insensitive */   false,
-                               /* make_ast    */   true);
+                               /* actions      */   true,
+                               /* insensitive  */   false,
+                               /* make_ast     */   true,
+                               /* node_actions */   true);
 
 #include "lrstar_main.cpp"
 

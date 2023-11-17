@@ -1,7 +1,3 @@
-
-///////////////////////////////////////////////////////////////////////////////
-//                                                                           //
-
 #pragma once
 
 #include "ALGOL60_Parser.h"
@@ -17,10 +13,4 @@ int ALGOL60_error(lrstar_parser *parser, int &t);
 int ALGOL60_lookup(lrstar_parser *parser, int &t);
 
 #endif
-#ifdef NODE_ACTIONS
-
-#endif
-
-//                                                                           //
-///////////////////////////////////////////////////////////////////////////////
 

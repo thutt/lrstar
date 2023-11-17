@@ -1,7 +1,3 @@
-
-///////////////////////////////////////////////////////////////////////////////
-//                                                                           //
-
 #include "lrstar_basic_defs.h"
 #include "Vba_LexerTables_typedef.h"
 #include "Vba_Actions.h"
@@ -50,15 +46,3 @@ int Vba_lookup(lrstar_parser *parser, int &t)             // Lookup in symbol ta
 }
 
 #endif
-
-///////////////////////////////////////////////////////////////////////////////
-
-#ifdef NODE_ACTIONS
-
-
-
-#endif
-
-//                                                                           //
-///////////////////////////////////////////////////////////////////////////////
-

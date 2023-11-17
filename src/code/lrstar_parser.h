@@ -87,9 +87,10 @@ private:
     *     performance reasons.
     */
 
+   bool actions;                /* Init & terminate actions.  */
    bool insensitive;            /* Case insensitive parser.   */
    bool make_ast;               /* Build AST.                 */
-   bool actions;                /* Init & terminate actions.  */
+   bool node_actions;           /* Node Actions.              */
 
 public:
    lrstar_user_data_t *user_data;
@@ -208,11 +209,13 @@ public:
    lrstar_parser(lrstar_user_data_t *user_data_,
                  bool                actions_,
                  bool                insensitive_,
-                 bool                make_ast_) :
+                 bool                make_ast_,
+                 bool                node_actions_) :
          user_data(user_data_),
          actions(actions_),
          insensitive(insensitive),
-         make_ast(make_ast_)
+         make_ast(make_ast_),
+         node_actions(node_actions_)
    {
    }
 

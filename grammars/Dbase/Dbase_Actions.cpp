@@ -1,7 +1,3 @@
-
-///////////////////////////////////////////////////////////////////////////////
-//                                                                           //
-
 #include "lrstar_basic_defs.h"
 #include "Dbase_LexerTables_typedef.h"
 #include "Dbase_Actions.h"
@@ -50,15 +46,3 @@ int Dbase_lookup(lrstar_parser *parser, int &t)             // Lookup in symbol 
 }
 
 #endif
-
-///////////////////////////////////////////////////////////////////////////////
-
-#ifdef NODE_ACTIONS
-
-
-
-#endif
-
-//                                                                           //
-///////////////////////////////////////////////////////////////////////////////
-

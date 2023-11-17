@@ -51,9 +51,6 @@ int Calc_lookup(lrstar_parser *parser, int &t) // Lookup in symbol table.
 
 #endif
 
-///////////////////////////////////////////////////////////////////////////////
-
-#ifdef NODE_ACTIONS
 
 int Calc_goal_ (lrstar_parser *parser, Node *v)
 {
@@ -315,11 +312,6 @@ int Calc_target_ (lrstar_parser *parser, Node *v)
         }
     return 1; // OK
 }
-
-#endif
-
-//                                                                           //
-///////////////////////////////////////////////////////////////////////////////
 
 /* Local Variables:      */
 /* mode: c               */
