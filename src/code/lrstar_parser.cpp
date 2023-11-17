@@ -64,9 +64,9 @@ int   lrstar_parser::init_parser (char* patharg, char* input_start, int max_syms
    lt.init_lexer (input_start, 3);     // Initialize the lexer.
    init_symtab (max_syms);             // Initialize the symbol table.
 
-#ifdef MAKE_AST
-   init_ast (max_nodes);               // Initialize the parser.
-#endif
+   if (make_ast) {
+      init_ast (max_nodes);            // Initialize the parser.
+   }
 
 #ifdef ACTIONS
    (*pt.init_func[0])(this);          // init_action()
@@ -89,9 +89,10 @@ Err:  n_errors++;
 
 void  lrstar_parser::term_parser ()
 {
-#ifdef MAKE_AST
-   term_ast ();
-#endif
+   if (make_ast) {
+      term_ast();
+   }
+
    term_symtab ();
 #ifdef ACTIONS
    (*pt.init_func[1])(this);               // term_action()
@@ -127,11 +128,12 @@ Test:
       PS++;
       PS->state = x;                            // Put current state on stack.
       PS->sti   = lt.token.sti;                 // Put symbol-table index on stack.
-#ifdef MAKE_AST
-      PS->line  = lt.token.line;                // Put line number on stack.
-      PS->start = lt.token.start;               // Put start address on stack.
-      PS->node  = 0;                            // Set node on stack to zero.
-#endif
+      if (make_ast) {
+         PS->line  = lt.token.line;             // Put line number on stack.
+         PS->start = lt.token.start;            // Put start address on stack.
+         PS->node  = 0;                         // Set node on stack to zero.
+      }
+
 #ifdef EXPECTING
       PS->sym   = -t;                           // Put symbol on stack.
 #endif
@@ -165,9 +167,9 @@ Test:
          RS->sym   = PS->sym;
 #endif
          PS->state = x;                         // Stack current state, replacing old state.
-#ifdef MAKE_AST
-         PS->node  = 0;                         // Set node on stack to zero.
-#endif
+         if (make_ast) {
+            PS->node  = 0;                      // Set node on stack to zero.
+         }
       }
       while (1)
       {
@@ -201,12 +203,12 @@ Test:
          {
             PS++;                               // Increment parser stack pointer.
             PS->state = x;                      // Put current state on stack.
-            PS->sti   = lt.token.sti;              // Put symbol table index on stack.
-#ifdef MAKE_AST
-            PS->line  = lt.token.line;             // Put line number on stack.
-            PS->start = lt.token.start;            // Put start address on stack.
-            PS->node  = 0;                      // Set node on stack to zero.
-#endif
+            PS->sti   = lt.token.sti;           // Put symbol table index on stack.
+            if (make_ast) {
+               PS->line  = lt.token.line;       // Put line number on stack.
+               PS->start = lt.token.start;      // Put start address on stack.
+               PS->node  = 0;                   // Set node on stack to zero.
+            }
             if (y > pt.accept_state) { // Shift and reduce action?
                p = y - pt.accept_state;            // Shift and reduce.
                goto SR;                         // Go to shift reduce.
@@ -233,11 +235,12 @@ Test:
       print_lookaheads();                       // Print lookahead statistics.
 #endif
       print_symtab ();                          // Print the symbol table contents.
-#ifdef MAKE_AST
-      find_root (PS[0].node);
-      print_ast ();
-      traverse (FIRST_PASS);
-#endif
+      if (make_ast) {
+         find_root (PS[0].node);
+         print_ast ();
+         traverse (FIRST_PASS);
+      }
+
 #ifdef DEBUG_PARSER
       fprintf (output, "\nDone.\n\n");
 #endif
@@ -278,48 +281,48 @@ void  lrstar_parser::reduce (int p)
       symbol[PS[0].sti].term = pt.argy[p];
    }
 #endif
-#ifdef MAKE_AST
-   int psi;                                           // Parse stack index.
-   if (pt.node_numb[p] >= 0)                          // MAKE NODE ?
-   {
-      Node* n   = new_node ();                        // Get a new node.
-      n->id     = pt.node_numb[p];                       // Set node id number.
-      n->prev   = 0;                                  // Set prev to nonexistent.
-      n->next   = 0;                                  // Set next to nonexistent.
-      n->child  = 0;                                  // Set child to nonexistent.
-      n->parent = 0;                                  // Set parent to nonexistent.
-      if (pt.argx[p] >= 0)                               // If first argument specified.
+   if (make_ast) {
+      int psi;                                        // Parse stack index.
+      if (pt.node_numb[p] >= 0)                       // MAKE NODE ?
       {
-         psi      = pt.argx[p];                          // Get parse-stack index.
-         n->sti   = PS[psi].sti;                      // Move sti from parse stack to node.
-         n->line  = PS[psi].line;                     // Move line from parse stack to node.
-         n->start = PS[psi].start;                    // Move start from parse stack to node.
+         Node* n   = new_node ();                     // Get a new node.
+         n->id     = pt.node_numb[p];                 // Set node id number.
+         n->prev   = 0;                               // Set prev to nonexistent.
+         n->next   = 0;                               // Set next to nonexistent.
+         n->child  = 0;                               // Set child to nonexistent.
+         n->parent = 0;                               // Set parent to nonexistent.
+         if (pt.argx[p] >= 0)                         // If first argument specified.
+         {
+            psi      = pt.argx[p];                    // Get parse-stack index.
+            n->sti   = PS[psi].sti;                   // Move sti from parse stack to node.
+            n->line  = PS[psi].line;                  // Move line from parse stack to node.
+            n->start = PS[psi].start;                 // Move start from parse stack to node.
+         }
+         else // No argument on production.
+         {
+            n->sti   = 0;                             // Set symbol-table index to zero.
+            n->line  = 0;                             // Set line number to zero.
+            n->start = 0;
+         }
+         psi = linkup(p);                             // Linkup the nodes in this rule.
+         if (psi >= 0)                                // Any nodes found in this rule?
+         {
+            n->child = PS[psi].node;                  // Define child.
+            PS[psi].node->parent = n;                 // Define parent.
+         }
+         PS[0].node = n;                              // Define this node in the parse stack.
+         PS[0].last = n;                              // Define this node in the parse stack.
       }
-      else // No argument on production.
+      else                                            // Check for nodes not linked?
       {
-         n->sti   = 0;                                // Set symbol-table index to zero.
-         n->line  = 0;                                // Set line number to zero.
-         n->start = 0;
+         psi = linkup (p);                            // Get parse-stack index.
+         if (psi > 0)                                 // If we have a node here ...
+         {
+            PS[0].node = PS[psi].node;                // Move node to 1st position.
+            PS[0].last = PS[psi].last;                // Move last also.
+         }
       }
-      psi = linkup(p);                                // Linkup the nodes in this rule.
-      if (psi >= 0)                                   // Any nodes found in this rule?
-      {
-         n->child = PS[psi].node;                     // Define child.
-         PS[psi].node->parent = n;                    // Define parent.
-      }
-      PS[0].node = n;                                 // Define this node in the parse stack.
-      PS[0].last = n;                                 // Define this node in the parse stack.
    }
-   else                                               // Check for nodes not linked?
-   {
-      psi = linkup (p);                               // Get parse-stack index.
-      if (psi > 0)                                    // If we have a node here ...
-      {
-         PS[0].node = PS[psi].node;                   // Move node to 1st position.
-         PS[0].last = PS[psi].last;                   // Move last also.
-      }
-   }
-#endif
 }
 
 #ifdef ND_PARSING
@@ -1142,8 +1145,6 @@ char* lrstar_parser::symbol_name (char* start, char* end)
    return name;
 }
 
-#ifdef MAKE_AST
-
 /////////////////////////////////////////////////////////////////////////////////////////////////////
 
 int   lrstar_parser::linkup (int p)
@@ -1439,7 +1440,7 @@ void  lrstar_parser::print_node (char *indent, Node* n)
    }
 }
 
-#endif
+//#endif  /* gungla */
 
 //                                                                           //
 ///////////////////////////////////////////////////////////////////////////////

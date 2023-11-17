@@ -7,7 +7,8 @@
 #include "LRK_Parser.h"
 
 lrstar_parser generated_parser(/* user data   */   NULL,
-                               /* insensitive */   false);
+                               /* insensitive */   false,
+                               /* make_ast    */   true);
 
 #include "lrstar_main.cpp"
 

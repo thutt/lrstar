@@ -7,7 +7,8 @@
 #include "Java1_Parser.h"
 
 lrstar_parser generated_parser(/* user data   */   NULL,
-                               /* insensitive */   false);
+                               /* insensitive */   false,
+                               /* make_ast    */   false);
 
 #include "lrstar_main.cpp"
 

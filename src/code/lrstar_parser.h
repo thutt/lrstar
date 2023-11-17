@@ -82,12 +82,13 @@ class lrstar_user_data_t {
 class lrstar_parser
 {
 private:
-   bool insensitive;            /* Case insensitive parser.
-                                 *
-                                 * XXX This option should be a
-                                 * resolved at compile time to not
-                                 * have to do a comparison on every
-                                 * character. */
+   /*
+    * XXX This options should be resolved at compile time for
+    *     performance reasons.
+    */
+
+   bool insensitive;            /* Case insensitive parser. */
+   bool make_ast;               /* Build AST.               */
 
 public:
    lrstar_user_data_t *user_data;
@@ -204,9 +205,11 @@ public:
    void    tracer      (Node* n);
 
    lrstar_parser(lrstar_user_data_t *user_data_,
-                 bool insensitive_) :
-      user_data(user_data_),
-      insensitive(insensitive)
+                 bool                insensitive_,
+                 bool                make_ast_) :
+         user_data(user_data_),
+         insensitive(insensitive),
+         make_ast(make_ast_)
    {
    }
 
