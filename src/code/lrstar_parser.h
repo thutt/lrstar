@@ -87,19 +87,19 @@ public:
     *     performance reasons.
     */
 
-   bool opt_actions;            /* Init & terminate actions.    */
-   bool opt_debug_parser;       /* Debugging diagnostics.       */
-   bool opt_debug_trace;        /* Tracing.                     */
-   bool opt_expecting;          /* Expecting.                   */
-   bool opt_insensitive;        /* Case insensitive parser.     */
-   int  opt_lookaheads;         /* Non-deterministic lookahead. */
-   bool opt_make_ast;           /* Build AST.                   */
-   bool opt_nd_parsing;         /* Non-deterministic. parsing.  */
-   int  opt_nd_threads;         /* nd_parsing thread count.     */
-   bool opt_node_actions;       /* Node Actions.                */
-   bool opt_reversable;         /* Reversable grammar.          */
-   bool opt_semantics;          /* Semantics.                   */
-   bool opt_term_actions;       /* Term Actions.                */
+   const bool opt_actions;            /* Init & terminate actions.    */
+   const bool opt_debug_parser;       /* Debugging diagnostics.       */
+   const bool opt_debug_trace;        /* Tracing.                     */
+   const bool opt_expecting;          /* Expecting.                   */
+   const bool opt_insensitive;        /* Case insensitive parser.     */
+   const int  opt_lookaheads;         /* Non-deterministic lookahead. */
+   const bool opt_make_ast;           /* Build AST.                   */
+   const bool opt_nd_parsing;         /* Non-deterministic. parsing.  */
+   const int  opt_nd_threads;         /* nd_parsing thread count.     */
+   const bool opt_node_actions;       /* Node Actions.                */
+   const bool opt_reversable;         /* Reversable grammar.          */
+   const bool opt_semantics;          /* Semantics.                   */
+   const bool opt_term_actions;       /* Term Actions.                */
 
 public:
    lrstar_user_data_t *user_data;
