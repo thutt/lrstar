@@ -43,18 +43,18 @@ static const uchar lowercase[256] = {
 
 int   lrstar_parser::init_parser (char* patharg, char* input_start, int max_syms, int max_nodes)
 {
-#ifdef ND_PARSING
-   for (int i = 0; i < ND_THREADS; i++)
-   {
-      SSstart[i] = new SStack[STKSIZE];
+   if (opt_nd_parsing) {
+      for (int i = 0; i < opt_nd_threads; i++)
+      {
+         SSstart[i] = new SStack[STKSIZE];
+      }
+      for (int i = 0; i < opt_lookaheads + 1; i++)
+      {
+         LAcount[i] = 0;
+      }
+      last_line = 0;
+      n_warnings = 0;
    }
-   for (int i = 0; i < LOOKAHEADS + 1; i++)
-   {
-      LAcount[i] = 0;
-   }
-   last_line = 0;
-   n_warnings = 0;
-#endif
 
    strcpy (path, patharg);
    PS           = PSstart;             // Set parse-stack pointer.
@@ -185,56 +185,58 @@ Test:
          PS -= pt.PL[p];                        // Reduce parse stack ptr by rule length - 1.
       }
    }
-#ifdef ND_PARSING
-   int i, j, na, y;
-   for (i = pt.nd_fterm[x]; i < pt.nd_fterm[x+1]; i++)   // For all ND terminals in this state.
-   {
-      if (pt.nd_term[i] == t)                      // Got a match?
+
+   if (opt_nd_parsing) {
+      int i, j, na, y;
+      for (i = pt.nd_fterm[x]; i < pt.nd_fterm[x+1]; i++)   // For all ND terminals in this state.
       {
-         j = pt.nd_faction[i];                     // Start of actions.
-         na = 0;                                // Number of actions.
-         do
+         if (pt.nd_term[i] == t)                      // Got a match?
          {
-            State[na] = x;                      // Copy this state.
-            Action[na++] = pt.nd_action[j];        // Copy this action.
-         }
-         while (++j < pt.nd_faction[i+1]);         // While there's more.
-         y = nd_parser (x,t,na);                // ND lookahead parser.
-         if (y > 0)                             // Shift?
-         {
-            PS++;                               // Increment parser stack pointer.
-            PS->state = x;                      // Put current state on stack.
-            PS->sti   = lt.token.sti;           // Put symbol table index on stack.
-            if (opt_make_ast) {
-               PS->line  = lt.token.line;       // Put line number on stack.
-               PS->start = lt.token.start;      // Put start address on stack.
-               PS->node  = 0;                   // Set node on stack to zero.
+            j = pt.nd_faction[i];                     // Start of actions.
+            na = 0;                                // Number of actions.
+            do
+            {
+               State[na] = x;                      // Copy this state.
+               Action[na++] = pt.nd_action[j];        // Copy this action.
             }
-            if (y > pt.accept_state) { // Shift and reduce action?
-               p = y - pt.accept_state;            // Shift and reduce.
-               goto SR;                         // Go to shift reduce.
+            while (++j < pt.nd_faction[i+1]);         // While there's more.
+            y = nd_parser (x,t,na);                // ND lookahead parser.
+            if (y > 0)                             // Shift?
+            {
+               PS++;                               // Increment parser stack pointer.
+               PS->state = x;                      // Put current state on stack.
+               PS->sti   = lt.token.sti;           // Put symbol table index on stack.
+               if (opt_make_ast) {
+                  PS->line  = lt.token.line;       // Put line number on stack.
+                  PS->start = lt.token.start;      // Put start address on stack.
+                  PS->node  = 0;                   // Set node on stack to zero.
+               }
+               if (y > pt.accept_state) { // Shift and reduce action?
+                  p = y - pt.accept_state;            // Shift and reduce.
+                  goto SR;                         // Go to shift reduce.
+               }
+               if (opt_expecting) {
+                  PS->sym = -t;                       // Put symbol on stack.
+               }
+               x = y;                              // Shift and goto.
+               goto Read;                          // Go to read another token.
             }
-            if (opt_expecting) {
-               PS->sym = -t;                       // Put symbol on stack.
+            if (y < 0)                             // Reduce ?
+            {
+               p = -y;                             // Reduce action.
+               goto Red;                           // Go to reduce.
             }
-            x = y;                              // Shift and goto.
-            goto Read;                          // Go to read another token.
-         }
-         if (y < 0)                             // Reduce ?
-         {
-            p = -y;                             // Reduce action.
-            goto Red;                           // Go to reduce.
          }
       }
    }
-#endif
+
    if (x == pt.accept_state)                       // If Goal production.
    {
       PS -= pt.PL[p];                              // Reduce parse stack ptr by rule length - 1.
       reduce (p);                               // Call reduce action with production number.
-#ifdef ND_PARSING
-      print_lookaheads();                       // Print lookahead statistics.
-#endif
+      if (opt_nd_parsing) {
+         print_lookaheads();                       // Print lookahead statistics.
+      }
       print_symtab ();                          // Print the symbol table contents.
       if (opt_make_ast) {
          find_root (PS[0].node);
@@ -325,7 +327,6 @@ void  lrstar_parser::reduce (int p)
    }
 }
 
-#ifdef ND_PARSING
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -399,7 +400,7 @@ int   lrstar_parser::nd_parser (int x, int t, int na)
 
    lt.lookahead.end = lt.token.end; // Prime get_lookahead().
    lt.lookahead_linenumb = lt.linenumb;
-   limit = LOOKAHEADS;
+   limit = opt_lookaheads;
    la = 1;
    do
    {
@@ -651,7 +652,7 @@ Shft:
 void  lrstar_parser::print_lookaheads()
 {
    int n = 0;
-   for (int i = 0; i <= LOOKAHEADS; i++)
+   for (int i = 0; i <= opt_lookaheads; i++)
    {
       if (LAcount[i] != 0)
       {
@@ -666,7 +667,6 @@ void  lrstar_parser::print_lookaheads()
    }
 }
 
-#endif // ND_PARSING
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -746,25 +746,26 @@ void  lrstar_parser::expecting (int x)
          T_exp[t] = 1;                          // Mark this terminal.
       }
    }
-#ifdef ND_PARSING
-   int i, j;
-   for (i = pt.nd_fterm[x]; i < pt.nd_fterm[x+1]; i++)      // For all terminals in this state.
-   {
-      for (j = pt.nd_faction[i];
-           j < pt.nd_faction[i+1]; j++)  // For all actions for these terminals.
+
+   if (opt_nd_parsing) {
+      int i, j;
+      for (i = pt.nd_fterm[x]; i < pt.nd_fterm[x+1]; i++)      // For all terminals in this state.
       {
-         if (pt.nd_action[j] > 0)                        // Terminal transition.
+         for (j = pt.nd_faction[i];
+              j < pt.nd_faction[i+1]; j++)  // For all actions for these terminals.
          {
-            T_exp[pt.nd_term[i]] = 1;                    // Mark this terminal.
-         }
-         else if (pt.nd_action[j] < 0)
-         {
-            int p = -pt.nd_action[j];
-            reduction (p, x);
+            if (pt.nd_action[j] > 0)                        // Terminal transition.
+            {
+               T_exp[pt.nd_term[i]] = 1;                    // Mark this terminal.
+            }
+            else if (pt.nd_action[j] < 0)
+            {
+               int p = -pt.nd_action[j];
+               reduction (p, x);
+            }
          }
       }
    }
-#endif
    int p, q;
    if ((p = pt.Rr[x]) > 0)                      // Default reduction?
    {

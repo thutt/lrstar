@@ -1420,19 +1420,17 @@ static void actions_cpp_fn(FILE       *fp,
    fprintf (fp, "int %s_lookup(lrstar_parser *parser, int &t)             // Lookup in symbol table.\n", gfn);
    fprintf (fp, "{\n");
    fprintf (fp, "      int sti;\n");
-   fprintf (fp, "      #ifdef ND_PARSING\n");
-   fprintf (fp, "      if (parser->lt.lookahead.start != 0)             // In lookahead mode?\n");
+   fprintf (fp,
+            "      if (parser->opt_nd_parsing && "
+            "parser->lt.lookahead.start != 0)             // In lookahead mode?\n");
    fprintf (fp, "      {\n");
    fprintf (fp, "         sti = parser->add_symbol(t, parser->lt.lookahead.start, parser->lt.lookahead.end);\n");
-   fprintf (fp, "      }\n");
-   fprintf (fp, "      else                                 // Regular mode of parsing.\n");
-   fprintf (fp, "      #endif\n");
-   fprintf (fp, "      {\n");
+   fprintf (fp, "      } else {                             // Regular mode of parsing.\n");
    fprintf (fp, "         sti = parser->add_symbol(t, parser->lt.token.start, parser->lt.token.end);\n");
    fprintf (fp, "      }\n");
-   fprintf (fp, "      #ifdef SEMANTICS\n");
-   fprintf (fp, "      t = parser->symbol[sti].term;        // Redefine terminal number?\n");
-   fprintf (fp, "      #endif\n");
+   fprintf (fp, "      if (parser->opt_semantics) {\n");
+   fprintf (fp, "         t = parser->symbol[sti].term;        // Redefine terminal number?\n");
+   fprintf (fp, "      }\n");
    fprintf (fp, "    return sti;\n");                       // Return symbol-table index.\n");
    fprintf (fp, "}\n");
    fprintf (fp, "\n");
