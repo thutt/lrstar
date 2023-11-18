@@ -87,16 +87,19 @@ public:
     *     performance reasons.
     */
 
-   bool opt_actions;            /* Init & terminate actions.  */
-   bool opt_debug_parser;       /* Debugging diagnostics.     */
-   bool opt_debug_trace;        /* Tracing.                   */
-   bool opt_expecting;          /* Expecting.                 */
-   bool opt_insensitive;        /* Case insensitive parser.   */
-   bool opt_make_ast;           /* Build AST.                 */
-   bool opt_node_actions;       /* Node Actions.              */
-   bool opt_reversable;         /* Reversable grammar.        */
-   bool opt_semantics;          /* Semantics.                 */
-   bool opt_term_actions;       /* Term Actions.              */
+   bool opt_actions;            /* Init & terminate actions.    */
+   bool opt_debug_parser;       /* Debugging diagnostics.       */
+   bool opt_debug_trace;        /* Tracing.                     */
+   bool opt_expecting;          /* Expecting.                   */
+   bool opt_insensitive;        /* Case insensitive parser.     */
+   int  opt_lookaheads;         /* Non-deterministic lookahead. */
+   bool opt_make_ast;           /* Build AST.                   */
+   bool opt_nd_parsing;         /* Non-deterministic. parsing.  */
+   int  opt_nd_threads;         /* nd_parsing thread count.     */
+   bool opt_node_actions;       /* Node Actions.                */
+   bool opt_reversable;         /* Reversable grammar.          */
+   bool opt_semantics;          /* Semantics.                   */
+   bool opt_term_actions;       /* Term Actions.                */
 
 public:
    lrstar_user_data_t *user_data;
@@ -143,16 +146,15 @@ private:
    void    print_stack  ();
 
    // ND parsing ...
-#ifdef ND_PARSING
    int     LA;                     // Look Ahead token.
    int     n_warnings;             // Numbor of warnings.
    int     last_line;
-   SStack* SS      [ND_THREADS];   // State stack pointer.
-   SStack* SSstart [ND_THREADS];   // State stack start.
-   int     State   [ND_THREADS];   // State, during lookahead.
-   int     Action  [ND_THREADS];   // Parsing action.
-   int     Parsed  [ND_THREADS];   // Parsed (0 or 1).
-   int     LAcount [LOOKAHEADS+1]; // Lookahead count.
+   SStack **SS;                    // State stack pointer.
+   SStack **SSstart;               // State stack start.
+   int     *State;                 // State, during lookahead.
+   int     *Action;                // Parsing action.
+   int     *Parsed;                // Parsed (0 or 1).
+   int     *LAcount;               // Lookahead count.
 
    void    nd_optimize       ();
    int     nd_parser         (int x, int t, int i);
@@ -160,7 +162,6 @@ private:
    void    print_action      (const char* str, int i);
    void    print_actions     (int na);
    void    print_lookaheads  ();
-#endif
 
    // Symbol-Table Area ...
 public:
@@ -218,7 +219,10 @@ public:
                  bool                debug_trace_,
                  bool                expecting_,
                  bool                insensitive_,
+                 int                 lookaheads_,
                  bool                make_ast_,
+                 bool                nd_parsing_,
+                 int                 nd_threads_,
                  bool                node_actions_,
                  bool                reversable_,
                  bool                semantics_,
@@ -229,12 +233,23 @@ public:
          opt_debug_trace(debug_trace_),
          opt_expecting(expecting_),
          opt_insensitive(insensitive_),
+         opt_lookaheads(lookaheads_),
          opt_make_ast(make_ast_),
+         opt_nd_parsing(nd_parsing_),
+         opt_nd_threads(nd_threads_),
          opt_node_actions(node_actions_),
          opt_reversable(reversable_),
          opt_semantics(semantics_),
          opt_term_actions(term_actions_)
    {
+      if (opt_nd_parsing) {
+         SS      = new SStack *[opt_nd_threads];
+         SSstart = new SStack *[opt_nd_threads];
+         State   = new int[opt_nd_threads];
+         Action  = new int[opt_nd_threads];
+         Parsed  = new int[opt_nd_threads];
+         LAcount = new int[opt_lookaheads + 1];
+      }
    }
 
 };

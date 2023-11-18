@@ -1494,9 +1494,21 @@ instantiate_generated_parser(FILE *fp)
            static_cast<int>(sizeof(templ) / sizeof(templ[0])) - 1, " ",
            b[!!optn[PG_INSENSITIVE]]);
    fprintf(fp, ",\n%*s"
+           "/* lookaheads   */   %d",
+           static_cast<int>(sizeof(templ) / sizeof(templ[0])) - 1, " ",
+           optn[PG_LOOKAHEADS]);
+   fprintf(fp, ",\n%*s"
            "/* make_ast     */   %s",
            static_cast<int>(sizeof(templ) / sizeof(templ[0])) - 1, " ",
            b[optn[PG_ASTCONST] && PG_Main::N_nodes > 0]);
+   fprintf(fp, ",\n%*s"
+           "/* nd_parsing   */   %s",
+           static_cast<int>(sizeof(templ) / sizeof(templ[0])) - 1, " ",
+           b[PG_Main::n_ndstates > 0]);
+   fprintf(fp, ",\n%*s"
+           "/* nd_threads   */   %d",
+           static_cast<int>(sizeof(templ) / sizeof(templ[0])) - 1, " ",
+           PG_Main::n_ndstates > 0 ? PG_Main::nd_maxcount : 0);
    fprintf(fp, ",\n%*s"
            "/* node_actions */   %s",
            static_cast<int>(sizeof(templ) / sizeof(templ[0])) - 1, " ",

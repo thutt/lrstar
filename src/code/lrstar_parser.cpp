@@ -626,7 +626,7 @@ Shft:
             printf ("\n   STOPPED LR(*) parsing after %d lookaheads, "
                     "for conflicting actions:\n\n", la + 1);
             do {
-               print_prod ("   * Reduce", -nd_action[k], 0);
+               print_prod ("   * Reduce", -pt.nd_action[k], 0);
             } while (++k < pt.nd_faction[j+1]);
             print_action ("\n   IGNORING ", i);
          }
