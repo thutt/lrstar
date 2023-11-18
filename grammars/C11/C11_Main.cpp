@@ -6,7 +6,8 @@
 #include "C11_LexerTables_typedef.h"
 #include "C11_Parser.h"
 
-lrstar_parser generated_parser(/* user data    */   NULL,
+lrstar_parser generated_parser(/* grammar      */   "C11",
+                               /* user data    */   NULL,
                                /* actions      */   true,
                                /* debug_parser */   false,
                                /* debug_trace  */   false,

@@ -6,7 +6,8 @@
 #include "Zeus_LexerTables_typedef.h"
 #include "Zeus_Parser.h"
 
-lrstar_parser generated_parser(/* user data    */   NULL,
+lrstar_parser generated_parser(/* grammar      */   "Zeus",
+                               /* user data    */   NULL,
                                /* actions      */   true,
                                /* debug_parser */   false,
                                /* debug_trace  */   false,

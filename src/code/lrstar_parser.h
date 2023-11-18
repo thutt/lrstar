@@ -104,7 +104,6 @@ public:
 public:
    lrstar_user_data_t *user_data;
 
-
 public:
    lexer_t         lt;   /* Lexer tables. */
    parser_tables_t pt;   /* Parser tables. */
@@ -115,6 +114,9 @@ public:
    int     parse        ();
    void    term_parser  ();
    void    print_prod   (const char* prefix, int p, int dot);
+
+public:
+   const char *grammar;         /* Name of grammar. */
 
 public:
    // Parser variables
@@ -213,7 +215,8 @@ public:
    void    print_node  (char* indent, Node* n);
    void    tracer      (Node* n);
 
-   lrstar_parser(lrstar_user_data_t *user_data_,
+   lrstar_parser(const char         *grammar_,
+                 lrstar_user_data_t *user_data_,
                  bool                actions_,
                  bool                debug_parser_,
                  bool                debug_trace_,
@@ -227,6 +230,7 @@ public:
                  bool                reversable_,
                  bool                semantics_,
                  bool                term_actions_) :
+         grammar(grammar_),
          user_data(user_data_),
          opt_actions(actions_),
          opt_debug_parser(debug_parser_),

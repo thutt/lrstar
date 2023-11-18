@@ -6,7 +6,8 @@
 #include "C_LexerTables_typedef.h"
 #include "C_Parser.h"
 
-lrstar_parser generated_parser(/* user data    */   NULL,
+lrstar_parser generated_parser(/* grammar      */   "C",
+                               /* user data    */   NULL,
                                /* actions      */   true,
                                /* debug_parser */   false,
                                /* debug_trace  */   false,

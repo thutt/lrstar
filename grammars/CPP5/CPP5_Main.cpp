@@ -6,7 +6,8 @@
 #include "CPP5_LexerTables_typedef.h"
 #include "CPP5_Parser.h"
 
-lrstar_parser generated_parser(/* user data    */   NULL,
+lrstar_parser generated_parser(/* grammar      */   "CPP5",
+                               /* user data    */   NULL,
                                /* actions      */   false,
                                /* debug_parser */   false,
                                /* debug_trace  */   false,

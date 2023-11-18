@@ -109,7 +109,7 @@ int   main (int na, char **arg)
    rc = 0;
    nl = 0;
 
-   printf (copyright, GRAMMAR);
+   printf (copyright, generated_parser.grammar);
    printf ("Args:   ");
    for (i = 1; i < na; i++) printf (" %s", arg[i]);
    printf ("\n");

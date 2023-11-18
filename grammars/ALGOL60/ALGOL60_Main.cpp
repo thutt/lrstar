@@ -6,7 +6,8 @@
 #include "ALGOL60_LexerTables_typedef.h"
 #include "ALGOL60_Parser.h"
 
-lrstar_parser generated_parser(/* user data    */   NULL,
+lrstar_parser generated_parser(/* grammar      */   "ALGOL60",
+                               /* user data    */   NULL,
                                /* actions      */   false,
                                /* debug_parser */   false,
                                /* debug_trace  */   false,

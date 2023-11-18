@@ -6,7 +6,8 @@
 #include "Modula2_LexerTables_typedef.h"
 #include "Modula2_Parser.h"
 
-lrstar_parser generated_parser(/* user data    */   NULL,
+lrstar_parser generated_parser(/* grammar      */   "Modula2",
+                               /* user data    */   NULL,
                                /* actions      */   true,
                                /* debug_parser */   false,
                                /* debug_trace  */   false,

@@ -6,7 +6,8 @@
 #include "PLSQL_LexerTables_typedef.h"
 #include "PLSQL_Parser.h"
 
-lrstar_parser generated_parser(/* user data    */   NULL,
+lrstar_parser generated_parser(/* grammar      */   "PLSQL",
+                               /* user data    */   NULL,
                                /* actions      */   false,
                                /* debug_parser */   false,
                                /* debug_trace  */   false,

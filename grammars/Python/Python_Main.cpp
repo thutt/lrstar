@@ -6,7 +6,8 @@
 #include "Python_LexerTables_typedef.h"
 #include "Python_Parser.h"
 
-lrstar_parser generated_parser(/* user data    */   NULL,
+lrstar_parser generated_parser(/* grammar      */   "Python",
+                               /* user data    */   NULL,
                                /* actions      */   false,
                                /* debug_parser */   false,
                                /* debug_trace  */   false,

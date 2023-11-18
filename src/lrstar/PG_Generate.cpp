@@ -1472,7 +1472,10 @@ instantiate_generated_parser(FILE *fp)
    static const char templ[] = "lrstar_parser generated_parser(";
    fprintf(fp, "\n%s", templ);
    fprintf(fp,
-           "/* user data    */   NULL");
+           "/* grammar      */   \"%s\"", gfn);
+   fprintf(fp, ",\n%*s"
+           "/* user data    */   NULL",
+           static_cast<int>(sizeof(templ) / sizeof(templ[0])) - 1, " ");
    fprintf(fp, ",\n%*s"
            "/* actions      */   %s",
            static_cast<int>(sizeof(templ) / sizeof(templ[0])) - 1, " ",
