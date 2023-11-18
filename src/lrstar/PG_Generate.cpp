@@ -68,64 +68,6 @@ static const char *get_typestr(int *x, int n)
 }
 
 
-static void
-print_defines(FILE *fp)
-{
-   int nl = 1;
-
-   fprintf (fp, "      #undef  GRAMMAR\n");          // In case of multiple parsers.
-   fprintf (fp, "      #undef  ACTIONS\n");          // In case of multiple parsers.
-   fprintf (fp, "      #undef  TERM_ACTIONS\n");     // In case of multiple parsers.
-   fprintf (fp, "      #undef  NODE_ACTIONS\n");     // In case of multiple parsers.
-   fprintf (fp, "      #undef  INSENSITIVE\n");      // In case of multiple parsers.
-   fprintf (fp, "      #undef  LOOKAHEADS\n");       // In case of multiple parsers.
-   fprintf (fp, "      #undef  DEBUG_PARSER\n");     // In case of multiple parsers.
-   fprintf (fp, "      #undef  DEBUG_TRACE\n");      // In case of multiple parsers.
-   fprintf (fp, "      #undef  MAKE_AST\n");         // In case of multiple parsers.
-   fprintf (fp, "      #undef  EXPECTING\n");        // In case of multiple parsers.
-//    fprintf (fp, "      #undef  ERRORUSED\n");        // In case of multiple parsers.
-   fprintf (fp, "      #undef  REVERSABLE\n");       // In case of multiple parsers.
-   fprintf (fp, "      #undef  SEMANTICS\n");        // In case of multiple parsers.
-   fprintf (fp, "      #undef  ND_PARSING\n");       // In case of multiple parsers.
-   fprintf (fp, "      #undef  ND_THREADS\n");       // In case of multiple parsers.
-
-   if (PG_Main::n_ndstates > 0) nl = optn[PG_LOOKAHEADS];
-
-   fprintf (fp, "\n      #define GRAMMAR      \"%s\"\n",           gfn);
-   if (PG_Main::N_tacts > 0 || PG_Main::N_nacts > 0) {
-      fprintf (fp, "      #define ACTIONS       %s_Actions\n",      gfn);
-   }
-   if (PG_Main::N_tacts > 0) {
-      fprintf (fp, "      #define TERM_ACTIONS  %s_TermActions\n",  gfn);
-   }
-   if (PG_Main::N_nacts > 0) {
-      fprintf (fp, "      #define NODE_ACTIONS  %s_NodeActions\n",  gfn);
-   }
-   if (optn[PG_INSENSITIVE])                 fprintf (fp, "      #define INSENSITIVE\n");
-   fprintf (fp, "      #define LOOKAHEADS  %3d\n", nl);
-   if (optn[PG_DEBUG])                       fprintf (fp, "      #define DEBUG_PARSER\n");
-   if (optn[PG_DEBUGTRACE])                  fprintf (fp, "      #define DEBUG_TRACE\n");
-   if (optn[PG_ASTCONST] && PG_Main::N_nodes > 0) {
-      fprintf (fp, "      #define MAKE_AST\n");
-   }
-   if (optn[PG_EXPECTING] || PG_Main::error_used > 0) {
-      fprintf (fp, "      #define EXPECTING\n");
-   }
-//    if (error_used > 0)                       fprintf (fp, "      #define ERRORUSED\n");
-   if (PG_Main::N_reverses > 0) {
-      fprintf (fp, "      #define REVERSABLE\n");
-   }
-   if (PG_Main::N_semantics > 0) {
-      fprintf (fp, "      #define SEMANTICS\n");
-   }
-   if (PG_Main::n_ndstates > 0)
-   {
-      fprintf (fp, "      #define ND_PARSING\n");
-      fprintf (fp, "      #define ND_THREADS  %3d\n", PG_Main::nd_maxcount);
-   }
-}
-
-
 static const char *
 template_decl(void)
 {
@@ -1366,7 +1308,6 @@ parser_header_fn(FILE       *fp,
    if (lrstar_linux) {
       fprintf (fp, "#include \"lrstar_lexer.h\"\n");
    }
-   print_defines(fp);
 
    fprintf(fp, "\n");
    PG_Main::GenerateParserTableEnums(fp);
