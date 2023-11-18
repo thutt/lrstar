@@ -20,6 +20,7 @@ lrstar_parser generated_parser(/* grammar      */   "Java9",
                                /* node_actions */   true,
                                /* reversable   */   false,
                                /* semantics    */   false,
+                               /* stksize      */   100,
                                /* term_actions */   true);
 
 #include "lrstar_main.cpp"

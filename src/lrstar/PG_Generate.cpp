@@ -1407,6 +1407,7 @@ static void lexer_cpp_fn(FILE       *fp,
 static void
 instantiate_generated_parser(FILE *fp)
 {
+   static const int  stksize = 100;       // Parser-stack size.
    static const char *b[] = { "false", "true" };
    static const char templ[] = "lrstar_parser generated_parser(";
    fprintf(fp, "\n%s", templ);
@@ -1463,6 +1464,10 @@ instantiate_generated_parser(FILE *fp)
            "/* semantics    */   %s",
            static_cast<int>(sizeof(templ) / sizeof(templ[0])) - 1, " ",
            b[PG_Main::N_semantics > 0]);
+   fprintf(fp, ",\n%*s"
+           "/* stksize      */   %d",
+           static_cast<int>(sizeof(templ) / sizeof(templ[0])) - 1, " ",
+           stksize);
    fprintf(fp, ",\n%*s"
            "/* term_actions */   %s",
            static_cast<int>(sizeof(templ) / sizeof(templ[0])) - 1, " ",

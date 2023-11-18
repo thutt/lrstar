@@ -20,6 +20,7 @@ lrstar_parser generated_parser(/* grammar      */   "YACC",
                                /* node_actions */   false,
                                /* reversable   */   false,
                                /* semantics    */   false,
+                               /* stksize      */   100,
                                /* term_actions */   false);
 
 #include "lrstar_main.cpp"

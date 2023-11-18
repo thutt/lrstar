@@ -20,6 +20,7 @@ lrstar_parser generated_parser(/* grammar      */   "Vba",
                                /* node_actions */   true,
                                /* reversable   */   false,
                                /* semantics    */   true,
+                               /* stksize      */   100,
                                /* term_actions */   true);
 
 #include "lrstar_main.cpp"

@@ -46,7 +46,7 @@ int   lrstar_parser::init_parser (char* patharg, char* input_start, int max_syms
    if (opt_nd_parsing) {
       for (int i = 0; i < opt_nd_threads; i++)
       {
-         SSstart[i] = new SStack[STKSIZE];
+         SSstart[i] = new SStack[opt_stksize];
       }
       for (int i = 0; i < opt_lookaheads + 1; i++)
       {
@@ -1298,7 +1298,7 @@ void  lrstar_parser::traverse (int trav)
       if (n_nodes > 1) { // Any nodes in the tree?
          if (pt.n_nodeactns > 0) { // Any node actions?
             stacki  = -1;
-            stack   = new Stack [STKSIZE];
+            stack   = new Stack [opt_stksize];
             counter = new int [pt.n_nodenames];
             for (int i = 0; i < pt.n_nodenames; i++)
             {

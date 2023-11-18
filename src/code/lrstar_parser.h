@@ -6,8 +6,6 @@
 #if !defined(_LRSTAR_PARSER_H_)
 #define _LRSTAR_PARSER_H_
 
-#define  STKSIZE          100       // Parser-stack size.
-
 // AST Traversal Passes.
 #define FIRST_PASS       1
 #define SECOND_PASS      2
@@ -99,6 +97,7 @@ public:
    const bool opt_node_actions;       /* Node Actions.                */
    const bool opt_reversable;         /* Reversable grammar.          */
    const bool opt_semantics;          /* Semantics.                   */
+   const int  opt_stksize;            /* Stack Size.                  */
    const bool opt_term_actions;       /* Term Actions.                */
 
 public:
@@ -121,8 +120,8 @@ public:
 public:
    // Parser variables
    char    path[256];     // Path of input file.
-   PStack  PSstart[STKSIZE];     // Parser stack start.
-   PStack* PS;            // Parse stack pointer.
+   PStack *PSstart;       // Parser stack start.
+   PStack *PS;            // Parse stack pointer.
    int     n_nodes;       // Number of nodes in AST.
    int     n_symbols;     // Number of symbols.
 
@@ -133,10 +132,10 @@ private:
 
 private:
    // Parser variables
-   RStack* RS;
-   RStack  RSstart[STKSIZE];
-   uchar*  T_exp;       // Terminal expected.
-   uchar*  S_exam;      // State examined.
+   RStack *RS;
+   RStack *RSstart;
+   uchar  *T_exp;       // Terminal expected.
+   uchar  *S_exam;      // State examined.
 
    // Expecting functions ...
    int     restore      ();
@@ -229,6 +228,7 @@ public:
                  bool                node_actions_,
                  bool                reversable_,
                  bool                semantics_,
+                 int                 stksize_,
                  bool                term_actions_) :
          grammar(grammar_),
          user_data(user_data_),
@@ -244,8 +244,12 @@ public:
          opt_node_actions(node_actions_),
          opt_reversable(reversable_),
          opt_semantics(semantics_),
+         opt_stksize(stksize_),
          opt_term_actions(term_actions_)
    {
+      PSstart = new PStack[opt_stksize];
+      RSstart = new RStack[opt_stksize];
+
       if (opt_nd_parsing) {
          SS      = new SStack *[opt_nd_threads];
          SSstart = new SStack *[opt_nd_threads];

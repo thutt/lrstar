@@ -20,6 +20,7 @@ lrstar_parser generated_parser(/* grammar      */   "Calc",
                                /* node_actions */   true,
                                /* reversable   */   true,
                                /* semantics    */   false,
+                               /* stksize      */   100,
                                /* term_actions */   true);
 
 #include "lrstar_main.cpp"
