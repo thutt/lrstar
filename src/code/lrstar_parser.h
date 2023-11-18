@@ -6,11 +6,12 @@
 #if !defined(_LRSTAR_PARSER_H_)
 #define _LRSTAR_PARSER_H_
 
-// AST Traversal Passes.
-#define FIRST_PASS       1
-#define SECOND_PASS      2
-#define THIRD_PASS       3
-#define FOURTH_PASS      4
+enum ast_pass_t {
+   FIRST_PASS  = 1,
+   SECOND_PASS = 2,
+   THIRD_PASS  = 3,
+   FOURTH_PASS = 4,
+};
 
 class Symbol         // Symbol in Symbol Table.
 {
@@ -184,12 +185,12 @@ private:
 
    // AST Area ...
 public:
-   Node*   root;          // Current root node.
-   Node*   node;          // Current AST node.
-   int     traversal;     // AST traversal number: 1, 2, 3 ...
-   int     direction;     // Node direction: TOP_DOWN, BOTTOM_UP.
-   Stack*  stack;         // AST stack array.
-   int     stacki;        // AST stack index.
+   Node*      root;             // Current root node.
+   Node*      node;             // Current AST node.
+   ast_pass_t traversal;        // AST traversal number: 1, 2, 3 ...
+   int        direction;        // Node direction: TOP_DOWN, BOTTOM_UP.
+   Stack*     stack;            // AST stack array.
+   int        stacki;           // AST stack index.
 
 private:
    int     max_nodes;     // Maximum number of nodes.
@@ -208,7 +209,7 @@ public:
    void    find_root   (Node* last);
    void    print_ast   ();
    void    print_ast   (Node* n);
-   void    traverse    (int trav);
+   void    traverse    (ast_pass_t trav);
    void    traverse    (Node* n);
    void    traverse    (char* indent, Node* n);
    void    print_node  (char* indent, Node* n);

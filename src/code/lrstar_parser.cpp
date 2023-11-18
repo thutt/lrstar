@@ -1292,7 +1292,7 @@ void  lrstar_parser::print_ast (Node* n) // Print subtree.
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////
 
-void  lrstar_parser::traverse (int trav)
+void  lrstar_parser::traverse(ast_pass_t trav)
 {
    if (opt_node_actions) {
       if (n_nodes > 1) { // Any nodes in the tree?
