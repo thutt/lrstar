@@ -1,0 +1,33 @@
+# Copyright (c) 2023 Logic Magicians Software
+# BSD 3 License
+
+$(if $(INSTALL_ROOT),,$(error INSTALL_ROOT is not set))
+
+CC	:=					\
+	g++
+
+
+INCLUDES	:=				\
+	$(INSTALL_ROOT)/include
+
+
+BUILD_TYPE	:=	\
+	$(if $(LRSTAR_BUILD_TYPE),$(if $(filter debug,$(LRSTAR_BUILD_TYPE)),DEBUG,RELEASE),RELEASE)
+
+
+LRSTAR  := $(INSTALL_ROOT)/bin/lrstar
+DFA     := $(INSTALL_ROOT)/bin/dfa
+
+DEFINES	:=			\
+	LRSTAR_LINUX
+
+
+ERROR_FORMAT	:=				\
+	-fdiagnostics-color=never		\
+	-fno-diagnostics-show-caret
+
+
+CXXFLAGS	:=					\
+	$(ERROR_FORMAT)					\
+	$(addprefix -I,$(INCLUDES))			\
+	$(addprefix -D,LRSTAR_$(BUILD_TYPE) $(DEFINES))

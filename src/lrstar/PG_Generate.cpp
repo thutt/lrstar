@@ -1559,44 +1559,36 @@ static void makefile_fn(FILE       *fp,
 {
    static const char *make = ("# Build '%s' parser.\n" /* grammar */
                               "\n\n"
-                              "CC	:=\t\t\t\\\n"
-                              "\tg++\n"
+                              "INSTALL_ROOT :=\t\t\t\\\n"
+                              "\t$(if $(LRSTAR_INSTALL_ROOT),$(LRSTAR_INSTALL_ROOT),/usr/local)\n"
                               "\n\n"
-                              "INCLUDES\t:=\t\t\t\\\n"
-                              "\t$(LRSTAR_INSTALL_ROOT)/include\n"
+                              "include $(LRSTAR_INSTALL_ROOT)/make/sample.defs\n"
                               "\n\n"
-                              "DEFINES\t:=\t\t\t\\\n"
-                              "\tLRSTAR_LINUX\n"
-                              "\n\n"
-                              "ERROR_FORMAT\t:=\t\t\t\\\n"
-                              "\t-fdiagnostics-color=never\t\t\t\\\n"
-                              "\t-fno-diagnostics-show-caret\t\t\t\\\n"
-                              "\n\n"
-                              "BUILD_TYPE\t:=\t\\\n"
-                              "\t$(if $(LRSTAR_BUILD_TYPE),"
-                              "$(if $(filter debug,$(LRSTAR_BUILD_TYPE)),"
-                              "DEBUG,RELEASE),RELEASE)\n"
-                              "\n\n"
-                              "CXXFLAGS\t:=\t\t\t\\\n"
-                              "\t$(ERROR_FORMAT)\t\t\t\\\n"
-                              "\t$(addprefix -I,$(INCLUDES))\t\t\t\\\n"
-                              "\t$(addprefix -D,LRSTAR_$(BUILD_TYPE) $(DEFINES))\t\t\t\\\n"
+                              "GRM\t\t:= %s\n" /* grammar */
+                              ".DEFAULT_GOAL\t:= $(GRM)\n"
                               "\n\n"
                               "SOURCE\t:=\t\t\t\\\n"
-                              "\t%s_Actions.cpp\t\t\t\\\n" /* grammar */
-                              "\t%s_Lexer.cpp\t\t\t\\\n"   /* grammar */
-                              "\t%s_Main.cpp\t\t\t\\\n"    /* grammar */
-                              "\t%s_Parser.cpp\n"          /* grammar */
+                              "\t$(GRM)_Actions.cpp\t\\\n"
+                              "\t$(GRM)_Lexer.cpp\t\\\n"
+                              "\t$(GRM)_Main.cpp\t\t\\\n"
+                              "\t$(GRM)_Parser.cpp\n"
                               "\n\n"
                               "OBJS\t:= $\t$(SOURCE:.cpp=.o)\n"
                               "\n\n"
-                              "%s:\t$(OBJS)\n"          /* grammar */
+                              "$(GRM)_Parser.cpp:\t$(GRM).grm\n"
+                              "\t$(LRSTAR) $<\n"
+                              "\n\n"
+                              "$(GRM)_LexerTables_typedef.h:\t$(GRM).lgr $(GRM)_Parser.cpp\n"
+                              "\t$(DFA) $<\n"
+                              "\n\n"
+                              "$(GRM)_Lexer.o:\t$(GRM)_LexerTables_typedef.h\n"
+                              "\n\n"
+                              "$(GRM):\t$(OBJS)\n"
                               "\t$(CC) -o $@ $(OBJS);\n"
                               "\n\n"
                               "clean:\n"
-                              "\trm $(SOURCE) $(OBJS) %s;"); /* grammar */
-   fprintf(fp, make, grammar, grammar, grammar,
-           grammar, grammar, grammar, grammar);
+                              "\trm $(SOURCE) $(OBJS) $(GRM);");
+   fprintf(fp, make, grammar, grammar);
 }
 
 

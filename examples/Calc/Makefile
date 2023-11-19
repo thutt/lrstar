@@ -1,46 +1,41 @@
 # Build 'Calc' parser.
 
 
-CC	:=			\
-	g++
+INSTALL_ROOT :=			\
+	$(if $(LRSTAR_INSTALL_ROOT),$(LRSTAR_INSTALL_ROOT),/usr/local)
 
 
-INCLUDES	:=			\
-	$(LRSTAR_INSTALL_ROOT)/include
+include $(LRSTAR_INSTALL_ROOT)/make/sample.defs
 
 
-DEFINES	:=			\
-	LRSTAR_LINUX
-
-
-ERROR_FORMAT	:=			\
-	-fdiagnostics-color=never			\
-	-fno-diagnostics-show-caret			\
-
-
-BUILD_TYPE	:=	\
-	$(if $(LRSTAR_BUILD_TYPE),$(if $(filter debug,$(LRSTAR_BUILD_TYPE)),DEBUG,RELEASE),RELEASE)
-
-
-CXXFLAGS	:=			\
-	$(ERROR_FORMAT)			\
-	$(addprefix -I,$(INCLUDES))			\
-	$(addprefix -D,LRSTAR_$(BUILD_TYPE) $(DEFINES))			\
+GRM		:= Calc
+.DEFAULT_GOAL	:= $(GRM)
 
 
 SOURCE	:=			\
-	Calc_Actions.cpp			\
-	Calc_Lexer.cpp			\
-	Calc_Main.cpp			\
-	Calc_Parser.cpp
+	$(GRM)_Actions.cpp	\
+	$(GRM)_Lexer.cpp	\
+	$(GRM)_Main.cpp		\
+	$(GRM)_Parser.cpp
 
 
 OBJS	:= $	$(SOURCE:.cpp=.o)
 
 
-Calc:	$(OBJS)
+$(GRM)_Parser.cpp:	$(GRM).grm
+	$(LRSTAR) $<
+
+
+$(GRM)_LexerTables_typedef.h:	$(GRM).lgr $(GRM)_Parser.cpp
+	$(DFA) $<
+
+
+$(GRM)_Lexer.o:	$(GRM)_LexerTables_typedef.h
+
+
+$(GRM):	$(OBJS)
 	$(CC) -o $@ $(OBJS);
 
 
 clean:
-	rm $(SOURCE) $(OBJS) Calc;
+	rm $(SOURCE) $(OBJS) $(GRM);
