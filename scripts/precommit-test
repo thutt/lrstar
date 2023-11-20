@@ -135,13 +135,20 @@ function main ()
                     if [ -r "${grm}/test.input.txt" ] ; then
                         (cd ${grm};
                          grm_name=$(basename "${grm}");
+                         grm_build_dir="${LRSTAR_BUILD_DIR}/${LRSTAR_BUILD_TYPE}/${grm##${LRSTAR_DIR}/}";
+                         grm_exec="${grm_build_dir}/${grm_name}";
                          rc=0;
-                         if ! "${grm}/${grm_name}" test.input.txt; then
-                             rc=1;
-                             echo "${grm}: test parse failed.";
-                         fi;
-                         rm test.output.txt;
-                         exit ${rc});
+                         if [ -x "${grm_exec}" ] ; then
+                             if ! "${grm_exec}" test.input.txt; then
+                                 rc=1;
+                                 echo "${grm}: test parse failed.";
+                             fi;
+                             rm test.output.txt;
+                             exit ${rc};
+                         else
+                             echo "${grm_exec} does not exist.  Cannot run test.";
+                             exit 1;
+                         fi);
                     fi;
                 fi;
 
