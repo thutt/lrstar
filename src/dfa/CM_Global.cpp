@@ -1,6 +1,7 @@
 
 /* Copyright 2018, 2023 Paul B Mann.  BSD License. */
 
+#include <assert.h>
 #include <string.h>
 #include "CM_Global.h"
 #include "LG_Global.h"
@@ -279,7 +280,12 @@ int   get_fid (char *arg, char *dir, char *fn, char *ft)
    fn [0] = 0;
    ft [0] = 0;
 
-   last_slash = strrchr(arg, '\\');
+   if (lrstar_linux) {
+      last_slash = strrchr(arg, '/');
+   } else {
+      assert(lrstar_windows);
+      last_slash = strrchr(arg, '\\');
+   }
    if (last_slash != NULL)
    {
       f = last_slash + 1;        // Point at filename start.
