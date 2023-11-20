@@ -145,15 +145,19 @@ def parse_arguments():
 
 
 def gather_artifacts(options, root):
-    images = (
-        os.path.join(root, "src", "lrstar", "lrstar"),
-        os.path.join(root, "src", "dfa", "dfa")
-    )
-
+    cmd = [ "/usr/bin/find",
+            root,
+            "-executable",
+            "-a",
+            "-type",  "f" ]
+    (stdout, stderr, rc) = execute.process(cmd)
     artifacts = { }
-    for img in images:
-        artifact = Artifact(options, root, img)
-        artifacts[artifact._relpath] = artifact
+    if rc == 0:
+        for img in stdout:
+            if len(img) == 0:
+                break
+            artifact = Artifact(options, root, img)
+            artifacts[artifact._relpath] = artifact
 
     return artifacts
 
@@ -161,7 +165,6 @@ def gather_artifacts(options, root):
 def program_name_width(artifacts):
     width = 0
     for pname in artifacts:
-
         width = max(width, len(artifacts[pname]._relpath))
     return width
 
@@ -192,22 +195,21 @@ def scale(n):
 
 
 def compare(base, modi):
-    assert(len(base) == len(modi))
-    width = program_name_width(base)
+    width = program_name_width(modi)
     field_width = 14
 
     print("")
     header(width, field_width)
-    for pname in sorted(base):
-        bartifact = base[pname]
-        bres      = bartifact.values()
+    for pname in sorted(modi):
+        martifact = modi[pname]
+        mres      = martifact.values()
 
-        if pname in modi:
-            martifact = modi[pname]
-            mres      = martifact.values()
+        if pname in base:
+            bartifact = base[pname]
+            bres      = bartifact.values()
         else:
-            martifact = None
-            mres      = None
+            bartifact = None
+            bres      = None
 
         if bres is not None and mres is not None:
             delta = (mres[0] - bres[0],
@@ -223,14 +225,13 @@ def compare(base, modi):
                    field_width, text,   # .text
                    field_width, rodata, # .rodata
                    field_width, data,   # .data
-                   field_width, bss))    # .bss
+                   field_width, bss))   # .bss
         else:
             if bres is None:
-                print("%*s     MISSING: %s" % (width, bartifact._relpath,
-                                               bartifact._pathname))
+                print("%*s     MISSING base" % (width, martifact._relpath))
             else:
                 assert(mres is None)
-                print("%*s     MISSING: %s" % (width, bartifact._relpath,
+                print("%*s     MISSING: %s" % (width, martifact._relpath,
                                                "modified image"))
     print("")
 
