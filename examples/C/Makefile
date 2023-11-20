@@ -1,15 +1,15 @@
 # Build 'C' parser.
 
 
+GRM		:= C
+.DEFAULT_GOAL	:= recurse
+
+
 INSTALL_ROOT :=			\
 	$(if $(LRSTAR_INSTALL_ROOT),$(LRSTAR_INSTALL_ROOT),/usr/local)
 
 
 include $(LRSTAR_INSTALL_ROOT)/make/sample.defs
-
-
-GRM		:= C
-.DEFAULT_GOAL	:= $(GRM)
 
 
 SOURCE	:=			\

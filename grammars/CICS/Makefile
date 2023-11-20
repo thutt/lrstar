@@ -1,15 +1,15 @@
 # Build 'CICS' parser.
 
 
+GRM		:= CICS
+.DEFAULT_GOAL	:= recurse
+
+
 INSTALL_ROOT :=			\
 	$(if $(LRSTAR_INSTALL_ROOT),$(LRSTAR_INSTALL_ROOT),/usr/local)
 
 
 include $(LRSTAR_INSTALL_ROOT)/make/sample.defs
-
-
-GRM		:= CICS
-.DEFAULT_GOAL	:= $(GRM)
 
 
 SOURCE	:=			\

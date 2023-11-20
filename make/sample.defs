@@ -2,18 +2,21 @@
 # BSD 3 License
 
 $(if $(INSTALL_ROOT),,$(error INSTALL_ROOT is not set))
+$(if $(LRSTAR_BUILD_DIR),,$(error LRSTAR_BUILD_DIR is not set))
+$(if $(LRSTAR_BUILD_TYPE),,$(error LRSTAR_BUILD_TYPE is not set))
+$(if $(strip $(filter debug release,$(LRSTAR_BUILD_TYPE))),,$(error LRSTAR_BUILD_TYPE must be in {debug | release}))
 
 CC	:=					\
 	g++
 
+export LRSTAR_BUILD_TYPE
 
 INCLUDES	:=				\
 	$(INSTALL_ROOT)/include
 
 
-BUILD_TYPE	:=	\
-	$(if $(LRSTAR_BUILD_TYPE),$(if $(filter debug,$(LRSTAR_BUILD_TYPE)),DEBUG,RELEASE),RELEASE)
-
+BUILD_TYPE	:=						\
+	$(if $(filter debug,$(LRSTAR_BUILD_TYPE)),DEBUG,RELEASE)
 
 LRSTAR  := $(INSTALL_ROOT)/bin/lrstar
 DFA     := $(INSTALL_ROOT)/bin/dfa
@@ -31,3 +34,16 @@ CXXFLAGS	:=					\
 	$(ERROR_FORMAT)					\
 	$(addprefix -I,$(INCLUDES))			\
 	$(addprefix -D,LRSTAR_$(BUILD_TYPE) $(DEFINES))
+
+GRM_DIR	:=	\
+	$(dir $(abspath $(word 1,$(MAKEFILE_LIST))))
+
+
+GRM_BUILD_DIR	:=					\
+	$(LRSTAR_BUILD_DIR)/$(LRSTAR_BUILD_TYPE)/$(subst $(LRSTAR_DIR)/,,$(GRM_DIR))
+
+$(GRM_BUILD_DIR):
+	mkdir --parents $(GRM_BUILD_DIR)
+
+recurse:	| $(GRM_BUILD_DIR)
+	$(MAKE) -C $(GRM_BUILD_DIR) --makefile $(GRM_DIR)/Makefile $(GRM) VPATH=$(GRM_DIR);
