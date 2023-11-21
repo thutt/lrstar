@@ -1425,8 +1425,6 @@ void  lrstar_parser::print_node (char *indent, Node* n)
    }
 }
 
-//#endif  /* gungla */
-
 //                                                                           //
 ///////////////////////////////////////////////////////////////////////////////
 /* Local Variables:      */
