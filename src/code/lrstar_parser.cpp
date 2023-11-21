@@ -41,15 +41,17 @@ static const uchar lowercase[256] = {
 
 
 
-int   lrstar_parser::init_parser (char* patharg, char* input_start, int max_syms, int max_nodes)
+void
+lrstar_parser::init_parser(char *patharg,
+                           char *input_start,
+                           int   max_syms,
+                           int   max_nodes)
 {
    if (opt_nd_parsing) {
-      for (int i = 0; i < opt_nd_threads; i++)
-      {
+      for (int i = 0; i < opt_nd_threads; i++) {
          SSstart[i] = new SStack[opt_stksize];
       }
-      for (int i = 0; i < opt_lookaheads + 1; i++)
-      {
+      for (int i = 0; i < opt_lookaheads + 1; i++) {
          LAcount[i] = 0;
       }
       last_line = 0;
@@ -76,12 +78,6 @@ int   lrstar_parser::init_parser (char* patharg, char* input_start, int max_syms
 
    memset (T_exp,  0, pt.n_terms);
    memset (S_exam, 0, pt.n_states);
-   return 1; // Return OK.
-
-Err:  n_errors++;
-   return 0;
-
-   goto Err; // Stops compiler from complaining.
 }
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////

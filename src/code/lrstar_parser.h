@@ -110,7 +110,7 @@ public:
 
 public:
    // Parser functions
-   int     init_parser  (char* path, char* input, int max_syms, int max_nodes);
+   void    init_parser  (char* path, char* input, int max_syms, int max_nodes);
    int     parse        ();
    void    term_parser  ();
    void    print_prod   (const char* prefix, int p, int dot);

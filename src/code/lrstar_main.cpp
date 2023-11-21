@@ -121,22 +121,17 @@ main(int argc, char **argv)
    output = Output.filedesc;
 
    // Parse the input file ...
-   rc = generated_parser.init_parser(Input.path, Input.input_start,
-                                     100000, 1000000);
-   if (rc <= 0) {
-      nl = 0;
-      printf ("\nError in init_parser().\n");
+   generated_parser.init_parser(Input.path, Input.input_start,
+                                100000, 1000000);
+
+   time1 = clock();  // Get start time.
+   nl = generated_parser.parse ();
+   time2 = clock (); // Get end time.
+   generated_parser.term_parser ();
+   if (nl <= 0) {
+      nl = -nl;
+      printf ("\nError in parse().\n");
       quit (1);
-   } else {
-      time1 = clock();  // Get start time.
-      nl = generated_parser.parse ();
-      time2 = clock (); // Get end time.
-      generated_parser.term_parser ();
-      if (nl <= 0) {
-         nl = -nl;
-         printf ("\nError in parse().\n");
-         quit (1);
-      }
    }
 
    // Compute the time and speed ...
