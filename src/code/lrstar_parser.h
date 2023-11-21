@@ -125,6 +125,7 @@ public:
    PStack *PS;            // Parse stack pointer.
    int     n_nodes;       // Number of nodes in AST.
    int     n_symbols;     // Number of symbols.
+   int     n_errors;
 
 private:
    // Parser functions
@@ -246,7 +247,8 @@ public:
          opt_reversable(reversable_),
          opt_semantics(semantics_),
          opt_stksize(stksize_),
-         opt_term_actions(term_actions_)
+         opt_term_actions(term_actions_),
+         n_errors(0)
    {
       PSstart = new PStack[opt_stksize];
       RSstart = new RStack[opt_stksize];

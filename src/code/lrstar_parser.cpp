@@ -58,7 +58,6 @@ int   lrstar_parser::init_parser (char* patharg, char* input_start, int max_syms
 
    strcpy (path, patharg);
    PS           = PSstart;             // Set parse-stack pointer.
-   n_errors     = 0;                   // Set number of errors.
    n_nodes      = 0;                   // In case of no parser creation.
 
    lt.init_lexer (input_start, 3);     // Initialize the lexer.

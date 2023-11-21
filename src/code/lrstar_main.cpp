@@ -70,7 +70,6 @@ public:
    static void   term ();
 };
 
-int   n_errors;
 FILE* output;
 void  quit (int rc);
 char* number (int x);
@@ -100,7 +99,8 @@ int    cOption::echo;
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////
 
-int   main (int na, char **arg)
+int
+main(int argc, char **argv)
 {
    const char* copyright = "\n%s parser, copyright ?.\n";
    int   i, t, time1, time2, thou, sec, nlps, nl, rc;
@@ -111,33 +111,28 @@ int   main (int na, char **arg)
 
    printf (copyright, generated_parser.grammar);
    printf ("Args:   ");
-   for (i = 1; i < na; i++) printf (" %s", arg[i]);
+   for (i = 1; i < argc; i++) printf (" %s", argv[i]);
    printf ("\n");
 
-   Option.init (na, arg);
+   Option.init (argc, argv);
    Input.init  (Input.dir,  Input.filename,  Input.filetype);
    Output.init (Output.dir, Output.filename, Output.filetype);
 
-   n_errors = 0;
-   output   = Output.filedesc;
+   output = Output.filedesc;
 
    // Parse the input file ...
    rc = generated_parser.init_parser(Input.path, Input.input_start,
                                      100000, 1000000);
-   if (rc <= 0)
-   {
+   if (rc <= 0) {
       nl = 0;
       printf ("\nError in init_parser().\n");
       quit (1);
-   }
-   else
-   {
+   } else {
       time1 = clock();  // Get start time.
       nl = generated_parser.parse ();
       time2 = clock (); // Get end time.
       generated_parser.term_parser ();
-      if (nl <= 0)
-      {
+      if (nl <= 0) {
          nl = -nl;
          printf ("\nError in parse().\n");
          quit (1);
@@ -262,10 +257,10 @@ char* number (int x)
 
 ///////////////////////////////////////////////////////////////////////////////
 
-int   cOption::init (int na, char* arg[])
+int   cOption::init (int argc, char* argv[])
 {
    int i, ne, no, nf, help;
-   if (na < 2)
+   if (argc < 2)
    {
    Help:    printf ("Usage:\n");
       printf ("\n");
@@ -278,18 +273,18 @@ int   cOption::init (int na, char* arg[])
    no = 0;  // Number of options.
    nf = 0;  // Number of files.
 
-   if (na > 1)
+   if (argc > 1)
    {
       cInput::dir[0]      = 0;
       cInput::filename[0] = 0;
       cInput::filetype[0] = 0;
-      if (arg[1][0] == '/') goto Optn;
+      if (argv[1][0] == '/') goto Optn;
       nf++;
-      split (arg[1], cInput::dir, cInput::filename, cInput::filetype, "input.txt");
+      split (argv[1], cInput::dir, cInput::filename, cInput::filetype, "input.txt");
       if (cInput::filename[0] == 0)
       {
          ne++;
-         printf ("Invalid filespec: \"%s\"\n", arg[1]);
+         printf ("Invalid filespec: \"%s\"\n", argv[1]);
          quit (1);
       }
       else
@@ -318,11 +313,11 @@ Optn: debug      = 0;
    help       = 0;
 
    // Process options ...
-   for (i = nf+1; i < na; i++)
+   for (i = nf+1; i < argc; i++)
    {
       no++;
       char* f = 0; // filename
-      char* p = arg[i];
+      char* p = argv[i];
       while (*p != 0 && *p != '=') p++;
       int val = 1;
       if (*p == '=')
@@ -334,11 +329,11 @@ Optn: debug      = 0;
          if (*(f+1) != 0) val = -1;
          *p = 0;
       }
-      switch (arg[i][1])
+      switch (argv[i][1])
       {
       case 'd':
       {
-         if (arg[i][2] == 0)
+         if (argv[i][2] == 0)
          {
             if (f) *p = '=';
             if (val < 0) goto Err;
@@ -349,7 +344,7 @@ Optn: debug      = 0;
       }
       case 'e':
       {
-         if (arg[i][2] == 0)
+         if (argv[i][2] == 0)
          {
             if (f) *p = '=';
             if (val < 0) goto Err;
@@ -360,7 +355,7 @@ Optn: debug      = 0;
       }
       case '?':
       {
-         if (arg[i][2] == 0)
+         if (argv[i][2] == 0)
          {
             if (f) *p = '=';
             if (val < 0) goto Err;
@@ -372,7 +367,7 @@ Optn: debug      = 0;
       default:
       {
       Err:           ne++;
-         printf ("Invalid option: \"%s\"\n", arg[i]);
+         printf ("Invalid option: \"%s\"\n", argv[i]);
          quit (1);
       }
       }
