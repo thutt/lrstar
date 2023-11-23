@@ -1316,7 +1316,7 @@ public:
    {
       if (opt_node_actions) {
          int   i  = n->id;             // Node id.
-         Node* c  = n->child;          // Child nove pointer.
+         Node *c  = n->child;          // Child node pointer.
 
          stacki++;
          counter[i]++;
