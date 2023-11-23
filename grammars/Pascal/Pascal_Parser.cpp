@@ -1898,7 +1898,6 @@ static nact_func_t Pascal_nact_func_[185] = {
 template<>
 nact_func_t *Pascal_parser_tables_t::nact_func = &Pascal_nact_func_[0];
 
-#include "lrstar_parser.cpp"
 
 //                                                                           //
 ///////////////////////////////////////////////////////////////////////////////

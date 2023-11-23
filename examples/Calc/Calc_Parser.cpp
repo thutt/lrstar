@@ -517,7 +517,6 @@ static nact_func_t Calc_nact_func_[17] = {
 template<>
 nact_func_t *Calc_parser_tables_t::nact_func = &Calc_nact_func_[0];
 
-#include "lrstar_parser.cpp"
 
 //                                                                           //
 ///////////////////////////////////////////////////////////////////////////////

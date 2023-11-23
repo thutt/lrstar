@@ -447,7 +447,6 @@ tact_func_t *YACC_parser_tables_t::tact_func = 0;
 template<>
 nact_func_t *YACC_parser_tables_t::nact_func = 0;
 
-#include "lrstar_parser.cpp"
 
 //                                                                           //
 ///////////////////////////////////////////////////////////////////////////////

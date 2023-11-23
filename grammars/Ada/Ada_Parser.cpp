@@ -1830,7 +1830,6 @@ tact_func_t *Ada_parser_tables_t::tact_func = &Ada_tact_funcs_[0];
 template<>
 nact_func_t *Ada_parser_tables_t::nact_func = 0;
 
-#include "lrstar_parser.cpp"
 
 //                                                                           //
 ///////////////////////////////////////////////////////////////////////////////

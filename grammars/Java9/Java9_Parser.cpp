@@ -4512,7 +4512,6 @@ static nact_func_t Java9_nact_func_[1] = {
 template<>
 nact_func_t *Java9_parser_tables_t::nact_func = &Java9_nact_func_[0];
 
-#include "lrstar_parser.cpp"
 
 //                                                                           //
 ///////////////////////////////////////////////////////////////////////////////

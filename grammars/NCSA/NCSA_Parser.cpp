@@ -557,7 +557,6 @@ static nact_func_t NCSA_nact_func_[11] = {
 template<>
 nact_func_t *NCSA_parser_tables_t::nact_func = &NCSA_nact_func_[0];
 
-#include "lrstar_parser.cpp"
 
 //                                                                           //
 ///////////////////////////////////////////////////////////////////////////////

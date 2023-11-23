@@ -453,7 +453,6 @@ static nact_func_t Typedef_nact_func_[1] = {
 template<>
 nact_func_t *Typedef_parser_tables_t::nact_func = &Typedef_nact_func_[0];
 
-#include "lrstar_parser.cpp"
 
 //                                                                           //
 ///////////////////////////////////////////////////////////////////////////////

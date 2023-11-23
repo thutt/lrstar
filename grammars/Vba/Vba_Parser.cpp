@@ -2124,7 +2124,6 @@ static nact_func_t Vba_nact_func_[81] = {
 template<>
 nact_func_t *Vba_parser_tables_t::nact_func = &Vba_nact_func_[0];
 
-#include "lrstar_parser.cpp"
 
 //                                                                           //
 ///////////////////////////////////////////////////////////////////////////////

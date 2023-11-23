@@ -1561,12 +1561,6 @@ parser_cpp_fn(FILE       *fp,
    PG_Main::instantiate_constants(fp);
    PG_Main::instantiate_fields(fp);
 
-   if (lrstar_linux) {
-      fprintf (fp, "#include \"lrstar_parser.cpp\"\n");
-   } else {
-      assert(lrstar_windows);
-      fprintf (fp, "#include \"../../code/parser.cpp\"\n");
-   }
    fprintf (fp, "\n");
    fprintf (fp, "//                                                                           //\n");
    fprintf (fp, "///////////////////////////////////////////////////////////////////////////////\n\n");
