@@ -9,11 +9,13 @@
 #include "PG_CreateTables.h"
 
 typedef enum field_name_t {
+#define PFCP(pf_) PF(pf_)
 #define PFL(pf_) PF(pf_)
 #define PF(pf_) ts_T_##pf_,
    PARSER_FIELDS
 #undef PF
 #undef PFL
+#undef PFCP
    ts_N_ELEMENTS
 } field_name_t;
 
@@ -71,10 +73,12 @@ static const char *get_typestr(int *x, int n)
 static const char *
 template_decl(void)
 {
+#define PFCP(pf_) PF(pf_)
 #define PF(pf_) "typename T_" #pf_ ", "
 #define PFL(pfl_) "typename T_" #pfl_
    static const char *decl = "template<" PARSER_FIELDS ">";
 #undef PF
+#undef PFCP
 #undef PFL
    return decl;
 }
@@ -83,11 +87,13 @@ template_decl(void)
 static const char *
 parser_tables_decl(void)
 {
+#define PFCP(pf_) PF(pf_)
 #define PF(pf_) "T_" #pf_ ", "
 #define PFL(pfl_) "T_" #pfl_
    static const char *inst = "templ_lrstar_parser_tables<" PARSER_FIELDS ">";
 #undef PF
 #undef PFL
+#undef PFCP
    return inst;
 }
 
@@ -98,16 +104,20 @@ parser_tables_inst(char *buf, size_t buf_len)
 
    snprintf(buf, buf_len,
             "templ_lrstar_parser_tables<"
+#define PFCP(pf_) PF(pf_)
 #define PF(pf_) "%s, "
 #define PFL(pfl_) "%s"
 PARSER_FIELDS
 #undef PF
+#undef PFCP
 #undef PFL
             ">",
+#define PFCP(pf_) PF(pf_)
 #define PF(pf_)   data_types[ts_T_##pf_].type,
 #define PFL(pfl_) data_types[ts_T_##pfl_].type
 PARSER_FIELDS
 #undef PF
+#undef PFCP
 #undef PFL
       );
 }
@@ -185,15 +195,15 @@ templ_init_functions(FILE *fp, int N_tacts, int N_nacts)
               "};\n\n", gfn, gfn, gfn, gfn, gfn);
       fprintf(fp,
               "// Init action function pointers ...\n"
-              "%s\n"
-              "init_func_t *%s::init_func = &%s_init_funcs_[0];\n\n",
-              template_decl(), parser_tables_decl(), gfn);
+              "template<>\n"
+              "init_func_t *%s_parser_tables_t::init_func = &%s_init_funcs_[0];\n\n",
+              gfn, gfn);
    } else {
       fprintf(fp,
               "// Init action function pointers ...\n"
-              "%s\n"
-              "init_func_t *%s::init_func = 0;\n\n",
-              template_decl(), parser_tables_decl());
+              "template<>\n"
+              "init_func_t *%s_parser_tables_t::init_func = 0;\n\n",
+              gfn);
    }
 }
 
@@ -219,15 +229,15 @@ templ_tact_functions(FILE *fp, int N_tacts, const char **Tact_start)
 
       fprintf(fp,
               "// Terminal action function pointers ...\n"
-              "%s\n"
-              "tact_func_t *%s::tact_func = &%s_tact_funcs_[0];\n\n",
-              template_decl(), parser_tables_decl(), gfn);
+              "template<>\n"
+              "tact_func_t *%s_parser_tables_t::tact_func = &%s_tact_funcs_[0];\n\n",
+              gfn, gfn);
    } else {
       fprintf(fp,
               "// Terminal action function pointeras ...\n"
-              "%s\n"
-              "tact_func_t *%s::tact_func = 0;\n\n",
-              template_decl(), parser_tables_decl());
+              "template<>\n"
+              "tact_func_t *%s_parser_tables_t::tact_func = 0;\n\n",
+              gfn);
    }
 }
 
@@ -255,15 +265,15 @@ templ_nact_functions(FILE *fp, int N_nacts, const char **Nact_start)
       fprintf(fp, "};\n\n");
       fprintf(fp,
               "// Node action function pointers ...\n"
-              "%s\n"
-              "nact_func_t *%s::nact_func = &%s_nact_func_[0];\n\n",
-              template_decl(), parser_tables_decl(), gfn);
+              "template<>\n"
+              "nact_func_t *%s_parser_tables_t::nact_func = &%s_nact_func_[0];\n\n",
+              gfn, gfn);
    } else {
       fprintf(fp,
               "// Node action function pointers ...\n"
-              "%s\n"
-              "nact_func_t *%s::nact_func = 0;\n\n",
-              template_decl(), parser_tables_decl());
+              "template<>\n"
+              "nact_func_t *%s_parser_tables_t::nact_func = 0;\n\n",
+              gfn);
    }
 }
 
@@ -272,15 +282,17 @@ static void
 instantiate_field_lengths(FILE *fp)
 {
    /* Define the lengths of each array field. */
-#define PFL(_field) PF(_field)
-#define PF(_field)                                       \
-   fprintf(fp, ("%s\n"                                   \
-                "const int %s::n_" #_field " = %d;\n\n"  \
-                ""),                                     \
-           template_decl(), parser_tables_decl(),        \
-           data_types[ts_T_##_field].n_elem);
+#define PFCP(pf_) PF(pf_)
+#define PFL(pf_) PF(pf_)
+#define PF(pf_)                                                         \
+   fprintf(fp, ("template<>\n"                                          \
+                "const int %s_parser_tables_t::n_" #pf_ " = %d;\n\n"    \
+                ""),                                                    \
+           gfn,                                                         \
+           data_types[ts_T_##pf_].n_elem);
    PARSER_FIELDS
 #undef PF
+#undef PFCP
 #undef PFL
 }
 
@@ -290,64 +302,64 @@ PG_Main::instantiate_constants(FILE *fp)
 {
    // Special constants in the parser.
    fprintf(fp,
-           "%s\n"
-           "const int %s::n_terms = %d; "
+           "template<>\n"
+           "const int %s_parser_tables_t::n_terms = %d; "
            "// Number of terminals.\n\n",
-           template_decl(), parser_tables_decl(), N_terms);
+           gfn, N_terms);
 
    fprintf(fp,
-           "%s\n"
-            "const int %s::n_heads      =%5d; "
-            "// Number of nonterminals.\n",
-           template_decl(), parser_tables_decl(), N_heads);
+           "template<>\n"
+            "const int %s_parser_tables_t::n_heads = %d; "
+            "// Number of nonterminals.\n\n",
+           gfn, N_heads);
 
    fprintf(fp,
-           "%s\n"
-           "const int %s::n_prods = %d; "
-           "// Number of productions.\n",
-           template_decl(), parser_tables_decl(), N_prods);
+           "template<>\n"
+           "const int %s_parser_tables_t::n_prods = %d; "
+           "// Number of productions.\n\n",
+           gfn, N_prods);
 
    fprintf(fp,
-           "%s\n"
-           "const int %s::n_states = %d; "
-           "// Number of states.\n",
-           template_decl(), parser_tables_decl(), N_states);
+           "template<>\n"
+           "const int %s_parser_tables_t::n_states = %d; "
+           "// Number of states.\n\n",
+           gfn, N_states);
 
    fprintf(fp,
-           "%s\n"
-           "const int %s::accept_state = %d; "
-           "// Accept state.\n",
-           template_decl(), parser_tables_decl(), Accept_state);
+           "template<>\n"
+           "const int %s_parser_tables_t::accept_state = %d; "
+           "// Accept state.\n\n",
+           gfn, Accept_state);
 
    fprintf(fp,
-           "%s\n"
-           "const int %s::n_termactns = %d; "
-           "// Number of terminal actions.\n",
-           template_decl(), parser_tables_decl(), N_tacts);
+           "template<>\n"
+           "const int %s_parser_tables_t::n_termactns = %d; "
+           "// Number of terminal actions.\n\n",
+           gfn, N_tacts);
 
    fprintf(fp,
-           "%s\n"
-           "const int %s::n_nodenames = %d; "
-           "// Number of node names.\n",
-           template_decl(), parser_tables_decl(), N_nodes);
+           "template<>\n"
+           "const int %s_parser_tables_t::n_nodenames = %d; "
+           "// Number of node names.\n\n",
+           gfn, N_nodes);
 
    fprintf(fp,
-           "%s\n"
-           "const int %s::n_nodeactns = %d; "
-           "// Number of node actions.\n",
-           template_decl(), parser_tables_decl(), N_nacts);
+           "template<>\n"
+           "const int %s_parser_tables_t::n_nodeactns = %d; "
+           "// Number of node actions.\n\n",
+           gfn, N_nacts);
 
    fprintf(fp,
-           "%s\n"
-           "const int %s::eof_symb = %d; "
-           "// <eof> symbol number.\n",
-           template_decl(), parser_tables_decl(), eof_term);
+           "template<>\n"
+           "const int %s_parser_tables_t::eof_symb = %d; "
+           "// <eof> symbol number.\n\n",
+           gfn, eof_term);
 
    fprintf(fp,
-           "%s\n"
-           "const int %s::err_used = %d; "
-           "// <error> used in grammar?\n\n",
-           template_decl(), parser_tables_decl(), error_used);
+           "template<>\n"
+           "const int %s_parser_tables_t::err_used = %d; "
+           "// <error> used in grammar?\n\n\n",
+           gfn, error_used);
 }
 
 void PG_Main::instantiate_term_symb_data(FILE *fp)
@@ -964,27 +976,46 @@ void PG_Main::instantiate_reverse_data(FILE *fp)
 void
 PG_Main::instantiate_fields(FILE *fp)
 {
-#define PFL(field_) PF(field_)
-#define PF(field_)                                                \
-      if (data_types[ts_T_##field_].n_elem != 0) {                \
-         instantiate_##field_##_data(fp);                         \
-         fprintf(fp, ("%s\n"                                      \
-                      "const T_%s *%s::" #field_ " = &%s[0];\n\n" \
-                      ""),                                        \
-                 template_decl(),                                 \
-                 #field_,                                         \
-                 parser_tables_decl(),                            \
-                 #field_ "_");                                    \
-      } else {                                                    \
-         fprintf(fp, ("%s\n"                                      \
-                      "const T_%s *%s::" #field_ " = 0;\n\n"      \
-                      ""),                                        \
-                 template_decl(),                                 \
-                 #field_,                                         \
-                 parser_tables_decl());                           \
-      }
+   char parser[512];
+
+   parser_tables_inst(parser, sizeof(parser) / sizeof(parser[0]));
+
+#define PFCP(pf_)                                           \
+   if (data_types[ts_T_##pf_].n_elem != 0) {                \
+      instantiate_##pf_##_data(fp);                         \
+      fprintf(fp, ("template<>\n"                           \
+                   "%s *%s_parser_tables_t::" #pf_ " = &%s[0];\n\n"         \
+                   ""),                                     \
+              data_types[ts_T_##pf_].type,                  \
+              gfn,                                          \
+              #pf_ "_");                                    \
+   } else {                                                 \
+      fprintf(fp, ("template<>\n"                           \
+                   "%s *%s_parser_tables_t::" #pf_ " = 0;\n\n"              \
+                   ""),                                     \
+              data_types[ts_T_##pf_].type,                  \
+              gfn);                                         \
+   }
+#define PFL(pf_) PF(pf_)
+#define PF(pf_)                                             \
+   if (data_types[ts_T_##pf_].n_elem != 0) {                \
+      instantiate_##pf_##_data(fp);                         \
+      fprintf(fp, ("template<>\n"                           \
+                   "const %s *%s_parser_tables_t::" #pf_ " = &%s[0];\n\n"   \
+                   ""),                                     \
+              data_types[ts_T_##pf_].type,                  \
+              gfn,                                          \
+              #pf_ "_");                                    \
+   } else {                                                 \
+      fprintf(fp, ("template<>\n"                           \
+                   "const %s *%s_parser_tables_t::" #pf_ " = 0;\n\n"        \
+                   ""),                                     \
+              data_types[ts_T_##pf_].type,                  \
+              gfn);                                         \
+   }
    PARSER_FIELDS
 #undef PF
+#undef PFCP
 #undef PFL
 
    templ_init_functions(fp, N_tacts, N_nacts);
@@ -1014,7 +1045,11 @@ PG_Main::typedef_tables(const char *dname,
 
    open_guard(fp, fname, cname, "TYPEDEF");
    fprintf(fp, "#include \"lrstar_parser_tables.h\"\n");
-   fprintf(fp, "typedef %s parser_tables_t;\n", parser);
+   fprintf(fp, "typedef %s %s_parser_tables_t;\n\n", parser, gfn);
+
+   /* XXX Remove this typedef when lrstar_parser is templatized and
+    * takes the parser table type as an argument. */
+   fprintf(fp, "typedef %s_parser_tables_t parser_tables_t;\n", gfn);
    close_guard(fp);
    fclose(fp);
 }
@@ -1060,16 +1095,16 @@ void  PG_Main::GenerateParserTables ()
    if (optn[PG_NODEACTIONS ] == 0) N_nacts = 0;
 
 
-   data_types[ts_T_term_symb].type   = "const char *";
+   data_types[ts_T_term_symb].type   = "const char * const";
    data_types[ts_T_term_symb].n_elem = N_terms;
 
-   data_types[ts_T_head_symb].type   = "const char *";
+   data_types[ts_T_head_symb].type   = "const char * const";
    data_types[ts_T_head_symb].n_elem = N_heads;
 
-   data_types[ts_T_tact_name].type    = "const char *";
+   data_types[ts_T_tact_name].type    = "const char * const";
    data_types[ts_T_tact_name].n_elem  = N_tacts;
 
-   data_types[ts_T_node_name].type   = "const char *";
+   data_types[ts_T_node_name].type   = "const char * const";
    data_types[ts_T_node_name].n_elem = N_nodes;
 
    nd_optimize ();
@@ -1516,9 +1551,11 @@ parser_cpp_fn(FILE       *fp,
    fprintf (fp, ("#include \"lrstar_basic_defs.h\"\n"
                  "#include \"lrstar_parser_tables.h\"\n"
                  "#include \"%s_LexerTables_typedef.h\"\n"
+                 "#include \"%s_ParserTables_typedef.h\"\n"
                  "#include \"%s_Parser.h\"\n"
-                 "#include \"%s_Actions.h\"\n"),
-            grammar, grammar, grammar);
+                 "#include \"%s_Actions.h\"\n\n"),
+            grammar, grammar, grammar, grammar);
+
 
    instantiate_field_lengths(fp);
    PG_Main::instantiate_constants(fp);

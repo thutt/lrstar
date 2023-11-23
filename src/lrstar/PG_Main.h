@@ -8,10 +8,10 @@
 #include "PG_PrintStates.h"
 
 #define PARSER_FIELDS                           \
-   PF(term_symb)                                \
-   PF(head_symb)                                \
-   PF(tact_name)                                \
-   PF(node_name)                                \
+   PFCP(term_symb)                              \
+   PFCP(head_symb)                              \
+   PFCP(tact_name)                              \
+   PFCP(node_name)                              \
    PF(head_numb)                                \
    PF(f_tail)                                   \
    PF(tail)                                     \
@@ -71,11 +71,13 @@ public:
                               const char *cname);
    static void instantiate_fields(FILE *fp);
    static void instantiate_constants(FILE *fp);
+#define PFCP(pfl_) PF(pfl_)
 #define PFL(pfl_) PF(pfl_)
 #define PF(pf_) static void instantiate_##pf_##_data(FILE *fp);
    PARSER_FIELDS
 #undef PF
 #undef PFL
+#undef PFCP
 };
 
 

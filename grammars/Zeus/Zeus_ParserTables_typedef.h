@@ -5,6 +5,8 @@
 #define __Zeus__ParserTables_TYPEDEF
 
 #include "lrstar_parser_tables.h"
-typedef templ_lrstar_parser_tables<const char *, const char *, const char *, const char *, uint8, uint16, int8, int8, uint32, uint32, uint8, uint16, uint8, uint8, int16, uint16, uint8, int16, uint16, uint8, uint8, uint8, uint8, int8, uint32, uint32, uint32, uint32, int8, uint32, uint32, uint32> parser_tables_t;
+typedef templ_lrstar_parser_tables<const char * const, const char * const, const char * const, const char * const, uint8, uint16, int8, int8, uint32, uint32, uint8, uint16, uint8, uint8, int16, uint16, uint8, int16, uint16, uint8, uint8, uint8, uint8, int8, uint32, uint32, uint32, uint32, int8, uint32, uint32, uint32> Zeus_parser_tables_t;
+
+typedef Zeus_parser_tables_t parser_tables_t;
 
 #endif

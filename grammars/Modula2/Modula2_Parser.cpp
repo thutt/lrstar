@@ -1,125 +1,136 @@
 #include "lrstar_basic_defs.h"
 #include "lrstar_parser_tables.h"
 #include "Modula2_LexerTables_typedef.h"
+#include "Modula2_ParserTables_typedef.h"
 #include "Modula2_Parser.h"
 #include "Modula2_Actions.h"
-template<typename T_term_symb, typename T_head_symb, typename T_tact_name, typename T_node_name, typename T_head_numb, typename T_f_tail, typename T_tail, typename T_arga, typename T_argx, typename T_argy, typename T_Bm, typename T_Br, typename T_Bc, typename T_Bf, typename T_Tm, typename T_Tr, typename T_Tc, typename T_Nm, typename T_Nr, typename T_Nc, typename T_Rm, typename T_Rr, typename T_Rc, typename T_PL, typename T_nd_fterm, typename T_nd_term, typename T_nd_faction, typename T_nd_action, typename T_tact_numb, typename T_node_numb, typename T_nact_numb, typename T_reverse>
-const int templ_lrstar_parser_tables<T_term_symb, T_head_symb, T_tact_name, T_node_name, T_head_numb, T_f_tail, T_tail, T_arga, T_argx, T_argy, T_Bm, T_Br, T_Bc, T_Bf, T_Tm, T_Tr, T_Tc, T_Nm, T_Nr, T_Nc, T_Rm, T_Rr, T_Rc, T_PL, T_nd_fterm, T_nd_term, T_nd_faction, T_nd_action, T_tact_numb, T_node_numb, T_nact_numb, T_reverse>::n_term_symb = 71;
 
-template<typename T_term_symb, typename T_head_symb, typename T_tact_name, typename T_node_name, typename T_head_numb, typename T_f_tail, typename T_tail, typename T_arga, typename T_argx, typename T_argy, typename T_Bm, typename T_Br, typename T_Bc, typename T_Bf, typename T_Tm, typename T_Tr, typename T_Tc, typename T_Nm, typename T_Nr, typename T_Nc, typename T_Rm, typename T_Rr, typename T_Rc, typename T_PL, typename T_nd_fterm, typename T_nd_term, typename T_nd_faction, typename T_nd_action, typename T_tact_numb, typename T_node_numb, typename T_nact_numb, typename T_reverse>
-const int templ_lrstar_parser_tables<T_term_symb, T_head_symb, T_tact_name, T_node_name, T_head_numb, T_f_tail, T_tail, T_arga, T_argx, T_argy, T_Bm, T_Br, T_Bc, T_Bf, T_Tm, T_Tr, T_Tc, T_Nm, T_Nr, T_Nc, T_Rm, T_Rr, T_Rc, T_PL, T_nd_fterm, T_nd_term, T_nd_faction, T_nd_action, T_tact_numb, T_node_numb, T_nact_numb, T_reverse>::n_head_symb = 122;
+template<>
+const int Modula2_parser_tables_t::n_term_symb = 71;
 
-template<typename T_term_symb, typename T_head_symb, typename T_tact_name, typename T_node_name, typename T_head_numb, typename T_f_tail, typename T_tail, typename T_arga, typename T_argx, typename T_argy, typename T_Bm, typename T_Br, typename T_Bc, typename T_Bf, typename T_Tm, typename T_Tr, typename T_Tc, typename T_Nm, typename T_Nr, typename T_Nc, typename T_Rm, typename T_Rr, typename T_Rc, typename T_PL, typename T_nd_fterm, typename T_nd_term, typename T_nd_faction, typename T_nd_action, typename T_tact_numb, typename T_node_numb, typename T_nact_numb, typename T_reverse>
-const int templ_lrstar_parser_tables<T_term_symb, T_head_symb, T_tact_name, T_node_name, T_head_numb, T_f_tail, T_tail, T_arga, T_argx, T_argy, T_Bm, T_Br, T_Bc, T_Bf, T_Tm, T_Tr, T_Tc, T_Nm, T_Nr, T_Nc, T_Rm, T_Rr, T_Rc, T_PL, T_nd_fterm, T_nd_term, T_nd_faction, T_nd_action, T_tact_numb, T_node_numb, T_nact_numb, T_reverse>::n_tact_name = 2;
+template<>
+const int Modula2_parser_tables_t::n_head_symb = 122;
 
-template<typename T_term_symb, typename T_head_symb, typename T_tact_name, typename T_node_name, typename T_head_numb, typename T_f_tail, typename T_tail, typename T_arga, typename T_argx, typename T_argy, typename T_Bm, typename T_Br, typename T_Bc, typename T_Bf, typename T_Tm, typename T_Tr, typename T_Tc, typename T_Nm, typename T_Nr, typename T_Nc, typename T_Rm, typename T_Rr, typename T_Rc, typename T_PL, typename T_nd_fterm, typename T_nd_term, typename T_nd_faction, typename T_nd_action, typename T_tact_numb, typename T_node_numb, typename T_nact_numb, typename T_reverse>
-const int templ_lrstar_parser_tables<T_term_symb, T_head_symb, T_tact_name, T_node_name, T_head_numb, T_f_tail, T_tail, T_arga, T_argx, T_argy, T_Bm, T_Br, T_Bc, T_Bf, T_Tm, T_Tr, T_Tc, T_Nm, T_Nr, T_Nc, T_Rm, T_Rr, T_Rc, T_PL, T_nd_fterm, T_nd_term, T_nd_faction, T_nd_action, T_tact_numb, T_node_numb, T_nact_numb, T_reverse>::n_node_name = 0;
+template<>
+const int Modula2_parser_tables_t::n_tact_name = 2;
 
-template<typename T_term_symb, typename T_head_symb, typename T_tact_name, typename T_node_name, typename T_head_numb, typename T_f_tail, typename T_tail, typename T_arga, typename T_argx, typename T_argy, typename T_Bm, typename T_Br, typename T_Bc, typename T_Bf, typename T_Tm, typename T_Tr, typename T_Tc, typename T_Nm, typename T_Nr, typename T_Nc, typename T_Rm, typename T_Rr, typename T_Rc, typename T_PL, typename T_nd_fterm, typename T_nd_term, typename T_nd_faction, typename T_nd_action, typename T_tact_numb, typename T_node_numb, typename T_nact_numb, typename T_reverse>
-const int templ_lrstar_parser_tables<T_term_symb, T_head_symb, T_tact_name, T_node_name, T_head_numb, T_f_tail, T_tail, T_arga, T_argx, T_argy, T_Bm, T_Br, T_Bc, T_Bf, T_Tm, T_Tr, T_Tc, T_Nm, T_Nr, T_Nc, T_Rm, T_Rr, T_Rc, T_PL, T_nd_fterm, T_nd_term, T_nd_faction, T_nd_action, T_tact_numb, T_node_numb, T_nact_numb, T_reverse>::n_head_numb = 226;
+template<>
+const int Modula2_parser_tables_t::n_node_name = 0;
 
-template<typename T_term_symb, typename T_head_symb, typename T_tact_name, typename T_node_name, typename T_head_numb, typename T_f_tail, typename T_tail, typename T_arga, typename T_argx, typename T_argy, typename T_Bm, typename T_Br, typename T_Bc, typename T_Bf, typename T_Tm, typename T_Tr, typename T_Tc, typename T_Nm, typename T_Nr, typename T_Nc, typename T_Rm, typename T_Rr, typename T_Rc, typename T_PL, typename T_nd_fterm, typename T_nd_term, typename T_nd_faction, typename T_nd_action, typename T_tact_numb, typename T_node_numb, typename T_nact_numb, typename T_reverse>
-const int templ_lrstar_parser_tables<T_term_symb, T_head_symb, T_tact_name, T_node_name, T_head_numb, T_f_tail, T_tail, T_arga, T_argx, T_argy, T_Bm, T_Br, T_Bc, T_Bf, T_Tm, T_Tr, T_Tc, T_Nm, T_Nr, T_Nc, T_Rm, T_Rr, T_Rc, T_PL, T_nd_fterm, T_nd_term, T_nd_faction, T_nd_action, T_tact_numb, T_node_numb, T_nact_numb, T_reverse>::n_f_tail = 227;
+template<>
+const int Modula2_parser_tables_t::n_head_numb = 226;
 
-template<typename T_term_symb, typename T_head_symb, typename T_tact_name, typename T_node_name, typename T_head_numb, typename T_f_tail, typename T_tail, typename T_arga, typename T_argx, typename T_argy, typename T_Bm, typename T_Br, typename T_Bc, typename T_Bf, typename T_Tm, typename T_Tr, typename T_Tc, typename T_Nm, typename T_Nr, typename T_Nc, typename T_Rm, typename T_Rr, typename T_Rc, typename T_PL, typename T_nd_fterm, typename T_nd_term, typename T_nd_faction, typename T_nd_action, typename T_tact_numb, typename T_node_numb, typename T_nact_numb, typename T_reverse>
-const int templ_lrstar_parser_tables<T_term_symb, T_head_symb, T_tact_name, T_node_name, T_head_numb, T_f_tail, T_tail, T_arga, T_argx, T_argy, T_Bm, T_Br, T_Bc, T_Bf, T_Tm, T_Tr, T_Tc, T_Nm, T_Nr, T_Nc, T_Rm, T_Rr, T_Rc, T_PL, T_nd_fterm, T_nd_term, T_nd_faction, T_nd_action, T_tact_numb, T_node_numb, T_nact_numb, T_reverse>::n_tail = 397;
+template<>
+const int Modula2_parser_tables_t::n_f_tail = 227;
 
-template<typename T_term_symb, typename T_head_symb, typename T_tact_name, typename T_node_name, typename T_head_numb, typename T_f_tail, typename T_tail, typename T_arga, typename T_argx, typename T_argy, typename T_Bm, typename T_Br, typename T_Bc, typename T_Bf, typename T_Tm, typename T_Tr, typename T_Tc, typename T_Nm, typename T_Nr, typename T_Nc, typename T_Rm, typename T_Rr, typename T_Rc, typename T_PL, typename T_nd_fterm, typename T_nd_term, typename T_nd_faction, typename T_nd_action, typename T_tact_numb, typename T_node_numb, typename T_nact_numb, typename T_reverse>
-const int templ_lrstar_parser_tables<T_term_symb, T_head_symb, T_tact_name, T_node_name, T_head_numb, T_f_tail, T_tail, T_arga, T_argx, T_argy, T_Bm, T_Br, T_Bc, T_Bf, T_Tm, T_Tr, T_Tc, T_Nm, T_Nr, T_Nc, T_Rm, T_Rr, T_Rc, T_PL, T_nd_fterm, T_nd_term, T_nd_faction, T_nd_action, T_tact_numb, T_node_numb, T_nact_numb, T_reverse>::n_arga = 71;
+template<>
+const int Modula2_parser_tables_t::n_tail = 397;
 
-template<typename T_term_symb, typename T_head_symb, typename T_tact_name, typename T_node_name, typename T_head_numb, typename T_f_tail, typename T_tail, typename T_arga, typename T_argx, typename T_argy, typename T_Bm, typename T_Br, typename T_Bc, typename T_Bf, typename T_Tm, typename T_Tr, typename T_Tc, typename T_Nm, typename T_Nr, typename T_Nc, typename T_Rm, typename T_Rr, typename T_Rc, typename T_PL, typename T_nd_fterm, typename T_nd_term, typename T_nd_faction, typename T_nd_action, typename T_tact_numb, typename T_node_numb, typename T_nact_numb, typename T_reverse>
-const int templ_lrstar_parser_tables<T_term_symb, T_head_symb, T_tact_name, T_node_name, T_head_numb, T_f_tail, T_tail, T_arga, T_argx, T_argy, T_Bm, T_Br, T_Bc, T_Bf, T_Tm, T_Tr, T_Tc, T_Nm, T_Nr, T_Nc, T_Rm, T_Rr, T_Rc, T_PL, T_nd_fterm, T_nd_term, T_nd_faction, T_nd_action, T_tact_numb, T_node_numb, T_nact_numb, T_reverse>::n_argx = 0;
+template<>
+const int Modula2_parser_tables_t::n_arga = 71;
 
-template<typename T_term_symb, typename T_head_symb, typename T_tact_name, typename T_node_name, typename T_head_numb, typename T_f_tail, typename T_tail, typename T_arga, typename T_argx, typename T_argy, typename T_Bm, typename T_Br, typename T_Bc, typename T_Bf, typename T_Tm, typename T_Tr, typename T_Tc, typename T_Nm, typename T_Nr, typename T_Nc, typename T_Rm, typename T_Rr, typename T_Rc, typename T_PL, typename T_nd_fterm, typename T_nd_term, typename T_nd_faction, typename T_nd_action, typename T_tact_numb, typename T_node_numb, typename T_nact_numb, typename T_reverse>
-const int templ_lrstar_parser_tables<T_term_symb, T_head_symb, T_tact_name, T_node_name, T_head_numb, T_f_tail, T_tail, T_arga, T_argx, T_argy, T_Bm, T_Br, T_Bc, T_Bf, T_Tm, T_Tr, T_Tc, T_Nm, T_Nr, T_Nc, T_Rm, T_Rr, T_Rc, T_PL, T_nd_fterm, T_nd_term, T_nd_faction, T_nd_action, T_tact_numb, T_node_numb, T_nact_numb, T_reverse>::n_argy = 0;
+template<>
+const int Modula2_parser_tables_t::n_argx = 0;
 
-template<typename T_term_symb, typename T_head_symb, typename T_tact_name, typename T_node_name, typename T_head_numb, typename T_f_tail, typename T_tail, typename T_arga, typename T_argx, typename T_argy, typename T_Bm, typename T_Br, typename T_Bc, typename T_Bf, typename T_Tm, typename T_Tr, typename T_Tc, typename T_Nm, typename T_Nr, typename T_Nc, typename T_Rm, typename T_Rr, typename T_Rc, typename T_PL, typename T_nd_fterm, typename T_nd_term, typename T_nd_faction, typename T_nd_action, typename T_tact_numb, typename T_node_numb, typename T_nact_numb, typename T_reverse>
-const int templ_lrstar_parser_tables<T_term_symb, T_head_symb, T_tact_name, T_node_name, T_head_numb, T_f_tail, T_tail, T_arga, T_argx, T_argy, T_Bm, T_Br, T_Bc, T_Bf, T_Tm, T_Tr, T_Tc, T_Nm, T_Nr, T_Nc, T_Rm, T_Rr, T_Rc, T_PL, T_nd_fterm, T_nd_term, T_nd_faction, T_nd_action, T_tact_numb, T_node_numb, T_nact_numb, T_reverse>::n_Bm = 158;
+template<>
+const int Modula2_parser_tables_t::n_argy = 0;
 
-template<typename T_term_symb, typename T_head_symb, typename T_tact_name, typename T_node_name, typename T_head_numb, typename T_f_tail, typename T_tail, typename T_arga, typename T_argx, typename T_argy, typename T_Bm, typename T_Br, typename T_Bc, typename T_Bf, typename T_Tm, typename T_Tr, typename T_Tc, typename T_Nm, typename T_Nr, typename T_Nc, typename T_Rm, typename T_Rr, typename T_Rc, typename T_PL, typename T_nd_fterm, typename T_nd_term, typename T_nd_faction, typename T_nd_action, typename T_tact_numb, typename T_node_numb, typename T_nact_numb, typename T_reverse>
-const int templ_lrstar_parser_tables<T_term_symb, T_head_symb, T_tact_name, T_node_name, T_head_numb, T_f_tail, T_tail, T_arga, T_argx, T_argy, T_Bm, T_Br, T_Bc, T_Bf, T_Tm, T_Tr, T_Tc, T_Nm, T_Nr, T_Nc, T_Rm, T_Rr, T_Rc, T_PL, T_nd_fterm, T_nd_term, T_nd_faction, T_nd_action, T_tact_numb, T_node_numb, T_nact_numb, T_reverse>::n_Br = 205;
+template<>
+const int Modula2_parser_tables_t::n_Bm = 158;
 
-template<typename T_term_symb, typename T_head_symb, typename T_tact_name, typename T_node_name, typename T_head_numb, typename T_f_tail, typename T_tail, typename T_arga, typename T_argx, typename T_argy, typename T_Bm, typename T_Br, typename T_Bc, typename T_Bf, typename T_Tm, typename T_Tr, typename T_Tc, typename T_Nm, typename T_Nr, typename T_Nc, typename T_Rm, typename T_Rr, typename T_Rc, typename T_PL, typename T_nd_fterm, typename T_nd_term, typename T_nd_faction, typename T_nd_action, typename T_tact_numb, typename T_node_numb, typename T_nact_numb, typename T_reverse>
-const int templ_lrstar_parser_tables<T_term_symb, T_head_symb, T_tact_name, T_node_name, T_head_numb, T_f_tail, T_tail, T_arga, T_argx, T_argy, T_Bm, T_Br, T_Bc, T_Bf, T_Tm, T_Tr, T_Tc, T_Nm, T_Nr, T_Nc, T_Rm, T_Rr, T_Rc, T_PL, T_nd_fterm, T_nd_term, T_nd_faction, T_nd_action, T_tact_numb, T_node_numb, T_nact_numb, T_reverse>::n_Bc = 71;
+template<>
+const int Modula2_parser_tables_t::n_Br = 205;
 
-template<typename T_term_symb, typename T_head_symb, typename T_tact_name, typename T_node_name, typename T_head_numb, typename T_f_tail, typename T_tail, typename T_arga, typename T_argx, typename T_argy, typename T_Bm, typename T_Br, typename T_Bc, typename T_Bf, typename T_Tm, typename T_Tr, typename T_Tc, typename T_Nm, typename T_Nr, typename T_Nc, typename T_Rm, typename T_Rr, typename T_Rc, typename T_PL, typename T_nd_fterm, typename T_nd_term, typename T_nd_faction, typename T_nd_action, typename T_tact_numb, typename T_node_numb, typename T_nact_numb, typename T_reverse>
-const int templ_lrstar_parser_tables<T_term_symb, T_head_symb, T_tact_name, T_node_name, T_head_numb, T_f_tail, T_tail, T_arga, T_argx, T_argy, T_Bm, T_Br, T_Bc, T_Bf, T_Tm, T_Tr, T_Tc, T_Nm, T_Nr, T_Nc, T_Rm, T_Rr, T_Rc, T_PL, T_nd_fterm, T_nd_term, T_nd_faction, T_nd_action, T_tact_numb, T_node_numb, T_nact_numb, T_reverse>::n_Bf = 71;
+template<>
+const int Modula2_parser_tables_t::n_Bc = 71;
 
-template<typename T_term_symb, typename T_head_symb, typename T_tact_name, typename T_node_name, typename T_head_numb, typename T_f_tail, typename T_tail, typename T_arga, typename T_argx, typename T_argy, typename T_Bm, typename T_Br, typename T_Bc, typename T_Bf, typename T_Tm, typename T_Tr, typename T_Tc, typename T_Nm, typename T_Nr, typename T_Nc, typename T_Rm, typename T_Rr, typename T_Rc, typename T_PL, typename T_nd_fterm, typename T_nd_term, typename T_nd_faction, typename T_nd_action, typename T_tact_numb, typename T_node_numb, typename T_nact_numb, typename T_reverse>
-const int templ_lrstar_parser_tables<T_term_symb, T_head_symb, T_tact_name, T_node_name, T_head_numb, T_f_tail, T_tail, T_arga, T_argx, T_argy, T_Bm, T_Br, T_Bc, T_Bf, T_Tm, T_Tr, T_Tc, T_Nm, T_Nr, T_Nc, T_Rm, T_Rr, T_Rc, T_PL, T_nd_fterm, T_nd_term, T_nd_faction, T_nd_action, T_tact_numb, T_node_numb, T_nact_numb, T_reverse>::n_Tm = 229;
+template<>
+const int Modula2_parser_tables_t::n_Bf = 71;
 
-template<typename T_term_symb, typename T_head_symb, typename T_tact_name, typename T_node_name, typename T_head_numb, typename T_f_tail, typename T_tail, typename T_arga, typename T_argx, typename T_argy, typename T_Bm, typename T_Br, typename T_Bc, typename T_Bf, typename T_Tm, typename T_Tr, typename T_Tc, typename T_Nm, typename T_Nr, typename T_Nc, typename T_Rm, typename T_Rr, typename T_Rc, typename T_PL, typename T_nd_fterm, typename T_nd_term, typename T_nd_faction, typename T_nd_action, typename T_tact_numb, typename T_node_numb, typename T_nact_numb, typename T_reverse>
-const int templ_lrstar_parser_tables<T_term_symb, T_head_symb, T_tact_name, T_node_name, T_head_numb, T_f_tail, T_tail, T_arga, T_argx, T_argy, T_Bm, T_Br, T_Bc, T_Bf, T_Tm, T_Tr, T_Tc, T_Nm, T_Nr, T_Nc, T_Rm, T_Rr, T_Rc, T_PL, T_nd_fterm, T_nd_term, T_nd_faction, T_nd_action, T_tact_numb, T_node_numb, T_nact_numb, T_reverse>::n_Tr = 205;
+template<>
+const int Modula2_parser_tables_t::n_Tm = 229;
 
-template<typename T_term_symb, typename T_head_symb, typename T_tact_name, typename T_node_name, typename T_head_numb, typename T_f_tail, typename T_tail, typename T_arga, typename T_argx, typename T_argy, typename T_Bm, typename T_Br, typename T_Bc, typename T_Bf, typename T_Tm, typename T_Tr, typename T_Tc, typename T_Nm, typename T_Nr, typename T_Nc, typename T_Rm, typename T_Rr, typename T_Rc, typename T_PL, typename T_nd_fterm, typename T_nd_term, typename T_nd_faction, typename T_nd_action, typename T_tact_numb, typename T_node_numb, typename T_nact_numb, typename T_reverse>
-const int templ_lrstar_parser_tables<T_term_symb, T_head_symb, T_tact_name, T_node_name, T_head_numb, T_f_tail, T_tail, T_arga, T_argx, T_argy, T_Bm, T_Br, T_Bc, T_Bf, T_Tm, T_Tr, T_Tc, T_Nm, T_Nr, T_Nc, T_Rm, T_Rr, T_Rc, T_PL, T_nd_fterm, T_nd_term, T_nd_faction, T_nd_action, T_tact_numb, T_node_numb, T_nact_numb, T_reverse>::n_Tc = 71;
+template<>
+const int Modula2_parser_tables_t::n_Tr = 205;
 
-template<typename T_term_symb, typename T_head_symb, typename T_tact_name, typename T_node_name, typename T_head_numb, typename T_f_tail, typename T_tail, typename T_arga, typename T_argx, typename T_argy, typename T_Bm, typename T_Br, typename T_Bc, typename T_Bf, typename T_Tm, typename T_Tr, typename T_Tc, typename T_Nm, typename T_Nr, typename T_Nc, typename T_Rm, typename T_Rr, typename T_Rc, typename T_PL, typename T_nd_fterm, typename T_nd_term, typename T_nd_faction, typename T_nd_action, typename T_tact_numb, typename T_node_numb, typename T_nact_numb, typename T_reverse>
-const int templ_lrstar_parser_tables<T_term_symb, T_head_symb, T_tact_name, T_node_name, T_head_numb, T_f_tail, T_tail, T_arga, T_argx, T_argy, T_Bm, T_Br, T_Bc, T_Bf, T_Tm, T_Tr, T_Tc, T_Nm, T_Nr, T_Nc, T_Rm, T_Rr, T_Rc, T_PL, T_nd_fterm, T_nd_term, T_nd_faction, T_nd_action, T_tact_numb, T_node_numb, T_nact_numb, T_reverse>::n_Nm = 1169;
+template<>
+const int Modula2_parser_tables_t::n_Tc = 71;
 
-template<typename T_term_symb, typename T_head_symb, typename T_tact_name, typename T_node_name, typename T_head_numb, typename T_f_tail, typename T_tail, typename T_arga, typename T_argx, typename T_argy, typename T_Bm, typename T_Br, typename T_Bc, typename T_Bf, typename T_Tm, typename T_Tr, typename T_Tc, typename T_Nm, typename T_Nr, typename T_Nc, typename T_Rm, typename T_Rr, typename T_Rc, typename T_PL, typename T_nd_fterm, typename T_nd_term, typename T_nd_faction, typename T_nd_action, typename T_tact_numb, typename T_node_numb, typename T_nact_numb, typename T_reverse>
-const int templ_lrstar_parser_tables<T_term_symb, T_head_symb, T_tact_name, T_node_name, T_head_numb, T_f_tail, T_tail, T_arga, T_argx, T_argy, T_Bm, T_Br, T_Bc, T_Bf, T_Tm, T_Tr, T_Tc, T_Nm, T_Nr, T_Nc, T_Rm, T_Rr, T_Rc, T_PL, T_nd_fterm, T_nd_term, T_nd_faction, T_nd_action, T_tact_numb, T_node_numb, T_nact_numb, T_reverse>::n_Nr = 205;
+template<>
+const int Modula2_parser_tables_t::n_Nm = 1169;
 
-template<typename T_term_symb, typename T_head_symb, typename T_tact_name, typename T_node_name, typename T_head_numb, typename T_f_tail, typename T_tail, typename T_arga, typename T_argx, typename T_argy, typename T_Bm, typename T_Br, typename T_Bc, typename T_Bf, typename T_Tm, typename T_Tr, typename T_Tc, typename T_Nm, typename T_Nr, typename T_Nc, typename T_Rm, typename T_Rr, typename T_Rc, typename T_PL, typename T_nd_fterm, typename T_nd_term, typename T_nd_faction, typename T_nd_action, typename T_tact_numb, typename T_node_numb, typename T_nact_numb, typename T_reverse>
-const int templ_lrstar_parser_tables<T_term_symb, T_head_symb, T_tact_name, T_node_name, T_head_numb, T_f_tail, T_tail, T_arga, T_argx, T_argy, T_Bm, T_Br, T_Bc, T_Bf, T_Tm, T_Tr, T_Tc, T_Nm, T_Nr, T_Nc, T_Rm, T_Rr, T_Rc, T_PL, T_nd_fterm, T_nd_term, T_nd_faction, T_nd_action, T_tact_numb, T_node_numb, T_nact_numb, T_reverse>::n_Nc = 226;
+template<>
+const int Modula2_parser_tables_t::n_Nr = 205;
 
-template<typename T_term_symb, typename T_head_symb, typename T_tact_name, typename T_node_name, typename T_head_numb, typename T_f_tail, typename T_tail, typename T_arga, typename T_argx, typename T_argy, typename T_Bm, typename T_Br, typename T_Bc, typename T_Bf, typename T_Tm, typename T_Tr, typename T_Tc, typename T_Nm, typename T_Nr, typename T_Nc, typename T_Rm, typename T_Rr, typename T_Rc, typename T_PL, typename T_nd_fterm, typename T_nd_term, typename T_nd_faction, typename T_nd_action, typename T_tact_numb, typename T_node_numb, typename T_nact_numb, typename T_reverse>
-const int templ_lrstar_parser_tables<T_term_symb, T_head_symb, T_tact_name, T_node_name, T_head_numb, T_f_tail, T_tail, T_arga, T_argx, T_argy, T_Bm, T_Br, T_Bc, T_Bf, T_Tm, T_Tr, T_Tc, T_Nm, T_Nr, T_Nc, T_Rm, T_Rr, T_Rc, T_PL, T_nd_fterm, T_nd_term, T_nd_faction, T_nd_action, T_tact_numb, T_node_numb, T_nact_numb, T_reverse>::n_Rm = 239;
+template<>
+const int Modula2_parser_tables_t::n_Nc = 226;
 
-template<typename T_term_symb, typename T_head_symb, typename T_tact_name, typename T_node_name, typename T_head_numb, typename T_f_tail, typename T_tail, typename T_arga, typename T_argx, typename T_argy, typename T_Bm, typename T_Br, typename T_Bc, typename T_Bf, typename T_Tm, typename T_Tr, typename T_Tc, typename T_Nm, typename T_Nr, typename T_Nc, typename T_Rm, typename T_Rr, typename T_Rc, typename T_PL, typename T_nd_fterm, typename T_nd_term, typename T_nd_faction, typename T_nd_action, typename T_tact_numb, typename T_node_numb, typename T_nact_numb, typename T_reverse>
-const int templ_lrstar_parser_tables<T_term_symb, T_head_symb, T_tact_name, T_node_name, T_head_numb, T_f_tail, T_tail, T_arga, T_argx, T_argy, T_Bm, T_Br, T_Bc, T_Bf, T_Tm, T_Tr, T_Tc, T_Nm, T_Nr, T_Nc, T_Rm, T_Rr, T_Rc, T_PL, T_nd_fterm, T_nd_term, T_nd_faction, T_nd_action, T_tact_numb, T_node_numb, T_nact_numb, T_reverse>::n_Rr = 205;
+template<>
+const int Modula2_parser_tables_t::n_Rm = 239;
 
-template<typename T_term_symb, typename T_head_symb, typename T_tact_name, typename T_node_name, typename T_head_numb, typename T_f_tail, typename T_tail, typename T_arga, typename T_argx, typename T_argy, typename T_Bm, typename T_Br, typename T_Bc, typename T_Bf, typename T_Tm, typename T_Tr, typename T_Tc, typename T_Nm, typename T_Nr, typename T_Nc, typename T_Rm, typename T_Rr, typename T_Rc, typename T_PL, typename T_nd_fterm, typename T_nd_term, typename T_nd_faction, typename T_nd_action, typename T_tact_numb, typename T_node_numb, typename T_nact_numb, typename T_reverse>
-const int templ_lrstar_parser_tables<T_term_symb, T_head_symb, T_tact_name, T_node_name, T_head_numb, T_f_tail, T_tail, T_arga, T_argx, T_argy, T_Bm, T_Br, T_Bc, T_Bf, T_Tm, T_Tr, T_Tc, T_Nm, T_Nr, T_Nc, T_Rm, T_Rr, T_Rc, T_PL, T_nd_fterm, T_nd_term, T_nd_faction, T_nd_action, T_tact_numb, T_node_numb, T_nact_numb, T_reverse>::n_Rc = 71;
+template<>
+const int Modula2_parser_tables_t::n_Rr = 205;
 
-template<typename T_term_symb, typename T_head_symb, typename T_tact_name, typename T_node_name, typename T_head_numb, typename T_f_tail, typename T_tail, typename T_arga, typename T_argx, typename T_argy, typename T_Bm, typename T_Br, typename T_Bc, typename T_Bf, typename T_Tm, typename T_Tr, typename T_Tc, typename T_Nm, typename T_Nr, typename T_Nc, typename T_Rm, typename T_Rr, typename T_Rc, typename T_PL, typename T_nd_fterm, typename T_nd_term, typename T_nd_faction, typename T_nd_action, typename T_tact_numb, typename T_node_numb, typename T_nact_numb, typename T_reverse>
-const int templ_lrstar_parser_tables<T_term_symb, T_head_symb, T_tact_name, T_node_name, T_head_numb, T_f_tail, T_tail, T_arga, T_argx, T_argy, T_Bm, T_Br, T_Bc, T_Bf, T_Tm, T_Tr, T_Tc, T_Nm, T_Nr, T_Nc, T_Rm, T_Rr, T_Rc, T_PL, T_nd_fterm, T_nd_term, T_nd_faction, T_nd_action, T_tact_numb, T_node_numb, T_nact_numb, T_reverse>::n_PL = 226;
+template<>
+const int Modula2_parser_tables_t::n_Rc = 71;
 
-template<typename T_term_symb, typename T_head_symb, typename T_tact_name, typename T_node_name, typename T_head_numb, typename T_f_tail, typename T_tail, typename T_arga, typename T_argx, typename T_argy, typename T_Bm, typename T_Br, typename T_Bc, typename T_Bf, typename T_Tm, typename T_Tr, typename T_Tc, typename T_Nm, typename T_Nr, typename T_Nc, typename T_Rm, typename T_Rr, typename T_Rc, typename T_PL, typename T_nd_fterm, typename T_nd_term, typename T_nd_faction, typename T_nd_action, typename T_tact_numb, typename T_node_numb, typename T_nact_numb, typename T_reverse>
-const int templ_lrstar_parser_tables<T_term_symb, T_head_symb, T_tact_name, T_node_name, T_head_numb, T_f_tail, T_tail, T_arga, T_argx, T_argy, T_Bm, T_Br, T_Bc, T_Bf, T_Tm, T_Tr, T_Tc, T_Nm, T_Nr, T_Nc, T_Rm, T_Rr, T_Rc, T_PL, T_nd_fterm, T_nd_term, T_nd_faction, T_nd_action, T_tact_numb, T_node_numb, T_nact_numb, T_reverse>::n_nd_fterm = 0;
+template<>
+const int Modula2_parser_tables_t::n_PL = 226;
 
-template<typename T_term_symb, typename T_head_symb, typename T_tact_name, typename T_node_name, typename T_head_numb, typename T_f_tail, typename T_tail, typename T_arga, typename T_argx, typename T_argy, typename T_Bm, typename T_Br, typename T_Bc, typename T_Bf, typename T_Tm, typename T_Tr, typename T_Tc, typename T_Nm, typename T_Nr, typename T_Nc, typename T_Rm, typename T_Rr, typename T_Rc, typename T_PL, typename T_nd_fterm, typename T_nd_term, typename T_nd_faction, typename T_nd_action, typename T_tact_numb, typename T_node_numb, typename T_nact_numb, typename T_reverse>
-const int templ_lrstar_parser_tables<T_term_symb, T_head_symb, T_tact_name, T_node_name, T_head_numb, T_f_tail, T_tail, T_arga, T_argx, T_argy, T_Bm, T_Br, T_Bc, T_Bf, T_Tm, T_Tr, T_Tc, T_Nm, T_Nr, T_Nc, T_Rm, T_Rr, T_Rc, T_PL, T_nd_fterm, T_nd_term, T_nd_faction, T_nd_action, T_tact_numb, T_node_numb, T_nact_numb, T_reverse>::n_nd_term = 0;
+template<>
+const int Modula2_parser_tables_t::n_nd_fterm = 0;
 
-template<typename T_term_symb, typename T_head_symb, typename T_tact_name, typename T_node_name, typename T_head_numb, typename T_f_tail, typename T_tail, typename T_arga, typename T_argx, typename T_argy, typename T_Bm, typename T_Br, typename T_Bc, typename T_Bf, typename T_Tm, typename T_Tr, typename T_Tc, typename T_Nm, typename T_Nr, typename T_Nc, typename T_Rm, typename T_Rr, typename T_Rc, typename T_PL, typename T_nd_fterm, typename T_nd_term, typename T_nd_faction, typename T_nd_action, typename T_tact_numb, typename T_node_numb, typename T_nact_numb, typename T_reverse>
-const int templ_lrstar_parser_tables<T_term_symb, T_head_symb, T_tact_name, T_node_name, T_head_numb, T_f_tail, T_tail, T_arga, T_argx, T_argy, T_Bm, T_Br, T_Bc, T_Bf, T_Tm, T_Tr, T_Tc, T_Nm, T_Nr, T_Nc, T_Rm, T_Rr, T_Rc, T_PL, T_nd_fterm, T_nd_term, T_nd_faction, T_nd_action, T_tact_numb, T_node_numb, T_nact_numb, T_reverse>::n_nd_faction = 0;
+template<>
+const int Modula2_parser_tables_t::n_nd_term = 0;
 
-template<typename T_term_symb, typename T_head_symb, typename T_tact_name, typename T_node_name, typename T_head_numb, typename T_f_tail, typename T_tail, typename T_arga, typename T_argx, typename T_argy, typename T_Bm, typename T_Br, typename T_Bc, typename T_Bf, typename T_Tm, typename T_Tr, typename T_Tc, typename T_Nm, typename T_Nr, typename T_Nc, typename T_Rm, typename T_Rr, typename T_Rc, typename T_PL, typename T_nd_fterm, typename T_nd_term, typename T_nd_faction, typename T_nd_action, typename T_tact_numb, typename T_node_numb, typename T_nact_numb, typename T_reverse>
-const int templ_lrstar_parser_tables<T_term_symb, T_head_symb, T_tact_name, T_node_name, T_head_numb, T_f_tail, T_tail, T_arga, T_argx, T_argy, T_Bm, T_Br, T_Bc, T_Bf, T_Tm, T_Tr, T_Tc, T_Nm, T_Nr, T_Nc, T_Rm, T_Rr, T_Rc, T_PL, T_nd_fterm, T_nd_term, T_nd_faction, T_nd_action, T_tact_numb, T_node_numb, T_nact_numb, T_reverse>::n_nd_action = 0;
+template<>
+const int Modula2_parser_tables_t::n_nd_faction = 0;
 
-template<typename T_term_symb, typename T_head_symb, typename T_tact_name, typename T_node_name, typename T_head_numb, typename T_f_tail, typename T_tail, typename T_arga, typename T_argx, typename T_argy, typename T_Bm, typename T_Br, typename T_Bc, typename T_Bf, typename T_Tm, typename T_Tr, typename T_Tc, typename T_Nm, typename T_Nr, typename T_Nc, typename T_Rm, typename T_Rr, typename T_Rc, typename T_PL, typename T_nd_fterm, typename T_nd_term, typename T_nd_faction, typename T_nd_action, typename T_tact_numb, typename T_node_numb, typename T_nact_numb, typename T_reverse>
-const int templ_lrstar_parser_tables<T_term_symb, T_head_symb, T_tact_name, T_node_name, T_head_numb, T_f_tail, T_tail, T_arga, T_argx, T_argy, T_Bm, T_Br, T_Bc, T_Bf, T_Tm, T_Tr, T_Tc, T_Nm, T_Nr, T_Nc, T_Rm, T_Rr, T_Rc, T_PL, T_nd_fterm, T_nd_term, T_nd_faction, T_nd_action, T_tact_numb, T_node_numb, T_nact_numb, T_reverse>::n_tact_numb = 71;
+template<>
+const int Modula2_parser_tables_t::n_nd_action = 0;
 
-template<typename T_term_symb, typename T_head_symb, typename T_tact_name, typename T_node_name, typename T_head_numb, typename T_f_tail, typename T_tail, typename T_arga, typename T_argx, typename T_argy, typename T_Bm, typename T_Br, typename T_Bc, typename T_Bf, typename T_Tm, typename T_Tr, typename T_Tc, typename T_Nm, typename T_Nr, typename T_Nc, typename T_Rm, typename T_Rr, typename T_Rc, typename T_PL, typename T_nd_fterm, typename T_nd_term, typename T_nd_faction, typename T_nd_action, typename T_tact_numb, typename T_node_numb, typename T_nact_numb, typename T_reverse>
-const int templ_lrstar_parser_tables<T_term_symb, T_head_symb, T_tact_name, T_node_name, T_head_numb, T_f_tail, T_tail, T_arga, T_argx, T_argy, T_Bm, T_Br, T_Bc, T_Bf, T_Tm, T_Tr, T_Tc, T_Nm, T_Nr, T_Nc, T_Rm, T_Rr, T_Rc, T_PL, T_nd_fterm, T_nd_term, T_nd_faction, T_nd_action, T_tact_numb, T_node_numb, T_nact_numb, T_reverse>::n_node_numb = 0;
+template<>
+const int Modula2_parser_tables_t::n_tact_numb = 71;
 
-template<typename T_term_symb, typename T_head_symb, typename T_tact_name, typename T_node_name, typename T_head_numb, typename T_f_tail, typename T_tail, typename T_arga, typename T_argx, typename T_argy, typename T_Bm, typename T_Br, typename T_Bc, typename T_Bf, typename T_Tm, typename T_Tr, typename T_Tc, typename T_Nm, typename T_Nr, typename T_Nc, typename T_Rm, typename T_Rr, typename T_Rc, typename T_PL, typename T_nd_fterm, typename T_nd_term, typename T_nd_faction, typename T_nd_action, typename T_tact_numb, typename T_node_numb, typename T_nact_numb, typename T_reverse>
-const int templ_lrstar_parser_tables<T_term_symb, T_head_symb, T_tact_name, T_node_name, T_head_numb, T_f_tail, T_tail, T_arga, T_argx, T_argy, T_Bm, T_Br, T_Bc, T_Bf, T_Tm, T_Tr, T_Tc, T_Nm, T_Nr, T_Nc, T_Rm, T_Rr, T_Rc, T_PL, T_nd_fterm, T_nd_term, T_nd_faction, T_nd_action, T_tact_numb, T_node_numb, T_nact_numb, T_reverse>::n_nact_numb = 0;
+template<>
+const int Modula2_parser_tables_t::n_node_numb = 0;
 
-template<typename T_term_symb, typename T_head_symb, typename T_tact_name, typename T_node_name, typename T_head_numb, typename T_f_tail, typename T_tail, typename T_arga, typename T_argx, typename T_argy, typename T_Bm, typename T_Br, typename T_Bc, typename T_Bf, typename T_Tm, typename T_Tr, typename T_Tc, typename T_Nm, typename T_Nr, typename T_Nc, typename T_Rm, typename T_Rr, typename T_Rc, typename T_PL, typename T_nd_fterm, typename T_nd_term, typename T_nd_faction, typename T_nd_action, typename T_tact_numb, typename T_node_numb, typename T_nact_numb, typename T_reverse>
-const int templ_lrstar_parser_tables<T_term_symb, T_head_symb, T_tact_name, T_node_name, T_head_numb, T_f_tail, T_tail, T_arga, T_argx, T_argy, T_Bm, T_Br, T_Bc, T_Bf, T_Tm, T_Tr, T_Tc, T_Nm, T_Nr, T_Nc, T_Rm, T_Rr, T_Rc, T_PL, T_nd_fterm, T_nd_term, T_nd_faction, T_nd_action, T_tact_numb, T_node_numb, T_nact_numb, T_reverse>::n_reverse = 0;
+template<>
+const int Modula2_parser_tables_t::n_nact_numb = 0;
 
-template<typename T_term_symb, typename T_head_symb, typename T_tact_name, typename T_node_name, typename T_head_numb, typename T_f_tail, typename T_tail, typename T_arga, typename T_argx, typename T_argy, typename T_Bm, typename T_Br, typename T_Bc, typename T_Bf, typename T_Tm, typename T_Tr, typename T_Tc, typename T_Nm, typename T_Nr, typename T_Nc, typename T_Rm, typename T_Rr, typename T_Rc, typename T_PL, typename T_nd_fterm, typename T_nd_term, typename T_nd_faction, typename T_nd_action, typename T_tact_numb, typename T_node_numb, typename T_nact_numb, typename T_reverse>
-const int templ_lrstar_parser_tables<T_term_symb, T_head_symb, T_tact_name, T_node_name, T_head_numb, T_f_tail, T_tail, T_arga, T_argx, T_argy, T_Bm, T_Br, T_Bc, T_Bf, T_Tm, T_Tr, T_Tc, T_Nm, T_Nr, T_Nc, T_Rm, T_Rr, T_Rc, T_PL, T_nd_fterm, T_nd_term, T_nd_faction, T_nd_action, T_tact_numb, T_node_numb, T_nact_numb, T_reverse>::n_terms = 71; // Number of terminals.
+template<>
+const int Modula2_parser_tables_t::n_reverse = 0;
 
-template<typename T_term_symb, typename T_head_symb, typename T_tact_name, typename T_node_name, typename T_head_numb, typename T_f_tail, typename T_tail, typename T_arga, typename T_argx, typename T_argy, typename T_Bm, typename T_Br, typename T_Bc, typename T_Bf, typename T_Tm, typename T_Tr, typename T_Tc, typename T_Nm, typename T_Nr, typename T_Nc, typename T_Rm, typename T_Rr, typename T_Rc, typename T_PL, typename T_nd_fterm, typename T_nd_term, typename T_nd_faction, typename T_nd_action, typename T_tact_numb, typename T_node_numb, typename T_nact_numb, typename T_reverse>
-const int templ_lrstar_parser_tables<T_term_symb, T_head_symb, T_tact_name, T_node_name, T_head_numb, T_f_tail, T_tail, T_arga, T_argx, T_argy, T_Bm, T_Br, T_Bc, T_Bf, T_Tm, T_Tr, T_Tc, T_Nm, T_Nr, T_Nc, T_Rm, T_Rr, T_Rc, T_PL, T_nd_fterm, T_nd_term, T_nd_faction, T_nd_action, T_tact_numb, T_node_numb, T_nact_numb, T_reverse>::n_heads      =  122; // Number of nonterminals.
-template<typename T_term_symb, typename T_head_symb, typename T_tact_name, typename T_node_name, typename T_head_numb, typename T_f_tail, typename T_tail, typename T_arga, typename T_argx, typename T_argy, typename T_Bm, typename T_Br, typename T_Bc, typename T_Bf, typename T_Tm, typename T_Tr, typename T_Tc, typename T_Nm, typename T_Nr, typename T_Nc, typename T_Rm, typename T_Rr, typename T_Rc, typename T_PL, typename T_nd_fterm, typename T_nd_term, typename T_nd_faction, typename T_nd_action, typename T_tact_numb, typename T_node_numb, typename T_nact_numb, typename T_reverse>
-const int templ_lrstar_parser_tables<T_term_symb, T_head_symb, T_tact_name, T_node_name, T_head_numb, T_f_tail, T_tail, T_arga, T_argx, T_argy, T_Bm, T_Br, T_Bc, T_Bf, T_Tm, T_Tr, T_Tc, T_Nm, T_Nr, T_Nc, T_Rm, T_Rr, T_Rc, T_PL, T_nd_fterm, T_nd_term, T_nd_faction, T_nd_action, T_tact_numb, T_node_numb, T_nact_numb, T_reverse>::n_prods = 226; // Number of productions.
-template<typename T_term_symb, typename T_head_symb, typename T_tact_name, typename T_node_name, typename T_head_numb, typename T_f_tail, typename T_tail, typename T_arga, typename T_argx, typename T_argy, typename T_Bm, typename T_Br, typename T_Bc, typename T_Bf, typename T_Tm, typename T_Tr, typename T_Tc, typename T_Nm, typename T_Nr, typename T_Nc, typename T_Rm, typename T_Rr, typename T_Rc, typename T_PL, typename T_nd_fterm, typename T_nd_term, typename T_nd_faction, typename T_nd_action, typename T_tact_numb, typename T_node_numb, typename T_nact_numb, typename T_reverse>
-const int templ_lrstar_parser_tables<T_term_symb, T_head_symb, T_tact_name, T_node_name, T_head_numb, T_f_tail, T_tail, T_arga, T_argx, T_argy, T_Bm, T_Br, T_Bc, T_Bf, T_Tm, T_Tr, T_Tc, T_Nm, T_Nr, T_Nc, T_Rm, T_Rr, T_Rc, T_PL, T_nd_fterm, T_nd_term, T_nd_faction, T_nd_action, T_tact_numb, T_node_numb, T_nact_numb, T_reverse>::n_states = 205; // Number of states.
-template<typename T_term_symb, typename T_head_symb, typename T_tact_name, typename T_node_name, typename T_head_numb, typename T_f_tail, typename T_tail, typename T_arga, typename T_argx, typename T_argy, typename T_Bm, typename T_Br, typename T_Bc, typename T_Bf, typename T_Tm, typename T_Tr, typename T_Tc, typename T_Nm, typename T_Nr, typename T_Nc, typename T_Rm, typename T_Rr, typename T_Rc, typename T_PL, typename T_nd_fterm, typename T_nd_term, typename T_nd_faction, typename T_nd_action, typename T_tact_numb, typename T_node_numb, typename T_nact_numb, typename T_reverse>
-const int templ_lrstar_parser_tables<T_term_symb, T_head_symb, T_tact_name, T_node_name, T_head_numb, T_f_tail, T_tail, T_arga, T_argx, T_argy, T_Bm, T_Br, T_Bc, T_Bf, T_Tm, T_Tr, T_Tc, T_Nm, T_Nr, T_Nc, T_Rm, T_Rr, T_Rc, T_PL, T_nd_fterm, T_nd_term, T_nd_faction, T_nd_action, T_tact_numb, T_node_numb, T_nact_numb, T_reverse>::accept_state = 204; // Accept state.
-template<typename T_term_symb, typename T_head_symb, typename T_tact_name, typename T_node_name, typename T_head_numb, typename T_f_tail, typename T_tail, typename T_arga, typename T_argx, typename T_argy, typename T_Bm, typename T_Br, typename T_Bc, typename T_Bf, typename T_Tm, typename T_Tr, typename T_Tc, typename T_Nm, typename T_Nr, typename T_Nc, typename T_Rm, typename T_Rr, typename T_Rc, typename T_PL, typename T_nd_fterm, typename T_nd_term, typename T_nd_faction, typename T_nd_action, typename T_tact_numb, typename T_node_numb, typename T_nact_numb, typename T_reverse>
-const int templ_lrstar_parser_tables<T_term_symb, T_head_symb, T_tact_name, T_node_name, T_head_numb, T_f_tail, T_tail, T_arga, T_argx, T_argy, T_Bm, T_Br, T_Bc, T_Bf, T_Tm, T_Tr, T_Tc, T_Nm, T_Nr, T_Nc, T_Rm, T_Rr, T_Rc, T_PL, T_nd_fterm, T_nd_term, T_nd_faction, T_nd_action, T_tact_numb, T_node_numb, T_nact_numb, T_reverse>::n_termactns = 2; // Number of terminal actions.
-template<typename T_term_symb, typename T_head_symb, typename T_tact_name, typename T_node_name, typename T_head_numb, typename T_f_tail, typename T_tail, typename T_arga, typename T_argx, typename T_argy, typename T_Bm, typename T_Br, typename T_Bc, typename T_Bf, typename T_Tm, typename T_Tr, typename T_Tc, typename T_Nm, typename T_Nr, typename T_Nc, typename T_Rm, typename T_Rr, typename T_Rc, typename T_PL, typename T_nd_fterm, typename T_nd_term, typename T_nd_faction, typename T_nd_action, typename T_tact_numb, typename T_node_numb, typename T_nact_numb, typename T_reverse>
-const int templ_lrstar_parser_tables<T_term_symb, T_head_symb, T_tact_name, T_node_name, T_head_numb, T_f_tail, T_tail, T_arga, T_argx, T_argy, T_Bm, T_Br, T_Bc, T_Bf, T_Tm, T_Tr, T_Tc, T_Nm, T_Nr, T_Nc, T_Rm, T_Rr, T_Rc, T_PL, T_nd_fterm, T_nd_term, T_nd_faction, T_nd_action, T_tact_numb, T_node_numb, T_nact_numb, T_reverse>::n_nodenames = 0; // Number of node names.
-template<typename T_term_symb, typename T_head_symb, typename T_tact_name, typename T_node_name, typename T_head_numb, typename T_f_tail, typename T_tail, typename T_arga, typename T_argx, typename T_argy, typename T_Bm, typename T_Br, typename T_Bc, typename T_Bf, typename T_Tm, typename T_Tr, typename T_Tc, typename T_Nm, typename T_Nr, typename T_Nc, typename T_Rm, typename T_Rr, typename T_Rc, typename T_PL, typename T_nd_fterm, typename T_nd_term, typename T_nd_faction, typename T_nd_action, typename T_tact_numb, typename T_node_numb, typename T_nact_numb, typename T_reverse>
-const int templ_lrstar_parser_tables<T_term_symb, T_head_symb, T_tact_name, T_node_name, T_head_numb, T_f_tail, T_tail, T_arga, T_argx, T_argy, T_Bm, T_Br, T_Bc, T_Bf, T_Tm, T_Tr, T_Tc, T_Nm, T_Nr, T_Nc, T_Rm, T_Rr, T_Rc, T_PL, T_nd_fterm, T_nd_term, T_nd_faction, T_nd_action, T_tact_numb, T_node_numb, T_nact_numb, T_reverse>::n_nodeactns = 0; // Number of node actions.
-template<typename T_term_symb, typename T_head_symb, typename T_tact_name, typename T_node_name, typename T_head_numb, typename T_f_tail, typename T_tail, typename T_arga, typename T_argx, typename T_argy, typename T_Bm, typename T_Br, typename T_Bc, typename T_Bf, typename T_Tm, typename T_Tr, typename T_Tc, typename T_Nm, typename T_Nr, typename T_Nc, typename T_Rm, typename T_Rr, typename T_Rc, typename T_PL, typename T_nd_fterm, typename T_nd_term, typename T_nd_faction, typename T_nd_action, typename T_tact_numb, typename T_node_numb, typename T_nact_numb, typename T_reverse>
-const int templ_lrstar_parser_tables<T_term_symb, T_head_symb, T_tact_name, T_node_name, T_head_numb, T_f_tail, T_tail, T_arga, T_argx, T_argy, T_Bm, T_Br, T_Bc, T_Bf, T_Tm, T_Tr, T_Tc, T_Nm, T_Nr, T_Nc, T_Rm, T_Rr, T_Rc, T_PL, T_nd_fterm, T_nd_term, T_nd_faction, T_nd_action, T_tact_numb, T_node_numb, T_nact_numb, T_reverse>::eof_symb = 1; // <eof> symbol number.
-template<typename T_term_symb, typename T_head_symb, typename T_tact_name, typename T_node_name, typename T_head_numb, typename T_f_tail, typename T_tail, typename T_arga, typename T_argx, typename T_argy, typename T_Bm, typename T_Br, typename T_Bc, typename T_Bf, typename T_Tm, typename T_Tr, typename T_Tc, typename T_Nm, typename T_Nr, typename T_Nc, typename T_Rm, typename T_Rr, typename T_Rc, typename T_PL, typename T_nd_fterm, typename T_nd_term, typename T_nd_faction, typename T_nd_action, typename T_tact_numb, typename T_node_numb, typename T_nact_numb, typename T_reverse>
-const int templ_lrstar_parser_tables<T_term_symb, T_head_symb, T_tact_name, T_node_name, T_head_numb, T_f_tail, T_tail, T_arga, T_argx, T_argy, T_Bm, T_Br, T_Bc, T_Bf, T_Tm, T_Tr, T_Tc, T_Nm, T_Nr, T_Nc, T_Rm, T_Rr, T_Rc, T_PL, T_nd_fterm, T_nd_term, T_nd_faction, T_nd_action, T_tact_numb, T_node_numb, T_nact_numb, T_reverse>::err_used = 0; // <error> used in grammar?
+template<>
+const int Modula2_parser_tables_t::n_terms = 71; // Number of terminals.
+
+template<>
+const int Modula2_parser_tables_t::n_heads = 122; // Number of nonterminals.
+
+template<>
+const int Modula2_parser_tables_t::n_prods = 226; // Number of productions.
+
+template<>
+const int Modula2_parser_tables_t::n_states = 205; // Number of states.
+
+template<>
+const int Modula2_parser_tables_t::accept_state = 204; // Accept state.
+
+template<>
+const int Modula2_parser_tables_t::n_termactns = 2; // Number of terminal actions.
+
+template<>
+const int Modula2_parser_tables_t::n_nodenames = 0; // Number of node names.
+
+template<>
+const int Modula2_parser_tables_t::n_nodeactns = 0; // Number of node actions.
+
+template<>
+const int Modula2_parser_tables_t::eof_symb = 1; // <eof> symbol number.
+
+template<>
+const int Modula2_parser_tables_t::err_used = 0; // <error> used in grammar?
+
 
 // Terminal symbols of the grammar.
 static const char *term_symb_[71] = {
@@ -196,8 +207,8 @@ static const char *term_symb_[71] = {
    "\'^\'",
 };
 
-template<typename T_term_symb, typename T_head_symb, typename T_tact_name, typename T_node_name, typename T_head_numb, typename T_f_tail, typename T_tail, typename T_arga, typename T_argx, typename T_argy, typename T_Bm, typename T_Br, typename T_Bc, typename T_Bf, typename T_Tm, typename T_Tr, typename T_Tc, typename T_Nm, typename T_Nr, typename T_Nc, typename T_Rm, typename T_Rr, typename T_Rc, typename T_PL, typename T_nd_fterm, typename T_nd_term, typename T_nd_faction, typename T_nd_action, typename T_tact_numb, typename T_node_numb, typename T_nact_numb, typename T_reverse>
-const T_term_symb *templ_lrstar_parser_tables<T_term_symb, T_head_symb, T_tact_name, T_node_name, T_head_numb, T_f_tail, T_tail, T_arga, T_argx, T_argy, T_Bm, T_Br, T_Bc, T_Bf, T_Tm, T_Tr, T_Tc, T_Nm, T_Nr, T_Nc, T_Rm, T_Rr, T_Rc, T_PL, T_nd_fterm, T_nd_term, T_nd_faction, T_nd_action, T_tact_numb, T_node_numb, T_nact_numb, T_reverse>::term_symb = &term_symb_[0];
+template<>
+const char * const *Modula2_parser_tables_t::term_symb = &term_symb_[0];
 
 // Nonterminal symbols of the grammar.
 static const char *head_symb_[122] = {
@@ -325,8 +336,8 @@ static const char *head_symb_[122] = {
    "Identifier/','+",
 };
 
-template<typename T_term_symb, typename T_head_symb, typename T_tact_name, typename T_node_name, typename T_head_numb, typename T_f_tail, typename T_tail, typename T_arga, typename T_argx, typename T_argy, typename T_Bm, typename T_Br, typename T_Bc, typename T_Bf, typename T_Tm, typename T_Tr, typename T_Tc, typename T_Nm, typename T_Nr, typename T_Nc, typename T_Rm, typename T_Rr, typename T_Rc, typename T_PL, typename T_nd_fterm, typename T_nd_term, typename T_nd_faction, typename T_nd_action, typename T_tact_numb, typename T_node_numb, typename T_nact_numb, typename T_reverse>
-const T_head_symb *templ_lrstar_parser_tables<T_term_symb, T_head_symb, T_tact_name, T_node_name, T_head_numb, T_f_tail, T_tail, T_arga, T_argx, T_argy, T_Bm, T_Br, T_Bc, T_Bf, T_Tm, T_Tr, T_Tc, T_Nm, T_Nr, T_Nc, T_Rm, T_Rr, T_Rc, T_PL, T_nd_fterm, T_nd_term, T_nd_faction, T_nd_action, T_tact_numb, T_node_numb, T_nact_numb, T_reverse>::head_symb = &head_symb_[0];
+template<>
+const char * const *Modula2_parser_tables_t::head_symb = &head_symb_[0];
 
 // Terninal action names found in the grammar ...
 static const char *tact_name_[2] = {
@@ -334,11 +345,11 @@ static const char *tact_name_[2] = {
    "lookup",
 };
 
-template<typename T_term_symb, typename T_head_symb, typename T_tact_name, typename T_node_name, typename T_head_numb, typename T_f_tail, typename T_tail, typename T_arga, typename T_argx, typename T_argy, typename T_Bm, typename T_Br, typename T_Bc, typename T_Bf, typename T_Tm, typename T_Tr, typename T_Tc, typename T_Nm, typename T_Nr, typename T_Nc, typename T_Rm, typename T_Rr, typename T_Rc, typename T_PL, typename T_nd_fterm, typename T_nd_term, typename T_nd_faction, typename T_nd_action, typename T_tact_numb, typename T_node_numb, typename T_nact_numb, typename T_reverse>
-const T_tact_name *templ_lrstar_parser_tables<T_term_symb, T_head_symb, T_tact_name, T_node_name, T_head_numb, T_f_tail, T_tail, T_arga, T_argx, T_argy, T_Bm, T_Br, T_Bc, T_Bf, T_Tm, T_Tr, T_Tc, T_Nm, T_Nr, T_Nc, T_Rm, T_Rr, T_Rc, T_PL, T_nd_fterm, T_nd_term, T_nd_faction, T_nd_action, T_tact_numb, T_node_numb, T_nact_numb, T_reverse>::tact_name = &tact_name_[0];
+template<>
+const char * const *Modula2_parser_tables_t::tact_name = &tact_name_[0];
 
-template<typename T_term_symb, typename T_head_symb, typename T_tact_name, typename T_node_name, typename T_head_numb, typename T_f_tail, typename T_tail, typename T_arga, typename T_argx, typename T_argy, typename T_Bm, typename T_Br, typename T_Bc, typename T_Bf, typename T_Tm, typename T_Tr, typename T_Tc, typename T_Nm, typename T_Nr, typename T_Nc, typename T_Rm, typename T_Rr, typename T_Rc, typename T_PL, typename T_nd_fterm, typename T_nd_term, typename T_nd_faction, typename T_nd_action, typename T_tact_numb, typename T_node_numb, typename T_nact_numb, typename T_reverse>
-const T_node_name *templ_lrstar_parser_tables<T_term_symb, T_head_symb, T_tact_name, T_node_name, T_head_numb, T_f_tail, T_tail, T_arga, T_argx, T_argy, T_Bm, T_Br, T_Bc, T_Bf, T_Tm, T_Tr, T_Tc, T_Nm, T_Nr, T_Nc, T_Rm, T_Rr, T_Rc, T_PL, T_nd_fterm, T_nd_term, T_nd_faction, T_nd_action, T_tact_numb, T_node_numb, T_nact_numb, T_reverse>::node_name = 0;
+template<>
+const char * const *Modula2_parser_tables_t::node_name = 0;
 
 // Head symbol numbers for the productions.
 static const uint8 head_numb_[226] = {
@@ -367,8 +378,8 @@ static const uint8 head_numb_[226] = {
      119,   119,   120,   120,   121,   121, 
 };
 
-template<typename T_term_symb, typename T_head_symb, typename T_tact_name, typename T_node_name, typename T_head_numb, typename T_f_tail, typename T_tail, typename T_arga, typename T_argx, typename T_argy, typename T_Bm, typename T_Br, typename T_Bc, typename T_Bf, typename T_Tm, typename T_Tr, typename T_Tc, typename T_Nm, typename T_Nr, typename T_Nc, typename T_Rm, typename T_Rr, typename T_Rc, typename T_PL, typename T_nd_fterm, typename T_nd_term, typename T_nd_faction, typename T_nd_action, typename T_tact_numb, typename T_node_numb, typename T_nact_numb, typename T_reverse>
-const T_head_numb *templ_lrstar_parser_tables<T_term_symb, T_head_symb, T_tact_name, T_node_name, T_head_numb, T_f_tail, T_tail, T_arga, T_argx, T_argy, T_Bm, T_Br, T_Bc, T_Bf, T_Tm, T_Tr, T_Tc, T_Nm, T_Nr, T_Nc, T_Rm, T_Rr, T_Rc, T_PL, T_nd_fterm, T_nd_term, T_nd_faction, T_nd_action, T_tact_numb, T_node_numb, T_nact_numb, T_reverse>::head_numb = &head_numb_[0];
+template<>
+const uint8 *Modula2_parser_tables_t::head_numb = &head_numb_[0];
 
 // First tail symbol index into the tail list ...
 static const uint16 f_tail_[227] = {
@@ -397,8 +408,8 @@ static const uint16 f_tail_[227] = {
      387,   387,   389,   390,   393,   394,   397, 
 };
 
-template<typename T_term_symb, typename T_head_symb, typename T_tact_name, typename T_node_name, typename T_head_numb, typename T_f_tail, typename T_tail, typename T_arga, typename T_argx, typename T_argy, typename T_Bm, typename T_Br, typename T_Bc, typename T_Bf, typename T_Tm, typename T_Tr, typename T_Tc, typename T_Nm, typename T_Nr, typename T_Nc, typename T_Rm, typename T_Rr, typename T_Rc, typename T_PL, typename T_nd_fterm, typename T_nd_term, typename T_nd_faction, typename T_nd_action, typename T_tact_numb, typename T_node_numb, typename T_nact_numb, typename T_reverse>
-const T_f_tail *templ_lrstar_parser_tables<T_term_symb, T_head_symb, T_tact_name, T_node_name, T_head_numb, T_f_tail, T_tail, T_arga, T_argx, T_argy, T_Bm, T_Br, T_Bc, T_Bf, T_Tm, T_Tr, T_Tc, T_Nm, T_Nr, T_Nc, T_Rm, T_Rr, T_Rc, T_PL, T_nd_fterm, T_nd_term, T_nd_faction, T_nd_action, T_tact_numb, T_node_numb, T_nact_numb, T_reverse>::f_tail = &f_tail_[0];
+template<>
+const uint16 *Modula2_parser_tables_t::f_tail = &f_tail_[0];
 
 // Tail symbol numbers ...
 static const int8 tail_[397] = {
@@ -444,8 +455,8 @@ static const int8 tail_[397] = {
     -120,    11,   -60,   -60,  -121,    28,   -60, 
 };
 
-template<typename T_term_symb, typename T_head_symb, typename T_tact_name, typename T_node_name, typename T_head_numb, typename T_f_tail, typename T_tail, typename T_arga, typename T_argx, typename T_argy, typename T_Bm, typename T_Br, typename T_Bc, typename T_Bf, typename T_Tm, typename T_Tr, typename T_Tc, typename T_Nm, typename T_Nr, typename T_Nc, typename T_Rm, typename T_Rr, typename T_Rc, typename T_PL, typename T_nd_fterm, typename T_nd_term, typename T_nd_faction, typename T_nd_action, typename T_tact_numb, typename T_node_numb, typename T_nact_numb, typename T_reverse>
-const T_tail *templ_lrstar_parser_tables<T_term_symb, T_head_symb, T_tact_name, T_node_name, T_head_numb, T_f_tail, T_tail, T_arga, T_argx, T_argy, T_Bm, T_Br, T_Bc, T_Bf, T_Tm, T_Tr, T_Tc, T_Nm, T_Nr, T_Nc, T_Rm, T_Rr, T_Rc, T_PL, T_nd_fterm, T_nd_term, T_nd_faction, T_nd_action, T_tact_numb, T_node_numb, T_nact_numb, T_reverse>::tail = &tail_[0];
+template<>
+const int8 *Modula2_parser_tables_t::tail = &tail_[0];
 
 // Arguments for token actions ...
 static const int8 arga_[71] = {
@@ -459,14 +470,14 @@ static const int8 arga_[71] = {
       -1, 
 };
 
-template<typename T_term_symb, typename T_head_symb, typename T_tact_name, typename T_node_name, typename T_head_numb, typename T_f_tail, typename T_tail, typename T_arga, typename T_argx, typename T_argy, typename T_Bm, typename T_Br, typename T_Bc, typename T_Bf, typename T_Tm, typename T_Tr, typename T_Tc, typename T_Nm, typename T_Nr, typename T_Nc, typename T_Rm, typename T_Rr, typename T_Rc, typename T_PL, typename T_nd_fterm, typename T_nd_term, typename T_nd_faction, typename T_nd_action, typename T_tact_numb, typename T_node_numb, typename T_nact_numb, typename T_reverse>
-const T_arga *templ_lrstar_parser_tables<T_term_symb, T_head_symb, T_tact_name, T_node_name, T_head_numb, T_f_tail, T_tail, T_arga, T_argx, T_argy, T_Bm, T_Br, T_Bc, T_Bf, T_Tm, T_Tr, T_Tc, T_Nm, T_Nr, T_Nc, T_Rm, T_Rr, T_Rc, T_PL, T_nd_fterm, T_nd_term, T_nd_faction, T_nd_action, T_tact_numb, T_node_numb, T_nact_numb, T_reverse>::arga = &arga_[0];
+template<>
+const int8 *Modula2_parser_tables_t::arga = &arga_[0];
 
-template<typename T_term_symb, typename T_head_symb, typename T_tact_name, typename T_node_name, typename T_head_numb, typename T_f_tail, typename T_tail, typename T_arga, typename T_argx, typename T_argy, typename T_Bm, typename T_Br, typename T_Bc, typename T_Bf, typename T_Tm, typename T_Tr, typename T_Tc, typename T_Nm, typename T_Nr, typename T_Nc, typename T_Rm, typename T_Rr, typename T_Rc, typename T_PL, typename T_nd_fterm, typename T_nd_term, typename T_nd_faction, typename T_nd_action, typename T_tact_numb, typename T_node_numb, typename T_nact_numb, typename T_reverse>
-const T_argx *templ_lrstar_parser_tables<T_term_symb, T_head_symb, T_tact_name, T_node_name, T_head_numb, T_f_tail, T_tail, T_arga, T_argx, T_argy, T_Bm, T_Br, T_Bc, T_Bf, T_Tm, T_Tr, T_Tc, T_Nm, T_Nr, T_Nc, T_Rm, T_Rr, T_Rc, T_PL, T_nd_fterm, T_nd_term, T_nd_faction, T_nd_action, T_tact_numb, T_node_numb, T_nact_numb, T_reverse>::argx = 0;
+template<>
+const uint32 *Modula2_parser_tables_t::argx = 0;
 
-template<typename T_term_symb, typename T_head_symb, typename T_tact_name, typename T_node_name, typename T_head_numb, typename T_f_tail, typename T_tail, typename T_arga, typename T_argx, typename T_argy, typename T_Bm, typename T_Br, typename T_Bc, typename T_Bf, typename T_Tm, typename T_Tr, typename T_Tc, typename T_Nm, typename T_Nr, typename T_Nc, typename T_Rm, typename T_Rr, typename T_Rc, typename T_PL, typename T_nd_fterm, typename T_nd_term, typename T_nd_faction, typename T_nd_action, typename T_tact_numb, typename T_node_numb, typename T_nact_numb, typename T_reverse>
-const T_argy *templ_lrstar_parser_tables<T_term_symb, T_head_symb, T_tact_name, T_node_name, T_head_numb, T_f_tail, T_tail, T_arga, T_argx, T_argy, T_Bm, T_Br, T_Bc, T_Bf, T_Tm, T_Tr, T_Tc, T_Nm, T_Nr, T_Nc, T_Rm, T_Rr, T_Rc, T_PL, T_nd_fterm, T_nd_term, T_nd_faction, T_nd_action, T_tact_numb, T_node_numb, T_nact_numb, T_reverse>::argy = 0;
+template<>
+const uint32 *Modula2_parser_tables_t::argy = 0;
 
 // Boolean matrix ...
 static const uint8 Bm_[158] = {
@@ -488,8 +499,8 @@ static const uint8 Bm_[158] = {
        0,     0,     0,     8,     0,     0,     0,     0, 
 };
 
-template<typename T_term_symb, typename T_head_symb, typename T_tact_name, typename T_node_name, typename T_head_numb, typename T_f_tail, typename T_tail, typename T_arga, typename T_argx, typename T_argy, typename T_Bm, typename T_Br, typename T_Bc, typename T_Bf, typename T_Tm, typename T_Tr, typename T_Tc, typename T_Nm, typename T_Nr, typename T_Nc, typename T_Rm, typename T_Rr, typename T_Rc, typename T_PL, typename T_nd_fterm, typename T_nd_term, typename T_nd_faction, typename T_nd_action, typename T_tact_numb, typename T_node_numb, typename T_nact_numb, typename T_reverse>
-const T_Bm *templ_lrstar_parser_tables<T_term_symb, T_head_symb, T_tact_name, T_node_name, T_head_numb, T_f_tail, T_tail, T_arga, T_argx, T_argy, T_Bm, T_Br, T_Bc, T_Bf, T_Tm, T_Tr, T_Tc, T_Nm, T_Nr, T_Nc, T_Rm, T_Rr, T_Rc, T_PL, T_nd_fterm, T_nd_term, T_nd_faction, T_nd_action, T_tact_numb, T_node_numb, T_nact_numb, T_reverse>::Bm = &Bm_[0];
+template<>
+const uint8 *Modula2_parser_tables_t::Bm = &Bm_[0];
 
 // Boolean matrix row (for state)...
 static const uint8 Br_[205] = {
@@ -516,8 +527,8 @@ static const uint8 Br_[205] = {
       61,   134,    30,   134,     0, 
       };
 
-template<typename T_term_symb, typename T_head_symb, typename T_tact_name, typename T_node_name, typename T_head_numb, typename T_f_tail, typename T_tail, typename T_arga, typename T_argx, typename T_argy, typename T_Bm, typename T_Br, typename T_Bc, typename T_Bf, typename T_Tm, typename T_Tr, typename T_Tc, typename T_Nm, typename T_Nr, typename T_Nc, typename T_Rm, typename T_Rr, typename T_Rc, typename T_PL, typename T_nd_fterm, typename T_nd_term, typename T_nd_faction, typename T_nd_action, typename T_tact_numb, typename T_node_numb, typename T_nact_numb, typename T_reverse>
-const T_Br *templ_lrstar_parser_tables<T_term_symb, T_head_symb, T_tact_name, T_node_name, T_head_numb, T_f_tail, T_tail, T_arga, T_argx, T_argy, T_Bm, T_Br, T_Bc, T_Bf, T_Tm, T_Tr, T_Tc, T_Nm, T_Nr, T_Nc, T_Rm, T_Rr, T_Rc, T_PL, T_nd_fterm, T_nd_term, T_nd_faction, T_nd_action, T_tact_numb, T_node_numb, T_nact_numb, T_reverse>::Br = &Br_[0];
+template<>
+const uint8 *Modula2_parser_tables_t::Br = &Br_[0];
 
 // Boolean matrix column (displacement) ...
 static const uint8 Bc_[71] = {
@@ -531,8 +542,8 @@ static const uint8 Bc_[71] = {
        5, 
       };
 
-template<typename T_term_symb, typename T_head_symb, typename T_tact_name, typename T_node_name, typename T_head_numb, typename T_f_tail, typename T_tail, typename T_arga, typename T_argx, typename T_argy, typename T_Bm, typename T_Br, typename T_Bc, typename T_Bf, typename T_Tm, typename T_Tr, typename T_Tc, typename T_Nm, typename T_Nr, typename T_Nc, typename T_Rm, typename T_Rr, typename T_Rc, typename T_PL, typename T_nd_fterm, typename T_nd_term, typename T_nd_faction, typename T_nd_action, typename T_tact_numb, typename T_node_numb, typename T_nact_numb, typename T_reverse>
-const T_Bc *templ_lrstar_parser_tables<T_term_symb, T_head_symb, T_tact_name, T_node_name, T_head_numb, T_f_tail, T_tail, T_arga, T_argx, T_argy, T_Bm, T_Br, T_Bc, T_Bf, T_Tm, T_Tr, T_Tc, T_Nm, T_Nr, T_Nc, T_Rm, T_Rr, T_Rc, T_PL, T_nd_fterm, T_nd_term, T_nd_faction, T_nd_action, T_tact_numb, T_node_numb, T_nact_numb, T_reverse>::Bc = &Bc_[0];
+template<>
+const uint8 *Modula2_parser_tables_t::Bc = &Bc_[0];
 
 // Boolean matrix filter/mask value ...
 static const uint8 Bf_[71] = {
@@ -546,8 +557,8 @@ static const uint8 Bf_[71] = {
       32, 
 };
 
-template<typename T_term_symb, typename T_head_symb, typename T_tact_name, typename T_node_name, typename T_head_numb, typename T_f_tail, typename T_tail, typename T_arga, typename T_argx, typename T_argy, typename T_Bm, typename T_Br, typename T_Bc, typename T_Bf, typename T_Tm, typename T_Tr, typename T_Tc, typename T_Nm, typename T_Nr, typename T_Nc, typename T_Rm, typename T_Rr, typename T_Rc, typename T_PL, typename T_nd_fterm, typename T_nd_term, typename T_nd_faction, typename T_nd_action, typename T_tact_numb, typename T_node_numb, typename T_nact_numb, typename T_reverse>
-const T_Bf *templ_lrstar_parser_tables<T_term_symb, T_head_symb, T_tact_name, T_node_name, T_head_numb, T_f_tail, T_tail, T_arga, T_argx, T_argy, T_Bm, T_Br, T_Bc, T_Bf, T_Tm, T_Tr, T_Tc, T_Nm, T_Nr, T_Nc, T_Rm, T_Rr, T_Rc, T_PL, T_nd_fterm, T_nd_term, T_nd_faction, T_nd_action, T_tact_numb, T_node_numb, T_nact_numb, T_reverse>::Bf = &Bf_[0];
+template<>
+const uint8 *Modula2_parser_tables_t::Bf = &Bf_[0];
 
 // Terminal transition matrix ...
 static const int16 Tm_[229] = {
@@ -576,8 +587,8 @@ static const int16 Tm_[229] = {
      -92,   -93,   -94,   -95,   -96,    25,    34,  -103,    29, 
 };
 
-template<typename T_term_symb, typename T_head_symb, typename T_tact_name, typename T_node_name, typename T_head_numb, typename T_f_tail, typename T_tail, typename T_arga, typename T_argx, typename T_argy, typename T_Bm, typename T_Br, typename T_Bc, typename T_Bf, typename T_Tm, typename T_Tr, typename T_Tc, typename T_Nm, typename T_Nr, typename T_Nc, typename T_Rm, typename T_Rr, typename T_Rc, typename T_PL, typename T_nd_fterm, typename T_nd_term, typename T_nd_faction, typename T_nd_action, typename T_tact_numb, typename T_node_numb, typename T_nact_numb, typename T_reverse>
-const T_Tm *templ_lrstar_parser_tables<T_term_symb, T_head_symb, T_tact_name, T_node_name, T_head_numb, T_f_tail, T_tail, T_arga, T_argx, T_argy, T_Bm, T_Br, T_Bc, T_Bf, T_Tm, T_Tr, T_Tc, T_Nm, T_Nr, T_Nc, T_Rm, T_Rr, T_Rc, T_PL, T_nd_fterm, T_nd_term, T_nd_faction, T_nd_action, T_tact_numb, T_node_numb, T_nact_numb, T_reverse>::Tm = &Tm_[0];
+template<>
+const int16 *Modula2_parser_tables_t::Tm = &Tm_[0];
 
 // Terminal transition matrix row ...
 static const uint8 Tr_[205] = {
@@ -604,8 +615,8 @@ static const uint8 Tr_[205] = {
        8,   103,   166,   103,   166, 
 };
 
-template<typename T_term_symb, typename T_head_symb, typename T_tact_name, typename T_node_name, typename T_head_numb, typename T_f_tail, typename T_tail, typename T_arga, typename T_argx, typename T_argy, typename T_Bm, typename T_Br, typename T_Bc, typename T_Bf, typename T_Tm, typename T_Tr, typename T_Tc, typename T_Nm, typename T_Nr, typename T_Nc, typename T_Rm, typename T_Rr, typename T_Rc, typename T_PL, typename T_nd_fterm, typename T_nd_term, typename T_nd_faction, typename T_nd_action, typename T_tact_numb, typename T_node_numb, typename T_nact_numb, typename T_reverse>
-const T_Tr *templ_lrstar_parser_tables<T_term_symb, T_head_symb, T_tact_name, T_node_name, T_head_numb, T_f_tail, T_tail, T_arga, T_argx, T_argy, T_Bm, T_Br, T_Bc, T_Bf, T_Tm, T_Tr, T_Tc, T_Nm, T_Nr, T_Nc, T_Rm, T_Rr, T_Rc, T_PL, T_nd_fterm, T_nd_term, T_nd_faction, T_nd_action, T_tact_numb, T_node_numb, T_nact_numb, T_reverse>::Tr = &Tr_[0];
+template<>
+const uint8 *Modula2_parser_tables_t::Tr = &Tr_[0];
 
 // Terminal transition matrix column ...
 static const uint8 Tc_[71] = {
@@ -619,8 +630,8 @@ static const uint8 Tc_[71] = {
       62, 
 };
 
-template<typename T_term_symb, typename T_head_symb, typename T_tact_name, typename T_node_name, typename T_head_numb, typename T_f_tail, typename T_tail, typename T_arga, typename T_argx, typename T_argy, typename T_Bm, typename T_Br, typename T_Bc, typename T_Bf, typename T_Tm, typename T_Tr, typename T_Tc, typename T_Nm, typename T_Nr, typename T_Nc, typename T_Rm, typename T_Rr, typename T_Rc, typename T_PL, typename T_nd_fterm, typename T_nd_term, typename T_nd_faction, typename T_nd_action, typename T_tact_numb, typename T_node_numb, typename T_nact_numb, typename T_reverse>
-const T_Tc *templ_lrstar_parser_tables<T_term_symb, T_head_symb, T_tact_name, T_node_name, T_head_numb, T_f_tail, T_tail, T_arga, T_argx, T_argy, T_Bm, T_Br, T_Bc, T_Bf, T_Tm, T_Tr, T_Tc, T_Nm, T_Nr, T_Nc, T_Rm, T_Rr, T_Rc, T_PL, T_nd_fterm, T_nd_term, T_nd_faction, T_nd_action, T_tact_numb, T_node_numb, T_nact_numb, T_reverse>::Tc = &Tc_[0];
+template<>
+const uint8 *Modula2_parser_tables_t::Tc = &Tc_[0];
 
 // Nonterminal transition matrix ...
 static const int16 Nm_[1169] = {
@@ -743,8 +754,8 @@ static const int16 Nm_[1169] = {
       32,  -211,    33,    30,  -119,  -221,    35,    39,  -188, 
 };
 
-template<typename T_term_symb, typename T_head_symb, typename T_tact_name, typename T_node_name, typename T_head_numb, typename T_f_tail, typename T_tail, typename T_arga, typename T_argx, typename T_argy, typename T_Bm, typename T_Br, typename T_Bc, typename T_Bf, typename T_Tm, typename T_Tr, typename T_Tc, typename T_Nm, typename T_Nr, typename T_Nc, typename T_Rm, typename T_Rr, typename T_Rc, typename T_PL, typename T_nd_fterm, typename T_nd_term, typename T_nd_faction, typename T_nd_action, typename T_tact_numb, typename T_node_numb, typename T_nact_numb, typename T_reverse>
-const T_Nm *templ_lrstar_parser_tables<T_term_symb, T_head_symb, T_tact_name, T_node_name, T_head_numb, T_f_tail, T_tail, T_arga, T_argx, T_argy, T_Bm, T_Br, T_Bc, T_Bf, T_Tm, T_Tr, T_Tc, T_Nm, T_Nr, T_Nc, T_Rm, T_Rr, T_Rc, T_PL, T_nd_fterm, T_nd_term, T_nd_faction, T_nd_action, T_tact_numb, T_node_numb, T_nact_numb, T_reverse>::Nm = &Nm_[0];
+template<>
+const int16 *Modula2_parser_tables_t::Nm = &Nm_[0];
 
 // Nonterminal transition matrix row ...
 static const uint16 Nr_[205] = {
@@ -771,8 +782,8 @@ static const uint16 Nr_[205] = {
  1109,   113,  1049,   115,  1109, 
 };
 
-template<typename T_term_symb, typename T_head_symb, typename T_tact_name, typename T_node_name, typename T_head_numb, typename T_f_tail, typename T_tail, typename T_arga, typename T_argx, typename T_argy, typename T_Bm, typename T_Br, typename T_Bc, typename T_Bf, typename T_Tm, typename T_Tr, typename T_Tc, typename T_Nm, typename T_Nr, typename T_Nc, typename T_Rm, typename T_Rr, typename T_Rc, typename T_PL, typename T_nd_fterm, typename T_nd_term, typename T_nd_faction, typename T_nd_action, typename T_tact_numb, typename T_node_numb, typename T_nact_numb, typename T_reverse>
-const T_Nr *templ_lrstar_parser_tables<T_term_symb, T_head_symb, T_tact_name, T_node_name, T_head_numb, T_f_tail, T_tail, T_arga, T_argx, T_argy, T_Bm, T_Br, T_Bc, T_Bf, T_Tm, T_Tr, T_Tc, T_Nm, T_Nr, T_Nc, T_Rm, T_Rr, T_Rc, T_PL, T_nd_fterm, T_nd_term, T_nd_faction, T_nd_action, T_tact_numb, T_node_numb, T_nact_numb, T_reverse>::Nr = &Nr_[0];
+template<>
+const uint16 *Modula2_parser_tables_t::Nr = &Nr_[0];
 
 // Nonterminal transition matrix column ...
 static const uint8 Nc_[226] = {
@@ -801,8 +812,8 @@ static const uint8 Nc_[226] = {
    57,    57,    58,    58,    59,    59, 
 };
 
-template<typename T_term_symb, typename T_head_symb, typename T_tact_name, typename T_node_name, typename T_head_numb, typename T_f_tail, typename T_tail, typename T_arga, typename T_argx, typename T_argy, typename T_Bm, typename T_Br, typename T_Bc, typename T_Bf, typename T_Tm, typename T_Tr, typename T_Tc, typename T_Nm, typename T_Nr, typename T_Nc, typename T_Rm, typename T_Rr, typename T_Rc, typename T_PL, typename T_nd_fterm, typename T_nd_term, typename T_nd_faction, typename T_nd_action, typename T_tact_numb, typename T_node_numb, typename T_nact_numb, typename T_reverse>
-const T_Nc *templ_lrstar_parser_tables<T_term_symb, T_head_symb, T_tact_name, T_node_name, T_head_numb, T_f_tail, T_tail, T_arga, T_argx, T_argy, T_Bm, T_Br, T_Bc, T_Bf, T_Tm, T_Tr, T_Tc, T_Nm, T_Nr, T_Nc, T_Rm, T_Rr, T_Rc, T_PL, T_nd_fterm, T_nd_term, T_nd_faction, T_nd_action, T_tact_numb, T_node_numb, T_nact_numb, T_reverse>::Nc = &Nc_[0];
+template<>
+const uint8 *Modula2_parser_tables_t::Nc = &Nc_[0];
 
 // Reduction matrix ...
 static const uint8 Rm_[239] = {
@@ -832,8 +843,8 @@ static const uint8 Rm_[239] = {
      203,     0,     0,     0,     0,    41,     0,   203,     0, 
 };
 
-template<typename T_term_symb, typename T_head_symb, typename T_tact_name, typename T_node_name, typename T_head_numb, typename T_f_tail, typename T_tail, typename T_arga, typename T_argx, typename T_argy, typename T_Bm, typename T_Br, typename T_Bc, typename T_Bf, typename T_Tm, typename T_Tr, typename T_Tc, typename T_Nm, typename T_Nr, typename T_Nc, typename T_Rm, typename T_Rr, typename T_Rc, typename T_PL, typename T_nd_fterm, typename T_nd_term, typename T_nd_faction, typename T_nd_action, typename T_tact_numb, typename T_node_numb, typename T_nact_numb, typename T_reverse>
-const T_Rm *templ_lrstar_parser_tables<T_term_symb, T_head_symb, T_tact_name, T_node_name, T_head_numb, T_f_tail, T_tail, T_arga, T_argx, T_argy, T_Bm, T_Br, T_Bc, T_Bf, T_Tm, T_Tr, T_Tc, T_Nm, T_Nr, T_Nc, T_Rm, T_Rr, T_Rc, T_PL, T_nd_fterm, T_nd_term, T_nd_faction, T_nd_action, T_tact_numb, T_node_numb, T_nact_numb, T_reverse>::Rm = &Rm_[0];
+template<>
+const uint8 *Modula2_parser_tables_t::Rm = &Rm_[0];
 
 // Reduction matrix row ...
 static const int16 Rr_[205] = {
@@ -860,8 +871,8 @@ static const int16 Rr_[205] = {
        0,    38,  -219,    38,     0, 
 };
 
-template<typename T_term_symb, typename T_head_symb, typename T_tact_name, typename T_node_name, typename T_head_numb, typename T_f_tail, typename T_tail, typename T_arga, typename T_argx, typename T_argy, typename T_Bm, typename T_Br, typename T_Bc, typename T_Bf, typename T_Tm, typename T_Tr, typename T_Tc, typename T_Nm, typename T_Nr, typename T_Nc, typename T_Rm, typename T_Rr, typename T_Rc, typename T_PL, typename T_nd_fterm, typename T_nd_term, typename T_nd_faction, typename T_nd_action, typename T_tact_numb, typename T_node_numb, typename T_nact_numb, typename T_reverse>
-const T_Rr *templ_lrstar_parser_tables<T_term_symb, T_head_symb, T_tact_name, T_node_name, T_head_numb, T_f_tail, T_tail, T_arga, T_argx, T_argy, T_Bm, T_Br, T_Bc, T_Bf, T_Tm, T_Tr, T_Tc, T_Nm, T_Nr, T_Nc, T_Rm, T_Rr, T_Rc, T_PL, T_nd_fterm, T_nd_term, T_nd_faction, T_nd_action, T_tact_numb, T_node_numb, T_nact_numb, T_reverse>::Rr = &Rr_[0];
+template<>
+const int16 *Modula2_parser_tables_t::Rr = &Rr_[0];
 
 // Reduction matrix column ...
 static const uint8 Rc_[71] = {
@@ -875,8 +886,8 @@ static const uint8 Rc_[71] = {
        6, 
 };
 
-template<typename T_term_symb, typename T_head_symb, typename T_tact_name, typename T_node_name, typename T_head_numb, typename T_f_tail, typename T_tail, typename T_arga, typename T_argx, typename T_argy, typename T_Bm, typename T_Br, typename T_Bc, typename T_Bf, typename T_Tm, typename T_Tr, typename T_Tc, typename T_Nm, typename T_Nr, typename T_Nc, typename T_Rm, typename T_Rr, typename T_Rc, typename T_PL, typename T_nd_fterm, typename T_nd_term, typename T_nd_faction, typename T_nd_action, typename T_tact_numb, typename T_node_numb, typename T_nact_numb, typename T_reverse>
-const T_Rc *templ_lrstar_parser_tables<T_term_symb, T_head_symb, T_tact_name, T_node_name, T_head_numb, T_f_tail, T_tail, T_arga, T_argx, T_argy, T_Bm, T_Br, T_Bc, T_Bf, T_Tm, T_Tr, T_Tc, T_Nm, T_Nr, T_Nc, T_Rm, T_Rr, T_Rc, T_PL, T_nd_fterm, T_nd_term, T_nd_faction, T_nd_action, T_tact_numb, T_node_numb, T_nact_numb, T_reverse>::Rc = &Rc_[0];
+template<>
+const uint8 *Modula2_parser_tables_t::Rc = &Rc_[0];
 
 // Production lengths (minus one) ...
 static const int8 PL_[226] = {
@@ -905,20 +916,20 @@ static const int8 PL_[226] = {
       -1,     1,     0,     2,     0,     2, 
 };
 
-template<typename T_term_symb, typename T_head_symb, typename T_tact_name, typename T_node_name, typename T_head_numb, typename T_f_tail, typename T_tail, typename T_arga, typename T_argx, typename T_argy, typename T_Bm, typename T_Br, typename T_Bc, typename T_Bf, typename T_Tm, typename T_Tr, typename T_Tc, typename T_Nm, typename T_Nr, typename T_Nc, typename T_Rm, typename T_Rr, typename T_Rc, typename T_PL, typename T_nd_fterm, typename T_nd_term, typename T_nd_faction, typename T_nd_action, typename T_tact_numb, typename T_node_numb, typename T_nact_numb, typename T_reverse>
-const T_PL *templ_lrstar_parser_tables<T_term_symb, T_head_symb, T_tact_name, T_node_name, T_head_numb, T_f_tail, T_tail, T_arga, T_argx, T_argy, T_Bm, T_Br, T_Bc, T_Bf, T_Tm, T_Tr, T_Tc, T_Nm, T_Nr, T_Nc, T_Rm, T_Rr, T_Rc, T_PL, T_nd_fterm, T_nd_term, T_nd_faction, T_nd_action, T_tact_numb, T_node_numb, T_nact_numb, T_reverse>::PL = &PL_[0];
+template<>
+const int8 *Modula2_parser_tables_t::PL = &PL_[0];
 
-template<typename T_term_symb, typename T_head_symb, typename T_tact_name, typename T_node_name, typename T_head_numb, typename T_f_tail, typename T_tail, typename T_arga, typename T_argx, typename T_argy, typename T_Bm, typename T_Br, typename T_Bc, typename T_Bf, typename T_Tm, typename T_Tr, typename T_Tc, typename T_Nm, typename T_Nr, typename T_Nc, typename T_Rm, typename T_Rr, typename T_Rc, typename T_PL, typename T_nd_fterm, typename T_nd_term, typename T_nd_faction, typename T_nd_action, typename T_tact_numb, typename T_node_numb, typename T_nact_numb, typename T_reverse>
-const T_nd_fterm *templ_lrstar_parser_tables<T_term_symb, T_head_symb, T_tact_name, T_node_name, T_head_numb, T_f_tail, T_tail, T_arga, T_argx, T_argy, T_Bm, T_Br, T_Bc, T_Bf, T_Tm, T_Tr, T_Tc, T_Nm, T_Nr, T_Nc, T_Rm, T_Rr, T_Rc, T_PL, T_nd_fterm, T_nd_term, T_nd_faction, T_nd_action, T_tact_numb, T_node_numb, T_nact_numb, T_reverse>::nd_fterm = 0;
+template<>
+const uint32 *Modula2_parser_tables_t::nd_fterm = 0;
 
-template<typename T_term_symb, typename T_head_symb, typename T_tact_name, typename T_node_name, typename T_head_numb, typename T_f_tail, typename T_tail, typename T_arga, typename T_argx, typename T_argy, typename T_Bm, typename T_Br, typename T_Bc, typename T_Bf, typename T_Tm, typename T_Tr, typename T_Tc, typename T_Nm, typename T_Nr, typename T_Nc, typename T_Rm, typename T_Rr, typename T_Rc, typename T_PL, typename T_nd_fterm, typename T_nd_term, typename T_nd_faction, typename T_nd_action, typename T_tact_numb, typename T_node_numb, typename T_nact_numb, typename T_reverse>
-const T_nd_term *templ_lrstar_parser_tables<T_term_symb, T_head_symb, T_tact_name, T_node_name, T_head_numb, T_f_tail, T_tail, T_arga, T_argx, T_argy, T_Bm, T_Br, T_Bc, T_Bf, T_Tm, T_Tr, T_Tc, T_Nm, T_Nr, T_Nc, T_Rm, T_Rr, T_Rc, T_PL, T_nd_fterm, T_nd_term, T_nd_faction, T_nd_action, T_tact_numb, T_node_numb, T_nact_numb, T_reverse>::nd_term = 0;
+template<>
+const uint32 *Modula2_parser_tables_t::nd_term = 0;
 
-template<typename T_term_symb, typename T_head_symb, typename T_tact_name, typename T_node_name, typename T_head_numb, typename T_f_tail, typename T_tail, typename T_arga, typename T_argx, typename T_argy, typename T_Bm, typename T_Br, typename T_Bc, typename T_Bf, typename T_Tm, typename T_Tr, typename T_Tc, typename T_Nm, typename T_Nr, typename T_Nc, typename T_Rm, typename T_Rr, typename T_Rc, typename T_PL, typename T_nd_fterm, typename T_nd_term, typename T_nd_faction, typename T_nd_action, typename T_tact_numb, typename T_node_numb, typename T_nact_numb, typename T_reverse>
-const T_nd_faction *templ_lrstar_parser_tables<T_term_symb, T_head_symb, T_tact_name, T_node_name, T_head_numb, T_f_tail, T_tail, T_arga, T_argx, T_argy, T_Bm, T_Br, T_Bc, T_Bf, T_Tm, T_Tr, T_Tc, T_Nm, T_Nr, T_Nc, T_Rm, T_Rr, T_Rc, T_PL, T_nd_fterm, T_nd_term, T_nd_faction, T_nd_action, T_tact_numb, T_node_numb, T_nact_numb, T_reverse>::nd_faction = 0;
+template<>
+const uint32 *Modula2_parser_tables_t::nd_faction = 0;
 
-template<typename T_term_symb, typename T_head_symb, typename T_tact_name, typename T_node_name, typename T_head_numb, typename T_f_tail, typename T_tail, typename T_arga, typename T_argx, typename T_argy, typename T_Bm, typename T_Br, typename T_Bc, typename T_Bf, typename T_Tm, typename T_Tr, typename T_Tc, typename T_Nm, typename T_Nr, typename T_Nc, typename T_Rm, typename T_Rr, typename T_Rc, typename T_PL, typename T_nd_fterm, typename T_nd_term, typename T_nd_faction, typename T_nd_action, typename T_tact_numb, typename T_node_numb, typename T_nact_numb, typename T_reverse>
-const T_nd_action *templ_lrstar_parser_tables<T_term_symb, T_head_symb, T_tact_name, T_node_name, T_head_numb, T_f_tail, T_tail, T_arga, T_argx, T_argy, T_Bm, T_Br, T_Bc, T_Bf, T_Tm, T_Tr, T_Tc, T_Nm, T_Nr, T_Nc, T_Rm, T_Rr, T_Rc, T_PL, T_nd_fterm, T_nd_term, T_nd_faction, T_nd_action, T_tact_numb, T_node_numb, T_nact_numb, T_reverse>::nd_action = 0;
+template<>
+const uint32 *Modula2_parser_tables_t::nd_action = 0;
 
 // Terminal action number ...
 static const int8 tact_numb_[71] = {
@@ -932,17 +943,17 @@ static const int8 tact_numb_[71] = {
       -1, 
 };
 
-template<typename T_term_symb, typename T_head_symb, typename T_tact_name, typename T_node_name, typename T_head_numb, typename T_f_tail, typename T_tail, typename T_arga, typename T_argx, typename T_argy, typename T_Bm, typename T_Br, typename T_Bc, typename T_Bf, typename T_Tm, typename T_Tr, typename T_Tc, typename T_Nm, typename T_Nr, typename T_Nc, typename T_Rm, typename T_Rr, typename T_Rc, typename T_PL, typename T_nd_fterm, typename T_nd_term, typename T_nd_faction, typename T_nd_action, typename T_tact_numb, typename T_node_numb, typename T_nact_numb, typename T_reverse>
-const T_tact_numb *templ_lrstar_parser_tables<T_term_symb, T_head_symb, T_tact_name, T_node_name, T_head_numb, T_f_tail, T_tail, T_arga, T_argx, T_argy, T_Bm, T_Br, T_Bc, T_Bf, T_Tm, T_Tr, T_Tc, T_Nm, T_Nr, T_Nc, T_Rm, T_Rr, T_Rc, T_PL, T_nd_fterm, T_nd_term, T_nd_faction, T_nd_action, T_tact_numb, T_node_numb, T_nact_numb, T_reverse>::tact_numb = &tact_numb_[0];
+template<>
+const int8 *Modula2_parser_tables_t::tact_numb = &tact_numb_[0];
 
-template<typename T_term_symb, typename T_head_symb, typename T_tact_name, typename T_node_name, typename T_head_numb, typename T_f_tail, typename T_tail, typename T_arga, typename T_argx, typename T_argy, typename T_Bm, typename T_Br, typename T_Bc, typename T_Bf, typename T_Tm, typename T_Tr, typename T_Tc, typename T_Nm, typename T_Nr, typename T_Nc, typename T_Rm, typename T_Rr, typename T_Rc, typename T_PL, typename T_nd_fterm, typename T_nd_term, typename T_nd_faction, typename T_nd_action, typename T_tact_numb, typename T_node_numb, typename T_nact_numb, typename T_reverse>
-const T_node_numb *templ_lrstar_parser_tables<T_term_symb, T_head_symb, T_tact_name, T_node_name, T_head_numb, T_f_tail, T_tail, T_arga, T_argx, T_argy, T_Bm, T_Br, T_Bc, T_Bf, T_Tm, T_Tr, T_Tc, T_Nm, T_Nr, T_Nc, T_Rm, T_Rr, T_Rc, T_PL, T_nd_fterm, T_nd_term, T_nd_faction, T_nd_action, T_tact_numb, T_node_numb, T_nact_numb, T_reverse>::node_numb = 0;
+template<>
+const uint32 *Modula2_parser_tables_t::node_numb = 0;
 
-template<typename T_term_symb, typename T_head_symb, typename T_tact_name, typename T_node_name, typename T_head_numb, typename T_f_tail, typename T_tail, typename T_arga, typename T_argx, typename T_argy, typename T_Bm, typename T_Br, typename T_Bc, typename T_Bf, typename T_Tm, typename T_Tr, typename T_Tc, typename T_Nm, typename T_Nr, typename T_Nc, typename T_Rm, typename T_Rr, typename T_Rc, typename T_PL, typename T_nd_fterm, typename T_nd_term, typename T_nd_faction, typename T_nd_action, typename T_tact_numb, typename T_node_numb, typename T_nact_numb, typename T_reverse>
-const T_nact_numb *templ_lrstar_parser_tables<T_term_symb, T_head_symb, T_tact_name, T_node_name, T_head_numb, T_f_tail, T_tail, T_arga, T_argx, T_argy, T_Bm, T_Br, T_Bc, T_Bf, T_Tm, T_Tr, T_Tc, T_Nm, T_Nr, T_Nc, T_Rm, T_Rr, T_Rc, T_PL, T_nd_fterm, T_nd_term, T_nd_faction, T_nd_action, T_tact_numb, T_node_numb, T_nact_numb, T_reverse>::nact_numb = 0;
+template<>
+const uint32 *Modula2_parser_tables_t::nact_numb = 0;
 
-template<typename T_term_symb, typename T_head_symb, typename T_tact_name, typename T_node_name, typename T_head_numb, typename T_f_tail, typename T_tail, typename T_arga, typename T_argx, typename T_argy, typename T_Bm, typename T_Br, typename T_Bc, typename T_Bf, typename T_Tm, typename T_Tr, typename T_Tc, typename T_Nm, typename T_Nr, typename T_Nc, typename T_Rm, typename T_Rr, typename T_Rc, typename T_PL, typename T_nd_fterm, typename T_nd_term, typename T_nd_faction, typename T_nd_action, typename T_tact_numb, typename T_node_numb, typename T_nact_numb, typename T_reverse>
-const T_reverse *templ_lrstar_parser_tables<T_term_symb, T_head_symb, T_tact_name, T_node_name, T_head_numb, T_f_tail, T_tail, T_arga, T_argx, T_argy, T_Bm, T_Br, T_Bc, T_Bf, T_Tm, T_Tr, T_Tc, T_Nm, T_Nr, T_Nc, T_Rm, T_Rr, T_Rc, T_PL, T_nd_fterm, T_nd_term, T_nd_faction, T_nd_action, T_tact_numb, T_node_numb, T_nact_numb, T_reverse>::reverse = 0;
+template<>
+const uint32 *Modula2_parser_tables_t::reverse = 0;
 
 void Modula2_init_actions(lrstar_parser *parser); /* User-supplied */
 void Modula2_term_actions(lrstar_parser *parser); /* User-supplied */
@@ -952,8 +963,8 @@ static init_func_t Modula2_init_funcs_[2] = {
 };
 
 // Init action function pointers ...
-template<typename T_term_symb, typename T_head_symb, typename T_tact_name, typename T_node_name, typename T_head_numb, typename T_f_tail, typename T_tail, typename T_arga, typename T_argx, typename T_argy, typename T_Bm, typename T_Br, typename T_Bc, typename T_Bf, typename T_Tm, typename T_Tr, typename T_Tc, typename T_Nm, typename T_Nr, typename T_Nc, typename T_Rm, typename T_Rr, typename T_Rc, typename T_PL, typename T_nd_fterm, typename T_nd_term, typename T_nd_faction, typename T_nd_action, typename T_tact_numb, typename T_node_numb, typename T_nact_numb, typename T_reverse>
-init_func_t *templ_lrstar_parser_tables<T_term_symb, T_head_symb, T_tact_name, T_node_name, T_head_numb, T_f_tail, T_tail, T_arga, T_argx, T_argy, T_Bm, T_Br, T_Bc, T_Bf, T_Tm, T_Tr, T_Tc, T_Nm, T_Nr, T_Nc, T_Rm, T_Rr, T_Rc, T_PL, T_nd_fterm, T_nd_term, T_nd_faction, T_nd_action, T_tact_numb, T_node_numb, T_nact_numb, T_reverse>::init_func = &Modula2_init_funcs_[0];
+template<>
+init_func_t *Modula2_parser_tables_t::init_func = &Modula2_init_funcs_[0];
 
 int Modula2_error(lrstar_parser *parser, int &t);
 int Modula2_lookup(lrstar_parser *parser, int &t);
@@ -964,12 +975,12 @@ static tact_func_t Modula2_tact_funcs_[2] = {
 };
 
 // Terminal action function pointers ...
-template<typename T_term_symb, typename T_head_symb, typename T_tact_name, typename T_node_name, typename T_head_numb, typename T_f_tail, typename T_tail, typename T_arga, typename T_argx, typename T_argy, typename T_Bm, typename T_Br, typename T_Bc, typename T_Bf, typename T_Tm, typename T_Tr, typename T_Tc, typename T_Nm, typename T_Nr, typename T_Nc, typename T_Rm, typename T_Rr, typename T_Rc, typename T_PL, typename T_nd_fterm, typename T_nd_term, typename T_nd_faction, typename T_nd_action, typename T_tact_numb, typename T_node_numb, typename T_nact_numb, typename T_reverse>
-tact_func_t *templ_lrstar_parser_tables<T_term_symb, T_head_symb, T_tact_name, T_node_name, T_head_numb, T_f_tail, T_tail, T_arga, T_argx, T_argy, T_Bm, T_Br, T_Bc, T_Bf, T_Tm, T_Tr, T_Tc, T_Nm, T_Nr, T_Nc, T_Rm, T_Rr, T_Rc, T_PL, T_nd_fterm, T_nd_term, T_nd_faction, T_nd_action, T_tact_numb, T_node_numb, T_nact_numb, T_reverse>::tact_func = &Modula2_tact_funcs_[0];
+template<>
+tact_func_t *Modula2_parser_tables_t::tact_func = &Modula2_tact_funcs_[0];
 
 // Node action function pointers ...
-template<typename T_term_symb, typename T_head_symb, typename T_tact_name, typename T_node_name, typename T_head_numb, typename T_f_tail, typename T_tail, typename T_arga, typename T_argx, typename T_argy, typename T_Bm, typename T_Br, typename T_Bc, typename T_Bf, typename T_Tm, typename T_Tr, typename T_Tc, typename T_Nm, typename T_Nr, typename T_Nc, typename T_Rm, typename T_Rr, typename T_Rc, typename T_PL, typename T_nd_fterm, typename T_nd_term, typename T_nd_faction, typename T_nd_action, typename T_tact_numb, typename T_node_numb, typename T_nact_numb, typename T_reverse>
-nact_func_t *templ_lrstar_parser_tables<T_term_symb, T_head_symb, T_tact_name, T_node_name, T_head_numb, T_f_tail, T_tail, T_arga, T_argx, T_argy, T_Bm, T_Br, T_Bc, T_Bf, T_Tm, T_Tr, T_Tc, T_Nm, T_Nr, T_Nc, T_Rm, T_Rr, T_Rc, T_PL, T_nd_fterm, T_nd_term, T_nd_faction, T_nd_action, T_tact_numb, T_node_numb, T_nact_numb, T_reverse>::nact_func = 0;
+template<>
+nact_func_t *Modula2_parser_tables_t::nact_func = 0;
 
 #include "lrstar_parser.cpp"
 

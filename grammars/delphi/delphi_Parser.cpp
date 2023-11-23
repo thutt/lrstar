@@ -1,125 +1,136 @@
 #include "lrstar_basic_defs.h"
 #include "lrstar_parser_tables.h"
 #include "delphi_LexerTables_typedef.h"
+#include "delphi_ParserTables_typedef.h"
 #include "delphi_Parser.h"
 #include "delphi_Actions.h"
-template<typename T_term_symb, typename T_head_symb, typename T_tact_name, typename T_node_name, typename T_head_numb, typename T_f_tail, typename T_tail, typename T_arga, typename T_argx, typename T_argy, typename T_Bm, typename T_Br, typename T_Bc, typename T_Bf, typename T_Tm, typename T_Tr, typename T_Tc, typename T_Nm, typename T_Nr, typename T_Nc, typename T_Rm, typename T_Rr, typename T_Rc, typename T_PL, typename T_nd_fterm, typename T_nd_term, typename T_nd_faction, typename T_nd_action, typename T_tact_numb, typename T_node_numb, typename T_nact_numb, typename T_reverse>
-const int templ_lrstar_parser_tables<T_term_symb, T_head_symb, T_tact_name, T_node_name, T_head_numb, T_f_tail, T_tail, T_arga, T_argx, T_argy, T_Bm, T_Br, T_Bc, T_Bf, T_Tm, T_Tr, T_Tc, T_Nm, T_Nr, T_Nc, T_Rm, T_Rr, T_Rc, T_PL, T_nd_fterm, T_nd_term, T_nd_faction, T_nd_action, T_tact_numb, T_node_numb, T_nact_numb, T_reverse>::n_term_symb = 101;
 
-template<typename T_term_symb, typename T_head_symb, typename T_tact_name, typename T_node_name, typename T_head_numb, typename T_f_tail, typename T_tail, typename T_arga, typename T_argx, typename T_argy, typename T_Bm, typename T_Br, typename T_Bc, typename T_Bf, typename T_Tm, typename T_Tr, typename T_Tc, typename T_Nm, typename T_Nr, typename T_Nc, typename T_Rm, typename T_Rr, typename T_Rc, typename T_PL, typename T_nd_fterm, typename T_nd_term, typename T_nd_faction, typename T_nd_action, typename T_tact_numb, typename T_node_numb, typename T_nact_numb, typename T_reverse>
-const int templ_lrstar_parser_tables<T_term_symb, T_head_symb, T_tact_name, T_node_name, T_head_numb, T_f_tail, T_tail, T_arga, T_argx, T_argy, T_Bm, T_Br, T_Bc, T_Bf, T_Tm, T_Tr, T_Tc, T_Nm, T_Nr, T_Nc, T_Rm, T_Rr, T_Rc, T_PL, T_nd_fterm, T_nd_term, T_nd_faction, T_nd_action, T_tact_numb, T_node_numb, T_nact_numb, T_reverse>::n_head_symb = 166;
+template<>
+const int delphi_parser_tables_t::n_term_symb = 101;
 
-template<typename T_term_symb, typename T_head_symb, typename T_tact_name, typename T_node_name, typename T_head_numb, typename T_f_tail, typename T_tail, typename T_arga, typename T_argx, typename T_argy, typename T_Bm, typename T_Br, typename T_Bc, typename T_Bf, typename T_Tm, typename T_Tr, typename T_Tc, typename T_Nm, typename T_Nr, typename T_Nc, typename T_Rm, typename T_Rr, typename T_Rc, typename T_PL, typename T_nd_fterm, typename T_nd_term, typename T_nd_faction, typename T_nd_action, typename T_tact_numb, typename T_node_numb, typename T_nact_numb, typename T_reverse>
-const int templ_lrstar_parser_tables<T_term_symb, T_head_symb, T_tact_name, T_node_name, T_head_numb, T_f_tail, T_tail, T_arga, T_argx, T_argy, T_Bm, T_Br, T_Bc, T_Bf, T_Tm, T_Tr, T_Tc, T_Nm, T_Nr, T_Nc, T_Rm, T_Rr, T_Rc, T_PL, T_nd_fterm, T_nd_term, T_nd_faction, T_nd_action, T_tact_numb, T_node_numb, T_nact_numb, T_reverse>::n_tact_name = 0;
+template<>
+const int delphi_parser_tables_t::n_head_symb = 166;
 
-template<typename T_term_symb, typename T_head_symb, typename T_tact_name, typename T_node_name, typename T_head_numb, typename T_f_tail, typename T_tail, typename T_arga, typename T_argx, typename T_argy, typename T_Bm, typename T_Br, typename T_Bc, typename T_Bf, typename T_Tm, typename T_Tr, typename T_Tc, typename T_Nm, typename T_Nr, typename T_Nc, typename T_Rm, typename T_Rr, typename T_Rc, typename T_PL, typename T_nd_fterm, typename T_nd_term, typename T_nd_faction, typename T_nd_action, typename T_tact_numb, typename T_node_numb, typename T_nact_numb, typename T_reverse>
-const int templ_lrstar_parser_tables<T_term_symb, T_head_symb, T_tact_name, T_node_name, T_head_numb, T_f_tail, T_tail, T_arga, T_argx, T_argy, T_Bm, T_Br, T_Bc, T_Bf, T_Tm, T_Tr, T_Tc, T_Nm, T_Nr, T_Nc, T_Rm, T_Rr, T_Rc, T_PL, T_nd_fterm, T_nd_term, T_nd_faction, T_nd_action, T_tact_numb, T_node_numb, T_nact_numb, T_reverse>::n_node_name = 0;
+template<>
+const int delphi_parser_tables_t::n_tact_name = 0;
 
-template<typename T_term_symb, typename T_head_symb, typename T_tact_name, typename T_node_name, typename T_head_numb, typename T_f_tail, typename T_tail, typename T_arga, typename T_argx, typename T_argy, typename T_Bm, typename T_Br, typename T_Bc, typename T_Bf, typename T_Tm, typename T_Tr, typename T_Tc, typename T_Nm, typename T_Nr, typename T_Nc, typename T_Rm, typename T_Rr, typename T_Rc, typename T_PL, typename T_nd_fterm, typename T_nd_term, typename T_nd_faction, typename T_nd_action, typename T_tact_numb, typename T_node_numb, typename T_nact_numb, typename T_reverse>
-const int templ_lrstar_parser_tables<T_term_symb, T_head_symb, T_tact_name, T_node_name, T_head_numb, T_f_tail, T_tail, T_arga, T_argx, T_argy, T_Bm, T_Br, T_Bc, T_Bf, T_Tm, T_Tr, T_Tc, T_Nm, T_Nr, T_Nc, T_Rm, T_Rr, T_Rc, T_PL, T_nd_fterm, T_nd_term, T_nd_faction, T_nd_action, T_tact_numb, T_node_numb, T_nact_numb, T_reverse>::n_head_numb = 355;
+template<>
+const int delphi_parser_tables_t::n_node_name = 0;
 
-template<typename T_term_symb, typename T_head_symb, typename T_tact_name, typename T_node_name, typename T_head_numb, typename T_f_tail, typename T_tail, typename T_arga, typename T_argx, typename T_argy, typename T_Bm, typename T_Br, typename T_Bc, typename T_Bf, typename T_Tm, typename T_Tr, typename T_Tc, typename T_Nm, typename T_Nr, typename T_Nc, typename T_Rm, typename T_Rr, typename T_Rc, typename T_PL, typename T_nd_fterm, typename T_nd_term, typename T_nd_faction, typename T_nd_action, typename T_tact_numb, typename T_node_numb, typename T_nact_numb, typename T_reverse>
-const int templ_lrstar_parser_tables<T_term_symb, T_head_symb, T_tact_name, T_node_name, T_head_numb, T_f_tail, T_tail, T_arga, T_argx, T_argy, T_Bm, T_Br, T_Bc, T_Bf, T_Tm, T_Tr, T_Tc, T_Nm, T_Nr, T_Nc, T_Rm, T_Rr, T_Rc, T_PL, T_nd_fterm, T_nd_term, T_nd_faction, T_nd_action, T_tact_numb, T_node_numb, T_nact_numb, T_reverse>::n_f_tail = 356;
+template<>
+const int delphi_parser_tables_t::n_head_numb = 355;
 
-template<typename T_term_symb, typename T_head_symb, typename T_tact_name, typename T_node_name, typename T_head_numb, typename T_f_tail, typename T_tail, typename T_arga, typename T_argx, typename T_argy, typename T_Bm, typename T_Br, typename T_Bc, typename T_Bf, typename T_Tm, typename T_Tr, typename T_Tc, typename T_Nm, typename T_Nr, typename T_Nc, typename T_Rm, typename T_Rr, typename T_Rc, typename T_PL, typename T_nd_fterm, typename T_nd_term, typename T_nd_faction, typename T_nd_action, typename T_tact_numb, typename T_node_numb, typename T_nact_numb, typename T_reverse>
-const int templ_lrstar_parser_tables<T_term_symb, T_head_symb, T_tact_name, T_node_name, T_head_numb, T_f_tail, T_tail, T_arga, T_argx, T_argy, T_Bm, T_Br, T_Bc, T_Bf, T_Tm, T_Tr, T_Tc, T_Nm, T_Nr, T_Nc, T_Rm, T_Rr, T_Rc, T_PL, T_nd_fterm, T_nd_term, T_nd_faction, T_nd_action, T_tact_numb, T_node_numb, T_nact_numb, T_reverse>::n_tail = 678;
+template<>
+const int delphi_parser_tables_t::n_f_tail = 356;
 
-template<typename T_term_symb, typename T_head_symb, typename T_tact_name, typename T_node_name, typename T_head_numb, typename T_f_tail, typename T_tail, typename T_arga, typename T_argx, typename T_argy, typename T_Bm, typename T_Br, typename T_Bc, typename T_Bf, typename T_Tm, typename T_Tr, typename T_Tc, typename T_Nm, typename T_Nr, typename T_Nc, typename T_Rm, typename T_Rr, typename T_Rc, typename T_PL, typename T_nd_fterm, typename T_nd_term, typename T_nd_faction, typename T_nd_action, typename T_tact_numb, typename T_node_numb, typename T_nact_numb, typename T_reverse>
-const int templ_lrstar_parser_tables<T_term_symb, T_head_symb, T_tact_name, T_node_name, T_head_numb, T_f_tail, T_tail, T_arga, T_argx, T_argy, T_Bm, T_Br, T_Bc, T_Bf, T_Tm, T_Tr, T_Tc, T_Nm, T_Nr, T_Nc, T_Rm, T_Rr, T_Rc, T_PL, T_nd_fterm, T_nd_term, T_nd_faction, T_nd_action, T_tact_numb, T_node_numb, T_nact_numb, T_reverse>::n_arga = 0;
+template<>
+const int delphi_parser_tables_t::n_tail = 678;
 
-template<typename T_term_symb, typename T_head_symb, typename T_tact_name, typename T_node_name, typename T_head_numb, typename T_f_tail, typename T_tail, typename T_arga, typename T_argx, typename T_argy, typename T_Bm, typename T_Br, typename T_Bc, typename T_Bf, typename T_Tm, typename T_Tr, typename T_Tc, typename T_Nm, typename T_Nr, typename T_Nc, typename T_Rm, typename T_Rr, typename T_Rc, typename T_PL, typename T_nd_fterm, typename T_nd_term, typename T_nd_faction, typename T_nd_action, typename T_tact_numb, typename T_node_numb, typename T_nact_numb, typename T_reverse>
-const int templ_lrstar_parser_tables<T_term_symb, T_head_symb, T_tact_name, T_node_name, T_head_numb, T_f_tail, T_tail, T_arga, T_argx, T_argy, T_Bm, T_Br, T_Bc, T_Bf, T_Tm, T_Tr, T_Tc, T_Nm, T_Nr, T_Nc, T_Rm, T_Rr, T_Rc, T_PL, T_nd_fterm, T_nd_term, T_nd_faction, T_nd_action, T_tact_numb, T_node_numb, T_nact_numb, T_reverse>::n_argx = 0;
+template<>
+const int delphi_parser_tables_t::n_arga = 0;
 
-template<typename T_term_symb, typename T_head_symb, typename T_tact_name, typename T_node_name, typename T_head_numb, typename T_f_tail, typename T_tail, typename T_arga, typename T_argx, typename T_argy, typename T_Bm, typename T_Br, typename T_Bc, typename T_Bf, typename T_Tm, typename T_Tr, typename T_Tc, typename T_Nm, typename T_Nr, typename T_Nc, typename T_Rm, typename T_Rr, typename T_Rc, typename T_PL, typename T_nd_fterm, typename T_nd_term, typename T_nd_faction, typename T_nd_action, typename T_tact_numb, typename T_node_numb, typename T_nact_numb, typename T_reverse>
-const int templ_lrstar_parser_tables<T_term_symb, T_head_symb, T_tact_name, T_node_name, T_head_numb, T_f_tail, T_tail, T_arga, T_argx, T_argy, T_Bm, T_Br, T_Bc, T_Bf, T_Tm, T_Tr, T_Tc, T_Nm, T_Nr, T_Nc, T_Rm, T_Rr, T_Rc, T_PL, T_nd_fterm, T_nd_term, T_nd_faction, T_nd_action, T_tact_numb, T_node_numb, T_nact_numb, T_reverse>::n_argy = 0;
+template<>
+const int delphi_parser_tables_t::n_argx = 0;
 
-template<typename T_term_symb, typename T_head_symb, typename T_tact_name, typename T_node_name, typename T_head_numb, typename T_f_tail, typename T_tail, typename T_arga, typename T_argx, typename T_argy, typename T_Bm, typename T_Br, typename T_Bc, typename T_Bf, typename T_Tm, typename T_Tr, typename T_Tc, typename T_Nm, typename T_Nr, typename T_Nc, typename T_Rm, typename T_Rr, typename T_Rc, typename T_PL, typename T_nd_fterm, typename T_nd_term, typename T_nd_faction, typename T_nd_action, typename T_tact_numb, typename T_node_numb, typename T_nact_numb, typename T_reverse>
-const int templ_lrstar_parser_tables<T_term_symb, T_head_symb, T_tact_name, T_node_name, T_head_numb, T_f_tail, T_tail, T_arga, T_argx, T_argy, T_Bm, T_Br, T_Bc, T_Bf, T_Tm, T_Tr, T_Tc, T_Nm, T_Nr, T_Nc, T_Rm, T_Rr, T_Rc, T_PL, T_nd_fterm, T_nd_term, T_nd_faction, T_nd_action, T_tact_numb, T_node_numb, T_nact_numb, T_reverse>::n_Bm = 394;
+template<>
+const int delphi_parser_tables_t::n_argy = 0;
 
-template<typename T_term_symb, typename T_head_symb, typename T_tact_name, typename T_node_name, typename T_head_numb, typename T_f_tail, typename T_tail, typename T_arga, typename T_argx, typename T_argy, typename T_Bm, typename T_Br, typename T_Bc, typename T_Bf, typename T_Tm, typename T_Tr, typename T_Tc, typename T_Nm, typename T_Nr, typename T_Nc, typename T_Rm, typename T_Rr, typename T_Rc, typename T_PL, typename T_nd_fterm, typename T_nd_term, typename T_nd_faction, typename T_nd_action, typename T_tact_numb, typename T_node_numb, typename T_nact_numb, typename T_reverse>
-const int templ_lrstar_parser_tables<T_term_symb, T_head_symb, T_tact_name, T_node_name, T_head_numb, T_f_tail, T_tail, T_arga, T_argx, T_argy, T_Bm, T_Br, T_Bc, T_Bf, T_Tm, T_Tr, T_Tc, T_Nm, T_Nr, T_Nc, T_Rm, T_Rr, T_Rc, T_PL, T_nd_fterm, T_nd_term, T_nd_faction, T_nd_action, T_tact_numb, T_node_numb, T_nact_numb, T_reverse>::n_Br = 343;
+template<>
+const int delphi_parser_tables_t::n_Bm = 394;
 
-template<typename T_term_symb, typename T_head_symb, typename T_tact_name, typename T_node_name, typename T_head_numb, typename T_f_tail, typename T_tail, typename T_arga, typename T_argx, typename T_argy, typename T_Bm, typename T_Br, typename T_Bc, typename T_Bf, typename T_Tm, typename T_Tr, typename T_Tc, typename T_Nm, typename T_Nr, typename T_Nc, typename T_Rm, typename T_Rr, typename T_Rc, typename T_PL, typename T_nd_fterm, typename T_nd_term, typename T_nd_faction, typename T_nd_action, typename T_tact_numb, typename T_node_numb, typename T_nact_numb, typename T_reverse>
-const int templ_lrstar_parser_tables<T_term_symb, T_head_symb, T_tact_name, T_node_name, T_head_numb, T_f_tail, T_tail, T_arga, T_argx, T_argy, T_Bm, T_Br, T_Bc, T_Bf, T_Tm, T_Tr, T_Tc, T_Nm, T_Nr, T_Nc, T_Rm, T_Rr, T_Rc, T_PL, T_nd_fterm, T_nd_term, T_nd_faction, T_nd_action, T_tact_numb, T_node_numb, T_nact_numb, T_reverse>::n_Bc = 101;
+template<>
+const int delphi_parser_tables_t::n_Br = 343;
 
-template<typename T_term_symb, typename T_head_symb, typename T_tact_name, typename T_node_name, typename T_head_numb, typename T_f_tail, typename T_tail, typename T_arga, typename T_argx, typename T_argy, typename T_Bm, typename T_Br, typename T_Bc, typename T_Bf, typename T_Tm, typename T_Tr, typename T_Tc, typename T_Nm, typename T_Nr, typename T_Nc, typename T_Rm, typename T_Rr, typename T_Rc, typename T_PL, typename T_nd_fterm, typename T_nd_term, typename T_nd_faction, typename T_nd_action, typename T_tact_numb, typename T_node_numb, typename T_nact_numb, typename T_reverse>
-const int templ_lrstar_parser_tables<T_term_symb, T_head_symb, T_tact_name, T_node_name, T_head_numb, T_f_tail, T_tail, T_arga, T_argx, T_argy, T_Bm, T_Br, T_Bc, T_Bf, T_Tm, T_Tr, T_Tc, T_Nm, T_Nr, T_Nc, T_Rm, T_Rr, T_Rc, T_PL, T_nd_fterm, T_nd_term, T_nd_faction, T_nd_action, T_tact_numb, T_node_numb, T_nact_numb, T_reverse>::n_Bf = 101;
+template<>
+const int delphi_parser_tables_t::n_Bc = 101;
 
-template<typename T_term_symb, typename T_head_symb, typename T_tact_name, typename T_node_name, typename T_head_numb, typename T_f_tail, typename T_tail, typename T_arga, typename T_argx, typename T_argy, typename T_Bm, typename T_Br, typename T_Bc, typename T_Bf, typename T_Tm, typename T_Tr, typename T_Tc, typename T_Nm, typename T_Nr, typename T_Nc, typename T_Rm, typename T_Rr, typename T_Rc, typename T_PL, typename T_nd_fterm, typename T_nd_term, typename T_nd_faction, typename T_nd_action, typename T_tact_numb, typename T_node_numb, typename T_nact_numb, typename T_reverse>
-const int templ_lrstar_parser_tables<T_term_symb, T_head_symb, T_tact_name, T_node_name, T_head_numb, T_f_tail, T_tail, T_arga, T_argx, T_argy, T_Bm, T_Br, T_Bc, T_Bf, T_Tm, T_Tr, T_Tc, T_Nm, T_Nr, T_Nc, T_Rm, T_Rr, T_Rc, T_PL, T_nd_fterm, T_nd_term, T_nd_faction, T_nd_action, T_tact_numb, T_node_numb, T_nact_numb, T_reverse>::n_Tm = 580;
+template<>
+const int delphi_parser_tables_t::n_Bf = 101;
 
-template<typename T_term_symb, typename T_head_symb, typename T_tact_name, typename T_node_name, typename T_head_numb, typename T_f_tail, typename T_tail, typename T_arga, typename T_argx, typename T_argy, typename T_Bm, typename T_Br, typename T_Bc, typename T_Bf, typename T_Tm, typename T_Tr, typename T_Tc, typename T_Nm, typename T_Nr, typename T_Nc, typename T_Rm, typename T_Rr, typename T_Rc, typename T_PL, typename T_nd_fterm, typename T_nd_term, typename T_nd_faction, typename T_nd_action, typename T_tact_numb, typename T_node_numb, typename T_nact_numb, typename T_reverse>
-const int templ_lrstar_parser_tables<T_term_symb, T_head_symb, T_tact_name, T_node_name, T_head_numb, T_f_tail, T_tail, T_arga, T_argx, T_argy, T_Bm, T_Br, T_Bc, T_Bf, T_Tm, T_Tr, T_Tc, T_Nm, T_Nr, T_Nc, T_Rm, T_Rr, T_Rc, T_PL, T_nd_fterm, T_nd_term, T_nd_faction, T_nd_action, T_tact_numb, T_node_numb, T_nact_numb, T_reverse>::n_Tr = 343;
+template<>
+const int delphi_parser_tables_t::n_Tm = 580;
 
-template<typename T_term_symb, typename T_head_symb, typename T_tact_name, typename T_node_name, typename T_head_numb, typename T_f_tail, typename T_tail, typename T_arga, typename T_argx, typename T_argy, typename T_Bm, typename T_Br, typename T_Bc, typename T_Bf, typename T_Tm, typename T_Tr, typename T_Tc, typename T_Nm, typename T_Nr, typename T_Nc, typename T_Rm, typename T_Rr, typename T_Rc, typename T_PL, typename T_nd_fterm, typename T_nd_term, typename T_nd_faction, typename T_nd_action, typename T_tact_numb, typename T_node_numb, typename T_nact_numb, typename T_reverse>
-const int templ_lrstar_parser_tables<T_term_symb, T_head_symb, T_tact_name, T_node_name, T_head_numb, T_f_tail, T_tail, T_arga, T_argx, T_argy, T_Bm, T_Br, T_Bc, T_Bf, T_Tm, T_Tr, T_Tc, T_Nm, T_Nr, T_Nc, T_Rm, T_Rr, T_Rc, T_PL, T_nd_fterm, T_nd_term, T_nd_faction, T_nd_action, T_tact_numb, T_node_numb, T_nact_numb, T_reverse>::n_Tc = 101;
+template<>
+const int delphi_parser_tables_t::n_Tr = 343;
 
-template<typename T_term_symb, typename T_head_symb, typename T_tact_name, typename T_node_name, typename T_head_numb, typename T_f_tail, typename T_tail, typename T_arga, typename T_argx, typename T_argy, typename T_Bm, typename T_Br, typename T_Bc, typename T_Bf, typename T_Tm, typename T_Tr, typename T_Tc, typename T_Nm, typename T_Nr, typename T_Nc, typename T_Rm, typename T_Rr, typename T_Rc, typename T_PL, typename T_nd_fterm, typename T_nd_term, typename T_nd_faction, typename T_nd_action, typename T_tact_numb, typename T_node_numb, typename T_nact_numb, typename T_reverse>
-const int templ_lrstar_parser_tables<T_term_symb, T_head_symb, T_tact_name, T_node_name, T_head_numb, T_f_tail, T_tail, T_arga, T_argx, T_argy, T_Bm, T_Br, T_Bc, T_Bf, T_Tm, T_Tr, T_Tc, T_Nm, T_Nr, T_Nc, T_Rm, T_Rr, T_Rc, T_PL, T_nd_fterm, T_nd_term, T_nd_faction, T_nd_action, T_tact_numb, T_node_numb, T_nact_numb, T_reverse>::n_Nm = 2246;
+template<>
+const int delphi_parser_tables_t::n_Tc = 101;
 
-template<typename T_term_symb, typename T_head_symb, typename T_tact_name, typename T_node_name, typename T_head_numb, typename T_f_tail, typename T_tail, typename T_arga, typename T_argx, typename T_argy, typename T_Bm, typename T_Br, typename T_Bc, typename T_Bf, typename T_Tm, typename T_Tr, typename T_Tc, typename T_Nm, typename T_Nr, typename T_Nc, typename T_Rm, typename T_Rr, typename T_Rc, typename T_PL, typename T_nd_fterm, typename T_nd_term, typename T_nd_faction, typename T_nd_action, typename T_tact_numb, typename T_node_numb, typename T_nact_numb, typename T_reverse>
-const int templ_lrstar_parser_tables<T_term_symb, T_head_symb, T_tact_name, T_node_name, T_head_numb, T_f_tail, T_tail, T_arga, T_argx, T_argy, T_Bm, T_Br, T_Bc, T_Bf, T_Tm, T_Tr, T_Tc, T_Nm, T_Nr, T_Nc, T_Rm, T_Rr, T_Rc, T_PL, T_nd_fterm, T_nd_term, T_nd_faction, T_nd_action, T_tact_numb, T_node_numb, T_nact_numb, T_reverse>::n_Nr = 343;
+template<>
+const int delphi_parser_tables_t::n_Nm = 2246;
 
-template<typename T_term_symb, typename T_head_symb, typename T_tact_name, typename T_node_name, typename T_head_numb, typename T_f_tail, typename T_tail, typename T_arga, typename T_argx, typename T_argy, typename T_Bm, typename T_Br, typename T_Bc, typename T_Bf, typename T_Tm, typename T_Tr, typename T_Tc, typename T_Nm, typename T_Nr, typename T_Nc, typename T_Rm, typename T_Rr, typename T_Rc, typename T_PL, typename T_nd_fterm, typename T_nd_term, typename T_nd_faction, typename T_nd_action, typename T_tact_numb, typename T_node_numb, typename T_nact_numb, typename T_reverse>
-const int templ_lrstar_parser_tables<T_term_symb, T_head_symb, T_tact_name, T_node_name, T_head_numb, T_f_tail, T_tail, T_arga, T_argx, T_argy, T_Bm, T_Br, T_Bc, T_Bf, T_Tm, T_Tr, T_Tc, T_Nm, T_Nr, T_Nc, T_Rm, T_Rr, T_Rc, T_PL, T_nd_fterm, T_nd_term, T_nd_faction, T_nd_action, T_tact_numb, T_node_numb, T_nact_numb, T_reverse>::n_Nc = 355;
+template<>
+const int delphi_parser_tables_t::n_Nr = 343;
 
-template<typename T_term_symb, typename T_head_symb, typename T_tact_name, typename T_node_name, typename T_head_numb, typename T_f_tail, typename T_tail, typename T_arga, typename T_argx, typename T_argy, typename T_Bm, typename T_Br, typename T_Bc, typename T_Bf, typename T_Tm, typename T_Tr, typename T_Tc, typename T_Nm, typename T_Nr, typename T_Nc, typename T_Rm, typename T_Rr, typename T_Rc, typename T_PL, typename T_nd_fterm, typename T_nd_term, typename T_nd_faction, typename T_nd_action, typename T_tact_numb, typename T_node_numb, typename T_nact_numb, typename T_reverse>
-const int templ_lrstar_parser_tables<T_term_symb, T_head_symb, T_tact_name, T_node_name, T_head_numb, T_f_tail, T_tail, T_arga, T_argx, T_argy, T_Bm, T_Br, T_Bc, T_Bf, T_Tm, T_Tr, T_Tc, T_Nm, T_Nr, T_Nc, T_Rm, T_Rr, T_Rc, T_PL, T_nd_fterm, T_nd_term, T_nd_faction, T_nd_action, T_tact_numb, T_node_numb, T_nact_numb, T_reverse>::n_Rm = 91;
+template<>
+const int delphi_parser_tables_t::n_Nc = 355;
 
-template<typename T_term_symb, typename T_head_symb, typename T_tact_name, typename T_node_name, typename T_head_numb, typename T_f_tail, typename T_tail, typename T_arga, typename T_argx, typename T_argy, typename T_Bm, typename T_Br, typename T_Bc, typename T_Bf, typename T_Tm, typename T_Tr, typename T_Tc, typename T_Nm, typename T_Nr, typename T_Nc, typename T_Rm, typename T_Rr, typename T_Rc, typename T_PL, typename T_nd_fterm, typename T_nd_term, typename T_nd_faction, typename T_nd_action, typename T_tact_numb, typename T_node_numb, typename T_nact_numb, typename T_reverse>
-const int templ_lrstar_parser_tables<T_term_symb, T_head_symb, T_tact_name, T_node_name, T_head_numb, T_f_tail, T_tail, T_arga, T_argx, T_argy, T_Bm, T_Br, T_Bc, T_Bf, T_Tm, T_Tr, T_Tc, T_Nm, T_Nr, T_Nc, T_Rm, T_Rr, T_Rc, T_PL, T_nd_fterm, T_nd_term, T_nd_faction, T_nd_action, T_tact_numb, T_node_numb, T_nact_numb, T_reverse>::n_Rr = 343;
+template<>
+const int delphi_parser_tables_t::n_Rm = 91;
 
-template<typename T_term_symb, typename T_head_symb, typename T_tact_name, typename T_node_name, typename T_head_numb, typename T_f_tail, typename T_tail, typename T_arga, typename T_argx, typename T_argy, typename T_Bm, typename T_Br, typename T_Bc, typename T_Bf, typename T_Tm, typename T_Tr, typename T_Tc, typename T_Nm, typename T_Nr, typename T_Nc, typename T_Rm, typename T_Rr, typename T_Rc, typename T_PL, typename T_nd_fterm, typename T_nd_term, typename T_nd_faction, typename T_nd_action, typename T_tact_numb, typename T_node_numb, typename T_nact_numb, typename T_reverse>
-const int templ_lrstar_parser_tables<T_term_symb, T_head_symb, T_tact_name, T_node_name, T_head_numb, T_f_tail, T_tail, T_arga, T_argx, T_argy, T_Bm, T_Br, T_Bc, T_Bf, T_Tm, T_Tr, T_Tc, T_Nm, T_Nr, T_Nc, T_Rm, T_Rr, T_Rc, T_PL, T_nd_fterm, T_nd_term, T_nd_faction, T_nd_action, T_tact_numb, T_node_numb, T_nact_numb, T_reverse>::n_Rc = 101;
+template<>
+const int delphi_parser_tables_t::n_Rr = 343;
 
-template<typename T_term_symb, typename T_head_symb, typename T_tact_name, typename T_node_name, typename T_head_numb, typename T_f_tail, typename T_tail, typename T_arga, typename T_argx, typename T_argy, typename T_Bm, typename T_Br, typename T_Bc, typename T_Bf, typename T_Tm, typename T_Tr, typename T_Tc, typename T_Nm, typename T_Nr, typename T_Nc, typename T_Rm, typename T_Rr, typename T_Rc, typename T_PL, typename T_nd_fterm, typename T_nd_term, typename T_nd_faction, typename T_nd_action, typename T_tact_numb, typename T_node_numb, typename T_nact_numb, typename T_reverse>
-const int templ_lrstar_parser_tables<T_term_symb, T_head_symb, T_tact_name, T_node_name, T_head_numb, T_f_tail, T_tail, T_arga, T_argx, T_argy, T_Bm, T_Br, T_Bc, T_Bf, T_Tm, T_Tr, T_Tc, T_Nm, T_Nr, T_Nc, T_Rm, T_Rr, T_Rc, T_PL, T_nd_fterm, T_nd_term, T_nd_faction, T_nd_action, T_tact_numb, T_node_numb, T_nact_numb, T_reverse>::n_PL = 355;
+template<>
+const int delphi_parser_tables_t::n_Rc = 101;
 
-template<typename T_term_symb, typename T_head_symb, typename T_tact_name, typename T_node_name, typename T_head_numb, typename T_f_tail, typename T_tail, typename T_arga, typename T_argx, typename T_argy, typename T_Bm, typename T_Br, typename T_Bc, typename T_Bf, typename T_Tm, typename T_Tr, typename T_Tc, typename T_Nm, typename T_Nr, typename T_Nc, typename T_Rm, typename T_Rr, typename T_Rc, typename T_PL, typename T_nd_fterm, typename T_nd_term, typename T_nd_faction, typename T_nd_action, typename T_tact_numb, typename T_node_numb, typename T_nact_numb, typename T_reverse>
-const int templ_lrstar_parser_tables<T_term_symb, T_head_symb, T_tact_name, T_node_name, T_head_numb, T_f_tail, T_tail, T_arga, T_argx, T_argy, T_Bm, T_Br, T_Bc, T_Bf, T_Tm, T_Tr, T_Tc, T_Nm, T_Nr, T_Nc, T_Rm, T_Rr, T_Rc, T_PL, T_nd_fterm, T_nd_term, T_nd_faction, T_nd_action, T_tact_numb, T_node_numb, T_nact_numb, T_reverse>::n_nd_fterm = 0;
+template<>
+const int delphi_parser_tables_t::n_PL = 355;
 
-template<typename T_term_symb, typename T_head_symb, typename T_tact_name, typename T_node_name, typename T_head_numb, typename T_f_tail, typename T_tail, typename T_arga, typename T_argx, typename T_argy, typename T_Bm, typename T_Br, typename T_Bc, typename T_Bf, typename T_Tm, typename T_Tr, typename T_Tc, typename T_Nm, typename T_Nr, typename T_Nc, typename T_Rm, typename T_Rr, typename T_Rc, typename T_PL, typename T_nd_fterm, typename T_nd_term, typename T_nd_faction, typename T_nd_action, typename T_tact_numb, typename T_node_numb, typename T_nact_numb, typename T_reverse>
-const int templ_lrstar_parser_tables<T_term_symb, T_head_symb, T_tact_name, T_node_name, T_head_numb, T_f_tail, T_tail, T_arga, T_argx, T_argy, T_Bm, T_Br, T_Bc, T_Bf, T_Tm, T_Tr, T_Tc, T_Nm, T_Nr, T_Nc, T_Rm, T_Rr, T_Rc, T_PL, T_nd_fterm, T_nd_term, T_nd_faction, T_nd_action, T_tact_numb, T_node_numb, T_nact_numb, T_reverse>::n_nd_term = 0;
+template<>
+const int delphi_parser_tables_t::n_nd_fterm = 0;
 
-template<typename T_term_symb, typename T_head_symb, typename T_tact_name, typename T_node_name, typename T_head_numb, typename T_f_tail, typename T_tail, typename T_arga, typename T_argx, typename T_argy, typename T_Bm, typename T_Br, typename T_Bc, typename T_Bf, typename T_Tm, typename T_Tr, typename T_Tc, typename T_Nm, typename T_Nr, typename T_Nc, typename T_Rm, typename T_Rr, typename T_Rc, typename T_PL, typename T_nd_fterm, typename T_nd_term, typename T_nd_faction, typename T_nd_action, typename T_tact_numb, typename T_node_numb, typename T_nact_numb, typename T_reverse>
-const int templ_lrstar_parser_tables<T_term_symb, T_head_symb, T_tact_name, T_node_name, T_head_numb, T_f_tail, T_tail, T_arga, T_argx, T_argy, T_Bm, T_Br, T_Bc, T_Bf, T_Tm, T_Tr, T_Tc, T_Nm, T_Nr, T_Nc, T_Rm, T_Rr, T_Rc, T_PL, T_nd_fterm, T_nd_term, T_nd_faction, T_nd_action, T_tact_numb, T_node_numb, T_nact_numb, T_reverse>::n_nd_faction = 0;
+template<>
+const int delphi_parser_tables_t::n_nd_term = 0;
 
-template<typename T_term_symb, typename T_head_symb, typename T_tact_name, typename T_node_name, typename T_head_numb, typename T_f_tail, typename T_tail, typename T_arga, typename T_argx, typename T_argy, typename T_Bm, typename T_Br, typename T_Bc, typename T_Bf, typename T_Tm, typename T_Tr, typename T_Tc, typename T_Nm, typename T_Nr, typename T_Nc, typename T_Rm, typename T_Rr, typename T_Rc, typename T_PL, typename T_nd_fterm, typename T_nd_term, typename T_nd_faction, typename T_nd_action, typename T_tact_numb, typename T_node_numb, typename T_nact_numb, typename T_reverse>
-const int templ_lrstar_parser_tables<T_term_symb, T_head_symb, T_tact_name, T_node_name, T_head_numb, T_f_tail, T_tail, T_arga, T_argx, T_argy, T_Bm, T_Br, T_Bc, T_Bf, T_Tm, T_Tr, T_Tc, T_Nm, T_Nr, T_Nc, T_Rm, T_Rr, T_Rc, T_PL, T_nd_fterm, T_nd_term, T_nd_faction, T_nd_action, T_tact_numb, T_node_numb, T_nact_numb, T_reverse>::n_nd_action = 0;
+template<>
+const int delphi_parser_tables_t::n_nd_faction = 0;
 
-template<typename T_term_symb, typename T_head_symb, typename T_tact_name, typename T_node_name, typename T_head_numb, typename T_f_tail, typename T_tail, typename T_arga, typename T_argx, typename T_argy, typename T_Bm, typename T_Br, typename T_Bc, typename T_Bf, typename T_Tm, typename T_Tr, typename T_Tc, typename T_Nm, typename T_Nr, typename T_Nc, typename T_Rm, typename T_Rr, typename T_Rc, typename T_PL, typename T_nd_fterm, typename T_nd_term, typename T_nd_faction, typename T_nd_action, typename T_tact_numb, typename T_node_numb, typename T_nact_numb, typename T_reverse>
-const int templ_lrstar_parser_tables<T_term_symb, T_head_symb, T_tact_name, T_node_name, T_head_numb, T_f_tail, T_tail, T_arga, T_argx, T_argy, T_Bm, T_Br, T_Bc, T_Bf, T_Tm, T_Tr, T_Tc, T_Nm, T_Nr, T_Nc, T_Rm, T_Rr, T_Rc, T_PL, T_nd_fterm, T_nd_term, T_nd_faction, T_nd_action, T_tact_numb, T_node_numb, T_nact_numb, T_reverse>::n_tact_numb = 0;
+template<>
+const int delphi_parser_tables_t::n_nd_action = 0;
 
-template<typename T_term_symb, typename T_head_symb, typename T_tact_name, typename T_node_name, typename T_head_numb, typename T_f_tail, typename T_tail, typename T_arga, typename T_argx, typename T_argy, typename T_Bm, typename T_Br, typename T_Bc, typename T_Bf, typename T_Tm, typename T_Tr, typename T_Tc, typename T_Nm, typename T_Nr, typename T_Nc, typename T_Rm, typename T_Rr, typename T_Rc, typename T_PL, typename T_nd_fterm, typename T_nd_term, typename T_nd_faction, typename T_nd_action, typename T_tact_numb, typename T_node_numb, typename T_nact_numb, typename T_reverse>
-const int templ_lrstar_parser_tables<T_term_symb, T_head_symb, T_tact_name, T_node_name, T_head_numb, T_f_tail, T_tail, T_arga, T_argx, T_argy, T_Bm, T_Br, T_Bc, T_Bf, T_Tm, T_Tr, T_Tc, T_Nm, T_Nr, T_Nc, T_Rm, T_Rr, T_Rc, T_PL, T_nd_fterm, T_nd_term, T_nd_faction, T_nd_action, T_tact_numb, T_node_numb, T_nact_numb, T_reverse>::n_node_numb = 0;
+template<>
+const int delphi_parser_tables_t::n_tact_numb = 0;
 
-template<typename T_term_symb, typename T_head_symb, typename T_tact_name, typename T_node_name, typename T_head_numb, typename T_f_tail, typename T_tail, typename T_arga, typename T_argx, typename T_argy, typename T_Bm, typename T_Br, typename T_Bc, typename T_Bf, typename T_Tm, typename T_Tr, typename T_Tc, typename T_Nm, typename T_Nr, typename T_Nc, typename T_Rm, typename T_Rr, typename T_Rc, typename T_PL, typename T_nd_fterm, typename T_nd_term, typename T_nd_faction, typename T_nd_action, typename T_tact_numb, typename T_node_numb, typename T_nact_numb, typename T_reverse>
-const int templ_lrstar_parser_tables<T_term_symb, T_head_symb, T_tact_name, T_node_name, T_head_numb, T_f_tail, T_tail, T_arga, T_argx, T_argy, T_Bm, T_Br, T_Bc, T_Bf, T_Tm, T_Tr, T_Tc, T_Nm, T_Nr, T_Nc, T_Rm, T_Rr, T_Rc, T_PL, T_nd_fterm, T_nd_term, T_nd_faction, T_nd_action, T_tact_numb, T_node_numb, T_nact_numb, T_reverse>::n_nact_numb = 0;
+template<>
+const int delphi_parser_tables_t::n_node_numb = 0;
 
-template<typename T_term_symb, typename T_head_symb, typename T_tact_name, typename T_node_name, typename T_head_numb, typename T_f_tail, typename T_tail, typename T_arga, typename T_argx, typename T_argy, typename T_Bm, typename T_Br, typename T_Bc, typename T_Bf, typename T_Tm, typename T_Tr, typename T_Tc, typename T_Nm, typename T_Nr, typename T_Nc, typename T_Rm, typename T_Rr, typename T_Rc, typename T_PL, typename T_nd_fterm, typename T_nd_term, typename T_nd_faction, typename T_nd_action, typename T_tact_numb, typename T_node_numb, typename T_nact_numb, typename T_reverse>
-const int templ_lrstar_parser_tables<T_term_symb, T_head_symb, T_tact_name, T_node_name, T_head_numb, T_f_tail, T_tail, T_arga, T_argx, T_argy, T_Bm, T_Br, T_Bc, T_Bf, T_Tm, T_Tr, T_Tc, T_Nm, T_Nr, T_Nc, T_Rm, T_Rr, T_Rc, T_PL, T_nd_fterm, T_nd_term, T_nd_faction, T_nd_action, T_tact_numb, T_node_numb, T_nact_numb, T_reverse>::n_reverse = 0;
+template<>
+const int delphi_parser_tables_t::n_nact_numb = 0;
 
-template<typename T_term_symb, typename T_head_symb, typename T_tact_name, typename T_node_name, typename T_head_numb, typename T_f_tail, typename T_tail, typename T_arga, typename T_argx, typename T_argy, typename T_Bm, typename T_Br, typename T_Bc, typename T_Bf, typename T_Tm, typename T_Tr, typename T_Tc, typename T_Nm, typename T_Nr, typename T_Nc, typename T_Rm, typename T_Rr, typename T_Rc, typename T_PL, typename T_nd_fterm, typename T_nd_term, typename T_nd_faction, typename T_nd_action, typename T_tact_numb, typename T_node_numb, typename T_nact_numb, typename T_reverse>
-const int templ_lrstar_parser_tables<T_term_symb, T_head_symb, T_tact_name, T_node_name, T_head_numb, T_f_tail, T_tail, T_arga, T_argx, T_argy, T_Bm, T_Br, T_Bc, T_Bf, T_Tm, T_Tr, T_Tc, T_Nm, T_Nr, T_Nc, T_Rm, T_Rr, T_Rc, T_PL, T_nd_fterm, T_nd_term, T_nd_faction, T_nd_action, T_tact_numb, T_node_numb, T_nact_numb, T_reverse>::n_terms = 101; // Number of terminals.
+template<>
+const int delphi_parser_tables_t::n_reverse = 0;
 
-template<typename T_term_symb, typename T_head_symb, typename T_tact_name, typename T_node_name, typename T_head_numb, typename T_f_tail, typename T_tail, typename T_arga, typename T_argx, typename T_argy, typename T_Bm, typename T_Br, typename T_Bc, typename T_Bf, typename T_Tm, typename T_Tr, typename T_Tc, typename T_Nm, typename T_Nr, typename T_Nc, typename T_Rm, typename T_Rr, typename T_Rc, typename T_PL, typename T_nd_fterm, typename T_nd_term, typename T_nd_faction, typename T_nd_action, typename T_tact_numb, typename T_node_numb, typename T_nact_numb, typename T_reverse>
-const int templ_lrstar_parser_tables<T_term_symb, T_head_symb, T_tact_name, T_node_name, T_head_numb, T_f_tail, T_tail, T_arga, T_argx, T_argy, T_Bm, T_Br, T_Bc, T_Bf, T_Tm, T_Tr, T_Tc, T_Nm, T_Nr, T_Nc, T_Rm, T_Rr, T_Rc, T_PL, T_nd_fterm, T_nd_term, T_nd_faction, T_nd_action, T_tact_numb, T_node_numb, T_nact_numb, T_reverse>::n_heads      =  166; // Number of nonterminals.
-template<typename T_term_symb, typename T_head_symb, typename T_tact_name, typename T_node_name, typename T_head_numb, typename T_f_tail, typename T_tail, typename T_arga, typename T_argx, typename T_argy, typename T_Bm, typename T_Br, typename T_Bc, typename T_Bf, typename T_Tm, typename T_Tr, typename T_Tc, typename T_Nm, typename T_Nr, typename T_Nc, typename T_Rm, typename T_Rr, typename T_Rc, typename T_PL, typename T_nd_fterm, typename T_nd_term, typename T_nd_faction, typename T_nd_action, typename T_tact_numb, typename T_node_numb, typename T_nact_numb, typename T_reverse>
-const int templ_lrstar_parser_tables<T_term_symb, T_head_symb, T_tact_name, T_node_name, T_head_numb, T_f_tail, T_tail, T_arga, T_argx, T_argy, T_Bm, T_Br, T_Bc, T_Bf, T_Tm, T_Tr, T_Tc, T_Nm, T_Nr, T_Nc, T_Rm, T_Rr, T_Rc, T_PL, T_nd_fterm, T_nd_term, T_nd_faction, T_nd_action, T_tact_numb, T_node_numb, T_nact_numb, T_reverse>::n_prods = 355; // Number of productions.
-template<typename T_term_symb, typename T_head_symb, typename T_tact_name, typename T_node_name, typename T_head_numb, typename T_f_tail, typename T_tail, typename T_arga, typename T_argx, typename T_argy, typename T_Bm, typename T_Br, typename T_Bc, typename T_Bf, typename T_Tm, typename T_Tr, typename T_Tc, typename T_Nm, typename T_Nr, typename T_Nc, typename T_Rm, typename T_Rr, typename T_Rc, typename T_PL, typename T_nd_fterm, typename T_nd_term, typename T_nd_faction, typename T_nd_action, typename T_tact_numb, typename T_node_numb, typename T_nact_numb, typename T_reverse>
-const int templ_lrstar_parser_tables<T_term_symb, T_head_symb, T_tact_name, T_node_name, T_head_numb, T_f_tail, T_tail, T_arga, T_argx, T_argy, T_Bm, T_Br, T_Bc, T_Bf, T_Tm, T_Tr, T_Tc, T_Nm, T_Nr, T_Nc, T_Rm, T_Rr, T_Rc, T_PL, T_nd_fterm, T_nd_term, T_nd_faction, T_nd_action, T_tact_numb, T_node_numb, T_nact_numb, T_reverse>::n_states = 343; // Number of states.
-template<typename T_term_symb, typename T_head_symb, typename T_tact_name, typename T_node_name, typename T_head_numb, typename T_f_tail, typename T_tail, typename T_arga, typename T_argx, typename T_argy, typename T_Bm, typename T_Br, typename T_Bc, typename T_Bf, typename T_Tm, typename T_Tr, typename T_Tc, typename T_Nm, typename T_Nr, typename T_Nc, typename T_Rm, typename T_Rr, typename T_Rc, typename T_PL, typename T_nd_fterm, typename T_nd_term, typename T_nd_faction, typename T_nd_action, typename T_tact_numb, typename T_node_numb, typename T_nact_numb, typename T_reverse>
-const int templ_lrstar_parser_tables<T_term_symb, T_head_symb, T_tact_name, T_node_name, T_head_numb, T_f_tail, T_tail, T_arga, T_argx, T_argy, T_Bm, T_Br, T_Bc, T_Bf, T_Tm, T_Tr, T_Tc, T_Nm, T_Nr, T_Nc, T_Rm, T_Rr, T_Rc, T_PL, T_nd_fterm, T_nd_term, T_nd_faction, T_nd_action, T_tact_numb, T_node_numb, T_nact_numb, T_reverse>::accept_state = 342; // Accept state.
-template<typename T_term_symb, typename T_head_symb, typename T_tact_name, typename T_node_name, typename T_head_numb, typename T_f_tail, typename T_tail, typename T_arga, typename T_argx, typename T_argy, typename T_Bm, typename T_Br, typename T_Bc, typename T_Bf, typename T_Tm, typename T_Tr, typename T_Tc, typename T_Nm, typename T_Nr, typename T_Nc, typename T_Rm, typename T_Rr, typename T_Rc, typename T_PL, typename T_nd_fterm, typename T_nd_term, typename T_nd_faction, typename T_nd_action, typename T_tact_numb, typename T_node_numb, typename T_nact_numb, typename T_reverse>
-const int templ_lrstar_parser_tables<T_term_symb, T_head_symb, T_tact_name, T_node_name, T_head_numb, T_f_tail, T_tail, T_arga, T_argx, T_argy, T_Bm, T_Br, T_Bc, T_Bf, T_Tm, T_Tr, T_Tc, T_Nm, T_Nr, T_Nc, T_Rm, T_Rr, T_Rc, T_PL, T_nd_fterm, T_nd_term, T_nd_faction, T_nd_action, T_tact_numb, T_node_numb, T_nact_numb, T_reverse>::n_termactns = 0; // Number of terminal actions.
-template<typename T_term_symb, typename T_head_symb, typename T_tact_name, typename T_node_name, typename T_head_numb, typename T_f_tail, typename T_tail, typename T_arga, typename T_argx, typename T_argy, typename T_Bm, typename T_Br, typename T_Bc, typename T_Bf, typename T_Tm, typename T_Tr, typename T_Tc, typename T_Nm, typename T_Nr, typename T_Nc, typename T_Rm, typename T_Rr, typename T_Rc, typename T_PL, typename T_nd_fterm, typename T_nd_term, typename T_nd_faction, typename T_nd_action, typename T_tact_numb, typename T_node_numb, typename T_nact_numb, typename T_reverse>
-const int templ_lrstar_parser_tables<T_term_symb, T_head_symb, T_tact_name, T_node_name, T_head_numb, T_f_tail, T_tail, T_arga, T_argx, T_argy, T_Bm, T_Br, T_Bc, T_Bf, T_Tm, T_Tr, T_Tc, T_Nm, T_Nr, T_Nc, T_Rm, T_Rr, T_Rc, T_PL, T_nd_fterm, T_nd_term, T_nd_faction, T_nd_action, T_tact_numb, T_node_numb, T_nact_numb, T_reverse>::n_nodenames = 0; // Number of node names.
-template<typename T_term_symb, typename T_head_symb, typename T_tact_name, typename T_node_name, typename T_head_numb, typename T_f_tail, typename T_tail, typename T_arga, typename T_argx, typename T_argy, typename T_Bm, typename T_Br, typename T_Bc, typename T_Bf, typename T_Tm, typename T_Tr, typename T_Tc, typename T_Nm, typename T_Nr, typename T_Nc, typename T_Rm, typename T_Rr, typename T_Rc, typename T_PL, typename T_nd_fterm, typename T_nd_term, typename T_nd_faction, typename T_nd_action, typename T_tact_numb, typename T_node_numb, typename T_nact_numb, typename T_reverse>
-const int templ_lrstar_parser_tables<T_term_symb, T_head_symb, T_tact_name, T_node_name, T_head_numb, T_f_tail, T_tail, T_arga, T_argx, T_argy, T_Bm, T_Br, T_Bc, T_Bf, T_Tm, T_Tr, T_Tc, T_Nm, T_Nr, T_Nc, T_Rm, T_Rr, T_Rc, T_PL, T_nd_fterm, T_nd_term, T_nd_faction, T_nd_action, T_tact_numb, T_node_numb, T_nact_numb, T_reverse>::n_nodeactns = 0; // Number of node actions.
-template<typename T_term_symb, typename T_head_symb, typename T_tact_name, typename T_node_name, typename T_head_numb, typename T_f_tail, typename T_tail, typename T_arga, typename T_argx, typename T_argy, typename T_Bm, typename T_Br, typename T_Bc, typename T_Bf, typename T_Tm, typename T_Tr, typename T_Tc, typename T_Nm, typename T_Nr, typename T_Nc, typename T_Rm, typename T_Rr, typename T_Rc, typename T_PL, typename T_nd_fterm, typename T_nd_term, typename T_nd_faction, typename T_nd_action, typename T_tact_numb, typename T_node_numb, typename T_nact_numb, typename T_reverse>
-const int templ_lrstar_parser_tables<T_term_symb, T_head_symb, T_tact_name, T_node_name, T_head_numb, T_f_tail, T_tail, T_arga, T_argx, T_argy, T_Bm, T_Br, T_Bc, T_Bf, T_Tm, T_Tr, T_Tc, T_Nm, T_Nr, T_Nc, T_Rm, T_Rr, T_Rc, T_PL, T_nd_fterm, T_nd_term, T_nd_faction, T_nd_action, T_tact_numb, T_node_numb, T_nact_numb, T_reverse>::eof_symb = 1; // <eof> symbol number.
-template<typename T_term_symb, typename T_head_symb, typename T_tact_name, typename T_node_name, typename T_head_numb, typename T_f_tail, typename T_tail, typename T_arga, typename T_argx, typename T_argy, typename T_Bm, typename T_Br, typename T_Bc, typename T_Bf, typename T_Tm, typename T_Tr, typename T_Tc, typename T_Nm, typename T_Nr, typename T_Nc, typename T_Rm, typename T_Rr, typename T_Rc, typename T_PL, typename T_nd_fterm, typename T_nd_term, typename T_nd_faction, typename T_nd_action, typename T_tact_numb, typename T_node_numb, typename T_nact_numb, typename T_reverse>
-const int templ_lrstar_parser_tables<T_term_symb, T_head_symb, T_tact_name, T_node_name, T_head_numb, T_f_tail, T_tail, T_arga, T_argx, T_argy, T_Bm, T_Br, T_Bc, T_Bf, T_Tm, T_Tr, T_Tc, T_Nm, T_Nr, T_Nc, T_Rm, T_Rr, T_Rc, T_PL, T_nd_fterm, T_nd_term, T_nd_faction, T_nd_action, T_tact_numb, T_node_numb, T_nact_numb, T_reverse>::err_used = 0; // <error> used in grammar?
+template<>
+const int delphi_parser_tables_t::n_terms = 101; // Number of terminals.
+
+template<>
+const int delphi_parser_tables_t::n_heads = 166; // Number of nonterminals.
+
+template<>
+const int delphi_parser_tables_t::n_prods = 355; // Number of productions.
+
+template<>
+const int delphi_parser_tables_t::n_states = 343; // Number of states.
+
+template<>
+const int delphi_parser_tables_t::accept_state = 342; // Accept state.
+
+template<>
+const int delphi_parser_tables_t::n_termactns = 0; // Number of terminal actions.
+
+template<>
+const int delphi_parser_tables_t::n_nodenames = 0; // Number of node names.
+
+template<>
+const int delphi_parser_tables_t::n_nodeactns = 0; // Number of node actions.
+
+template<>
+const int delphi_parser_tables_t::eof_symb = 1; // <eof> symbol number.
+
+template<>
+const int delphi_parser_tables_t::err_used = 0; // <error> used in grammar?
+
 
 // Terminal symbols of the grammar.
 static const char *term_symb_[101] = {
@@ -226,8 +237,8 @@ static const char *term_symb_[101] = {
    "\'DIESE\'",
 };
 
-template<typename T_term_symb, typename T_head_symb, typename T_tact_name, typename T_node_name, typename T_head_numb, typename T_f_tail, typename T_tail, typename T_arga, typename T_argx, typename T_argy, typename T_Bm, typename T_Br, typename T_Bc, typename T_Bf, typename T_Tm, typename T_Tr, typename T_Tc, typename T_Nm, typename T_Nr, typename T_Nc, typename T_Rm, typename T_Rr, typename T_Rc, typename T_PL, typename T_nd_fterm, typename T_nd_term, typename T_nd_faction, typename T_nd_action, typename T_tact_numb, typename T_node_numb, typename T_nact_numb, typename T_reverse>
-const T_term_symb *templ_lrstar_parser_tables<T_term_symb, T_head_symb, T_tact_name, T_node_name, T_head_numb, T_f_tail, T_tail, T_arga, T_argx, T_argy, T_Bm, T_Br, T_Bc, T_Bf, T_Tm, T_Tr, T_Tc, T_Nm, T_Nr, T_Nc, T_Rm, T_Rr, T_Rc, T_PL, T_nd_fterm, T_nd_term, T_nd_faction, T_nd_action, T_tact_numb, T_node_numb, T_nact_numb, T_reverse>::term_symb = &term_symb_[0];
+template<>
+const char * const *delphi_parser_tables_t::term_symb = &term_symb_[0];
 
 // Nonterminal symbols of the grammar.
 static const char *head_symb_[166] = {
@@ -399,14 +410,14 @@ static const char *head_symb_[166] = {
    "general_string_const",
 };
 
-template<typename T_term_symb, typename T_head_symb, typename T_tact_name, typename T_node_name, typename T_head_numb, typename T_f_tail, typename T_tail, typename T_arga, typename T_argx, typename T_argy, typename T_Bm, typename T_Br, typename T_Bc, typename T_Bf, typename T_Tm, typename T_Tr, typename T_Tc, typename T_Nm, typename T_Nr, typename T_Nc, typename T_Rm, typename T_Rr, typename T_Rc, typename T_PL, typename T_nd_fterm, typename T_nd_term, typename T_nd_faction, typename T_nd_action, typename T_tact_numb, typename T_node_numb, typename T_nact_numb, typename T_reverse>
-const T_head_symb *templ_lrstar_parser_tables<T_term_symb, T_head_symb, T_tact_name, T_node_name, T_head_numb, T_f_tail, T_tail, T_arga, T_argx, T_argy, T_Bm, T_Br, T_Bc, T_Bf, T_Tm, T_Tr, T_Tc, T_Nm, T_Nr, T_Nc, T_Rm, T_Rr, T_Rc, T_PL, T_nd_fterm, T_nd_term, T_nd_faction, T_nd_action, T_tact_numb, T_node_numb, T_nact_numb, T_reverse>::head_symb = &head_symb_[0];
+template<>
+const char * const *delphi_parser_tables_t::head_symb = &head_symb_[0];
 
-template<typename T_term_symb, typename T_head_symb, typename T_tact_name, typename T_node_name, typename T_head_numb, typename T_f_tail, typename T_tail, typename T_arga, typename T_argx, typename T_argy, typename T_Bm, typename T_Br, typename T_Bc, typename T_Bf, typename T_Tm, typename T_Tr, typename T_Tc, typename T_Nm, typename T_Nr, typename T_Nc, typename T_Rm, typename T_Rr, typename T_Rc, typename T_PL, typename T_nd_fterm, typename T_nd_term, typename T_nd_faction, typename T_nd_action, typename T_tact_numb, typename T_node_numb, typename T_nact_numb, typename T_reverse>
-const T_tact_name *templ_lrstar_parser_tables<T_term_symb, T_head_symb, T_tact_name, T_node_name, T_head_numb, T_f_tail, T_tail, T_arga, T_argx, T_argy, T_Bm, T_Br, T_Bc, T_Bf, T_Tm, T_Tr, T_Tc, T_Nm, T_Nr, T_Nc, T_Rm, T_Rr, T_Rc, T_PL, T_nd_fterm, T_nd_term, T_nd_faction, T_nd_action, T_tact_numb, T_node_numb, T_nact_numb, T_reverse>::tact_name = 0;
+template<>
+const char * const *delphi_parser_tables_t::tact_name = 0;
 
-template<typename T_term_symb, typename T_head_symb, typename T_tact_name, typename T_node_name, typename T_head_numb, typename T_f_tail, typename T_tail, typename T_arga, typename T_argx, typename T_argy, typename T_Bm, typename T_Br, typename T_Bc, typename T_Bf, typename T_Tm, typename T_Tr, typename T_Tc, typename T_Nm, typename T_Nr, typename T_Nc, typename T_Rm, typename T_Rr, typename T_Rc, typename T_PL, typename T_nd_fterm, typename T_nd_term, typename T_nd_faction, typename T_nd_action, typename T_tact_numb, typename T_node_numb, typename T_nact_numb, typename T_reverse>
-const T_node_name *templ_lrstar_parser_tables<T_term_symb, T_head_symb, T_tact_name, T_node_name, T_head_numb, T_f_tail, T_tail, T_arga, T_argx, T_argy, T_Bm, T_Br, T_Bc, T_Bf, T_Tm, T_Tr, T_Tc, T_Nm, T_Nr, T_Nc, T_Rm, T_Rr, T_Rc, T_PL, T_nd_fterm, T_nd_term, T_nd_faction, T_nd_action, T_tact_numb, T_node_numb, T_nact_numb, T_reverse>::node_name = 0;
+template<>
+const char * const *delphi_parser_tables_t::node_name = 0;
 
 // Head symbol numbers for the productions.
 static const uint8 head_numb_[355] = {
@@ -448,8 +459,8 @@ static const uint8 head_numb_[355] = {
      163,   164,   164,   165,   165, 
 };
 
-template<typename T_term_symb, typename T_head_symb, typename T_tact_name, typename T_node_name, typename T_head_numb, typename T_f_tail, typename T_tail, typename T_arga, typename T_argx, typename T_argy, typename T_Bm, typename T_Br, typename T_Bc, typename T_Bf, typename T_Tm, typename T_Tr, typename T_Tc, typename T_Nm, typename T_Nr, typename T_Nc, typename T_Rm, typename T_Rr, typename T_Rc, typename T_PL, typename T_nd_fterm, typename T_nd_term, typename T_nd_faction, typename T_nd_action, typename T_tact_numb, typename T_node_numb, typename T_nact_numb, typename T_reverse>
-const T_head_numb *templ_lrstar_parser_tables<T_term_symb, T_head_symb, T_tact_name, T_node_name, T_head_numb, T_f_tail, T_tail, T_arga, T_argx, T_argy, T_Bm, T_Br, T_Bc, T_Bf, T_Tm, T_Tr, T_Tc, T_Nm, T_Nr, T_Nc, T_Rm, T_Rr, T_Rc, T_PL, T_nd_fterm, T_nd_term, T_nd_faction, T_nd_action, T_tact_numb, T_node_numb, T_nact_numb, T_reverse>::head_numb = &head_numb_[0];
+template<>
+const uint8 *delphi_parser_tables_t::head_numb = &head_numb_[0];
 
 // First tail symbol index into the tail list ...
 static const uint16 f_tail_[356] = {
@@ -491,8 +502,8 @@ static const uint16 f_tail_[356] = {
      670,   671,   672,   675,   676,   678, 
 };
 
-template<typename T_term_symb, typename T_head_symb, typename T_tact_name, typename T_node_name, typename T_head_numb, typename T_f_tail, typename T_tail, typename T_arga, typename T_argx, typename T_argy, typename T_Bm, typename T_Br, typename T_Bc, typename T_Bf, typename T_Tm, typename T_Tr, typename T_Tc, typename T_Nm, typename T_Nr, typename T_Nc, typename T_Rm, typename T_Rr, typename T_Rc, typename T_PL, typename T_nd_fterm, typename T_nd_term, typename T_nd_faction, typename T_nd_action, typename T_tact_numb, typename T_node_numb, typename T_nact_numb, typename T_reverse>
-const T_f_tail *templ_lrstar_parser_tables<T_term_symb, T_head_symb, T_tact_name, T_node_name, T_head_numb, T_f_tail, T_tail, T_arga, T_argx, T_argy, T_Bm, T_Br, T_Bc, T_Bf, T_Tm, T_Tr, T_Tc, T_Nm, T_Nr, T_Nc, T_Rm, T_Rr, T_Rc, T_PL, T_nd_fterm, T_nd_term, T_nd_faction, T_nd_action, T_tact_numb, T_node_numb, T_nact_numb, T_reverse>::f_tail = &f_tail_[0];
+template<>
+const uint16 *delphi_parser_tables_t::f_tail = &f_tail_[0];
 
 // Tail symbol numbers ...
 static const int16 tail_[678] = {
@@ -566,17 +577,17 @@ static const int16 tail_[678] = {
       51,  -163,  -164,     3,  -163,    11,   100,    20, 
 };
 
-template<typename T_term_symb, typename T_head_symb, typename T_tact_name, typename T_node_name, typename T_head_numb, typename T_f_tail, typename T_tail, typename T_arga, typename T_argx, typename T_argy, typename T_Bm, typename T_Br, typename T_Bc, typename T_Bf, typename T_Tm, typename T_Tr, typename T_Tc, typename T_Nm, typename T_Nr, typename T_Nc, typename T_Rm, typename T_Rr, typename T_Rc, typename T_PL, typename T_nd_fterm, typename T_nd_term, typename T_nd_faction, typename T_nd_action, typename T_tact_numb, typename T_node_numb, typename T_nact_numb, typename T_reverse>
-const T_tail *templ_lrstar_parser_tables<T_term_symb, T_head_symb, T_tact_name, T_node_name, T_head_numb, T_f_tail, T_tail, T_arga, T_argx, T_argy, T_Bm, T_Br, T_Bc, T_Bf, T_Tm, T_Tr, T_Tc, T_Nm, T_Nr, T_Nc, T_Rm, T_Rr, T_Rc, T_PL, T_nd_fterm, T_nd_term, T_nd_faction, T_nd_action, T_tact_numb, T_node_numb, T_nact_numb, T_reverse>::tail = &tail_[0];
+template<>
+const int16 *delphi_parser_tables_t::tail = &tail_[0];
 
-template<typename T_term_symb, typename T_head_symb, typename T_tact_name, typename T_node_name, typename T_head_numb, typename T_f_tail, typename T_tail, typename T_arga, typename T_argx, typename T_argy, typename T_Bm, typename T_Br, typename T_Bc, typename T_Bf, typename T_Tm, typename T_Tr, typename T_Tc, typename T_Nm, typename T_Nr, typename T_Nc, typename T_Rm, typename T_Rr, typename T_Rc, typename T_PL, typename T_nd_fterm, typename T_nd_term, typename T_nd_faction, typename T_nd_action, typename T_tact_numb, typename T_node_numb, typename T_nact_numb, typename T_reverse>
-const T_arga *templ_lrstar_parser_tables<T_term_symb, T_head_symb, T_tact_name, T_node_name, T_head_numb, T_f_tail, T_tail, T_arga, T_argx, T_argy, T_Bm, T_Br, T_Bc, T_Bf, T_Tm, T_Tr, T_Tc, T_Nm, T_Nr, T_Nc, T_Rm, T_Rr, T_Rc, T_PL, T_nd_fterm, T_nd_term, T_nd_faction, T_nd_action, T_tact_numb, T_node_numb, T_nact_numb, T_reverse>::arga = 0;
+template<>
+const uint32 *delphi_parser_tables_t::arga = 0;
 
-template<typename T_term_symb, typename T_head_symb, typename T_tact_name, typename T_node_name, typename T_head_numb, typename T_f_tail, typename T_tail, typename T_arga, typename T_argx, typename T_argy, typename T_Bm, typename T_Br, typename T_Bc, typename T_Bf, typename T_Tm, typename T_Tr, typename T_Tc, typename T_Nm, typename T_Nr, typename T_Nc, typename T_Rm, typename T_Rr, typename T_Rc, typename T_PL, typename T_nd_fterm, typename T_nd_term, typename T_nd_faction, typename T_nd_action, typename T_tact_numb, typename T_node_numb, typename T_nact_numb, typename T_reverse>
-const T_argx *templ_lrstar_parser_tables<T_term_symb, T_head_symb, T_tact_name, T_node_name, T_head_numb, T_f_tail, T_tail, T_arga, T_argx, T_argy, T_Bm, T_Br, T_Bc, T_Bf, T_Tm, T_Tr, T_Tc, T_Nm, T_Nr, T_Nc, T_Rm, T_Rr, T_Rc, T_PL, T_nd_fterm, T_nd_term, T_nd_faction, T_nd_action, T_tact_numb, T_node_numb, T_nact_numb, T_reverse>::argx = 0;
+template<>
+const uint32 *delphi_parser_tables_t::argx = 0;
 
-template<typename T_term_symb, typename T_head_symb, typename T_tact_name, typename T_node_name, typename T_head_numb, typename T_f_tail, typename T_tail, typename T_arga, typename T_argx, typename T_argy, typename T_Bm, typename T_Br, typename T_Bc, typename T_Bf, typename T_Tm, typename T_Tr, typename T_Tc, typename T_Nm, typename T_Nr, typename T_Nc, typename T_Rm, typename T_Rr, typename T_Rc, typename T_PL, typename T_nd_fterm, typename T_nd_term, typename T_nd_faction, typename T_nd_action, typename T_tact_numb, typename T_node_numb, typename T_nact_numb, typename T_reverse>
-const T_argy *templ_lrstar_parser_tables<T_term_symb, T_head_symb, T_tact_name, T_node_name, T_head_numb, T_f_tail, T_tail, T_arga, T_argx, T_argy, T_Bm, T_Br, T_Bc, T_Bf, T_Tm, T_Tr, T_Tc, T_Nm, T_Nr, T_Nc, T_Rm, T_Rr, T_Rc, T_PL, T_nd_fterm, T_nd_term, T_nd_faction, T_nd_action, T_tact_numb, T_node_numb, T_nact_numb, T_reverse>::argy = 0;
+template<>
+const uint32 *delphi_parser_tables_t::argy = 0;
 
 // Boolean matrix ...
 static const uint8 Bm_[394] = {
@@ -622,8 +633,8 @@ static const uint8 Bm_[394] = {
        0,     0,     0,     0, 
 };
 
-template<typename T_term_symb, typename T_head_symb, typename T_tact_name, typename T_node_name, typename T_head_numb, typename T_f_tail, typename T_tail, typename T_arga, typename T_argx, typename T_argy, typename T_Bm, typename T_Br, typename T_Bc, typename T_Bf, typename T_Tm, typename T_Tr, typename T_Tc, typename T_Nm, typename T_Nr, typename T_Nc, typename T_Rm, typename T_Rr, typename T_Rc, typename T_PL, typename T_nd_fterm, typename T_nd_term, typename T_nd_faction, typename T_nd_action, typename T_tact_numb, typename T_node_numb, typename T_nact_numb, typename T_reverse>
-const T_Bm *templ_lrstar_parser_tables<T_term_symb, T_head_symb, T_tact_name, T_node_name, T_head_numb, T_f_tail, T_tail, T_arga, T_argx, T_argy, T_Bm, T_Br, T_Bc, T_Bf, T_Tm, T_Tr, T_Tc, T_Nm, T_Nr, T_Nc, T_Rm, T_Rr, T_Rc, T_PL, T_nd_fterm, T_nd_term, T_nd_faction, T_nd_action, T_tact_numb, T_node_numb, T_nact_numb, T_reverse>::Bm = &Bm_[0];
+template<>
+const uint8 *delphi_parser_tables_t::Bm = &Bm_[0];
 
 // Boolean matrix row (for state)...
 static const uint16 Br_[343] = {
@@ -664,8 +675,8 @@ static const uint16 Br_[343] = {
       82,    33,     0, 
       };
 
-template<typename T_term_symb, typename T_head_symb, typename T_tact_name, typename T_node_name, typename T_head_numb, typename T_f_tail, typename T_tail, typename T_arga, typename T_argx, typename T_argy, typename T_Bm, typename T_Br, typename T_Bc, typename T_Bf, typename T_Tm, typename T_Tr, typename T_Tc, typename T_Nm, typename T_Nr, typename T_Nc, typename T_Rm, typename T_Rr, typename T_Rc, typename T_PL, typename T_nd_fterm, typename T_nd_term, typename T_nd_faction, typename T_nd_action, typename T_tact_numb, typename T_node_numb, typename T_nact_numb, typename T_reverse>
-const T_Br *templ_lrstar_parser_tables<T_term_symb, T_head_symb, T_tact_name, T_node_name, T_head_numb, T_f_tail, T_tail, T_arga, T_argx, T_argy, T_Bm, T_Br, T_Bc, T_Bf, T_Tm, T_Tr, T_Tc, T_Nm, T_Nr, T_Nc, T_Rm, T_Rr, T_Rc, T_PL, T_nd_fterm, T_nd_term, T_nd_faction, T_nd_action, T_tact_numb, T_node_numb, T_nact_numb, T_reverse>::Br = &Br_[0];
+template<>
+const uint16 *delphi_parser_tables_t::Br = &Br_[0];
 
 // Boolean matrix column (displacement) ...
 static const uint8 Bc_[101] = {
@@ -682,8 +693,8 @@ static const uint8 Bc_[101] = {
        2, 
       };
 
-template<typename T_term_symb, typename T_head_symb, typename T_tact_name, typename T_node_name, typename T_head_numb, typename T_f_tail, typename T_tail, typename T_arga, typename T_argx, typename T_argy, typename T_Bm, typename T_Br, typename T_Bc, typename T_Bf, typename T_Tm, typename T_Tr, typename T_Tc, typename T_Nm, typename T_Nr, typename T_Nc, typename T_Rm, typename T_Rr, typename T_Rc, typename T_PL, typename T_nd_fterm, typename T_nd_term, typename T_nd_faction, typename T_nd_action, typename T_tact_numb, typename T_node_numb, typename T_nact_numb, typename T_reverse>
-const T_Bc *templ_lrstar_parser_tables<T_term_symb, T_head_symb, T_tact_name, T_node_name, T_head_numb, T_f_tail, T_tail, T_arga, T_argx, T_argy, T_Bm, T_Br, T_Bc, T_Bf, T_Tm, T_Tr, T_Tc, T_Nm, T_Nr, T_Nc, T_Rm, T_Rr, T_Rc, T_PL, T_nd_fterm, T_nd_term, T_nd_faction, T_nd_action, T_tact_numb, T_node_numb, T_nact_numb, T_reverse>::Bc = &Bc_[0];
+template<>
+const uint8 *delphi_parser_tables_t::Bc = &Bc_[0];
 
 // Boolean matrix filter/mask value ...
 static const uint8 Bf_[101] = {
@@ -700,8 +711,8 @@ static const uint8 Bf_[101] = {
      128, 
 };
 
-template<typename T_term_symb, typename T_head_symb, typename T_tact_name, typename T_node_name, typename T_head_numb, typename T_f_tail, typename T_tail, typename T_arga, typename T_argx, typename T_argy, typename T_Bm, typename T_Br, typename T_Bc, typename T_Bf, typename T_Tm, typename T_Tr, typename T_Tc, typename T_Nm, typename T_Nr, typename T_Nc, typename T_Rm, typename T_Rr, typename T_Rc, typename T_PL, typename T_nd_fterm, typename T_nd_term, typename T_nd_faction, typename T_nd_action, typename T_tact_numb, typename T_node_numb, typename T_nact_numb, typename T_reverse>
-const T_Bf *templ_lrstar_parser_tables<T_term_symb, T_head_symb, T_tact_name, T_node_name, T_head_numb, T_f_tail, T_tail, T_arga, T_argx, T_argy, T_Bm, T_Br, T_Bc, T_Bf, T_Tm, T_Tr, T_Tc, T_Nm, T_Nr, T_Nc, T_Rm, T_Rr, T_Rc, T_PL, T_nd_fterm, T_nd_term, T_nd_faction, T_nd_action, T_tact_numb, T_node_numb, T_nact_numb, T_reverse>::Bf = &Bf_[0];
+template<>
+const uint8 *delphi_parser_tables_t::Bf = &Bf_[0];
 
 // Terminal transition matrix ...
 static const int16 Tm_[580] = {
@@ -765,8 +776,8 @@ static const int16 Tm_[580] = {
     -326,  -327,  -328,  -329,  -330,  -331,  -332,   143,  -349,  -204, 
 };
 
-template<typename T_term_symb, typename T_head_symb, typename T_tact_name, typename T_node_name, typename T_head_numb, typename T_f_tail, typename T_tail, typename T_arga, typename T_argx, typename T_argy, typename T_Bm, typename T_Br, typename T_Bc, typename T_Bf, typename T_Tm, typename T_Tr, typename T_Tc, typename T_Nm, typename T_Nr, typename T_Nc, typename T_Rm, typename T_Rr, typename T_Rc, typename T_PL, typename T_nd_fterm, typename T_nd_term, typename T_nd_faction, typename T_nd_action, typename T_tact_numb, typename T_node_numb, typename T_nact_numb, typename T_reverse>
-const T_Tm *templ_lrstar_parser_tables<T_term_symb, T_head_symb, T_tact_name, T_node_name, T_head_numb, T_f_tail, T_tail, T_arga, T_argx, T_argy, T_Bm, T_Br, T_Bc, T_Bf, T_Tm, T_Tr, T_Tc, T_Nm, T_Nr, T_Nc, T_Rm, T_Rr, T_Rc, T_PL, T_nd_fterm, T_nd_term, T_nd_faction, T_nd_action, T_tact_numb, T_node_numb, T_nact_numb, T_reverse>::Tm = &Tm_[0];
+template<>
+const int16 *delphi_parser_tables_t::Tm = &Tm_[0];
 
 // Terminal transition matrix row ...
 static const uint16 Tr_[343] = {
@@ -807,8 +818,8 @@ static const uint16 Tr_[343] = {
       46,   509,   509, 
 };
 
-template<typename T_term_symb, typename T_head_symb, typename T_tact_name, typename T_node_name, typename T_head_numb, typename T_f_tail, typename T_tail, typename T_arga, typename T_argx, typename T_argy, typename T_Bm, typename T_Br, typename T_Bc, typename T_Bf, typename T_Tm, typename T_Tr, typename T_Tc, typename T_Nm, typename T_Nr, typename T_Nc, typename T_Rm, typename T_Rr, typename T_Rc, typename T_PL, typename T_nd_fterm, typename T_nd_term, typename T_nd_faction, typename T_nd_action, typename T_tact_numb, typename T_node_numb, typename T_nact_numb, typename T_reverse>
-const T_Tr *templ_lrstar_parser_tables<T_term_symb, T_head_symb, T_tact_name, T_node_name, T_head_numb, T_f_tail, T_tail, T_arga, T_argx, T_argy, T_Bm, T_Br, T_Bc, T_Bf, T_Tm, T_Tr, T_Tc, T_Nm, T_Nr, T_Nc, T_Rm, T_Rr, T_Rc, T_PL, T_nd_fterm, T_nd_term, T_nd_faction, T_nd_action, T_tact_numb, T_node_numb, T_nact_numb, T_reverse>::Tr = &Tr_[0];
+template<>
+const uint16 *delphi_parser_tables_t::Tr = &Tr_[0];
 
 // Terminal transition matrix column ...
 static const uint8 Tc_[101] = {
@@ -825,8 +836,8 @@ static const uint8 Tc_[101] = {
       70, 
 };
 
-template<typename T_term_symb, typename T_head_symb, typename T_tact_name, typename T_node_name, typename T_head_numb, typename T_f_tail, typename T_tail, typename T_arga, typename T_argx, typename T_argy, typename T_Bm, typename T_Br, typename T_Bc, typename T_Bf, typename T_Tm, typename T_Tr, typename T_Tc, typename T_Nm, typename T_Nr, typename T_Nc, typename T_Rm, typename T_Rr, typename T_Rc, typename T_PL, typename T_nd_fterm, typename T_nd_term, typename T_nd_faction, typename T_nd_action, typename T_tact_numb, typename T_node_numb, typename T_nact_numb, typename T_reverse>
-const T_Tc *templ_lrstar_parser_tables<T_term_symb, T_head_symb, T_tact_name, T_node_name, T_head_numb, T_f_tail, T_tail, T_arga, T_argx, T_argy, T_Bm, T_Br, T_Bc, T_Bf, T_Tm, T_Tr, T_Tc, T_Nm, T_Nr, T_Nc, T_Rm, T_Rr, T_Rc, T_PL, T_nd_fterm, T_nd_term, T_nd_faction, T_nd_action, T_tact_numb, T_node_numb, T_nact_numb, T_reverse>::Tc = &Tc_[0];
+template<>
+const uint8 *delphi_parser_tables_t::Tc = &Tc_[0];
 
 // Nonterminal transition matrix ...
 static const int16 Nm_[2246] = {
@@ -1057,8 +1068,8 @@ static const int16 Nm_[2246] = {
        3,  -146,  -206,    14,   212,   -63, 
 };
 
-template<typename T_term_symb, typename T_head_symb, typename T_tact_name, typename T_node_name, typename T_head_numb, typename T_f_tail, typename T_tail, typename T_arga, typename T_argx, typename T_argy, typename T_Bm, typename T_Br, typename T_Bc, typename T_Bf, typename T_Tm, typename T_Tr, typename T_Tc, typename T_Nm, typename T_Nr, typename T_Nc, typename T_Rm, typename T_Rr, typename T_Rc, typename T_PL, typename T_nd_fterm, typename T_nd_term, typename T_nd_faction, typename T_nd_action, typename T_tact_numb, typename T_node_numb, typename T_nact_numb, typename T_reverse>
-const T_Nm *templ_lrstar_parser_tables<T_term_symb, T_head_symb, T_tact_name, T_node_name, T_head_numb, T_f_tail, T_tail, T_arga, T_argx, T_argy, T_Bm, T_Br, T_Bc, T_Bf, T_Tm, T_Tr, T_Tc, T_Nm, T_Nr, T_Nc, T_Rm, T_Rr, T_Rc, T_PL, T_nd_fterm, T_nd_term, T_nd_faction, T_nd_action, T_tact_numb, T_node_numb, T_nact_numb, T_reverse>::Nm = &Nm_[0];
+template<>
+const int16 *delphi_parser_tables_t::Nm = &Nm_[0];
 
 // Nonterminal transition matrix row ...
 static const uint16 Nr_[343] = {
@@ -1099,8 +1110,8 @@ static const uint16 Nr_[343] = {
  2187,    13,  2187, 
 };
 
-template<typename T_term_symb, typename T_head_symb, typename T_tact_name, typename T_node_name, typename T_head_numb, typename T_f_tail, typename T_tail, typename T_arga, typename T_argx, typename T_argy, typename T_Bm, typename T_Br, typename T_Bc, typename T_Bf, typename T_Tm, typename T_Tr, typename T_Tc, typename T_Nm, typename T_Nr, typename T_Nc, typename T_Rm, typename T_Rr, typename T_Rc, typename T_PL, typename T_nd_fterm, typename T_nd_term, typename T_nd_faction, typename T_nd_action, typename T_tact_numb, typename T_node_numb, typename T_nact_numb, typename T_reverse>
-const T_Nr *templ_lrstar_parser_tables<T_term_symb, T_head_symb, T_tact_name, T_node_name, T_head_numb, T_f_tail, T_tail, T_arga, T_argx, T_argy, T_Bm, T_Br, T_Bc, T_Bf, T_Tm, T_Tr, T_Tc, T_Nm, T_Nr, T_Nc, T_Rm, T_Rr, T_Rc, T_PL, T_nd_fterm, T_nd_term, T_nd_faction, T_nd_action, T_tact_numb, T_node_numb, T_nact_numb, T_reverse>::Nr = &Nr_[0];
+template<>
+const uint16 *delphi_parser_tables_t::Nr = &Nr_[0];
 
 // Nonterminal transition matrix column ...
 static const uint8 Nc_[355] = {
@@ -1142,8 +1153,8 @@ static const uint8 Nc_[355] = {
    56,    57,    57,    58,    58, 
 };
 
-template<typename T_term_symb, typename T_head_symb, typename T_tact_name, typename T_node_name, typename T_head_numb, typename T_f_tail, typename T_tail, typename T_arga, typename T_argx, typename T_argy, typename T_Bm, typename T_Br, typename T_Bc, typename T_Bf, typename T_Tm, typename T_Tr, typename T_Tc, typename T_Nm, typename T_Nr, typename T_Nc, typename T_Rm, typename T_Rr, typename T_Rc, typename T_PL, typename T_nd_fterm, typename T_nd_term, typename T_nd_faction, typename T_nd_action, typename T_tact_numb, typename T_node_numb, typename T_nact_numb, typename T_reverse>
-const T_Nc *templ_lrstar_parser_tables<T_term_symb, T_head_symb, T_tact_name, T_node_name, T_head_numb, T_f_tail, T_tail, T_arga, T_argx, T_argy, T_Bm, T_Br, T_Bc, T_Bf, T_Tm, T_Tr, T_Tc, T_Nm, T_Nr, T_Nc, T_Rm, T_Rr, T_Rc, T_PL, T_nd_fterm, T_nd_term, T_nd_faction, T_nd_action, T_tact_numb, T_node_numb, T_nact_numb, T_reverse>::Nc = &Nc_[0];
+template<>
+const uint8 *delphi_parser_tables_t::Nc = &Nc_[0];
 
 // Reduction matrix ...
 static const uint16 Rm_[91] = {
@@ -1159,8 +1170,8 @@ static const uint16 Rm_[91] = {
        0, 
 };
 
-template<typename T_term_symb, typename T_head_symb, typename T_tact_name, typename T_node_name, typename T_head_numb, typename T_f_tail, typename T_tail, typename T_arga, typename T_argx, typename T_argy, typename T_Bm, typename T_Br, typename T_Bc, typename T_Bf, typename T_Tm, typename T_Tr, typename T_Tc, typename T_Nm, typename T_Nr, typename T_Nc, typename T_Rm, typename T_Rr, typename T_Rc, typename T_PL, typename T_nd_fterm, typename T_nd_term, typename T_nd_faction, typename T_nd_action, typename T_tact_numb, typename T_node_numb, typename T_nact_numb, typename T_reverse>
-const T_Rm *templ_lrstar_parser_tables<T_term_symb, T_head_symb, T_tact_name, T_node_name, T_head_numb, T_f_tail, T_tail, T_arga, T_argx, T_argy, T_Bm, T_Br, T_Bc, T_Bf, T_Tm, T_Tr, T_Tc, T_Nm, T_Nr, T_Nc, T_Rm, T_Rr, T_Rc, T_PL, T_nd_fterm, T_nd_term, T_nd_faction, T_nd_action, T_tact_numb, T_node_numb, T_nact_numb, T_reverse>::Rm = &Rm_[0];
+template<>
+const uint16 *delphi_parser_tables_t::Rm = &Rm_[0];
 
 // Reduction matrix row ...
 static const int16 Rr_[343] = {
@@ -1201,8 +1212,8 @@ static const int16 Rr_[343] = {
      175,     0,     0, 
 };
 
-template<typename T_term_symb, typename T_head_symb, typename T_tact_name, typename T_node_name, typename T_head_numb, typename T_f_tail, typename T_tail, typename T_arga, typename T_argx, typename T_argy, typename T_Bm, typename T_Br, typename T_Bc, typename T_Bf, typename T_Tm, typename T_Tr, typename T_Tc, typename T_Nm, typename T_Nr, typename T_Nc, typename T_Rm, typename T_Rr, typename T_Rc, typename T_PL, typename T_nd_fterm, typename T_nd_term, typename T_nd_faction, typename T_nd_action, typename T_tact_numb, typename T_node_numb, typename T_nact_numb, typename T_reverse>
-const T_Rr *templ_lrstar_parser_tables<T_term_symb, T_head_symb, T_tact_name, T_node_name, T_head_numb, T_f_tail, T_tail, T_arga, T_argx, T_argy, T_Bm, T_Br, T_Bc, T_Bf, T_Tm, T_Tr, T_Tc, T_Nm, T_Nr, T_Nc, T_Rm, T_Rr, T_Rc, T_PL, T_nd_fterm, T_nd_term, T_nd_faction, T_nd_action, T_tact_numb, T_node_numb, T_nact_numb, T_reverse>::Rr = &Rr_[0];
+template<>
+const int16 *delphi_parser_tables_t::Rr = &Rr_[0];
 
 // Reduction matrix column ...
 static const uint8 Rc_[101] = {
@@ -1219,8 +1230,8 @@ static const uint8 Rc_[101] = {
        0, 
 };
 
-template<typename T_term_symb, typename T_head_symb, typename T_tact_name, typename T_node_name, typename T_head_numb, typename T_f_tail, typename T_tail, typename T_arga, typename T_argx, typename T_argy, typename T_Bm, typename T_Br, typename T_Bc, typename T_Bf, typename T_Tm, typename T_Tr, typename T_Tc, typename T_Nm, typename T_Nr, typename T_Nc, typename T_Rm, typename T_Rr, typename T_Rc, typename T_PL, typename T_nd_fterm, typename T_nd_term, typename T_nd_faction, typename T_nd_action, typename T_tact_numb, typename T_node_numb, typename T_nact_numb, typename T_reverse>
-const T_Rc *templ_lrstar_parser_tables<T_term_symb, T_head_symb, T_tact_name, T_node_name, T_head_numb, T_f_tail, T_tail, T_arga, T_argx, T_argy, T_Bm, T_Br, T_Bc, T_Bf, T_Tm, T_Tr, T_Tc, T_Nm, T_Nr, T_Nc, T_Rm, T_Rr, T_Rc, T_PL, T_nd_fterm, T_nd_term, T_nd_faction, T_nd_action, T_tact_numb, T_node_numb, T_nact_numb, T_reverse>::Rc = &Rc_[0];
+template<>
+const uint8 *delphi_parser_tables_t::Rc = &Rc_[0];
 
 // Production lengths (minus one) ...
 static const int8 PL_[355] = {
@@ -1262,44 +1273,44 @@ static const int8 PL_[355] = {
        0,     0,     2,     0,     1, 
 };
 
-template<typename T_term_symb, typename T_head_symb, typename T_tact_name, typename T_node_name, typename T_head_numb, typename T_f_tail, typename T_tail, typename T_arga, typename T_argx, typename T_argy, typename T_Bm, typename T_Br, typename T_Bc, typename T_Bf, typename T_Tm, typename T_Tr, typename T_Tc, typename T_Nm, typename T_Nr, typename T_Nc, typename T_Rm, typename T_Rr, typename T_Rc, typename T_PL, typename T_nd_fterm, typename T_nd_term, typename T_nd_faction, typename T_nd_action, typename T_tact_numb, typename T_node_numb, typename T_nact_numb, typename T_reverse>
-const T_PL *templ_lrstar_parser_tables<T_term_symb, T_head_symb, T_tact_name, T_node_name, T_head_numb, T_f_tail, T_tail, T_arga, T_argx, T_argy, T_Bm, T_Br, T_Bc, T_Bf, T_Tm, T_Tr, T_Tc, T_Nm, T_Nr, T_Nc, T_Rm, T_Rr, T_Rc, T_PL, T_nd_fterm, T_nd_term, T_nd_faction, T_nd_action, T_tact_numb, T_node_numb, T_nact_numb, T_reverse>::PL = &PL_[0];
+template<>
+const int8 *delphi_parser_tables_t::PL = &PL_[0];
 
-template<typename T_term_symb, typename T_head_symb, typename T_tact_name, typename T_node_name, typename T_head_numb, typename T_f_tail, typename T_tail, typename T_arga, typename T_argx, typename T_argy, typename T_Bm, typename T_Br, typename T_Bc, typename T_Bf, typename T_Tm, typename T_Tr, typename T_Tc, typename T_Nm, typename T_Nr, typename T_Nc, typename T_Rm, typename T_Rr, typename T_Rc, typename T_PL, typename T_nd_fterm, typename T_nd_term, typename T_nd_faction, typename T_nd_action, typename T_tact_numb, typename T_node_numb, typename T_nact_numb, typename T_reverse>
-const T_nd_fterm *templ_lrstar_parser_tables<T_term_symb, T_head_symb, T_tact_name, T_node_name, T_head_numb, T_f_tail, T_tail, T_arga, T_argx, T_argy, T_Bm, T_Br, T_Bc, T_Bf, T_Tm, T_Tr, T_Tc, T_Nm, T_Nr, T_Nc, T_Rm, T_Rr, T_Rc, T_PL, T_nd_fterm, T_nd_term, T_nd_faction, T_nd_action, T_tact_numb, T_node_numb, T_nact_numb, T_reverse>::nd_fterm = 0;
+template<>
+const uint32 *delphi_parser_tables_t::nd_fterm = 0;
 
-template<typename T_term_symb, typename T_head_symb, typename T_tact_name, typename T_node_name, typename T_head_numb, typename T_f_tail, typename T_tail, typename T_arga, typename T_argx, typename T_argy, typename T_Bm, typename T_Br, typename T_Bc, typename T_Bf, typename T_Tm, typename T_Tr, typename T_Tc, typename T_Nm, typename T_Nr, typename T_Nc, typename T_Rm, typename T_Rr, typename T_Rc, typename T_PL, typename T_nd_fterm, typename T_nd_term, typename T_nd_faction, typename T_nd_action, typename T_tact_numb, typename T_node_numb, typename T_nact_numb, typename T_reverse>
-const T_nd_term *templ_lrstar_parser_tables<T_term_symb, T_head_symb, T_tact_name, T_node_name, T_head_numb, T_f_tail, T_tail, T_arga, T_argx, T_argy, T_Bm, T_Br, T_Bc, T_Bf, T_Tm, T_Tr, T_Tc, T_Nm, T_Nr, T_Nc, T_Rm, T_Rr, T_Rc, T_PL, T_nd_fterm, T_nd_term, T_nd_faction, T_nd_action, T_tact_numb, T_node_numb, T_nact_numb, T_reverse>::nd_term = 0;
+template<>
+const uint32 *delphi_parser_tables_t::nd_term = 0;
 
-template<typename T_term_symb, typename T_head_symb, typename T_tact_name, typename T_node_name, typename T_head_numb, typename T_f_tail, typename T_tail, typename T_arga, typename T_argx, typename T_argy, typename T_Bm, typename T_Br, typename T_Bc, typename T_Bf, typename T_Tm, typename T_Tr, typename T_Tc, typename T_Nm, typename T_Nr, typename T_Nc, typename T_Rm, typename T_Rr, typename T_Rc, typename T_PL, typename T_nd_fterm, typename T_nd_term, typename T_nd_faction, typename T_nd_action, typename T_tact_numb, typename T_node_numb, typename T_nact_numb, typename T_reverse>
-const T_nd_faction *templ_lrstar_parser_tables<T_term_symb, T_head_symb, T_tact_name, T_node_name, T_head_numb, T_f_tail, T_tail, T_arga, T_argx, T_argy, T_Bm, T_Br, T_Bc, T_Bf, T_Tm, T_Tr, T_Tc, T_Nm, T_Nr, T_Nc, T_Rm, T_Rr, T_Rc, T_PL, T_nd_fterm, T_nd_term, T_nd_faction, T_nd_action, T_tact_numb, T_node_numb, T_nact_numb, T_reverse>::nd_faction = 0;
+template<>
+const uint32 *delphi_parser_tables_t::nd_faction = 0;
 
-template<typename T_term_symb, typename T_head_symb, typename T_tact_name, typename T_node_name, typename T_head_numb, typename T_f_tail, typename T_tail, typename T_arga, typename T_argx, typename T_argy, typename T_Bm, typename T_Br, typename T_Bc, typename T_Bf, typename T_Tm, typename T_Tr, typename T_Tc, typename T_Nm, typename T_Nr, typename T_Nc, typename T_Rm, typename T_Rr, typename T_Rc, typename T_PL, typename T_nd_fterm, typename T_nd_term, typename T_nd_faction, typename T_nd_action, typename T_tact_numb, typename T_node_numb, typename T_nact_numb, typename T_reverse>
-const T_nd_action *templ_lrstar_parser_tables<T_term_symb, T_head_symb, T_tact_name, T_node_name, T_head_numb, T_f_tail, T_tail, T_arga, T_argx, T_argy, T_Bm, T_Br, T_Bc, T_Bf, T_Tm, T_Tr, T_Tc, T_Nm, T_Nr, T_Nc, T_Rm, T_Rr, T_Rc, T_PL, T_nd_fterm, T_nd_term, T_nd_faction, T_nd_action, T_tact_numb, T_node_numb, T_nact_numb, T_reverse>::nd_action = 0;
+template<>
+const uint32 *delphi_parser_tables_t::nd_action = 0;
 
-template<typename T_term_symb, typename T_head_symb, typename T_tact_name, typename T_node_name, typename T_head_numb, typename T_f_tail, typename T_tail, typename T_arga, typename T_argx, typename T_argy, typename T_Bm, typename T_Br, typename T_Bc, typename T_Bf, typename T_Tm, typename T_Tr, typename T_Tc, typename T_Nm, typename T_Nr, typename T_Nc, typename T_Rm, typename T_Rr, typename T_Rc, typename T_PL, typename T_nd_fterm, typename T_nd_term, typename T_nd_faction, typename T_nd_action, typename T_tact_numb, typename T_node_numb, typename T_nact_numb, typename T_reverse>
-const T_tact_numb *templ_lrstar_parser_tables<T_term_symb, T_head_symb, T_tact_name, T_node_name, T_head_numb, T_f_tail, T_tail, T_arga, T_argx, T_argy, T_Bm, T_Br, T_Bc, T_Bf, T_Tm, T_Tr, T_Tc, T_Nm, T_Nr, T_Nc, T_Rm, T_Rr, T_Rc, T_PL, T_nd_fterm, T_nd_term, T_nd_faction, T_nd_action, T_tact_numb, T_node_numb, T_nact_numb, T_reverse>::tact_numb = 0;
+template<>
+const uint32 *delphi_parser_tables_t::tact_numb = 0;
 
-template<typename T_term_symb, typename T_head_symb, typename T_tact_name, typename T_node_name, typename T_head_numb, typename T_f_tail, typename T_tail, typename T_arga, typename T_argx, typename T_argy, typename T_Bm, typename T_Br, typename T_Bc, typename T_Bf, typename T_Tm, typename T_Tr, typename T_Tc, typename T_Nm, typename T_Nr, typename T_Nc, typename T_Rm, typename T_Rr, typename T_Rc, typename T_PL, typename T_nd_fterm, typename T_nd_term, typename T_nd_faction, typename T_nd_action, typename T_tact_numb, typename T_node_numb, typename T_nact_numb, typename T_reverse>
-const T_node_numb *templ_lrstar_parser_tables<T_term_symb, T_head_symb, T_tact_name, T_node_name, T_head_numb, T_f_tail, T_tail, T_arga, T_argx, T_argy, T_Bm, T_Br, T_Bc, T_Bf, T_Tm, T_Tr, T_Tc, T_Nm, T_Nr, T_Nc, T_Rm, T_Rr, T_Rc, T_PL, T_nd_fterm, T_nd_term, T_nd_faction, T_nd_action, T_tact_numb, T_node_numb, T_nact_numb, T_reverse>::node_numb = 0;
+template<>
+const uint32 *delphi_parser_tables_t::node_numb = 0;
 
-template<typename T_term_symb, typename T_head_symb, typename T_tact_name, typename T_node_name, typename T_head_numb, typename T_f_tail, typename T_tail, typename T_arga, typename T_argx, typename T_argy, typename T_Bm, typename T_Br, typename T_Bc, typename T_Bf, typename T_Tm, typename T_Tr, typename T_Tc, typename T_Nm, typename T_Nr, typename T_Nc, typename T_Rm, typename T_Rr, typename T_Rc, typename T_PL, typename T_nd_fterm, typename T_nd_term, typename T_nd_faction, typename T_nd_action, typename T_tact_numb, typename T_node_numb, typename T_nact_numb, typename T_reverse>
-const T_nact_numb *templ_lrstar_parser_tables<T_term_symb, T_head_symb, T_tact_name, T_node_name, T_head_numb, T_f_tail, T_tail, T_arga, T_argx, T_argy, T_Bm, T_Br, T_Bc, T_Bf, T_Tm, T_Tr, T_Tc, T_Nm, T_Nr, T_Nc, T_Rm, T_Rr, T_Rc, T_PL, T_nd_fterm, T_nd_term, T_nd_faction, T_nd_action, T_tact_numb, T_node_numb, T_nact_numb, T_reverse>::nact_numb = 0;
+template<>
+const uint32 *delphi_parser_tables_t::nact_numb = 0;
 
-template<typename T_term_symb, typename T_head_symb, typename T_tact_name, typename T_node_name, typename T_head_numb, typename T_f_tail, typename T_tail, typename T_arga, typename T_argx, typename T_argy, typename T_Bm, typename T_Br, typename T_Bc, typename T_Bf, typename T_Tm, typename T_Tr, typename T_Tc, typename T_Nm, typename T_Nr, typename T_Nc, typename T_Rm, typename T_Rr, typename T_Rc, typename T_PL, typename T_nd_fterm, typename T_nd_term, typename T_nd_faction, typename T_nd_action, typename T_tact_numb, typename T_node_numb, typename T_nact_numb, typename T_reverse>
-const T_reverse *templ_lrstar_parser_tables<T_term_symb, T_head_symb, T_tact_name, T_node_name, T_head_numb, T_f_tail, T_tail, T_arga, T_argx, T_argy, T_Bm, T_Br, T_Bc, T_Bf, T_Tm, T_Tr, T_Tc, T_Nm, T_Nr, T_Nc, T_Rm, T_Rr, T_Rc, T_PL, T_nd_fterm, T_nd_term, T_nd_faction, T_nd_action, T_tact_numb, T_node_numb, T_nact_numb, T_reverse>::reverse = 0;
+template<>
+const uint32 *delphi_parser_tables_t::reverse = 0;
 
 // Init action function pointers ...
-template<typename T_term_symb, typename T_head_symb, typename T_tact_name, typename T_node_name, typename T_head_numb, typename T_f_tail, typename T_tail, typename T_arga, typename T_argx, typename T_argy, typename T_Bm, typename T_Br, typename T_Bc, typename T_Bf, typename T_Tm, typename T_Tr, typename T_Tc, typename T_Nm, typename T_Nr, typename T_Nc, typename T_Rm, typename T_Rr, typename T_Rc, typename T_PL, typename T_nd_fterm, typename T_nd_term, typename T_nd_faction, typename T_nd_action, typename T_tact_numb, typename T_node_numb, typename T_nact_numb, typename T_reverse>
-init_func_t *templ_lrstar_parser_tables<T_term_symb, T_head_symb, T_tact_name, T_node_name, T_head_numb, T_f_tail, T_tail, T_arga, T_argx, T_argy, T_Bm, T_Br, T_Bc, T_Bf, T_Tm, T_Tr, T_Tc, T_Nm, T_Nr, T_Nc, T_Rm, T_Rr, T_Rc, T_PL, T_nd_fterm, T_nd_term, T_nd_faction, T_nd_action, T_tact_numb, T_node_numb, T_nact_numb, T_reverse>::init_func = 0;
+template<>
+init_func_t *delphi_parser_tables_t::init_func = 0;
 
 // Terminal action function pointeras ...
-template<typename T_term_symb, typename T_head_symb, typename T_tact_name, typename T_node_name, typename T_head_numb, typename T_f_tail, typename T_tail, typename T_arga, typename T_argx, typename T_argy, typename T_Bm, typename T_Br, typename T_Bc, typename T_Bf, typename T_Tm, typename T_Tr, typename T_Tc, typename T_Nm, typename T_Nr, typename T_Nc, typename T_Rm, typename T_Rr, typename T_Rc, typename T_PL, typename T_nd_fterm, typename T_nd_term, typename T_nd_faction, typename T_nd_action, typename T_tact_numb, typename T_node_numb, typename T_nact_numb, typename T_reverse>
-tact_func_t *templ_lrstar_parser_tables<T_term_symb, T_head_symb, T_tact_name, T_node_name, T_head_numb, T_f_tail, T_tail, T_arga, T_argx, T_argy, T_Bm, T_Br, T_Bc, T_Bf, T_Tm, T_Tr, T_Tc, T_Nm, T_Nr, T_Nc, T_Rm, T_Rr, T_Rc, T_PL, T_nd_fterm, T_nd_term, T_nd_faction, T_nd_action, T_tact_numb, T_node_numb, T_nact_numb, T_reverse>::tact_func = 0;
+template<>
+tact_func_t *delphi_parser_tables_t::tact_func = 0;
 
 // Node action function pointers ...
-template<typename T_term_symb, typename T_head_symb, typename T_tact_name, typename T_node_name, typename T_head_numb, typename T_f_tail, typename T_tail, typename T_arga, typename T_argx, typename T_argy, typename T_Bm, typename T_Br, typename T_Bc, typename T_Bf, typename T_Tm, typename T_Tr, typename T_Tc, typename T_Nm, typename T_Nr, typename T_Nc, typename T_Rm, typename T_Rr, typename T_Rc, typename T_PL, typename T_nd_fterm, typename T_nd_term, typename T_nd_faction, typename T_nd_action, typename T_tact_numb, typename T_node_numb, typename T_nact_numb, typename T_reverse>
-nact_func_t *templ_lrstar_parser_tables<T_term_symb, T_head_symb, T_tact_name, T_node_name, T_head_numb, T_f_tail, T_tail, T_arga, T_argx, T_argy, T_Bm, T_Br, T_Bc, T_Bf, T_Tm, T_Tr, T_Tc, T_Nm, T_Nr, T_Nc, T_Rm, T_Rr, T_Rc, T_PL, T_nd_fterm, T_nd_term, T_nd_faction, T_nd_action, T_tact_numb, T_node_numb, T_nact_numb, T_reverse>::nact_func = 0;
+template<>
+nact_func_t *delphi_parser_tables_t::nact_func = 0;
 
 #include "lrstar_parser.cpp"
 
