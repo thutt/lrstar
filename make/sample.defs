@@ -31,6 +31,7 @@ ERROR_FORMAT	:=				\
 
 
 CXXFLAGS	:=					\
+	-Werror						\
 	$(ERROR_FORMAT)					\
 	$(addprefix -I,$(INCLUDES))			\
 	$(addprefix -D,LRSTAR_$(BUILD_TYPE) $(DEFINES))
@@ -47,3 +48,7 @@ $(GRM_BUILD_DIR):
 
 recurse:	| $(GRM_BUILD_DIR)
 	$(MAKE) -C $(GRM_BUILD_DIR) --makefile $(GRM_DIR)/Makefile $(GRM) VPATH=$(GRM_DIR);
+
+# Local Variables:
+# mode: makefile
+# End:
