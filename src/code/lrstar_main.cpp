@@ -121,11 +121,14 @@ main(int argc, char **argv)
    output = Output.filedesc;
 
    // Parse the input file ...
-   generated_parser.init_parser(Input.path, Input.input_start,
-                                100000, 1000000);
+   if (!generated_parser.init_parser(Input.path, Input.input_start,
+                                     100000, 1000000)) {
+      fprintf(stderr, "Failed to initialize parser.\n");
+      quit(1);
+   }
 
    time1 = clock();  // Get start time.
-   nl = generated_parser.parse ();
+   nl = generated_parser.parse(output);
    time2 = clock (); // Get end time.
    generated_parser.term_parser ();
    if (nl <= 0) {
