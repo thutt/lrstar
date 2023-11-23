@@ -33,6 +33,10 @@
    __attribute__((fallthrough))
 
 
+#define NO_RETURN                               \
+   __attribute__((noreturn))
+
+
 /* COMPILE_TIME_ASSERT
  *
  *  Compile-time assert.  Checks if _expr, which must be a
