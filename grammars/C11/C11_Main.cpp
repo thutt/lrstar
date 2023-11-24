@@ -4,7 +4,7 @@
 
 void C11_init_actions(lrstar_parser *parser); /* User-supplied */
 void C11_term_actions(lrstar_parser *parser); /* User-supplied */
-static init_func_t C11_init_funcs_[2] = {
+static lrstar_parser::init_func_t C11_init_funcs_[2] = {
    C11_init_actions,
    C11_term_actions
 };
@@ -12,7 +12,7 @@ static init_func_t C11_init_funcs_[2] = {
 int C11_error(lrstar_parser *parser, int &t);
 int C11_lookup(lrstar_parser *parser, int &t);
 // Terminal action function pointers ...
-static tact_func_t C11_tact_funcs_[2] = {
+static lrstar_parser::tact_func_t C11_tact_funcs_[2] = {
    C11_error,
    C11_lookup,
 };

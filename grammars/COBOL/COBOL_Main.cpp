@@ -4,7 +4,7 @@
 
 void COBOL_init_actions(lrstar_parser *parser); /* User-supplied */
 void COBOL_term_actions(lrstar_parser *parser); /* User-supplied */
-static init_func_t COBOL_init_funcs_[2] = {
+static lrstar_parser::init_func_t COBOL_init_funcs_[2] = {
    COBOL_init_actions,
    COBOL_term_actions
 };
@@ -12,7 +12,7 @@ static init_func_t COBOL_init_funcs_[2] = {
 int COBOL_error(lrstar_parser *parser, int &t);
 int COBOL_lookup(lrstar_parser *parser, int &t);
 // Terminal action function pointers ...
-static tact_func_t COBOL_tact_funcs_[2] = {
+static lrstar_parser::tact_func_t COBOL_tact_funcs_[2] = {
    COBOL_error,
    COBOL_lookup,
 };

@@ -44,11 +44,6 @@ public:
    Node*  parent;    // Parent node.                              4  32 bytes
 };
 
-class lrstar_parser;
-typedef void (*init_func_t)(lrstar_parser *parser);
-typedef int  (*tact_func_t)(lrstar_parser *parser, int &t);
-typedef int  (*nact_func_t)(lrstar_parser *parser, Node *t);
-
 class PStack         // Parser stack.
 {
 public:
@@ -89,10 +84,13 @@ class lrstar_user_data_t {
     */
 };
 
-
 class lrstar_parser
 {
 public:
+   typedef void (*init_func_t)(lrstar_parser *parser);
+   typedef int  (*tact_func_t)(lrstar_parser *parser, int &t);
+   typedef int  (*nact_func_t)(lrstar_parser *parser, Node *t);
+
    /*
     * XXX This options should be resolved at compile time for
     *     performance reasons.

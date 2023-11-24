@@ -4,7 +4,7 @@
 
 void Typedef_init_actions(lrstar_parser *parser); /* User-supplied */
 void Typedef_term_actions(lrstar_parser *parser); /* User-supplied */
-static init_func_t Typedef_init_funcs_[2] = {
+static lrstar_parser::init_func_t Typedef_init_funcs_[2] = {
    Typedef_init_actions,
    Typedef_term_actions
 };
@@ -12,13 +12,13 @@ static init_func_t Typedef_init_funcs_[2] = {
 int Typedef_error(lrstar_parser *parser, int &t);
 int Typedef_lookup(lrstar_parser *parser, int &t);
 // Terminal action function pointers ...
-static tact_func_t Typedef_tact_funcs_[2] = {
+static lrstar_parser::tact_func_t Typedef_tact_funcs_[2] = {
    Typedef_error,
    Typedef_lookup,
 };
 
 // Node action function pointers ...
-static nact_func_t Typedef_nact_funcs_[1] = {
+static lrstar_parser::nact_func_t Typedef_nact_funcs_[1] = {
    0,
 };
 

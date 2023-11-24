@@ -4,7 +4,7 @@
 
 void LRK_init_actions(lrstar_parser *parser); /* User-supplied */
 void LRK_term_actions(lrstar_parser *parser); /* User-supplied */
-static init_func_t LRK_init_funcs_[2] = {
+static lrstar_parser::init_func_t LRK_init_funcs_[2] = {
    LRK_init_actions,
    LRK_term_actions
 };
@@ -12,13 +12,13 @@ static init_func_t LRK_init_funcs_[2] = {
 int LRK_error(lrstar_parser *parser, int &t);
 int LRK_lookup(lrstar_parser *parser, int &t);
 // Terminal action function pointers ...
-static tact_func_t LRK_tact_funcs_[2] = {
+static lrstar_parser::tact_func_t LRK_tact_funcs_[2] = {
    LRK_error,
    LRK_lookup,
 };
 
 // Node action function pointers ...
-static nact_func_t LRK_nact_funcs_[8] = {
+static lrstar_parser::nact_func_t LRK_nact_funcs_[8] = {
    0,
    0,
    0,

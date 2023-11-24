@@ -4,7 +4,7 @@
 
 void SQL_init_actions(lrstar_parser *parser); /* User-supplied */
 void SQL_term_actions(lrstar_parser *parser); /* User-supplied */
-static init_func_t SQL_init_funcs_[2] = {
+static lrstar_parser::init_func_t SQL_init_funcs_[2] = {
    SQL_init_actions,
    SQL_term_actions
 };
@@ -12,7 +12,7 @@ static init_func_t SQL_init_funcs_[2] = {
 int SQL_error(lrstar_parser *parser, int &t);
 int SQL_lookup(lrstar_parser *parser, int &t);
 // Terminal action function pointers ...
-static tact_func_t SQL_tact_funcs_[2] = {
+static lrstar_parser::tact_func_t SQL_tact_funcs_[2] = {
    SQL_error,
    SQL_lookup,
 };

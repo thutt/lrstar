@@ -4,7 +4,7 @@
 
 void verilog_init_actions(lrstar_parser *parser); /* User-supplied */
 void verilog_term_actions(lrstar_parser *parser); /* User-supplied */
-static init_func_t verilog_init_funcs_[2] = {
+static lrstar_parser::init_func_t verilog_init_funcs_[2] = {
    verilog_init_actions,
    verilog_term_actions
 };
@@ -12,7 +12,7 @@ static init_func_t verilog_init_funcs_[2] = {
 int verilog_error(lrstar_parser *parser, int &t);
 int verilog_lookup(lrstar_parser *parser, int &t);
 // Terminal action function pointers ...
-static tact_func_t verilog_tact_funcs_[2] = {
+static lrstar_parser::tact_func_t verilog_tact_funcs_[2] = {
    verilog_error,
    verilog_lookup,
 };

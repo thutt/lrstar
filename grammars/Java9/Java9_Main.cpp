@@ -4,7 +4,7 @@
 
 void Java9_init_actions(lrstar_parser *parser); /* User-supplied */
 void Java9_term_actions(lrstar_parser *parser); /* User-supplied */
-static init_func_t Java9_init_funcs_[2] = {
+static lrstar_parser::init_func_t Java9_init_funcs_[2] = {
    Java9_init_actions,
    Java9_term_actions
 };
@@ -12,13 +12,13 @@ static init_func_t Java9_init_funcs_[2] = {
 int Java9_error(lrstar_parser *parser, int &t);
 int Java9_lookup(lrstar_parser *parser, int &t);
 // Terminal action function pointers ...
-static tact_func_t Java9_tact_funcs_[2] = {
+static lrstar_parser::tact_func_t Java9_tact_funcs_[2] = {
    Java9_error,
    Java9_lookup,
 };
 
 // Node action function pointers ...
-static nact_func_t Java9_nact_funcs_[1] = {
+static lrstar_parser::nact_func_t Java9_nact_funcs_[1] = {
    0,
 };
 

@@ -4,7 +4,7 @@
 
 void Zeus_init_actions(lrstar_parser *parser); /* User-supplied */
 void Zeus_term_actions(lrstar_parser *parser); /* User-supplied */
-static init_func_t Zeus_init_funcs_[2] = {
+static lrstar_parser::init_func_t Zeus_init_funcs_[2] = {
    Zeus_init_actions,
    Zeus_term_actions
 };
@@ -12,7 +12,7 @@ static init_func_t Zeus_init_funcs_[2] = {
 int Zeus_error(lrstar_parser *parser, int &t);
 int Zeus_lookup(lrstar_parser *parser, int &t);
 // Terminal action function pointers ...
-static tact_func_t Zeus_tact_funcs_[2] = {
+static lrstar_parser::tact_func_t Zeus_tact_funcs_[2] = {
    Zeus_error,
    Zeus_lookup,
 };

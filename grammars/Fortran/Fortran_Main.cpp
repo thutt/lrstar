@@ -4,7 +4,7 @@
 
 void Fortran_init_actions(lrstar_parser *parser); /* User-supplied */
 void Fortran_term_actions(lrstar_parser *parser); /* User-supplied */
-static init_func_t Fortran_init_funcs_[2] = {
+static lrstar_parser::init_func_t Fortran_init_funcs_[2] = {
    Fortran_init_actions,
    Fortran_term_actions
 };
@@ -12,7 +12,7 @@ static init_func_t Fortran_init_funcs_[2] = {
 int Fortran_error(lrstar_parser *parser, int &t);
 int Fortran_lookup(lrstar_parser *parser, int &t);
 // Terminal action function pointers ...
-static tact_func_t Fortran_tact_funcs_[2] = {
+static lrstar_parser::tact_func_t Fortran_tact_funcs_[2] = {
    Fortran_error,
    Fortran_lookup,
 };

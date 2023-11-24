@@ -4,7 +4,7 @@
 
 void Ada_init_actions(lrstar_parser *parser); /* User-supplied */
 void Ada_term_actions(lrstar_parser *parser); /* User-supplied */
-static init_func_t Ada_init_funcs_[2] = {
+static lrstar_parser::init_func_t Ada_init_funcs_[2] = {
    Ada_init_actions,
    Ada_term_actions
 };
@@ -12,7 +12,7 @@ static init_func_t Ada_init_funcs_[2] = {
 int Ada_error(lrstar_parser *parser, int &t);
 int Ada_lookup(lrstar_parser *parser, int &t);
 // Terminal action function pointers ...
-static tact_func_t Ada_tact_funcs_[2] = {
+static lrstar_parser::tact_func_t Ada_tact_funcs_[2] = {
    Ada_error,
    Ada_lookup,
 };

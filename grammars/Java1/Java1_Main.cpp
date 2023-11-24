@@ -4,7 +4,7 @@
 
 void Java1_init_actions(lrstar_parser *parser); /* User-supplied */
 void Java1_term_actions(lrstar_parser *parser); /* User-supplied */
-static init_func_t Java1_init_funcs_[2] = {
+static lrstar_parser::init_func_t Java1_init_funcs_[2] = {
    Java1_init_actions,
    Java1_term_actions
 };
@@ -12,7 +12,7 @@ static init_func_t Java1_init_funcs_[2] = {
 int Java1_error(lrstar_parser *parser, int &t);
 int Java1_lookup(lrstar_parser *parser, int &t);
 // Terminal action function pointers ...
-static tact_func_t Java1_tact_funcs_[2] = {
+static lrstar_parser::tact_func_t Java1_tact_funcs_[2] = {
    Java1_error,
    Java1_lookup,
 };

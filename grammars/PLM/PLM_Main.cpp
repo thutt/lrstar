@@ -4,14 +4,14 @@
 
 void PLM_init_actions(lrstar_parser *parser); /* User-supplied */
 void PLM_term_actions(lrstar_parser *parser); /* User-supplied */
-static init_func_t PLM_init_funcs_[2] = {
+static lrstar_parser::init_func_t PLM_init_funcs_[2] = {
    PLM_init_actions,
    PLM_term_actions
 };
 
 int PLM_error(lrstar_parser *parser, int &t);
 // Terminal action function pointers ...
-static tact_func_t PLM_tact_funcs_[1] = {
+static lrstar_parser::tact_func_t PLM_tact_funcs_[1] = {
    PLM_error,
 };
 

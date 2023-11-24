@@ -4,7 +4,7 @@
 
 void XPL_init_actions(lrstar_parser *parser); /* User-supplied */
 void XPL_term_actions(lrstar_parser *parser); /* User-supplied */
-static init_func_t XPL_init_funcs_[2] = {
+static lrstar_parser::init_func_t XPL_init_funcs_[2] = {
    XPL_init_actions,
    XPL_term_actions
 };
@@ -12,7 +12,7 @@ static init_func_t XPL_init_funcs_[2] = {
 int XPL_error(lrstar_parser *parser, int &t);
 int XPL_lookup(lrstar_parser *parser, int &t);
 // Terminal action function pointers ...
-static tact_func_t XPL_tact_funcs_[2] = {
+static lrstar_parser::tact_func_t XPL_tact_funcs_[2] = {
    XPL_error,
    XPL_lookup,
 };

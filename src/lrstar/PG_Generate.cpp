@@ -202,7 +202,7 @@ main_init_functions(FILE *fp, int N_tacts, int N_nacts)
               "/* User-supplied */\n"
               "void %s_term_actions(lrstar_parser *parser); "
               "/* User-supplied */\n"
-              "static init_func_t %s_init_funcs_[2] = {\n"
+              "static lrstar_parser::init_func_t %s_init_funcs_[2] = {\n"
               "   %s_init_actions,\n"
               "   %s_term_actions\n"
               "};\n\n", gfn, gfn, gfn, gfn, gfn);
@@ -227,7 +227,7 @@ main_tact_functions(FILE *fp, int N_tacts, const char **Tact_start)
       }
       fprintf(fp,
               "// Terminal action function pointers ...\n"
-              "static tact_func_t %s_tact_funcs_[%d] = {\n",
+              "static lrstar_parser::tact_func_t %s_tact_funcs_[%d] = {\n",
               gfn, N_tacts);
       for (int t = 0; t < N_tacts; t++) {
          fprintf (fp, "   %s_%s,\n", gfn, Tact_start[t]);
@@ -252,7 +252,7 @@ main_nact_functions(FILE *fp, int N_nacts, const char **Nact_start)
       }
 
       fprintf(fp, "// Node action function pointers ...\n");
-      fprintf(fp, "static nact_func_t %s_nact_funcs_[%d] = {\n", gfn, N_nacts);
+      fprintf(fp, "static lrstar_parser::nact_func_t %s_nact_funcs_[%d] = {\n", gfn, N_nacts);
       for (int n = 0; n < N_nacts; n++) {
          if (strcmp (Nact_start[n], "NULL") == 0) {
             fprintf(fp, "   0,\n");
@@ -1307,14 +1307,6 @@ void actions_header_fn(FILE       *fp,
    fprintf (fp, "#pragma once\n");
    fprintf (fp, "\n");
    fprintf (fp, "#include \"%s_Parser.h\"\n", grammar);
-   fprintf (fp, "\n");
-   fprintf (fp, "class lrstar_parser;\n");
-   fprintf (fp, "\n");
-   fprintf (fp, "void %s_init_actions(lrstar_parser *parser);\n", gfn);
-   fprintf (fp, "void %s_term_actions(lrstar_parser *parser);\n", gfn);
-   fprintf (fp, "\n");
-   fprintf (fp, "int %s_error(lrstar_parser *parser, int &t);\n", gfn);
-   fprintf (fp, "int %s_lookup(lrstar_parser *parser, int &t);\n", gfn);
    fprintf (fp, "\n");
 }
 

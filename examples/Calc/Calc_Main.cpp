@@ -4,7 +4,7 @@
 
 void Calc_init_actions(lrstar_parser *parser); /* User-supplied */
 void Calc_term_actions(lrstar_parser *parser); /* User-supplied */
-static init_func_t Calc_init_funcs_[2] = {
+static lrstar_parser::init_func_t Calc_init_funcs_[2] = {
    Calc_init_actions,
    Calc_term_actions
 };
@@ -12,7 +12,7 @@ static init_func_t Calc_init_funcs_[2] = {
 int Calc_error(lrstar_parser *parser, int &t);
 int Calc_lookup(lrstar_parser *parser, int &t);
 // Terminal action function pointers ...
-static tact_func_t Calc_tact_funcs_[2] = {
+static lrstar_parser::tact_func_t Calc_tact_funcs_[2] = {
    Calc_error,
    Calc_lookup,
 };
@@ -35,7 +35,7 @@ int Calc_then_(lrstar_parser *parser, Node *node);
 int Calc_then2_(lrstar_parser *parser, Node *node);
 int Calc_else2_(lrstar_parser *parser, Node *node);
 // Node action function pointers ...
-static nact_func_t Calc_nact_funcs_[17] = {
+static lrstar_parser::nact_func_t Calc_nact_funcs_[17] = {
    Calc_goal_,
    Calc_program_,
    Calc_store_,

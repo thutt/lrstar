@@ -4,7 +4,7 @@
 
 void Vba_init_actions(lrstar_parser *parser); /* User-supplied */
 void Vba_term_actions(lrstar_parser *parser); /* User-supplied */
-static init_func_t Vba_init_funcs_[2] = {
+static lrstar_parser::init_func_t Vba_init_funcs_[2] = {
    Vba_init_actions,
    Vba_term_actions
 };
@@ -12,13 +12,13 @@ static init_func_t Vba_init_funcs_[2] = {
 int Vba_error(lrstar_parser *parser, int &t);
 int Vba_lookup(lrstar_parser *parser, int &t);
 // Terminal action function pointers ...
-static tact_func_t Vba_tact_funcs_[2] = {
+static lrstar_parser::tact_func_t Vba_tact_funcs_[2] = {
    Vba_error,
    Vba_lookup,
 };
 
 // Node action function pointers ...
-static nact_func_t Vba_nact_funcs_[81] = {
+static lrstar_parser::nact_func_t Vba_nact_funcs_[81] = {
    0,
    0,
    0,

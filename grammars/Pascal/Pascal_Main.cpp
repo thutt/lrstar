@@ -4,7 +4,7 @@
 
 void Pascal_init_actions(lrstar_parser *parser); /* User-supplied */
 void Pascal_term_actions(lrstar_parser *parser); /* User-supplied */
-static init_func_t Pascal_init_funcs_[2] = {
+static lrstar_parser::init_func_t Pascal_init_funcs_[2] = {
    Pascal_init_actions,
    Pascal_term_actions
 };
@@ -12,13 +12,13 @@ static init_func_t Pascal_init_funcs_[2] = {
 int Pascal_error(lrstar_parser *parser, int &t);
 int Pascal_lookup(lrstar_parser *parser, int &t);
 // Terminal action function pointers ...
-static tact_func_t Pascal_tact_funcs_[2] = {
+static lrstar_parser::tact_func_t Pascal_tact_funcs_[2] = {
    Pascal_error,
    Pascal_lookup,
 };
 
 // Node action function pointers ...
-static nact_func_t Pascal_nact_funcs_[185] = {
+static lrstar_parser::nact_func_t Pascal_nact_funcs_[185] = {
    0,
    0,
    0,
