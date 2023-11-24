@@ -22,7 +22,6 @@ static Fortran_parser_t::tact_func_t Fortran_tact_funcs_[2] = {
 
 Fortran_parser_t
 generated_parser(/* grammar      */   &Fortran_grammar_name[0],
-                 /* term_actions */   true,
                  /* init_func    */   &Fortran_init_funcs_[0],
                  /* tact_func    */   &Fortran_tact_funcs_[0],
                  /* nact_func    */   0);

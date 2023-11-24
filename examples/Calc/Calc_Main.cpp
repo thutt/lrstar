@@ -60,7 +60,6 @@ static Calc_parser_t::nact_func_t Calc_nact_funcs_[17] = {
 
 Calc_parser_t
 generated_parser(/* grammar      */   &Calc_grammar_name[0],
-                 /* term_actions */   true,
                  /* init_func    */   &Calc_init_funcs_[0],
                  /* tact_func    */   &Calc_tact_funcs_[0],
                  /* nact_func    */   &Calc_nact_funcs_[0]);

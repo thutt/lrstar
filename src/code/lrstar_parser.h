@@ -461,7 +461,7 @@ private:                        // LR Parser
       do {
          total = 0;
          LA = lt.get_lookahead();
-         if (opt_term_actions) {
+         if (C_term_actions) {
             if (pt.tact_numb[LA] >= 0) {                // If term action ...
                (*tact_func[pt.tact_numb[LA]])(this, LA);   // Call term-action function.
             }
@@ -557,7 +557,6 @@ public:
    }
 
    lrstar_parser(const char         *grammar_,
-                 bool                term_actions_,
                  init_func_t         *init_func_,
                  tact_func_t         *tact_func_,
                  nact_func_t         *nact_func_) :
@@ -576,7 +575,7 @@ public:
       opt_reversable(C_reversable),
       opt_semantics(C_semantics),
       opt_stksize(C_stksize),
-      opt_term_actions(term_actions_),
+      opt_term_actions(C_term_actions),
       init_func(init_func_),
       tact_func(tact_func_),
       nact_func(nact_func_),
@@ -1108,7 +1107,7 @@ public:
       x = 0;                                          // State = 0 to start.
    Read:
       T = t = lt.get_token();                         // Get incoming token.
-      if (opt_term_actions) {
+      if (C_term_actions) {
          if (pt.tact_numb[t] >= 0) {                  // If token action ...
             // Call token-action function.
             lt.token.sti = (*tact_func[pt.tact_numb[t]])(this, t);

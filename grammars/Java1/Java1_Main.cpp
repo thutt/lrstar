@@ -22,7 +22,6 @@ static Java1_parser_t::tact_func_t Java1_tact_funcs_[2] = {
 
 Java1_parser_t
 generated_parser(/* grammar      */   &Java1_grammar_name[0],
-                 /* term_actions */   true,
                  /* init_func    */   &Java1_init_funcs_[0],
                  /* tact_func    */   &Java1_tact_funcs_[0],
                  /* nact_func    */   0);

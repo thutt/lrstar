@@ -22,7 +22,6 @@ static SQL_parser_t::tact_func_t SQL_tact_funcs_[2] = {
 
 SQL_parser_t
 generated_parser(/* grammar      */   &SQL_grammar_name[0],
-                 /* term_actions */   true,
                  /* init_func    */   &SQL_init_funcs_[0],
                  /* tact_func    */   &SQL_tact_funcs_[0],
                  /* nact_func    */   0);
