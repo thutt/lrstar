@@ -22,7 +22,6 @@ static Ada_parser_t::tact_func_t Ada_tact_funcs_[2] = {
 
 Ada_parser_t
 generated_parser(/* grammar      */   &Ada_grammar_name[0],
-                 /* user data    */   NULL,
                  /* actions      */   true,
                  /* debug_parser */   false,
                  /* debug_trace  */   false,

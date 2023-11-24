@@ -27,7 +27,6 @@ static Java9_parser_t::nact_func_t Java9_nact_funcs_[1] = {
 
 Java9_parser_t
 generated_parser(/* grammar      */   &Java9_grammar_name[0],
-                 /* user data    */   NULL,
                  /* actions      */   true,
                  /* debug_parser */   false,
                  /* debug_trace  */   false,

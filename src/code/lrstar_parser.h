@@ -560,7 +560,6 @@ public:
    }
 
    lrstar_parser(const char         *grammar_,
-                 lrstar_user_data_t *user_data_,
                  bool                actions_,
                  bool                debug_parser_,
                  bool                debug_trace_,
@@ -579,7 +578,7 @@ public:
                  tact_func_t         *tact_func_,
                  nact_func_t         *nact_func_) :
       grammar(grammar_),
-      user_data(user_data_),
+      user_data(0),
       opt_actions(actions_),
       opt_debug_parser(debug_parser_),
       opt_debug_trace(debug_trace_),
@@ -611,6 +610,13 @@ public:
             LAcount = new int[opt_lookaheads + 1];
          }
       }
+
+
+   void
+   set_user_data(lrstar_user_data_t *data)
+   {
+      user_data = data;
+   }
 
 
    void
