@@ -1,10 +1,7 @@
-
-///////////////////////////////////////////////////////////////////////////////
-//                                                                           //
-
 #include "lrstar_basic_defs.h"
 #include "Python_LexerTables_typedef.h"
 #include "Python_Parser.h"
+
 
 lrstar_parser generated_parser(/* grammar      */   "Python",
                                /* user data    */   NULL,
@@ -21,10 +18,9 @@ lrstar_parser generated_parser(/* grammar      */   "Python",
                                /* reversable   */   false,
                                /* semantics    */   false,
                                /* stksize      */   100,
-                               /* term_actions */   false);
+                               /* term_actions */   false,
+                               /* init_func    */   NULL,
+                               /* tact_func    */   NULL,
+                               /* nact_func    */   NULL);
 
 #include "lrstar_main.cpp"
-
-//                                                                           //
-///////////////////////////////////////////////////////////////////////////////
-

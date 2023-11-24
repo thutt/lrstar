@@ -2883,34 +2883,3 @@ const uint32 *Fortran_parser_tables_t::nact_numb = 0;
 template<>
 const uint32 *Fortran_parser_tables_t::reverse = 0;
 
-void Fortran_init_actions(lrstar_parser *parser); /* User-supplied */
-void Fortran_term_actions(lrstar_parser *parser); /* User-supplied */
-static init_func_t Fortran_init_funcs_[2] = {
-   Fortran_init_actions,
-   Fortran_term_actions
-};
-
-// Init action function pointers ...
-template<>
-init_func_t *Fortran_parser_tables_t::init_func = &Fortran_init_funcs_[0];
-
-int Fortran_error(lrstar_parser *parser, int &t);
-int Fortran_lookup(lrstar_parser *parser, int &t);
-// Terminal action function pointers ...
-static tact_func_t Fortran_tact_funcs_[2] = {
-   Fortran_error,
-   Fortran_lookup,
-};
-
-// Terminal action function pointers ...
-template<>
-tact_func_t *Fortran_parser_tables_t::tact_func = &Fortran_tact_funcs_[0];
-
-// Node action function pointers ...
-template<>
-nact_func_t *Fortran_parser_tables_t::nact_func = 0;
-
-
-//                                                                           //
-///////////////////////////////////////////////////////////////////////////////
-

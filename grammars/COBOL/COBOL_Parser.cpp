@@ -3626,34 +3626,3 @@ const uint32 *COBOL_parser_tables_t::nact_numb = 0;
 template<>
 const uint32 *COBOL_parser_tables_t::reverse = 0;
 
-void COBOL_init_actions(lrstar_parser *parser); /* User-supplied */
-void COBOL_term_actions(lrstar_parser *parser); /* User-supplied */
-static init_func_t COBOL_init_funcs_[2] = {
-   COBOL_init_actions,
-   COBOL_term_actions
-};
-
-// Init action function pointers ...
-template<>
-init_func_t *COBOL_parser_tables_t::init_func = &COBOL_init_funcs_[0];
-
-int COBOL_error(lrstar_parser *parser, int &t);
-int COBOL_lookup(lrstar_parser *parser, int &t);
-// Terminal action function pointers ...
-static tact_func_t COBOL_tact_funcs_[2] = {
-   COBOL_error,
-   COBOL_lookup,
-};
-
-// Terminal action function pointers ...
-template<>
-tact_func_t *COBOL_parser_tables_t::tact_func = &COBOL_tact_funcs_[0];
-
-// Node action function pointers ...
-template<>
-nact_func_t *COBOL_parser_tables_t::nact_func = 0;
-
-
-//                                                                           //
-///////////////////////////////////////////////////////////////////////////////
-

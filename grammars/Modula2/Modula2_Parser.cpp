@@ -955,34 +955,3 @@ const uint32 *Modula2_parser_tables_t::nact_numb = 0;
 template<>
 const uint32 *Modula2_parser_tables_t::reverse = 0;
 
-void Modula2_init_actions(lrstar_parser *parser); /* User-supplied */
-void Modula2_term_actions(lrstar_parser *parser); /* User-supplied */
-static init_func_t Modula2_init_funcs_[2] = {
-   Modula2_init_actions,
-   Modula2_term_actions
-};
-
-// Init action function pointers ...
-template<>
-init_func_t *Modula2_parser_tables_t::init_func = &Modula2_init_funcs_[0];
-
-int Modula2_error(lrstar_parser *parser, int &t);
-int Modula2_lookup(lrstar_parser *parser, int &t);
-// Terminal action function pointers ...
-static tact_func_t Modula2_tact_funcs_[2] = {
-   Modula2_error,
-   Modula2_lookup,
-};
-
-// Terminal action function pointers ...
-template<>
-tact_func_t *Modula2_parser_tables_t::tact_func = &Modula2_tact_funcs_[0];
-
-// Node action function pointers ...
-template<>
-nact_func_t *Modula2_parser_tables_t::nact_func = 0;
-
-
-//                                                                           //
-///////////////////////////////////////////////////////////////////////////////
-

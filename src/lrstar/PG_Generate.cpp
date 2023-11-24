@@ -20,6 +20,18 @@ typedef enum field_name_t {
 } field_name_t;
 
 
+/* Info needed to generate
+   init_func,
+   tact_func,
+   nact_func
+*/
+struct callback_info_t {
+   int          N_tacts;
+   int          N_nacts;
+   const char **Tact_start;
+   const char **Nact_start;
+};
+
 struct data_types_t {
    const char *type;            /* C type, string form. */
    int         n_elem;          /* Number of elements in array.
@@ -35,7 +47,7 @@ typedef void (*file_writer_fn_t)(FILE       *fp,
 
 
 static data_types_t data_types[ts_N_ELEMENTS];
-
+static callback_info_t callback_info;
 
 static const char *get_typestr(int *x, int n)
 {
@@ -180,8 +192,9 @@ create_filename(char       *dst,
 
 
 
-static void
-templ_init_functions(FILE *fp, int N_tacts, int N_nacts)
+// gungla
+static bool
+main_init_functions(FILE *fp, int N_tacts, int N_nacts)
 {
    if (N_tacts > 0 || N_nacts > 0) {
       fprintf(fp,
@@ -193,24 +206,18 @@ templ_init_functions(FILE *fp, int N_tacts, int N_nacts)
               "   %s_init_actions,\n"
               "   %s_term_actions\n"
               "};\n\n", gfn, gfn, gfn, gfn, gfn);
-      fprintf(fp,
-              "// Init action function pointers ...\n"
-              "template<>\n"
-              "init_func_t *%s_parser_tables_t::init_func = &%s_init_funcs_[0];\n\n",
-              gfn, gfn);
+      return true;
    } else {
-      fprintf(fp,
-              "// Init action function pointers ...\n"
-              "template<>\n"
-              "init_func_t *%s_parser_tables_t::init_func = 0;\n\n",
-              gfn);
+      return false;
    }
 }
 
 
 
-static void
-templ_tact_functions(FILE *fp, int N_tacts, const char **Tact_start)
+
+
+static bool
+main_tact_functions(FILE *fp, int N_tacts, const char **Tact_start)
 {
    if (N_tacts > 0) { // Number of terminal actions.
       // Token Actions ...
@@ -226,24 +233,15 @@ templ_tact_functions(FILE *fp, int N_tacts, const char **Tact_start)
          fprintf (fp, "   %s_%s,\n", gfn, Tact_start[t]);
       }
       fprintf (fp, "};\n\n");
-
-      fprintf(fp,
-              "// Terminal action function pointers ...\n"
-              "template<>\n"
-              "tact_func_t *%s_parser_tables_t::tact_func = &%s_tact_funcs_[0];\n\n",
-              gfn, gfn);
+      return true;
    } else {
-      fprintf(fp,
-              "// Terminal action function pointeras ...\n"
-              "template<>\n"
-              "tact_func_t *%s_parser_tables_t::tact_func = 0;\n\n",
-              gfn);
+      return false;
    }
 }
 
 
-static void
-templ_nact_functions(FILE *fp, int N_nacts, const char **Nact_start)
+static bool
+main_nact_functions(FILE *fp, int N_nacts, const char **Nact_start)
 {
    if (N_nacts > 0) {           // Number of node actions
       for (int n = 0; n < N_nacts; n++) {
@@ -254,7 +252,7 @@ templ_nact_functions(FILE *fp, int N_nacts, const char **Nact_start)
       }
 
       fprintf(fp, "// Node action function pointers ...\n");
-      fprintf(fp, "static nact_func_t %s_nact_func_[%d] = {\n", gfn, N_nacts);
+      fprintf(fp, "static nact_func_t %s_nact_funcs_[%d] = {\n", gfn, N_nacts);
       for (int n = 0; n < N_nacts; n++) {
          if (strcmp (Nact_start[n], "NULL") == 0) {
             fprintf(fp, "   0,\n");
@@ -263,17 +261,9 @@ templ_nact_functions(FILE *fp, int N_nacts, const char **Nact_start)
          }
       }
       fprintf(fp, "};\n\n");
-      fprintf(fp,
-              "// Node action function pointers ...\n"
-              "template<>\n"
-              "nact_func_t *%s_parser_tables_t::nact_func = &%s_nact_func_[0];\n\n",
-              gfn, gfn);
+      return true;
    } else {
-      fprintf(fp,
-              "// Node action function pointers ...\n"
-              "template<>\n"
-              "nact_func_t *%s_parser_tables_t::nact_func = 0;\n\n",
-              gfn);
+      return false;
    }
 }
 
@@ -1017,10 +1007,6 @@ PG_Main::instantiate_fields(FILE *fp)
 #undef PF
 #undef PFCP
 #undef PFL
-
-   templ_init_functions(fp, N_tacts, N_nacts);
-   templ_tact_functions(fp, N_tacts, Tact_start);
-   templ_nact_functions(fp, N_nacts, Nact_start);
 }
 
 
@@ -1447,6 +1433,24 @@ instantiate_generated_parser(FILE *fp)
    static const int  stksize = 100;       // Parser-stack size.
    static const char *b[] = { "false", "true" };
    static const char templ[] = "lrstar_parser generated_parser(";
+   bool init_fn;
+   bool tact_fn;
+   bool nact_fn;
+
+   fprintf(fp, "\n");
+   init_fn = main_init_functions(fp,
+                                 callback_info.N_tacts,
+                                 callback_info.N_nacts);
+
+   tact_fn = main_tact_functions(fp,
+                                 callback_info.N_tacts,
+                                 callback_info.Tact_start);
+
+   nact_fn = main_nact_functions(fp,
+                                 callback_info.N_nacts,
+                                 callback_info.Nact_start);
+
+
    fprintf(fp, "\n%s", templ);
    fprintf(fp,
            "/* grammar      */   \"%s\"", gfn);
@@ -1509,6 +1513,44 @@ instantiate_generated_parser(FILE *fp)
            "/* term_actions */   %s",
            static_cast<int>(sizeof(templ) / sizeof(templ[0])) - 1, " ",
            b[PG_Main::N_tacts > 0]);
+
+   if (init_fn) {
+      fprintf(fp, ",\n%*s"
+              "/* init_func    */   &%s_init_funcs_[0]",
+              static_cast<int>(sizeof(templ) / sizeof(templ[0])) - 1, " ",
+              gfn);
+   } else {
+      fprintf(fp, ",\n%*s"
+              "/* init_func    */   %s",
+              static_cast<int>(sizeof(templ) / sizeof(templ[0])) - 1, " ",
+              "NULL");
+   }
+
+   if (tact_fn) {
+      fprintf(fp, ",\n%*s"
+              "/* tact_func    */   &%s_tact_funcs_[0]",
+              static_cast<int>(sizeof(templ) / sizeof(templ[0])) - 1, " ",
+              gfn);
+   } else {
+      fprintf(fp, ",\n%*s"
+              "/* tact_func    */   %s",
+              static_cast<int>(sizeof(templ) / sizeof(templ[0])) - 1, " ",
+              "NULL");
+   }
+
+   if (nact_fn) {
+      fprintf(fp, ",\n%*s"
+              "/* nact_func    */   &%s_nact_funcs_[0]",
+              static_cast<int>(sizeof(templ) / sizeof(templ[0])) - 1, " ",
+              gfn);
+
+   } else {
+      fprintf(fp, ",\n%*s"
+              "/* nact_func    */   %s",
+              static_cast<int>(sizeof(templ) / sizeof(templ[0])) - 1, " ",
+              "NULL");
+   }
+
    fprintf(fp, ");\n\n");
 }
 
@@ -1518,10 +1560,6 @@ static void main_cpp_fn(FILE       *fp,
                         const char *grammar,
                         const char *fname)
 {
-   fprintf (fp, "\n");
-   fprintf (fp, "///////////////////////////////////////////////////////////////////////////////\n");
-   fprintf (fp, "//                                                                           //\n");
-   fprintf (fp, "\n");
    fprintf (fp, ("#include \"lrstar_basic_defs.h\"\n"
                  "#include \"%s_LexerTables_typedef.h\"\n"
                  "#include \"%s_Parser.h\"\n"), grammar, grammar);
@@ -1532,9 +1570,6 @@ static void main_cpp_fn(FILE       *fp,
       assert(lrstar_windows);
       fprintf (fp, "#include \"../../code/main.cpp\"\n");
    }
-   fprintf (fp, "\n");
-   fprintf (fp, "//                                                                           //\n");
-   fprintf (fp, "///////////////////////////////////////////////////////////////////////////////\n\n");
 }
 
 
@@ -1556,14 +1591,9 @@ parser_cpp_fn(FILE       *fp,
                  "#include \"%s_Actions.h\"\n\n"),
             grammar, grammar, grammar, grammar);
 
-
    instantiate_field_lengths(fp);
    PG_Main::instantiate_constants(fp);
    PG_Main::instantiate_fields(fp);
-
-   fprintf (fp, "\n");
-   fprintf (fp, "//                                                                           //\n");
-   fprintf (fp, "///////////////////////////////////////////////////////////////////////////////\n\n");
 }
 
 
@@ -1674,6 +1704,11 @@ static void write_file(const char       *gdn,
 
 void  PG_Main::GenerateOtherFiles ()
 {
+   callback_info.N_tacts    = N_tacts;
+   callback_info.N_nacts    = N_nacts;
+   callback_info.Tact_start = Tact_start;
+   callback_info.Nact_start = Nact_start;
+
    write_file(gdn, gfn, NULL, "_Actions.h", false, actions_header_fn);
    write_file(gdn, gfn, NULL, "_Parser.h", true, parser_header_fn);
    write_file(gdn, gfn, NULL, "_Actions.cpp", false, actions_cpp_fn);

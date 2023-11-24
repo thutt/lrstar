@@ -44,6 +44,11 @@ public:
    Node*  parent;    // Parent node.                              4  32 bytes
 };
 
+class lrstar_parser;
+typedef void (*init_func_t)(lrstar_parser *parser);
+typedef int  (*tact_func_t)(lrstar_parser *parser, int &t);
+typedef int  (*nact_func_t)(lrstar_parser *parser, Node *t);
+
 class PStack         // Parser stack.
 {
 public:
@@ -176,8 +181,12 @@ private:
    char    draw_last[3];
    char    draw_space[3];
 
-private:                        // LR Parser
+private:
+   init_func_t *init_func; /* Pointer to init_func table. */
+   tact_func_t *tact_func; /* Pointer to tact_func table.  */
+   nact_func_t *nact_func; /* Pointer to nact_func table.  */
 
+private:                        // LR Parser
    void
    reduce(int p)
    {
@@ -189,16 +198,14 @@ private:                        // LR Parser
 
       if (opt_make_ast) {
          int psi;                                        // Parse stack index.
-         if (pt.node_numb[p] >= 0)                       // MAKE NODE ?
-         {
+         if (pt.node_numb[p] >= 0) {                     // MAKE NODE ?
             Node* n   = new_node ();                     // Get a new node.
             n->id     = pt.node_numb[p];                 // Set node id number.
             n->prev   = 0;                               // Set prev to nonexistent.
             n->next   = 0;                               // Set next to nonexistent.
             n->child  = 0;                               // Set child to nonexistent.
             n->parent = 0;                               // Set parent to nonexistent.
-            if (pt.argx[p] >= 0)                         // If first argument specified.
-            {
+            if (pt.argx[p] >= 0) {                       // If first argument specified.
                psi      = pt.argx[p];                    // Get parse-stack index.
                n->sti   = PS[psi].sti;                   // Move sti from parse stack to node.
                n->line  = PS[psi].line;                  // Move line from parse stack to node.
@@ -446,7 +453,7 @@ private:                        // LR Parser
          LA = lt.get_lookahead();
          if (opt_term_actions) {
             if (pt.tact_numb[LA] >= 0) {                // If term action ...
-               (*pt.tact_func[pt.tact_numb[LA]])(this, LA);   // Call term-action function.
+               (*tact_func[pt.tact_numb[LA]])(this, LA);   // Call term-action function.
             }
          }
 
@@ -554,7 +561,10 @@ public:
                  bool                reversable_,
                  bool                semantics_,
                  int                 stksize_,
-                 bool                term_actions_) :
+                 bool                term_actions_,
+                 init_func_t         *init_func_,
+                 tact_func_t         *tact_func_,
+                 nact_func_t         *nact_func_) :
       grammar(grammar_),
       user_data(user_data_),
       opt_actions(actions_),
@@ -571,6 +581,9 @@ public:
       opt_semantics(semantics_),
       opt_stksize(stksize_),
       opt_term_actions(term_actions_),
+      init_func(init_func_),
+      tact_func(tact_func_),
+      nact_func(nact_func_),
       n_errors(0)
       {
          PSstart = new PStack[opt_stksize];
@@ -614,7 +627,7 @@ public:
 
          term_symtab();
          if (opt_actions) {
-            (*pt.init_func[1])(this);               // term_action()
+            (*init_func[1])(this);               // term_action()
          }
       }
 
@@ -1095,7 +1108,7 @@ public:
       if (opt_term_actions) {
          if (pt.tact_numb[t] >= 0) {                  // If token action ...
             // Call token-action function.
-            lt.token.sti = (*pt.tact_func[pt.tact_numb[t]])(this, t);
+            lt.token.sti = (*tact_func[pt.tact_numb[t]])(this, t);
          }
       } else {
          lt.token.sti = -t;
@@ -1324,10 +1337,10 @@ public:
          stack[stacki].id      = i;
          stack[stacki].counter = counter[i];
 
-         if (pt.nact_func[i] != 0) { // Got a node action ?
+         if (nact_func[i] != 0) { // Got a node action ?
             direction = TOP_DOWN;
             tracer(n);
-            (*pt.nact_func[i])(this, n);
+            (*nact_func[i])(this, n);
          }
 
          while (c != 0) {
@@ -1335,10 +1348,10 @@ public:
             c = c->next;
          }
 
-         if (pt.nact_func[i] != 0) { // Got a node action ?
+         if (nact_func[i] != 0) { // Got a node action ?
             direction = BOTTOM_UP;
             tracer(n);
-            (*pt.nact_func[i])(this, n);
+            (*nact_func[i])(this, n);
          }
          stacki--;
       }
@@ -1487,7 +1500,7 @@ public:
       }
 
       if (opt_actions) {
-         (*pt.init_func[0])(this);          // init_action()
+         (*init_func[0])(this);          // init_action()
       }
 
       T_exp  = new uchar[pt.n_terms];

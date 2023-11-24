@@ -639,34 +639,3 @@ const uint32 *XPL_parser_tables_t::nact_numb = 0;
 template<>
 const uint32 *XPL_parser_tables_t::reverse = 0;
 
-void XPL_init_actions(lrstar_parser *parser); /* User-supplied */
-void XPL_term_actions(lrstar_parser *parser); /* User-supplied */
-static init_func_t XPL_init_funcs_[2] = {
-   XPL_init_actions,
-   XPL_term_actions
-};
-
-// Init action function pointers ...
-template<>
-init_func_t *XPL_parser_tables_t::init_func = &XPL_init_funcs_[0];
-
-int XPL_error(lrstar_parser *parser, int &t);
-int XPL_lookup(lrstar_parser *parser, int &t);
-// Terminal action function pointers ...
-static tact_func_t XPL_tact_funcs_[2] = {
-   XPL_error,
-   XPL_lookup,
-};
-
-// Terminal action function pointers ...
-template<>
-tact_func_t *XPL_parser_tables_t::tact_func = &XPL_tact_funcs_[0];
-
-// Node action function pointers ...
-template<>
-nact_func_t *XPL_parser_tables_t::nact_func = 0;
-
-
-//                                                                           //
-///////////////////////////////////////////////////////////////////////////////
-

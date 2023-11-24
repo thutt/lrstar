@@ -1461,34 +1461,3 @@ const uint32 *SQL_parser_tables_t::nact_numb = 0;
 template<>
 const uint32 *SQL_parser_tables_t::reverse = 0;
 
-void SQL_init_actions(lrstar_parser *parser); /* User-supplied */
-void SQL_term_actions(lrstar_parser *parser); /* User-supplied */
-static init_func_t SQL_init_funcs_[2] = {
-   SQL_init_actions,
-   SQL_term_actions
-};
-
-// Init action function pointers ...
-template<>
-init_func_t *SQL_parser_tables_t::init_func = &SQL_init_funcs_[0];
-
-int SQL_error(lrstar_parser *parser, int &t);
-int SQL_lookup(lrstar_parser *parser, int &t);
-// Terminal action function pointers ...
-static tact_func_t SQL_tact_funcs_[2] = {
-   SQL_error,
-   SQL_lookup,
-};
-
-// Terminal action function pointers ...
-template<>
-tact_func_t *SQL_parser_tables_t::tact_func = &SQL_tact_funcs_[0];
-
-// Node action function pointers ...
-template<>
-nact_func_t *SQL_parser_tables_t::nact_func = 0;
-
-
-//                                                                           //
-///////////////////////////////////////////////////////////////////////////////
-

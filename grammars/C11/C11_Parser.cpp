@@ -1315,34 +1315,3 @@ const uint32 *C11_parser_tables_t::nact_numb = 0;
 template<>
 const uint32 *C11_parser_tables_t::reverse = 0;
 
-void C11_init_actions(lrstar_parser *parser); /* User-supplied */
-void C11_term_actions(lrstar_parser *parser); /* User-supplied */
-static init_func_t C11_init_funcs_[2] = {
-   C11_init_actions,
-   C11_term_actions
-};
-
-// Init action function pointers ...
-template<>
-init_func_t *C11_parser_tables_t::init_func = &C11_init_funcs_[0];
-
-int C11_error(lrstar_parser *parser, int &t);
-int C11_lookup(lrstar_parser *parser, int &t);
-// Terminal action function pointers ...
-static tact_func_t C11_tact_funcs_[2] = {
-   C11_error,
-   C11_lookup,
-};
-
-// Terminal action function pointers ...
-template<>
-tact_func_t *C11_parser_tables_t::tact_func = &C11_tact_funcs_[0];
-
-// Node action function pointers ...
-template<>
-nact_func_t *C11_parser_tables_t::nact_func = 0;
-
-
-//                                                                           //
-///////////////////////////////////////////////////////////////////////////////
-

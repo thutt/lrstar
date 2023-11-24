@@ -421,39 +421,3 @@ const int8 *Typedef_parser_tables_t::nact_numb = &nact_numb_[0];
 template<>
 const uint32 *Typedef_parser_tables_t::reverse = 0;
 
-void Typedef_init_actions(lrstar_parser *parser); /* User-supplied */
-void Typedef_term_actions(lrstar_parser *parser); /* User-supplied */
-static init_func_t Typedef_init_funcs_[2] = {
-   Typedef_init_actions,
-   Typedef_term_actions
-};
-
-// Init action function pointers ...
-template<>
-init_func_t *Typedef_parser_tables_t::init_func = &Typedef_init_funcs_[0];
-
-int Typedef_error(lrstar_parser *parser, int &t);
-int Typedef_lookup(lrstar_parser *parser, int &t);
-// Terminal action function pointers ...
-static tact_func_t Typedef_tact_funcs_[2] = {
-   Typedef_error,
-   Typedef_lookup,
-};
-
-// Terminal action function pointers ...
-template<>
-tact_func_t *Typedef_parser_tables_t::tact_func = &Typedef_tact_funcs_[0];
-
-// Node action function pointers ...
-static nact_func_t Typedef_nact_func_[1] = {
-   0,
-};
-
-// Node action function pointers ...
-template<>
-nact_func_t *Typedef_parser_tables_t::nact_func = &Typedef_nact_func_[0];
-
-
-//                                                                           //
-///////////////////////////////////////////////////////////////////////////////
-

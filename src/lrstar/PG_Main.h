@@ -62,6 +62,7 @@ private:
    static char*  slash_inside_keyword  (char* term_name, char quote);
    static void   GenerateParserTables  ();
    static void   GenerateOtherFiles    ();
+
    static void   DeleteLexFile ();
    static void   OutputLexFile ();
 

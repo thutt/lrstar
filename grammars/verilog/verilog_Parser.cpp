@@ -1968,34 +1968,3 @@ const uint32 *verilog_parser_tables_t::nact_numb = 0;
 template<>
 const uint32 *verilog_parser_tables_t::reverse = 0;
 
-void verilog_init_actions(lrstar_parser *parser); /* User-supplied */
-void verilog_term_actions(lrstar_parser *parser); /* User-supplied */
-static init_func_t verilog_init_funcs_[2] = {
-   verilog_init_actions,
-   verilog_term_actions
-};
-
-// Init action function pointers ...
-template<>
-init_func_t *verilog_parser_tables_t::init_func = &verilog_init_funcs_[0];
-
-int verilog_error(lrstar_parser *parser, int &t);
-int verilog_lookup(lrstar_parser *parser, int &t);
-// Terminal action function pointers ...
-static tact_func_t verilog_tact_funcs_[2] = {
-   verilog_error,
-   verilog_lookup,
-};
-
-// Terminal action function pointers ...
-template<>
-tact_func_t *verilog_parser_tables_t::tact_func = &verilog_tact_funcs_[0];
-
-// Node action function pointers ...
-template<>
-nact_func_t *verilog_parser_tables_t::nact_func = 0;
-
-
-//                                                                           //
-///////////////////////////////////////////////////////////////////////////////
-

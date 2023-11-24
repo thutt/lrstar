@@ -4,8 +4,6 @@
 #if !defined(_LRSTAR_PARSER_TABLES_H_)
 #define _LRSTAR_PARSER_TABLES_H_
 
-#include "lrstar.h"
-
 template<typename T_term_symb,
          typename T_head_symb,
          typename T_tact_name,
@@ -145,9 +143,5 @@ public:
     static const T_node_numb  *node_numb;
     static const T_nact_numb  *nact_numb;
     static const T_reverse    *reverse;
-
-    static init_func_t        *init_func;   /* Pointer to init_func  table. */
-    static tact_func_t        *tact_func;   /* Pointer to tact_func table.  */
-    static nact_func_t        *nact_func;   /* Pointer to nact_func table.  */
 };
 #endif

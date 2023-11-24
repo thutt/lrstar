@@ -1962,34 +1962,3 @@ const uint32 *Dbase_parser_tables_t::nact_numb = 0;
 template<>
 const uint32 *Dbase_parser_tables_t::reverse = 0;
 
-void Dbase_init_actions(lrstar_parser *parser); /* User-supplied */
-void Dbase_term_actions(lrstar_parser *parser); /* User-supplied */
-static init_func_t Dbase_init_funcs_[2] = {
-   Dbase_init_actions,
-   Dbase_term_actions
-};
-
-// Init action function pointers ...
-template<>
-init_func_t *Dbase_parser_tables_t::init_func = &Dbase_init_funcs_[0];
-
-int Dbase_error(lrstar_parser *parser, int &t);
-int Dbase_lookup(lrstar_parser *parser, int &t);
-// Terminal action function pointers ...
-static tact_func_t Dbase_tact_funcs_[2] = {
-   Dbase_error,
-   Dbase_lookup,
-};
-
-// Terminal action function pointers ...
-template<>
-tact_func_t *Dbase_parser_tables_t::tact_func = &Dbase_tact_funcs_[0];
-
-// Node action function pointers ...
-template<>
-nact_func_t *Dbase_parser_tables_t::nact_func = 0;
-
-
-//                                                                           //
-///////////////////////////////////////////////////////////////////////////////
-

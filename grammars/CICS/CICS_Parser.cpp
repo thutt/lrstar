@@ -2021,34 +2021,3 @@ const uint32 *CICS_parser_tables_t::nact_numb = 0;
 template<>
 const uint32 *CICS_parser_tables_t::reverse = 0;
 
-void CICS_init_actions(lrstar_parser *parser); /* User-supplied */
-void CICS_term_actions(lrstar_parser *parser); /* User-supplied */
-static init_func_t CICS_init_funcs_[2] = {
-   CICS_init_actions,
-   CICS_term_actions
-};
-
-// Init action function pointers ...
-template<>
-init_func_t *CICS_parser_tables_t::init_func = &CICS_init_funcs_[0];
-
-int CICS_error(lrstar_parser *parser, int &t);
-int CICS_lookup(lrstar_parser *parser, int &t);
-// Terminal action function pointers ...
-static tact_func_t CICS_tact_funcs_[2] = {
-   CICS_error,
-   CICS_lookup,
-};
-
-// Terminal action function pointers ...
-template<>
-tact_func_t *CICS_parser_tables_t::tact_func = &CICS_tact_funcs_[0];
-
-// Node action function pointers ...
-template<>
-nact_func_t *CICS_parser_tables_t::nact_func = 0;
-
-
-//                                                                           //
-///////////////////////////////////////////////////////////////////////////////
-

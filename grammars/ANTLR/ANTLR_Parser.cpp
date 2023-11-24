@@ -801,34 +801,3 @@ const uint32 *ANTLR_parser_tables_t::nact_numb = 0;
 template<>
 const uint32 *ANTLR_parser_tables_t::reverse = 0;
 
-void ANTLR_init_actions(lrstar_parser *parser); /* User-supplied */
-void ANTLR_term_actions(lrstar_parser *parser); /* User-supplied */
-static init_func_t ANTLR_init_funcs_[2] = {
-   ANTLR_init_actions,
-   ANTLR_term_actions
-};
-
-// Init action function pointers ...
-template<>
-init_func_t *ANTLR_parser_tables_t::init_func = &ANTLR_init_funcs_[0];
-
-int ANTLR_error(lrstar_parser *parser, int &t);
-int ANTLR_lookup(lrstar_parser *parser, int &t);
-// Terminal action function pointers ...
-static tact_func_t ANTLR_tact_funcs_[2] = {
-   ANTLR_error,
-   ANTLR_lookup,
-};
-
-// Terminal action function pointers ...
-template<>
-tact_func_t *ANTLR_parser_tables_t::tact_func = &ANTLR_tact_funcs_[0];
-
-// Node action function pointers ...
-template<>
-nact_func_t *ANTLR_parser_tables_t::nact_func = 0;
-
-
-//                                                                           //
-///////////////////////////////////////////////////////////////////////////////
-

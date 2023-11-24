@@ -974,34 +974,3 @@ const uint32 *Zeus_parser_tables_t::nact_numb = 0;
 template<>
 const uint32 *Zeus_parser_tables_t::reverse = 0;
 
-void Zeus_init_actions(lrstar_parser *parser); /* User-supplied */
-void Zeus_term_actions(lrstar_parser *parser); /* User-supplied */
-static init_func_t Zeus_init_funcs_[2] = {
-   Zeus_init_actions,
-   Zeus_term_actions
-};
-
-// Init action function pointers ...
-template<>
-init_func_t *Zeus_parser_tables_t::init_func = &Zeus_init_funcs_[0];
-
-int Zeus_error(lrstar_parser *parser, int &t);
-int Zeus_lookup(lrstar_parser *parser, int &t);
-// Terminal action function pointers ...
-static tact_func_t Zeus_tact_funcs_[2] = {
-   Zeus_error,
-   Zeus_lookup,
-};
-
-// Terminal action function pointers ...
-template<>
-tact_func_t *Zeus_parser_tables_t::tact_func = &Zeus_tact_funcs_[0];
-
-// Node action function pointers ...
-template<>
-nact_func_t *Zeus_parser_tables_t::nact_func = 0;
-
-
-//                                                                           //
-///////////////////////////////////////////////////////////////////////////////
-

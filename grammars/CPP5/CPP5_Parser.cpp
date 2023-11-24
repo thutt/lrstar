@@ -3677,19 +3677,3 @@ const uint32 *CPP5_parser_tables_t::nact_numb = 0;
 template<>
 const uint32 *CPP5_parser_tables_t::reverse = 0;
 
-// Init action function pointers ...
-template<>
-init_func_t *CPP5_parser_tables_t::init_func = 0;
-
-// Terminal action function pointeras ...
-template<>
-tact_func_t *CPP5_parser_tables_t::tact_func = 0;
-
-// Node action function pointers ...
-template<>
-nact_func_t *CPP5_parser_tables_t::nact_func = 0;
-
-
-//                                                                           //
-///////////////////////////////////////////////////////////////////////////////
-

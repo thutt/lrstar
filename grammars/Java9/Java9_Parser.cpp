@@ -4480,39 +4480,3 @@ const int8 *Java9_parser_tables_t::nact_numb = &nact_numb_[0];
 template<>
 const uint32 *Java9_parser_tables_t::reverse = 0;
 
-void Java9_init_actions(lrstar_parser *parser); /* User-supplied */
-void Java9_term_actions(lrstar_parser *parser); /* User-supplied */
-static init_func_t Java9_init_funcs_[2] = {
-   Java9_init_actions,
-   Java9_term_actions
-};
-
-// Init action function pointers ...
-template<>
-init_func_t *Java9_parser_tables_t::init_func = &Java9_init_funcs_[0];
-
-int Java9_error(lrstar_parser *parser, int &t);
-int Java9_lookup(lrstar_parser *parser, int &t);
-// Terminal action function pointers ...
-static tact_func_t Java9_tact_funcs_[2] = {
-   Java9_error,
-   Java9_lookup,
-};
-
-// Terminal action function pointers ...
-template<>
-tact_func_t *Java9_parser_tables_t::tact_func = &Java9_tact_funcs_[0];
-
-// Node action function pointers ...
-static nact_func_t Java9_nact_func_[1] = {
-   0,
-};
-
-// Node action function pointers ...
-template<>
-nact_func_t *Java9_parser_tables_t::nact_func = &Java9_nact_func_[0];
-
-
-//                                                                           //
-///////////////////////////////////////////////////////////////////////////////
-

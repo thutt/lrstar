@@ -1055,32 +1055,3 @@ const uint32 *PLM_parser_tables_t::nact_numb = 0;
 template<>
 const uint32 *PLM_parser_tables_t::reverse = 0;
 
-void PLM_init_actions(lrstar_parser *parser); /* User-supplied */
-void PLM_term_actions(lrstar_parser *parser); /* User-supplied */
-static init_func_t PLM_init_funcs_[2] = {
-   PLM_init_actions,
-   PLM_term_actions
-};
-
-// Init action function pointers ...
-template<>
-init_func_t *PLM_parser_tables_t::init_func = &PLM_init_funcs_[0];
-
-int PLM_error(lrstar_parser *parser, int &t);
-// Terminal action function pointers ...
-static tact_func_t PLM_tact_funcs_[1] = {
-   PLM_error,
-};
-
-// Terminal action function pointers ...
-template<>
-tact_func_t *PLM_parser_tables_t::tact_func = &PLM_tact_funcs_[0];
-
-// Node action function pointers ...
-template<>
-nact_func_t *PLM_parser_tables_t::nact_func = 0;
-
-
-//                                                                           //
-///////////////////////////////////////////////////////////////////////////////
-

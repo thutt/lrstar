@@ -3947,34 +3947,3 @@ const uint32 *PL1_parser_tables_t::nact_numb = 0;
 template<>
 const uint32 *PL1_parser_tables_t::reverse = 0;
 
-void PL1_init_actions(lrstar_parser *parser); /* User-supplied */
-void PL1_term_actions(lrstar_parser *parser); /* User-supplied */
-static init_func_t PL1_init_funcs_[2] = {
-   PL1_init_actions,
-   PL1_term_actions
-};
-
-// Init action function pointers ...
-template<>
-init_func_t *PL1_parser_tables_t::init_func = &PL1_init_funcs_[0];
-
-int PL1_error(lrstar_parser *parser, int &t);
-int PL1_lookup(lrstar_parser *parser, int &t);
-// Terminal action function pointers ...
-static tact_func_t PL1_tact_funcs_[2] = {
-   PL1_error,
-   PL1_lookup,
-};
-
-// Terminal action function pointers ...
-template<>
-tact_func_t *PL1_parser_tables_t::tact_func = &PL1_tact_funcs_[0];
-
-// Node action function pointers ...
-template<>
-nact_func_t *PL1_parser_tables_t::nact_func = 0;
-
-
-//                                                                           //
-///////////////////////////////////////////////////////////////////////////////
-

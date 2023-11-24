@@ -1,10 +1,132 @@
-
-///////////////////////////////////////////////////////////////////////////////
-//                                                                           //
-
 #include "lrstar_basic_defs.h"
 #include "C_LexerTables_typedef.h"
 #include "C_Parser.h"
+
+void C_init_actions(lrstar_parser *parser); /* User-supplied */
+void C_term_actions(lrstar_parser *parser); /* User-supplied */
+static init_func_t C_init_funcs_[2] = {
+   C_init_actions,
+   C_term_actions
+};
+
+int C_error(lrstar_parser *parser, int &t);
+int C_lookup(lrstar_parser *parser, int &t);
+// Terminal action function pointers ...
+static tact_func_t C_tact_funcs_[2] = {
+   C_error,
+   C_lookup,
+};
+
+// Node action function pointers ...
+static nact_func_t C_nact_funcs_[106] = {
+   0,
+   0,
+   0,
+   0,
+   0,
+   0,
+   0,
+   0,
+   0,
+   0,
+   0,
+   0,
+   0,
+   0,
+   0,
+   0,
+   0,
+   0,
+   0,
+   0,
+   0,
+   0,
+   0,
+   0,
+   0,
+   0,
+   0,
+   0,
+   0,
+   0,
+   0,
+   0,
+   0,
+   0,
+   0,
+   0,
+   0,
+   0,
+   0,
+   0,
+   0,
+   0,
+   0,
+   0,
+   0,
+   0,
+   0,
+   0,
+   0,
+   0,
+   0,
+   0,
+   0,
+   0,
+   0,
+   0,
+   0,
+   0,
+   0,
+   0,
+   0,
+   0,
+   0,
+   0,
+   0,
+   0,
+   0,
+   0,
+   0,
+   0,
+   0,
+   0,
+   0,
+   0,
+   0,
+   0,
+   0,
+   0,
+   0,
+   0,
+   0,
+   0,
+   0,
+   0,
+   0,
+   0,
+   0,
+   0,
+   0,
+   0,
+   0,
+   0,
+   0,
+   0,
+   0,
+   0,
+   0,
+   0,
+   0,
+   0,
+   0,
+   0,
+   0,
+   0,
+   0,
+   0,
+};
+
 
 lrstar_parser generated_parser(/* grammar      */   "C",
                                /* user data    */   NULL,
@@ -21,10 +143,9 @@ lrstar_parser generated_parser(/* grammar      */   "C",
                                /* reversable   */   false,
                                /* semantics    */   true,
                                /* stksize      */   100,
-                               /* term_actions */   true);
+                               /* term_actions */   true,
+                               /* init_func    */   &C_init_funcs_[0],
+                               /* tact_func    */   &C_tact_funcs_[0],
+                               /* nact_func    */   &C_nact_funcs_[0]);
 
 #include "lrstar_main.cpp"
-
-//                                                                           //
-///////////////////////////////////////////////////////////////////////////////
-

@@ -1,10 +1,7 @@
-
-///////////////////////////////////////////////////////////////////////////////
-//                                                                           //
-
 #include "lrstar_basic_defs.h"
 #include "CPP5_LexerTables_typedef.h"
 #include "CPP5_Parser.h"
+
 
 lrstar_parser generated_parser(/* grammar      */   "CPP5",
                                /* user data    */   NULL,
@@ -21,10 +18,9 @@ lrstar_parser generated_parser(/* grammar      */   "CPP5",
                                /* reversable   */   false,
                                /* semantics    */   false,
                                /* stksize      */   100,
-                               /* term_actions */   false);
+                               /* term_actions */   false,
+                               /* init_func    */   NULL,
+                               /* tact_func    */   NULL,
+                               /* nact_func    */   NULL);
 
 #include "lrstar_main.cpp"
-
-//                                                                           //
-///////////////////////////////////////////////////////////////////////////////
-

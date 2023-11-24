@@ -1245,34 +1245,3 @@ const uint32 *Java1_parser_tables_t::nact_numb = 0;
 template<>
 const uint32 *Java1_parser_tables_t::reverse = 0;
 
-void Java1_init_actions(lrstar_parser *parser); /* User-supplied */
-void Java1_term_actions(lrstar_parser *parser); /* User-supplied */
-static init_func_t Java1_init_funcs_[2] = {
-   Java1_init_actions,
-   Java1_term_actions
-};
-
-// Init action function pointers ...
-template<>
-init_func_t *Java1_parser_tables_t::init_func = &Java1_init_funcs_[0];
-
-int Java1_error(lrstar_parser *parser, int &t);
-int Java1_lookup(lrstar_parser *parser, int &t);
-// Terminal action function pointers ...
-static tact_func_t Java1_tact_funcs_[2] = {
-   Java1_error,
-   Java1_lookup,
-};
-
-// Terminal action function pointers ...
-template<>
-tact_func_t *Java1_parser_tables_t::tact_func = &Java1_tact_funcs_[0];
-
-// Node action function pointers ...
-template<>
-nact_func_t *Java1_parser_tables_t::nact_func = 0;
-
-
-//                                                                           //
-///////////////////////////////////////////////////////////////////////////////
-
