@@ -22,7 +22,6 @@ static XPL_parser_t::tact_func_t XPL_tact_funcs_[2] = {
 
 XPL_parser_t
 generated_parser(/* grammar      */   &XPL_grammar_name[0],
-                 /* expecting    */   true,
                  /* insensitive  */   false,
                  /* lookaheads   */   1,
                  /* make_ast     */   false,

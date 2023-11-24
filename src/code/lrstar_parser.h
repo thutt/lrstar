@@ -557,7 +557,6 @@ public:
    }
 
    lrstar_parser(const char         *grammar_,
-                 bool                expecting_,
                  bool                insensitive_,
                  int                 lookaheads_,
                  bool                make_ast_,
@@ -576,7 +575,7 @@ public:
       opt_actions(C_action),
       opt_debug_parser(C_debug_parser),
       opt_debug_trace(C_debug_trace),
-      opt_expecting(expecting_),
+      opt_expecting(C_expecting),
       opt_insensitive(insensitive_),
       opt_lookaheads(lookaheads_),
       opt_make_ast(make_ast_),
@@ -1126,7 +1125,7 @@ public:
       } else {
          lt.token.sti = -t;
       }
-      if (opt_expecting) {
+      if (C_expecting) {
          RS = RSstart;
          RS->state = x;
          RS->ptr = PS;
@@ -1144,7 +1143,7 @@ public:
             PS->node  = 0;                         // Set node on stack to zero.
          }
 
-         if (opt_expecting) {
+         if (C_expecting) {
             PS->sym   = -t;                        // Put symbol on stack.
          }
          x = pt.Tm[pt.Tr[x] +
@@ -1153,7 +1152,7 @@ public:
             p = -x;
          SR:
             PS -= pt.PL[p];                        // Reduce stack ptr by production length.
-            if (opt_expecting) {
+            if (C_expecting) {
                PS->sym = pt.head_numb[p];          // Put symbol on stack.
             }
             reduce(p);                             // Call reduce action with production number.
@@ -1167,7 +1166,7 @@ public:
       Red:
          PS -= pt.PL[p];                           // Reduce parse stack ptr by rule length - 1.
          if (pt.PL[p] < 0) {                       // Null production?
-            if (opt_expecting) {
+            if (C_expecting) {
                RS++;
                RS->ptr   = PS;
                RS->state = PS->state;
@@ -1179,7 +1178,7 @@ public:
             }
          }
          while (1) {
-            if (opt_expecting) {
+            if (C_expecting) {
                PS->sym = pt.head_numb[p];          // Put symbol on stack.
             }
             reduce(p);                             // Call reduce action with production number.
@@ -1219,7 +1218,7 @@ public:
                      p = y - pt.accept_state;         // Shift and reduce.
                      goto SR;                         // Go to shift reduce.
                   }
-                  if (opt_expecting) {
+                  if (C_expecting) {
                      PS->sym = -t;                       // Put symbol on stack.
                   }
                   x = y;                              // Shift and goto.
@@ -1252,7 +1251,7 @@ public:
          return lt.linenumb - 1;                       // Success.
       }
 
-      if (opt_expecting) {
+      if (C_expecting) {
          x = restore ();
          if (t != 0) {
             t = 0;                                    // Try <error>
@@ -1261,11 +1260,11 @@ public:
       }
 
       if (n_errors < INT_MAX) {                   // Error message not printed?
-         if (opt_expecting) {
+         if (C_expecting) {
             print_stack ();
          }
          syntax_error ("Error", &lt.token, pt.term_symb[T]);
-         if (opt_expecting) {
+         if (C_expecting) {
             expecting (x);
             print_terms (x);
          }
