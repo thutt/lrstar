@@ -107,7 +107,6 @@ static Vba_parser_t::nact_func_t Vba_nact_funcs_[81] = {
 
 Vba_parser_t
 generated_parser(/* grammar      */   &Vba_grammar_name[0],
-                 /* reversable   */   false,
                  /* semantics    */   true,
                  /* stksize      */   100,
                  /* term_actions */   true,

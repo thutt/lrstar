@@ -7,7 +7,6 @@ const char CPP5_grammar_name[] = "CPP5";
 
 CPP5_parser_t
 generated_parser(/* grammar      */   &CPP5_grammar_name[0],
-                 /* reversable   */   false,
                  /* semantics    */   false,
                  /* stksize      */   100,
                  /* term_actions */   false,

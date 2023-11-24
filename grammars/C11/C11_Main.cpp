@@ -22,7 +22,6 @@ static C11_parser_t::tact_func_t C11_tact_funcs_[2] = {
 
 C11_parser_t
 generated_parser(/* grammar      */   &C11_grammar_name[0],
-                 /* reversable   */   false,
                  /* semantics    */   false,
                  /* stksize      */   100,
                  /* term_actions */   true,

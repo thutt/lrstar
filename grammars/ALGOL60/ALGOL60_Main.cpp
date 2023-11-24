@@ -7,7 +7,6 @@ const char ALGOL60_grammar_name[] = "ALGOL60";
 
 ALGOL60_parser_t
 generated_parser(/* grammar      */   &ALGOL60_grammar_name[0],
-                 /* reversable   */   false,
                  /* semantics    */   false,
                  /* stksize      */   100,
                  /* term_actions */   false,

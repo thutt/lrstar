@@ -249,7 +249,7 @@ private:                        // LR Parser
       int i;
       int next = -1;
 
-      if (opt_reversable && pt.reverse[p] != 0) {        // IF NOT TO REVERSE THE ORDER.
+      if (C_reversable && pt.reverse[p] != 0) {          // IF NOT TO REVERSE THE ORDER.
          for (i = 0; i <= pt.PL[p]; i++) {               // For each tail pointer.
             if (PS[i].node != 0) {                       // If tail points to node.
                if (next >= 0) {                          // If one waiting.
@@ -557,7 +557,6 @@ public:
    }
 
    lrstar_parser(const char         *grammar_,
-                 bool                reversable_,
                  bool                semantics_,
                  int                 stksize_,
                  bool                term_actions_,
@@ -576,7 +575,7 @@ public:
       opt_nd_parsing(C_nd_parsing),
       opt_nd_threads(C_nd_threads),
       opt_node_actions(C_node_actions),
-      opt_reversable(reversable_),
+      opt_reversable(C_reversable),
       opt_semantics(semantics_),
       opt_stksize(stksize_),
       opt_term_actions(term_actions_),

@@ -7,7 +7,6 @@ const char Python_grammar_name[] = "Python";
 
 Python_parser_t
 generated_parser(/* grammar      */   &Python_grammar_name[0],
-                 /* reversable   */   false,
                  /* semantics    */   false,
                  /* stksize      */   100,
                  /* term_actions */   false,

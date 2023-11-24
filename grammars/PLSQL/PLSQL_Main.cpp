@@ -7,7 +7,6 @@ const char PLSQL_grammar_name[] = "PLSQL";
 
 PLSQL_parser_t
 generated_parser(/* grammar      */   &PLSQL_grammar_name[0],
-                 /* reversable   */   false,
                  /* semantics    */   false,
                  /* stksize      */   100,
                  /* term_actions */   false,

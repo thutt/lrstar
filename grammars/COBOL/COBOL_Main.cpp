@@ -22,7 +22,6 @@ static COBOL_parser_t::tact_func_t COBOL_tact_funcs_[2] = {
 
 COBOL_parser_t
 generated_parser(/* grammar      */   &COBOL_grammar_name[0],
-                 /* reversable   */   false,
                  /* semantics    */   false,
                  /* stksize      */   100,
                  /* term_actions */   true,
