@@ -1,21 +1,26 @@
+
+///////////////////////////////////////////////////////////////////////////////
+//                                                                           //
+
 #include "lrstar_basic_defs.h"
 #include "Java1_LexerTables_typedef.h"
 #include "Java1_Actions.h"
+#include "Java1_Parser.h"
 #include "lrstar_main.h"
 
 
-void Java1_init_actions(lrstar_parser *parser)
+void Java1_init_actions(Java1_parser_t *parser)
 {
       /* Initialization code goes here */
 }
 
-void  Java1_term_actions(lrstar_parser *parser)
+void  Java1_term_actions(Java1_parser_t *parser)
 {
       /* Termination code goes here */
 }
 
 
-int Java1_error(lrstar_parser *parser, int &t)
+int Java1_error(Java1_parser_t *parser, int &t)
 {
       if (parser->lt.token.end == parser->lt.token.start)        // Illegal character?
       {
@@ -24,18 +29,19 @@ int Java1_error(lrstar_parser *parser, int &t)
       return 0;
 }
 
-int Java1_lookup(lrstar_parser *parser, int &t)             // Lookup in symbol table.
+int Java1_lookup(Java1_parser_t *parser, int &t)              // Lookup in symbol table.
 {
       int sti;
-      if (parser->opt_nd_parsing &&
-          parser->lt.lookahead.start != 0)             // In lookahead mode?
+      if (parser->opt_nd_parsing && parser->lt.lookahead.start != 0)             // In lookahead mode?
       {
          sti = parser->add_symbol(t, parser->lt.lookahead.start, parser->lt.lookahead.end);
-      } else {                                 // Regular mode of parsing.
+      } else {                             // Regular mode of parsing.
          sti = parser->add_symbol(t, parser->lt.token.start, parser->lt.token.end);
       }
       if (parser->opt_semantics) {
-          t = parser->symbol[sti].term;        // Redefine terminal number?
+         t = parser->symbol[sti].term;        // Redefine terminal number?
       }
     return sti;
 }
+
+

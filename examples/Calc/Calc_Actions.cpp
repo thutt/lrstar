@@ -8,18 +8,18 @@
 #include "lrstar_main.h"
 
 
-void    Calc_init_actions(lrstar_parser *parser)
+void    Calc_init_actions(Calc_parser_t *parser)
 {
     /* Initialization code goes here */
 }
 
-void    Calc_term_actions(lrstar_parser *parser)
+void    Calc_term_actions(Calc_parser_t *parser)
 {
     /* Termination code goes here */
 }
 
 
-int Calc_error(lrstar_parser *parser, int &t)
+int Calc_error(Calc_parser_t *parser, int &t)
 {
     if (parser->lt.token.end == parser->lt.token.start) // Illegal character?
     {
@@ -28,7 +28,7 @@ int Calc_error(lrstar_parser *parser, int &t)
     return 0;
 }
 
-int Calc_lookup(lrstar_parser *parser, int &t) // Lookup in symbol table.
+int Calc_lookup(Calc_parser_t *parser, int &t) // Lookup in symbol table.
 {
     int sti;
     if (parser->opt_nd_parsing &&
@@ -45,7 +45,7 @@ int Calc_lookup(lrstar_parser *parser, int &t) // Lookup in symbol table.
 }
 
 
-int Calc_goal_ (lrstar_parser *parser, Node *v)
+int Calc_goal_ (Calc_parser_t *parser, Node *v)
 {
     Node* n = (Node*)v;
     if (parser->traversal == FIRST_PASS)
@@ -61,7 +61,7 @@ int Calc_goal_ (lrstar_parser *parser, Node *v)
     return 1; // OK
 }
 
-int Calc_program_ (lrstar_parser *parser, Node *v)
+int Calc_program_ (Calc_parser_t *parser, Node *v)
 {
     Node* n = (Node*)v;
     if (parser->traversal == FIRST_PASS)
@@ -77,7 +77,7 @@ int Calc_program_ (lrstar_parser *parser, Node *v)
     return 1; // OK
 }
 
-int Calc_ident_ (lrstar_parser *parser, Node *v)
+int Calc_ident_ (Calc_parser_t *parser, Node *v)
 {
     Node* n = (Node*)v;
     if (parser->traversal == FIRST_PASS)
@@ -92,7 +92,7 @@ int Calc_ident_ (lrstar_parser *parser, Node *v)
     return 1; // OK
 }
 
-int Calc_int_ (lrstar_parser *parser, Node *v)
+int Calc_int_ (Calc_parser_t *parser, Node *v)
 {
     Node* n = (Node*)v;
     if (parser->traversal == FIRST_PASS)
@@ -107,7 +107,7 @@ int Calc_int_ (lrstar_parser *parser, Node *v)
     return 1; // OK
 }
 
-int Calc_add_ (lrstar_parser *parser, Node *v)
+int Calc_add_ (Calc_parser_t *parser, Node *v)
 {
     Node* n = (Node*)v;
     if (parser->traversal == FIRST_PASS)
@@ -122,7 +122,7 @@ int Calc_add_ (lrstar_parser *parser, Node *v)
     return 1; // OK
 }
 
-int Calc_sub_ (lrstar_parser *parser, Node *v)
+int Calc_sub_ (Calc_parser_t *parser, Node *v)
 {
     Node* n = (Node*)v;
     if (parser->traversal == FIRST_PASS)
@@ -137,7 +137,7 @@ int Calc_sub_ (lrstar_parser *parser, Node *v)
     return 1; // OK
 }
 
-int Calc_mul_ (lrstar_parser *parser, Node *v)
+int Calc_mul_ (Calc_parser_t *parser, Node *v)
 {
     Node* n = (Node*)v;
     if (parser->traversal == FIRST_PASS)
@@ -152,7 +152,7 @@ int Calc_mul_ (lrstar_parser *parser, Node *v)
     return 1; // OK
 }
 
-int Calc_div_ (lrstar_parser *parser, Node *v)
+int Calc_div_ (Calc_parser_t *parser, Node *v)
 {
     Node* n = (Node*)v;
     if (parser->traversal == FIRST_PASS)
@@ -167,7 +167,7 @@ int Calc_div_ (lrstar_parser *parser, Node *v)
     return 1; // OK
 }
 
-int Calc_pwr_ (lrstar_parser *parser, Node *v)
+int Calc_pwr_ (Calc_parser_t *parser, Node *v)
 {
     Node* n = (Node*)v;
     if (parser->traversal == FIRST_PASS)
@@ -182,7 +182,7 @@ int Calc_pwr_ (lrstar_parser *parser, Node *v)
     return 1; // OK
 }
 
-int Calc_if_ (lrstar_parser *parser, Node *v)
+int Calc_if_ (Calc_parser_t *parser, Node *v)
 {
     Node* n = (Node*)v;
     if (parser->traversal == FIRST_PASS)
@@ -198,7 +198,7 @@ int Calc_if_ (lrstar_parser *parser, Node *v)
     return 1; // OK
 }
 
-int Calc_then_ (lrstar_parser *parser, Node *v)
+int Calc_then_ (Calc_parser_t *parser, Node *v)
 {
     Node* n = (Node*)v;
     if (parser->traversal == FIRST_PASS)
@@ -214,7 +214,7 @@ int Calc_then_ (lrstar_parser *parser, Node *v)
     return 1; // OK
 }
 
-int Calc_then2_ (lrstar_parser *parser, Node *v)
+int Calc_then2_ (Calc_parser_t *parser, Node *v)
 {
     Node* n = (Node*)v;
     if (parser->traversal == FIRST_PASS)
@@ -230,7 +230,7 @@ int Calc_then2_ (lrstar_parser *parser, Node *v)
     return 1; // OK
 }
 
-int Calc_else2_ (lrstar_parser *parser, Node *v)
+int Calc_else2_ (Calc_parser_t *parser, Node *v)
 {
     Node* n = (Node*)v;
     if (parser->traversal == FIRST_PASS)
@@ -246,7 +246,7 @@ int Calc_else2_ (lrstar_parser *parser, Node *v)
     return 1; // OK
 }
 
-int Calc_eq_ (lrstar_parser *parser, Node *v)
+int Calc_eq_ (Calc_parser_t *parser, Node *v)
 {
     Node* n = (Node*)v;
     if (parser->traversal == FIRST_PASS)
@@ -261,7 +261,7 @@ int Calc_eq_ (lrstar_parser *parser, Node *v)
     return 1; // OK
 }
 
-int Calc_ne_ (lrstar_parser *parser, Node *v)
+int Calc_ne_ (Calc_parser_t *parser, Node *v)
 {
     Node* n = (Node*)v;
     if (parser->traversal == FIRST_PASS)
@@ -276,7 +276,7 @@ int Calc_ne_ (lrstar_parser *parser, Node *v)
     return 1; // OK
 }
 
-int Calc_store_ (lrstar_parser *parser, Node *v)
+int Calc_store_ (Calc_parser_t *parser, Node *v)
 {
     Node* n = (Node*)v;
     if (parser->traversal == FIRST_PASS)
@@ -291,7 +291,7 @@ int Calc_store_ (lrstar_parser *parser, Node *v)
     return 1; // OK
 }
 
-int Calc_target_ (lrstar_parser *parser, Node *v)
+int Calc_target_ (Calc_parser_t *parser, Node *v)
 {
     Node* n = (Node*)v;
     if (parser->traversal == FIRST_PASS)

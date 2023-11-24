@@ -2,40 +2,43 @@
 #include "ANTLR_LexerTables_typedef.h"
 #include "ANTLR_Parser.h"
 
-void ANTLR_init_actions(lrstar_parser *parser); /* User-supplied */
-void ANTLR_term_actions(lrstar_parser *parser); /* User-supplied */
-static lrstar_parser::init_func_t ANTLR_init_funcs_[2] = {
+const char ANTLR_grammar_name[] = "ANTLR";
+
+void ANTLR_init_actions(ANTLR_parser_t *parser); /* User-supplied */
+void ANTLR_term_actions(ANTLR_parser_t *parser); /* User-supplied */
+static ANTLR_parser_t::init_func_t ANTLR_init_funcs_[2] = {
    ANTLR_init_actions,
    ANTLR_term_actions
 };
 
-int ANTLR_error(lrstar_parser *parser, int &t);
-int ANTLR_lookup(lrstar_parser *parser, int &t);
+int ANTLR_error(ANTLR_parser_t *parser, int &t);
+int ANTLR_lookup(ANTLR_parser_t *parser, int &t);
 // Terminal action function pointers ...
-static lrstar_parser::tact_func_t ANTLR_tact_funcs_[2] = {
+static ANTLR_parser_t::tact_func_t ANTLR_tact_funcs_[2] = {
    ANTLR_error,
    ANTLR_lookup,
 };
 
 
-lrstar_parser generated_parser(/* grammar      */   "ANTLR",
-                               /* user data    */   NULL,
-                               /* actions      */   true,
-                               /* debug_parser */   false,
-                               /* debug_trace  */   false,
-                               /* expecting    */   true,
-                               /* insensitive  */   false,
-                               /* lookaheads   */   1,
-                               /* make_ast     */   false,
-                               /* nd_parsing   */   false,
-                               /* nd_threads   */   0,
-                               /* node_actions */   false,
-                               /* reversable   */   false,
-                               /* semantics    */   false,
-                               /* stksize      */   100,
-                               /* term_actions */   true,
-                               /* init_func    */   &ANTLR_init_funcs_[0],
-                               /* tact_func    */   &ANTLR_tact_funcs_[0],
-                               /* nact_func    */   NULL);
+ANTLR_parser_t
+generated_parser(/* grammar      */   &ANTLR_grammar_name[0],
+                 /* user data    */   NULL,
+                 /* actions      */   true,
+                 /* debug_parser */   false,
+                 /* debug_trace  */   false,
+                 /* expecting    */   true,
+                 /* insensitive  */   false,
+                 /* lookaheads   */   1,
+                 /* make_ast     */   false,
+                 /* nd_parsing   */   false,
+                 /* nd_threads   */   0,
+                 /* node_actions */   false,
+                 /* reversable   */   false,
+                 /* semantics    */   false,
+                 /* stksize      */   100,
+                 /* term_actions */   true,
+                 /* init_func    */   &ANTLR_init_funcs_[0],
+                 /* tact_func    */   &ANTLR_tact_funcs_[0],
+                 /* nact_func    */   0);
 
 #include "lrstar_main.cpp"

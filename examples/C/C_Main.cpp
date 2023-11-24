@@ -2,23 +2,25 @@
 #include "C_LexerTables_typedef.h"
 #include "C_Parser.h"
 
-void C_init_actions(lrstar_parser *parser); /* User-supplied */
-void C_term_actions(lrstar_parser *parser); /* User-supplied */
-static lrstar_parser::init_func_t C_init_funcs_[2] = {
+const char C_grammar_name[] = "C";
+
+void C_init_actions(C_parser_t *parser); /* User-supplied */
+void C_term_actions(C_parser_t *parser); /* User-supplied */
+static C_parser_t::init_func_t C_init_funcs_[2] = {
    C_init_actions,
    C_term_actions
 };
 
-int C_error(lrstar_parser *parser, int &t);
-int C_lookup(lrstar_parser *parser, int &t);
+int C_error(C_parser_t *parser, int &t);
+int C_lookup(C_parser_t *parser, int &t);
 // Terminal action function pointers ...
-static lrstar_parser::tact_func_t C_tact_funcs_[2] = {
+static C_parser_t::tact_func_t C_tact_funcs_[2] = {
    C_error,
    C_lookup,
 };
 
 // Node action function pointers ...
-static lrstar_parser::nact_func_t C_nact_funcs_[106] = {
+static C_parser_t::nact_func_t C_nact_funcs_[106] = {
    0,
    0,
    0,
@@ -128,24 +130,25 @@ static lrstar_parser::nact_func_t C_nact_funcs_[106] = {
 };
 
 
-lrstar_parser generated_parser(/* grammar      */   "C",
-                               /* user data    */   NULL,
-                               /* actions      */   true,
-                               /* debug_parser */   false,
-                               /* debug_trace  */   false,
-                               /* expecting    */   true,
-                               /* insensitive  */   false,
-                               /* lookaheads   */   1,
-                               /* make_ast     */   true,
-                               /* nd_parsing   */   false,
-                               /* nd_threads   */   0,
-                               /* node_actions */   true,
-                               /* reversable   */   false,
-                               /* semantics    */   true,
-                               /* stksize      */   100,
-                               /* term_actions */   true,
-                               /* init_func    */   &C_init_funcs_[0],
-                               /* tact_func    */   &C_tact_funcs_[0],
-                               /* nact_func    */   &C_nact_funcs_[0]);
+C_parser_t
+generated_parser(/* grammar      */   &C_grammar_name[0],
+                 /* user data    */   NULL,
+                 /* actions      */   true,
+                 /* debug_parser */   false,
+                 /* debug_trace  */   false,
+                 /* expecting    */   true,
+                 /* insensitive  */   false,
+                 /* lookaheads   */   1,
+                 /* make_ast     */   true,
+                 /* nd_parsing   */   false,
+                 /* nd_threads   */   0,
+                 /* node_actions */   true,
+                 /* reversable   */   false,
+                 /* semantics    */   true,
+                 /* stksize      */   100,
+                 /* term_actions */   true,
+                 /* init_func    */   &C_init_funcs_[0],
+                 /* tact_func    */   &C_tact_funcs_[0],
+                 /* nact_func    */   &C_nact_funcs_[0]);
 
 #include "lrstar_main.cpp"

@@ -1,26 +1,26 @@
 #pragma once
 #include "Calc_Parser.h"
 
-int Calc_error(lrstar_parser *parser, int &t);
-int Calc_lookup(lrstar_parser *parser, int &t);
+int Calc_error(Calc_parser_t *parser, int &t);
+int Calc_lookup(Calc_parser_t *parser, int &t);
 
-int Calc_eq_      (lrstar_parser *parser, Node *n);
-int Calc_ne_      (lrstar_parser *parser, Node *n);
-int Calc_add_     (lrstar_parser *parser, Node *n);
-int Calc_sub_     (lrstar_parser *parser, Node *n);
-int Calc_mul_     (lrstar_parser *parser, Node *n);
-int Calc_div_     (lrstar_parser *parser, Node *n);
-int Calc_pwr_     (lrstar_parser *parser, Node *n);
-int Calc_goal_    (lrstar_parser *parser, Node *n);
-int Calc_ident_   (lrstar_parser *parser, Node *n);
-int Calc_if_      (lrstar_parser *parser, Node *n);
-int Calc_then_    (lrstar_parser *parser, Node *n);
-int Calc_then2_   (lrstar_parser *parser, Node *n);
-int Calc_else2_   (lrstar_parser *parser, Node *n);
-int Calc_program_ (lrstar_parser *parser, Node *n);
-int Calc_int_     (lrstar_parser *parser, Node *n);
-int Calc_store_   (lrstar_parser *parser, Node *n);
-int Calc_target_  (lrstar_parser *parser, Node *n);
+int Calc_eq_      (Calc_parser_t *parser, Node *n);
+int Calc_ne_      (Calc_parser_t *parser, Node *n);
+int Calc_add_     (Calc_parser_t *parser, Node *n);
+int Calc_sub_     (Calc_parser_t *parser, Node *n);
+int Calc_mul_     (Calc_parser_t *parser, Node *n);
+int Calc_div_     (Calc_parser_t *parser, Node *n);
+int Calc_pwr_     (Calc_parser_t *parser, Node *n);
+int Calc_goal_    (Calc_parser_t *parser, Node *n);
+int Calc_ident_   (Calc_parser_t *parser, Node *n);
+int Calc_if_      (Calc_parser_t *parser, Node *n);
+int Calc_then_    (Calc_parser_t *parser, Node *n);
+int Calc_then2_   (Calc_parser_t *parser, Node *n);
+int Calc_else2_   (Calc_parser_t *parser, Node *n);
+int Calc_program_ (Calc_parser_t *parser, Node *n);
+int Calc_int_     (Calc_parser_t *parser, Node *n);
+int Calc_store_   (Calc_parser_t *parser, Node *n);
+int Calc_target_  (Calc_parser_t *parser, Node *n);
 
 /* Local Variables:      */
 /* mode: c               */

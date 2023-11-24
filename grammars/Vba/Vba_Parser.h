@@ -94,4 +94,22 @@ enum nodecon {
 #include "Vba_ParserTables_typedef.h"
 #include "lrstar_parser.h"
 
+extern const char Vba_grammar_name[];
+
+typedef lrstar_parser</* grammar      */   Vba_grammar_name,
+                      /* actions      */   true,
+                      /* debug_parser */   false,
+                      /* debug_trace  */   false,
+                      /* expecting    */   true,
+                      /* insensitive  */   false,
+                      /* lookaheads   */   1,
+                      /* make_ast     */   true,
+                      /* nd_parsing   */   false,
+                      /* nd_threads   */   0,
+                      /* node_actions */   true,
+                      /* reversable   */   false,
+                      /* semantics    */   true,
+                      /* stksize      */   100,
+                      /* term_actions */   true> Vba_parser_t;
+
 #endif

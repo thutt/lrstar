@@ -2,45 +2,48 @@
 #include "Typedef_LexerTables_typedef.h"
 #include "Typedef_Parser.h"
 
-void Typedef_init_actions(lrstar_parser *parser); /* User-supplied */
-void Typedef_term_actions(lrstar_parser *parser); /* User-supplied */
-static lrstar_parser::init_func_t Typedef_init_funcs_[2] = {
+const char Typedef_grammar_name[] = "Typedef";
+
+void Typedef_init_actions(Typedef_parser_t *parser); /* User-supplied */
+void Typedef_term_actions(Typedef_parser_t *parser); /* User-supplied */
+static Typedef_parser_t::init_func_t Typedef_init_funcs_[2] = {
    Typedef_init_actions,
    Typedef_term_actions
 };
 
-int Typedef_error(lrstar_parser *parser, int &t);
-int Typedef_lookup(lrstar_parser *parser, int &t);
+int Typedef_error(Typedef_parser_t *parser, int &t);
+int Typedef_lookup(Typedef_parser_t *parser, int &t);
 // Terminal action function pointers ...
-static lrstar_parser::tact_func_t Typedef_tact_funcs_[2] = {
+static Typedef_parser_t::tact_func_t Typedef_tact_funcs_[2] = {
    Typedef_error,
    Typedef_lookup,
 };
 
 // Node action function pointers ...
-static lrstar_parser::nact_func_t Typedef_nact_funcs_[1] = {
+static Typedef_parser_t::nact_func_t Typedef_nact_funcs_[1] = {
    0,
 };
 
 
-lrstar_parser generated_parser(/* grammar      */   "Typedef",
-                               /* user data    */   NULL,
-                               /* actions      */   true,
-                               /* debug_parser */   false,
-                               /* debug_trace  */   false,
-                               /* expecting    */   true,
-                               /* insensitive  */   false,
-                               /* lookaheads   */   1,
-                               /* make_ast     */   true,
-                               /* nd_parsing   */   false,
-                               /* nd_threads   */   0,
-                               /* node_actions */   true,
-                               /* reversable   */   false,
-                               /* semantics    */   true,
-                               /* stksize      */   100,
-                               /* term_actions */   true,
-                               /* init_func    */   &Typedef_init_funcs_[0],
-                               /* tact_func    */   &Typedef_tact_funcs_[0],
-                               /* nact_func    */   &Typedef_nact_funcs_[0]);
+Typedef_parser_t
+generated_parser(/* grammar      */   &Typedef_grammar_name[0],
+                 /* user data    */   NULL,
+                 /* actions      */   true,
+                 /* debug_parser */   false,
+                 /* debug_trace  */   false,
+                 /* expecting    */   true,
+                 /* insensitive  */   false,
+                 /* lookaheads   */   1,
+                 /* make_ast     */   true,
+                 /* nd_parsing   */   false,
+                 /* nd_threads   */   0,
+                 /* node_actions */   true,
+                 /* reversable   */   false,
+                 /* semantics    */   true,
+                 /* stksize      */   100,
+                 /* term_actions */   true,
+                 /* init_func    */   &Typedef_init_funcs_[0],
+                 /* tact_func    */   &Typedef_tact_funcs_[0],
+                 /* nact_func    */   &Typedef_nact_funcs_[0]);
 
 #include "lrstar_main.cpp"

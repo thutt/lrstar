@@ -190,22 +190,19 @@ create_filename(char       *dst,
 }
 
 
-
-
-// gungla
 static bool
 main_init_functions(FILE *fp, int N_tacts, int N_nacts)
 {
    if (N_tacts > 0 || N_nacts > 0) {
       fprintf(fp,
-              "void %s_init_actions(lrstar_parser *parser); "
+              "void %s_init_actions(%s_parser_t *parser); "
               "/* User-supplied */\n"
-              "void %s_term_actions(lrstar_parser *parser); "
+              "void %s_term_actions(%s_parser_t *parser); "
               "/* User-supplied */\n"
-              "static lrstar_parser::init_func_t %s_init_funcs_[2] = {\n"
+              "static %s_parser_t::init_func_t %s_init_funcs_[2] = {\n"
               "   %s_init_actions,\n"
               "   %s_term_actions\n"
-              "};\n\n", gfn, gfn, gfn, gfn, gfn);
+              "};\n\n", gfn, gfn, gfn, gfn, gfn, gfn, gfn, gfn);
       return true;
    } else {
       return false;
@@ -222,13 +219,13 @@ main_tact_functions(FILE *fp, int N_tacts, const char **Tact_start)
    if (N_tacts > 0) { // Number of terminal actions.
       // Token Actions ...
       for (int t = 0; t < N_tacts; t++) {
-         fprintf (fp, "int %s_%s(lrstar_parser *parser, int &t);\n",
-                  gfn, Tact_start[t]);
+         fprintf (fp, "int %s_%s(%s_parser_t *parser, int &t);\n",
+                  gfn, Tact_start[t], gfn);
       }
       fprintf(fp,
               "// Terminal action function pointers ...\n"
-              "static lrstar_parser::tact_func_t %s_tact_funcs_[%d] = {\n",
-              gfn, N_tacts);
+              "static %s_parser_t::tact_func_t %s_tact_funcs_[%d] = {\n",
+              gfn, gfn, N_tacts);
       for (int t = 0; t < N_tacts; t++) {
          fprintf (fp, "   %s_%s,\n", gfn, Tact_start[t]);
       }
@@ -246,13 +243,14 @@ main_nact_functions(FILE *fp, int N_nacts, const char **Nact_start)
    if (N_nacts > 0) {           // Number of node actions
       for (int n = 0; n < N_nacts; n++) {
          if (strcmp (Nact_start[n], "NULL") != 0) {
-            fprintf(fp, "int %s_%s(lrstar_parser *parser, Node *node);\n",
-                    gfn, Nact_start[n]);
+            fprintf(fp, "int %s_%s(%s_parser_t *parser, Node *node);\n",
+                    gfn, Nact_start[n], gfn);
          }
       }
 
       fprintf(fp, "// Node action function pointers ...\n");
-      fprintf(fp, "static lrstar_parser::nact_func_t %s_nact_funcs_[%d] = {\n", gfn, N_nacts);
+      fprintf(fp, "static %s_parser_t::nact_func_t %s_nact_funcs_[%d] = {\n",
+              gfn, gfn, N_nacts);
       for (int n = 0; n < N_nacts; n++) {
          if (strcmp (Nact_start[n], "NULL") == 0) {
             fprintf(fp, "   0,\n");
@@ -1312,110 +1310,74 @@ void actions_header_fn(FILE       *fp,
 
 
 static void
-parser_header_fn(FILE       *fp,
-                 const char *pathname,
-                 const char *grammar,
-                 const char *fname)
+generate_grammar_parser_typedef(FILE *fp, const char *grammar)
 {
-   open_guard(fp, grammar, "Parser", "H");
+   static const int  stksize = 100;       // Parser-stack size.
+   static const char *b[] = { "false", "true" };
+   static const char templ[] = "typedef lrstar_parser<";
 
-   fprintf (fp, "#include \"lrstar_basic_defs.h\"\n");
-   if (lrstar_linux) {
-      fprintf (fp, "#include \"lrstar_lexer.h\"\n");
-   }
+   fprintf(fp, "extern const char %s_grammar_name[];\n\n", gfn);
 
-   fprintf(fp, "\n");
-   PG_Main::GenerateParserTableEnums(fp);
-
-   fprintf (fp, "#include \"%s_ParserTables_typedef.h\"\n", grammar);
-   fprintf (fp, "#include \"lrstar_parser.h\"\n");
-   close_guard(fp);
-}
-
-
-static void actions_cpp_fn(FILE       *fp,
-                           const char *pathname,
-                           const char *grammar,
-                           const char *fname)
-{
-   fprintf (fp, "\n");
-   fprintf (fp, "///////////////////////////////////////////////////////////////////////////////\n");
-   fprintf (fp, "//                                                                           //\n");
-   fprintf (fp, "\n");
-   fprintf (fp, ("#include \"lrstar_basic_defs.h\"\n"
-                 "#include \"%s_LexerTables_typedef.h\"\n"
-                 "#include \"%s_Actions.h\"\n"), grammar, grammar);
-   if (lrstar_linux) {
-      fprintf (fp, "#include \"lrstar_main.h\"\n");
-   } else {
-      assert(lrstar_windows);
-      fprintf (fp, "#include \"../../code/main.h\"\n");
-   }
-   fprintf (fp, "\n");
-   fprintf (fp, "\n");
-   fprintf (fp, "void %s_init_actions(lrstar_parser *parser)\n", gfn);
-   fprintf (fp, "{\n");
-   fprintf (fp, "      /* Initialization code goes here */\n");
-   fprintf (fp, "}\n");
-   fprintf (fp, "\n");
-   fprintf (fp, "void  %s_term_actions(lrstar_parser *parser)\n", gfn);
-   fprintf (fp, "{\n");
-   fprintf (fp, "      /* Termination code goes here */\n");
-   fprintf (fp, "}\n");
-   fprintf (fp, "\n");
-   fprintf (fp, "\n");
-   fprintf (fp, "int %s_error(lrstar_parser *parser, int &t)\n", gfn);
-   fprintf (fp, "{\n");
-   fprintf (fp, "      if (parser->lt.token.end == parser->lt.token.start)        // Illegal character?\n");
-   fprintf (fp, "      {\n");
-   fprintf (fp, "         parser->lt.token.end++;\n");
-   fprintf (fp, "      }\n");
-   fprintf (fp, "      return 0;\n");
-   fprintf (fp, "}\n");
-   fprintf (fp, "\n");
-   fprintf (fp, "int %s_lookup(lrstar_parser *parser, int &t)             // Lookup in symbol table.\n", gfn);
-   fprintf (fp, "{\n");
-   fprintf (fp, "      int sti;\n");
-   fprintf (fp,
-            "      if (parser->opt_nd_parsing && "
-            "parser->lt.lookahead.start != 0)             // In lookahead mode?\n");
-   fprintf (fp, "      {\n");
-   fprintf (fp, "         sti = parser->add_symbol(t, parser->lt.lookahead.start, parser->lt.lookahead.end);\n");
-   fprintf (fp, "      } else {                             // Regular mode of parsing.\n");
-   fprintf (fp, "         sti = parser->add_symbol(t, parser->lt.token.start, parser->lt.token.end);\n");
-   fprintf (fp, "      }\n");
-   fprintf (fp, "      if (parser->opt_semantics) {\n");
-   fprintf (fp, "         t = parser->symbol[sti].term;        // Redefine terminal number?\n");
-   fprintf (fp, "      }\n");
-   fprintf (fp, "    return sti;\n");                       // Return symbol-table index.\n");
-   fprintf (fp, "}\n");
-   fprintf (fp, "\n");
-   fprintf (fp, "\n");
-}
-
-
-static void lexer_cpp_fn(FILE       *fp,
-                         const char *pathname,
-                         const char *grammar,
-                         const char *fname)
-{
-   fprintf (fp, "\n");
-   fprintf (fp, "///////////////////////////////////////////////////////////////////////////////\n");
-   fprintf (fp, "//                                                                           //\n");
-   fprintf (fp, "\n");
-
-   fprintf (fp, "#include \"lrstar_basic_defs.h\"\n");
-   if (lrstar_linux) {
-      fprintf (fp, "#include \"lrstar_lexer.h\"\n");
-   }
-   fprintf (fp, ("#include \"%s_LexerTables_instantiate.h\"\n"), grammar);
-   if (lrstar_windows) {
-      fprintf (fp, "#include \"../../code/lexer.h\"\n");
-      fprintf (fp, "#include \"../../code/lexer.cpp\"\n");
-   }
-   fprintf (fp, "\n");
-   fprintf (fp, "//                                                                           //\n");
-   fprintf (fp, "///////////////////////////////////////////////////////////////////////////////\n\n");
+   fprintf(fp, "%s", templ);
+   fprintf(fp,
+           "/* grammar      */   %s_grammar_name", gfn);
+   fprintf(fp, ",\n%*s"
+           "/* actions      */   %s",
+           static_cast<int>(sizeof(templ) / sizeof(templ[0])) - 1, " ",
+           b[PG_Main::N_tacts > 0 || PG_Main::N_nacts > 0]);
+   fprintf(fp, ",\n%*s"
+           "/* debug_parser */   %s",
+           static_cast<int>(sizeof(templ) / sizeof(templ[0])) - 1, " ",
+           b[!!optn[PG_DEBUG]]);
+   fprintf(fp, ",\n%*s"
+           "/* debug_trace  */   %s",
+           static_cast<int>(sizeof(templ) / sizeof(templ[0])) - 1, " ",
+           b[!!optn[PG_DEBUGTRACE]]);
+   fprintf(fp, ",\n%*s"
+           "/* expecting    */   %s",
+           static_cast<int>(sizeof(templ) / sizeof(templ[0])) - 1, " ",
+           b[optn[PG_EXPECTING] || PG_Main::error_used > 0]);
+   fprintf(fp, ",\n%*s"
+           "/* insensitive  */   %s",
+           static_cast<int>(sizeof(templ) / sizeof(templ[0])) - 1, " ",
+           b[!!optn[PG_INSENSITIVE]]);
+   fprintf(fp, ",\n%*s"
+           "/* lookaheads   */   %d",
+           static_cast<int>(sizeof(templ) / sizeof(templ[0])) - 1, " ",
+           optn[PG_LOOKAHEADS]);
+   fprintf(fp, ",\n%*s"
+           "/* make_ast     */   %s",
+           static_cast<int>(sizeof(templ) / sizeof(templ[0])) - 1, " ",
+           b[optn[PG_ASTCONST] && PG_Main::N_nodes > 0]);
+   fprintf(fp, ",\n%*s"
+           "/* nd_parsing   */   %s",
+           static_cast<int>(sizeof(templ) / sizeof(templ[0])) - 1, " ",
+           b[PG_Main::n_ndstates > 0]);
+   fprintf(fp, ",\n%*s"
+           "/* nd_threads   */   %d",
+           static_cast<int>(sizeof(templ) / sizeof(templ[0])) - 1, " ",
+           PG_Main::n_ndstates > 0 ? PG_Main::nd_maxcount : 0);
+   fprintf(fp, ",\n%*s"
+           "/* node_actions */   %s",
+           static_cast<int>(sizeof(templ) / sizeof(templ[0])) - 1, " ",
+           b[PG_Main::N_nacts > 0]);
+   fprintf(fp, ",\n%*s"
+           "/* reversable   */   %s",
+           static_cast<int>(sizeof(templ) / sizeof(templ[0])) - 1, " ",
+           b[PG_Main::N_reverses > 0]);
+   fprintf(fp, ",\n%*s"
+           "/* semantics    */   %s",
+           static_cast<int>(sizeof(templ) / sizeof(templ[0])) - 1, " ",
+           b[PG_Main::N_semantics > 0]);
+   fprintf(fp, ",\n%*s"
+           "/* stksize      */   %d",
+           static_cast<int>(sizeof(templ) / sizeof(templ[0])) - 1, " ",
+           stksize);
+   fprintf(fp, ",\n%*s"
+           "/* term_actions */   %s",
+           static_cast<int>(sizeof(templ) / sizeof(templ[0])) - 1, " ",
+           b[PG_Main::N_tacts > 0]);
+   fprintf(fp, "> %s_parser_t;\n", grammar);
 }
 
 
@@ -1424,11 +1386,13 @@ instantiate_generated_parser(FILE *fp)
 {
    static const int  stksize = 100;       // Parser-stack size.
    static const char *b[] = { "false", "true" };
-   static const char templ[] = "lrstar_parser generated_parser(";
+   static const char templ[] = "generated_parser(";
    bool init_fn;
    bool tact_fn;
    bool nact_fn;
 
+   fprintf(fp, "\n");
+   fprintf(fp, "const char %s_grammar_name[] = \"%s\";\n", gfn, gfn);
    fprintf(fp, "\n");
    init_fn = main_init_functions(fp,
                                  callback_info.N_tacts,
@@ -1443,9 +1407,13 @@ instantiate_generated_parser(FILE *fp)
                                  callback_info.Nact_start);
 
 
-   fprintf(fp, "\n%s", templ);
+   fprintf(fp, "\n");
+
+   fprintf(fp, "%s_parser_t\n", gfn);
+   fprintf(fp, "%s", templ);
+
    fprintf(fp,
-           "/* grammar      */   \"%s\"", gfn);
+           "/* grammar      */   &%s_grammar_name[0]", gfn);
    fprintf(fp, ",\n%*s"
            "/* user data    */   NULL",
            static_cast<int>(sizeof(templ) / sizeof(templ[0])) - 1, " ");
@@ -1515,7 +1483,7 @@ instantiate_generated_parser(FILE *fp)
       fprintf(fp, ",\n%*s"
               "/* init_func    */   %s",
               static_cast<int>(sizeof(templ) / sizeof(templ[0])) - 1, " ",
-              "NULL");
+              "0");
    }
 
    if (tact_fn) {
@@ -1527,7 +1495,7 @@ instantiate_generated_parser(FILE *fp)
       fprintf(fp, ",\n%*s"
               "/* tact_func    */   %s",
               static_cast<int>(sizeof(templ) / sizeof(templ[0])) - 1, " ",
-              "NULL");
+              "0");
    }
 
    if (nact_fn) {
@@ -1540,10 +1508,122 @@ instantiate_generated_parser(FILE *fp)
       fprintf(fp, ",\n%*s"
               "/* nact_func    */   %s",
               static_cast<int>(sizeof(templ) / sizeof(templ[0])) - 1, " ",
-              "NULL");
+              "0");
    }
 
    fprintf(fp, ");\n\n");
+}
+
+
+static void
+parser_header_fn(FILE       *fp,
+                 const char *pathname,
+                 const char *grammar,
+                 const char *fname)
+{
+   open_guard(fp, grammar, "Parser", "H");
+
+   fprintf (fp, "#include \"lrstar_basic_defs.h\"\n");
+   if (lrstar_linux) {
+      fprintf (fp, "#include \"lrstar_lexer.h\"\n");
+   }
+
+   fprintf(fp, "\n");
+   PG_Main::GenerateParserTableEnums(fp);
+
+   fprintf(fp, "#include \"%s_ParserTables_typedef.h\"\n", grammar);
+   fprintf(fp, "#include \"lrstar_parser.h\"\n\n");
+   generate_grammar_parser_typedef(fp, grammar);
+   close_guard(fp);
+}
+
+
+static void actions_cpp_fn(FILE       *fp,
+                           const char *pathname,
+                           const char *grammar,
+                           const char *fname)
+{
+   fprintf (fp, "\n");
+   fprintf (fp, "///////////////////////////////////////////////////////////////////////////////\n");
+   fprintf (fp, "//                                                                           //\n");
+   fprintf (fp, "\n");
+   fprintf (fp, ("#include \"lrstar_basic_defs.h\"\n"
+                 "#include \"%s_LexerTables_typedef.h\"\n"
+                 "#include \"%s_Actions.h\"\n"
+                 "#include \"%s_Parser.h\"\n"),
+            grammar, grammar, grammar);
+   if (lrstar_linux) {
+      fprintf (fp, "#include \"lrstar_main.h\"\n");
+   } else {
+      assert(lrstar_windows);
+      fprintf (fp, "#include \"../../code/main.h\"\n");
+   }
+   fprintf (fp, "\n");
+   fprintf (fp, "\n");
+   fprintf (fp, "void %s_init_actions(%s_parser_t *parser)\n", gfn, gfn);
+   fprintf (fp, "{\n");
+   fprintf (fp, "      /* Initialization code goes here */\n");
+   fprintf (fp, "}\n");
+   fprintf (fp, "\n");
+   fprintf (fp, "void  %s_term_actions(%s_parser_t *parser)\n", gfn, gfn);
+   fprintf (fp, "{\n");
+   fprintf (fp, "      /* Termination code goes here */\n");
+   fprintf (fp, "}\n");
+   fprintf (fp, "\n");
+   fprintf (fp, "\n");
+   fprintf (fp, "int %s_error(%s_parser_t *parser, int &t)\n", gfn, gfn);
+   fprintf (fp, "{\n");
+   fprintf (fp, "      if (parser->lt.token.end == parser->lt.token.start)        // Illegal character?\n");
+   fprintf (fp, "      {\n");
+   fprintf (fp, "         parser->lt.token.end++;\n");
+   fprintf (fp, "      }\n");
+   fprintf (fp, "      return 0;\n");
+   fprintf (fp, "}\n");
+   fprintf (fp, "\n");
+   fprintf (fp, "int %s_lookup(%s_parser_t *parser, int &t) "
+            "             // Lookup in symbol table.\n", gfn, gfn);
+   fprintf (fp, "{\n");
+   fprintf (fp, "      int sti;\n");
+   fprintf (fp,
+            "      if (parser->opt_nd_parsing && "
+            "parser->lt.lookahead.start != 0)             // In lookahead mode?\n");
+   fprintf (fp, "      {\n");
+   fprintf (fp, "         sti = parser->add_symbol(t, parser->lt.lookahead.start, parser->lt.lookahead.end);\n");
+   fprintf (fp, "      } else {                             // Regular mode of parsing.\n");
+   fprintf (fp, "         sti = parser->add_symbol(t, parser->lt.token.start, parser->lt.token.end);\n");
+   fprintf (fp, "      }\n");
+   fprintf (fp, "      if (parser->opt_semantics) {\n");
+   fprintf (fp, "         t = parser->symbol[sti].term;        // Redefine terminal number?\n");
+   fprintf (fp, "      }\n");
+   fprintf (fp, "    return sti;\n");                       // Return symbol-table index.\n");
+   fprintf (fp, "}\n");
+   fprintf (fp, "\n");
+   fprintf (fp, "\n");
+}
+
+
+static void lexer_cpp_fn(FILE       *fp,
+                         const char *pathname,
+                         const char *grammar,
+                         const char *fname)
+{
+   fprintf (fp, "\n");
+   fprintf (fp, "///////////////////////////////////////////////////////////////////////////////\n");
+   fprintf (fp, "//                                                                           //\n");
+   fprintf (fp, "\n");
+
+   fprintf (fp, "#include \"lrstar_basic_defs.h\"\n");
+   if (lrstar_linux) {
+      fprintf (fp, "#include \"lrstar_lexer.h\"\n");
+   }
+   fprintf (fp, ("#include \"%s_LexerTables_instantiate.h\"\n"), grammar);
+   if (lrstar_windows) {
+      fprintf (fp, "#include \"../../code/lexer.h\"\n");
+      fprintf (fp, "#include \"../../code/lexer.cpp\"\n");
+   }
+   fprintf (fp, "\n");
+   fprintf (fp, "//                                                                           //\n");
+   fprintf (fp, "///////////////////////////////////////////////////////////////////////////////\n\n");
 }
 
 

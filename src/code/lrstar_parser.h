@@ -84,6 +84,21 @@ class lrstar_user_data_t {
     */
 };
 
+template<const char *C_grammar,
+         bool        C_action,
+         bool        C_debug_parser,
+         bool        C_debug_trace,
+         bool        C_expecting,
+         bool        C_insensitive,
+         bool        C_lookaheads,
+         bool        C_make_ast,
+         bool        C_nd_parsing,
+         bool        C_nd_threads,
+         bool        C_node_actions,
+         bool        C_reversable,
+         bool        C_semantics,
+         int         C_stksize,
+         bool C_term_actions>
 class lrstar_parser
 {
 public:

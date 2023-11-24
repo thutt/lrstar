@@ -37,4 +37,22 @@ enum nodecon {
 #include "Calc_ParserTables_typedef.h"
 #include "lrstar_parser.h"
 
+extern const char Calc_grammar_name[];
+
+typedef lrstar_parser</* grammar      */   Calc_grammar_name,
+                      /* actions      */   true,
+                      /* debug_parser */   false,
+                      /* debug_trace  */   false,
+                      /* expecting    */   true,
+                      /* insensitive  */   false,
+                      /* lookaheads   */   1,
+                      /* make_ast     */   true,
+                      /* nd_parsing   */   false,
+                      /* nd_threads   */   0,
+                      /* node_actions */   true,
+                      /* reversable   */   true,
+                      /* semantics    */   false,
+                      /* stksize      */   100,
+                      /* term_actions */   true> Calc_parser_t;
+
 #endif

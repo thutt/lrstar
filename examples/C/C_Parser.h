@@ -119,4 +119,22 @@ enum nodecon {
 #include "C_ParserTables_typedef.h"
 #include "lrstar_parser.h"
 
+extern const char C_grammar_name[];
+
+typedef lrstar_parser</* grammar      */   C_grammar_name,
+                      /* actions      */   true,
+                      /* debug_parser */   false,
+                      /* debug_trace  */   false,
+                      /* expecting    */   true,
+                      /* insensitive  */   false,
+                      /* lookaheads   */   1,
+                      /* make_ast     */   true,
+                      /* nd_parsing   */   false,
+                      /* nd_threads   */   0,
+                      /* node_actions */   true,
+                      /* reversable   */   false,
+                      /* semantics    */   true,
+                      /* stksize      */   100,
+                      /* term_actions */   true> C_parser_t;
+
 #endif
