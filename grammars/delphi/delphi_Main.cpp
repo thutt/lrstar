@@ -7,7 +7,6 @@ const char delphi_grammar_name[] = "delphi";
 
 delphi_parser_t
 generated_parser(/* grammar      */   &delphi_grammar_name[0],
-                 /* stksize      */   100,
                  /* term_actions */   false,
                  /* init_func    */   0,
                  /* tact_func    */   0,

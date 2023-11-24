@@ -34,7 +34,6 @@ static LRK_parser_t::nact_func_t LRK_nact_funcs_[8] = {
 
 LRK_parser_t
 generated_parser(/* grammar      */   &LRK_grammar_name[0],
-                 /* stksize      */   100,
                  /* term_actions */   true,
                  /* init_func    */   &LRK_init_funcs_[0],
                  /* tact_func    */   &LRK_tact_funcs_[0],

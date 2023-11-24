@@ -557,7 +557,6 @@ public:
    }
 
    lrstar_parser(const char         *grammar_,
-                 int                 stksize_,
                  bool                term_actions_,
                  init_func_t         *init_func_,
                  tact_func_t         *tact_func_,
@@ -576,15 +575,15 @@ public:
       opt_node_actions(C_node_actions),
       opt_reversable(C_reversable),
       opt_semantics(C_semantics),
-      opt_stksize(stksize_),
+      opt_stksize(C_stksize),
       opt_term_actions(term_actions_),
       init_func(init_func_),
       tact_func(tact_func_),
       nact_func(nact_func_),
       n_errors(0)
       {
-         PSstart = new PStack[opt_stksize];
-         RSstart = new RStack[opt_stksize];
+         PSstart = new PStack[C_stksize];
+         RSstart = new RStack[C_stksize];
 
          if (C_nd_parsing) {
             SS      = new SStack *[C_nd_threads];
@@ -1369,7 +1368,7 @@ public:
          if (n_nodes > 1) {           // Any nodes in the tree?
             if (pt.n_nodeactns > 0) { // Any node actions?
                stacki  = -1;
-               stack   = new Stack [opt_stksize];
+               stack   = new Stack [C_stksize];
                counter = new int [pt.n_nodenames];
 
                for (int i = 0; i < pt.n_nodenames; i++) {
@@ -1481,7 +1480,7 @@ public:
    {
       if (C_nd_parsing) {
          for (int i = 0; i < C_nd_threads; i++) {
-            SSstart[i] = new SStack[opt_stksize];
+            SSstart[i] = new SStack[C_stksize];
          }
          for (int i = 0; i < C_lookaheads + 1; i++) {
             LAcount[i] = 0;
