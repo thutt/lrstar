@@ -560,7 +560,6 @@ public:
    }
 
    lrstar_parser(const char         *grammar_,
-                 bool                actions_,
                  bool                debug_parser_,
                  bool                debug_trace_,
                  bool                expecting_,
@@ -579,7 +578,7 @@ public:
                  nact_func_t         *nact_func_) :
       grammar(grammar_),
       user_data(0),
-      opt_actions(actions_),
+      opt_actions(C_action),
       opt_debug_parser(debug_parser_),
       opt_debug_trace(debug_trace_),
       opt_expecting(expecting_),
@@ -645,7 +644,7 @@ public:
          }
 
          term_symtab();
-         if (opt_actions) {
+         if (C_action) {
             (*init_func[1])(this);               // term_action()
          }
       }
@@ -1518,7 +1517,7 @@ public:
          init_ast(max_nodes);            // Initialize the parser.
       }
 
-      if (opt_actions) {
+      if (C_action) {
          (*init_func[0])(this);          // init_action()
       }
 

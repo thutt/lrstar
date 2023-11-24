@@ -132,7 +132,6 @@ static C_parser_t::nact_func_t C_nact_funcs_[106] = {
 
 C_parser_t
 generated_parser(/* grammar      */   &C_grammar_name[0],
-                 /* actions      */   true,
                  /* debug_parser */   false,
                  /* debug_trace  */   false,
                  /* expecting    */   true,

@@ -1415,10 +1415,6 @@ instantiate_generated_parser(FILE *fp)
    fprintf(fp,
            "/* grammar      */   &%s_grammar_name[0]", gfn);
    fprintf(fp, ",\n%*s"
-           "/* actions      */   %s",
-           static_cast<int>(sizeof(templ) / sizeof(templ[0])) - 1, " ",
-           b[PG_Main::N_tacts > 0 || PG_Main::N_nacts > 0]);
-   fprintf(fp, ",\n%*s"
            "/* debug_parser */   %s",
            static_cast<int>(sizeof(templ) / sizeof(templ[0])) - 1, " ",
            b[!!optn[PG_DEBUG]]);

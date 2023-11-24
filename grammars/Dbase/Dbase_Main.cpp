@@ -22,7 +22,6 @@ static Dbase_parser_t::tact_func_t Dbase_tact_funcs_[2] = {
 
 Dbase_parser_t
 generated_parser(/* grammar      */   &Dbase_grammar_name[0],
-                 /* actions      */   true,
                  /* debug_parser */   false,
                  /* debug_trace  */   false,
                  /* expecting    */   true,
