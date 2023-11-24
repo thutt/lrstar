@@ -1415,10 +1415,6 @@ instantiate_generated_parser(FILE *fp)
    fprintf(fp,
            "/* grammar      */   &%s_grammar_name[0]", gfn);
    fprintf(fp, ",\n%*s"
-           "/* make_ast     */   %s",
-           static_cast<int>(sizeof(templ) / sizeof(templ[0])) - 1, " ",
-           b[optn[PG_ASTCONST] && PG_Main::N_nodes > 0]);
-   fprintf(fp, ",\n%*s"
            "/* nd_parsing   */   %s",
            static_cast<int>(sizeof(templ) / sizeof(templ[0])) - 1, " ",
            b[PG_Main::n_ndstates > 0]);

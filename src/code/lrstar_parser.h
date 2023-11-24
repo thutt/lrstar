@@ -206,7 +206,7 @@ private:                        // LR Parser
          }
       }
 
-      if (opt_make_ast) {
+      if (C_make_ast) {
          int psi;                                        // Parse stack index.
          if (pt.node_numb[p] >= 0) {                     // MAKE NODE ?
             Node* n   = new_node ();                     // Get a new node.
@@ -557,7 +557,6 @@ public:
    }
 
    lrstar_parser(const char         *grammar_,
-                 bool                make_ast_,
                  bool                nd_parsing_,
                  int                 nd_threads_,
                  bool                node_actions_,
@@ -576,7 +575,7 @@ public:
       opt_expecting(C_expecting),
       opt_insensitive(C_insensitive),
       opt_lookaheads(C_lookaheads),
-      opt_make_ast(make_ast_),
+      opt_make_ast(C_make_ast),
       opt_nd_parsing(nd_parsing_),
       opt_nd_threads(nd_threads_),
       opt_node_actions(node_actions_),
@@ -631,7 +630,7 @@ public:
    void
    term_parser()
       {
-         if (opt_make_ast) {
+         if (C_make_ast) {
             term_ast();
          }
 
@@ -1135,7 +1134,7 @@ public:
          PS++;
          PS->state = x;                            // Put current state on stack.
          PS->sti   = lt.token.sti;                 // Put symbol-table index on stack.
-         if (opt_make_ast) {
+         if (C_make_ast) {
             PS->line  = lt.token.line;             // Put line number on stack.
             PS->start = lt.token.start;            // Put start address on stack.
             PS->node  = 0;                         // Set node on stack to zero.
@@ -1171,7 +1170,7 @@ public:
                RS->sym   = PS->sym;
             }
             PS->state = x;                         // Stack current state, replacing old state.
-            if (opt_make_ast) {
+            if (C_make_ast) {
                PS->node  = 0;                      // Set node on stack to zero.
             }
          }
@@ -1207,7 +1206,7 @@ public:
                   PS++;                               // Increment parser stack pointer.
                   PS->state = x;                      // Put current state on stack.
                   PS->sti   = lt.token.sti;           // Put symbol table index on stack.
-                  if (opt_make_ast) {
+                  if (C_make_ast) {
                      PS->line  = lt.token.line;       // Put line number on stack.
                      PS->start = lt.token.start;      // Put start address on stack.
                      PS->node  = 0;                   // Set node on stack to zero.
@@ -1237,7 +1236,7 @@ public:
             print_lookaheads();                       // Print lookahead statistics.
          }
          print_symtab(fp);                            // Print the symbol table contents.
-         if (opt_make_ast) {
+         if (C_make_ast) {
             find_root (PS[0].node);
             print_ast(fp);
             traverse(fp, FIRST_PASS);
@@ -1505,7 +1504,7 @@ public:
          return false;
       }
 
-      if (opt_make_ast) {
+      if (C_make_ast) {
          init_ast(max_nodes);            // Initialize the parser.
       }
 

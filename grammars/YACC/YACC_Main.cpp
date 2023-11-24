@@ -7,7 +7,6 @@ const char YACC_grammar_name[] = "YACC";
 
 YACC_parser_t
 generated_parser(/* grammar      */   &YACC_grammar_name[0],
-                 /* make_ast     */   false,
                  /* nd_parsing   */   false,
                  /* nd_threads   */   0,
                  /* node_actions */   false,
