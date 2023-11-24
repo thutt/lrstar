@@ -1412,18 +1412,10 @@ instantiate_generated_parser(FILE *fp)
    fprintf(fp, "%s_parser_t\n", gfn);
    fprintf(fp, "%s", templ);
 
-   fprintf(fp,
-           "/* grammar      */   &%s_grammar_name[0]", gfn);
    if (init_fn) {
-      fprintf(fp, ",\n%*s"
-              "/* init_func    */   &%s_init_funcs_[0]",
-              static_cast<int>(sizeof(templ) / sizeof(templ[0])) - 1, " ",
-              gfn);
+      fprintf(fp, "/* init_func    */   &%s_init_funcs_[0]", gfn);
    } else {
-      fprintf(fp, ",\n%*s"
-              "/* init_func    */   %s",
-              static_cast<int>(sizeof(templ) / sizeof(templ[0])) - 1, " ",
-              "0");
+      fprintf(fp, "/* init_func    */   0");
    }
 
    if (tact_fn) {
@@ -1433,9 +1425,8 @@ instantiate_generated_parser(FILE *fp)
               gfn);
    } else {
       fprintf(fp, ",\n%*s"
-              "/* tact_func    */   %s",
-              static_cast<int>(sizeof(templ) / sizeof(templ[0])) - 1, " ",
-              "0");
+              "/* tact_func    */   0",
+              static_cast<int>(sizeof(templ) / sizeof(templ[0])) - 1, " ");
    }
 
    if (nact_fn) {
@@ -1446,9 +1437,8 @@ instantiate_generated_parser(FILE *fp)
 
    } else {
       fprintf(fp, ",\n%*s"
-              "/* nact_func    */   %s",
-              static_cast<int>(sizeof(templ) / sizeof(templ[0])) - 1, " ",
-              "0");
+              "/* nact_func    */   0",
+              static_cast<int>(sizeof(templ) / sizeof(templ[0])) - 1, " ");
    }
 
    fprintf(fp, ");\n\n");

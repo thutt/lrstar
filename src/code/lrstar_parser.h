@@ -556,11 +556,10 @@ public:
       exit(100);
    }
 
-   lrstar_parser(const char         *grammar_,
-                 init_func_t         *init_func_,
+   lrstar_parser(init_func_t         *init_func_,
                  tact_func_t         *tact_func_,
                  nact_func_t         *nact_func_) :
-      grammar(grammar_),
+      grammar(C_grammar),
       user_data(0),
       opt_actions(C_action),
       opt_debug_parser(C_debug_parser),

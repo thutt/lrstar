@@ -106,8 +106,7 @@ static Vba_parser_t::nact_func_t Vba_nact_funcs_[81] = {
 
 
 Vba_parser_t
-generated_parser(/* grammar      */   &Vba_grammar_name[0],
-                 /* init_func    */   &Vba_init_funcs_[0],
+generated_parser(/* init_func    */   &Vba_init_funcs_[0],
                  /* tact_func    */   &Vba_tact_funcs_[0],
                  /* nact_func    */   &Vba_nact_funcs_[0]);
 

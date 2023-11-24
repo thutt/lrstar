@@ -36,8 +36,7 @@ static NCSA_parser_t::nact_func_t NCSA_nact_funcs_[11] = {
 
 
 NCSA_parser_t
-generated_parser(/* grammar      */   &NCSA_grammar_name[0],
-                 /* init_func    */   &NCSA_init_funcs_[0],
+generated_parser(/* init_func    */   &NCSA_init_funcs_[0],
                  /* tact_func    */   &NCSA_tact_funcs_[0],
                  /* nact_func    */   &NCSA_nact_funcs_[0]);
 

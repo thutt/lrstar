@@ -19,8 +19,7 @@ static PLM_parser_t::tact_func_t PLM_tact_funcs_[1] = {
 
 
 PLM_parser_t
-generated_parser(/* grammar      */   &PLM_grammar_name[0],
-                 /* init_func    */   &PLM_init_funcs_[0],
+generated_parser(/* init_func    */   &PLM_init_funcs_[0],
                  /* tact_func    */   &PLM_tact_funcs_[0],
                  /* nact_func    */   0);
 

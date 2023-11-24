@@ -21,8 +21,7 @@ static verilog_parser_t::tact_func_t verilog_tact_funcs_[2] = {
 
 
 verilog_parser_t
-generated_parser(/* grammar      */   &verilog_grammar_name[0],
-                 /* init_func    */   &verilog_init_funcs_[0],
+generated_parser(/* init_func    */   &verilog_init_funcs_[0],
                  /* tact_func    */   &verilog_tact_funcs_[0],
                  /* nact_func    */   0);
 

@@ -21,8 +21,7 @@ static COBOL_parser_t::tact_func_t COBOL_tact_funcs_[2] = {
 
 
 COBOL_parser_t
-generated_parser(/* grammar      */   &COBOL_grammar_name[0],
-                 /* init_func    */   &COBOL_init_funcs_[0],
+generated_parser(/* init_func    */   &COBOL_init_funcs_[0],
                  /* tact_func    */   &COBOL_tact_funcs_[0],
                  /* nact_func    */   0);
 

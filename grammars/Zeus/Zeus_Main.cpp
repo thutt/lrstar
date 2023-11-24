@@ -21,8 +21,7 @@ static Zeus_parser_t::tact_func_t Zeus_tact_funcs_[2] = {
 
 
 Zeus_parser_t
-generated_parser(/* grammar      */   &Zeus_grammar_name[0],
-                 /* init_func    */   &Zeus_init_funcs_[0],
+generated_parser(/* init_func    */   &Zeus_init_funcs_[0],
                  /* tact_func    */   &Zeus_tact_funcs_[0],
                  /* nact_func    */   0);
 
