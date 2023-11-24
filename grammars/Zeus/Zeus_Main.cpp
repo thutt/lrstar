@@ -22,8 +22,6 @@ static Zeus_parser_t::tact_func_t Zeus_tact_funcs_[2] = {
 
 Zeus_parser_t
 generated_parser(/* grammar      */   &Zeus_grammar_name[0],
-                 /* debug_parser */   false,
-                 /* debug_trace  */   false,
                  /* expecting    */   true,
                  /* insensitive  */   false,
                  /* lookaheads   */   1,

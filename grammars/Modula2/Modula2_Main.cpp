@@ -22,8 +22,6 @@ static Modula2_parser_t::tact_func_t Modula2_tact_funcs_[2] = {
 
 Modula2_parser_t
 generated_parser(/* grammar      */   &Modula2_grammar_name[0],
-                 /* debug_parser */   false,
-                 /* debug_trace  */   false,
                  /* expecting    */   true,
                  /* insensitive  */   false,
                  /* lookaheads   */   1,

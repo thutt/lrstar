@@ -22,8 +22,6 @@ static Java1_parser_t::tact_func_t Java1_tact_funcs_[2] = {
 
 Java1_parser_t
 generated_parser(/* grammar      */   &Java1_grammar_name[0],
-                 /* debug_parser */   false,
-                 /* debug_trace  */   false,
                  /* expecting    */   true,
                  /* insensitive  */   false,
                  /* lookaheads   */   1,

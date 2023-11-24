@@ -22,8 +22,6 @@ static CICS_parser_t::tact_func_t CICS_tact_funcs_[2] = {
 
 CICS_parser_t
 generated_parser(/* grammar      */   &CICS_grammar_name[0],
-                 /* debug_parser */   false,
-                 /* debug_trace  */   false,
                  /* expecting    */   true,
                  /* insensitive  */   false,
                  /* lookaheads   */   1,

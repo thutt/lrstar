@@ -1,6 +1,3 @@
-
-/////////////////////////////////////////////////////////////////////////////////////////////////////
-//                                                                                                 //
 //    LRSTAR Parser Header
 
 #if !defined(_LRSTAR_PARSER_H_)
@@ -354,7 +351,7 @@ private:                        // LR Parser
                State[i] = pt.nd_action[k];
                return true;
             }
-            if (opt_debug_parser) {
+            if (C_debug_parser) {
                char string[16];
                // A recursive call to nd_parse() is needed to continue
                // the ND lookahead parsing.  This version of the LR(*)
@@ -381,7 +378,7 @@ private:                        // LR Parser
          }
       }
 
-      if (opt_debug_parser) {
+      if (C_debug_parser) {
          char string[16];
          sprintf(string, "In state %d", State[i]);
          if (la == 0) {
@@ -404,7 +401,7 @@ private:                        // LR Parser
       int  limit;          // Lookahead limit.
       char string[64];
 
-      if (opt_debug_parser) {
+      if (C_debug_parser) {
          if (lt.token.line > last_line) {
             printf ("\n");
          }
@@ -440,13 +437,13 @@ private:                        // LR Parser
       // ONE ACTION SUCCEEDED ? ...
       if (total == 1) {
          LAcount[1]++;
-         if (opt_debug_parser) {
+         if (C_debug_parser) {
             n_warnings = 0;
          }
          i = 0;
          do {
             if (Parsed[i] > 0) {
-               if (opt_debug_parser) {
+               if (C_debug_parser) {
                   printf("   CHOOSING ");
                   print_action("", i);
                   printf ("\n");
@@ -484,14 +481,14 @@ private:                        // LR Parser
          // ONE ACTION SUCCEEDED ? ...
          if (total == 1) {
             LAcount[la+1]++;
-            if (opt_debug_parser) {
+            if (C_debug_parser) {
                n_warnings = 0;
             }
 
             i = 0;
             do {
                if (Parsed[i] > 0) {
-                  if (opt_debug_parser) {
+                  if (C_debug_parser) {
                      printf ("   CHOOSING ");
                      print_action ("", i);
                      printf("\n");
@@ -521,7 +518,7 @@ private:                        // LR Parser
       // TRIED ALL LOOKAHEADS, STILL AMBIGUOUS ...
       LAcount[limit]++;
       if (Action[0] > 0) { // Shift action?
-         if (opt_debug_parser) {
+         if (C_debug_parser) {
             printf("\n   AMBIGUITY after %d lookaheads, "
                    "choosing the Shift action.\n", limit);
             printf("\n");
@@ -534,7 +531,7 @@ private:                        // LR Parser
       // Some parsers choose the lowest numbered reduction.
       // Not a good idea, because the grammar is ambiguous.
       // Fix the grammar or increase option /k, if necessary.
-      if (opt_debug_parser) {
+      if (C_debug_parser) {
          printf("\n   AMBIGUITY after %d lookaheads, unable to decide.\n", limit);
       } else {
          sprintf(string, "In state %d", x);
@@ -560,8 +557,6 @@ public:
    }
 
    lrstar_parser(const char         *grammar_,
-                 bool                debug_parser_,
-                 bool                debug_trace_,
                  bool                expecting_,
                  bool                insensitive_,
                  int                 lookaheads_,
@@ -579,8 +574,8 @@ public:
       grammar(grammar_),
       user_data(0),
       opt_actions(C_action),
-      opt_debug_parser(debug_parser_),
-      opt_debug_trace(debug_trace_),
+      opt_debug_parser(C_debug_parser),
+      opt_debug_trace(C_debug_trace),
       opt_expecting(expecting_),
       opt_insensitive(insensitive_),
       opt_lookaheads(lookaheads_),
@@ -1033,7 +1028,7 @@ public:
    void
    print_stack ()               // Print parser stack.
    {
-      if (opt_debug_parser) {
+      if (C_debug_parser) {
          printf("\nParse stack:\n");
          for (PStack* ps = PSstart + 1; ps <= PS; ps++) {
             const char *name;
@@ -1098,7 +1093,7 @@ public:
    void
    print_ast(FILE *fp)
    {
-      if (opt_debug_parser) {
+      if (C_debug_parser) {
          print_ast(fp, root);
       }
    }
@@ -1251,7 +1246,7 @@ public:
             traverse(fp, FIRST_PASS);
          }
 
-         if (opt_debug_parser) {
+         if (C_debug_parser) {
             fprintf(fp, "\nDone.\n\n");
          }
          return lt.linenumb - 1;                       // Success.
@@ -1390,7 +1385,7 @@ public:
                   counter[i] = 0;
                }
 
-               if (opt_debug_parser) {
+               if (C_debug_parser) {
                   fprintf(fp,"\nDoing Tree Traversal ...\n\n");
                } else {
                   fprintf(fp,"\n");
@@ -1411,7 +1406,7 @@ public:
    void
    tracer(Node *n)
    {
-      if (opt_debug_trace) {
+      if (C_debug_trace) {
          if (opt_node_actions) {
             const char *dir;
             if (direction == TOP_DOWN ) {
@@ -1430,7 +1425,7 @@ public:
    void
    print_symtab(FILE *fp)
    {
-      if (opt_debug_parser) {
+      if (C_debug_parser) {
          fprintf(fp,"\nSymbol Table ...\n\n");
          if (n_symbols > 1) {
             fprintf(fp,"   sti  leng  type     name "
