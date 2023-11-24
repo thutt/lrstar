@@ -22,7 +22,6 @@ static PL1_parser_t::tact_func_t PL1_tact_funcs_[2] = {
 
 PL1_parser_t
 generated_parser(/* grammar      */   &PL1_grammar_name[0],
-                 /* lookaheads   */   1,
                  /* make_ast     */   false,
                  /* nd_parsing   */   false,
                  /* nd_threads   */   0,

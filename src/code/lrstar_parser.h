@@ -455,7 +455,7 @@ private:                        // LR Parser
 
       lt.lookahead.end      = lt.token.end; // Prime get_lookahead().
       lt.lookahead_linenumb = lt.linenumb;
-      limit                 = opt_lookaheads;
+      limit                 = C_lookaheads;
       la                    = 1;
 
       do {
@@ -557,7 +557,6 @@ public:
    }
 
    lrstar_parser(const char         *grammar_,
-                 int                 lookaheads_,
                  bool                make_ast_,
                  bool                nd_parsing_,
                  int                 nd_threads_,
@@ -576,7 +575,7 @@ public:
       opt_debug_trace(C_debug_trace),
       opt_expecting(C_expecting),
       opt_insensitive(C_insensitive),
-      opt_lookaheads(lookaheads_),
+      opt_lookaheads(C_lookaheads),
       opt_make_ast(make_ast_),
       opt_nd_parsing(nd_parsing_),
       opt_nd_threads(nd_threads_),
@@ -599,7 +598,7 @@ public:
             State   = new int[opt_nd_threads];
             Action  = new int[opt_nd_threads];
             Parsed  = new int[opt_nd_threads];
-            LAcount = new int[opt_lookaheads + 1];
+            LAcount = new int[C_lookaheads + 1];
          }
       }
 
@@ -765,7 +764,7 @@ public:
    print_lookaheads()
    {
       int n = 0;
-      for (int i = 0; i <= opt_lookaheads; i++) {
+      for (int i = 0; i <= C_lookaheads; i++) {
          if (LAcount[i] != 0) {
             const char *msg;
             if (n++ == 0) {
@@ -1490,7 +1489,7 @@ public:
          for (int i = 0; i < opt_nd_threads; i++) {
             SSstart[i] = new SStack[opt_stksize];
          }
-         for (int i = 0; i < opt_lookaheads + 1; i++) {
+         for (int i = 0; i < C_lookaheads + 1; i++) {
             LAcount[i] = 0;
          }
          last_line = 0;
