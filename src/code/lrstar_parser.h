@@ -103,26 +103,6 @@ public:
    typedef int  (*tact_func_t)(lrstar_parser *parser, int &t);
    typedef int  (*nact_func_t)(lrstar_parser *parser, Node *t);
 
-   /*
-    * XXX This options should be resolved at compile time for
-    *     performance reasons.
-    */
-
-   const bool opt_actions;            /* Init & terminate actions.    */
-   const bool opt_debug_parser;       /* Debugging diagnostics.       */
-   const bool opt_debug_trace;        /* Tracing.                     */
-   const bool opt_expecting;          /* Expecting.                   */
-   const bool opt_insensitive;        /* Case insensitive parser.     */
-   const int  opt_lookaheads;         /* Non-deterministic lookahead. */
-   const bool opt_make_ast;           /* Build AST.                   */
-   const bool opt_nd_parsing;         /* Non-deterministic. parsing.  */
-   const int  opt_nd_threads;         /* nd_parsing thread count.     */
-   const bool opt_node_actions;       /* Node Actions.                */
-   const bool opt_reversable;         /* Reversable grammar.          */
-   const bool opt_semantics;          /* Semantics.                   */
-   const int  opt_stksize;            /* Stack Size.                  */
-   const bool opt_term_actions;       /* Term Actions.                */
-
 public:
    lrstar_user_data_t *user_data;
 
@@ -561,20 +541,6 @@ public:
                  nact_func_t         *nact_func_) :
       grammar(C_grammar),
       user_data(0),
-      opt_actions(C_action),
-      opt_debug_parser(C_debug_parser),
-      opt_debug_trace(C_debug_trace),
-      opt_expecting(C_expecting),
-      opt_insensitive(C_insensitive),
-      opt_lookaheads(C_lookaheads),
-      opt_make_ast(C_make_ast),
-      opt_nd_parsing(C_nd_parsing),
-      opt_nd_threads(C_nd_threads),
-      opt_node_actions(C_node_actions),
-      opt_reversable(C_reversable),
-      opt_semantics(C_semantics),
-      opt_stksize(C_stksize),
-      opt_term_actions(C_term_actions),
       init_func(init_func_),
       tact_func(tact_func_),
       nact_func(nact_func_),
@@ -593,6 +559,8 @@ public:
          }
       }
 
+   bool opt_semantics(void)  { return C_semantics;  }
+   bool opt_nd_parsing(void) { return C_nd_parsing; }
 
    void
    set_user_data(lrstar_user_data_t *data)

@@ -32,13 +32,13 @@ int LRK_error(LRK_parser_t *parser, int &t)
 int LRK_lookup(LRK_parser_t *parser, int &t)              // Lookup in symbol table.
 {
       int sti;
-      if (parser->opt_nd_parsing && parser->lt.lookahead.start != 0)             // In lookahead mode?
+      if (parser->opt_nd_parsing() && parser->lt.lookahead.start != 0)             // In lookahead mode?
       {
          sti = parser->add_symbol(t, parser->lt.lookahead.start, parser->lt.lookahead.end);
       } else {                             // Regular mode of parsing.
          sti = parser->add_symbol(t, parser->lt.token.start, parser->lt.token.end);
       }
-      if (parser->opt_semantics) {
+      if (parser->opt_semantics()) {
          t = parser->symbol[sti].term;        // Redefine terminal number?
       }
     return sti;

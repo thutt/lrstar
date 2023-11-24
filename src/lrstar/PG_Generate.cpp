@@ -1503,29 +1503,27 @@ static void actions_cpp_fn(FILE       *fp,
    fprintf (fp, "\n");
    fprintf (fp, "int %s_error(%s_parser_t *parser, int &t)\n", gfn, gfn);
    fprintf (fp, "{\n");
-   fprintf (fp, "      if (parser->lt.token.end == parser->lt.token.start)        // Illegal character?\n");
-   fprintf (fp, "      {\n");
-   fprintf (fp, "         parser->lt.token.end++;\n");
-   fprintf (fp, "      }\n");
-   fprintf (fp, "      return 0;\n");
+   fprintf (fp, "   if (parser->lt.token.end == parser->lt.token.start) {      // Illegal character?\n");
+   fprintf (fp, "      parser->lt.token.end++;\n");
+   fprintf (fp, "   }\n");
+   fprintf (fp, "   return 0;\n");
    fprintf (fp, "}\n");
    fprintf (fp, "\n");
    fprintf (fp, "int %s_lookup(%s_parser_t *parser, int &t) "
             "             // Lookup in symbol table.\n", gfn, gfn);
    fprintf (fp, "{\n");
-   fprintf (fp, "      int sti;\n");
-   fprintf (fp,
-            "      if (parser->opt_nd_parsing && "
-            "parser->lt.lookahead.start != 0)             // In lookahead mode?\n");
-   fprintf (fp, "      {\n");
-   fprintf (fp, "         sti = parser->add_symbol(t, parser->lt.lookahead.start, parser->lt.lookahead.end);\n");
-   fprintf (fp, "      } else {                             // Regular mode of parsing.\n");
-   fprintf (fp, "         sti = parser->add_symbol(t, parser->lt.token.start, parser->lt.token.end);\n");
-   fprintf (fp, "      }\n");
-   fprintf (fp, "      if (parser->opt_semantics) {\n");
-   fprintf (fp, "         t = parser->symbol[sti].term;        // Redefine terminal number?\n");
-   fprintf (fp, "      }\n");
-   fprintf (fp, "    return sti;\n");                       // Return symbol-table index.\n");
+   fprintf (fp, "   int sti;\n");
+   fprintf (fp, ("   if (parser->opt_nd_parsing() &&\n"
+                 "       parser->lt.lookahead.start != 0) {"
+                 "           // In lookahead mode?\n"));
+   fprintf (fp, "       sti = parser->add_symbol(t, parser->lt.lookahead.start, parser->lt.lookahead.end);\n");
+   fprintf (fp, "   } else {                             // Regular mode of parsing.\n");
+   fprintf (fp, "       sti = parser->add_symbol(t, parser->lt.token.start, parser->lt.token.end);\n");
+   fprintf (fp, "   }\n");
+   fprintf (fp, "   if (parser->opt_semantics()) {\n");
+   fprintf (fp, "      t = parser->symbol[sti].term;        // Redefine terminal number?\n");
+   fprintf (fp, "   }\n");
+   fprintf (fp, "   return sti;\n");                       // Return symbol-table index.\n");
    fprintf (fp, "}\n");
    fprintf (fp, "\n");
    fprintf (fp, "\n");
