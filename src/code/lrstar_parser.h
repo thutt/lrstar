@@ -557,7 +557,6 @@ public:
    }
 
    lrstar_parser(const char         *grammar_,
-                 bool                node_actions_,
                  bool                reversable_,
                  bool                semantics_,
                  int                 stksize_,
@@ -576,7 +575,7 @@ public:
       opt_make_ast(C_make_ast),
       opt_nd_parsing(C_nd_parsing),
       opt_nd_threads(C_nd_threads),
-      opt_node_actions(node_actions_),
+      opt_node_actions(C_node_actions),
       opt_reversable(reversable_),
       opt_semantics(semantics_),
       opt_stksize(stksize_),
@@ -1334,7 +1333,7 @@ public:
    void
    traverse(FILE *fp, Node *n)
    {
-      if (opt_node_actions) {
+      if (C_node_actions) {
          int   i  = n->id;             // Node id.
          Node *c  = n->child;          // Child node pointer.
 
@@ -1368,7 +1367,7 @@ public:
    void
    traverse(FILE *fp, ast_pass_t trav)
    {
-      if (opt_node_actions) {
+      if (C_node_actions) {
          if (n_nodes > 1) {           // Any nodes in the tree?
             if (pt.n_nodeactns > 0) { // Any node actions?
                stacki  = -1;
@@ -1401,7 +1400,7 @@ public:
    tracer(Node *n)
    {
       if (C_debug_trace) {
-         if (opt_node_actions) {
+         if (C_node_actions) {
             const char *dir;
             if (direction == TOP_DOWN ) {
                dir = "*>";

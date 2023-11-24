@@ -22,7 +22,6 @@ static ANTLR_parser_t::tact_func_t ANTLR_tact_funcs_[2] = {
 
 ANTLR_parser_t
 generated_parser(/* grammar      */   &ANTLR_grammar_name[0],
-                 /* node_actions */   false,
                  /* reversable   */   false,
                  /* semantics    */   false,
                  /* stksize      */   100,
