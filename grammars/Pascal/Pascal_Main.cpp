@@ -211,7 +211,6 @@ static Pascal_parser_t::nact_func_t Pascal_nact_funcs_[185] = {
 
 Pascal_parser_t
 generated_parser(/* grammar      */   &Pascal_grammar_name[0],
-                 /* insensitive  */   false,
                  /* lookaheads   */   1,
                  /* make_ast     */   true,
                  /* nd_parsing   */   false,

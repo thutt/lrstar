@@ -557,7 +557,6 @@ public:
    }
 
    lrstar_parser(const char         *grammar_,
-                 bool                insensitive_,
                  int                 lookaheads_,
                  bool                make_ast_,
                  bool                nd_parsing_,
@@ -576,7 +575,7 @@ public:
       opt_debug_parser(C_debug_parser),
       opt_debug_trace(C_debug_trace),
       opt_expecting(C_expecting),
-      opt_insensitive(insensitive_),
+      opt_insensitive(C_insensitive),
       opt_lookaheads(lookaheads_),
       opt_make_ast(make_ast_),
       opt_nd_parsing(nd_parsing_),
@@ -1532,7 +1531,7 @@ public:
       uint        hash   = length;               // Set hash to length.
       int         i      = 0;                    // Set shift value to 0.
       do {                                       // Assume length != 0
-         if (opt_insensitive) {
+         if (C_insensitive) {
             hash += static_cast<uint8>(*p) << i;
          } else {
             hash += *p << i;
@@ -1549,7 +1548,7 @@ public:
             char* start = symbol[sti].start;
             char* end   = start + length;
             do {
-               if (opt_insensitive) {
+               if (C_insensitive) {
                   if (static_cast<uint8>(*p) != static_cast<uint8>(*start)) {
                      goto Cont;
                   }

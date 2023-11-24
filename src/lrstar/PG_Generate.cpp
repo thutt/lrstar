@@ -1415,10 +1415,6 @@ instantiate_generated_parser(FILE *fp)
    fprintf(fp,
            "/* grammar      */   &%s_grammar_name[0]", gfn);
    fprintf(fp, ",\n%*s"
-           "/* insensitive  */   %s",
-           static_cast<int>(sizeof(templ) / sizeof(templ[0])) - 1, " ",
-           b[!!optn[PG_INSENSITIVE]]);
-   fprintf(fp, ",\n%*s"
            "/* lookaheads   */   %d",
            static_cast<int>(sizeof(templ) / sizeof(templ[0])) - 1, " ",
            optn[PG_LOOKAHEADS]);

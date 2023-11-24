@@ -22,7 +22,6 @@ static C11_parser_t::tact_func_t C11_tact_funcs_[2] = {
 
 C11_parser_t
 generated_parser(/* grammar      */   &C11_grammar_name[0],
-                 /* insensitive  */   false,
                  /* lookaheads   */   1,
                  /* make_ast     */   false,
                  /* nd_parsing   */   false,
