@@ -557,8 +557,6 @@ public:
    }
 
    lrstar_parser(const char         *grammar_,
-                 bool                nd_parsing_,
-                 int                 nd_threads_,
                  bool                node_actions_,
                  bool                reversable_,
                  bool                semantics_,
@@ -576,8 +574,8 @@ public:
       opt_insensitive(C_insensitive),
       opt_lookaheads(C_lookaheads),
       opt_make_ast(C_make_ast),
-      opt_nd_parsing(nd_parsing_),
-      opt_nd_threads(nd_threads_),
+      opt_nd_parsing(C_nd_parsing),
+      opt_nd_threads(C_nd_threads),
       opt_node_actions(node_actions_),
       opt_reversable(reversable_),
       opt_semantics(semantics_),
@@ -591,12 +589,12 @@ public:
          PSstart = new PStack[opt_stksize];
          RSstart = new RStack[opt_stksize];
 
-         if (opt_nd_parsing) {
-            SS      = new SStack *[opt_nd_threads];
-            SSstart = new SStack *[opt_nd_threads];
-            State   = new int[opt_nd_threads];
-            Action  = new int[opt_nd_threads];
-            Parsed  = new int[opt_nd_threads];
+         if (C_nd_parsing) {
+            SS      = new SStack *[C_nd_threads];
+            SSstart = new SStack *[C_nd_threads];
+            State   = new int[C_nd_threads];
+            Action  = new int[C_nd_threads];
+            Parsed  = new int[C_nd_threads];
             LAcount = new int[C_lookaheads + 1];
          }
       }
@@ -991,7 +989,7 @@ public:
          }
       }
 
-      if (opt_nd_parsing) {
+      if (C_nd_parsing) {
          int i, j;
          for (i = pt.nd_fterm[x];
               i < pt.nd_fterm[x+1]; i++) {         // For all terminals in this state.
@@ -1189,7 +1187,7 @@ public:
          }
       }
 
-      if (opt_nd_parsing) {
+      if (C_nd_parsing) {
          int i, j, na, y;
 
          // For all ND terminals in this state.
@@ -1232,7 +1230,7 @@ public:
       if (x == pt.accept_state) {                     // If Goal production.
          PS -= pt.PL[p];                              // Reduce parse stack ptr by rule length - 1.
          reduce (p);                                  // Call reduce action with production number.
-         if (opt_nd_parsing) {
+         if (C_nd_parsing) {
             print_lookaheads();                       // Print lookahead statistics.
          }
          print_symtab(fp);                            // Print the symbol table contents.
@@ -1484,8 +1482,8 @@ public:
                int   max_syms,
                int   max_nodes)
    {
-      if (opt_nd_parsing) {
-         for (int i = 0; i < opt_nd_threads; i++) {
+      if (C_nd_parsing) {
+         for (int i = 0; i < C_nd_threads; i++) {
             SSstart[i] = new SStack[opt_stksize];
          }
          for (int i = 0; i < C_lookaheads + 1; i++) {

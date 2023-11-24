@@ -1415,14 +1415,6 @@ instantiate_generated_parser(FILE *fp)
    fprintf(fp,
            "/* grammar      */   &%s_grammar_name[0]", gfn);
    fprintf(fp, ",\n%*s"
-           "/* nd_parsing   */   %s",
-           static_cast<int>(sizeof(templ) / sizeof(templ[0])) - 1, " ",
-           b[PG_Main::n_ndstates > 0]);
-   fprintf(fp, ",\n%*s"
-           "/* nd_threads   */   %d",
-           static_cast<int>(sizeof(templ) / sizeof(templ[0])) - 1, " ",
-           PG_Main::n_ndstates > 0 ? PG_Main::nd_maxcount : 0);
-   fprintf(fp, ",\n%*s"
            "/* node_actions */   %s",
            static_cast<int>(sizeof(templ) / sizeof(templ[0])) - 1, " ",
            b[PG_Main::N_nacts > 0]);

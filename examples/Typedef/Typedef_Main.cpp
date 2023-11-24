@@ -27,8 +27,6 @@ static Typedef_parser_t::nact_func_t Typedef_nact_funcs_[1] = {
 
 Typedef_parser_t
 generated_parser(/* grammar      */   &Typedef_grammar_name[0],
-                 /* nd_parsing   */   false,
-                 /* nd_threads   */   0,
                  /* node_actions */   true,
                  /* reversable   */   false,
                  /* semantics    */   true,

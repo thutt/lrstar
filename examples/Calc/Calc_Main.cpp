@@ -60,8 +60,6 @@ static Calc_parser_t::nact_func_t Calc_nact_funcs_[17] = {
 
 Calc_parser_t
 generated_parser(/* grammar      */   &Calc_grammar_name[0],
-                 /* nd_parsing   */   false,
-                 /* nd_threads   */   0,
                  /* node_actions */   true,
                  /* reversable   */   true,
                  /* semantics    */   false,
