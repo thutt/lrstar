@@ -37,7 +37,6 @@ static NCSA_parser_t::nact_func_t NCSA_nact_funcs_[11] = {
 
 NCSA_parser_t
 generated_parser(/* grammar      */   &NCSA_grammar_name[0],
-                 /* semantics    */   true,
                  /* stksize      */   100,
                  /* term_actions */   true,
                  /* init_func    */   &NCSA_init_funcs_[0],

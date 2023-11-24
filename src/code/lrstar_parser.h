@@ -200,7 +200,7 @@ private:                        // LR Parser
    void
    reduce(int p)
    {
-      if (opt_semantics) {
+      if (C_semantics) {
          if (pt.argy[p] >= 0) {
             symbol[PS[0].sti].term = pt.argy[p];
          }
@@ -557,7 +557,6 @@ public:
    }
 
    lrstar_parser(const char         *grammar_,
-                 bool                semantics_,
                  int                 stksize_,
                  bool                term_actions_,
                  init_func_t         *init_func_,
@@ -576,7 +575,7 @@ public:
       opt_nd_threads(C_nd_threads),
       opt_node_actions(C_node_actions),
       opt_reversable(C_reversable),
-      opt_semantics(semantics_),
+      opt_semantics(C_semantics),
       opt_stksize(stksize_),
       opt_term_actions(term_actions_),
       init_func(init_func_),

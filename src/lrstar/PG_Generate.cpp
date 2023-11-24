@@ -1415,10 +1415,6 @@ instantiate_generated_parser(FILE *fp)
    fprintf(fp,
            "/* grammar      */   &%s_grammar_name[0]", gfn);
    fprintf(fp, ",\n%*s"
-           "/* semantics    */   %s",
-           static_cast<int>(sizeof(templ) / sizeof(templ[0])) - 1, " ",
-           b[PG_Main::N_semantics > 0]);
-   fprintf(fp, ",\n%*s"
            "/* stksize      */   %d",
            static_cast<int>(sizeof(templ) / sizeof(templ[0])) - 1, " ",
            stksize);
