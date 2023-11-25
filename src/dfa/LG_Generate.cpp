@@ -150,7 +150,7 @@ LG::instantiate_lexer(const char *dname,
    char pathname[PATH_MAX];
 
    create_filename(pathname, PATH_MAX, dname, fname, cname,
-                   "_instantiate", ".h");
+                   "", ".cpp");
 
    fp = fopen(pathname, "w");
    if (fp == NULL) {
@@ -158,9 +158,10 @@ LG::instantiate_lexer(const char *dname,
       Quit();
    }
 
-   open_guard(fp, fname, cname, "INSTANTIATE");
-   fprintf(fp, "// Include this file only once in a project.  It instantiates a "
-           "lexer.\n");
+   fprintf(fp,
+           "#include \"lrstar_basic_defs.h\"\n"
+           "#include \"lrstar_lexer.h\"\n"
+           "#include \"%s_LexerTables_typedef.h\"\n\n", fname);
 
    if (optn [LG_DEBUG]) {
       fprintf(fp, "      #define DEBUG_LEXER\n");
@@ -177,18 +178,22 @@ LG::instantiate_lexer(const char *dname,
       fprintf(fp, "};\n\n");
    }
 
-   fprintf(fp, ("%s\n"
-                "const int %s::n_term_numb = %d;\n\n"
-                ""), template_decl(), lexer_decl(), data_types[ts_TermNumb].n_elem);
-   fprintf(fp, ("%s\n"
-                "const int %s::n_Tm = %d;\n\n"
-                ""), template_decl(), lexer_decl(), data_types[ts_Tm].n_elem);
-   fprintf(fp, ("%s\n"
-                "const int %s::n_Tr = %d;\n\n"
-                ""), template_decl(), lexer_decl(), data_types[ts_Tr].n_elem);
-   fprintf(fp, ("%s\n"
-                "const int %s::n_Tc = %d;\n\n"
-                ""), template_decl(), lexer_decl(), data_types[ts_Tc].n_elem);
+   fprintf(fp,
+           "template<>\n"
+           "const int %s_lexer_t::n_term_numb = %d;\n",
+           fname, data_types[ts_TermNumb].n_elem);
+   fprintf(fp,
+           "template<>\n"
+           "const int %s_lexer_t::n_Tm = %d;\n",
+           fname, data_types[ts_Tm].n_elem);
+   fprintf(fp,
+           "template<>\n"
+           "const int %s_lexer_t::n_Tr = %d;\n",
+           fname, data_types[ts_Tr].n_elem);
+   fprintf(fp,
+           "template<>\n"
+           "const int %s_lexer_t::n_Tc = %d;\n\n",
+           fname, data_types[ts_Tc].n_elem);
 
 
    fprintf(fp, "// Terminal number ...\n");
@@ -201,11 +206,10 @@ LG::instantiate_lexer(const char *dname,
       else fprintf(fp, "%5d, ", D_red[i]);
    }
    fprintf(fp, "\n};\n\n");
-
-
-   fprintf(fp, ("%s\n"
-                "const T_term_numb *%s::term_numb = &term_numb_[0];\n\n"
-                ""), template_decl(), lexer_decl());
+   fprintf(fp,
+           "template<>\n"
+           "const %s *%s_lexer_t::term_numb = &term_numb_[0];\n\n",
+           data_types[ts_TermNumb].type, fname);
 
 
    fprintf(fp, "// Terminal transition matrix ...\n");
@@ -228,9 +232,10 @@ LG::instantiate_lexer(const char *dname,
    }
    fprintf(fp, "\n};\n\n");
 
-   fprintf(fp, ("%s\n"
-                "const T_Tm *%s::Tm = &Tm_[0];\n\n"
-                ""), template_decl(), lexer_decl());
+   fprintf(fp,
+           "template<>\n"
+           "const %s *%s_lexer_t::Tm = &Tm_[0];\n\n",
+           data_types[ts_Tm].type, fname);
 
    if (optn[LG_TABL_MEDIUM])
    {
@@ -245,13 +250,15 @@ LG::instantiate_lexer(const char *dname,
          }
       }
       fprintf(fp, "\n};\n\n");
-      fprintf(fp, ("%s\n"
-                   "const T_Tr *%s::Tr = &Tr_[0];\n\n"
-                   ""), template_decl(), lexer_decl());
+      fprintf(fp,
+              "template<>\n"
+              "const %s *%s_lexer_t::Tr = &Tr_[0];\n\n",
+              data_types[ts_Tr].type, fname);
    } else {
-      fprintf(fp, ("%s\n"
-                   "const T_Tr *%s::Tr = 0;\n\n"
-                   ""), template_decl(), lexer_decl());
+      fprintf(fp,
+              "template<>\n"
+              "const %s *%s_lexer_t::Tr = 0;\n\n",
+              data_types[ts_Tr].type, fname);
    }
 
 
@@ -269,18 +276,17 @@ LG::instantiate_lexer(const char *dname,
       }
       fprintf(fp, "\n};\n\n");
 
-      fprintf(fp, ("%s\n"
-                   "const T_Tc *%s::Tc = &Tc_[0];\n\n"
-                   ""), template_decl(), lexer_decl());
+      fprintf(fp,
+              "template<>\n"
+              "const %s *%s_lexer_t::Tc = &Tc_[0];\n\n",
+              data_types[ts_Tc].type, fname);
 
    } else {
-      fprintf(fp, ("%s\n"
-                   "const T_Tc *%s::Tc = 0;\n\n"
-                   ""), template_decl(), lexer_decl());
+      fprintf(fp,
+              "template<>\n"
+              "const %s *%s::Tc = 0;\n\n",
+              data_types[ts_Tc].type, fname);
    }
-
-   fprintf(fp, "template class %s;\n", lexer_instantiation);
-   close_guard(fp);
    fclose(fp);
 }
 
@@ -343,7 +349,7 @@ void LG::GenerateLexerDefines ()
    }
 
    lexer_inst(lexer, 128);
-   LG::instantiate_lexer(gdn, gfn, lexer_class, lexer);
+   LG::instantiate_lexer(gdn, gfn, "_Lexer", lexer);
    typedef_lexer(gdn, gfn, lexer_class, lexer);
 }
 

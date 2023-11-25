@@ -1520,31 +1520,6 @@ static void actions_cpp_fn(FILE       *fp,
 }
 
 
-static void lexer_cpp_fn(FILE       *fp,
-                         const char *pathname,
-                         const char *grammar,
-                         const char *fname)
-{
-   fprintf (fp, "\n");
-   fprintf (fp, "///////////////////////////////////////////////////////////////////////////////\n");
-   fprintf (fp, "//                                                                           //\n");
-   fprintf (fp, "\n");
-
-   fprintf (fp, "#include \"lrstar_basic_defs.h\"\n");
-   if (lrstar_linux) {
-      fprintf (fp, "#include \"lrstar_lexer.h\"\n");
-   }
-   fprintf (fp, ("#include \"%s_LexerTables_instantiate.h\"\n"), grammar);
-   if (lrstar_windows) {
-      fprintf (fp, "#include \"../../code/lexer.h\"\n");
-      fprintf (fp, "#include \"../../code/lexer.cpp\"\n");
-   }
-   fprintf (fp, "\n");
-   fprintf (fp, "//                                                                           //\n");
-   fprintf (fp, "///////////////////////////////////////////////////////////////////////////////\n\n");
-}
-
-
 static void main_cpp_fn(FILE       *fp,
                         const char *pathname,
                         const char *grammar,
@@ -1700,7 +1675,6 @@ void  PG_Main::GenerateOtherFiles ()
 
    write_file(gdn, gfn, NULL, "_Parser.h", true, parser_header_fn);
    write_file(gdn, gfn, NULL, "_Actions.cpp", false, actions_cpp_fn);
-   write_file(gdn, gfn, NULL, "_Lexer.cpp", true, lexer_cpp_fn);
    write_file(gdn, gfn, NULL, "_Main.cpp", true, main_cpp_fn);
    write_file(gdn, gfn, NULL, "_Parser.cpp", true, parser_cpp_fn);
    if (lrstar_linux) {
