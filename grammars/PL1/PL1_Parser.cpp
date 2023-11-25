@@ -3,7 +3,6 @@
 #include "PL1_LexerTables_typedef.h"
 #include "PL1_ParserTables_typedef.h"
 #include "PL1_Parser.h"
-#include "PL1_Actions.h"
 
 template<>
 const int PL1_parser_tables_t::n_term_symb = 226;

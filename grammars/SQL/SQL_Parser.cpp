@@ -3,7 +3,6 @@
 #include "SQL_LexerTables_typedef.h"
 #include "SQL_ParserTables_typedef.h"
 #include "SQL_Parser.h"
-#include "SQL_Actions.h"
 
 template<>
 const int SQL_parser_tables_t::n_term_symb = 138;

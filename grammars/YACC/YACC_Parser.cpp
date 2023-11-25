@@ -3,7 +3,6 @@
 #include "YACC_LexerTables_typedef.h"
 #include "YACC_ParserTables_typedef.h"
 #include "YACC_Parser.h"
-#include "YACC_Actions.h"
 
 template<>
 const int YACC_parser_tables_t::n_term_symb = 27;

@@ -3,7 +3,6 @@
 #include "NCSA_LexerTables_typedef.h"
 #include "NCSA_ParserTables_typedef.h"
 #include "NCSA_Parser.h"
-#include "NCSA_Actions.h"
 
 template<>
 const int NCSA_parser_tables_t::n_term_symb = 24;

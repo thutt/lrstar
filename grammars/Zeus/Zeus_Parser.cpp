@@ -3,7 +3,6 @@
 #include "Zeus_LexerTables_typedef.h"
 #include "Zeus_ParserTables_typedef.h"
 #include "Zeus_Parser.h"
-#include "Zeus_Actions.h"
 
 template<>
 const int Zeus_parser_tables_t::n_term_symb = 71;

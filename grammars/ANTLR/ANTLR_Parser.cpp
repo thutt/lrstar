@@ -3,7 +3,6 @@
 #include "ANTLR_LexerTables_typedef.h"
 #include "ANTLR_ParserTables_typedef.h"
 #include "ANTLR_Parser.h"
-#include "ANTLR_Actions.h"
 
 template<>
 const int ANTLR_parser_tables_t::n_term_symb = 43;

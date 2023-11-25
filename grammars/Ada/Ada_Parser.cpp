@@ -3,7 +3,6 @@
 #include "Ada_LexerTables_typedef.h"
 #include "Ada_ParserTables_typedef.h"
 #include "Ada_Parser.h"
-#include "Ada_Actions.h"
 
 template<>
 const int Ada_parser_tables_t::n_term_symb = 93;

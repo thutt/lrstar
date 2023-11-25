@@ -3,7 +3,6 @@
 #include "C11_LexerTables_typedef.h"
 #include "C11_ParserTables_typedef.h"
 #include "C11_Parser.h"
-#include "C11_Actions.h"
 
 template<>
 const int C11_parser_tables_t::n_term_symb = 99;

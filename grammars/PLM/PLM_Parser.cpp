@@ -3,7 +3,6 @@
 #include "PLM_LexerTables_typedef.h"
 #include "PLM_ParserTables_typedef.h"
 #include "PLM_Parser.h"
-#include "PLM_Actions.h"
 
 template<>
 const int PLM_parser_tables_t::n_term_symb = 70;

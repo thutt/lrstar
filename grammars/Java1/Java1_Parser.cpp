@@ -3,7 +3,6 @@
 #include "Java1_LexerTables_typedef.h"
 #include "Java1_ParserTables_typedef.h"
 #include "Java1_Parser.h"
-#include "Java1_Actions.h"
 
 template<>
 const int Java1_parser_tables_t::n_term_symb = 99;

@@ -3,7 +3,6 @@
 #include "Calc_LexerTables_typedef.h"
 #include "Calc_ParserTables_typedef.h"
 #include "Calc_Parser.h"
-#include "Calc_Actions.h"
 
 template<>
 const int Calc_parser_tables_t::n_term_symb = 22;

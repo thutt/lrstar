@@ -3,7 +3,6 @@
 #include "CPP5_LexerTables_typedef.h"
 #include "CPP5_ParserTables_typedef.h"
 #include "CPP5_Parser.h"
-#include "CPP5_Actions.h"
 
 template<>
 const int CPP5_parser_tables_t::n_term_symb = 103;

@@ -3,7 +3,6 @@
 #include "Pascal_LexerTables_typedef.h"
 #include "Pascal_ParserTables_typedef.h"
 #include "Pascal_Parser.h"
-#include "Pascal_Actions.h"
 
 template<>
 const int Pascal_parser_tables_t::n_term_symb = 113;

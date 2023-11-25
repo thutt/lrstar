@@ -1,6 +1,5 @@
 #include "lrstar_basic_defs.h"
 #include "NCSA_LexerTables_typedef.h"
-#include "NCSA_Actions.h"
 #include "lrstar_main.h"
 
 

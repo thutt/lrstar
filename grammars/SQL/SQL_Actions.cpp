@@ -4,7 +4,6 @@
 
 #include "lrstar_basic_defs.h"
 #include "SQL_LexerTables_typedef.h"
-#include "SQL_Actions.h"
 #include "SQL_Parser.h"
 #include "lrstar_main.h"
 

@@ -3,7 +3,6 @@
 #include "Fortran_LexerTables_typedef.h"
 #include "Fortran_ParserTables_typedef.h"
 #include "Fortran_Parser.h"
-#include "Fortran_Actions.h"
 
 template<>
 const int Fortran_parser_tables_t::n_term_symb = 268;

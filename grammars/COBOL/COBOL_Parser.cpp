@@ -3,7 +3,6 @@
 #include "COBOL_LexerTables_typedef.h"
 #include "COBOL_ParserTables_typedef.h"
 #include "COBOL_Parser.h"
-#include "COBOL_Actions.h"
 
 template<>
 const int COBOL_parser_tables_t::n_term_symb = 351;

@@ -3,7 +3,6 @@
 #include "CICS_LexerTables_typedef.h"
 #include "CICS_ParserTables_typedef.h"
 #include "CICS_Parser.h"
-#include "CICS_Actions.h"
 
 template<>
 const int CICS_parser_tables_t::n_term_symb = 216;

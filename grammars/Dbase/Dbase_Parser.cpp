@@ -3,7 +3,6 @@
 #include "Dbase_LexerTables_typedef.h"
 #include "Dbase_ParserTables_typedef.h"
 #include "Dbase_Parser.h"
-#include "Dbase_Actions.h"
 
 template<>
 const int Dbase_parser_tables_t::n_term_symb = 280;

@@ -3,7 +3,6 @@
 #include "ALGOL60_LexerTables_typedef.h"
 #include "ALGOL60_ParserTables_typedef.h"
 #include "ALGOL60_Parser.h"
-#include "ALGOL60_Actions.h"
 
 template<>
 const int ALGOL60_parser_tables_t::n_term_symb = 57;

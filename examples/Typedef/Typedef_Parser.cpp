@@ -3,7 +3,6 @@
 #include "Typedef_LexerTables_typedef.h"
 #include "Typedef_ParserTables_typedef.h"
 #include "Typedef_Parser.h"
-#include "Typedef_Actions.h"
 
 template<>
 const int Typedef_parser_tables_t::n_term_symb = 12;

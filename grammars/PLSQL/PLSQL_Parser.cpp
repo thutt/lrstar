@@ -3,7 +3,6 @@
 #include "PLSQL_LexerTables_typedef.h"
 #include "PLSQL_ParserTables_typedef.h"
 #include "PLSQL_Parser.h"
-#include "PLSQL_Actions.h"
 
 template<>
 const int PLSQL_parser_tables_t::n_term_symb = 2285;

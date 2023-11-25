@@ -3,7 +3,6 @@
 #include "Modula2_LexerTables_typedef.h"
 #include "Modula2_ParserTables_typedef.h"
 #include "Modula2_Parser.h"
-#include "Modula2_Actions.h"
 
 template<>
 const int Modula2_parser_tables_t::n_term_symb = 71;

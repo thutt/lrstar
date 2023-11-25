@@ -3,7 +3,6 @@
 #include "XPL_LexerTables_typedef.h"
 #include "XPL_ParserTables_typedef.h"
 #include "XPL_Parser.h"
-#include "XPL_Actions.h"
 
 template<>
 const int XPL_parser_tables_t::n_term_symb = 49;

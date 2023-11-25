@@ -3,7 +3,6 @@
 #include "delphi_LexerTables_typedef.h"
 #include "delphi_ParserTables_typedef.h"
 #include "delphi_Parser.h"
-#include "delphi_Actions.h"
 
 template<>
 const int delphi_parser_tables_t::n_term_symb = 101;

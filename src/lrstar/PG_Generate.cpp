@@ -1292,19 +1292,6 @@ void  PG_Main::GenerateParserTables ()
 };
 
 
-void actions_header_fn(FILE       *fp,
-                       const char *pathname,
-                       const char *grammar,
-                       const char *fname)
-{
-   fprintf (fp, "\n");
-   fprintf (fp, "#pragma once\n");
-   fprintf (fp, "\n");
-   fprintf (fp, "#include \"%s_Parser.h\"\n", grammar);
-   fprintf (fp, "\n");
-}
-
-
 static void
 generate_grammar_parser_typedef(FILE *fp, const char *grammar)
 {
@@ -1483,9 +1470,8 @@ static void actions_cpp_fn(FILE       *fp,
    fprintf (fp, "\n");
    fprintf (fp, ("#include \"lrstar_basic_defs.h\"\n"
                  "#include \"%s_LexerTables_typedef.h\"\n"
-                 "#include \"%s_Actions.h\"\n"
                  "#include \"%s_Parser.h\"\n"),
-            grammar, grammar, grammar);
+            grammar, grammar);
    if (lrstar_linux) {
       fprintf (fp, "#include \"lrstar_main.h\"\n");
    } else {
@@ -1591,9 +1577,8 @@ parser_cpp_fn(FILE       *fp,
                  "#include \"lrstar_parser_tables.h\"\n"
                  "#include \"%s_LexerTables_typedef.h\"\n"
                  "#include \"%s_ParserTables_typedef.h\"\n"
-                 "#include \"%s_Parser.h\"\n"
-                 "#include \"%s_Actions.h\"\n\n"),
-            grammar, grammar, grammar, grammar);
+                 "#include \"%s_Parser.h\"\n\n"),
+            grammar, grammar, grammar);
 
    instantiate_field_lengths(fp);
    PG_Main::instantiate_constants(fp);
@@ -1713,7 +1698,6 @@ void  PG_Main::GenerateOtherFiles ()
    callback_info.Tact_start = Tact_start;
    callback_info.Nact_start = Nact_start;
 
-   write_file(gdn, gfn, NULL, "_Actions.h", false, actions_header_fn);
    write_file(gdn, gfn, NULL, "_Parser.h", true, parser_header_fn);
    write_file(gdn, gfn, NULL, "_Actions.cpp", false, actions_cpp_fn);
    write_file(gdn, gfn, NULL, "_Lexer.cpp", true, lexer_cpp_fn);
