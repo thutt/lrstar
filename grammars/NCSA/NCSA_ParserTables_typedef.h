@@ -7,6 +7,5 @@
 #include "lrstar_parser_tables.h"
 typedef templ_lrstar_parser_tables<const char * const, const char * const, const char * const, const char * const, uint8, uint8, int8, int8, int8, int8, uint8, uint8, uint8, uint8, int8, uint8, uint8, int8, uint8, uint8, uint8, int8, uint8, uint8, uint32, uint32, uint32, uint32, int8, int8, int8, uint32> NCSA_parser_tables_t;
 
-typedef NCSA_parser_tables_t parser_tables_t;
 
 #endif

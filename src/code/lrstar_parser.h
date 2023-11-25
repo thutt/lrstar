@@ -95,7 +95,9 @@ template<const char *C_grammar,
          bool        C_reversable,
          bool        C_semantics,
          int         C_stksize,
-         bool C_term_actions>
+         bool        C_term_actions,
+         typename    T_lexer_t,
+         typename    T_parser_tables_t>
 class lrstar_parser
 {
 public:
@@ -107,8 +109,8 @@ public:
    lrstar_user_data_t *user_data;
 
 public:
-   lexer_t         lt;   /* Lexer tables. */
-   parser_tables_t pt;   /* Parser tables. */
+   T_lexer_t         lt;        /* Lexer tables. */
+   T_parser_tables_t pt;        /* Parser tables. */
 
 public:
 

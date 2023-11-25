@@ -305,7 +305,7 @@ typedef_lexer(const char *dname,
 
    open_guard(fp, fname, cname, "TYPEDEF");
    fprintf(fp, "#include \"lrstar_lexer.h\"\n");
-   fprintf(fp, "typedef %s lexer_t;\n", lexer_instantiation);
+   fprintf(fp, "typedef %s %s_lexer_t;\n", lexer_instantiation, fname);
    close_guard(fp);
    fclose(fp);
 }

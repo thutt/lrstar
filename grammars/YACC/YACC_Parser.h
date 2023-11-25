@@ -12,20 +12,22 @@
 
 extern const char YACC_grammar_name[];
 
-typedef lrstar_parser</* grammar      */   YACC_grammar_name,
-                      /* actions      */   false,
-                      /* debug_parser */   false,
-                      /* debug_trace  */   false,
-                      /* expecting    */   true,
-                      /* insensitive  */   false,
-                      /* lookaheads   */   1,
-                      /* make_ast     */   false,
-                      /* nd_parsing   */   false,
-                      /* nd_threads   */   0,
-                      /* node_actions */   false,
-                      /* reversable   */   false,
-                      /* semantics    */   false,
-                      /* stksize      */   100,
-                      /* term_actions */   false> YACC_parser_t;
+typedef lrstar_parser</* grammar           */   YACC_grammar_name,
+                      /* actions           */   false,
+                      /* debug_parser      */   false,
+                      /* debug_trace       */   false,
+                      /* expecting         */   true,
+                      /* insensitive       */   false,
+                      /* lookaheads        */   1,
+                      /* make_ast          */   false,
+                      /* nd_parsing        */   false,
+                      /* nd_threads        */   0,
+                      /* node_actions      */   false,
+                      /* reversable        */   false,
+                      /* semantics         */   false,
+                      /* stksize           */   100,
+                      /* term_actions      */   false,
+                      /* lexer table type  */   YACC_lexer_t,
+                      /* parser table type */   YACC_parser_tables_t> YACC_parser_t;
 
 #endif

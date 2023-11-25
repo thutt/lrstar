@@ -5,6 +5,6 @@
 #define __Java9__LexerTables_TYPEDEF
 
 #include "lrstar_lexer.h"
-typedef templ_lrstar_lexer<int8, uint16, uint16, uint8> lexer_t;
+typedef templ_lrstar_lexer<int8, uint16, uint16, uint8> Java9_lexer_t;
 
 #endif

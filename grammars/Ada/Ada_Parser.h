@@ -12,20 +12,22 @@
 
 extern const char Ada_grammar_name[];
 
-typedef lrstar_parser</* grammar      */   Ada_grammar_name,
-                      /* actions      */   true,
-                      /* debug_parser */   false,
-                      /* debug_trace  */   false,
-                      /* expecting    */   true,
-                      /* insensitive  */   false,
-                      /* lookaheads   */   1,
-                      /* make_ast     */   false,
-                      /* nd_parsing   */   false,
-                      /* nd_threads   */   0,
-                      /* node_actions */   false,
-                      /* reversable   */   false,
-                      /* semantics    */   false,
-                      /* stksize      */   100,
-                      /* term_actions */   true> Ada_parser_t;
+typedef lrstar_parser</* grammar           */   Ada_grammar_name,
+                      /* actions           */   true,
+                      /* debug_parser      */   false,
+                      /* debug_trace       */   false,
+                      /* expecting         */   true,
+                      /* insensitive       */   false,
+                      /* lookaheads        */   1,
+                      /* make_ast          */   false,
+                      /* nd_parsing        */   false,
+                      /* nd_threads        */   0,
+                      /* node_actions      */   false,
+                      /* reversable        */   false,
+                      /* semantics         */   false,
+                      /* stksize           */   100,
+                      /* term_actions      */   true,
+                      /* lexer table type  */   Ada_lexer_t,
+                      /* parser table type */   Ada_parser_tables_t> Ada_parser_t;
 
 #endif

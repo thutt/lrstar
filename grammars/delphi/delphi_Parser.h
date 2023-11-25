@@ -12,20 +12,22 @@
 
 extern const char delphi_grammar_name[];
 
-typedef lrstar_parser</* grammar      */   delphi_grammar_name,
-                      /* actions      */   false,
-                      /* debug_parser */   false,
-                      /* debug_trace  */   false,
-                      /* expecting    */   true,
-                      /* insensitive  */   false,
-                      /* lookaheads   */   1,
-                      /* make_ast     */   false,
-                      /* nd_parsing   */   false,
-                      /* nd_threads   */   0,
-                      /* node_actions */   false,
-                      /* reversable   */   false,
-                      /* semantics    */   false,
-                      /* stksize      */   100,
-                      /* term_actions */   false> delphi_parser_t;
+typedef lrstar_parser</* grammar           */   delphi_grammar_name,
+                      /* actions           */   false,
+                      /* debug_parser      */   false,
+                      /* debug_trace       */   false,
+                      /* expecting         */   true,
+                      /* insensitive       */   false,
+                      /* lookaheads        */   1,
+                      /* make_ast          */   false,
+                      /* nd_parsing        */   false,
+                      /* nd_threads        */   0,
+                      /* node_actions      */   false,
+                      /* reversable        */   false,
+                      /* semantics         */   false,
+                      /* stksize           */   100,
+                      /* term_actions      */   false,
+                      /* lexer table type  */   delphi_lexer_t,
+                      /* parser table type */   delphi_parser_tables_t> delphi_parser_t;
 
 #endif

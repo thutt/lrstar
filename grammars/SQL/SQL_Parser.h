@@ -12,20 +12,22 @@
 
 extern const char SQL_grammar_name[];
 
-typedef lrstar_parser</* grammar      */   SQL_grammar_name,
-                      /* actions      */   true,
-                      /* debug_parser */   false,
-                      /* debug_trace  */   false,
-                      /* expecting    */   true,
-                      /* insensitive  */   false,
-                      /* lookaheads   */   1,
-                      /* make_ast     */   false,
-                      /* nd_parsing   */   false,
-                      /* nd_threads   */   0,
-                      /* node_actions */   false,
-                      /* reversable   */   false,
-                      /* semantics    */   false,
-                      /* stksize      */   100,
-                      /* term_actions */   true> SQL_parser_t;
+typedef lrstar_parser</* grammar           */   SQL_grammar_name,
+                      /* actions           */   true,
+                      /* debug_parser      */   false,
+                      /* debug_trace       */   false,
+                      /* expecting         */   true,
+                      /* insensitive       */   false,
+                      /* lookaheads        */   1,
+                      /* make_ast          */   false,
+                      /* nd_parsing        */   false,
+                      /* nd_threads        */   0,
+                      /* node_actions      */   false,
+                      /* reversable        */   false,
+                      /* semantics         */   false,
+                      /* stksize           */   100,
+                      /* term_actions      */   true,
+                      /* lexer table type  */   SQL_lexer_t,
+                      /* parser table type */   SQL_parser_tables_t> SQL_parser_t;
 
 #endif

@@ -200,20 +200,22 @@ enum nodecon {
 
 extern const char Pascal_grammar_name[];
 
-typedef lrstar_parser</* grammar      */   Pascal_grammar_name,
-                      /* actions      */   true,
-                      /* debug_parser */   false,
-                      /* debug_trace  */   false,
-                      /* expecting    */   true,
-                      /* insensitive  */   false,
-                      /* lookaheads   */   1,
-                      /* make_ast     */   true,
-                      /* nd_parsing   */   false,
-                      /* nd_threads   */   0,
-                      /* node_actions */   true,
-                      /* reversable   */   false,
-                      /* semantics    */   true,
-                      /* stksize      */   100,
-                      /* term_actions */   true> Pascal_parser_t;
+typedef lrstar_parser</* grammar           */   Pascal_grammar_name,
+                      /* actions           */   true,
+                      /* debug_parser      */   false,
+                      /* debug_trace       */   false,
+                      /* expecting         */   true,
+                      /* insensitive       */   false,
+                      /* lookaheads        */   1,
+                      /* make_ast          */   true,
+                      /* nd_parsing        */   false,
+                      /* nd_threads        */   0,
+                      /* node_actions      */   true,
+                      /* reversable        */   false,
+                      /* semantics         */   true,
+                      /* stksize           */   100,
+                      /* term_actions      */   true,
+                      /* lexer table type  */   Pascal_lexer_t,
+                      /* parser table type */   Pascal_parser_tables_t> Pascal_parser_t;
 
 #endif

@@ -1030,10 +1030,6 @@ PG_Main::typedef_tables(const char *dname,
    open_guard(fp, fname, cname, "TYPEDEF");
    fprintf(fp, "#include \"lrstar_parser_tables.h\"\n");
    fprintf(fp, "typedef %s %s_parser_tables_t;\n\n", parser, gfn);
-
-   /* XXX Remove this typedef when lrstar_parser is templatized and
-    * takes the parser table type as an argument. */
-   fprintf(fp, "typedef %s_parser_tables_t parser_tables_t;\n", gfn);
    close_guard(fp);
    fclose(fp);
 }
@@ -1320,63 +1316,71 @@ generate_grammar_parser_typedef(FILE *fp, const char *grammar)
 
    fprintf(fp, "%s", templ);
    fprintf(fp,
-           "/* grammar      */   %s_grammar_name", gfn);
+           "/* grammar           */   %s_grammar_name", gfn);
    fprintf(fp, ",\n%*s"
-           "/* actions      */   %s",
+           "/* actions           */   %s",
            static_cast<int>(sizeof(templ) / sizeof(templ[0])) - 1, " ",
            b[PG_Main::N_tacts > 0 || PG_Main::N_nacts > 0]);
    fprintf(fp, ",\n%*s"
-           "/* debug_parser */   %s",
+           "/* debug_parser      */   %s",
            static_cast<int>(sizeof(templ) / sizeof(templ[0])) - 1, " ",
            b[!!optn[PG_DEBUG]]);
    fprintf(fp, ",\n%*s"
-           "/* debug_trace  */   %s",
+           "/* debug_trace       */   %s",
            static_cast<int>(sizeof(templ) / sizeof(templ[0])) - 1, " ",
            b[!!optn[PG_DEBUGTRACE]]);
    fprintf(fp, ",\n%*s"
-           "/* expecting    */   %s",
+           "/* expecting         */   %s",
            static_cast<int>(sizeof(templ) / sizeof(templ[0])) - 1, " ",
            b[optn[PG_EXPECTING] || PG_Main::error_used > 0]);
    fprintf(fp, ",\n%*s"
-           "/* insensitive  */   %s",
+           "/* insensitive       */   %s",
            static_cast<int>(sizeof(templ) / sizeof(templ[0])) - 1, " ",
            b[!!optn[PG_INSENSITIVE]]);
    fprintf(fp, ",\n%*s"
-           "/* lookaheads   */   %d",
+           "/* lookaheads        */   %d",
            static_cast<int>(sizeof(templ) / sizeof(templ[0])) - 1, " ",
            optn[PG_LOOKAHEADS]);
    fprintf(fp, ",\n%*s"
-           "/* make_ast     */   %s",
+           "/* make_ast          */   %s",
            static_cast<int>(sizeof(templ) / sizeof(templ[0])) - 1, " ",
            b[optn[PG_ASTCONST] && PG_Main::N_nodes > 0]);
    fprintf(fp, ",\n%*s"
-           "/* nd_parsing   */   %s",
+           "/* nd_parsing        */   %s",
            static_cast<int>(sizeof(templ) / sizeof(templ[0])) - 1, " ",
            b[PG_Main::n_ndstates > 0]);
    fprintf(fp, ",\n%*s"
-           "/* nd_threads   */   %d",
+           "/* nd_threads        */   %d",
            static_cast<int>(sizeof(templ) / sizeof(templ[0])) - 1, " ",
            PG_Main::n_ndstates > 0 ? PG_Main::nd_maxcount : 0);
    fprintf(fp, ",\n%*s"
-           "/* node_actions */   %s",
+           "/* node_actions      */   %s",
            static_cast<int>(sizeof(templ) / sizeof(templ[0])) - 1, " ",
            b[PG_Main::N_nacts > 0]);
    fprintf(fp, ",\n%*s"
-           "/* reversable   */   %s",
+           "/* reversable        */   %s",
            static_cast<int>(sizeof(templ) / sizeof(templ[0])) - 1, " ",
            b[PG_Main::N_reverses > 0]);
    fprintf(fp, ",\n%*s"
-           "/* semantics    */   %s",
+           "/* semantics         */   %s",
            static_cast<int>(sizeof(templ) / sizeof(templ[0])) - 1, " ",
            b[PG_Main::N_semantics > 0]);
    fprintf(fp, ",\n%*s"
-           "/* stksize      */   %d",
+           "/* stksize           */   %d",
            static_cast<int>(sizeof(templ) / sizeof(templ[0])) - 1, " ",
            stksize);
    fprintf(fp, ",\n%*s"
-           "/* term_actions */   %s",
+           "/* term_actions      */   %s",
            static_cast<int>(sizeof(templ) / sizeof(templ[0])) - 1, " ",
            b[PG_Main::N_tacts > 0]);
+   fprintf(fp, ",\n%*s"
+           "/* lexer table type  */   %s_lexer_t",
+           static_cast<int>(sizeof(templ) / sizeof(templ[0])) - 1, " ",
+           grammar);
+   fprintf(fp, ",\n%*s"
+           "/* parser table type */   %s_parser_tables_t",
+           static_cast<int>(sizeof(templ) / sizeof(templ[0])) - 1, " ",
+           grammar);
    fprintf(fp, "> %s_parser_t;\n", grammar);
 }
 

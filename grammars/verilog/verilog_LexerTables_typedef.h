@@ -5,6 +5,6 @@
 #define __verilog__LexerTables_TYPEDEF
 
 #include "lrstar_lexer.h"
-typedef templ_lrstar_lexer<uint8, uint16, uint16, uint8> lexer_t;
+typedef templ_lrstar_lexer<uint8, uint16, uint16, uint8> verilog_lexer_t;
 
 #endif

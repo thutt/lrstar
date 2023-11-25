@@ -23,20 +23,22 @@ enum nodecon {
 
 extern const char LRK_grammar_name[];
 
-typedef lrstar_parser</* grammar      */   LRK_grammar_name,
-                      /* actions      */   true,
-                      /* debug_parser */   false,
-                      /* debug_trace  */   false,
-                      /* expecting    */   true,
-                      /* insensitive  */   false,
-                      /* lookaheads   */   1,
-                      /* make_ast     */   true,
-                      /* nd_parsing   */   false,
-                      /* nd_threads   */   0,
-                      /* node_actions */   true,
-                      /* reversable   */   false,
-                      /* semantics    */   true,
-                      /* stksize      */   100,
-                      /* term_actions */   true> LRK_parser_t;
+typedef lrstar_parser</* grammar           */   LRK_grammar_name,
+                      /* actions           */   true,
+                      /* debug_parser      */   false,
+                      /* debug_trace       */   false,
+                      /* expecting         */   true,
+                      /* insensitive       */   false,
+                      /* lookaheads        */   1,
+                      /* make_ast          */   true,
+                      /* nd_parsing        */   false,
+                      /* nd_threads        */   0,
+                      /* node_actions      */   true,
+                      /* reversable        */   false,
+                      /* semantics         */   true,
+                      /* stksize           */   100,
+                      /* term_actions      */   true,
+                      /* lexer table type  */   LRK_lexer_t,
+                      /* parser table type */   LRK_parser_tables_t> LRK_parser_t;
 
 #endif
