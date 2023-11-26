@@ -13,10 +13,10 @@ include $(LRSTAR_INSTALL_ROOT)/make/sample.defs
 
 
 SOURCE	:=			\
-	$(GRM)_Actions.cpp	\
 	$(GRM)_Lexer.cpp	\
 	$(GRM)_Main.cpp		\
-	$(GRM)_Parser.cpp
+	$(GRM)_Parser.cpp	\
+	$(GRM)_user.cpp
 
 
 OBJS	:= $	$(SOURCE:.cpp=.o)

@@ -1,7 +1,11 @@
 /* Copyright 2018, 2023 Paul B Mann.  BSD License. */
 
 #include <assert.h>
+#include <fcntl.h>
 #include <stdio.h>
+#include <sys/stat.h>
+#include <sys/types.h>
+#include <unistd.h>
 
 #include "lrstar_basic_defs.h"
 #include "CM_Global.h"
@@ -19,6 +23,8 @@ typedef enum field_name_t {
    ts_N_ELEMENTS
 } field_name_t;
 
+
+typedef void (*write_user_fn_t)(FILE *fp, const char *fn_name);
 
 /* Info needed to generate
    init_func,
@@ -1459,66 +1465,202 @@ parser_header_fn(FILE       *fp,
 }
 
 
-static void actions_cpp_fn(FILE       *fp,
-                           const char *pathname,
-                           const char *grammar,
-                           const char *fname)
+static void
+write_user_preamble(FILE *fp)
 {
-   fprintf (fp, "\n");
-   fprintf (fp, "///////////////////////////////////////////////////////////////////////////////\n");
-   fprintf (fp, "//                                                                           //\n");
-   fprintf (fp, "\n");
-   fprintf (fp, ("#include \"lrstar_basic_defs.h\"\n"
-                 "#include \"%s_LexerTables_typedef.h\"\n"
-                 "#include \"%s_Parser.h\"\n"),
-            grammar, grammar);
-   if (lrstar_linux) {
-      fprintf (fp, "#include \"lrstar_main.h\"\n");
-   } else {
-      assert(lrstar_windows);
-      fprintf (fp, "#include \"../../code/main.h\"\n");
-   }
-   fprintf (fp, "\n");
-   fprintf (fp, "\n");
-   fprintf (fp, "void %s_init_actions(%s_parser_t *parser)\n", gfn, gfn);
-   fprintf (fp, "{\n");
-   fprintf (fp, "      /* Initialization code goes here */\n");
-   fprintf (fp, "}\n");
-   fprintf (fp, "\n");
-   fprintf (fp, "void  %s_term_actions(%s_parser_t *parser)\n", gfn, gfn);
-   fprintf (fp, "{\n");
-   fprintf (fp, "      /* Termination code goes here */\n");
-   fprintf (fp, "}\n");
-   fprintf (fp, "\n");
-   fprintf (fp, "\n");
-   fprintf (fp, "int %s_error(%s_parser_t *parser, int &t)\n", gfn, gfn);
-   fprintf (fp, "{\n");
-   fprintf (fp, "   if (parser->lt.token.end == parser->lt.token.start) {      // Illegal character?\n");
-   fprintf (fp, "      parser->lt.token.end++;\n");
-   fprintf (fp, "   }\n");
-   fprintf (fp, "   return 0;\n");
-   fprintf (fp, "}\n");
-   fprintf (fp, "\n");
-   fprintf (fp, "int %s_lookup(%s_parser_t *parser, int &t) "
-            "             // Lookup in symbol table.\n", gfn, gfn);
-   fprintf (fp, "{\n");
-   fprintf (fp, "   int sti;\n");
-   fprintf (fp, ("   if (parser->opt_nd_parsing() &&\n"
-                 "       parser->lt.lookahead.start != 0) {"
-                 "           // In lookahead mode?\n"));
-   fprintf (fp, "       sti = parser->add_symbol(t, parser->lt.lookahead.start, parser->lt.lookahead.end);\n");
-   fprintf (fp, "   } else {                             // Regular mode of parsing.\n");
-   fprintf (fp, "       sti = parser->add_symbol(t, parser->lt.token.start, parser->lt.token.end);\n");
-   fprintf (fp, "   }\n");
-   fprintf (fp, "   if (parser->opt_semantics()) {\n");
-   fprintf (fp, "      t = parser->symbol[sti].term;        // Redefine terminal number?\n");
-   fprintf (fp, "   }\n");
-   fprintf (fp, "   return sti;\n");                       // Return symbol-table index.\n");
-   fprintf (fp, "}\n");
-   fprintf (fp, "\n");
-   fprintf (fp, "\n");
+   fprintf(fp,
+           "/* This file is created by lrstar.\n"
+           " *\n"
+           " *\n"
+           " *  NOTE: lrstar will never rewrite or delete this file.\n"
+           " *        It can be safely edited to add user-supplied code.\n"
+           " */\n"
+           "\n");
 }
 
+static void
+write_user_init(FILE *fp, const char *fn_name)
+{
+   write_user_preamble(fp);
+   fprintf(fp,
+           "void\n"
+           "%s_%s(%s_parser_t *parser)\n"
+           "{\n"
+           "      /* Initialization code goes here */\n"
+           "}\n",
+           gfn, fn_name, gfn);
+}
+
+
+static void
+write_user_term(FILE *fp, const char *fn_name)
+{
+   write_user_preamble(fp);
+   fprintf(fp,
+           "void\n"
+           "%s_%s(%s_parser_t *parser)\n"
+           "{\n"
+           "      /* Termination code goes here */\n"
+           "}\n",
+           gfn, fn_name, gfn);
+}
+
+
+static void
+write_user_error(FILE *fp, const char *fn_name)
+{
+   write_user_preamble(fp);
+   fprintf(fp,
+           "int\n"
+           "%s_%s(%s_parser_t *parser, int &t)\n"
+           "{\n"
+           "   if (parser->lt.token.end == parser->lt.token.start) {\n"
+           "      // An illegal character.\n"
+           "      parser->lt.token.end++;\n"
+           "   }\n"
+           "   return 0;\n"
+           "}\n",
+           gfn, fn_name, gfn);
+}
+
+
+static void
+write_user_lookup(FILE *fp, const char *fn_name)
+{
+   write_user_preamble(fp);
+   fprintf(fp,
+           "int\n"
+           "%s_%s(%s_parser_t *parser, int &t)\n"
+           "{\n"
+           "   // Lookup in symbol table.\n\n"
+           "   int sti;\n"
+           "\n"
+           "   if (parser->opt_nd_parsing() &&\n"
+           "       parser->lt.lookahead.start != 0) {\n"
+           "      // In lookahead mode.\n"
+           "      sti = parser->add_symbol(t, parser->lt.lookahead.start,\n"
+           "                               parser->lt.lookahead.end);\n"
+           "   } else {\n"
+           "      // Regular mode of parsing\n"
+           "      sti = parser->add_symbol(t, parser->lt.token.start,\n"
+           "                               parser->lt.token.end);\n"
+           "   }\n\n"
+           "   if (parser->opt_semantics()) {\n"
+           "      // Redefine terminal number?\n"
+           "      t = parser->symbol[sti].term;\n"
+           "   }\n\n"
+           "   return sti; // Return symbol-table index.\n"
+           "}\n",
+           gfn, fn_name, gfn);
+}
+
+
+static void
+write_user_nact(FILE *fp, const char *fn_name)
+{
+   write_user_preamble(fp);
+   fprintf(fp,
+           "void\n"
+           "%s_%s(%s_parser_t *parser, Node *v)\n"
+           "{\n"
+           "}\n",
+           gfn, fn_name, gfn);
+}
+
+
+static void
+write_user_header(FILE *fp, const char *fn_name)
+{
+   fprintf(fp,
+           "/* This file is created by lrstar.\n"
+           " *\n"
+           " * This file can be used to add any code that must be\n"
+           " * available to all the user-defined functions.  For example,\n"
+           " * if string comparisons are needed, '#include <string.h>'.\n"
+           " *\n"
+           " *\n"
+           " *  NOTE: lrstar will never rewrite or delete this file.\n"
+           " *        It can be safely edited to add user-supplied code.\n"
+           " */\n"
+           "#if !defined(__%s_USER_HEADER__)\n"
+           "\n"
+           "\n"
+           "\n"
+           "#endif\n", gfn);
+}
+
+
+static void
+user_write_include_and_file(FILE            *fp,
+                            const char      *grammar,
+                            const char      *fn_name,
+                            write_user_fn_t  fn)
+{
+   char        pathname[PATH_MAX];
+   struct stat statbuf;
+   bool        exists;
+
+   if (fn_name != 0) {
+      /* Per-callout function header file. */
+      fprintf(fp, "#include \"%s_user_%s.h\"\n", grammar, fn_name);
+      snprintf(&pathname[0], sizeof(pathname) / sizeof(pathname[0]),
+               "%s_user_%s.h", grammar, fn_name);
+   } else {
+      /* Global user header file. */
+      fprintf(fp, "#include \"%s_user.h\"\n", grammar);
+      snprintf(&pathname[0], sizeof(pathname) / sizeof(pathname[0]),
+               "%s_user.h", grammar);
+   }
+
+   exists = stat(pathname, &statbuf) != -1;
+   /*  The code in the functions is contained in these files is
+    *  written by the user.  Consequently, lrstar will only create the
+    *  file with the proper signature; lrstar will never overwrite or
+    *  delete these files.
+    */
+   if (!exists) {
+      FILE *ifp = fopen(pathname, "w");
+      if (fn != NULL) {
+         (*fn)(ifp, fn_name);
+      }
+      fclose(ifp);
+   }
+}
+
+static void
+user_written_cpp_fn(FILE       *fp,
+                    const char *pathname,
+                    const char *grammar,
+                    const char *fname)
+{
+   fprintf(fp,
+           ("/* This file is generated by lrstar and will be "
+            "overwritten by it. */\n\n"
+            "#include \"lrstar_basic_defs.h\"\n"
+            "#include \"%s_LexerTables_typedef.h\"\n"
+            "#include \"%s_Parser.h\"\n"),
+           grammar, grammar);
+
+   user_write_include_and_file(fp, grammar, NULL, write_user_header);
+   user_write_include_and_file(fp, grammar, "init_actions", write_user_init);
+   user_write_include_and_file(fp, grammar, "term_actions", write_user_term);
+   user_write_include_and_file(fp, grammar, "error", write_user_error);
+   user_write_include_and_file(fp, grammar, "lookup", write_user_lookup);
+
+   if (callback_info.N_nacts > 0) {
+      int          N_nacts    = callback_info.N_nacts;
+      const char **Nact_start = callback_info.Nact_start;
+      int          n          = 0;
+
+      while (n < N_nacts) {
+         if (strcmp(Nact_start[n], "NULL") != 0) {
+            user_write_include_and_file(fp, grammar, Nact_start[n],
+                                        write_user_nact);
+         }
+         n++;
+      }
+   }
+}
 
 static void main_cpp_fn(FILE       *fp,
                         const char *pathname,
@@ -1595,10 +1737,10 @@ static void makefile_fn(FILE       *fp,
                               "include $(LRSTAR_INSTALL_ROOT)/make/sample.defs\n"
                               "\n\n"
                               "SOURCE\t:=\t\t\t\\\n"
-                              "\t$(GRM)_Actions.cpp\t\\\n"
                               "\t$(GRM)_Lexer.cpp\t\\\n"
                               "\t$(GRM)_Main.cpp\t\t\\\n"
-                              "\t$(GRM)_Parser.cpp\n"
+                              "\t$(GRM)_Parser.cpp\t\\\n"
+                              "\t$(GRM)_user.cpp\n"
                               "\n\n"
                               "OBJS\t:= $\t$(SOURCE:.cpp=.o)\n"
                               "\n\n"
@@ -1615,7 +1757,7 @@ static void makefile_fn(FILE       *fp,
                               "\n\n"
                               "clean:\n"
                               "\trm $(SOURCE) $(OBJS) $(GRM);");
-   fprintf(fp, make, grammar, grammar, pathname);
+   fprintf(fp, make, grammar, grammar, grammar, pathname);
 }
 
 
@@ -1674,9 +1816,12 @@ void  PG_Main::GenerateOtherFiles ()
    callback_info.Nact_start = Nact_start;
 
    write_file(gdn, gfn, NULL, "_Parser.h", true, parser_header_fn);
-   write_file(gdn, gfn, NULL, "_Actions.cpp", false, actions_cpp_fn);
    write_file(gdn, gfn, NULL, "_Main.cpp", true, main_cpp_fn);
    write_file(gdn, gfn, NULL, "_Parser.cpp", true, parser_cpp_fn);
+   if (lrstar_linux) {
+      write_file(gdn, gfn, NULL, "_user.cpp", true,
+                 user_written_cpp_fn);
+   }
    if (lrstar_linux) {
       write_file(gdn, gfn,  "Makefile", "", true, makefile_fn);
    } else {
