@@ -1743,16 +1743,16 @@ template<>
 const int8 *Pascal_parser_tables_t::PL = &PL_[0];
 
 template<>
-const uint32 *Pascal_parser_tables_t::nd_fterm = 0;
+const int32 *Pascal_parser_tables_t::nd_fterm = 0;
 
 template<>
-const uint32 *Pascal_parser_tables_t::nd_term = 0;
+const int32 *Pascal_parser_tables_t::nd_term = 0;
 
 template<>
-const uint32 *Pascal_parser_tables_t::nd_faction = 0;
+const int32 *Pascal_parser_tables_t::nd_faction = 0;
 
 template<>
-const uint32 *Pascal_parser_tables_t::nd_action = 0;
+const int32 *Pascal_parser_tables_t::nd_action = 0;
 
 // Terminal action number ...
 static const int8 tact_numb_[113] = {
@@ -1864,5 +1864,5 @@ template<>
 const int8 *Pascal_parser_tables_t::nact_numb = &nact_numb_[0];
 
 template<>
-const uint32 *Pascal_parser_tables_t::reverse = 0;
+const int32 *Pascal_parser_tables_t::reverse = 0;
 

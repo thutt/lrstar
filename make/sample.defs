@@ -32,6 +32,7 @@ ERROR_FORMAT	:=				\
 
 CXXFLAGS	:=					\
 	-pedantic					\
+	-Wall						\
 	-Werror						\
 	-Os						\
 	-MMD						\

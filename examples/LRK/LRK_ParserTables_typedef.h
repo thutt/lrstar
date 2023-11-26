@@ -30,14 +30,14 @@ typedef templ_lrstar_parser_tables<
    /* Rr */  uint8,
    /* Rc */  uint8,
    /* PL */  int8,
-   /* nd_fterm */  uint32,
-   /* nd_term */  uint32,
-   /* nd_faction */  uint32,
-   /* nd_action */  uint32,
+   /* nd_fterm */  int32,
+   /* nd_term */  int32,
+   /* nd_faction */  int32,
+   /* nd_action */  int32,
    /* tact_numb */  int8,
    /* node_numb */  int8,
    /* nact_numb */  int8,
-   /* reverse */ uint32> LRK_parser_tables_t;
+   /* reverse */ int32> LRK_parser_tables_t;
 
 
 #endif

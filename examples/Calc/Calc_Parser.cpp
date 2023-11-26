@@ -269,7 +269,7 @@ template<>
 const int8 *Calc_parser_tables_t::argx = &argx_[0];
 
 template<>
-const uint32 *Calc_parser_tables_t::argy = 0;
+const int32 *Calc_parser_tables_t::argy = 0;
 
 // Boolean matrix ...
 static const uint8 Bm_[30] = {
@@ -417,16 +417,16 @@ template<>
 const int8 *Calc_parser_tables_t::PL = &PL_[0];
 
 template<>
-const uint32 *Calc_parser_tables_t::nd_fterm = 0;
+const int32 *Calc_parser_tables_t::nd_fterm = 0;
 
 template<>
-const uint32 *Calc_parser_tables_t::nd_term = 0;
+const int32 *Calc_parser_tables_t::nd_term = 0;
 
 template<>
-const uint32 *Calc_parser_tables_t::nd_faction = 0;
+const int32 *Calc_parser_tables_t::nd_faction = 0;
 
 template<>
-const uint32 *Calc_parser_tables_t::nd_action = 0;
+const int32 *Calc_parser_tables_t::nd_action = 0;
 
 // Terminal action number ...
 static const int8 tact_numb_[22] = {

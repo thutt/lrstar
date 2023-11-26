@@ -1473,10 +1473,10 @@ template<>
 const int8 *Fortran_parser_tables_t::arga = &arga_[0];
 
 template<>
-const uint32 *Fortran_parser_tables_t::argx = 0;
+const int32 *Fortran_parser_tables_t::argx = 0;
 
 template<>
-const uint32 *Fortran_parser_tables_t::argy = 0;
+const int32 *Fortran_parser_tables_t::argy = 0;
 
 // Boolean matrix ...
 static const uint8 Bm_[762] = {
@@ -2828,16 +2828,16 @@ template<>
 const int8 *Fortran_parser_tables_t::PL = &PL_[0];
 
 template<>
-const uint32 *Fortran_parser_tables_t::nd_fterm = 0;
+const int32 *Fortran_parser_tables_t::nd_fterm = 0;
 
 template<>
-const uint32 *Fortran_parser_tables_t::nd_term = 0;
+const int32 *Fortran_parser_tables_t::nd_term = 0;
 
 template<>
-const uint32 *Fortran_parser_tables_t::nd_faction = 0;
+const int32 *Fortran_parser_tables_t::nd_faction = 0;
 
 template<>
-const uint32 *Fortran_parser_tables_t::nd_action = 0;
+const int32 *Fortran_parser_tables_t::nd_action = 0;
 
 // Terminal action number ...
 static const int8 tact_numb_[268] = {
@@ -2874,11 +2874,11 @@ template<>
 const int8 *Fortran_parser_tables_t::tact_numb = &tact_numb_[0];
 
 template<>
-const uint32 *Fortran_parser_tables_t::node_numb = 0;
+const int32 *Fortran_parser_tables_t::node_numb = 0;
 
 template<>
-const uint32 *Fortran_parser_tables_t::nact_numb = 0;
+const int32 *Fortran_parser_tables_t::nact_numb = 0;
 
 template<>
-const uint32 *Fortran_parser_tables_t::reverse = 0;
+const int32 *Fortran_parser_tables_t::reverse = 0;
 

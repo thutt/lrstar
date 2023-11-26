@@ -107,15 +107,17 @@ public:
 
 public:
    lrstar_user_data_t *user_data;
+   const char *grammar;         /* Name of grammar. */
+
+private:
+   init_func_t *init_func; /* Pointer to init_func table. */
+   tact_func_t *tact_func; /* Pointer to tact_func table.  */
+   nact_func_t *nact_func; /* Pointer to nact_func table.  */
 
 public:
    T_lexer_t         lt;        /* Lexer tables. */
    T_parser_tables_t pt;        /* Parser tables. */
 
-public:
-
-public:
-   const char *grammar;         /* Name of grammar. */
 
 public:
    // Parser variables
@@ -172,11 +174,6 @@ private:
    char    draw_vbar[3];
    char    draw_last[3];
    char    draw_space[3];
-
-private:
-   init_func_t *init_func; /* Pointer to init_func table. */
-   tact_func_t *tact_func; /* Pointer to tact_func table.  */
-   nact_func_t *nact_func; /* Pointer to nact_func table.  */
 
 private:                        // LR Parser
    void
@@ -319,13 +316,15 @@ private:                        // LR Parser
       }
 
       // LOOK FOR A SHIFT ACTION FOR THIS TOKEN ...
-      for (int j = pt.nd_fterm [State[i]];
-           j < pt.nd_fterm [State[i]+1]; j++) {
+      for (int j = pt.nd_fterm[State[i]];
+           j < pt.nd_fterm[State[i] + 1]; j++) {
          if (pt.nd_term[j] == LA) {
             int k = pt.nd_faction[j];
+
             if (pt.nd_action[k] > 0) {                    // Shift action (always first one)?
                SS[i]++;
                SS[i]->state = State[i];                   // Put State on stack.
+
                if (pt.nd_action[k] > pt.accept_state) {   // Shift and reduce?
                   State[i] = pt.accept_state - pt.nd_action[k];// Convert to production number.
                   goto SR;
@@ -541,8 +540,8 @@ public:
    lrstar_parser(init_func_t         *init_func_,
                  tact_func_t         *tact_func_,
                  nact_func_t         *nact_func_) :
-      grammar(C_grammar),
       user_data(0),
+      grammar(C_grammar),
       init_func(init_func_),
       tact_func(tact_func_),
       nact_func(nact_func_),

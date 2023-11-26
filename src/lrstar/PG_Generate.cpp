@@ -1042,9 +1042,9 @@ PG_Main::typedef_tables(const char *dname,
 
 
 static void
-set_data_type_uint32(field_name_t field_name)
+set_data_type_int32(field_name_t field_name)
 {
-   data_types[field_name].type   = "uint32";
+   data_types[field_name].type   = "int32";
    data_types[field_name].n_elem = 0;
 }
 
@@ -1121,7 +1121,7 @@ void  PG_Main::GenerateParserTables ()
       data_types[ts_T_arga].type   = get_typestr (Arga, N_terms);
       data_types[ts_T_arga].n_elem = N_terms;
    } else {
-      set_data_type_uint32(ts_T_arga);
+      set_data_type_int32(ts_T_arga);
    }
 
    // First arguments for productions ...
@@ -1138,7 +1138,7 @@ void  PG_Main::GenerateParserTables ()
       data_types[ts_T_argx].type   = get_typestr (Argx, N_prods);
       data_types[ts_T_argx].n_elem = N_prods;
    } else {
-      set_data_type_uint32(ts_T_argx);
+      set_data_type_int32(ts_T_argx);
    }
 
    // Second arguments for productions ...
@@ -1156,7 +1156,7 @@ void  PG_Main::GenerateParserTables ()
       data_types[ts_T_argy].type   = get_typestr (Argy, N_prods);
       data_types[ts_T_argy].n_elem = N_prods;
    } else {
-      set_data_type_uint32(ts_T_argy);
+      set_data_type_int32(ts_T_argy);
    }
 
    if (optn[PG_BOOLMATRIX] > 0)
@@ -1245,10 +1245,10 @@ void  PG_Main::GenerateParserTables ()
       data_types[ts_T_nd_action].type   = get_typestr (nd_action, count);
       data_types[ts_T_nd_action].n_elem = count;
    } else {
-      set_data_type_uint32(ts_T_nd_fterm);
-      set_data_type_uint32(ts_T_nd_term);
-      set_data_type_uint32(ts_T_nd_faction);
-      set_data_type_uint32(ts_T_nd_action);
+      set_data_type_int32(ts_T_nd_fterm);
+      set_data_type_int32(ts_T_nd_term);
+      set_data_type_int32(ts_T_nd_faction);
+      set_data_type_int32(ts_T_nd_action);
    }
 
    newline = 0;
@@ -1259,7 +1259,7 @@ void  PG_Main::GenerateParserTables ()
       data_types[ts_T_tact_numb].type   = get_typestr (Tact_numb, N_terms);
       data_types[ts_T_tact_numb].n_elem = N_terms;
    } else {
-      set_data_type_uint32(ts_T_tact_numb);
+      set_data_type_int32(ts_T_tact_numb);
    }
 
    if (optn[PG_ASTCONST] > 0 && N_nodes > 0)
@@ -1277,7 +1277,7 @@ void  PG_Main::GenerateParserTables ()
          data_types[ts_T_nact_numb].type   = get_typestr (Nact_numb, N_prods);
          data_types[ts_T_nact_numb].n_elem = N_prods;
       } else {
-         set_data_type_uint32(ts_T_nact_numb);
+         set_data_type_int32(ts_T_nact_numb);
       }
 
 
@@ -1287,12 +1287,12 @@ void  PG_Main::GenerateParserTables ()
          data_types[ts_T_reverse].type   = "uint8";
          data_types[ts_T_reverse].n_elem = N_prods;
       } else {
-         set_data_type_uint32(ts_T_reverse);
+         set_data_type_int32(ts_T_reverse);
       }
    } else {
-      set_data_type_uint32(ts_T_node_numb);
-      set_data_type_uint32(ts_T_nact_numb);
-      set_data_type_uint32(ts_T_reverse);
+      set_data_type_int32(ts_T_node_numb);
+      set_data_type_int32(ts_T_nact_numb);
+      set_data_type_int32(ts_T_reverse);
    }
    typedef_tables(gdn, gfn, name);
 };

@@ -103,10 +103,9 @@ int
 main(int argc, char **argv)
 {
    const char* copyright = "\n%s parser, copyright ?.\n";
-   int   i, t, time1, time2, thou, sec, nlps, nl, rc;
+   int   i, t, time1, time2, thou, sec, nlps, nl;
 
    time1 = clock();  // Get start time.
-   rc = 0;
    nl = 0;
 
    printf (copyright, generated_parser.grammar);
