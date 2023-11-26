@@ -33,6 +33,7 @@ ERROR_FORMAT	:=				\
 CXXFLAGS	:=					\
 	-Werror						\
 	-Os						\
+	-MMD						\
 	$(ERROR_FORMAT)					\
 	$(addprefix -I,$(INCLUDES))			\
 	$(addprefix -D,LRSTAR_$(BUILD_TYPE) $(DEFINES))
