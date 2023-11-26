@@ -183,6 +183,7 @@ const char * const *Typedef_parser_tables_t::tact_name = &tact_name_[0];
 // Node names found in the grammar.
 static const char * node_name_[1] = {
    "hello_,"
+
 };
 
 template<>

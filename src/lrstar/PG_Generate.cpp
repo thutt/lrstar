@@ -398,7 +398,7 @@ void PG_Main::instantiate_node_name_data(FILE *fp)
       fprintf(fp, "// Node names found in the grammar.\n");
       fprintf(fp, "static const char * node_name_[%d] = {\n", N_nodes);
       for (int i = 0; i < N_nodes; i++) {
-         fprintf(fp, "   \"%s,\"", Node_start[i]);
+         fprintf(fp, "   \"%s,\"\n", Node_start[i]);
       }
       fprintf(fp, "\n};\n\n");
    }

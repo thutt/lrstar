@@ -191,7 +191,15 @@ const char * const *LRK_parser_tables_t::tact_name = &tact_name_[0];
 
 // Node names found in the grammar.
 static const char * node_name_[8] = {
-   "goal_,"   "function_decl_,"   "function_def_,"   "type_spec_,"   "function_,"   "arg_,"   "arg_name_,"   "function_body_,"
+   "goal_,"
+   "function_decl_,"
+   "function_def_,"
+   "type_spec_,"
+   "function_,"
+   "arg_,"
+   "arg_name_,"
+   "function_body_,"
+
 };
 
 template<>

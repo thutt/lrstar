@@ -205,7 +205,18 @@ const char * const *NCSA_parser_tables_t::tact_name = &tact_name_[0];
 
 // Node names found in the grammar.
 static const char * node_name_[11] = {
-   "Report,"   "Day,"   "Client,"   "FullName,"   "Name,"   "Time,"   "File,"   "Code,"   "Size,"   "Source,"   "Query,"
+   "Report,"
+   "Day,"
+   "Client,"
+   "FullName,"
+   "Name,"
+   "Time,"
+   "File,"
+   "Code,"
+   "Size,"
+   "Source,"
+   "Query,"
+
 };
 
 template<>

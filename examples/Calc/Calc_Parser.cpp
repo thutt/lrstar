@@ -191,7 +191,24 @@ const char * const *Calc_parser_tables_t::tact_name = &tact_name_[0];
 
 // Node names found in the grammar.
 static const char * node_name_[17] = {
-   "goal_,"   "program_,"   "store_,"   "if_,"   "target_,"   "eq_,"   "ne_,"   "add_,"   "sub_,"   "mul_,"   "div_,"   "pwr_,"   "int_,"   "ident_,"   "then_,"   "then2_,"   "else2_,"
+   "goal_,"
+   "program_,"
+   "store_,"
+   "if_,"
+   "target_,"
+   "eq_,"
+   "ne_,"
+   "add_,"
+   "sub_,"
+   "mul_,"
+   "div_,"
+   "pwr_,"
+   "int_,"
+   "ident_,"
+   "then_,"
+   "then2_,"
+   "else2_,"
+
 };
 
 template<>
