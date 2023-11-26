@@ -52,7 +52,7 @@ public:
    static char   dir[256];       // Directory (folder) of file.
    static char   filename[256];  // Filename of input file.
    static char   filetype[64];   // Filetype of input file.
-   static int    filesize;
+   static long   filesize;
    static int    filedesc;
    static int    init (char* dir, char* fn, char* ft);
    static void   term ();
@@ -70,10 +70,10 @@ public:
    static void   term ();
 };
 
-FILE* output;
-void  quit (int rc);
-char* number (int x);
-int   split (char* arg, char* dir, char* fn, char* ft, const char* def);
+FILE *output;
+void  quit(int rc);
+char *number(long x);
+int   split(char* arg, char* dir, char* fn, char* ft, const char* def);
 
 cOption Option;
 cInput  Input;
@@ -86,7 +86,7 @@ char   cInput::path[256];        // Path of include file.
 char   cInput::filename[256];    // Filename of include file.
 char   cInput::filetype[64];     // Filetype of include file.
 int    cInput::filedesc;
-int    cInput::filesize;
+long   cInput::filesize;
 
 char   cOutput::path[256];       // Path of output file.
 char   cOutput::dir[];           // Directory.
@@ -103,7 +103,13 @@ int
 main(int argc, char **argv)
 {
    const char* copyright = "\n%s parser, copyright ?.\n";
-   int   i, t, time1, time2, thou, sec, nlps, nl;
+   int   i, nl;
+   clock_t time1;
+   clock_t time2;
+   clock_t thou;
+   clock_t sec;
+   clock_t nlps;
+   clock_t t;
 
    time1 = clock();  // Get start time.
    nl = 0;
@@ -145,11 +151,11 @@ main(int argc, char **argv)
    thou -= sec * 1000;
 
    printf ("\nSuccess ...\n");
-   printf ("%10s symbols in symbol table.\n",  number (generated_parser.n_symbols));
-   printf ("%10s nodes in AST.\n",             number (generated_parser.n_nodes));
-   printf ("%10s lines read in input file.\n", number (nl));
-   printf ("%10s lines per second.\n",         number (nlps));
-   printf ("%6d.%03d seconds.\n",              sec, thou);
+   printf ("%10s symbols in symbol table.\n",  number(generated_parser.n_symbols));
+   printf ("%10s nodes in AST.\n",             number(generated_parser.n_nodes));
+   printf ("%10s lines read in input file.\n", number(nl));
+   printf ("%10s lines per second.\n",         number(nlps));
+   printf ("%6ld.%03ld seconds.\n",            sec, thou);
 
    quit (0);
    return 0;
@@ -172,7 +178,7 @@ void  quit (int rc)
 
 int   cInput::init (char* dir, char* fn, char* ft)
 {
-   int  nb;                                  // Number of bytes read.
+   long  nb;                                  // Number of bytes read.
    strcpy (path, dir);
    strcat (path, fn);
    strcat (path, ft);
@@ -182,10 +188,10 @@ int   cInput::init (char* dir, char* fn, char* ft)
       printf ("File %s not found.\n", path);
       quit (1);
    }
-   filesize = _filelength (filedesc);              // Get filesize.
+   filesize = _filelength(filedesc);              // Get filesize.
    input_start = new char [filesize+6];            // Get some RAM space.
    *input_start = '\n';                            // Put <eol> at beginning.
-   nb = _read (filedesc, input_start+1, filesize); // Read size bytes into buffer.
+   nb = _read(filedesc, input_start+1, filesize); // Read size bytes into buffer.
    if (nb <= 0)                                    // If read error.
    {
       printf ("Read error on file %s.\n", path);
@@ -232,24 +238,28 @@ void  cOutput::term ()
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////
 
-char* number (int x)
+char *number(long x)
 {
    int i, j, k;
-   char buff[16];
-   static char string[12] = "           ";
+   char buff[25];
+   static char string[25];
 
-   sprintf (buff, "%d", x);
-   k = (int)strlen (buff);
-   i = k + (k-1)/3;
-   string[i--] = 0;
+   sprintf(buff, "%ld", x);
+
+   k           = (int)strlen(buff);
+   i           = k + (k - 1) / 3;
+   string[i--] = '\0';
    j = 0;
-   while (1)
-   {
+   while (1) {
       string[i--] = buff[--k];
-      if (i < 0) break;
-      if (++j % 3 == 0) string[i--] = ',';
+      if (i < 0) {
+         break;
+      }
+      if (++j % 3 == 0) {
+         string[i--] = ',';
+      }
    }
-   return (string);
+   return string;
 }
 
 ///////////////////////////////////////////////////////////////////////////////

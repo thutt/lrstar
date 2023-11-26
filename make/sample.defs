@@ -33,6 +33,7 @@ ERROR_FORMAT	:=				\
 CXXFLAGS	:=					\
 	-pedantic					\
 	-Wall						\
+	-Wconversion					\
 	-Werror						\
 	-Wextra						\
 	-Os						\
