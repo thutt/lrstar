@@ -50,8 +50,8 @@ typedef signed short int   int16;
 #endif
 
 #if __SIZEOF_INT__ == 4
-typedef unsigned long int  uint32;
-typedef signed long int    int32;
+typedef unsigned int       uint32;
+typedef signed int         int32;
 #else
 #error An integer is not 32-bits with this Gcc.
 #endif
