@@ -121,10 +121,10 @@ parser_tables_inst(char *buf, size_t buf_len)
 {
 
    snprintf(buf, buf_len,
-            "templ_lrstar_parser_tables<"
+            "templ_lrstar_parser_tables<\n"
 #define PFCP(pf_) PF(pf_)
-#define PF(pf_) "%s, "
-#define PFL(pfl_) "%s"
+#define PF(pf_)   "   /* " #pf_ " */  %s,\n"
+#define PFL(pfl_) "   /* " #pfl_ " */ %s"
 PARSER_FIELDS
 #undef PF
 #undef PFCP
@@ -970,7 +970,7 @@ void PG_Main::instantiate_reverse_data(FILE *fp)
 void
 PG_Main::instantiate_fields(FILE *fp)
 {
-   char parser[512];
+   char parser[1024];
 
    parser_tables_inst(parser, sizeof(parser) / sizeof(parser[0]));
 
@@ -1020,7 +1020,7 @@ PG_Main::typedef_tables(const char *dname,
                         const char *cname)
 {
    FILE *fp;
-   char parser[512];
+   char parser[1024];
    char pathname[PATH_MAX];
 
    parser_tables_inst(parser, sizeof(parser) / sizeof(parser[0]));
@@ -1686,7 +1686,7 @@ parser_cpp_fn(FILE       *fp,
               const char *grammar,
               const char *fname)
 {
-   char parser[512];
+   char parser[1024];
 
    parser_tables_inst(parser, sizeof(parser) / sizeof(parser[0]));
 
