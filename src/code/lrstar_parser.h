@@ -131,8 +131,8 @@ private:
    // Parser variables
    RStack *RS;
    RStack *RSstart;
-   uchar  *T_exp;       // Terminal expected.
-   uchar  *S_exam;      // State examined.
+   bool   *T_exp;       // Terminal expected.
+   bool   *S_exam;      // State examined.
 
    // ND parsing ...
    int     LA;                     // Look Ahead token.
@@ -149,10 +149,10 @@ public:
    Symbol *symbol;        // Symbol.
 
 private:
-   uint    hashdiv;       // Hash divisor.
-   int    *hashvec;       // Hash vector.
-   int     max_cells;     // Maximum number of cells in the hash vector.
-   int     max_symbols;   // Maximum number of symbols.
+   unsigned  hashdiv;           // Hash divisor.
+   int      *hashvec;           // Hash vector.
+   int       max_cells;         // Maximum number of cells in the hash vector.
+   int       max_symbols;       // Maximum number of symbols.
 
    // AST Area ...
 public:
@@ -881,7 +881,7 @@ public:
          x = seq[t];
 
          // if (x == pt.eof_symb) continue;
-         if (T_exp[x] == 1) {
+         if (T_exp[x]) {
             if (pt.term_symb[x][0] == '<' ||  pt.term_symb[x][0] == '{') {
                printf ("         %4d %-30s\n", x, pt.term_symb[x]);
             }
@@ -893,7 +893,7 @@ public:
          if (x == pt.eof_symb) {
             continue;
          }
-         if (T_exp[x] == 1) {
+         if (T_exp[x]) {
             if (pt.term_symb[x][0] != '<' && pt.term_symb[x][0] != '{') {
                printf ("         %4d %-30s\n", x, pt.term_symb[x]);
             }
@@ -921,7 +921,7 @@ public:
          x = pt.Nm[pt.Nr[PS->state] +
                    pt.Nc[q]];          // Get next state from nonterminal transition.
          if (x > 0) {
-            if (S_exam[x] == 0) {      // Not been there yet?
+            if (!S_exam[x]) {          // Not been there yet?
                expecting(x);           // Recursive call, potential loop, but very rare.
             }
             break;
@@ -945,11 +945,11 @@ public:
       int t;                                       // Terminal number.
       int p, q;
 
-      S_exam[x] = 1;                               // Mark this state as seen.
+      S_exam[x] = true;                            // Mark this state as seen.
       for (t = 0; t < pt.n_terms; t++) {           // For all terminals.
          if (pt.Bm[pt.Br[x] +
                    pt.Bc[t]] & pt.Bf[t]) {         // Check B-matrix for shift action.
-            T_exp[t] = 1;                          // Mark this terminal.
+            T_exp[t] = true;                       // Mark this terminal.
          }
       }
 
@@ -960,7 +960,7 @@ public:
             for (j = pt.nd_faction[i];
                  j < pt.nd_faction[i+1]; j++) {    // For all actions for these terminals.
                if (pt.nd_action[j] > 0) {          // Terminal transition.
-                  T_exp[pt.nd_term[i]] = 1;        // Mark this terminal.
+                  T_exp[pt.nd_term[i]] = true;     // Mark this terminal.
                } else if (pt.nd_action[j] < 0) {
                   int p = -pt.nd_action[j];
                   reduction(p, x);
@@ -1474,11 +1474,11 @@ public:
          (*init_func[0])(this);          // init_action()
       }
 
-      T_exp  = new uchar[pt.n_terms];
-      S_exam = new uchar[pt.n_states];
+      T_exp  = new bool[pt.n_terms];
+      S_exam = new bool[pt.n_states];
 
-      memset(T_exp,  0, pt.n_terms);
-      memset(S_exam, 0, pt.n_states);
+      memset(T_exp,  false, pt.n_terms);
+      memset(S_exam, false, pt.n_states);
       return true;
    }
 
@@ -1488,7 +1488,7 @@ public:
    {
       const char *p      = token_start;          // Point at start.
       int         length = (int)(token_end - p); // Set length.
-      uint        hash   = length;               // Set hash to length.
+      unsigned    hash   = length;               // Set hash to length.
       int         i      = 0;                    // Set shift value to 0.
       do {                                       // Assume length != 0
          if (C_insensitive) {

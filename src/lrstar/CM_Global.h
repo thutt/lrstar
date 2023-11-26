@@ -9,6 +9,9 @@
 #define EXTERN extern
 #endif
 
+typedef unsigned char       uchar;
+typedef unsigned short int  ushort;
+
 #define MAX_LENGTH 60
 
 #include "sys/types.h"

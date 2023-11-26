@@ -103,11 +103,6 @@ typedef signed long int    int64;
 #else
 #error Unknown compiler; Sized integer types not defined.
 #endif
-
-typedef unsigned char       uchar;
-typedef unsigned int        uint;
-typedef unsigned short int  ushort;
-
 #endif
 /* Local Variables:      */
 /* mode: c               */
