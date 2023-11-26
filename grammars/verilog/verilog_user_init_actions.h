@@ -6,7 +6,7 @@
  */
 
 void
-verilog_init_actions(verilog_parser_t *parser)
+verilog_init_actions(UNUSED_PARAM(verilog_parser_t *parser))
 {
       /* Initialization code goes here */
 }

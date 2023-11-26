@@ -6,7 +6,7 @@
  */
 
 void
-ANTLR_term_actions(ANTLR_parser_t *parser)
+ANTLR_term_actions(UNUSED_PARAM(ANTLR_parser_t *parser))
 {
       /* Termination code goes here */
 }

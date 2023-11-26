@@ -1,5 +1,5 @@
 void
-Calc_ident_(Calc_parser_t *parser, Node *v)
+Calc_ident_(UNUSED_PARAM(Calc_parser_t *parser), UNUSED_PARAM(Node *v))
 {
     Node *n = v;
 

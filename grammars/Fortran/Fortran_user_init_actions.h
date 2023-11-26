@@ -6,7 +6,7 @@
  */
 
 void
-Fortran_init_actions(Fortran_parser_t *parser)
+Fortran_init_actions(UNUSED_PARAM(Fortran_parser_t *parser))
 {
       /* Initialization code goes here */
 }

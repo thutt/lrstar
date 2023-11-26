@@ -6,7 +6,7 @@
  */
 
 int
-Modula2_error(Modula2_parser_t *parser, int &t)
+Modula2_error(UNUSED_PARAM(Modula2_parser_t *parser), UNUSED_PARAM(int &t))
 {
    if (parser->lt.token.end == parser->lt.token.start) {
       // An illegal character.

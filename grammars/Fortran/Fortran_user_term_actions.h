@@ -6,7 +6,7 @@
  */
 
 void
-Fortran_term_actions(Fortran_parser_t *parser)
+Fortran_term_actions(UNUSED_PARAM(Fortran_parser_t *parser))
 {
       /* Termination code goes here */
 }

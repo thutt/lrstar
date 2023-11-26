@@ -6,7 +6,7 @@
  */
 
 void
-Pascal_term_actions(Pascal_parser_t *parser)
+Pascal_term_actions(UNUSED_PARAM(Pascal_parser_t *parser))
 {
       /* Termination code goes here */
 }

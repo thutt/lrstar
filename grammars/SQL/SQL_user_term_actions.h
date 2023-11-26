@@ -6,7 +6,7 @@
  */
 
 void
-SQL_term_actions(SQL_parser_t *parser)
+SQL_term_actions(UNUSED_PARAM(SQL_parser_t *parser))
 {
       /* Termination code goes here */
 }

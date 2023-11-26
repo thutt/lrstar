@@ -6,7 +6,7 @@
  */
 
 int
-ANTLR_lookup(ANTLR_parser_t *parser, int &t)
+ANTLR_lookup(UNUSED_PARAM(ANTLR_parser_t *parser), UNUSED_PARAM(int &t))
 {
    // Lookup in symbol table.
 

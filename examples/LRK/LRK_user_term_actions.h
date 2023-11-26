@@ -6,7 +6,7 @@
  */
 
 void
-LRK_term_actions(LRK_parser_t *parser)
+LRK_term_actions(UNUSED_PARAM(LRK_parser_t *parser))
 {
       /* Termination code goes here */
 }

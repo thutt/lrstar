@@ -6,7 +6,7 @@
  */
 
 void
-Calc_init_actions(Calc_parser_t *parser)
+Calc_init_actions(UNUSED_PARAM(Calc_parser_t *parser))
 {
       /* Initialization code goes here */
 }

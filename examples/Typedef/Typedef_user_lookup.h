@@ -6,7 +6,7 @@
  */
 
 int
-Typedef_lookup(Typedef_parser_t *parser, int &t)
+Typedef_lookup(UNUSED_PARAM(Typedef_parser_t *parser), UNUSED_PARAM(int &t))
 {
    // Lookup in symbol table.
 

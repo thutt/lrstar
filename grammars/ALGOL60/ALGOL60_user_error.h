@@ -6,7 +6,7 @@
  */
 
 int
-ALGOL60_error(ALGOL60_parser_t *parser, int &t)
+ALGOL60_error(UNUSED_PARAM(ALGOL60_parser_t *parser), UNUSED_PARAM(int &t))
 {
    if (parser->lt.token.end == parser->lt.token.start) {
       // An illegal character.

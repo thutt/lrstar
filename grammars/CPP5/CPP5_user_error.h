@@ -6,7 +6,7 @@
  */
 
 int
-CPP5_error(CPP5_parser_t *parser, int &t)
+CPP5_error(UNUSED_PARAM(CPP5_parser_t *parser), UNUSED_PARAM(int &t))
 {
    if (parser->lt.token.end == parser->lt.token.start) {
       // An illegal character.

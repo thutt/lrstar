@@ -4,15 +4,15 @@
 
 const char Typedef_grammar_name[] = "Typedef";
 
-void Typedef_init_actions(Typedef_parser_t *parser); /* User-supplied */
-void Typedef_term_actions(Typedef_parser_t *parser); /* User-supplied */
+void Typedef_init_actions(UNUSED_PARAM(Typedef_parser_t *parser)); /* User-supplied */
+void Typedef_term_actions(UNUSED_PARAM(Typedef_parser_t *parser)); /* User-supplied */
 static Typedef_parser_t::init_func_t Typedef_init_funcs_[2] = {
    Typedef_init_actions,
    Typedef_term_actions
 };
 
-int Typedef_error(Typedef_parser_t *parser, int &t);
-int Typedef_lookup(Typedef_parser_t *parser, int &t);
+int Typedef_error(UNUSED_PARAM(Typedef_parser_t *parser), UNUSED_PARAM(int &t));
+int Typedef_lookup(UNUSED_PARAM(Typedef_parser_t *parser), UNUSED_PARAM(int &t));
 // Terminal action function pointers ...
 static Typedef_parser_t::tact_func_t Typedef_tact_funcs_[2] = {
    Typedef_error,

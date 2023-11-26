@@ -6,7 +6,7 @@
  */
 
 void
-COBOL_term_actions(COBOL_parser_t *parser)
+COBOL_term_actions(UNUSED_PARAM(COBOL_parser_t *parser))
 {
       /* Termination code goes here */
 }

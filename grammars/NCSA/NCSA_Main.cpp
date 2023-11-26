@@ -4,15 +4,15 @@
 
 const char NCSA_grammar_name[] = "NCSA";
 
-void NCSA_init_actions(NCSA_parser_t *parser); /* User-supplied */
-void NCSA_term_actions(NCSA_parser_t *parser); /* User-supplied */
+void NCSA_init_actions(UNUSED_PARAM(NCSA_parser_t *parser)); /* User-supplied */
+void NCSA_term_actions(UNUSED_PARAM(NCSA_parser_t *parser)); /* User-supplied */
 static NCSA_parser_t::init_func_t NCSA_init_funcs_[2] = {
    NCSA_init_actions,
    NCSA_term_actions
 };
 
-int NCSA_error(NCSA_parser_t *parser, int &t);
-int NCSA_lookup(NCSA_parser_t *parser, int &t);
+int NCSA_error(UNUSED_PARAM(NCSA_parser_t *parser), UNUSED_PARAM(int &t));
+int NCSA_lookup(UNUSED_PARAM(NCSA_parser_t *parser), UNUSED_PARAM(int &t));
 // Terminal action function pointers ...
 static NCSA_parser_t::tact_func_t NCSA_tact_funcs_[2] = {
    NCSA_error,

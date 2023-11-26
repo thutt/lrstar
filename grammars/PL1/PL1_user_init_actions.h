@@ -6,7 +6,7 @@
  */
 
 void
-PL1_init_actions(PL1_parser_t *parser)
+PL1_init_actions(UNUSED_PARAM(PL1_parser_t *parser))
 {
       /* Initialization code goes here */
 }

@@ -4,15 +4,15 @@
 
 const char Dbase_grammar_name[] = "Dbase";
 
-void Dbase_init_actions(Dbase_parser_t *parser); /* User-supplied */
-void Dbase_term_actions(Dbase_parser_t *parser); /* User-supplied */
+void Dbase_init_actions(UNUSED_PARAM(Dbase_parser_t *parser)); /* User-supplied */
+void Dbase_term_actions(UNUSED_PARAM(Dbase_parser_t *parser)); /* User-supplied */
 static Dbase_parser_t::init_func_t Dbase_init_funcs_[2] = {
    Dbase_init_actions,
    Dbase_term_actions
 };
 
-int Dbase_error(Dbase_parser_t *parser, int &t);
-int Dbase_lookup(Dbase_parser_t *parser, int &t);
+int Dbase_error(UNUSED_PARAM(Dbase_parser_t *parser), UNUSED_PARAM(int &t));
+int Dbase_lookup(UNUSED_PARAM(Dbase_parser_t *parser), UNUSED_PARAM(int &t));
 // Terminal action function pointers ...
 static Dbase_parser_t::tact_func_t Dbase_tact_funcs_[2] = {
    Dbase_error,

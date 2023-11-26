@@ -6,7 +6,7 @@
  */
 
 void
-ANTLR_init_actions(ANTLR_parser_t *parser)
+ANTLR_init_actions(UNUSED_PARAM(ANTLR_parser_t *parser))
 {
       /* Initialization code goes here */
 }

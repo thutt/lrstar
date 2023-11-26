@@ -6,7 +6,7 @@
  */
 
 void
-CICS_term_actions(CICS_parser_t *parser)
+CICS_term_actions(UNUSED_PARAM(CICS_parser_t *parser))
 {
       /* Termination code goes here */
 }

@@ -6,7 +6,7 @@
  */
 
 void
-Dbase_init_actions(Dbase_parser_t *parser)
+Dbase_init_actions(UNUSED_PARAM(Dbase_parser_t *parser))
 {
       /* Initialization code goes here */
 }

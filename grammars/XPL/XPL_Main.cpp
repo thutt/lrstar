@@ -4,15 +4,15 @@
 
 const char XPL_grammar_name[] = "XPL";
 
-void XPL_init_actions(XPL_parser_t *parser); /* User-supplied */
-void XPL_term_actions(XPL_parser_t *parser); /* User-supplied */
+void XPL_init_actions(UNUSED_PARAM(XPL_parser_t *parser)); /* User-supplied */
+void XPL_term_actions(UNUSED_PARAM(XPL_parser_t *parser)); /* User-supplied */
 static XPL_parser_t::init_func_t XPL_init_funcs_[2] = {
    XPL_init_actions,
    XPL_term_actions
 };
 
-int XPL_error(XPL_parser_t *parser, int &t);
-int XPL_lookup(XPL_parser_t *parser, int &t);
+int XPL_error(UNUSED_PARAM(XPL_parser_t *parser), UNUSED_PARAM(int &t));
+int XPL_lookup(UNUSED_PARAM(XPL_parser_t *parser), UNUSED_PARAM(int &t));
 // Terminal action function pointers ...
 static XPL_parser_t::tact_func_t XPL_tact_funcs_[2] = {
    XPL_error,

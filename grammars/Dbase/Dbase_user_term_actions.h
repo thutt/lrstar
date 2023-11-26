@@ -6,7 +6,7 @@
  */
 
 void
-Dbase_term_actions(Dbase_parser_t *parser)
+Dbase_term_actions(UNUSED_PARAM(Dbase_parser_t *parser))
 {
       /* Termination code goes here */
 }

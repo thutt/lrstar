@@ -4,15 +4,15 @@
 
 const char Java1_grammar_name[] = "Java1";
 
-void Java1_init_actions(Java1_parser_t *parser); /* User-supplied */
-void Java1_term_actions(Java1_parser_t *parser); /* User-supplied */
+void Java1_init_actions(UNUSED_PARAM(Java1_parser_t *parser)); /* User-supplied */
+void Java1_term_actions(UNUSED_PARAM(Java1_parser_t *parser)); /* User-supplied */
 static Java1_parser_t::init_func_t Java1_init_funcs_[2] = {
    Java1_init_actions,
    Java1_term_actions
 };
 
-int Java1_error(Java1_parser_t *parser, int &t);
-int Java1_lookup(Java1_parser_t *parser, int &t);
+int Java1_error(UNUSED_PARAM(Java1_parser_t *parser), UNUSED_PARAM(int &t));
+int Java1_lookup(UNUSED_PARAM(Java1_parser_t *parser), UNUSED_PARAM(int &t));
 // Terminal action function pointers ...
 static Java1_parser_t::tact_func_t Java1_tact_funcs_[2] = {
    Java1_error,

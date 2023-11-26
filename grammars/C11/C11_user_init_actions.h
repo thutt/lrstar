@@ -6,7 +6,7 @@
  */
 
 void
-C11_init_actions(C11_parser_t *parser)
+C11_init_actions(UNUSED_PARAM(C11_parser_t *parser))
 {
       /* Initialization code goes here */
 }

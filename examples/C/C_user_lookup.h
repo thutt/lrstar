@@ -6,7 +6,7 @@
  */
 
 int
-C_lookup(C_parser_t *parser, int &t)
+C_lookup(UNUSED_PARAM(C_parser_t *parser), UNUSED_PARAM(int &t))
 {
    // Lookup in symbol table.
 

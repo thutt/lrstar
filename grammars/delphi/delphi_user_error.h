@@ -6,7 +6,7 @@
  */
 
 int
-delphi_error(delphi_parser_t *parser, int &t)
+delphi_error(UNUSED_PARAM(delphi_parser_t *parser), UNUSED_PARAM(int &t))
 {
    if (parser->lt.token.end == parser->lt.token.start) {
       // An illegal character.

@@ -6,7 +6,7 @@
  */
 
 void
-CPP5_term_actions(CPP5_parser_t *parser)
+CPP5_term_actions(UNUSED_PARAM(CPP5_parser_t *parser))
 {
       /* Termination code goes here */
 }

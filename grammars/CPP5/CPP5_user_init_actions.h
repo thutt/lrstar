@@ -6,7 +6,7 @@
  */
 
 void
-CPP5_init_actions(CPP5_parser_t *parser)
+CPP5_init_actions(UNUSED_PARAM(CPP5_parser_t *parser))
 {
       /* Initialization code goes here */
 }

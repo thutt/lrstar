@@ -6,7 +6,7 @@
  */
 
 int
-Vba_error(Vba_parser_t *parser, int &t)
+Vba_error(UNUSED_PARAM(Vba_parser_t *parser), UNUSED_PARAM(int &t))
 {
    if (parser->lt.token.end == parser->lt.token.start) {
       // An illegal character.

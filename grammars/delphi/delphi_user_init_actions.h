@@ -6,7 +6,7 @@
  */
 
 void
-delphi_init_actions(delphi_parser_t *parser)
+delphi_init_actions(UNUSED_PARAM(delphi_parser_t *parser))
 {
       /* Initialization code goes here */
 }

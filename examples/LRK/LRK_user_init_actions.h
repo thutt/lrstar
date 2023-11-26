@@ -6,7 +6,7 @@
  */
 
 void
-LRK_init_actions(LRK_parser_t *parser)
+LRK_init_actions(UNUSED_PARAM(LRK_parser_t *parser))
 {
       /* Initialization code goes here */
 }

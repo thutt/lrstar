@@ -17,10 +17,10 @@
 
 /* Input Tokens. */
 
-EOF   <eof>          ;
-ERR   <error>        => error();
-ID    <identifier>   => lookup();  // Lookup & store in symbol table.
-INT   <integer>      => lookup();  // Lookup & store in symbol table.
+END_OF_FILE   <eof>          ;
+ERR           <error>        => error();
+ID            <identifier>   => lookup();  // Lookup & store in symbol table.
+INT           <integer>      => lookup();  // Lookup & store in symbol table.
 
 /* Operator precedence. */
 
@@ -31,7 +31,7 @@ INT   <integer>      => lookup();  // Lookup & store in symbol table.
 
 /* Productions. */
 
-Goal     : Program* EOF                            *> goal_
+Goal     : Program* END_OF_FILE                    *> goal_
          ;
 
 Program  : 'program' ID '{' Stmt* '}'              *> program_(2)

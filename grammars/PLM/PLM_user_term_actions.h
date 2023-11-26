@@ -6,7 +6,7 @@
  */
 
 void
-PLM_term_actions(PLM_parser_t *parser)
+PLM_term_actions(UNUSED_PARAM(PLM_parser_t *parser))
 {
       /* Termination code goes here */
 }

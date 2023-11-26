@@ -6,7 +6,7 @@
  */
 
 int
-Zeus_error(Zeus_parser_t *parser, int &t)
+Zeus_error(UNUSED_PARAM(Zeus_parser_t *parser), UNUSED_PARAM(int &t))
 {
    if (parser->lt.token.end == parser->lt.token.start) {
       // An illegal character.

@@ -201,9 +201,9 @@ main_init_functions(FILE *fp, int N_tacts, int N_nacts)
 {
    if (N_tacts > 0 || N_nacts > 0) {
       fprintf(fp,
-              "void %s_init_actions(%s_parser_t *parser); "
+              "void %s_init_actions(UNUSED_PARAM(%s_parser_t *parser)); "
               "/* User-supplied */\n"
-              "void %s_term_actions(%s_parser_t *parser); "
+              "void %s_term_actions(UNUSED_PARAM(%s_parser_t *parser)); "
               "/* User-supplied */\n"
               "static %s_parser_t::init_func_t %s_init_funcs_[2] = {\n"
               "   %s_init_actions,\n"
@@ -225,7 +225,9 @@ main_tact_functions(FILE *fp, int N_tacts, const char **Tact_start)
    if (N_tacts > 0) { // Number of terminal actions.
       // Token Actions ...
       for (int t = 0; t < N_tacts; t++) {
-         fprintf (fp, "int %s_%s(%s_parser_t *parser, int &t);\n",
+         fprintf (fp,
+                  "int %s_%s(UNUSED_PARAM(%s_parser_t *parser), "
+                  "UNUSED_PARAM(int &t));\n",
                   gfn, Tact_start[t], gfn);
       }
       fprintf(fp,
@@ -249,7 +251,9 @@ main_nact_functions(FILE *fp, int N_nacts, const char **Nact_start)
    if (N_nacts > 0) {           // Number of node actions
       for (int n = 0; n < N_nacts; n++) {
          if (strcmp (Nact_start[n], "NULL") != 0) {
-            fprintf(fp, "int %s_%s(%s_parser_t *parser, Node *node);\n",
+            fprintf(fp,
+                    "int %s_%s(UNUSED_PARAM(%s_parser_t *parser), "
+                    "UNUSED_PARAM(Node *node));\n",
                     gfn, Nact_start[n], gfn);
          }
       }
@@ -1484,7 +1488,7 @@ write_user_init(FILE *fp, const char *fn_name)
    write_user_preamble(fp);
    fprintf(fp,
            "void\n"
-           "%s_%s(%s_parser_t *parser)\n"
+           "%s_%s(UNUSED_PARAM(%s_parser_t *parser))\n"
            "{\n"
            "      /* Initialization code goes here */\n"
            "}\n",
@@ -1498,7 +1502,7 @@ write_user_term(FILE *fp, const char *fn_name)
    write_user_preamble(fp);
    fprintf(fp,
            "void\n"
-           "%s_%s(%s_parser_t *parser)\n"
+           "%s_%s(UNUSED_PARAM(%s_parser_t *parser))\n"
            "{\n"
            "      /* Termination code goes here */\n"
            "}\n",
@@ -1512,7 +1516,8 @@ write_user_error(FILE *fp, const char *fn_name)
    write_user_preamble(fp);
    fprintf(fp,
            "int\n"
-           "%s_%s(%s_parser_t *parser, int &t)\n"
+           "%s_%s(UNUSED_PARAM(%s_parser_t *parser), "
+           "UNUSED_PARAM(int &t))\n"
            "{\n"
            "   if (parser->lt.token.end == parser->lt.token.start) {\n"
            "      // An illegal character.\n"
@@ -1530,7 +1535,8 @@ write_user_lookup(FILE *fp, const char *fn_name)
    write_user_preamble(fp);
    fprintf(fp,
            "int\n"
-           "%s_%s(%s_parser_t *parser, int &t)\n"
+           "%s_%s(UNUSED_PARAM(%s_parser_t *parser), "
+           "UNUSED_PARAM(int &t))\n"
            "{\n"
            "   // Lookup in symbol table.\n\n"
            "   int sti;\n"
@@ -1561,7 +1567,8 @@ write_user_nact(FILE *fp, const char *fn_name)
    write_user_preamble(fp);
    fprintf(fp,
            "void\n"
-           "%s_%s(%s_parser_t *parser, Node *v)\n"
+           "%s_%s(UNUSED_PARAM(%s_parser_t *parser), "
+           "UNUSED_PARAM(Node *v))\n"
            "{\n"
            "}\n",
            gfn, fn_name, gfn);

@@ -6,7 +6,7 @@
  */
 
 void
-NCSA_init_actions(NCSA_parser_t *parser)
+NCSA_init_actions(UNUSED_PARAM(NCSA_parser_t *parser))
 {
       /* Initialization code goes here */
 }

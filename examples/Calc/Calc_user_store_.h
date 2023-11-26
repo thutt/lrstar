@@ -1,5 +1,5 @@
 void
-Calc_store_(Calc_parser_t *parser, Node *v)
+Calc_store_(UNUSED_PARAM(Calc_parser_t *parser), UNUSED_PARAM(Node *v))
 {
     if (parser->traversal == FIRST_PASS) {
         switch (parser->direction) {

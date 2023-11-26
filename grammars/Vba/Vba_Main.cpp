@@ -4,15 +4,15 @@
 
 const char Vba_grammar_name[] = "Vba";
 
-void Vba_init_actions(Vba_parser_t *parser); /* User-supplied */
-void Vba_term_actions(Vba_parser_t *parser); /* User-supplied */
+void Vba_init_actions(UNUSED_PARAM(Vba_parser_t *parser)); /* User-supplied */
+void Vba_term_actions(UNUSED_PARAM(Vba_parser_t *parser)); /* User-supplied */
 static Vba_parser_t::init_func_t Vba_init_funcs_[2] = {
    Vba_init_actions,
    Vba_term_actions
 };
 
-int Vba_error(Vba_parser_t *parser, int &t);
-int Vba_lookup(Vba_parser_t *parser, int &t);
+int Vba_error(UNUSED_PARAM(Vba_parser_t *parser), UNUSED_PARAM(int &t));
+int Vba_lookup(UNUSED_PARAM(Vba_parser_t *parser), UNUSED_PARAM(int &t));
 // Terminal action function pointers ...
 static Vba_parser_t::tact_func_t Vba_tact_funcs_[2] = {
    Vba_error,

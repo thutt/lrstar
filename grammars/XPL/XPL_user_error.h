@@ -6,7 +6,7 @@
  */
 
 int
-XPL_error(XPL_parser_t *parser, int &t)
+XPL_error(UNUSED_PARAM(XPL_parser_t *parser), UNUSED_PARAM(int &t))
 {
    if (parser->lt.token.end == parser->lt.token.start) {
       // An illegal character.

@@ -6,7 +6,7 @@
  */
 
 int
-ANTLR_error(ANTLR_parser_t *parser, int &t)
+ANTLR_error(UNUSED_PARAM(ANTLR_parser_t *parser), UNUSED_PARAM(int &t))
 {
    if (parser->lt.token.end == parser->lt.token.start) {
       // An illegal character.

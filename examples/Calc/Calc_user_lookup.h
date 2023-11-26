@@ -6,7 +6,7 @@
  */
 
 int
-Calc_lookup(Calc_parser_t *parser, int &t)
+Calc_lookup(UNUSED_PARAM(Calc_parser_t *parser), UNUSED_PARAM(int &t))
 {
    // Lookup in symbol table.
 

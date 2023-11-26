@@ -6,7 +6,7 @@
  */
 
 void
-Zeus_term_actions(Zeus_parser_t *parser)
+Zeus_term_actions(UNUSED_PARAM(Zeus_parser_t *parser))
 {
       /* Termination code goes here */
 }

@@ -6,7 +6,7 @@
  */
 
 void
-YACC_term_actions(YACC_parser_t *parser)
+YACC_term_actions(UNUSED_PARAM(YACC_parser_t *parser))
 {
       /* Termination code goes here */
 }

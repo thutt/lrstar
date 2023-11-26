@@ -6,7 +6,7 @@
  */
 
 void
-ALGOL60_init_actions(ALGOL60_parser_t *parser)
+ALGOL60_init_actions(UNUSED_PARAM(ALGOL60_parser_t *parser))
 {
       /* Initialization code goes here */
 }

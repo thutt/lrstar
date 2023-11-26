@@ -4,15 +4,15 @@
 
 const char verilog_grammar_name[] = "verilog";
 
-void verilog_init_actions(verilog_parser_t *parser); /* User-supplied */
-void verilog_term_actions(verilog_parser_t *parser); /* User-supplied */
+void verilog_init_actions(UNUSED_PARAM(verilog_parser_t *parser)); /* User-supplied */
+void verilog_term_actions(UNUSED_PARAM(verilog_parser_t *parser)); /* User-supplied */
 static verilog_parser_t::init_func_t verilog_init_funcs_[2] = {
    verilog_init_actions,
    verilog_term_actions
 };
 
-int verilog_error(verilog_parser_t *parser, int &t);
-int verilog_lookup(verilog_parser_t *parser, int &t);
+int verilog_error(UNUSED_PARAM(verilog_parser_t *parser), UNUSED_PARAM(int &t));
+int verilog_lookup(UNUSED_PARAM(verilog_parser_t *parser), UNUSED_PARAM(int &t));
 // Terminal action function pointers ...
 static verilog_parser_t::tact_func_t verilog_tact_funcs_[2] = {
    verilog_error,

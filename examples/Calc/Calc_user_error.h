@@ -6,7 +6,7 @@
  */
 
 int
-Calc_error(Calc_parser_t *parser, int &t)
+Calc_error(UNUSED_PARAM(Calc_parser_t *parser), UNUSED_PARAM(int &t))
 {
    if (parser->lt.token.end == parser->lt.token.start) {
       // An illegal character.

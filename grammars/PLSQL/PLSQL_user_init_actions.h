@@ -6,7 +6,7 @@
  */
 
 void
-PLSQL_init_actions(PLSQL_parser_t *parser)
+PLSQL_init_actions(UNUSED_PARAM(PLSQL_parser_t *parser))
 {
       /* Initialization code goes here */
 }

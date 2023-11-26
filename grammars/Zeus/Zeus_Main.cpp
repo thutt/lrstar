@@ -4,15 +4,15 @@
 
 const char Zeus_grammar_name[] = "Zeus";
 
-void Zeus_init_actions(Zeus_parser_t *parser); /* User-supplied */
-void Zeus_term_actions(Zeus_parser_t *parser); /* User-supplied */
+void Zeus_init_actions(UNUSED_PARAM(Zeus_parser_t *parser)); /* User-supplied */
+void Zeus_term_actions(UNUSED_PARAM(Zeus_parser_t *parser)); /* User-supplied */
 static Zeus_parser_t::init_func_t Zeus_init_funcs_[2] = {
    Zeus_init_actions,
    Zeus_term_actions
 };
 
-int Zeus_error(Zeus_parser_t *parser, int &t);
-int Zeus_lookup(Zeus_parser_t *parser, int &t);
+int Zeus_error(UNUSED_PARAM(Zeus_parser_t *parser), UNUSED_PARAM(int &t));
+int Zeus_lookup(UNUSED_PARAM(Zeus_parser_t *parser), UNUSED_PARAM(int &t));
 // Terminal action function pointers ...
 static Zeus_parser_t::tact_func_t Zeus_tact_funcs_[2] = {
    Zeus_error,

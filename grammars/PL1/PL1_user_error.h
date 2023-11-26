@@ -6,7 +6,7 @@
  */
 
 int
-PL1_error(PL1_parser_t *parser, int &t)
+PL1_error(UNUSED_PARAM(PL1_parser_t *parser), UNUSED_PARAM(int &t))
 {
    if (parser->lt.token.end == parser->lt.token.start) {
       // An illegal character.

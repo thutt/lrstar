@@ -6,7 +6,7 @@
  */
 
 void
-delphi_term_actions(delphi_parser_t *parser)
+delphi_term_actions(UNUSED_PARAM(delphi_parser_t *parser))
 {
       /* Termination code goes here */
 }

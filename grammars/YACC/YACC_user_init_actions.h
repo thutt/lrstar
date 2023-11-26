@@ -6,7 +6,7 @@
  */
 
 void
-YACC_init_actions(YACC_parser_t *parser)
+YACC_init_actions(UNUSED_PARAM(YACC_parser_t *parser))
 {
       /* Initialization code goes here */
 }

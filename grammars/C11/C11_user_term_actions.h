@@ -6,7 +6,7 @@
  */
 
 void
-C11_term_actions(C11_parser_t *parser)
+C11_term_actions(UNUSED_PARAM(C11_parser_t *parser))
 {
       /* Termination code goes here */
 }

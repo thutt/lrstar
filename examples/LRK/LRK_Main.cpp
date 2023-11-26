@@ -4,15 +4,15 @@
 
 const char LRK_grammar_name[] = "LRK";
 
-void LRK_init_actions(LRK_parser_t *parser); /* User-supplied */
-void LRK_term_actions(LRK_parser_t *parser); /* User-supplied */
+void LRK_init_actions(UNUSED_PARAM(LRK_parser_t *parser)); /* User-supplied */
+void LRK_term_actions(UNUSED_PARAM(LRK_parser_t *parser)); /* User-supplied */
 static LRK_parser_t::init_func_t LRK_init_funcs_[2] = {
    LRK_init_actions,
    LRK_term_actions
 };
 
-int LRK_error(LRK_parser_t *parser, int &t);
-int LRK_lookup(LRK_parser_t *parser, int &t);
+int LRK_error(UNUSED_PARAM(LRK_parser_t *parser), UNUSED_PARAM(int &t));
+int LRK_lookup(UNUSED_PARAM(LRK_parser_t *parser), UNUSED_PARAM(int &t));
 // Terminal action function pointers ...
 static LRK_parser_t::tact_func_t LRK_tact_funcs_[2] = {
    LRK_error,

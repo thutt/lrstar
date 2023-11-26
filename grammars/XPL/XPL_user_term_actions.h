@@ -6,7 +6,7 @@
  */
 
 void
-XPL_term_actions(XPL_parser_t *parser)
+XPL_term_actions(UNUSED_PARAM(XPL_parser_t *parser))
 {
       /* Termination code goes here */
 }

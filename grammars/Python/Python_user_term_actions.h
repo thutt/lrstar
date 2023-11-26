@@ -6,7 +6,7 @@
  */
 
 void
-Python_term_actions(Python_parser_t *parser)
+Python_term_actions(UNUSED_PARAM(Python_parser_t *parser))
 {
       /* Termination code goes here */
 }

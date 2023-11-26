@@ -4,7 +4,7 @@
 /* Terminal Symbols */
 
        ERR                       <error>;
-       EOF                       <eof>;
+       END_OF_FILE               <eof>;
        ID                        <identifier>;
        INT                       <integer>;
 

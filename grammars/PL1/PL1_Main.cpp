@@ -4,15 +4,15 @@
 
 const char PL1_grammar_name[] = "PL1";
 
-void PL1_init_actions(PL1_parser_t *parser); /* User-supplied */
-void PL1_term_actions(PL1_parser_t *parser); /* User-supplied */
+void PL1_init_actions(UNUSED_PARAM(PL1_parser_t *parser)); /* User-supplied */
+void PL1_term_actions(UNUSED_PARAM(PL1_parser_t *parser)); /* User-supplied */
 static PL1_parser_t::init_func_t PL1_init_funcs_[2] = {
    PL1_init_actions,
    PL1_term_actions
 };
 
-int PL1_error(PL1_parser_t *parser, int &t);
-int PL1_lookup(PL1_parser_t *parser, int &t);
+int PL1_error(UNUSED_PARAM(PL1_parser_t *parser), UNUSED_PARAM(int &t));
+int PL1_lookup(UNUSED_PARAM(PL1_parser_t *parser), UNUSED_PARAM(int &t));
 // Terminal action function pointers ...
 static PL1_parser_t::tact_func_t PL1_tact_funcs_[2] = {
    PL1_error,

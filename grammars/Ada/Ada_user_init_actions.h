@@ -6,7 +6,7 @@
  */
 
 void
-Ada_init_actions(Ada_parser_t *parser)
+Ada_init_actions(UNUSED_PARAM(Ada_parser_t *parser))
 {
       /* Initialization code goes here */
 }

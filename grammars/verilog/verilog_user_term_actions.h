@@ -6,7 +6,7 @@
  */
 
 void
-verilog_term_actions(verilog_parser_t *parser)
+verilog_term_actions(UNUSED_PARAM(verilog_parser_t *parser))
 {
       /* Termination code goes here */
 }

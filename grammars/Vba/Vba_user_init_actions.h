@@ -6,7 +6,7 @@
  */
 
 void
-Vba_init_actions(Vba_parser_t *parser)
+Vba_init_actions(UNUSED_PARAM(Vba_parser_t *parser))
 {
       /* Initialization code goes here */
 }

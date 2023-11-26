@@ -1,7 +1,7 @@
 
 /*
  * [The "BSD license"]
- *  Copyright (c) 2013 Terence Parr
+ *  Copyright (c) 2013, 2023 Terence Parr
  *  Copyright (c) 2013 Sam Harwell
  *  All rights reserved.
  *
@@ -36,7 +36,7 @@
 /*  Modified for input to LRSTAR by Paul Mann, June 3 2022. */
 
    ERR              <error>           => error();
-   EOF              <eof>             ;
+   END_OF_FILE      <eof>             ;
    INT              <integer>         => lookup();
    STRING_LITERAL   <string_literal>  => lookup();
    LEXER_CHAR_SET   <lexer_char_set>  => lookup();
@@ -86,7 +86,7 @@
 // The main entry point for parsing a v4 grammar.
 
 Goal  
-   : grammarSpec EOF 
+   : grammarSpec END_OF_FILE 
    ;
 
 grammarSpec

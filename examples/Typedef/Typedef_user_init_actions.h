@@ -6,7 +6,7 @@
  */
 
 void
-Typedef_init_actions(Typedef_parser_t *parser)
+Typedef_init_actions(UNUSED_PARAM(Typedef_parser_t *parser))
 {
       /* Initialization code goes here */
 }

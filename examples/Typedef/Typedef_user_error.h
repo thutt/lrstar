@@ -6,7 +6,7 @@
  */
 
 int
-Typedef_error(Typedef_parser_t *parser, int &t)
+Typedef_error(UNUSED_PARAM(Typedef_parser_t *parser), UNUSED_PARAM(int &t))
 {
    if (parser->lt.token.end == parser->lt.token.start) {
       // An illegal character.

@@ -6,7 +6,7 @@
  */
 
 void
-Java1_term_actions(Java1_parser_t *parser)
+Java1_term_actions(UNUSED_PARAM(Java1_parser_t *parser))
 {
       /* Termination code goes here */
 }

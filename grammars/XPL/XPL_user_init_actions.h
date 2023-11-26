@@ -6,7 +6,7 @@
  */
 
 void
-XPL_init_actions(XPL_parser_t *parser)
+XPL_init_actions(UNUSED_PARAM(XPL_parser_t *parser))
 {
       /* Initialization code goes here */
 }

@@ -6,7 +6,7 @@
  */
 
 void
-NCSA_term_actions(NCSA_parser_t *parser)
+NCSA_term_actions(UNUSED_PARAM(NCSA_parser_t *parser))
 {
       /* Termination code goes here */
 }

@@ -9,7 +9,7 @@
 
 enum termcon {
    ERR = 0,
-   EOF = 1,
+   END_OF_FILE = 1,
    INT = 2,
    STRING_LITERAL = 3,
    LEXER_CHAR_SET = 4,

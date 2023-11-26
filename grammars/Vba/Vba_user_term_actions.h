@@ -6,7 +6,7 @@
  */
 
 void
-Vba_term_actions(Vba_parser_t *parser)
+Vba_term_actions(UNUSED_PARAM(Vba_parser_t *parser))
 {
       /* Termination code goes here */
 }

@@ -6,7 +6,7 @@
  */
 
 void
-Pascal_init_actions(Pascal_parser_t *parser)
+Pascal_init_actions(UNUSED_PARAM(Pascal_parser_t *parser))
 {
       /* Initialization code goes here */
 }

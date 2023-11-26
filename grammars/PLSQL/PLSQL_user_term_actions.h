@@ -6,7 +6,7 @@
  */
 
 void
-PLSQL_term_actions(PLSQL_parser_t *parser)
+PLSQL_term_actions(UNUSED_PARAM(PLSQL_parser_t *parser))
 {
       /* Termination code goes here */
 }

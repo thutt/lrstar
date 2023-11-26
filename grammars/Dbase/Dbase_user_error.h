@@ -6,7 +6,7 @@
  */
 
 int
-Dbase_error(Dbase_parser_t *parser, int &t)
+Dbase_error(UNUSED_PARAM(Dbase_parser_t *parser), UNUSED_PARAM(int &t))
 {
    if (parser->lt.token.end == parser->lt.token.start) {
       // An illegal character.

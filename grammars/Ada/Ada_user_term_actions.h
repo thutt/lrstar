@@ -6,7 +6,7 @@
  */
 
 void
-Ada_term_actions(Ada_parser_t *parser)
+Ada_term_actions(UNUSED_PARAM(Ada_parser_t *parser))
 {
       /* Termination code goes here */
 }

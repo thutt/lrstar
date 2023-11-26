@@ -6,7 +6,7 @@
  */
 
 void
-Python_init_actions(Python_parser_t *parser)
+Python_init_actions(UNUSED_PARAM(Python_parser_t *parser))
 {
       /* Initialization code goes here */
 }

@@ -4,15 +4,15 @@
 
 const char Pascal_grammar_name[] = "Pascal";
 
-void Pascal_init_actions(Pascal_parser_t *parser); /* User-supplied */
-void Pascal_term_actions(Pascal_parser_t *parser); /* User-supplied */
+void Pascal_init_actions(UNUSED_PARAM(Pascal_parser_t *parser)); /* User-supplied */
+void Pascal_term_actions(UNUSED_PARAM(Pascal_parser_t *parser)); /* User-supplied */
 static Pascal_parser_t::init_func_t Pascal_init_funcs_[2] = {
    Pascal_init_actions,
    Pascal_term_actions
 };
 
-int Pascal_error(Pascal_parser_t *parser, int &t);
-int Pascal_lookup(Pascal_parser_t *parser, int &t);
+int Pascal_error(UNUSED_PARAM(Pascal_parser_t *parser), UNUSED_PARAM(int &t));
+int Pascal_lookup(UNUSED_PARAM(Pascal_parser_t *parser), UNUSED_PARAM(int &t));
 // Terminal action function pointers ...
 static Pascal_parser_t::tact_func_t Pascal_tact_funcs_[2] = {
    Pascal_error,

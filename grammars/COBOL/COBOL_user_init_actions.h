@@ -6,7 +6,7 @@
  */
 
 void
-COBOL_init_actions(COBOL_parser_t *parser)
+COBOL_init_actions(UNUSED_PARAM(COBOL_parser_t *parser))
 {
       /* Initialization code goes here */
 }

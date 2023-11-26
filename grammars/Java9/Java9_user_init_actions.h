@@ -6,7 +6,7 @@
  */
 
 void
-Java9_init_actions(Java9_parser_t *parser)
+Java9_init_actions(UNUSED_PARAM(Java9_parser_t *parser))
 {
       /* Initialization code goes here */
 }

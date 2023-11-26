@@ -6,7 +6,7 @@
  */
 
 int
-verilog_error(verilog_parser_t *parser, int &t)
+verilog_error(UNUSED_PARAM(verilog_parser_t *parser), UNUSED_PARAM(int &t))
 {
    if (parser->lt.token.end == parser->lt.token.start) {
       // An illegal character.

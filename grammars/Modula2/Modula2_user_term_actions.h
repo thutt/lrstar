@@ -6,7 +6,7 @@
  */
 
 void
-Modula2_term_actions(Modula2_parser_t *parser)
+Modula2_term_actions(UNUSED_PARAM(Modula2_parser_t *parser))
 {
       /* Termination code goes here */
 }

@@ -6,7 +6,7 @@
  */
 
 void
-Modula2_init_actions(Modula2_parser_t *parser)
+Modula2_init_actions(UNUSED_PARAM(Modula2_parser_t *parser))
 {
       /* Initialization code goes here */
 }

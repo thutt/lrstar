@@ -6,7 +6,7 @@
  */
 
 int
-LRK_lookup(LRK_parser_t *parser, int &t)
+LRK_lookup(UNUSED_PARAM(LRK_parser_t *parser), UNUSED_PARAM(int &t))
 {
    // Lookup in symbol table.
 

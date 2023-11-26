@@ -6,7 +6,7 @@
  */
 
 int
-C11_error(C11_parser_t *parser, int &t)
+C11_error(UNUSED_PARAM(C11_parser_t *parser), UNUSED_PARAM(int &t))
 {
    if (parser->lt.token.end == parser->lt.token.start) {
       // An illegal character.

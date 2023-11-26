@@ -8,7 +8,7 @@
 #include "lrstar_lexer.h"
 
 enum termcon {
-   EOF = 1,
+   END_OF_FILE = 1,
    ERR = 0,
    ID = 2,
    INT = 3,

@@ -6,7 +6,7 @@
  */
 
 int
-CICS_error(CICS_parser_t *parser, int &t)
+CICS_error(UNUSED_PARAM(CICS_parser_t *parser), UNUSED_PARAM(int &t))
 {
    if (parser->lt.token.end == parser->lt.token.start) {
       // An illegal character.

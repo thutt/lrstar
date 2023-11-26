@@ -6,7 +6,7 @@
  */
 
 int
-Pascal_error(Pascal_parser_t *parser, int &t)
+Pascal_error(UNUSED_PARAM(Pascal_parser_t *parser), UNUSED_PARAM(int &t))
 {
    if (parser->lt.token.end == parser->lt.token.start) {
       // An illegal character.

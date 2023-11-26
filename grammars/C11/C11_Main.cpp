@@ -4,15 +4,15 @@
 
 const char C11_grammar_name[] = "C11";
 
-void C11_init_actions(C11_parser_t *parser); /* User-supplied */
-void C11_term_actions(C11_parser_t *parser); /* User-supplied */
+void C11_init_actions(UNUSED_PARAM(C11_parser_t *parser)); /* User-supplied */
+void C11_term_actions(UNUSED_PARAM(C11_parser_t *parser)); /* User-supplied */
 static C11_parser_t::init_func_t C11_init_funcs_[2] = {
    C11_init_actions,
    C11_term_actions
 };
 
-int C11_error(C11_parser_t *parser, int &t);
-int C11_lookup(C11_parser_t *parser, int &t);
+int C11_error(UNUSED_PARAM(C11_parser_t *parser), UNUSED_PARAM(int &t));
+int C11_lookup(UNUSED_PARAM(C11_parser_t *parser), UNUSED_PARAM(int &t));
 // Terminal action function pointers ...
 static C11_parser_t::tact_func_t C11_tact_funcs_[2] = {
    C11_error,

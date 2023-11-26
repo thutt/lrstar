@@ -6,7 +6,7 @@
  */
 
 void
-Calc_term_actions(Calc_parser_t *parser)
+Calc_term_actions(UNUSED_PARAM(Calc_parser_t *parser))
 {
       /* Termination code goes here */
 }

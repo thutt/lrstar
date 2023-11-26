@@ -24,6 +24,10 @@ DISTRIB_BASIC_DEFS_HEADER	:=	\
 	$(DISTRIB_ROOT)/include/lrstar_basic_defs.h
 
 
+DISTRIB_BASIC_DEFS_GCC_HEADER	:=	\
+	$(DISTRIB_ROOT)/include/lrstar_basic_defs_gcc.h
+
+
 DISTRIB_LIBRARY_DEFS_HEADER	:=	\
 	$(DISTRIB_ROOT)/include/lrstar_library_defs.h
 
@@ -89,6 +93,16 @@ $(DISTRIB_BASIC_DEFS_HEADER):	$(LRSTAR_DIR)/src/include/lrstar_basic_defs.h
 	echo "BASIC DEFS: $@";
 
 
+$(DISTRIB_BASIC_DEFS_GCC_HEADER):	$(LRSTAR_DIR)/src/include/lrstar_basic_defs_gcc.h
+	$(PROLOG);				\
+	$(INSTALL)				\
+		--mode=444			\
+		-D				\
+		"$<"				\
+		$@;				\
+	echo "BASIC GCC DEFS: $@";
+
+
 $(DISTRIB_LIBRARY_DEFS_HEADER):	$(LRSTAR_DIR)/src/include/lrstar_library_defs.h
 	$(PROLOG);				\
 	$(INSTALL)				\
@@ -122,16 +136,17 @@ $(DISTRIB_DFA):		$(DFA)
 # The 'distribution' target uses Gnu Coreutils 'install' program to
 # put all the delivered build artifacts into the '/usr/local'
 # directory tree.
-distribution:					\
-		$(DISTRIB_BASIC_DEFS_HEADER)	\
-		$(DISTRIB_DFA)			\
-		$(DISTRIB_LEXER_HEADER)		\
-		$(DISTRIB_LIBRARY_DEFS_HEADER)	\
-		$(DISTRIB_LRSTAR)		\
-		$(DISTRIB_MAIN_CODE)		\
-		$(DISTRIB_MAIN_HEADER)		\
-		$(DISTRIB_PARSER_HEADER)	\
-		$(DISTRIB_PARSER_TABLES_HEADER)	\
+distribution:						\
+		$(DISTRIB_BASIC_DEFS_HEADER)		\
+		$(DISTRIB_BASIC_DEFS_GCC_HEADER)	\
+		$(DISTRIB_DFA)				\
+		$(DISTRIB_LEXER_HEADER)			\
+		$(DISTRIB_LIBRARY_DEFS_HEADER)		\
+		$(DISTRIB_LRSTAR)			\
+		$(DISTRIB_MAIN_CODE)			\
+		$(DISTRIB_MAIN_HEADER)			\
+		$(DISTRIB_PARSER_HEADER)		\
+		$(DISTRIB_PARSER_TABLES_HEADER)		\
 		$(DISTRIB_SAMPLE_MAKE_DEFS)
 	$(PROLOG);	\
 	true;

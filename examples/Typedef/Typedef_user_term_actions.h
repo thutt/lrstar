@@ -6,7 +6,7 @@
  */
 
 void
-Typedef_term_actions(Typedef_parser_t *parser)
+Typedef_term_actions(UNUSED_PARAM(Typedef_parser_t *parser))
 {
       /* Termination code goes here */
 }

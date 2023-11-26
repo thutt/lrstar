@@ -6,7 +6,7 @@
  */
 
 int
-NCSA_error(NCSA_parser_t *parser, int &t)
+NCSA_error(UNUSED_PARAM(NCSA_parser_t *parser), UNUSED_PARAM(int &t))
 {
    if (parser->lt.token.end == parser->lt.token.start) {
       // An illegal character.

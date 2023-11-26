@@ -6,7 +6,7 @@
  */
 
 void
-CICS_init_actions(CICS_parser_t *parser)
+CICS_init_actions(UNUSED_PARAM(CICS_parser_t *parser))
 {
       /* Initialization code goes here */
 }

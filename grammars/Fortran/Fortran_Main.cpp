@@ -4,15 +4,15 @@
 
 const char Fortran_grammar_name[] = "Fortran";
 
-void Fortran_init_actions(Fortran_parser_t *parser); /* User-supplied */
-void Fortran_term_actions(Fortran_parser_t *parser); /* User-supplied */
+void Fortran_init_actions(UNUSED_PARAM(Fortran_parser_t *parser)); /* User-supplied */
+void Fortran_term_actions(UNUSED_PARAM(Fortran_parser_t *parser)); /* User-supplied */
 static Fortran_parser_t::init_func_t Fortran_init_funcs_[2] = {
    Fortran_init_actions,
    Fortran_term_actions
 };
 
-int Fortran_error(Fortran_parser_t *parser, int &t);
-int Fortran_lookup(Fortran_parser_t *parser, int &t);
+int Fortran_error(UNUSED_PARAM(Fortran_parser_t *parser), UNUSED_PARAM(int &t));
+int Fortran_lookup(UNUSED_PARAM(Fortran_parser_t *parser), UNUSED_PARAM(int &t));
 // Terminal action function pointers ...
 static Fortran_parser_t::tact_func_t Fortran_tact_funcs_[2] = {
    Fortran_error,

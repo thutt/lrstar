@@ -6,7 +6,7 @@
  */
 
 int
-Fortran_error(Fortran_parser_t *parser, int &t)
+Fortran_error(UNUSED_PARAM(Fortran_parser_t *parser), UNUSED_PARAM(int &t))
 {
    if (parser->lt.token.end == parser->lt.token.start) {
       // An illegal character.

@@ -6,7 +6,7 @@
  */
 
 int
-LRK_error(LRK_parser_t *parser, int &t)
+LRK_error(UNUSED_PARAM(LRK_parser_t *parser), UNUSED_PARAM(int &t))
 {
    if (parser->lt.token.end == parser->lt.token.start) {
       // An illegal character.

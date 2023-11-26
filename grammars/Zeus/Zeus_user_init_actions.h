@@ -6,7 +6,7 @@
  */
 
 void
-Zeus_init_actions(Zeus_parser_t *parser)
+Zeus_init_actions(UNUSED_PARAM(Zeus_parser_t *parser))
 {
       /* Initialization code goes here */
 }
