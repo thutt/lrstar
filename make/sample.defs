@@ -33,12 +33,31 @@ ERROR_FORMAT	:=				\
 CXXFLAGS	:=					\
 	-MMD						\
 	-Os						\
+	-Waggregate-return				\
 	-Wall						\
+	-Wcast-align					\
+	-Wchar-subscripts				\
 	-Wconversion					\
+	-Wdangling-else					\
 	-Werror						\
 	-Wextra						\
+	-Wimplicit-fallthrough				\
+	-Wlogical-not-parentheses			\
+	-Wmaybe-uninitialized				\
+	-Wmisleading-indentation			\
+	-Wnull-dereference				\
+	-Wparentheses					\
+	-Wpointer-arith					\
+	-Wreturn-type					\
+	-Wsequence-point				\
 	-Wshadow					\
+	-Wsign-compare					\
 	-Wsign-conversion				\
+	-Wundef						\
+	-Wuninitialized					\
+	-Wunused					\
+	-Wunused-label					\
+	-Wunused-value					\
 	-pedantic					\
 	$(ERROR_FORMAT)					\
 	$(addprefix -I,$(INCLUDES))			\
