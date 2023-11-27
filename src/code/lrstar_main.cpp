@@ -21,7 +21,7 @@
 
 #if defined(LRSTAR_LINUX)
 #include <unistd.h>
-long  _filelength (int fd)
+off_t _filelength(int fd)
 {
    struct stat st;
    fstat(fd, &st);
@@ -52,7 +52,7 @@ public:
    static char   dir[256];       // Directory (folder) of file.
    static char   filename[256];  // Filename of input file.
    static char   filetype[64];   // Filetype of input file.
-   static long   filesize;
+   static size_t filesize;
    static int    filedesc;
    static int    init (char* dir, char* fn, char* ft);
    static void   term ();
@@ -86,7 +86,7 @@ char   cInput::path[256];        // Path of include file.
 char   cInput::filename[256];    // Filename of include file.
 char   cInput::filetype[64];     // Filetype of include file.
 int    cInput::filedesc;
-long   cInput::filesize;
+size_t cInput::filesize;
 
 char   cOutput::path[256];       // Path of output file.
 char   cOutput::dir[];           // Directory.
@@ -179,24 +179,28 @@ void  quit (int rc)
 int   cInput::init (char* dir, char* fn, char* ft)
 {
    long  nb;                                  // Number of bytes read.
-   strcpy (path, dir);
-   strcat (path, fn);
-   strcat (path, ft);
+
+   strcpy(path, dir);
+   strcat(path, fn);
+   strcat(path, ft);
+
    filedesc = _open (path, 0);               // Open the file.
-   if (filedesc < 0)                         // If open error.
-   {
+   if (filedesc < 0) {                       // If open error.
       printf ("File %s not found.\n", path);
       quit (1);
    }
-   filesize = _filelength(filedesc);              // Get filesize.
-   input_start = new char [filesize+6];            // Get some RAM space.
-   *input_start = '\n';                            // Put <eol> at beginning.
-   nb = _read(filedesc, input_start+1, filesize); // Read size bytes into buffer.
-   if (nb <= 0)                                    // If read error.
-   {
+
+   /* A file length cannot be negative, so the cast is safe. */
+   filesize     = static_cast<size_t>(_filelength(filedesc));
+   input_start  = new char [filesize + 6]; // Get some RAM space.
+   *input_start = '\n';                    // Put <eol> at beginning.
+
+   nb = _read(filedesc, input_start + 1, filesize); // Read size bytes into buffer.
+   if (nb <= 0) {                                 // If read error.
       printf ("Read error on file %s.\n", path);
-      quit (1);
+      quit(1);
    }
+
    input_end = input_start + nb + 1;      // Set end-of-buffer pointer.
    *input_end++ = EOL_CHAR;               // Put end-of-line here.
    *input_end++ = EOF_CHAR;               // Put first <eof> here.

@@ -17,19 +17,17 @@ enum ast_pass_t {
    FOURTH_PASS = 4,
 };
 
-class Symbol         // Symbol in Symbol Table.
-{
+class Symbol {                   // Symbol in Symbol Table.
 public:
-   char*  start;     // Start of symbol in input file or ?.
-   int    length;    // Length of symbol.
-   int    cell;      // Cell number in hash vector (if need to delete later).
-   int    type;      // Type of symbol: int, char, float, short, ...
-   int    term;      // Terminal number for lookup function.
-   int    scope;     // Scope: global, local, inner loop, ...
+   char     *start;             // Start of symbol in input file or ?.
+   unsigned  length;            // Length of symbol.
+   unsigned  cell;              // Cell number in hash vector (if need to delete later).
+   int       type;              // Type of symbol: int, char, float, short, ...
+   int       term;              // Terminal number for lookup function.
+   int       scope;             // Scope: global, local, inner loop, ...
 };
 
-class Node           // AST Node.
-{
+class Node {         // AST Node.
 public:
    int    id;        // Node ID number  .                         4
    int    sti;       // Symbol-table index (perm or temp var).    4
@@ -41,8 +39,7 @@ public:
    Node*  parent;    // Parent node.                              4  32 bytes
 };
 
-class PStack         // Parser stack.
-{
+class PStack {       // Parser stack.
 public:
    int    state;     // Parser state.
    int    sym;       // Tail symbol.
@@ -53,22 +50,19 @@ public:
    Node*  last;      // Pointer to last in list.
 };
 
-class RStack         // Restore Stack.
-{
+class RStack {       // Restore Stack.
 public:
    PStack* ptr;      // Parse stack pointer.       4  4
    int     state;    // State.                        4
    int     sym;      // Symbol.                       4  12 bytes.
 };
 
-class SStack         // State stack.
-{
+class SStack {       // State stack.
 public:
    int    state;     // Parser state.
 };
 
-class Stack          // AST Stack.
-{
+class Stack {        // AST Stack.
 public:
    int    id;        // Node id.                      4
    int    counter;   // Counter of node accesses.     4   8 bytes
@@ -98,8 +92,7 @@ template<const char *C_grammar,
          bool        C_term_actions,
          typename    T_lexer_t,
          typename    T_parser_tables_t>
-class lrstar_parser
-{
+class lrstar_parser {
 public:
    typedef void (*init_func_t)(lrstar_parser *parser);
    typedef int  (*tact_func_t)(lrstar_parser *parser, int &t);
@@ -121,12 +114,12 @@ public:
 
 public:
    // Parser variables
-   char    path[256];     // Path of input file.
-   PStack *PSstart;       // Parser stack start.
-   PStack *PS;            // Parse stack pointer.
-   int     n_nodes;       // Number of nodes in AST.
-   int     n_symbols;     // Number of symbols.
-   int     n_errors;
+   char      path[256];         // Path of input file.
+   PStack   *PSstart;           // Parser stack start.
+   PStack   *PS;                // Parse stack pointer.
+   unsigned  n_nodes;           // Number of nodes in AST.
+   unsigned  n_symbols;         // Number of symbols.
+   int       n_errors;
 
 
 private:
@@ -153,8 +146,8 @@ public:
 private:
    unsigned  hashdiv;           // Hash divisor.
    int      *hashvec;           // Hash vector.
-   int       max_cells;         // Maximum number of cells in the hash vector.
-   int       max_symbols;       // Maximum number of symbols.
+   unsigned  max_cells;         // Maximum number of cells in the hash vector.
+   unsigned  max_symbols;       // Maximum number of symbols.
 
    // AST Area ...
 public:
@@ -166,14 +159,14 @@ public:
    int        stacki;           // AST stack index.
 
 private:
-   int     max_nodes;     // Maximum number of nodes.
-   int*    counter;       // Node counter array.
-   Node*   nodearea;      // Node area or Node block allocated.
-   char    indent[256];   // Indentation for printing current node.
-   char    draw_plus[3];
-   char    draw_vbar[3];
-   char    draw_last[3];
-   char    draw_space[3];
+   unsigned  max_nodes;         // Maximum number of AST nodes.
+   int      *counter;           // Node counter array.
+   Node     *nodearea;          // Node area or Node block allocated.
+   char      indent[256];       // Indentation for printing current node.
+   char      draw_plus[3];
+   char      draw_vbar[3];
+   char      draw_last[3];
+   char      draw_space[3];
 
 private:                        // LR Parser
    void
@@ -653,7 +646,7 @@ public:
    char *                       // XXX dynamically allocate result.
    symbol_name(int sti)
    {
-      int          i;
+      unsigned     i;
       char        *p;
       static char  name[100];
 
@@ -665,7 +658,7 @@ public:
          name[i] = 0;
       }
       else {                    // Input file symbol.
-         int L;
+         unsigned L;
 
          p = symbol[sti].start;
          L = symbol[sti].length;
@@ -821,16 +814,21 @@ public:
          name[seq[0]] gives the first name in the sorted list.
       */
       const char **P;
-      const char *P_temp;
-      int *L;
-      int L_temp, seq_temp, i, j, leng, c;
+      const char  *P_temp;
+      size_t      *L;
+      int          seq_temp;
+      int          i;
+      int          j;
+      int          c;
+      size_t       L_temp;
+      size_t       leng;
 
-      L = new int  [pt.n_terms];
+      L = new size_t[pt.n_terms];
       P = new const char *[pt.n_terms];
 
       for (i = 0; i < pt.n_terms; i++) {
          P[i] = pt.term_symb[i];
-         L[i] = (int)strlen(pt.term_symb[i]);
+         L[i] = strlen(pt.term_symb[i]);
          seq[i] = i;
       }
       for (i = 1; i < pt.n_terms; i++) { // Bubble sort algorithm.
@@ -845,8 +843,8 @@ public:
                leng = L_temp;
             }
 
-            c = strncmp (P_temp, P[j], leng);
-            if (c < 0 || (c == 0 && L_temp < L[j])) {
+            c = strncmp(P_temp, P[j], leng);
+            if (c == 0 && L_temp < L[j]) {
                P[j+1]   = P[j];
                L[j+1]   = L[j];
                seq[j+1] = seq[j];
@@ -873,7 +871,7 @@ public:
       printf("Expecting one of the following:\n\n");
 
       int t, x;
-      int* seq = new int [pt.n_terms];
+      int *seq = new int[pt.n_terms];
       sort_terms(seq);
 
       for (t = 0; t < pt.n_terms; t++) {
@@ -1012,9 +1010,10 @@ public:
 
 
    bool
-   init_symtab(int max_symb)
+   init_symtab(unsigned max_symb)
    {
-      int i;
+      unsigned i;
+
       n_symbols = 1;                // 0 is reserved for null symbol.
 
       if (max_symb > 0) {
@@ -1407,6 +1406,7 @@ public:
    new_node()
    {
       Node *n;
+
       if (n_nodes % max_nodes == 0) {                 // Filled up nodearea?
          nodearea = new Node[max_nodes];              // Get another nodearea.
       }
@@ -1417,7 +1417,7 @@ public:
    }
 
    void
-   init_ast(int max)
+   init_ast(unsigned max)
    {
       n_nodes      = 1;
       max_nodes    = max;       // max_nodes to allocate as needed.
@@ -1440,10 +1440,10 @@ public:
 
 
    bool
-   init_parser(char *patharg,
-               char *input_start,
-               int   max_syms,
-               int   max_nodes)
+   init_parser(char     *patharg,
+               char     *input_start,
+               unsigned  max_syms,
+               unsigned  max_nodes)
    {
       if (C_nd_parsing) {
          for (int i = 0; i < C_nd_threads; i++) {
@@ -1473,11 +1473,24 @@ public:
          (*init_func[0])(this);          // init_action()
       }
 
-      T_exp  = new bool[pt.n_terms];
-      S_exam = new bool[pt.n_states];
+      {
+         /* Work around gcc defect.
+          *
+          * If the 'pt' variables are left in the 'new' expresions,
+          * gcc issues the following diagnostic:
+          *
+          *   error: conversion to 'long unsigned int' from 'sizetype' may change
+          *          the sign of the result [-Werror=sign-conversion]
+          */
+         int n_terms  = pt.n_terms;
+         int n_states = pt.n_states;
 
-      memset(T_exp,  false, pt.n_terms);
-      memset(S_exam, false, pt.n_states);
+         T_exp  = new bool[n_terms];
+         S_exam = new bool[n_states];
+      }
+
+      memset(T_exp,  false, static_cast<size_t>(pt.n_terms));
+      memset(S_exam, false, static_cast<size_t>(pt.n_states));
       return true;
    }
 
@@ -1486,21 +1499,22 @@ public:
    add_symbol(int t, char* token_start, char* token_end)
    {
       const char *p      = token_start;          // Point at start.
-      int         length = (int)(token_end - p); // Set length.
-      unsigned    hash   = length;               // Set hash to length.
-      int         i      = 0;                    // Set shift value to 0.
-      do {                                       // Assume length != 0
+      long int    length = token_end - p;        // Set length.
+      unsigned    hash   = static_cast<unsigned>(length); // Set hash to length.
+      int         i      = 0;                             // Set shift value to 0.
+      do {                                                // Assume length != 0
          if (C_insensitive) {
             hash += static_cast<uint8>(*p) << i;
          } else {
-            hash += *p << i;
+            hash += static_cast<uint8>(*p) << i;
          }
          i += 4;
          i %= 32;
       } while (++p < token_end);
 
-      int cell = hash % max_cells;              // Get first cell.
-      int sti  = hashvec [cell];                // Get symbol table index.
+      unsigned cell = hash % max_cells; // Get first cell.
+      int      sti  = hashvec [cell]; // Get symbol table index.
+
       while (sti >= 0) {                        // Symbol exists?
          if (symbol[sti].length == length) {    // If lengths are equal ...
             p = token_start;                    // Point at token start.
@@ -1522,7 +1536,8 @@ public:
             return sti;                         // Return sti.
          }
       Cont:
-         cell = (hash *= 65549)/hashdiv;        // Get new cell number.
+         hash *= 65549;
+         cell = hash / hashdiv;        // Get new cell number.
          sti  = hashvec[cell];                     // Get symbol table index.
       }
 
@@ -1533,13 +1548,15 @@ public:
                         "increase instantiation size.",
                         __PRETTY_FUNCTION__, __LINE__);
       }
-      sti = hashvec[cell] = n_symbols;          // Put symbol number into hash vector.
-      symbol[sti].start   = token_start;        // Pointer to original location in input file.
-      symbol[sti].length  = length;             // Length of symbol.
-      symbol[sti].cell    = cell;               // Cell in the hash vector.
-      symbol[sti].type    = 0;                  // Type of symbol: int, char, float, short, ...
-      symbol[sti].term    = t;                  // Terminal number for lookup funciton.
-      symbol[sti].scope   = 0;                  // Scope: global, local, inner loop, ...
+      assert(n_symbols <= INT_MAX);
+      sti                = static_cast<int>(n_symbols);
+      hashvec[cell]      = sti;          // Put symbol number into hash vector.
+      symbol[sti].start  = token_start; // Pointer to original location in input file.
+      symbol[sti].length = static_cast<unsigned>(length);      // Length of symbol.
+      symbol[sti].cell   = cell;        // Cell in the hash vector.
+      symbol[sti].type   = 0;           // Type of symbol: int, char, float, short.
+      symbol[sti].term   = t;           // Terminal number for lookup funciton.
+      symbol[sti].scope  = 0;           // Scope: global, local, inner loop.
       n_symbols++;
       return sti;                               // Return symbol table index.
    }
