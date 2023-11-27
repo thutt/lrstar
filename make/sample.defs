@@ -31,14 +31,15 @@ ERROR_FORMAT	:=				\
 
 
 CXXFLAGS	:=					\
-	-pedantic					\
+	-MMD						\
+	-Os						\
 	-Wall						\
 	-Wconversion					\
 	-Werror						\
 	-Wextra						\
+	-Wshadow					\
 	-Wsign-conversion				\
-	-Os						\
-	-MMD						\
+	-pedantic					\
 	$(ERROR_FORMAT)					\
 	$(addprefix -I,$(INCLUDES))			\
 	$(addprefix -D,LRSTAR_$(BUILD_TYPE) $(DEFINES))

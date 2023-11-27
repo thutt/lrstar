@@ -162,7 +162,6 @@ private:
    unsigned  max_nodes;         // Maximum number of AST nodes.
    int      *counter;           // Node counter array.
    Node     *nodearea;          // Node area or Node block allocated.
-   char      indent[256];       // Indentation for printing current node.
    char      draw_plus[3];
    char      draw_vbar[3];
    char      draw_last[3];
@@ -959,8 +958,8 @@ public:
                if (pt.nd_action[j] > 0) {          // Terminal transition.
                   T_exp[pt.nd_term[i]] = true;     // Mark this terminal.
                } else if (pt.nd_action[j] < 0) {
-                  int p = -pt.nd_action[j];
-                  reduction(p, x);
+                  int pp = -pt.nd_action[j];
+                  reduction(pp, x);
                }
             }
          }
@@ -1250,13 +1249,13 @@ public:
                  indent, pt.node_name[id]);
 
          if (sti > 0) {         // In the symbol table?
-            char *p  = symbol[sti].start + symbol[sti].length;
+            char *pp  = symbol[sti].start + symbol[sti].length;
             char  ch;
 
-            ch = *p;
-            *p = '\0';
+            ch = *pp;
+            *pp = '\0';
             fprintf(fp, " (%s)\n", symbol[sti].start);
-            *p = ch;
+            *pp = ch;
          } else {               // A terminal symbol of the grammar!
             fprintf(fp, " (%s)\n", pt.term_symb[-sti]);
          }
@@ -1443,7 +1442,7 @@ public:
    init_parser(char     *patharg,
                char     *input_start,
                unsigned  max_syms,
-               unsigned  max_nodes)
+               unsigned  max_nodes_)
    {
       if (C_nd_parsing) {
          for (int i = 0; i < C_nd_threads; i++) {
@@ -1466,7 +1465,7 @@ public:
       }
 
       if (C_make_ast) {
-         init_ast(max_nodes);            // Initialize the parser.
+         init_ast(max_nodes_);            // Initialize the parser.
       }
 
       if (C_action) {
