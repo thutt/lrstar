@@ -20,7 +20,6 @@ SCRIPT="${0}";
 PN=${SCRIPT##*/};      # Program name (remove all before last '/').
 DN=${SCRIPT%/*};       # Directory name (removall all after last '/').
 
-
 function fatal ()
 {
     local msg="${1}";
@@ -35,9 +34,41 @@ function lrstar ()
     local grm="${1}";
     local grm_name="$(basename "${grm}")";
     local grm_dir="$(dirname "${grm}")";
+    declare -A options=(
+        ["ALGOL60.grm"]="ast o"
+        ["ANTLR.grm"]="m"
+        ["Ada.grm"]="ci m"
+        ["C11.grm"]="o"
+        ["CICS.grm"]=""
+        ["COBOL.grm"]=""
+        ["CPP5.grm"]=""
+        ["Dbase.grm"]=""
+        ["Fortran.grm"]=""
+        ["Java1.grm"]=""
+        ["Java9.grm"]=""
+        ["Kotlin.grm"]=""
+        ["Modula2.grm"]=""
+        ["NCSA.grm"]=""
+        ["PL1.grm"]=""
+        ["PLM.grm"]=""
+        ["PLSQL.grm"]="m"
+        ["Pascal.grm"]="ci"
+        ["Python.grm"]=""
+        ["SQL.grm"]=""
+        ["Vba.grm"]=""
+        ["XPL.grm"]=""
+        ["YACC.grm"]=""
+        ["Zeus.grm"]=""
+        ["delphi.grm"]="ci"
+        ["verilog.grm"]=""
+        ["C.grm"]=""
+        ["Calc.grm"]=""
+        ["LRK.grm"]="k=100"
+        ["Typedef.grm"]=""
+    );
 
     pushd "${grm_dir}" >/dev/null;
-    "${lrstar}" "${grm_name}";
+    "${lrstar}" "${grm_name}" ${options[${grm_name}]};
     popd >/dev/null
 }
 
@@ -48,9 +79,41 @@ function dfa ()
     local lgr="${1}";
     local lgr_name="$(basename "${lgr}")";
     local lgr_dir="$(dirname "${lgr}")";
+    declare -A options=(
+        ["ALGOL60.lgr"]=""
+        ["ANTLR.lgr"]="sto m"
+        ["Ada.lgr"]=""
+        ["C11.lgr"]=""
+        ["CICS.lgr"]=""
+        ["COBOL.lgr"]=""
+        ["CPP5.lgr"]=""
+        ["Dbase.lgr"]=""
+        ["Fortran.lgr"]=""
+        ["Java1.lgr"]=""
+        ["Java9.lgr"]=""
+        ["Kotlin.lgr"]=""
+        ["Modula2.lgr"]=""
+        ["NCSA.lgr"]=""
+        ["PL1.lgr"]=""
+        ["PLM.lgr"]="sto m"
+        ["PLSQL.lgr"]="sto m"
+        ["Pascal.lgr"]=""
+        ["Python.lgr"]=""
+        ["SQL.lgr"]=""
+        ["Vba.lgr"]=""
+        ["XPL.lgr"]=""
+        ["YACC.lgr"]=""
+        ["Zeus.lgr"]=""
+        ["delphi.lgr"]=""
+        ["verilog.lgr"]=""
+        ["C.lgr"]=""
+        ["Calc.lgr"]=""
+        ["LRK.lgr"]="sto"
+        ["Typedef.lgr"]="m"
+    );
 
     pushd "${lgr_dir}" >/dev/null;
-    "${dfa}" "${lgr_name}";
+    "${dfa}" "${lgr_name}" ${options[${lgr_name}]};
     popd >/dev/null;
 }
 
@@ -116,7 +179,18 @@ function main ()
             # The Kotlin lexical grammer is not a dfa grammer, so skip
             # testing until that can be sorted out.
             if [ "$(basename ${grm})" != "Kotlin" ] ; then
-                    # Pre-cleanup in case last build & test failed.
+                # Pre-cleanup in case last build & test failed.
+                #
+                # Note that lrstar / dfa cannot be easily run from the
+                # build directory via usage of VPATH.  This is true
+                # because they write the output into the same place as
+                # in the input file.  And lrstar doesn't properly
+                # handle the input grammar pathname, incorrectly using
+                # the full path.
+                #
+                # Bottom line, until path handling is improved, ony
+                # execute lrstar while the CWD is directory containing
+                # the grammar file.
                 cleanup "${grm}";
                 process "${grm}";
 

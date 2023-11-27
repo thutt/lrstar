@@ -77,16 +77,16 @@ template<>
 const int LRK_parser_tables_t::n_PL = 31;
 
 template<>
-const int LRK_parser_tables_t::n_nd_fterm = 0;
+const int LRK_parser_tables_t::n_nd_fterm = 24;
 
 template<>
-const int LRK_parser_tables_t::n_nd_term = 0;
+const int LRK_parser_tables_t::n_nd_term = 2;
 
 template<>
-const int LRK_parser_tables_t::n_nd_faction = 0;
+const int LRK_parser_tables_t::n_nd_faction = 3;
 
 template<>
-const int LRK_parser_tables_t::n_nd_action = 0;
+const int LRK_parser_tables_t::n_nd_action = 4;
 
 template<>
 const int LRK_parser_tables_t::n_tact_numb = 19;
@@ -381,7 +381,7 @@ const uint8 *LRK_parser_tables_t::Rm = &Rm_[0];
 
 // Reduction matrix row ...
 static const uint8 Rr_[23] = {
-       0,     0,     0,     0,     0,    12,     0,    13,     0,    26, 
+       0,     0,     0,     0,     0,     0,     0,     0,     0,    26, 
       28,    28,     0,    27,     0,     0,     0,     0,     0,     0, 
       19,     0,     0, 
 };
@@ -409,17 +409,39 @@ static const int8 PL_[31] = {
 template<>
 const int8 *LRK_parser_tables_t::PL = &PL_[0];
 
-template<>
-const int32 *LRK_parser_tables_t::nd_fterm = 0;
+// Nondeterministic first terminal in the list ...
+static const uint8 nd_fterm_[24] = {
+       0,     0,     0,     0,     0,     0,     1,     1,     2,     2, 
+       2,     2,     2,     2,     2,     2,     2,     2,     2,     2, 
+       2,     2,     2,     2, 
+};
 
 template<>
-const int32 *LRK_parser_tables_t::nd_term = 0;
+const uint8 *LRK_parser_tables_t::nd_fterm = &nd_fterm_[0];
+
+// Nondeterministic terminal list ...
+const uint8 nd_term_[2] = {
+       6,     6, 
+};
 
 template<>
-const int32 *LRK_parser_tables_t::nd_faction = 0;
+const uint8 *LRK_parser_tables_t::nd_term = &nd_term_[0];
+
+// Nondeterministic first action in the list ...
+static const uint8 nd_faction_[3] = {
+       0,     2,     4, 
+};
 
 template<>
-const int32 *LRK_parser_tables_t::nd_action = 0;
+const uint8 *LRK_parser_tables_t::nd_faction = &nd_faction_[0];
+
+// Nondeterministic actions list ...
+static const int8 nd_action_[4] = {
+     -12,   -14,   -13,   -15, 
+};
+
+template<>
+const int8 *LRK_parser_tables_t::nd_action = &nd_action_[0];
 
 // Terminal action number ...
 static const int8 tact_numb_[19] = {
