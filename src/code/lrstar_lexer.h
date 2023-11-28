@@ -39,7 +39,8 @@ public:
     int     linenumb_printed;    // Line number already printed.
     int     lookahead_linenumb;  // Line number in input file.
 
-   void init_lexer(char *input_start, int tab_setting)
+   void
+   init_lexer(char *input_start, int tab_setting)
    {
       linenumb          = 0;
       linenumb_printed  = 0;
@@ -51,7 +52,8 @@ public:
    }
 
 
-   int get_token()
+   int
+   get_token()
    {
       int x, y;                     // State, next state.
       do {
@@ -63,9 +65,7 @@ public:
             x = y;
             if (*token.end == '\n') {
                linenumb++;
-               if (debug_lexer_) {
-                  prt_line();
-               }
+               prt_line();
             }
             token.end++;
          }
@@ -73,123 +73,32 @@ public:
       return term_numb[x];       // Return token_number.
    }
 
-   char *untabify(char *ls)
+
+   void
+   prt_line()
    {
       if (debug_lexer_) {
-         int          ns;
-         int          col;
-         char        *p;
-         char        *s;
-         static char  string [256];
-         char        *stringend = string + 250;
-
-         col = 0;
-         for (p = ls, s = string; *p != '\n'; p++) {
-            if (*p == '\t') {           // col = 0 1 2 3 4 5
-               ns = 3 - (col % 3);
-               switch (ns) {
-               case 3:
-                  *s++ = ' ';
-                  LRSTAR_FALLTHROUGH();
-               case 2:
-                  *s++ = ' ';
-                  LRSTAR_FALLTHROUGH();
-               case 1:
-                  *s++ = ' ';
-               }
-               col += ns;
-            } else {
-               *s++ = *p;
-               col++;
-            }
-            if (s > stringend) {
-               break;
-            }
-         }
-         *s = 0;
-         return string;
-      } else {
-         return ls;
-      }
-   }
-
-
-   char *untabify(char *ls, char *&ts)
-   {
-      // ls = line start.
-      // ts = token start within this line.;
-      static char  string[256];
-      char        *stringend = string + 250;
-      char        *p;
-      char        *s;
-      int          ns;
-      int          col       = 0;
-      int          incr      = 0;
-      for (p = ls, s = string; *p != '\n'; p++) {
-         if (*p == '\t') {           // col = 0 1 2 3 4 5
-            ns = 3 - (col % 3);
-            switch (ns) {
-            case 3:
-               *s++ = ' ';
-               if (p < ts) {
-                  incr++;
-               }
-               LRSTAR_FALLTHROUGH();
-
-            case 2:
-               *s++ = ' ';
-               if (p < ts) {
-                  incr++;
-               }
-               LRSTAR_FALLTHROUGH();
-
-            case 1:
-               *s++ = ' ';
-            }
-            col += ns;
-         } else {
-            *s++ = *p;
-            col++;
-         }
-         if (s > stringend) {
-            break;
-         }
-      }
-      *s = 0;
-      ts = string + (ts - ls) + incr;
-      return string;
-   }
-
-
-   void  prt_line()
-   {
-#if 1
-      assert(false);
-#else
-      // This requires <stdio.h>, but that defines EOF.  EOF is used
-      // by some of the grammars.  That produces syntax errors.
-      if (debug_lexer_) {
-         char *str;
          char *ls;
          if (linenumb > linenumb_printed) {
             if (linenumb == 1) {
                printf  (        "\n");
                fprintf (stderr, "\nInput File ...\n\n");
             }
-            ls = token.end + 1;
+
+            ls               = token.end + 1;
             linenumb_printed = linenumb;
-            if (*ls != 26) { // Not end of file?
-               str = untabify (ls);
-               printf  (        "%6d  %s\n", linenumb, str);
-               fprintf (stderr, "%6d  %s\n", linenumb, str);
+
+            if (*ls != 26) {    // Not end of file?
+               printf("%6d  %s\n", linenumb, ls);
+               fprintf(stderr, "%6d  %s\n", linenumb, ls);
             }
          }
       }
-#endif
    }
 
 
-   int get_lookahead()
+   int
+   get_lookahead()
    {
       int x, y;                     // State, next state.
       do {
@@ -210,7 +119,7 @@ public:
 };
 #endif
 /* Local Variables:      */
-/* mode: c               */
+/* mode: c++             */
 /* c-basic-offset: 3     */
 /* tab-width: 3          */
 /* indent-tabs-mode: nil */

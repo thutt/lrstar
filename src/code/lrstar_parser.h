@@ -335,9 +335,9 @@ private:                        // LR Parser
                sprintf(string, "In state %d", State[i]);
 
                if (la == 0) {
-                  syntax_error (string, &lt.token, pt.term_symb[LA]);
+                  syntax_error(string, &lt.token, pt.term_symb[LA]);
                } else {
-                  syntax_error (string, &lt.lookahead, pt.term_symb[LA]);
+                  syntax_error(string, &lt.lookahead, pt.term_symb[LA]);
                }
 
                printf ("\n   STOPPED LR(*) parsing after %d lookaheads, "
@@ -753,15 +753,9 @@ public:
 
 
    void
-   syntax_error(const char *msg, Token* T, const char* symb)
+   syntax_error(const char *msg, Token *T, const char *symb)
    {
       char  c;
-      char *p;
-      char *lineout;
-      char *pointer;
-      char *linestart;
-      char  string[256];
-      int   i = 0;
 
       n_errors++;
       if (*T->start <= 32) {
@@ -772,37 +766,15 @@ public:
          }
       }
 
-      // Get line start ...
-      linestart = T->start;
-      while (*linestart != '\n') {
-         linestart--;
-      }
-      linestart++;
+      printf("%s(%d) : %s ", path, T->line, msg);
 
-      // Get untabified line ...
-      pointer = T->start;
-      lineout = lt.untabify (linestart, pointer);
-
-      // Make pointer line ...
-      for (p = lineout; p < pointer; p++) {
-         string[i++] = '-';
-      }
-      string[i] = 0;
-
-      printf("\n%s(%d) : %s, %s\n", path, T->line, msg, lineout);
-      printf(  "%s(%d) : %s, %s^ ", path, T->line, msg, string);
-
-      if (*T->start > 32) {
+      if (*T->start > ' ') {
          c = *T->end;
-         *T->end = 0;
+         *T->end = '\0';
          printf("at %s %s\n", T->start, symb);
          *T->end = c;
-      } else {
-         int x = *T->start;
-         if (x < 0) {
-            x += 256;
-         }
-         printf("at %d %s\n", x, symb);
+      } else {                  /* Control character. */
+         printf("at %#x %s\n", *T->start, symb);
       }
    }
 
@@ -1385,7 +1357,7 @@ public:
          if (n_symbols > 1) {
             fprintf(fp,"   sti  leng  type     name "
                     "                               terminal\n");
-            for (int i = 1; i < n_symbols; i++) {
+            for (int i = 1; i < static_cast<int>(n_symbols); i++) {
                fprintf(fp," %5d %5d %5d     %-30s %4d %s\n",
                        i,
                        symbol[i].length,
@@ -1562,7 +1534,7 @@ public:
 };
 #endif
 /* Local Variables:      */
-/* mode: c               */
+/* mode: c++             */
 /* c-basic-offset: 3     */
 /* tab-width: 3          */
 /* indent-tabs-mode: nil */
