@@ -753,14 +753,14 @@ public:
 
 
    void
-   syntax_error(const char *msg, Token* T, const char* symb)
+   syntax_error(const char *msg, Token *T, const char *symb)
    {
       char  c;
       char *p;
       char *lineout;
       char *pointer;
       char *linestart;
-      char  string[256];
+      char *string;
       int   i = 0;
 
       n_errors++;
@@ -784,13 +784,17 @@ public:
       lineout = lt.untabify (linestart, pointer);
 
       // Make pointer line ...
-      for (p = lineout; p < pointer; p++) {
+      p      = lineout;
+      string = new char[pointer - p + 1];
+      while (p < pointer) {
          string[i++] = '-';
+         p++;
       }
-      string[i] = 0;
+      string[i] = '\0';
 
       printf("\n%s(%d) : %s, %s\n", path, T->line, msg, lineout);
       printf(  "%s(%d) : %s, %s^ ", path, T->line, msg, string);
+      delete [] string;
 
       if (*T->start > 32) {
          c = *T->end;
@@ -1385,7 +1389,7 @@ public:
          if (n_symbols > 1) {
             fprintf(fp,"   sti  leng  type     name "
                     "                               terminal\n");
-            for (int i = 1; i < n_symbols; i++) {
+            for (int i = 1; i < static_cast<int>(n_symbols); i++) {
                fprintf(fp," %5d %5d %5d     %-30s %4d %s\n",
                        i,
                        symbol[i].length,
