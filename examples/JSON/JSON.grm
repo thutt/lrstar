@@ -1,0 +1,62 @@
+/*--- Token Actions. ---*/
+
+<error>        => error();
+<string>       => lookup();
+<constant>     => lookup();
+
+
+Goal
+   : Value/','+ <eof>                      +> goal_
+   ;
+
+Array
+   :  '[' Value/','+ ']'                   +> array_
+   ;
+
+Object
+   :  '{' Member/','+'}'                   +> object_
+   ;
+
+
+Member
+   : <string> ':' Value                    +> member_
+   ;
+
+
+String
+   : <string>                              +> string_
+   ;
+
+Constant
+   : <constant>                            +> constant_
+   ;
+
+Null
+   : 'null'                                +> null_
+   ;
+
+True
+   : 'true'                                +> true_
+   ;
+
+False
+   : 'false'                               +> false_
+   ;
+
+Value
+   : Array      |
+     Object     |
+     String     |
+     Constant   |
+     Null       |
+     False      |
+     True                                 +> value_
+   ;
+
+/*--- End. ---*/
+/* Local Variables:      */
+/* mode: c               */
+/* c-basic-offset: 3     */
+/* tab-width: 3          */
+/* indent-tabs-mode: nil */
+/* End:                  */

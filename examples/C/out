@@ -1,0 +1,721 @@
+LRSTAR 24.0.017 32b Copyright Paul B Mann.
+ALGOL60.grm ast o 
+Grammar      169 rules, 57 terminals, 77 nonterminals.
+States       273 states in LALR(1) state machine.
+             148 states when using shift-reduce actions.
+Conflicts     18 states, 232 shift-reduce, 1 reduce-reduce.
+Optimized    415 N-transactions, 203 T-transactions, were optimized.
+            rows   cols          matrix       list      vect     total
+B matrix      46 x   37 x 1 =     1,702 ->     159 +     262 =     421  
+T matrix      43 x   38 x 2 =     3,268 ->   1,202 +     353 =   1,555  
+N matrix      70 x   22 x 2 =     3,080 ->   1,062 +     465 =   1,527  
+R matrix       5 x    8 x 1 =        36 ->      36 +     353 =     389  
+Total                                        2,459 +   1,433 =   3,892
+0 min 0.013 sec, 31.375 MB, 12 WARNINGS, 0 errors.
+/nas/homes/thutt/lrstar/lrstar/grammars/ALGOL60/ALGOL60.lgr does not exist.
+LRSTAR 24.0.017 32b Copyright Paul B Mann.
+ANTLR.grm m 
+Grammar      213 rules, 43 terminals, 126 nonterminals.
+States       305 states in LALR(1) state machine.
+             148 states when using shift-reduce actions.
+Conflicts      4 states, 4 shift-reduce, 2 reduce-reduce.
+            rows   cols          matrix       list      vect     total
+B matrix      51 x   38 x 1 =     1,938 ->     163 +     234 =     397 
+B matrix      51 x   38 x 1 =     1,938 ->     163 +     234 =     397 
+T matrix       8 x   41 x 2 =       656 ->     388 +     191 =     579 
+T matrix       8 x   41 x 2 =       656 ->     388 +     191 =     579 
+T matrix       8 x   33 x 2 =       528 ->     352 +     191 =     543 
+T matrix       8 x   33 x 2 =       528 ->     362 +     191 =     553 
+N matrix      29 x   91 x 2 =     5,278 ->     918 +     509 =   1,427 
+N matrix      29 x   91 x 2 =     5,278 ->     904 +     509 =   1,413 
+N matrix      29 x   66 x 2 =     3,828 ->     788 +     509 =   1,297 
+N matrix      29 x   66 x 2 =     3,828 ->     802 +     509 =   1,311 
+R matrix       9 x   14 x 1 =       121 ->     121 +     339 =     460 
+R matrix       9 x   14 x 1 =       121 ->     121 +     339 =     460 
+            rows   cols          matrix       list      vect     total
+B matrix      51 x   38 x 1 =     1,938 ->     163 +     234 =     397 *
+T matrix       8 x   33 x 2 =       528 ->     352 +     191 =     543 *
+N matrix      29 x   66 x 2 =     3,828 ->     788 +     509 =   1,297 *
+R matrix       9 x   14 x 1 =       121 ->     121 +     339 =     460 *
+Total                                        1,424 +   1,273 =   2,697
+0 min 0.013 sec, 31.416 MB, 0 warnings, 0 errors.
+DFA 24.0.016 32b Copyright Paul B Mann.
+ANTLR.lgr sto m 
+Grammar     1603 rules, 256 terminals, 63 nonterminals.
+States      5338 states before converting to a DFA.
+             136 states in final DFA state machine.
+Conflicts      0 states, 0 shift-reduce, 0 reduce-reduce.
+            rows   cols          matrix       list      vect     total
+T matrix     113 x   57 x 1 =     6,441 ->   5,259 +     664 =   5,923 
+0 min 0.097 sec, 38.784 MB, 0 warnings, 0 errors.
+make: Entering directory '/nas/homes/thutt/lrstar/lrstar/grammars/ANTLR'
+mkdir --parents /tmp/lrstar/release/grammars/ANTLR/
+make -C /tmp/lrstar/release/grammars/ANTLR/ --makefile /nas/homes/thutt/lrstar/lrstar/grammars/ANTLR//Makefile ANTLR VPATH=/nas/homes/thutt/lrstar/lrstar/grammars/ANTLR/;
+make[1]: Entering directory '/tmp/lrstar/release/grammars/ANTLR'
+g++ -MMD -Os -Waggregate-return -Wall -Wcast-align -Wchar-subscripts -Wconversion -Wdangling-else -Werror -Wextra -Wimplicit-fallthrough -Wlogical-not-parentheses -Wmaybe-uninitialized -Wmisleading-indentation -Wnull-dereference -Wparentheses -Wpointer-arith -Wreturn-type -Wsequence-point -Wshadow -Wsign-compare -Wsign-conversion -Wundef -Wuninitialized -Wunused -Wunused-label -Wunused-value -pedantic -fdiagnostics-color=never -fno-diagnostics-show-caret -I/tmp/lrstar/release/usr/local/include -DLRSTAR_RELEASE -DLRSTAR_LINUX   -c -o ANTLR_Lexer.o /nas/homes/thutt/lrstar/lrstar/grammars/ANTLR/ANTLR_Lexer.cpp
+g++ -MMD -Os -Waggregate-return -Wall -Wcast-align -Wchar-subscripts -Wconversion -Wdangling-else -Werror -Wextra -Wimplicit-fallthrough -Wlogical-not-parentheses -Wmaybe-uninitialized -Wmisleading-indentation -Wnull-dereference -Wparentheses -Wpointer-arith -Wreturn-type -Wsequence-point -Wshadow -Wsign-compare -Wsign-conversion -Wundef -Wuninitialized -Wunused -Wunused-label -Wunused-value -pedantic -fdiagnostics-color=never -fno-diagnostics-show-caret -I/tmp/lrstar/release/usr/local/include -DLRSTAR_RELEASE -DLRSTAR_LINUX   -c -o ANTLR_Main.o /nas/homes/thutt/lrstar/lrstar/grammars/ANTLR/ANTLR_Main.cpp
+g++ -MMD -Os -Waggregate-return -Wall -Wcast-align -Wchar-subscripts -Wconversion -Wdangling-else -Werror -Wextra -Wimplicit-fallthrough -Wlogical-not-parentheses -Wmaybe-uninitialized -Wmisleading-indentation -Wnull-dereference -Wparentheses -Wpointer-arith -Wreturn-type -Wsequence-point -Wshadow -Wsign-compare -Wsign-conversion -Wundef -Wuninitialized -Wunused -Wunused-label -Wunused-value -pedantic -fdiagnostics-color=never -fno-diagnostics-show-caret -I/tmp/lrstar/release/usr/local/include -DLRSTAR_RELEASE -DLRSTAR_LINUX   -c -o ANTLR_Parser.o /nas/homes/thutt/lrstar/lrstar/grammars/ANTLR/ANTLR_Parser.cpp
+g++ -MMD -Os -Waggregate-return -Wall -Wcast-align -Wchar-subscripts -Wconversion -Wdangling-else -Werror -Wextra -Wimplicit-fallthrough -Wlogical-not-parentheses -Wmaybe-uninitialized -Wmisleading-indentation -Wnull-dereference -Wparentheses -Wpointer-arith -Wreturn-type -Wsequence-point -Wshadow -Wsign-compare -Wsign-conversion -Wundef -Wuninitialized -Wunused -Wunused-label -Wunused-value -pedantic -fdiagnostics-color=never -fno-diagnostics-show-caret -I/tmp/lrstar/release/usr/local/include -DLRSTAR_RELEASE -DLRSTAR_LINUX   -c -o ANTLR_user.o /nas/homes/thutt/lrstar/lrstar/grammars/ANTLR/ANTLR_user.cpp
+g++ -o ANTLR ANTLR_Lexer.o ANTLR_Main.o ANTLR_Parser.o ANTLR_user.o;
+make[1]: Leaving directory '/tmp/lrstar/release/grammars/ANTLR'
+make: Leaving directory '/nas/homes/thutt/lrstar/lrstar/grammars/ANTLR'
+
+ANTLR parser, copyright ?.
+Args:    test.input.txt
+
+Success ...
+       115 symbols in symbol table.
+         0 nodes in AST.
+       403 lines read in input file.
+ 2,413,173 lines per second.
+     0.000 seconds.
+LRSTAR 24.0.017 32b Copyright Paul B Mann.
+Ada.grm ci m 
+Grammar      414 rules, 93 terminals, 205 nonterminals.
+States       807 states in LALR(1) state machine.
+             464 states when using shift-reduce actions.
+Conflicts      4 states, 7 shift-reduce, 50 reduce-reduce.
+            rows   cols          matrix       list      vect     total
+B matrix     118 x   77 x 1 =     9,086 ->     727 +   1,114 =   1,841 
+B matrix     118 x   77 x 1 =     9,086 ->     723 +   1,114 =   1,837 
+T matrix      73 x   81 x 2 =    11,826 ->   1,214 +   1,021 =   2,235 
+T matrix      73 x   81 x 2 =    11,826 ->   1,288 +   1,021 =   2,309 
+T matrix      73 x   53 x 2 =     7,738 ->   1,338 +   1,021 =   2,359 
+T matrix      73 x   53 x 2 =     7,738 ->   1,272 +   1,021 =   2,293 
+N matrix     102 x  138 x 2 =    28,152 ->   6,446 +   1,342 =   7,788 
+N matrix     102 x  138 x 2 =    28,152 ->   6,196 +   1,342 =   7,538 
+N matrix     102 x   74 x 2 =    15,096 ->   7,426 +   1,342 =   8,768 
+N matrix     102 x   74 x 2 =    15,096 ->   6,502 +   1,342 =   7,844 
+R matrix      19 x   21 x 2 =       748 ->     748 +   1,021 =   1,769 
+R matrix      19 x   21 x 2 =       748 ->     748 +   1,021 =   1,769 
+            rows   cols          matrix       list      vect     total
+B matrix     118 x   77 x 1 =     9,086 ->     723 +   1,114 =   1,837 *
+T matrix      73 x   81 x 2 =    11,826 ->   1,214 +   1,021 =   2,235 *
+N matrix     102 x  138 x 2 =    28,152 ->   6,196 +   1,342 =   7,538 *
+R matrix      19 x   21 x 2 =       748 ->     748 +   1,021 =   1,769 *
+Total                                        8,881 +   4,498 =  13,379
+0 min 0.065 sec, 31.535 MB, 0 warnings, 0 errors.
+/nas/homes/thutt/lrstar/lrstar/grammars/Ada/Ada.lgr does not exist.
+LRSTAR 24.0.017 32b Copyright Paul B Mann.
+C11.grm o 
+Grammar      275 rules, 99 terminals, 78 nonterminals.
+States       480 states in LALR(1) state machine.
+             256 states when using shift-reduce actions.
+Conflicts      2 states, 2 shift-reduce, 0 reduce-reduce.
+Optimized    791 N-transactions, 1843 T-transactions, were optimized.
+            rows   cols          matrix       list      vect     total
+B matrix      69 x   40 x 1 =     2,760 ->     283 +     710 =     993  
+T matrix      46 x   41 x 2 =     3,772 ->   2,760 +     611 =   3,371  
+N matrix      88 x   31 x 2 =     5,456 ->   4,250 +     787 =   5,037  
+R matrix       1 x    1 x 1 =         1 ->       1 +     355 =     356  
+Total                                        7,294 +   2,463 =   9,757
+0 min 0.017 sec, 31.455 MB, 0 warnings, 0 errors.
+DFA 24.0.016 32b Copyright Paul B Mann.
+C11.lgr 
+Grammar     1838 rules, 256 terminals, 115 nonterminals.
+States      5815 states before converting to a DFA.
+             288 states in final DFA state machine.
+Conflicts      0 states, 0 shift-reduce, 0 reduce-reduce.
+            rows   cols          matrix       list      vect     total
+T matrix     253 x   59 x 2 =    29,854 ->  29,854 +   1,120 =  30,974 
+0 min 0.116 sec, 43.914 MB, 0 warnings, 0 errors.
+make: Entering directory '/nas/homes/thutt/lrstar/lrstar/grammars/C11'
+mkdir --parents /tmp/lrstar/release/grammars/C11/
+make -C /tmp/lrstar/release/grammars/C11/ --makefile /nas/homes/thutt/lrstar/lrstar/grammars/C11//Makefile C11 VPATH=/nas/homes/thutt/lrstar/lrstar/grammars/C11/;
+make[1]: Entering directory '/tmp/lrstar/release/grammars/C11'
+g++ -MMD -Os -Waggregate-return -Wall -Wcast-align -Wchar-subscripts -Wconversion -Wdangling-else -Werror -Wextra -Wimplicit-fallthrough -Wlogical-not-parentheses -Wmaybe-uninitialized -Wmisleading-indentation -Wnull-dereference -Wparentheses -Wpointer-arith -Wreturn-type -Wsequence-point -Wshadow -Wsign-compare -Wsign-conversion -Wundef -Wuninitialized -Wunused -Wunused-label -Wunused-value -pedantic -fdiagnostics-color=never -fno-diagnostics-show-caret -I/tmp/lrstar/release/usr/local/include -DLRSTAR_RELEASE -DLRSTAR_LINUX   -c -o C11_Lexer.o /nas/homes/thutt/lrstar/lrstar/grammars/C11/C11_Lexer.cpp
+g++ -MMD -Os -Waggregate-return -Wall -Wcast-align -Wchar-subscripts -Wconversion -Wdangling-else -Werror -Wextra -Wimplicit-fallthrough -Wlogical-not-parentheses -Wmaybe-uninitialized -Wmisleading-indentation -Wnull-dereference -Wparentheses -Wpointer-arith -Wreturn-type -Wsequence-point -Wshadow -Wsign-compare -Wsign-conversion -Wundef -Wuninitialized -Wunused -Wunused-label -Wunused-value -pedantic -fdiagnostics-color=never -fno-diagnostics-show-caret -I/tmp/lrstar/release/usr/local/include -DLRSTAR_RELEASE -DLRSTAR_LINUX   -c -o C11_Main.o /nas/homes/thutt/lrstar/lrstar/grammars/C11/C11_Main.cpp
+g++ -MMD -Os -Waggregate-return -Wall -Wcast-align -Wchar-subscripts -Wconversion -Wdangling-else -Werror -Wextra -Wimplicit-fallthrough -Wlogical-not-parentheses -Wmaybe-uninitialized -Wmisleading-indentation -Wnull-dereference -Wparentheses -Wpointer-arith -Wreturn-type -Wsequence-point -Wshadow -Wsign-compare -Wsign-conversion -Wundef -Wuninitialized -Wunused -Wunused-label -Wunused-value -pedantic -fdiagnostics-color=never -fno-diagnostics-show-caret -I/tmp/lrstar/release/usr/local/include -DLRSTAR_RELEASE -DLRSTAR_LINUX   -c -o C11_Parser.o /nas/homes/thutt/lrstar/lrstar/grammars/C11/C11_Parser.cpp
+g++ -MMD -Os -Waggregate-return -Wall -Wcast-align -Wchar-subscripts -Wconversion -Wdangling-else -Werror -Wextra -Wimplicit-fallthrough -Wlogical-not-parentheses -Wmaybe-uninitialized -Wmisleading-indentation -Wnull-dereference -Wparentheses -Wpointer-arith -Wreturn-type -Wsequence-point -Wshadow -Wsign-compare -Wsign-conversion -Wundef -Wuninitialized -Wunused -Wunused-label -Wunused-value -pedantic -fdiagnostics-color=never -fno-diagnostics-show-caret -I/tmp/lrstar/release/usr/local/include -DLRSTAR_RELEASE -DLRSTAR_LINUX   -c -o C11_user.o /nas/homes/thutt/lrstar/lrstar/grammars/C11/C11_user.cpp
+g++ -o C11 C11_Lexer.o C11_Main.o C11_Parser.o C11_user.o;
+make[1]: Leaving directory '/tmp/lrstar/release/grammars/C11'
+make: Leaving directory '/nas/homes/thutt/lrstar/lrstar/grammars/C11'
+
+C11 parser, copyright ?.
+Args:    test.input.txt
+
+Success ...
+       779 symbols in symbol table.
+         0 nodes in AST.
+     2,271 lines read in input file.
+ 1,336,668 lines per second.
+     0.001 seconds.
+LRSTAR 24.0.017 32b Copyright Paul B Mann.
+CICS.grm 
+Grammar      821 rules, 216 terminals, 369 nonterminals.
+States      1393 states in LALR(1) state machine.
+             668 states when using shift-reduce actions.
+Conflicts      0 states, 0 shift-reduce, 0 reduce-reduce.
+            rows   cols          matrix       list      vect     total
+B matrix      50 x   64 x 1 =     3,200 ->     310 +   1,768 =   2,078  
+T matrix     193 x  107 x 2 =    41,302 ->   2,608 +   1,552 =   4,160  
+N matrix       2 x  368 x 2 =     1,472 ->   1,466 +   2,978 =   4,444  
+R matrix       1 x    1 x 1 =         1 ->       1 +   1,552 =   1,553  
+Total                                        4,385 +   7,850 =  12,235
+0 min 0.020 sec, 31.765 MB, 3 WARNINGS, 0 errors.
+/nas/homes/thutt/lrstar/lrstar/grammars/CICS/CICS.lgr does not exist.
+LRSTAR 24.0.017 32b Copyright Paul B Mann.
+COBOL.grm 
+Grammar     1005 rules, 351 terminals, 425 nonterminals.
+States      1620 states in LALR(1) state machine.
+             887 states when using shift-reduce actions.
+Conflicts    107 states, 778 shift-reduce, 0 reduce-reduce.
+            rows   cols          matrix       list      vect     total
+B matrix     300 x  235 x 1 =    70,500 ->   4,284 +   2,476 =   6,760  
+T matrix     113 x  263 x 2 =    59,438 ->   5,972 +   2,476 =   8,448  
+N matrix     119 x  343 x 2 =    81,634 ->  12,366 +   3,784 =  16,150  
+R matrix      12 x   21 x 2 =       478 ->     478 +   2,125 =   2,603  
+Total                                       23,100 +  10,861 =  33,961
+0 min 0.056 sec, 31.985 MB, 0 warnings, 0 errors.
+/nas/homes/thutt/lrstar/lrstar/grammars/COBOL/COBOL.lgr does not exist.
+LRSTAR 24.0.017 32b Copyright Paul B Mann.
+CPP5.grm 
+Grammar      643 rules, 103 terminals, 164 nonterminals.
+States      1235 states in LALR(1) state machine.
+             701 states when using shift-reduce actions.
+Conflicts     23 states, 24 shift-reduce, 18 reduce-reduce.
+            rows   cols          matrix       list      vect     total
+B matrix     131 x   50 x 1 =     6,550 ->     685 +   1,608 =   2,293  
+T matrix     159 x   74 x 2 =    23,532 ->  12,668 +   1,505 =  14,173  
+N matrix     265 x   80 x 2 =    42,400 ->  31,528 +   2,045 =  33,573  
+R matrix      48 x   18 x 2 =     1,668 ->   1,668 +   1,505 =   3,173  
+Total                                       46,549 +   6,663 =  53,212
+0 min 0.094 sec, 31.642 MB, 0 warnings, 0 errors.
+/nas/homes/thutt/lrstar/lrstar/grammars/CPP5/CPP5.lgr does not exist.
+LRSTAR 24.0.017 32b Copyright Paul B Mann.
+Dbase.grm 
+Grammar      618 rules, 280 terminals, 174 nonterminals.
+States      1106 states in LALR(1) state machine.
+             635 states when using shift-reduce actions.
+Conflicts      0 states, 0 shift-reduce, 0 reduce-reduce.
+            rows   cols          matrix       list      vect     total
+B matrix      99 x   93 x 1 =     9,207 ->     785 +   1,830 =   2,615  
+T matrix      76 x  135 x 2 =    20,520 ->   3,992 +   1,550 =   5,542  
+N matrix      62 x  146 x 2 =    18,104 ->   2,188 +   1,888 =   4,076  
+R matrix       3 x    5 x 2 =        26 ->      26 +   1,550 =   1,576  
+Total                                        6,991 +   6,818 =  13,809
+0 min 0.024 sec, 31.701 MB, 0 warnings, 0 errors.
+/nas/homes/thutt/lrstar/lrstar/grammars/Dbase/Dbase.lgr does not exist.
+LRSTAR 24.0.017 32b Copyright Paul B Mann.
+Fortran.grm 
+Grammar     1133 rules, 268 terminals, 572 nonterminals.
+States      1713 states in LALR(1) state machine.
+             724 states when using shift-reduce actions.
+Conflicts     36 states, 61 shift-reduce, 0 reduce-reduce.
+            rows   cols          matrix       list      vect     total
+B matrix     107 x   76 x 1 =     8,132 ->     762 +   1,984 =   2,746  
+T matrix      97 x  145 x 2 =    28,130 ->   3,500 +   1,716 =   5,216  
+N matrix      53 x  313 x 2 =    33,178 ->   6,810 +   3,714 =  10,524  
+R matrix      17 x   20 x 2 =       596 ->     596 +   1,716 =   2,312  
+Total                                       11,668 +   9,130 =  20,798
+0 min 0.033 sec, 31.981 MB, 0 warnings, 0 errors.
+/nas/homes/thutt/lrstar/lrstar/grammars/Fortran/Fortran.lgr does not exist.
+LRSTAR 24.0.017 32b Copyright Paul B Mann.
+Java1.grm 
+Grammar      270 rules, 99 terminals, 99 nonterminals.
+States       434 states in LALR(1) state machine.
+             236 states when using shift-reduce actions.
+Conflicts      2 states, 1 shift-reduce, 1 reduce-reduce.
+            rows   cols          matrix       list      vect     total
+B matrix      65 x   43 x 1 =     2,795 ->     266 +     670 =     936  
+T matrix      23 x   68 x 2 =     3,128 ->   1,216 +     571 =   1,787  
+N matrix      83 x   58 x 2 =     9,628 ->   6,270 +     742 =   7,012  
+R matrix       6 x    9 x 1 =        49 ->      49 +     571 =     620  
+Total                                        7,801 +   2,554 =  10,355
+0 min 0.018 sec, 31.446 MB, 0 warnings, 0 errors.
+DFA 24.0.016 32b Copyright Paul B Mann.
+Java1.lgr 
+Grammar     1484 rules, 256 terminals, 149 nonterminals.
+States      7025 states before converting to a DFA.
+             393 states in final DFA state machine.
+Conflicts      0 states, 0 shift-reduce, 0 reduce-reduce.
+            rows   cols          matrix       list      vect     total
+T matrix     360 x   73 x 2 =    52,560 ->  52,560 +   1,435 =  53,995 
+0 min 0.174 sec, 58.819 MB, 0 warnings, 0 errors.
+make: Entering directory '/nas/homes/thutt/lrstar/lrstar/grammars/Java1'
+mkdir --parents /tmp/lrstar/release/grammars/Java1/
+make -C /tmp/lrstar/release/grammars/Java1/ --makefile /nas/homes/thutt/lrstar/lrstar/grammars/Java1//Makefile Java1 VPATH=/nas/homes/thutt/lrstar/lrstar/grammars/Java1/;
+make[1]: Entering directory '/tmp/lrstar/release/grammars/Java1'
+g++ -MMD -Os -Waggregate-return -Wall -Wcast-align -Wchar-subscripts -Wconversion -Wdangling-else -Werror -Wextra -Wimplicit-fallthrough -Wlogical-not-parentheses -Wmaybe-uninitialized -Wmisleading-indentation -Wnull-dereference -Wparentheses -Wpointer-arith -Wreturn-type -Wsequence-point -Wshadow -Wsign-compare -Wsign-conversion -Wundef -Wuninitialized -Wunused -Wunused-label -Wunused-value -pedantic -fdiagnostics-color=never -fno-diagnostics-show-caret -I/tmp/lrstar/release/usr/local/include -DLRSTAR_RELEASE -DLRSTAR_LINUX   -c -o Java1_Lexer.o /nas/homes/thutt/lrstar/lrstar/grammars/Java1/Java1_Lexer.cpp
+g++ -MMD -Os -Waggregate-return -Wall -Wcast-align -Wchar-subscripts -Wconversion -Wdangling-else -Werror -Wextra -Wimplicit-fallthrough -Wlogical-not-parentheses -Wmaybe-uninitialized -Wmisleading-indentation -Wnull-dereference -Wparentheses -Wpointer-arith -Wreturn-type -Wsequence-point -Wshadow -Wsign-compare -Wsign-conversion -Wundef -Wuninitialized -Wunused -Wunused-label -Wunused-value -pedantic -fdiagnostics-color=never -fno-diagnostics-show-caret -I/tmp/lrstar/release/usr/local/include -DLRSTAR_RELEASE -DLRSTAR_LINUX   -c -o Java1_Main.o /nas/homes/thutt/lrstar/lrstar/grammars/Java1/Java1_Main.cpp
+g++ -MMD -Os -Waggregate-return -Wall -Wcast-align -Wchar-subscripts -Wconversion -Wdangling-else -Werror -Wextra -Wimplicit-fallthrough -Wlogical-not-parentheses -Wmaybe-uninitialized -Wmisleading-indentation -Wnull-dereference -Wparentheses -Wpointer-arith -Wreturn-type -Wsequence-point -Wshadow -Wsign-compare -Wsign-conversion -Wundef -Wuninitialized -Wunused -Wunused-label -Wunused-value -pedantic -fdiagnostics-color=never -fno-diagnostics-show-caret -I/tmp/lrstar/release/usr/local/include -DLRSTAR_RELEASE -DLRSTAR_LINUX   -c -o Java1_Parser.o /nas/homes/thutt/lrstar/lrstar/grammars/Java1/Java1_Parser.cpp
+g++ -MMD -Os -Waggregate-return -Wall -Wcast-align -Wchar-subscripts -Wconversion -Wdangling-else -Werror -Wextra -Wimplicit-fallthrough -Wlogical-not-parentheses -Wmaybe-uninitialized -Wmisleading-indentation -Wnull-dereference -Wparentheses -Wpointer-arith -Wreturn-type -Wsequence-point -Wshadow -Wsign-compare -Wsign-conversion -Wundef -Wuninitialized -Wunused -Wunused-label -Wunused-value -pedantic -fdiagnostics-color=never -fno-diagnostics-show-caret -I/tmp/lrstar/release/usr/local/include -DLRSTAR_RELEASE -DLRSTAR_LINUX   -c -o Java1_user.o /nas/homes/thutt/lrstar/lrstar/grammars/Java1/Java1_user.cpp
+g++ -o Java1 Java1_Lexer.o Java1_Main.o Java1_Parser.o Java1_user.o;
+make[1]: Leaving directory '/tmp/lrstar/release/grammars/Java1'
+make: Leaving directory '/nas/homes/thutt/lrstar/lrstar/grammars/Java1'
+LRSTAR 24.0.017 32b Copyright Paul B Mann.
+Java9.grm 
+Grammar      733 rules, 110 terminals, 366 nonterminals.
+States      1242 states in LALR(1) state machine.
+             745 states when using shift-reduce actions.
+Conflicts    225 states, 1289 shift-reduce, 334 reduce-reduce.
+            rows   cols          matrix       list      vect     total
+B matrix     105 x   72 x 1 =     7,560 ->     663 +   1,710 =   2,373  
+T matrix      85 x   64 x 2 =    10,880 ->   3,052 +   1,600 =   4,652  
+N matrix     163 x  173 x 2 =    56,398 ->  40,266 +   2,223 =  42,489  
+R matrix      92 x   46 x 2 =     8,126 ->   8,126 +   1,600 =   9,726  
+Total                                       52,107 +   7,133 =  59,240
+0 min 0.065 sec, 31.729 MB, 0 warnings, 0 errors.
+DFA 24.0.016 32b Copyright Paul B Mann.
+Java9.lgr 
+Grammar     1505 rules, 256 terminals, 159 nonterminals.
+States      7075 states before converting to a DFA.
+             433 states in final DFA state machine.
+Conflicts      0 states, 0 shift-reduce, 0 reduce-reduce.
+            rows   cols          matrix       list      vect     total
+T matrix     397 x   69 x 2 =    54,786 ->  54,786 +   1,555 =  56,341 
+0 min 0.182 sec, 59.476 MB, 0 warnings, 0 errors.
+make: Entering directory '/nas/homes/thutt/lrstar/lrstar/grammars/Java9'
+mkdir --parents /tmp/lrstar/release/grammars/Java9/
+make -C /tmp/lrstar/release/grammars/Java9/ --makefile /nas/homes/thutt/lrstar/lrstar/grammars/Java9//Makefile Java9 VPATH=/nas/homes/thutt/lrstar/lrstar/grammars/Java9/;
+make[1]: Entering directory '/tmp/lrstar/release/grammars/Java9'
+g++ -MMD -Os -Waggregate-return -Wall -Wcast-align -Wchar-subscripts -Wconversion -Wdangling-else -Werror -Wextra -Wimplicit-fallthrough -Wlogical-not-parentheses -Wmaybe-uninitialized -Wmisleading-indentation -Wnull-dereference -Wparentheses -Wpointer-arith -Wreturn-type -Wsequence-point -Wshadow -Wsign-compare -Wsign-conversion -Wundef -Wuninitialized -Wunused -Wunused-label -Wunused-value -pedantic -fdiagnostics-color=never -fno-diagnostics-show-caret -I/tmp/lrstar/release/usr/local/include -DLRSTAR_RELEASE -DLRSTAR_LINUX   -c -o Java9_Lexer.o /nas/homes/thutt/lrstar/lrstar/grammars/Java9/Java9_Lexer.cpp
+g++ -MMD -Os -Waggregate-return -Wall -Wcast-align -Wchar-subscripts -Wconversion -Wdangling-else -Werror -Wextra -Wimplicit-fallthrough -Wlogical-not-parentheses -Wmaybe-uninitialized -Wmisleading-indentation -Wnull-dereference -Wparentheses -Wpointer-arith -Wreturn-type -Wsequence-point -Wshadow -Wsign-compare -Wsign-conversion -Wundef -Wuninitialized -Wunused -Wunused-label -Wunused-value -pedantic -fdiagnostics-color=never -fno-diagnostics-show-caret -I/tmp/lrstar/release/usr/local/include -DLRSTAR_RELEASE -DLRSTAR_LINUX   -c -o Java9_Main.o /nas/homes/thutt/lrstar/lrstar/grammars/Java9/Java9_Main.cpp
+g++ -MMD -Os -Waggregate-return -Wall -Wcast-align -Wchar-subscripts -Wconversion -Wdangling-else -Werror -Wextra -Wimplicit-fallthrough -Wlogical-not-parentheses -Wmaybe-uninitialized -Wmisleading-indentation -Wnull-dereference -Wparentheses -Wpointer-arith -Wreturn-type -Wsequence-point -Wshadow -Wsign-compare -Wsign-conversion -Wundef -Wuninitialized -Wunused -Wunused-label -Wunused-value -pedantic -fdiagnostics-color=never -fno-diagnostics-show-caret -I/tmp/lrstar/release/usr/local/include -DLRSTAR_RELEASE -DLRSTAR_LINUX   -c -o Java9_Parser.o /nas/homes/thutt/lrstar/lrstar/grammars/Java9/Java9_Parser.cpp
+g++ -MMD -Os -Waggregate-return -Wall -Wcast-align -Wchar-subscripts -Wconversion -Wdangling-else -Werror -Wextra -Wimplicit-fallthrough -Wlogical-not-parentheses -Wmaybe-uninitialized -Wmisleading-indentation -Wnull-dereference -Wparentheses -Wpointer-arith -Wreturn-type -Wsequence-point -Wshadow -Wsign-compare -Wsign-conversion -Wundef -Wuninitialized -Wunused -Wunused-label -Wunused-value -pedantic -fdiagnostics-color=never -fno-diagnostics-show-caret -I/tmp/lrstar/release/usr/local/include -DLRSTAR_RELEASE -DLRSTAR_LINUX   -c -o Java9_user.o /nas/homes/thutt/lrstar/lrstar/grammars/Java9/Java9_user.cpp
+g++ -o Java9 Java9_Lexer.o Java9_Main.o Java9_Parser.o Java9_user.o;
+make[1]: Leaving directory '/tmp/lrstar/release/grammars/Java9'
+make: Leaving directory '/nas/homes/thutt/lrstar/lrstar/grammars/Java9'
+LRSTAR 24.0.017 32b Copyright Paul B Mann.
+Modula2.grm 
+Grammar      226 rules, 71 terminals, 122 nonterminals.
+States       372 states in LALR(1) state machine.
+             205 states when using shift-reduce actions.
+Conflicts      2 states, 2 shift-reduce, 0 reduce-reduce.
+            rows   cols          matrix       list      vect     total
+B matrix      52 x   46 x 1 =     2,392 ->     158 +     347 =     505  
+T matrix      17 x   63 x 2 =     2,142 ->     458 +     276 =     734  
+N matrix      56 x   60 x 2 =     6,720 ->   2,338 +     636 =   2,974  
+R matrix      13 x   20 x 1 =       239 ->     239 +     481 =     720  
+Total                                        3,193 +   1,740 =   4,933
+0 min 0.012 sec, 31.422 MB, 0 warnings, 0 errors.
+DFA 24.0.016 32b Copyright Paul B Mann.
+Modula2.lgr 
+Grammar     1269 rules, 256 terminals, 75 nonterminals.
+States      2905 states before converting to a DFA.
+             218 states in final DFA state machine.
+Conflicts      0 states, 0 shift-reduce, 0 reduce-reduce.
+            rows   cols          matrix       list      vect     total
+T matrix     195 x   54 x 1 =    10,530 ->  10,530 +     910 =  11,440 
+0 min 0.045 sec, 26.1008 MB, 0 warnings, 0 errors.
+make: Entering directory '/nas/homes/thutt/lrstar/lrstar/grammars/Modula2'
+mkdir --parents /tmp/lrstar/release/grammars/Modula2/
+make -C /tmp/lrstar/release/grammars/Modula2/ --makefile /nas/homes/thutt/lrstar/lrstar/grammars/Modula2//Makefile Modula2 VPATH=/nas/homes/thutt/lrstar/lrstar/grammars/Modula2/;
+make[1]: Entering directory '/tmp/lrstar/release/grammars/Modula2'
+g++ -MMD -Os -Waggregate-return -Wall -Wcast-align -Wchar-subscripts -Wconversion -Wdangling-else -Werror -Wextra -Wimplicit-fallthrough -Wlogical-not-parentheses -Wmaybe-uninitialized -Wmisleading-indentation -Wnull-dereference -Wparentheses -Wpointer-arith -Wreturn-type -Wsequence-point -Wshadow -Wsign-compare -Wsign-conversion -Wundef -Wuninitialized -Wunused -Wunused-label -Wunused-value -pedantic -fdiagnostics-color=never -fno-diagnostics-show-caret -I/tmp/lrstar/release/usr/local/include -DLRSTAR_RELEASE -DLRSTAR_LINUX   -c -o Modula2_Lexer.o /nas/homes/thutt/lrstar/lrstar/grammars/Modula2/Modula2_Lexer.cpp
+g++ -MMD -Os -Waggregate-return -Wall -Wcast-align -Wchar-subscripts -Wconversion -Wdangling-else -Werror -Wextra -Wimplicit-fallthrough -Wlogical-not-parentheses -Wmaybe-uninitialized -Wmisleading-indentation -Wnull-dereference -Wparentheses -Wpointer-arith -Wreturn-type -Wsequence-point -Wshadow -Wsign-compare -Wsign-conversion -Wundef -Wuninitialized -Wunused -Wunused-label -Wunused-value -pedantic -fdiagnostics-color=never -fno-diagnostics-show-caret -I/tmp/lrstar/release/usr/local/include -DLRSTAR_RELEASE -DLRSTAR_LINUX   -c -o Modula2_Main.o /nas/homes/thutt/lrstar/lrstar/grammars/Modula2/Modula2_Main.cpp
+g++ -MMD -Os -Waggregate-return -Wall -Wcast-align -Wchar-subscripts -Wconversion -Wdangling-else -Werror -Wextra -Wimplicit-fallthrough -Wlogical-not-parentheses -Wmaybe-uninitialized -Wmisleading-indentation -Wnull-dereference -Wparentheses -Wpointer-arith -Wreturn-type -Wsequence-point -Wshadow -Wsign-compare -Wsign-conversion -Wundef -Wuninitialized -Wunused -Wunused-label -Wunused-value -pedantic -fdiagnostics-color=never -fno-diagnostics-show-caret -I/tmp/lrstar/release/usr/local/include -DLRSTAR_RELEASE -DLRSTAR_LINUX   -c -o Modula2_Parser.o /nas/homes/thutt/lrstar/lrstar/grammars/Modula2/Modula2_Parser.cpp
+g++ -MMD -Os -Waggregate-return -Wall -Wcast-align -Wchar-subscripts -Wconversion -Wdangling-else -Werror -Wextra -Wimplicit-fallthrough -Wlogical-not-parentheses -Wmaybe-uninitialized -Wmisleading-indentation -Wnull-dereference -Wparentheses -Wpointer-arith -Wreturn-type -Wsequence-point -Wshadow -Wsign-compare -Wsign-conversion -Wundef -Wuninitialized -Wunused -Wunused-label -Wunused-value -pedantic -fdiagnostics-color=never -fno-diagnostics-show-caret -I/tmp/lrstar/release/usr/local/include -DLRSTAR_RELEASE -DLRSTAR_LINUX   -c -o Modula2_user.o /nas/homes/thutt/lrstar/lrstar/grammars/Modula2/Modula2_user.cpp
+g++ -o Modula2 Modula2_Lexer.o Modula2_Main.o Modula2_Parser.o Modula2_user.o;
+make[1]: Leaving directory '/tmp/lrstar/release/grammars/Modula2'
+make: Leaving directory '/nas/homes/thutt/lrstar/lrstar/grammars/Modula2'
+LRSTAR 24.0.017 32b Copyright Paul B Mann.
+NCSA.grm 
+Grammar       62 rules, 24 terminals, 25 nonterminals.
+States        89 states in LALR(1) state machine.
+              38 states when using shift-reduce actions.
+Conflicts      3 states, 4 shift-reduce, 12 reduce-reduce.
+            rows   cols          matrix       list      vect     total
+B matrix      22 x   22 x 1 =       484 ->      57 +      86 =     143  
+T matrix       9 x   17 x 1 =       153 ->      99 +      62 =     161  
+N matrix       6 x   22 x 1 =       132 ->      72 +     100 =     172  
+R matrix       2 x    3 x 1 =         6 ->       6 +      62 =      68  
+Total                                          234 +     310 =     544
+0 min 0.011 sec, 31.326 MB, 0 warnings, 0 errors.
+/nas/homes/thutt/lrstar/lrstar/grammars/NCSA/NCSA.lgr does not exist.
+LRSTAR 24.0.017 32b Copyright Paul B Mann.
+PL1.grm 
+Grammar     1272 rules, 226 terminals, 632 nonterminals.
+States      1873 states in LALR(1) state machine.
+             860 states when using shift-reduce actions.
+Conflicts     35 states, 217 shift-reduce, 0 reduce-reduce.
+            rows   cols          matrix       list      vect     total
+B matrix     107 x   80 x 1 =     8,560 ->     668 +   2,172 =   2,840  
+T matrix     149 x  131 x 2 =    39,038 ->   4,708 +   1,946 =   6,654  
+N matrix     168 x  336 x 2 =   112,896 ->  24,802 +   4,264 =  29,066  
+R matrix      11 x   13 x 2 =       242 ->     242 +   1,946 =   2,188  
+Total                                       30,420 +  10,328 =  40,748
+0 min 0.115 sec, 32.007 MB, 0 warnings, 0 errors.
+/nas/homes/thutt/lrstar/lrstar/grammars/PL1/PL1.lgr does not exist.
+LRSTAR 24.0.017 32b Copyright Paul B Mann.
+PLM.grm 
+Grammar      255 rules, 70 terminals, 152 nonterminals.
+States       368 states in LALR(1) state machine.
+             148 states when using shift-reduce actions.
+Conflicts      7 states, 9 shift-reduce, 4 reduce-reduce.
+            rows   cols          matrix       list      vect     total
+B matrix      50 x   40 x 1 =     2,000 ->     190 +     288 =     478  
+T matrix       1 x   69 x 2 =       138 ->     138 +     218 =     356  
+N matrix      58 x   90 x 2 =    10,440 ->   4,830 +     551 =   5,381  
+R matrix       2 x    3 x 1 =         5 ->       5 +     366 =     371  
+Total                                        5,163 +   1,423 =   6,586
+0 min 0.015 sec, 31.421 MB, 0 warnings, 0 errors.
+/nas/homes/thutt/lrstar/lrstar/grammars/PLM/PLM.lgr does not exist.
+LRSTAR 24.0.017 32b Copyright Paul B Mann.
+PLSQL.grm m 
+Grammar     6574 rules, 2285 terminals, 2242 nonterminals.
+States      9295 states in LALR(1) state machine.
+            3750 states when using shift-reduce actions.
+Conflicts    804 states, 257713 shift-reduce, 132606 reduce-reduce.
+            rows   cols          matrix       list      vect     total
+B matrix     937 x  665 x 1 =   623,105 ->  35,849 +  12,070 =  47,919 
+B matrix     937 x  665 x 1 =   623,105 ->  36,615 +  12,070 =  48,685 
+T matrix     221 x 2260 x 2 =   998,920 -> 135,106 +  12,070 = 147,176 
+T matrix     221 x 2260 x 2 =   998,920 -> 134,270 +  12,070 = 146,340 
+T matrix     222 x 2164 x 2 =   960,816 -> 140,782 +  19,570 = 160,352 
+T matrix     222 x 2167 x 2 =   962,148 -> 139,734 +  19,570 = 159,304 
+N matrix     364 x 1603 x 2 = 1,166,984 ->  41,796 +  20,648 =  62,444 
+N matrix     364 x 1603 x 2 = 1,166,984 ->  44,998 +  20,648 =  65,646 
+N matrix     364 x 1316 x 2 =   958,048 ->  42,730 +  20,648 =  63,378 
+N matrix     364 x 1316 x 2 =   958,048 ->  37,940 +  20,648 =  58,588 
+R matrix     247 x  178 x 2 =    85,788 ->  85,788 +  17,285 = 103,073 
+R matrix     247 x  178 x 2 =    85,788 ->  85,788 +  17,285 = 103,073 
+            rows   cols          matrix       list      vect     total
+B matrix     937 x  665 x 1 =   623,105 ->  35,849 +  12,070 =  47,919 *
+T matrix     221 x 2260 x 2 =   998,920 -> 134,270 +  12,070 = 146,340 *
+N matrix     364 x 1316 x 2 =   958,048 ->  37,940 +  20,648 =  58,588 *
+R matrix     247 x  178 x 2 =    85,788 ->  85,788 +  17,285 = 103,073 *
+Total                                      293,847 +  62,073 = 355,920
+0 min 8.616 sec, 61.183 MB, 37 WARNINGS, 0 errors.
+DFA 24.0.016 32b Copyright Paul B Mann.
+PLSQL.lgr sto m 
+Grammar     6224 rules, 256 terminals, 2310 nonterminals.
+States     20724 states before converting to a DFA.
+           13027 states in final DFA state machine.
+Conflicts      0 states, 0 shift-reduce, 0 reduce-reduce.
+            rows   cols          matrix       list      vect     total
+T matrix   12758 x   84 x 2 = 2,143,344 ->1,867,370 +  78,418 =1,945,788 
+1 min 21.985 sec, 423.148 MB, 3 warnings, 0 errors.
+make: Entering directory '/nas/homes/thutt/lrstar/lrstar/grammars/PLSQL'
+mkdir --parents /tmp/lrstar/release/grammars/PLSQL/
+make -C /tmp/lrstar/release/grammars/PLSQL/ --makefile /nas/homes/thutt/lrstar/lrstar/grammars/PLSQL//Makefile PLSQL VPATH=/nas/homes/thutt/lrstar/lrstar/grammars/PLSQL/;
+make[1]: Entering directory '/tmp/lrstar/release/grammars/PLSQL'
+g++ -MMD -Os -Waggregate-return -Wall -Wcast-align -Wchar-subscripts -Wconversion -Wdangling-else -Werror -Wextra -Wimplicit-fallthrough -Wlogical-not-parentheses -Wmaybe-uninitialized -Wmisleading-indentation -Wnull-dereference -Wparentheses -Wpointer-arith -Wreturn-type -Wsequence-point -Wshadow -Wsign-compare -Wsign-conversion -Wundef -Wuninitialized -Wunused -Wunused-label -Wunused-value -pedantic -fdiagnostics-color=never -fno-diagnostics-show-caret -I/tmp/lrstar/release/usr/local/include -DLRSTAR_RELEASE -DLRSTAR_LINUX   -c -o PLSQL_Lexer.o /nas/homes/thutt/lrstar/lrstar/grammars/PLSQL/PLSQL_Lexer.cpp
+g++ -MMD -Os -Waggregate-return -Wall -Wcast-align -Wchar-subscripts -Wconversion -Wdangling-else -Werror -Wextra -Wimplicit-fallthrough -Wlogical-not-parentheses -Wmaybe-uninitialized -Wmisleading-indentation -Wnull-dereference -Wparentheses -Wpointer-arith -Wreturn-type -Wsequence-point -Wshadow -Wsign-compare -Wsign-conversion -Wundef -Wuninitialized -Wunused -Wunused-label -Wunused-value -pedantic -fdiagnostics-color=never -fno-diagnostics-show-caret -I/tmp/lrstar/release/usr/local/include -DLRSTAR_RELEASE -DLRSTAR_LINUX   -c -o PLSQL_Main.o /nas/homes/thutt/lrstar/lrstar/grammars/PLSQL/PLSQL_Main.cpp
+g++ -MMD -Os -Waggregate-return -Wall -Wcast-align -Wchar-subscripts -Wconversion -Wdangling-else -Werror -Wextra -Wimplicit-fallthrough -Wlogical-not-parentheses -Wmaybe-uninitialized -Wmisleading-indentation -Wnull-dereference -Wparentheses -Wpointer-arith -Wreturn-type -Wsequence-point -Wshadow -Wsign-compare -Wsign-conversion -Wundef -Wuninitialized -Wunused -Wunused-label -Wunused-value -pedantic -fdiagnostics-color=never -fno-diagnostics-show-caret -I/tmp/lrstar/release/usr/local/include -DLRSTAR_RELEASE -DLRSTAR_LINUX   -c -o PLSQL_Parser.o /nas/homes/thutt/lrstar/lrstar/grammars/PLSQL/PLSQL_Parser.cpp
+g++ -MMD -Os -Waggregate-return -Wall -Wcast-align -Wchar-subscripts -Wconversion -Wdangling-else -Werror -Wextra -Wimplicit-fallthrough -Wlogical-not-parentheses -Wmaybe-uninitialized -Wmisleading-indentation -Wnull-dereference -Wparentheses -Wpointer-arith -Wreturn-type -Wsequence-point -Wshadow -Wsign-compare -Wsign-conversion -Wundef -Wuninitialized -Wunused -Wunused-label -Wunused-value -pedantic -fdiagnostics-color=never -fno-diagnostics-show-caret -I/tmp/lrstar/release/usr/local/include -DLRSTAR_RELEASE -DLRSTAR_LINUX   -c -o PLSQL_user.o /nas/homes/thutt/lrstar/lrstar/grammars/PLSQL/PLSQL_user.cpp
+g++ -o PLSQL PLSQL_Lexer.o PLSQL_Main.o PLSQL_Parser.o PLSQL_user.o;
+make[1]: Leaving directory '/tmp/lrstar/release/grammars/PLSQL'
+make: Leaving directory '/nas/homes/thutt/lrstar/lrstar/grammars/PLSQL'
+LRSTAR 24.0.017 32b Copyright Paul B Mann.
+Pascal.grm ci 
+Grammar      379 rules, 113 terminals, 194 nonterminals.
+States       631 states in LALR(1) state machine.
+             344 states when using shift-reduce actions.
+Conflicts     13 states, 13 shift-reduce, 0 reduce-reduce.
+            rows   cols          matrix       list      vect     total
+B matrix      88 x   68 x 1 =     5,984 ->     530 +     914 =   1,444  
+T matrix      28 x   73 x 2 =     4,088 ->   1,406 +     801 =   2,207  
+N matrix      86 x  100 x 2 =    17,200 ->   6,480 +   1,067 =   7,547  
+R matrix       3 x    5 x 2 =        24 ->      24 +     801 =     825  
+Total                                        8,440 +   3,583 =  12,023
+0 min 0.019 sec, 31.572 MB, 0 warnings, 0 errors.
+DFA 24.0.016 32b Copyright Paul B Mann.
+Pascal.lgr 
+Grammar     1341 rules, 256 terminals, 112 nonterminals.
+States      3075 states before converting to a DFA.
+             353 states in final DFA state machine.
+Conflicts      0 states, 0 shift-reduce, 0 reduce-reduce.
+            rows   cols          matrix       list      vect     total
+T matrix     332 x   56 x 2 =    37,184 ->  37,184 +   1,315 =  38,499 
+0 min 0.054 sec, 27.010 MB, 0 warnings, 0 errors.
+make: Entering directory '/nas/homes/thutt/lrstar/lrstar/grammars/Pascal'
+mkdir --parents /tmp/lrstar/release/grammars/Pascal/
+make -C /tmp/lrstar/release/grammars/Pascal/ --makefile /nas/homes/thutt/lrstar/lrstar/grammars/Pascal//Makefile Pascal VPATH=/nas/homes/thutt/lrstar/lrstar/grammars/Pascal/;
+make[1]: Entering directory '/tmp/lrstar/release/grammars/Pascal'
+g++ -MMD -Os -Waggregate-return -Wall -Wcast-align -Wchar-subscripts -Wconversion -Wdangling-else -Werror -Wextra -Wimplicit-fallthrough -Wlogical-not-parentheses -Wmaybe-uninitialized -Wmisleading-indentation -Wnull-dereference -Wparentheses -Wpointer-arith -Wreturn-type -Wsequence-point -Wshadow -Wsign-compare -Wsign-conversion -Wundef -Wuninitialized -Wunused -Wunused-label -Wunused-value -pedantic -fdiagnostics-color=never -fno-diagnostics-show-caret -I/tmp/lrstar/release/usr/local/include -DLRSTAR_RELEASE -DLRSTAR_LINUX   -c -o Pascal_Lexer.o /nas/homes/thutt/lrstar/lrstar/grammars/Pascal/Pascal_Lexer.cpp
+g++ -MMD -Os -Waggregate-return -Wall -Wcast-align -Wchar-subscripts -Wconversion -Wdangling-else -Werror -Wextra -Wimplicit-fallthrough -Wlogical-not-parentheses -Wmaybe-uninitialized -Wmisleading-indentation -Wnull-dereference -Wparentheses -Wpointer-arith -Wreturn-type -Wsequence-point -Wshadow -Wsign-compare -Wsign-conversion -Wundef -Wuninitialized -Wunused -Wunused-label -Wunused-value -pedantic -fdiagnostics-color=never -fno-diagnostics-show-caret -I/tmp/lrstar/release/usr/local/include -DLRSTAR_RELEASE -DLRSTAR_LINUX   -c -o Pascal_Main.o /nas/homes/thutt/lrstar/lrstar/grammars/Pascal/Pascal_Main.cpp
+g++ -MMD -Os -Waggregate-return -Wall -Wcast-align -Wchar-subscripts -Wconversion -Wdangling-else -Werror -Wextra -Wimplicit-fallthrough -Wlogical-not-parentheses -Wmaybe-uninitialized -Wmisleading-indentation -Wnull-dereference -Wparentheses -Wpointer-arith -Wreturn-type -Wsequence-point -Wshadow -Wsign-compare -Wsign-conversion -Wundef -Wuninitialized -Wunused -Wunused-label -Wunused-value -pedantic -fdiagnostics-color=never -fno-diagnostics-show-caret -I/tmp/lrstar/release/usr/local/include -DLRSTAR_RELEASE -DLRSTAR_LINUX   -c -o Pascal_Parser.o /nas/homes/thutt/lrstar/lrstar/grammars/Pascal/Pascal_Parser.cpp
+g++ -MMD -Os -Waggregate-return -Wall -Wcast-align -Wchar-subscripts -Wconversion -Wdangling-else -Werror -Wextra -Wimplicit-fallthrough -Wlogical-not-parentheses -Wmaybe-uninitialized -Wmisleading-indentation -Wnull-dereference -Wparentheses -Wpointer-arith -Wreturn-type -Wsequence-point -Wshadow -Wsign-compare -Wsign-conversion -Wundef -Wuninitialized -Wunused -Wunused-label -Wunused-value -pedantic -fdiagnostics-color=never -fno-diagnostics-show-caret -I/tmp/lrstar/release/usr/local/include -DLRSTAR_RELEASE -DLRSTAR_LINUX   -c -o Pascal_user.o /nas/homes/thutt/lrstar/lrstar/grammars/Pascal/Pascal_user.cpp
+g++ -o Pascal Pascal_Lexer.o Pascal_Main.o Pascal_Parser.o Pascal_user.o;
+make[1]: Leaving directory '/tmp/lrstar/release/grammars/Pascal'
+make: Leaving directory '/nas/homes/thutt/lrstar/lrstar/grammars/Pascal'
+LRSTAR 24.0.017 32b Copyright Paul B Mann.
+Python.grm 
+Grammar      396 rules, 94 terminals, 220 nonterminals.
+States       559 states in LALR(1) state machine.
+             257 states when using shift-reduce actions.
+Conflicts      5 states, 26 shift-reduce, 57 reduce-reduce.
+            rows   cols          matrix       list      vect     total
+B matrix      62 x   49 x 1 =     3,038 ->     249 +     445 =     694  
+T matrix      19 x   81 x 2 =     3,078 ->     702 +     608 =   1,310  
+N matrix      67 x  173 x 2 =    23,182 ->   6,092 +     910 =   7,002  
+R matrix      23 x   16 x 2 =       664 ->     664 +     608 =   1,272  
+Total                                        7,707 +   2,571 =  10,278
+0 min 0.017 sec, 31.528 MB, 0 warnings, 0 errors.
+/nas/homes/thutt/lrstar/lrstar/grammars/Python/Python.lgr does not exist.
+LRSTAR 24.0.017 32b Copyright Paul B Mann.
+SQL.grm 
+Grammar      399 rules, 138 terminals, 154 nonterminals.
+States       861 states in LALR(1) state machine.
+             532 states when using shift-reduce actions.
+Conflicts     31 states, 67 shift-reduce, 74 reduce-reduce.
+            rows   cols          matrix       list      vect     total
+B matrix     114 x   87 x 1 =     9,918 ->     736 +   1,340 =   2,076  
+T matrix     101 x  121 x 2 =    24,442 ->   2,146 +   1,202 =   3,348  
+N matrix      58 x  102 x 2 =    11,832 ->   1,962 +   1,463 =   3,425  
+R matrix       4 x    8 x 2 =        56 ->      56 +   1,202 =   1,258  
+Total                                        4,900 +   5,207 =  10,107
+0 min 0.016 sec, 31.550 MB, 0 warnings, 0 errors.
+/nas/homes/thutt/lrstar/lrstar/grammars/SQL/SQL.lgr does not exist.
+LRSTAR 24.0.017 32b Copyright Paul B Mann.
+Vba.grm 
+Grammar      405 rules, 139 terminals, 181 nonterminals.
+States       727 states in LALR(1) state machine.
+             453 states when using shift-reduce actions.
+Conflicts      2 states, 1 shift-reduce, 10 reduce-reduce.
+            rows   cols          matrix       list      vect     total
+B matrix     111 x   87 x 1 =     9,657 ->     892 +   1,184 =   2,076  
+T matrix      29 x   73 x 2 =     4,234 ->   2,878 +   1,045 =   3,923  
+N matrix      94 x  108 x 2 =    20,304 ->   8,242 +   1,311 =   9,553  
+R matrix      14 x   20 x 2 =       530 ->     530 +   1,045 =   1,575  
+Total                                       12,542 +   4,585 =  17,127
+0 min 0.026 sec, 31.572 MB, 5 WARNINGS, 0 errors.
+/nas/homes/thutt/lrstar/lrstar/grammars/Vba/Vba.lgr does not exist.
+LRSTAR 24.0.017 32b Copyright Paul B Mann.
+XPL.grm 
+Grammar      109 rules, 49 terminals, 49 nonterminals.
+States       183 states in LALR(1) state machine.
+              97 states when using shift-reduce actions.
+Conflicts      0 states, 0 shift-reduce, 0 reduce-reduce.
+            rows   cols          matrix       list      vect     total
+B matrix      42 x   30 x 1 =     1,260 ->     118 +     195 =     313  
+T matrix      16 x   38 x 1 =       608 ->     144 +     146 =     290  
+N matrix      34 x   35 x 1 =     1,190 ->     580 +     303 =     883  
+R matrix       1 x    1 x 1 =         1 ->       1 +     146 =     147  
+Total                                          843 +     790 =   1,633
+0 min 0.009 sec, 31.347 MB, 0 warnings, 0 errors.
+/nas/homes/thutt/lrstar/lrstar/grammars/XPL/XPL.lgr does not exist.
+LRSTAR 24.0.017 32b Copyright Paul B Mann.
+YACC.grm 
+Grammar       59 rules, 27 terminals, 17 nonterminals.
+States        84 states in LALR(1) state machine.
+              43 states when using shift-reduce actions.
+Conflicts      9 states, 9 shift-reduce, 0 reduce-reduce.
+            rows   cols          matrix       list      vect     total
+B matrix      21 x   20 x 1 =       420 ->      44 +      97 =     141  
+T matrix      11 x   21 x 1 =       231 ->      86 +      70 =     156  
+N matrix       6 x   15 x 1 =        90 ->      48 +     102 =     150  
+R matrix       1 x    1 x 1 =         1 ->       1 +      70 =      71  
+Total                                          179 +     339 =     518
+0 min 0.011 sec, 31.316 MB, 0 warnings, 0 errors.
+/nas/homes/thutt/lrstar/lrstar/grammars/YACC/YACC.lgr does not exist.
+LRSTAR 24.0.017 32b Copyright Paul B Mann.
+Zeus.grm 
+Grammar      222 rules, 71 terminals, 114 nonterminals.
+States       406 states in LALR(1) state machine.
+             229 states when using shift-reduce actions.
+Conflicts     10 states, 24 shift-reduce, 10 reduce-reduce.
+            rows   cols          matrix       list      vect     total
+B matrix      69 x   53 x 1 =     3,657 ->     340 +     600 =     940  
+T matrix      28 x   43 x 2 =     2,408 ->     800 +     529 =   1,329  
+N matrix      50 x   65 x 2 =     6,500 ->   2,308 +     680 =   2,988  
+R matrix       1 x    1 x 1 =         1 ->       1 +     300 =     301  
+Total                                        3,449 +   2,109 =   5,558
+0 min 0.012 sec, 31.412 MB, 0 warnings, 0 errors.
+/nas/homes/thutt/lrstar/lrstar/grammars/Zeus/Zeus.lgr does not exist.
+LRSTAR 24.0.017 32b Copyright Paul B Mann.
+delphi.grm ci 
+Grammar      355 rules, 101 terminals, 166 nonterminals.
+States       611 states in LALR(1) state machine.
+             343 states when using shift-reduce actions.
+Conflicts     26 states, 105 shift-reduce, 115 reduce-reduce.
+            rows   cols          matrix       list      vect     total
+B matrix      78 x   61 x 1 =     4,758 ->     394 +     888 =   1,282  
+T matrix      39 x   71 x 2 =     5,538 ->   1,160 +     787 =   1,947  
+N matrix     139 x   59 x 2 =    16,402 ->   4,492 +   1,041 =   5,533  
+R matrix       7 x   14 x 2 =       182 ->     182 +     787 =     969  
+Total                                        6,228 +   3,503 =   9,731
+0 min 0.016 sec, 31.483 MB, 0 warnings, 0 errors.
+/nas/homes/thutt/lrstar/lrstar/grammars/delphi/delphi.lgr does not exist.
+LRSTAR 24.0.017 32b Copyright Paul B Mann.
+verilog.grm 
+Grammar      521 rules, 177 terminals, 230 nonterminals.
+States       984 states in LALR(1) state machine.
+             569 states when using shift-reduce actions.
+Conflicts     21 states, 92 shift-reduce, 70 reduce-reduce.
+            rows   cols          matrix       list      vect     total
+B matrix      84 x   67 x 1 =     5,628 ->     505 +   1,492 =   1,997  
+T matrix      53 x  125 x 2 =    13,250 ->   3,184 +   1,315 =   4,499  
+N matrix     182 x  110 x 2 =    40,040 ->   7,154 +   1,659 =   8,813  
+R matrix       9 x   19 x 2 =       306 ->     306 +   1,315 =   1,621  
+Total                                       11,149 +   5,781 =  16,930
+0 min 0.028 sec, 31.624 MB, 24 WARNINGS, 0 errors.
+DFA 24.0.016 32b Copyright Paul B Mann.
+verilog.lgr 
+Grammar      497 rules, 256 terminals, 160 nonterminals.
+States      2075 states before converting to a DFA.
+             500 states in final DFA state machine.
+Conflicts      0 states, 0 shift-reduce, 0 reduce-reduce.
+            rows   cols          matrix       list      vect     total
+T matrix     457 x   61 x 2 =    55,754 ->  55,754 +   1,756 =  57,510 
+0 min 0.040 sec, 31.866 MB, 0 warnings, 0 errors.
+make: Entering directory '/nas/homes/thutt/lrstar/lrstar/grammars/verilog'
+mkdir --parents /tmp/lrstar/release/grammars/verilog/
+make -C /tmp/lrstar/release/grammars/verilog/ --makefile /nas/homes/thutt/lrstar/lrstar/grammars/verilog//Makefile verilog VPATH=/nas/homes/thutt/lrstar/lrstar/grammars/verilog/;
+make[1]: Entering directory '/tmp/lrstar/release/grammars/verilog'
+g++ -MMD -Os -Waggregate-return -Wall -Wcast-align -Wchar-subscripts -Wconversion -Wdangling-else -Werror -Wextra -Wimplicit-fallthrough -Wlogical-not-parentheses -Wmaybe-uninitialized -Wmisleading-indentation -Wnull-dereference -Wparentheses -Wpointer-arith -Wreturn-type -Wsequence-point -Wshadow -Wsign-compare -Wsign-conversion -Wundef -Wuninitialized -Wunused -Wunused-label -Wunused-value -pedantic -fdiagnostics-color=never -fno-diagnostics-show-caret -I/tmp/lrstar/release/usr/local/include -DLRSTAR_RELEASE -DLRSTAR_LINUX   -c -o verilog_Lexer.o /nas/homes/thutt/lrstar/lrstar/grammars/verilog/verilog_Lexer.cpp
+g++ -MMD -Os -Waggregate-return -Wall -Wcast-align -Wchar-subscripts -Wconversion -Wdangling-else -Werror -Wextra -Wimplicit-fallthrough -Wlogical-not-parentheses -Wmaybe-uninitialized -Wmisleading-indentation -Wnull-dereference -Wparentheses -Wpointer-arith -Wreturn-type -Wsequence-point -Wshadow -Wsign-compare -Wsign-conversion -Wundef -Wuninitialized -Wunused -Wunused-label -Wunused-value -pedantic -fdiagnostics-color=never -fno-diagnostics-show-caret -I/tmp/lrstar/release/usr/local/include -DLRSTAR_RELEASE -DLRSTAR_LINUX   -c -o verilog_Main.o /nas/homes/thutt/lrstar/lrstar/grammars/verilog/verilog_Main.cpp
+g++ -MMD -Os -Waggregate-return -Wall -Wcast-align -Wchar-subscripts -Wconversion -Wdangling-else -Werror -Wextra -Wimplicit-fallthrough -Wlogical-not-parentheses -Wmaybe-uninitialized -Wmisleading-indentation -Wnull-dereference -Wparentheses -Wpointer-arith -Wreturn-type -Wsequence-point -Wshadow -Wsign-compare -Wsign-conversion -Wundef -Wuninitialized -Wunused -Wunused-label -Wunused-value -pedantic -fdiagnostics-color=never -fno-diagnostics-show-caret -I/tmp/lrstar/release/usr/local/include -DLRSTAR_RELEASE -DLRSTAR_LINUX   -c -o verilog_Parser.o /nas/homes/thutt/lrstar/lrstar/grammars/verilog/verilog_Parser.cpp
+g++ -MMD -Os -Waggregate-return -Wall -Wcast-align -Wchar-subscripts -Wconversion -Wdangling-else -Werror -Wextra -Wimplicit-fallthrough -Wlogical-not-parentheses -Wmaybe-uninitialized -Wmisleading-indentation -Wnull-dereference -Wparentheses -Wpointer-arith -Wreturn-type -Wsequence-point -Wshadow -Wsign-compare -Wsign-conversion -Wundef -Wuninitialized -Wunused -Wunused-label -Wunused-value -pedantic -fdiagnostics-color=never -fno-diagnostics-show-caret -I/tmp/lrstar/release/usr/local/include -DLRSTAR_RELEASE -DLRSTAR_LINUX   -c -o verilog_user.o /nas/homes/thutt/lrstar/lrstar/grammars/verilog/verilog_user.cpp
+g++ -o verilog verilog_Lexer.o verilog_Main.o verilog_Parser.o verilog_user.o;
+make[1]: Leaving directory '/tmp/lrstar/release/grammars/verilog'
+make: Leaving directory '/nas/homes/thutt/lrstar/lrstar/grammars/verilog'
+LRSTAR 24.0.017 32b Copyright Paul B Mann.
+C.grm o ast=0 
+Grammar      206 rules, 82 terminals, 70 nonterminals.
+States       360 states in LALR(1) state machine.
+             216 states when using shift-reduce actions.
+Conflicts      0 states, 0 shift-reduce, 0 reduce-reduce.
+Optimized    433 N-transactions, 571 T-transactions, were optimized.
+            rows   cols          matrix       list      vect     total
+B matrix      58 x   37 x 1 =     2,146 ->     230 +     380 =     610  
+T matrix      30 x   44 x 2 =     2,640 ->   1,584 +     514 =   2,098  
+N matrix      88 x   22 x 2 =     3,872 ->   1,654 +     638 =   2,292  
+R matrix       2 x    3 x 1 =         5 ->       5 +     514 =     519  
+Total                                        3,473 +   2,046 =   5,519
+0 min 0.013 sec, 31.442 MB, 0 warnings, 0 errors.
+DFA 24.0.016 32b Copyright Paul B Mann.
+C.lgr 
+Grammar     1808 rules, 256 terminals, 99 nonterminals.
+States      5719 states before converting to a DFA.
+             207 states in final DFA state machine.
+Conflicts      0 states, 0 shift-reduce, 0 reduce-reduce.
+            rows   cols          matrix       list      vect     total
+T matrix     172 x   59 x 1 =    10,148 ->  10,148 +     877 =  11,025 
+0 min 0.108 sec, 42.845 MB, 0 warnings, 0 errors.
+make: Entering directory '/nas/homes/thutt/lrstar/lrstar/examples/C'
+mkdir --parents /tmp/lrstar/release/examples/C/
+make -C /tmp/lrstar/release/examples/C/ --makefile /nas/homes/thutt/lrstar/lrstar/examples/C//Makefile C VPATH=/nas/homes/thutt/lrstar/lrstar/examples/C/;
+make[1]: Entering directory '/tmp/lrstar/release/examples/C'
+g++ -MMD -Os -Waggregate-return -Wall -Wcast-align -Wchar-subscripts -Wconversion -Wdangling-else -Werror -Wextra -Wimplicit-fallthrough -Wlogical-not-parentheses -Wmaybe-uninitialized -Wmisleading-indentation -Wnull-dereference -Wparentheses -Wpointer-arith -Wreturn-type -Wsequence-point -Wshadow -Wsign-compare -Wsign-conversion -Wundef -Wuninitialized -Wunused -Wunused-label -Wunused-value -pedantic -fdiagnostics-color=never -fno-diagnostics-show-caret -I/tmp/lrstar/release/usr/local/include -DLRSTAR_RELEASE -DLRSTAR_LINUX   -c -o C_Lexer.o /nas/homes/thutt/lrstar/lrstar/examples/C/C_Lexer.cpp
+g++ -MMD -Os -Waggregate-return -Wall -Wcast-align -Wchar-subscripts -Wconversion -Wdangling-else -Werror -Wextra -Wimplicit-fallthrough -Wlogical-not-parentheses -Wmaybe-uninitialized -Wmisleading-indentation -Wnull-dereference -Wparentheses -Wpointer-arith -Wreturn-type -Wsequence-point -Wshadow -Wsign-compare -Wsign-conversion -Wundef -Wuninitialized -Wunused -Wunused-label -Wunused-value -pedantic -fdiagnostics-color=never -fno-diagnostics-show-caret -I/tmp/lrstar/release/usr/local/include -DLRSTAR_RELEASE -DLRSTAR_LINUX   -c -o C_Main.o /nas/homes/thutt/lrstar/lrstar/examples/C/C_Main.cpp
+g++ -MMD -Os -Waggregate-return -Wall -Wcast-align -Wchar-subscripts -Wconversion -Wdangling-else -Werror -Wextra -Wimplicit-fallthrough -Wlogical-not-parentheses -Wmaybe-uninitialized -Wmisleading-indentation -Wnull-dereference -Wparentheses -Wpointer-arith -Wreturn-type -Wsequence-point -Wshadow -Wsign-compare -Wsign-conversion -Wundef -Wuninitialized -Wunused -Wunused-label -Wunused-value -pedantic -fdiagnostics-color=never -fno-diagnostics-show-caret -I/tmp/lrstar/release/usr/local/include -DLRSTAR_RELEASE -DLRSTAR_LINUX   -c -o C_Parser.o /nas/homes/thutt/lrstar/lrstar/examples/C/C_Parser.cpp
+g++ -MMD -Os -Waggregate-return -Wall -Wcast-align -Wchar-subscripts -Wconversion -Wdangling-else -Werror -Wextra -Wimplicit-fallthrough -Wlogical-not-parentheses -Wmaybe-uninitialized -Wmisleading-indentation -Wnull-dereference -Wparentheses -Wpointer-arith -Wreturn-type -Wsequence-point -Wshadow -Wsign-compare -Wsign-conversion -Wundef -Wuninitialized -Wunused -Wunused-label -Wunused-value -pedantic -fdiagnostics-color=never -fno-diagnostics-show-caret -I/tmp/lrstar/release/usr/local/include -DLRSTAR_RELEASE -DLRSTAR_LINUX   -c -o C_user.o /nas/homes/thutt/lrstar/lrstar/examples/C/C_user.cpp
+g++ -o C C_Lexer.o C_Main.o C_Parser.o C_user.o;
+make[1]: Leaving directory '/tmp/lrstar/release/examples/C'
+make: Leaving directory '/nas/homes/thutt/lrstar/lrstar/examples/C'
+
+C parser, copyright ?.
+Args:    test.input.txt
+
+Success ...
+       779 symbols in symbol table.
+         0 nodes in AST.
+   226,999 lines read in input file.
+ 1,954,966 lines per second.
+     0.116 seconds.
+LRSTAR 24.0.017 32b Copyright Paul B Mann.
+Calc.grm 
+Grammar       26 rules, 22 terminals, 13 nonterminals.
+States        49 states in LALR(1) state machine.
+              36 states when using shift-reduce actions.
+Conflicts      0 states, 0 shift-reduce, 0 reduce-reduce.
+            rows   cols          matrix       list      vect     total
+B matrix      17 x   17 x 1 =       289 ->      30 +      80 =     110  
+T matrix       3 x   17 x 1 =        51 ->      33 +      58 =      91  
+N matrix      10 x   11 x 1 =       110 ->      47 +      62 =     109  
+R matrix       2 x    3 x 1 =         5 ->       5 +      58 =      63  
+Total                                          115 +     258 =     373
+0 min 0.011 sec, 31.311 MB, 0 warnings, 0 errors.
+DFA 24.0.016 32b Copyright Paul B Mann.
+Calc.lgr 
+Grammar      690 rules, 256 terminals, 42 nonterminals.
+States      2348 states before converting to a DFA.
+              55 states in final DFA state machine.
+Conflicts      0 states, 0 shift-reduce, 0 reduce-reduce.
+            rows   cols          matrix       list      vect     total
+T matrix      42 x   34 x 1 =     1,428 ->   1,428 +     421 =   1,849 
+0 min 0.027 sec, 26.923 MB, 0 warnings, 0 errors.
+make: Entering directory '/nas/homes/thutt/lrstar/lrstar/examples/Calc'
+mkdir --parents /tmp/lrstar/release/examples/Calc/
+make -C /tmp/lrstar/release/examples/Calc/ --makefile /nas/homes/thutt/lrstar/lrstar/examples/Calc//Makefile Calc VPATH=/nas/homes/thutt/lrstar/lrstar/examples/Calc/;
+make[1]: Entering directory '/tmp/lrstar/release/examples/Calc'
+g++ -MMD -Os -Waggregate-return -Wall -Wcast-align -Wchar-subscripts -Wconversion -Wdangling-else -Werror -Wextra -Wimplicit-fallthrough -Wlogical-not-parentheses -Wmaybe-uninitialized -Wmisleading-indentation -Wnull-dereference -Wparentheses -Wpointer-arith -Wreturn-type -Wsequence-point -Wshadow -Wsign-compare -Wsign-conversion -Wundef -Wuninitialized -Wunused -Wunused-label -Wunused-value -pedantic -fdiagnostics-color=never -fno-diagnostics-show-caret -I/tmp/lrstar/release/usr/local/include -DLRSTAR_RELEASE -DLRSTAR_LINUX   -c -o Calc_Lexer.o /nas/homes/thutt/lrstar/lrstar/examples/Calc/Calc_Lexer.cpp
+g++ -MMD -Os -Waggregate-return -Wall -Wcast-align -Wchar-subscripts -Wconversion -Wdangling-else -Werror -Wextra -Wimplicit-fallthrough -Wlogical-not-parentheses -Wmaybe-uninitialized -Wmisleading-indentation -Wnull-dereference -Wparentheses -Wpointer-arith -Wreturn-type -Wsequence-point -Wshadow -Wsign-compare -Wsign-conversion -Wundef -Wuninitialized -Wunused -Wunused-label -Wunused-value -pedantic -fdiagnostics-color=never -fno-diagnostics-show-caret -I/tmp/lrstar/release/usr/local/include -DLRSTAR_RELEASE -DLRSTAR_LINUX   -c -o Calc_Main.o /nas/homes/thutt/lrstar/lrstar/examples/Calc/Calc_Main.cpp
+g++ -MMD -Os -Waggregate-return -Wall -Wcast-align -Wchar-subscripts -Wconversion -Wdangling-else -Werror -Wextra -Wimplicit-fallthrough -Wlogical-not-parentheses -Wmaybe-uninitialized -Wmisleading-indentation -Wnull-dereference -Wparentheses -Wpointer-arith -Wreturn-type -Wsequence-point -Wshadow -Wsign-compare -Wsign-conversion -Wundef -Wuninitialized -Wunused -Wunused-label -Wunused-value -pedantic -fdiagnostics-color=never -fno-diagnostics-show-caret -I/tmp/lrstar/release/usr/local/include -DLRSTAR_RELEASE -DLRSTAR_LINUX   -c -o Calc_Parser.o /nas/homes/thutt/lrstar/lrstar/examples/Calc/Calc_Parser.cpp
+g++ -MMD -Os -Waggregate-return -Wall -Wcast-align -Wchar-subscripts -Wconversion -Wdangling-else -Werror -Wextra -Wimplicit-fallthrough -Wlogical-not-parentheses -Wmaybe-uninitialized -Wmisleading-indentation -Wnull-dereference -Wparentheses -Wpointer-arith -Wreturn-type -Wsequence-point -Wshadow -Wsign-compare -Wsign-conversion -Wundef -Wuninitialized -Wunused -Wunused-label -Wunused-value -pedantic -fdiagnostics-color=never -fno-diagnostics-show-caret -I/tmp/lrstar/release/usr/local/include -DLRSTAR_RELEASE -DLRSTAR_LINUX   -c -o Calc_user.o /nas/homes/thutt/lrstar/lrstar/examples/Calc/Calc_user.cpp
+g++ -o Calc Calc_Lexer.o Calc_Main.o Calc_Parser.o Calc_user.o;
+make[1]: Leaving directory '/tmp/lrstar/release/examples/Calc'
+make: Leaving directory '/nas/homes/thutt/lrstar/lrstar/examples/Calc'
+
+Calc parser, copyright ?.
+Args:    test.input.txt
+		START
+		PROGRAM TEST
+if1:
+		LOAD a
+		LOAD 0
+		EQ
+		BR NZ else1
+then1:
+if2:
+		LOAD X
+		LOAD 0
+		EQ
+		BR NZ else2
+then2:
+		LOAD 1
+		LOAD 2
+		LOAD 3
+		MUL
+		ADD
+		LADR b
+		STORE
+		BR endif2
+else2:
+		LOAD 2
+		LOAD 3
+		ADD
+		LOAD 4
+		ADD
+		LADR b
+		STORE
+endif2:
+		BR endif1
+else1:
+if3:
+		LOAD x
+		LOAD 1
+		NE
+		BR NZ else3
+then3:
+		LOAD 3
+		LOAD 4
+		MUL
+		LOAD 5
+		ADD
+		LADR b3
+		STORE
+		BR endif3
+else3:
+		LOAD 4
+		LOAD 5
+		MUL
+		LOAD 6
+		MUL
+		LADR B43509
+		STORE
+endif3:
+endif1:
+		END PROGRAM TEST
+		EOF
+
+Success ...
+        14 symbols in symbol table.
+        49 nodes in AST.
+        17 lines read in input file.
+   226,666 lines per second.
+     0.000 seconds.
+LRSTAR 24.0.017 32b Copyright Paul B Mann.
+JSON.grm 
+
+JSON.grm(168) : Error, Statements */
+JSON.grm(168) : Error, -----------^ at * '*'
+
+Expecting one of the following:
+
+      '->'
+      ':'
+
+0 min 0.003 sec, 5.398 MB, 0 warnings, 1 ERROR.

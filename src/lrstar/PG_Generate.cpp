@@ -402,7 +402,7 @@ void PG_Main::instantiate_node_name_data(FILE *fp)
       fprintf(fp, "// Node names found in the grammar.\n");
       fprintf(fp, "static const char * node_name_[%d] = {\n", N_nodes);
       for (int i = 0; i < N_nodes; i++) {
-         fprintf(fp, "   \"%s,\"\n", Node_start[i]);
+         fprintf(fp, "   \"%s\",\n", Node_start[i]);
       }
       fprintf(fp, "\n};\n\n");
    }
@@ -1760,7 +1760,7 @@ static void makefile_fn(FILE       *fp,
                               "$(GRM)_Lexer.o:\t$(GRM)_LexerTables_typedef.h\n"
                               "\n\n"
                               "$(GRM):\t$(OBJS)\n"
-                              "\t$(CC) -o $@ $(OBJS);\n"
+                              "\t$(CC) $(CXXFLAGS) -o $@ $(OBJS);\n"
                               "\n\n"
                               "clean:\n"
                               "\trm $(SOURCE) $(OBJS) $(GRM);");

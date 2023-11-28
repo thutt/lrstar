@@ -35,8 +35,8 @@ typedef templ_lrstar_parser_tables<
    /* nd_faction */  int32,
    /* nd_action */  int32,
    /* tact_numb */  int8,
-   /* node_numb */  int8,
-   /* nact_numb */  int8,
+   /* node_numb */  int32,
+   /* nact_numb */  int32,
    /* reverse */ int32> C_parser_tables_t;
 
 

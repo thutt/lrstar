@@ -34,7 +34,7 @@ $(GRM)_Lexer.o:	$(GRM)_LexerTables_typedef.h
 
 
 $(GRM):	$(OBJS)
-	$(CC) -o $@ $(OBJS);
+	$(CC) $(CXXFLAGS) -o $@ $(OBJS);
 
 
 clean:
