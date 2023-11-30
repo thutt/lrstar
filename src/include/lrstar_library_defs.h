@@ -17,12 +17,6 @@
 #define debug_lexer_ (0)
 
 
-typedef enum parse_direction_t {
-   TOP_DOWN,
-   PASS_OVER,
-   BOTTOM_UP
-} parse_direction_t;
-
 #endif
 /* Local Variables:      */
 /* mode: c               */

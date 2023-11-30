@@ -17,6 +17,12 @@ enum ast_pass_t {
    FOURTH_PASS = 4,
 };
 
+typedef enum parse_direction_t {
+   TOP_DOWN,
+   BOTTOM_UP
+} parse_direction_t;
+
+
 class Symbol {                   // Symbol in Symbol Table.
 public:
    char     *start;             // Start of symbol in input file or ?.
@@ -149,14 +155,13 @@ private:
    unsigned  max_cells;         // Maximum number of cells in the hash vector.
    unsigned  max_symbols;       // Maximum number of symbols.
 
-   // AST Area ...
-public:
-   Node*      root;             // Current root node.
-   Node*      node;             // Current AST node.
-   ast_pass_t traversal;        // AST traversal number: 1, 2, 3 ...
-   int        direction;        // Node direction: TOP_DOWN, BOTTOM_UP.
-   Stack*     stack;            // AST stack array.
-   int        stacki;           // AST stack index.
+public:                          // AST Area ...
+   ast_pass_t         traversal; // AST traversal number: 1, 2, 3 ...
+   parse_direction_t  direction; // Node traversal direction.
+   int                stacki;    // AST stack index.
+   Node              *root;      // Current root node.
+   Node              *node;      // Current AST node.
+   Stack             *stack;     // AST stack array.
 
 private:
    unsigned  max_nodes;         // Maximum number of AST nodes.
@@ -1336,12 +1341,13 @@ public:
       if (C_debug_trace) {
          if (C_node_actions) {
             const char *dir;
-            if (direction == TOP_DOWN ) {
+            switch (direction) {
+            case TOP_DOWN:
                dir = "*>";
-            } else if (direction == PASS_OVER) {
-               dir = "**";
-            } else {
+               break;
+            case BOTTOM_UP:
                dir = "<*";
+               break;
             }
             printf("   %d %s %s (%s)\n", traversal, dir,
                    pt.node_name[n->id], symbol_name(n->sti));
