@@ -28,10 +28,6 @@ DISTRIB_BASIC_DEFS_GCC_HEADER	:=	\
 	$(DISTRIB_ROOT)/include/lrstar_basic_defs_gcc.h
 
 
-DISTRIB_LIBRARY_DEFS_HEADER	:=	\
-	$(DISTRIB_ROOT)/include/lrstar_library_defs.h
-
-
 DISTRIB_LEXER_HEADER	:=	\
 	$(DISTRIB_ROOT)/include/lrstar_lexer.h
 $(DISTRIB_LEXER_HEADER):	$(LRSTAR_DIR)/src/code/lrstar_lexer.h
@@ -103,16 +99,6 @@ $(DISTRIB_BASIC_DEFS_GCC_HEADER):	$(LRSTAR_DIR)/src/include/lrstar_basic_defs_gc
 	echo "BASIC GCC DEFS: $@";
 
 
-$(DISTRIB_LIBRARY_DEFS_HEADER):	$(LRSTAR_DIR)/src/include/lrstar_library_defs.h
-	$(PROLOG);				\
-	$(INSTALL)				\
-		--mode=444			\
-		-D				\
-		"$<"				\
-		$@;				\
-	echo "LIBRARY DEFS: $@";
-
-
 $(DISTRIB_LRSTAR):	$(LRSTAR)
 	$(PROLOG);				\
 	$(INSTALL)				\
@@ -141,7 +127,6 @@ distribution:						\
 		$(DISTRIB_BASIC_DEFS_GCC_HEADER)	\
 		$(DISTRIB_DFA)				\
 		$(DISTRIB_LEXER_HEADER)			\
-		$(DISTRIB_LIBRARY_DEFS_HEADER)		\
 		$(DISTRIB_LRSTAR)			\
 		$(DISTRIB_MAIN_CODE)			\
 		$(DISTRIB_MAIN_HEADER)			\

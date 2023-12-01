@@ -6,7 +6,6 @@
 
 #include <assert.h>
 #include "lrstar_basic_defs.h"
-#include "lrstar_library_defs.h"
 
 class Token
 {
@@ -17,7 +16,7 @@ public:
    int   line;                  // Line number.
 };
 
-template<typename T_term_numb, typename T_Tm, typename T_Tr, typename T_Tc>
+template<bool C_debug, typename T_term_numb, typename T_Tm, typename T_Tr, typename T_Tc>
 class templ_lrstar_lexer
 {
 private:
@@ -77,7 +76,7 @@ public:
    void
    prt_line()
    {
-      if (debug_lexer_) {
+      if (C_debug) {
          char *ls;
          if (linenumb > linenumb_printed) {
             if (linenumb == 1) {

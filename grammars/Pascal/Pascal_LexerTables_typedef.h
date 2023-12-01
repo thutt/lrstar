@@ -5,6 +5,6 @@
 #define __Pascal__LexerTables_TYPEDEF
 
 #include "lrstar_lexer.h"
-typedef templ_lrstar_lexer<int8, uint16, uint16, uint8> Pascal_lexer_t;
+typedef templ_lrstar_lexer<false, int8, uint16, uint16, uint8> Pascal_lexer_t;
 
 #endif

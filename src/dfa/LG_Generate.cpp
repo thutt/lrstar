@@ -91,7 +91,9 @@ create_filename(char       *dst,
 static const char *
 template_decl(void)
 {
-   static const char *decl = ("template<typename T_term_numb, "
+   static const char *decl = ("template<"
+                              "bool C_debug, "
+                              "typename T_term_numb, "
                               "typename T_Tm, "
                               "typename T_Tr, "
                               "typename T_Tc>");
@@ -102,7 +104,7 @@ template_decl(void)
 static const char *
 lexer_decl(void)
 {
-   static const char *inst = ("templ_lrstar_lexer<T_term_numb, "
+   static const char *inst = ("templ_lrstar_lexer<C_debug, T_term_numb, "
                               "T_Tm, T_Tr, T_Tc>");
    return inst;
 }
@@ -111,8 +113,10 @@ lexer_decl(void)
 static void
 lexer_inst(char *buf, size_t buf_len)
 {
+   static const char *b[] = { "false", "true" };
    snprintf(buf, buf_len,
-            "templ_lrstar_lexer<%s, %s, %s, %s>",
+            "templ_lrstar_lexer<%s, %s, %s, %s, %s>",
+            b[!!optn[LG_DEBUG]],
             data_types[ts_TermNumb].type,
             data_types[ts_Tm].type,
             data_types[ts_Tr].type,

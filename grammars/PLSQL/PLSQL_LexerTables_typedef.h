@@ -5,6 +5,6 @@
 #define __PLSQL__LexerTables_TYPEDEF
 
 #include "lrstar_lexer.h"
-typedef templ_lrstar_lexer<int16, uint16, uint32, uint8> PLSQL_lexer_t;
+typedef templ_lrstar_lexer<false, int16, uint16, uint32, uint8> PLSQL_lexer_t;
 
 #endif
