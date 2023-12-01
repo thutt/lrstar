@@ -1,89 +1,62 @@
 
 /* Token Rules */
 
-	<eof>						-> \z
+<eof>                -> \z
 
-	<constant>     		-> literal
-								-> integer
-								-> decimal
-								-> real
+<integer>            -> '-' '0'
+                     -> '0'
+                     -> '-' digit1_9 digit*
+                     -> digit1_9 digit*
 
-	<identifier>   		-> letter (letter|digit)*
+<real>               -> fraction
+                     -> exponent
 
-	integer        		-> digit+
+fraction             -> <integer> '.' digit*
 
-	real	         		-> integer exp
-								-> decimal exp
+exponent            -> fraction exp
 
-	decimal        		-> digit+ '.'
-								->        '.' digit+
-								-> digit+ '.' digit+
+exp                  -> 'e' digit+
+                     -> 'E' digit+
+                     -> 'e' '-' digit+
+                     -> 'E' '-' digit+
+                     -> 'e' '+' digit+
+                     -> 'E' '+' digit+
 
-	exp	         		-> 'e' digit+
-								-> 'E' digit+
-								-> 'e' '-' digit+
-								-> 'E' '-' digit+
-								-> 'e' '+' digit+
-								-> 'E' '+' digit+
+<string>             -> '"' schar* '"'
 
-	literal        		-> ''' lchar '''
+schar                -> sany
+                     -> '\' '\'
+                     -> '\' '''
+                     -> '\' '"'
+                     -> '\' 'n'
+                     -> '\' 't'
+                     -> '\' 'a'
+                     -> '\' 'b'
+                     -> '\' 'f'
+                     -> '\' 'r'
+                     -> '\' 'v'
+                     -> '\' '0'
 
-	lchar          		-> lany
-								-> '\' '\'
-								-> '\' '''
-								-> '\' '"'
-								-> '\' 'n'
-								-> '\' 't'
-								-> '\' 'a'
-								-> '\' 'b'
-								-> '\' 'f'
-								-> '\' 'r'
-								-> '\' 'v'
-								-> '\' '0'
+{whitespace}         -> whitechar+
 
-	<string>       		-> '"' schar* '"'
-
-	schar          		-> sany
-								-> '\' '\'
-								-> '\' '''
-								-> '\' '"'
-								-> '\' 'n'
-								-> '\' 't'
-								-> '\' 'a'
-								-> '\' 'b'
-								-> '\' 'f'
-								-> '\' 'r'
-								-> '\' 'v'
-								-> '\' '0'
-
-	{whitespace}       	-> whitechar+
-
-	{commentline}  		-> '/' '/' neol*
-
-	{commentblock} 		-> '/' '*' na* '*'+ (nans na* '*'+)* '/'
 
 /* Character Sets */
 
-	any						= 0..255 - \z
-	lany           		= any - ''' - '\' - \n
-	sany	         		= any - '"' - '\' - \n
+any                  = 0..255 - \z
+sany                 = any - '"' - '\' - \n
 
-	letter	      		= 'a'..'z' | 'A'..'Z' | '_'
-	digit	         		= '0'..'9'
+digit                = '0'..'9'
+digit1_9             = '1'..'9'
 
-	whitechar     			= \t | \n | \r | \f | \v | ' '
+whitechar            = \t | \n | \v | ' '
 
-	na             		= any - '*' 			// not asterisk
-	nans           		= any - '*' - '/'	   // not asterisk not slash
-	neol           		= any - \n 			   // not end of line
-
-	\t							=  9						// tab
-	\n							= 10						// newline
-	\v							= 11						// vertical feed?
-	\f							= 12						// form feed
-	\r							= 13						// return
-	\z							= 26						// end of file
-	\b							= 32						// blank/space
+\t                   =  9                 // tab
+\n                   = 10                 // newline
+\v                   = 11                 // vertical feed?
+\f                   = 12                 // form feed
+\r                   = 13                 // return
+\z                   = 26                 // end of file
+\b                   = 32                 // blank/space
 
 /* End */
 /* Local Variables:      */

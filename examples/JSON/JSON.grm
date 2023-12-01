@@ -1,12 +1,22 @@
-/*--- Token Actions. ---*/
-
 <error>        => error();
 <string>       => lookup();
-<constant>     => lookup();
+<integer>      => lookup();
+<real>         => lookup();
 
 
 Goal
    : Value/','+ <eof>                      +> goal_
+   ;
+
+Value
+   : Array      |
+     Object     |
+     String     |
+     Integer    |
+     Real       |
+     Null       |
+     False      |
+     True
    ;
 
 Array
@@ -19,7 +29,7 @@ Object
 
 
 Member
-   : <string> ':' Value                    +> member_
+   : String ':' Value                      +> member_
    ;
 
 
@@ -27,8 +37,12 @@ String
    : <string>                              +> string_
    ;
 
-Constant
-   : <constant>                            +> constant_
+Integer
+   : <integer>                             +> integer_
+   ;
+
+Real
+   : <real>                                +> real_
    ;
 
 Null
@@ -41,16 +55,6 @@ True
 
 False
    : 'false'                               +> false_
-   ;
-
-Value
-   : Array      |
-     Object     |
-     String     |
-     Constant   |
-     Null       |
-     False      |
-     True                                 +> value_
    ;
 
 /*--- End. ---*/
