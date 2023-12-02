@@ -35,14 +35,20 @@ public:
 
 class Node {         // AST Node.
 public:
-   int    id;        // Node ID number  .                         4
-   int    sti;       // Symbol-table index (perm or temp var).    4
-   int    line;      // Line number in input file.                4
-   char*  start;     // Start of symbol in input area.            4
-   Node*  prev;      // Previous node.                            4
-   Node*  next;      // Next node.                                4
-   Node*  child;     // Child node.                               4
-   Node*  parent;    // Parent node.                              4  32 bytes
+   int   id;                    // Node ID number.
+   int   sti;                   // Symbol-table index (perm or temp var).
+   int   line;                  // Line number in input file.
+   char *start;                 // Start of symbol in input area.
+   Node *prev;                  // Previous node.
+   Node *next;                  // Next node.
+   Node *child;                 // Child node.
+   Node *parent;                // Parent node.
+   Node(int id_) :
+      id(id_),
+      sti(0), line(0), start(0),
+      prev(0), next(0), child(0), parent(0)
+   {
+   }
 };
 
 class PStack {       // Parser stack.
@@ -166,7 +172,6 @@ public:                          // AST Area ...
 private:
    unsigned  max_nodes;         // Maximum number of AST nodes.
    int      *counter;           // Node counter array.
-   Node     *nodearea;          // Node area or Node block allocated.
    char      draw_plus[3];
    char      draw_vbar[3];
    char      draw_last[3];
@@ -185,12 +190,7 @@ private:                        // LR Parser
       if (C_make_ast) {
          int psi;                                        // Parse stack index.
          if (pt.node_numb[p] >= 0) {                     // MAKE NODE ?
-            Node* n   = new_node ();                     // Get a new node.
-            n->id     = pt.node_numb[p];                 // Set node id number.
-            n->prev   = 0;                               // Set prev to nonexistent.
-            n->next   = 0;                               // Set next to nonexistent.
-            n->child  = 0;                               // Set child to nonexistent.
-            n->parent = 0;                               // Set parent to nonexistent.
+            Node *n = new_node(pt.node_numb[p]);         // Get a new node.
             if (pt.argx[p] >= 0) {                       // If first argument specified.
                psi      = pt.argx[p];                    // Get parse-stack index.
                n->sti   = PS[psi].sti;                   // Move sti from parse stack to node.
@@ -1378,36 +1378,21 @@ public:
       }
    }
 
-
    Node *
-   new_node()
+   new_node(int id)
    {
-      Node *n;
-
-      if (n_nodes % max_nodes == 0) {                 // Filled up nodearea?
-         nodearea = new Node[max_nodes];              // Get another nodearea.
-      }
-
-      n = &(nodearea[n_nodes % max_nodes]);
+      Node *n = new Node(id);
       n_nodes++;
       return n;
    }
+
 
    void
    init_ast(unsigned max)
    {
       n_nodes      = 1;
       max_nodes    = max;       // max_nodes to allocate as needed.
-      nodearea     = new Node[max_nodes];
-      node         = new_node();
-      node->id     = -1;        // Undefined.
-      node->sti    = 0;
-      node->line   = 0;
-      node->start  = 0;
-      node->next   = 0;
-      node->prev   = 0;
-      node->child  = 0;
-      node->parent = 0;
+      node         = new_node(-1);
 
       strcpy(draw_plus,  "+ ");
       strcpy(draw_vbar,  "| ");
