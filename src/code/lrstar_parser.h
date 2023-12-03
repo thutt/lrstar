@@ -257,7 +257,7 @@ private:                        // LR Parser
    }
 
 
-   bool
+   int
    nd_parser_la(int i, int la)            // ND LA Parser.
    {
       int p;                                   // Production (rule).
@@ -272,7 +272,7 @@ private:                        // LR Parser
                goto SR;
             }
             State[i] = Action[i];                     // Get next state.
-            return true;
+            return 1;
          }
          p = -Action[i];                              // Get production.
          goto Red;                                    // Reduce.
@@ -292,7 +292,7 @@ private:                        // LR Parser
             State[i] = pt.Nm[pt.Nr[SS[i]->state] +
                              pt.Nc[p]];               // Get next state from nonter. trans. matrix.
          }
-         return true;                                    // Return success.
+         return 1;                                    // Return success.
       }
 
       if ((p = pt.Rr[State[i]]) > 0 ||                   // Default reduction?
@@ -314,7 +314,7 @@ private:                        // LR Parser
       }
 
       if (State[i] == pt.accept_state) {
-         return true;
+         return 1;
       }
 
       // LOOK FOR A SHIFT ACTION FOR THIS TOKEN ...
@@ -332,7 +332,7 @@ private:                        // LR Parser
                   goto SR;
                }
                State[i] = pt.nd_action[k];
-               return true;
+               return 1;
             }
             if (C_debug_parser) {
                char string[16];
@@ -357,7 +357,7 @@ private:                        // LR Parser
                } while (++k < pt.nd_faction[j+1]);
                print_action ("\n   IGNORING ", i);
             }
-            return false;
+            return 0;
          }
       }
 
@@ -371,11 +371,11 @@ private:                        // LR Parser
          }
          print_action("\n   IGNORING ", i);
       }
-      return false;      // Did not find a match for LA in this state.
+      return 0;      // Did not find a match for LA in this state.
    }
 
 
-   bool
+   int
    nd_parser(int x, int t, int na)
    {
       int  i;
@@ -431,7 +431,7 @@ private:                        // LR Parser
                   print_action("", i);
                   printf ("\n");
                }
-               return !!Action[i];
+               return Action[i];
             }
          } while (++i < na);
       }
@@ -477,7 +477,7 @@ private:                        // LR Parser
                      printf("\n");
                   }
                   lt.lookahead.start = 0; // Stop lookahead mode in lookup().
-                  return !!Action[i];
+                  return Action[i];
                }
             } while (++i < na);
          }
@@ -494,7 +494,7 @@ private:                        // LR Parser
                       la + 1);
             }
             n_errors = INT_MAX; // No more error messages.
-            return false;
+            return 0;           // FAILURE
          }
       } while (++la < limit);
 
@@ -508,7 +508,7 @@ private:                        // LR Parser
             n_warnings = 0;
          }
          lt.lookahead.start = 0; // Stop lookahead mode in lookup().
-         return !!Action[0];
+         return Action[0];
       }
 
       // Some parsers choose the lowest numbered reduction.
@@ -523,7 +523,7 @@ private:                        // LR Parser
          print_actions(na);
       }
       n_errors = INT_MAX; // No more error messages.
-      return false;
+      return 0;           // FAILURE
    }
 
 public:
