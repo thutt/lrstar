@@ -13,10 +13,10 @@
 extern const char C_grammar_name[];
 
 typedef lrstar_parser</* grammar           */   C_grammar_name,
-                      /* actions           */   true,
+                      /* actions           */   false,
                       /* debug_parser      */   false,
                       /* debug_trace       */   false,
-                      /* expecting         */   true,
+                      /* expecting         */   false,
                       /* insensitive       */   false,
                       /* lookaheads        */   1,
                       /* make_ast          */   false,
@@ -26,7 +26,7 @@ typedef lrstar_parser</* grammar           */   C_grammar_name,
                       /* reversable        */   false,
                       /* semantics         */   true,
                       /* stksize           */   100,
-                      /* term_actions      */   true,
+                      /* term_actions      */   false,
                       /* lexer table type  */   C_lexer_t,
                       /* parser table type */   C_parser_tables_t> C_parser_t;
 

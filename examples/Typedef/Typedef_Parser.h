@@ -18,7 +18,7 @@ extern const char Typedef_grammar_name[];
 
 typedef lrstar_parser</* grammar           */   Typedef_grammar_name,
                       /* actions           */   true,
-                      /* debug_parser      */   false,
+                      /* debug_parser      */   true,
                       /* debug_trace       */   false,
                       /* expecting         */   true,
                       /* insensitive       */   false,

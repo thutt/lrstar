@@ -11,7 +11,7 @@ template<>
 const int C_parser_tables_t::n_head_symb = 70;
 
 template<>
-const int C_parser_tables_t::n_tact_name = 2;
+const int C_parser_tables_t::n_tact_name = 0;
 
 template<>
 const int C_parser_tables_t::n_node_name = 106;
@@ -26,7 +26,7 @@ template<>
 const int C_parser_tables_t::n_tail = 445;
 
 template<>
-const int C_parser_tables_t::n_arga = 82;
+const int C_parser_tables_t::n_arga = 0;
 
 template<>
 const int C_parser_tables_t::n_argx = 206;
@@ -89,7 +89,7 @@ template<>
 const int C_parser_tables_t::n_nd_action = 0;
 
 template<>
-const int C_parser_tables_t::n_tact_numb = 82;
+const int C_parser_tables_t::n_tact_numb = 0;
 
 template<>
 const int C_parser_tables_t::n_node_numb = 0;
@@ -116,7 +116,7 @@ template<>
 const int C_parser_tables_t::accept_state = 215; // Accept state.
 
 template<>
-const int C_parser_tables_t::n_termactns = 2; // Number of terminal actions.
+const int C_parser_tables_t::n_termactns = 0; // Number of terminal actions.
 
 template<>
 const int C_parser_tables_t::n_nodenames = 106; // Number of node names.
@@ -297,14 +297,8 @@ static const char *head_symb_[70] = {
 template<>
 const char * const *C_parser_tables_t::head_symb = &head_symb_[0];
 
-// Terninal action names found in the grammar ...
-static const char *tact_name_[2] = {
-   "error",
-   "lookup",
-};
-
 template<>
-const char * const *C_parser_tables_t::tact_name = &tact_name_[0];
+const char * const *C_parser_tables_t::tact_name = 0;
 
 // Node names found in the grammar.
 static const char * node_name_[106] = {
@@ -528,21 +522,8 @@ static const int8 tail_[445] = {
 template<>
 const int8 *C_parser_tables_t::tail = &tail_[0];
 
-// Arguments for token actions ...
-static const int8 arga_[82] = {
-      -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1, 
-      -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1, 
-      -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1, 
-      -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1, 
-      -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1, 
-      -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1, 
-      -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1, 
-      -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1, 
-      -1,    -1, 
-};
-
 template<>
-const int8 *C_parser_tables_t::arga = &arga_[0];
+const int32 *C_parser_tables_t::arga = 0;
 
 // First arguments for productions ...
 static const int8 argx_[206] = {
@@ -1063,21 +1044,8 @@ const int32 *C_parser_tables_t::nd_faction = 0;
 template<>
 const int32 *C_parser_tables_t::nd_action = 0;
 
-// Terminal action number ...
-static const int8 tact_numb_[82] = {
-       0,    -1,     1,     1,     1,    -1,    -1,    -1,    -1,    -1, 
-      -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1, 
-      -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1, 
-      -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1, 
-      -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1, 
-      -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1, 
-      -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1, 
-      -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1, 
-      -1,    -1, 
-};
-
 template<>
-const int8 *C_parser_tables_t::tact_numb = &tact_numb_[0];
+const int32 *C_parser_tables_t::tact_numb = 0;
 
 template<>
 const int32 *C_parser_tables_t::node_numb = 0;

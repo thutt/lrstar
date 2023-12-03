@@ -1,4 +1,251 @@
 
 STATE MACHINE LISTING:
 
-'st' option was not specified.
+  1. STATE 5   has  1 nondeterministic
+  2. STATE 7   has  1 nondeterministic
+
+STATE 0 .........................................................................................
+
+   *    0  Goal -> . (FunctionDecl | FunctionDef | TypedefDecl)+ <eof> 
+
+       11  'int'                           shift & reduce    5  TypeSpec -> . 'int' 
+       12  'char'                          shift & reduce    6  TypeSpec -> . 'char' 
+       13  'long'                          shift & reduce    7  TypeSpec -> . 'long' 
+       14  'short'                         shift & reduce    8  TypeSpec -> . 'short' 
+       15  'unsigned'                      shift & reduce    9  TypeSpec -> . 'unsigned' 
+        5  {typename}                      shift & reduce   10  TypeSpec -> . {typename} 
+        3  'typedef'                       shift & goto      3
+
+       13  (FunctionDecl | FunctionDef | TypedefDecl)+  goto              1
+       12  (FunctionDecl | FunctionDef | TypedefDecl)  reduce           24  (FunctionDecl | FunctionDef | TypedefDecl)+ -> (FunctionDecl | FunctionDef | TypedefDecl) . 
+        3  FunctionDecl                    reduce           21  (FunctionDecl | FunctionDef | TypedefDecl) -> FunctionDecl . 
+        5  TypeSpec                        goto              2
+        4  FunctionDef                     reduce           22  (FunctionDecl | FunctionDef | TypedefDecl) -> FunctionDef . 
+        1  TypedefDecl                     reduce           23  (FunctionDecl | FunctionDef | TypedefDecl) -> TypedefDecl . 
+
+STATE 1 .........................................................................................
+
+   *    0  Goal -> (FunctionDecl | FunctionDef | TypedefDecl)+ . <eof> 
+   *   25  (FunctionDecl | FunctionDef | TypedefDecl)+ -> (FunctionDecl | FunctionDef | TypedefDecl)+ . (FunctionDecl | FunctionDef | TypedefDecl) 
+
+        1  <eof>                           shift & goto     22
+       11  'int'                           shift & reduce    5  TypeSpec -> . 'int' 
+       12  'char'                          shift & reduce    6  TypeSpec -> . 'char' 
+       13  'long'                          shift & reduce    7  TypeSpec -> . 'long' 
+       14  'short'                         shift & reduce    8  TypeSpec -> . 'short' 
+       15  'unsigned'                      shift & reduce    9  TypeSpec -> . 'unsigned' 
+        5  {typename}                      shift & reduce   10  TypeSpec -> . {typename} 
+        3  'typedef'                       shift & goto      3
+
+       12  (FunctionDecl | FunctionDef | TypedefDecl)  reduce           25  (FunctionDecl | FunctionDef | TypedefDecl)+ -> (FunctionDecl | FunctionDef | TypedefDecl)+ (FunctionDecl | FunctionDef | TypedefDecl) . 
+        3  FunctionDecl                    reduce           21  (FunctionDecl | FunctionDef | TypedefDecl) -> FunctionDecl . 
+        5  TypeSpec                        goto              2
+        4  FunctionDef                     reduce           22  (FunctionDecl | FunctionDef | TypedefDecl) -> FunctionDef . 
+        1  TypedefDecl                     reduce           23  (FunctionDecl | FunctionDef | TypedefDecl) -> TypedefDecl . 
+
+STATE 2 .........................................................................................
+
+   *    3  FunctionDecl -> TypeSpec . FuncDecl '(' Arg/','* ')' ';' 
+   *    4  FunctionDef -> TypeSpec . FuncDef '(' Arg/','* ')' '{' FuncBody '}' 
+   *   11  TypeSpec -> TypeSpec . '*' 
+
+        2  <identifier>                    shift & reduce   18  FunctionName -> . <identifier> 
+       17  {function_name}                 shift & goto      7
+       16  '*'                             shift & reduce   11  TypeSpec -> TypeSpec . '*' 
+
+        6  FuncDecl                        goto              4
+       10  FunctionName                    goto              5
+        7  FuncDef                         goto              6
+
+STATE 3 .........................................................................................
+
+   *    1  TypedefDecl -> 'typedef' . TypeSpec+ TypeIdent ';' 
+
+       11  'int'                           shift & reduce    5  TypeSpec -> . 'int' 
+       12  'char'                          shift & reduce    6  TypeSpec -> . 'char' 
+       13  'long'                          shift & reduce    7  TypeSpec -> . 'long' 
+       14  'short'                         shift & reduce    8  TypeSpec -> . 'short' 
+       15  'unsigned'                      shift & reduce    9  TypeSpec -> . 'unsigned' 
+        5  {typename}                      shift & reduce   10  TypeSpec -> . {typename} 
+
+       14  TypeSpec+                       goto              8
+        5  TypeSpec                        goto              9
+
+STATE 4 .........................................................................................
+
+   *    3  FunctionDecl -> TypeSpec FuncDecl . '(' Arg/','* ')' ';' 
+
+        6  '('                             shift & goto     10
+
+STATE 5 nd_max = 2 ..............................................................................
+
+   *   12  FuncDecl -> FunctionName . 
+   *   14  FuncDef -> FunctionName . 
+
+   Nondeterministic
+   N    6  '('                             reduce           12  FuncDecl -> FunctionName . 
+   N    6  '('                             reduce           14  FuncDef -> FunctionName . 
+
+STATE 6 .........................................................................................
+
+   *    4  FunctionDef -> TypeSpec FuncDef . '(' Arg/','* ')' '{' FuncBody '}' 
+
+        6  '('                             shift & goto     11
+
+STATE 7 nd_max = 2 ..............................................................................
+
+   *   13  FuncDecl -> {function_name} . 
+   *   15  FuncDef -> {function_name} . 
+
+   Nondeterministic
+   N    6  '('                             reduce           13  FuncDecl -> {function_name} . 
+   N    6  '('                             reduce           15  FuncDef -> {function_name} . 
+
+STATE 8 .........................................................................................
+
+   *    1  TypedefDecl -> 'typedef' TypeSpec+ . TypeIdent ';' 
+   *   27  TypeSpec+ -> TypeSpec+ . TypeSpec 
+
+        2  <identifier>                    shift & reduce    2  TypeIdent -> . <identifier> 
+       11  'int'                           shift & reduce    5  TypeSpec -> . 'int' 
+       12  'char'                          shift & reduce    6  TypeSpec -> . 'char' 
+       13  'long'                          shift & reduce    7  TypeSpec -> . 'long' 
+       14  'short'                         shift & reduce    8  TypeSpec -> . 'short' 
+       15  'unsigned'                      shift & reduce    9  TypeSpec -> . 'unsigned' 
+        5  {typename}                      shift & reduce   10  TypeSpec -> . {typename} 
+
+        2  TypeIdent                       goto             12
+        5  TypeSpec                        goto             13
+
+STATE 9 .........................................................................................
+
+   *   11  TypeSpec -> TypeSpec . '*' 
+   *   26  TypeSpec+ -> TypeSpec . 
+
+       16  '*'                             shift & reduce   11  TypeSpec -> TypeSpec . '*' 
+           (default)                       reduce           26  TypeSpec+ -> TypeSpec . 
+
+STATE 10 .........................................................................................
+
+   *    3  FunctionDecl -> TypeSpec FuncDecl '(' . Arg/','* ')' ';' 
+   *   28  Arg/','* -> . 
+
+       11  'int'                           shift & reduce    5  TypeSpec -> . 'int' 
+       12  'char'                          shift & reduce    6  TypeSpec -> . 'char' 
+       13  'long'                          shift & reduce    7  TypeSpec -> . 'long' 
+       14  'short'                         shift & reduce    8  TypeSpec -> . 'short' 
+       15  'unsigned'                      shift & reduce    9  TypeSpec -> . 'unsigned' 
+        5  {typename}                      shift & reduce   10  TypeSpec -> . {typename} 
+           (default)                       reduce           28  Arg/','* -> . 
+
+       15  Arg/','*                        goto             14
+        8  Arg                             reduce           29  Arg/','* -> Arg . 
+        5  TypeSpec                        goto             15
+
+STATE 11 .........................................................................................
+
+   *    4  FunctionDef -> TypeSpec FuncDef '(' . Arg/','* ')' '{' FuncBody '}' 
+   *   28  Arg/','* -> . 
+
+       11  'int'                           shift & reduce    5  TypeSpec -> . 'int' 
+       12  'char'                          shift & reduce    6  TypeSpec -> . 'char' 
+       13  'long'                          shift & reduce    7  TypeSpec -> . 'long' 
+       14  'short'                         shift & reduce    8  TypeSpec -> . 'short' 
+       15  'unsigned'                      shift & reduce    9  TypeSpec -> . 'unsigned' 
+        5  {typename}                      shift & reduce   10  TypeSpec -> . {typename} 
+           (default)                       reduce           28  Arg/','* -> . 
+
+       15  Arg/','*                        goto             16
+        8  Arg                             reduce           29  Arg/','* -> Arg . 
+        5  TypeSpec                        goto             15
+
+STATE 12 .........................................................................................
+
+   *    1  TypedefDecl -> 'typedef' TypeSpec+ TypeIdent . ';' 
+
+        4  ';'                             shift & reduce    1  TypedefDecl -> 'typedef' TypeSpec+ TypeIdent . ';' 
+
+STATE 13 .........................................................................................
+
+   *   11  TypeSpec -> TypeSpec . '*' 
+   *   27  TypeSpec+ -> TypeSpec+ TypeSpec . 
+
+       16  '*'                             shift & reduce   11  TypeSpec -> TypeSpec . '*' 
+           (default)                       reduce           27  TypeSpec+ -> TypeSpec+ TypeSpec . 
+
+STATE 14 .........................................................................................
+
+   *    3  FunctionDecl -> TypeSpec FuncDecl '(' Arg/','* . ')' ';' 
+   *   30  Arg/','* -> Arg/','* . ',' Arg 
+
+        8  ')'                             shift & goto     17
+        7  ','                             shift & goto     18
+
+STATE 15 .........................................................................................
+
+   *   11  TypeSpec -> TypeSpec . '*' 
+   *   16  Arg -> TypeSpec . ArgName 
+
+       16  '*'                             shift & reduce   11  TypeSpec -> TypeSpec . '*' 
+        2  <identifier>                    shift & reduce   17  ArgName -> . <identifier> 
+
+        9  ArgName                         reduce           16  Arg -> TypeSpec ArgName . 
+
+STATE 16 .........................................................................................
+
+   *    4  FunctionDef -> TypeSpec FuncDef '(' Arg/','* . ')' '{' FuncBody '}' 
+   *   30  Arg/','* -> Arg/','* . ',' Arg 
+
+        8  ')'                             shift & goto     19
+        7  ','                             shift & goto     18
+
+STATE 17 .........................................................................................
+
+   *    3  FunctionDecl -> TypeSpec FuncDecl '(' Arg/','* ')' . ';' 
+
+        4  ';'                             shift & reduce    3  FunctionDecl -> TypeSpec FuncDecl '(' Arg/','* ')' . ';' 
+
+STATE 18 .........................................................................................
+
+   *   30  Arg/','* -> Arg/','* ',' . Arg 
+
+       11  'int'                           shift & reduce    5  TypeSpec -> . 'int' 
+       12  'char'                          shift & reduce    6  TypeSpec -> . 'char' 
+       13  'long'                          shift & reduce    7  TypeSpec -> . 'long' 
+       14  'short'                         shift & reduce    8  TypeSpec -> . 'short' 
+       15  'unsigned'                      shift & reduce    9  TypeSpec -> . 'unsigned' 
+        5  {typename}                      shift & reduce   10  TypeSpec -> . {typename} 
+
+        8  Arg                             reduce           30  Arg/','* -> Arg/','* ',' Arg . 
+        5  TypeSpec                        goto             15
+
+STATE 19 .........................................................................................
+
+   *    4  FunctionDef -> TypeSpec FuncDef '(' Arg/','* ')' . '{' FuncBody '}' 
+
+        9  '{'                             shift & goto     20
+
+STATE 20 .........................................................................................
+
+   *    4  FunctionDef -> TypeSpec FuncDef '(' Arg/','* ')' '{' . FuncBody '}' 
+   *   19  FuncBody -> . 
+
+       18  '...'                           shift & reduce   20  FuncBody -> . '...' 
+           (default)                       reduce           19  FuncBody -> . 
+
+       11  FuncBody                        goto             21
+
+STATE 21 .........................................................................................
+
+   *    4  FunctionDef -> TypeSpec FuncDef '(' Arg/','* ')' '{' FuncBody . '}' 
+
+       10  '}'                             shift & reduce    4  FunctionDef -> TypeSpec FuncDef '(' Arg/','* ')' '{' FuncBody . '}' 
+
+STATE 22 .........................................................................................
+
+   *    0  Goal -> (FunctionDecl | FunctionDef | TypedefDecl)+ <eof> . 
+
+END ................................................................................................
+
+
+

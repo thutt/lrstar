@@ -13,7 +13,7 @@ typedef templ_lrstar_parser_tables<
    /* head_numb */  uint8,
    /* f_tail */  uint16,
    /* tail */  int8,
-   /* arga */  int8,
+   /* arga */  int32,
    /* argx */  int8,
    /* argy */  int8,
    /* Bm */  uint8,
@@ -34,7 +34,7 @@ typedef templ_lrstar_parser_tables<
    /* nd_term */  int32,
    /* nd_faction */  int32,
    /* nd_action */  int32,
-   /* tact_numb */  int8,
+   /* tact_numb */  int32,
    /* node_numb */  int32,
    /* nact_numb */  int32,
    /* reverse */ int32> C_parser_tables_t;

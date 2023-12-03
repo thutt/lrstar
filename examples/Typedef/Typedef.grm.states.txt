@@ -1,4 +1,159 @@
 
 STATE MACHINE LISTING:
 
-'st' option was not specified.
+No Conflicts Reported.
+
+STATE 0 ..........................................................................................
+
+   *    0  Goal -> . Declaration* <eof> 
+   *   14  Declaration* -> . 
+
+           (default)                       reduce           14  Declaration* -> . 
+
+        9  Declaration*                    goto              1
+
+STATE 1 ..........................................................................................
+
+   *    0  Goal -> Declaration* . <eof> 
+   *   15  Declaration* -> Declaration* . Declaration 
+
+        1  <eof>                           shift & goto     13
+        8  'char'                          shift & reduce    9  Type -> . 'char' 
+        9  'int'                           shift & reduce   10  Type -> . 'int' 
+       10  'short'                         shift & reduce   11  Type -> . 'short' 
+       11  'unsigned'                      shift & reduce   12  Type -> . 'unsigned' 
+        6  {typename}                      shift & reduce   13  Type -> . {typename} 
+        4  'typedef'                       shift & goto      3
+
+        1  Declaration                     reduce           15  Declaration* -> Declaration* Declaration . 
+       10  Type+                           goto              2
+        8  Type                            reduce           16  Type+ -> Type . 
+
+STATE 2 ..........................................................................................
+
+   *    1  Declaration -> Type+ . VarList ';' 
+   *   17  Type+ -> Type+ . Type 
+   *   22  Ptr* -> . 
+
+        8  'char'                          shift & reduce    9  Type -> . 'char' 
+        9  'int'                           shift & reduce   10  Type -> . 'int' 
+       10  'short'                         shift & reduce   11  Type -> . 'short' 
+       11  'unsigned'                      shift & reduce   12  Type -> . 'unsigned' 
+        6  {typename}                      shift & reduce   13  Type -> . {typename} 
+           (default)                       reduce           22  Ptr* -> . 
+
+        2  VarList                         goto              4
+       11  Var/','+                        goto              5
+        4  Var                             reduce           18  Var/','+ -> Var . 
+       13  Ptr*                            goto              6
+        8  Type                            reduce           17  Type+ -> Type+ Type . 
+
+STATE 3 ..........................................................................................
+
+   *    2  Declaration -> 'typedef' . Type+ TypeVarList ';' 
+
+        8  'char'                          shift & reduce    9  Type -> . 'char' 
+        9  'int'                           shift & reduce   10  Type -> . 'int' 
+       10  'short'                         shift & reduce   11  Type -> . 'short' 
+       11  'unsigned'                      shift & reduce   12  Type -> . 'unsigned' 
+        6  {typename}                      shift & reduce   13  Type -> . {typename} 
+
+       10  Type+                           goto              7
+        8  Type                            reduce           16  Type+ -> Type . 
+
+STATE 4 ..........................................................................................
+
+   *    1  Declaration -> Type+ VarList . ';' 
+
+        3  ';'                             shift & reduce    1  Declaration -> Type+ VarList . ';' 
+
+STATE 5 ..........................................................................................
+
+   *   19  Var/','+ -> Var/','+ . ',' Var 
+   *    3  VarList -> Var/','+ . 
+
+        5  ','                             shift & goto      8
+           (default)                       reduce            3  VarList -> Var/','+ . 
+
+STATE 6 ..........................................................................................
+
+   *    5  Var -> Ptr* . <identifier> 
+   *   23  Ptr* -> Ptr* . Ptr 
+
+        2  <identifier>                    shift & reduce    5  Var -> Ptr* . <identifier> 
+        7  '*'                             shift & reduce    8  Ptr -> . '*' 
+
+        7  Ptr                             reduce           23  Ptr* -> Ptr* Ptr . 
+
+STATE 7 ..........................................................................................
+
+   *    2  Declaration -> 'typedef' Type+ . TypeVarList ';' 
+   *   17  Type+ -> Type+ . Type 
+   *   22  Ptr* -> . 
+
+        8  'char'                          shift & reduce    9  Type -> . 'char' 
+        9  'int'                           shift & reduce   10  Type -> . 'int' 
+       10  'short'                         shift & reduce   11  Type -> . 'short' 
+       11  'unsigned'                      shift & reduce   12  Type -> . 'unsigned' 
+        6  {typename}                      shift & reduce   13  Type -> . {typename} 
+           (default)                       reduce           22  Ptr* -> . 
+
+        3  TypeVarList                     goto              9
+       12  TypeVar/','+                    goto             10
+        5  TypeVar                         reduce           20  TypeVar/','+ -> TypeVar . 
+       13  Ptr*                            goto             11
+        8  Type                            reduce           17  Type+ -> Type+ Type . 
+
+STATE 8 ..........................................................................................
+
+   *   19  Var/','+ -> Var/','+ ',' . Var 
+   *   22  Ptr* -> . 
+
+           (default)                       reduce           22  Ptr* -> . 
+
+        4  Var                             reduce           19  Var/','+ -> Var/','+ ',' Var . 
+       13  Ptr*                            goto              6
+
+STATE 9 ..........................................................................................
+
+   *    2  Declaration -> 'typedef' Type+ TypeVarList . ';' 
+
+        3  ';'                             shift & reduce    2  Declaration -> 'typedef' Type+ TypeVarList . ';' 
+
+STATE 10 ..........................................................................................
+
+   *   21  TypeVar/','+ -> TypeVar/','+ . ',' TypeVar 
+   *    4  TypeVarList -> TypeVar/','+ . 
+
+        5  ','                             shift & goto     12
+           (default)                       reduce            4  TypeVarList -> TypeVar/','+ . 
+
+STATE 11 ..........................................................................................
+
+   *    6  TypeVar -> Ptr* . TypeIdent 
+   *   23  Ptr* -> Ptr* . Ptr 
+
+        2  <identifier>                    shift & reduce    7  TypeIdent -> . <identifier> 
+        7  '*'                             shift & reduce    8  Ptr -> . '*' 
+
+        6  TypeIdent                       reduce            6  TypeVar -> Ptr* TypeIdent . 
+        7  Ptr                             reduce           23  Ptr* -> Ptr* Ptr . 
+
+STATE 12 ..........................................................................................
+
+   *   21  TypeVar/','+ -> TypeVar/','+ ',' . TypeVar 
+   *   22  Ptr* -> . 
+
+           (default)                       reduce           22  Ptr* -> . 
+
+        5  TypeVar                         reduce           21  TypeVar/','+ -> TypeVar/','+ ',' TypeVar . 
+       13  Ptr*                            goto             11
+
+STATE 13 ..........................................................................................
+
+   *    0  Goal -> Declaration* <eof> . 
+
+END ................................................................................................
+
+
+

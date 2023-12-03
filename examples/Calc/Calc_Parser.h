@@ -41,8 +41,8 @@ extern const char Calc_grammar_name[];
 
 typedef lrstar_parser</* grammar           */   Calc_grammar_name,
                       /* actions           */   true,
-                      /* debug_parser      */   false,
-                      /* debug_trace       */   false,
+                      /* debug_parser      */   true,
+                      /* debug_trace       */   true,
                       /* expecting         */   true,
                       /* insensitive       */   false,
                       /* lookaheads        */   1,

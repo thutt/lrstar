@@ -25,7 +25,7 @@ typedef templ_lrstar_parser_tables<
    /* Tc */  uint8,
    /* Nm */  int16,
    /* Nr */  uint16,
-   /* Nc */  uint16,
+   /* Nc */  uint8,
    /* Rm */  uint16,
    /* Rr */  int16,
    /* Rc */  uint8,
