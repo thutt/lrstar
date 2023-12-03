@@ -24,9 +24,15 @@ DISTRIB_BASIC_DEFS_HEADER	:=	\
 	$(DISTRIB_ROOT)/include/lrstar_basic_defs.h
 
 
+DISTRIB_LOWERCASE_HEADER	:=	\
+	$(DISTRIB_ROOT)/include/lowercase.h
+
+
+DISTRIB_LOWERCASE_LIB	:=	\
+	$(DISTRIB_ROOT)/lib/lowercase.o
+
 DISTRIB_BASIC_DEFS_GCC_HEADER	:=	\
 	$(DISTRIB_ROOT)/include/lrstar_basic_defs_gcc.h
-
 
 DISTRIB_LEXER_HEADER	:=	\
 	$(DISTRIB_ROOT)/include/lrstar_lexer.h
@@ -41,6 +47,9 @@ DISTRIB_MAIN_HEADER	:=	\
 
 DISTRIB_SAMPLE_MAKE_DEFS	:=	\
 	$(DISTRIB_ROOT)/make/sample.defs
+
+$(DISTRIB_LOWERCASE_HEADER):	$(LRSTAR_DIR)/src/include/lowercase.h
+$(DISTRIB_LOWERCASE_LIB):	$(LOWERCASE_LIB)
 
 $(DISTRIB_MAIN_CODE):		$(LRSTAR_DIR)/src/code/lrstar_main.cpp
 $(DISTRIB_MAIN_HEADER):		$(LRSTAR_DIR)/src/code/lrstar_main.h
@@ -67,6 +76,28 @@ $(DISTRIB_PARSER_TABLES_HEADER):
 		"$(LRSTAR_DIR)/src/code/$(notdir $@)"	\
 		$@;					\
 	echo "LIBRARY: $@";
+
+
+$(DISTRIB_LOWERCASE_HEADER):
+	$(PROLOG);						\
+	$(INSTALL)						\
+		--mode=444					\
+		-D						\
+		"$(LRSTAR_DIR)/src/include/$(notdir $@)"	\
+		$@;						\
+	echo "lowercase.h: $@";
+
+
+# Always installed because $(LOWERCASE_LIB) is .PHONY.
+#
+$(DISTRIB_LOWERCASE_LIB):
+	$(PROLOG);					\
+	$(INSTALL)					\
+		--mode=444				\
+		-D					\
+		$<					\
+		$@;					\
+	echo "lowercase.o: $@";
 
 
 $(DISTRIB_SAMPLE_MAKE_DEFS):
@@ -116,17 +147,19 @@ $(DISTRIB_DFA):		$(DFA)
 		-D				\
 		"$(DFA)"			\
 		$@;				\
-	echo "DFA   : $@";
+	echo "DFA: $@";
 
 
 # The 'distribution' target uses Gnu Coreutils 'install' program to
 # put all the delivered build artifacts into the '/usr/local'
 # directory tree.
 distribution:						\
-		$(DISTRIB_BASIC_DEFS_HEADER)		\
 		$(DISTRIB_BASIC_DEFS_GCC_HEADER)	\
+		$(DISTRIB_BASIC_DEFS_HEADER)		\
 		$(DISTRIB_DFA)				\
 		$(DISTRIB_LEXER_HEADER)			\
+		$(DISTRIB_LOWERCASE_LIB)		\
+		$(DISTRIB_LOWERCASE_HEADER)		\
 		$(DISTRIB_LRSTAR)			\
 		$(DISTRIB_MAIN_CODE)			\
 		$(DISTRIB_MAIN_HEADER)			\

@@ -14,8 +14,8 @@ all:	$(DFA) $(LRSTAR)
 	$(PROLOG);					\
 	echo "Master: All targets built.";
 
-.PHONY:	$(DFA) $(LRSTAR)
-$(DFA) $(LRSTAR):		\
+.PHONY:	$(DFA) $(LRSTAR) $(LOWERCASE_LIB)
+$(DFA) $(LRSTAR) $(LOWERCASE_LIB):		\
 		| build-directories
 	$(PROLOG);							\
 	src_dir="$(subst $(_BUILD_DIR),$(LRSTAR_DIR),$(dir $@))";	\
@@ -34,13 +34,14 @@ clean:
 	rm -rf $(_BUILD_DIR);
 
 
-$(DFA_BUILD_DIR) $(LRSTAR_BUILD_DIR):
+$(DFA_BUILD_DIR) $(LRSTAR_BUILD_DIR) $(LOWERCASE_BUILD_DIR):
 	$(PROLOG);	\
 	mkdir -p $@;
 
 
 build-directories:				\
 	| $(DFA_BUILD_DIR)			\
+	  $(LOWERCASE_BUILD_DIR)		\
 	  $(LRSTAR_BUILD_DIR)
 
 

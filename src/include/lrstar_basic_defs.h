@@ -66,7 +66,6 @@
 #if !defined(UNUSED_PARAM)
 #error UNUSED_PARAM is not defined.
 #endif
-
 #endif
 /* Local Variables:      */
 /* mode: c               */

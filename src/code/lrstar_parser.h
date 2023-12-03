@@ -8,6 +8,8 @@
 #include <stdlib.h>
 #include <string.h>
 
+#include "lowercase.h"
+
 #define EOF_CHAR 26             // End Of File character.
 
 enum ast_pass_t {
@@ -38,6 +40,7 @@ public:
    int   id;                    // Node ID number.
    int   sti;                   // Symbol-table index (perm or temp var).
    int   line;                  // Line number in input file.
+   int   ref;                   // Number used to refer to a node in AST dump.
    char *start;                 // Start of symbol in input area.
    Node *prev;                  // Previous node.
    Node *next;                  // Next node.
@@ -45,7 +48,9 @@ public:
    Node *parent;                // Parent node.
    Node(int id_) :
       id(id_),
-      sti(0), line(0), start(0),
+      sti(0), line(0),
+      ref(-1),                  // Invalid reference number.
+      start(0),
       prev(0), next(0), child(0), parent(0)
    {
    }
@@ -1213,16 +1218,16 @@ public:
       int sti = n->sti;
 
       if (sti != 0) {           // zero means no symbol.
-         int   col;
+         long  col;
          int   line = n->line;
          char *p    = n->start - 1;
 
          while (*p != '\n') {
             p--;
          }
-         col = (int)(n->start - p);
+         col = n->start - p;
 
-         fprintf(fp, "  %4d  %4d  %4d  %s%s", sti, line, col,
+         fprintf(fp, "  %4d  %4d  %4ld  %s%s", sti, line, col,
                  indent, pt.node_name[id]);
 
          if (sti > 0) {         // In the symbol table?
@@ -1460,16 +1465,19 @@ public:
    int
    add_symbol(int t, char* token_start, char* token_end)
    {
-      const char *p      = token_start;          // Point at start.
-      long int    length = token_end - p;        // Set length.
+      const char *p      = token_start; // Point at start.
+      long int    length = token_end - p; // Set length.
       unsigned    hash   = static_cast<unsigned>(length); // Set hash to length.
-      int         i      = 0;                             // Set shift value to 0.
+      int         i      = 0;   // Set shift value to 0.
+      char        lowered;
+
       do {                                                // Assume length != 0
          if (C_insensitive) {
-            hash += static_cast<uint8>(*p) << i;
+            lowered = lowercase[static_cast<unsigned char>(*p)];
          } else {
-            hash += static_cast<uint8>(*p) << i;
+            lowered = *p;
          }
+         hash += static_cast<uint8>(lowered) << i;
          i += 4;
          i %= 32;
       } while (++p < token_end);
@@ -1484,13 +1492,12 @@ public:
             char* end   = start + length;
             do {
                if (C_insensitive) {
-                  if (static_cast<uint8>(*p) != static_cast<uint8>(*start)) {
-                     goto Cont;
-                  }
+                  lowered = lowercase[static_cast<unsigned char>(*start)];
                } else {
-                  if (*p != *start) {
-                     goto Cont;                 // If characters not equal ...
-                  }
+                  lowered = *start;
+               }
+               if (*p != lowered) {
+                  goto Cont;                 // If characters not equal ...
                }
                start++;
                p++;

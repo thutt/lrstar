@@ -9,6 +9,8 @@ $(if $(strip $(filter debug release,$(LRSTAR_BUILD_TYPE))),,$(error LRSTAR_BUILD
 CC	:=					\
 	g++
 
+
+
 export LRSTAR_BUILD_TYPE
 
 INCLUDES	:=				\

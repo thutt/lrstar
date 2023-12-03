@@ -16,10 +16,10 @@ SOURCE	:=			\
 	$(GRM)_Lexer.cpp	\
 	$(GRM)_Main.cpp		\
 	$(GRM)_Parser.cpp	\
-	$(GRM)_user.cpp
+	$(GRM)_user.cpp		\
 
 
-OBJS	:= $	$(SOURCE:.cpp=.o)
+OBJS	:= $	$(SOURCE:.cpp=.o) $(LRSTAR_INSTALL_ROOT)/lib/lowercase.o
 
 
 $(GRM)_Parser.cpp:	$(GRM).grm
