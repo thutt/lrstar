@@ -1013,14 +1013,77 @@ public:
 
 
    void
-   print_ast(FILE *fp, Node *n) // Print subtree.
+   print_node(FILE *fp, char *indent, Node *n)
+   {
+      int id  = n->id;
+      int sti = n->sti;
+
+      if (sti != 0) {           // zero means no symbol.
+         long  col;
+         int   line = n->line;
+         char *p    = n->start - 1;
+
+         while (*p != '\n') {
+            p--;
+         }
+         col = n->start - p;
+
+         fprintf(fp, "  %4d  %4d  %4ld  %s%s", sti, line, col,
+                 indent, pt.node_name[id]);
+
+         if (sti > 0) {         // In the symbol table?
+            char *pp  = symbol[sti].start + symbol[sti].length;
+            char  ch;
+
+            ch = *pp;
+            *pp = '\0';
+            fprintf(fp, " (%s)\n", symbol[sti].start);
+            *pp = ch;
+         } else {               // A terminal symbol of the grammar!
+            fprintf(fp, " (%s)\n", pt.term_symb[-sti]);
+         }
+      } else {
+         fprintf(fp,"     .     .     .  %s%s\n", indent, pt.node_name[id]);
+      }
+   }
+
+
+   void
+   traverse_print_ast(FILE *fp, char *indent, Node *n)
+   {
+      while (n->next != 0) {
+         strcat(indent, draw_plus);
+         print_node(fp, indent, n);
+         indent[strlen(indent) - 2] = 0;
+
+         if (n->child != 0) {
+            strcat(indent, draw_vbar);
+            traverse_print_ast(fp, indent, n->child);
+            indent[strlen(indent) - 2] = '\0';
+         }
+         n = n->next;
+      }
+
+      strcat(indent, draw_last);
+      print_node(fp, indent, n);
+      indent[strlen(indent) - 2] = '\0';
+      if (n->child != 0) {
+         strcat(indent, draw_space);
+         traverse_print_ast(fp, indent, n->child);
+         indent[strlen(indent) - 2] = '\0';
+      }
+   }
+
+
+   void
+   print_ast_nodes(FILE *fp, Node *n) // Print subtree.
    {
       char indent [512];
       strcpy(indent, draw_space);
       fprintf(fp, "\nAbstract Syntax Tree ...\n\n");
       if (n != 0) {
          fprintf(fp, "   sti  line   col  \n");
-         traverse(fp, indent, n); // Start parser traversal.
+         traverse_print_ast(fp, indent, n); // Start parser traversal.
       } else {
          fprintf(fp, "   Parser is empty.\n");
       }
@@ -1031,7 +1094,7 @@ public:
    print_ast(FILE *fp)
    {
       if (C_debug_parser) {
-         print_ast(fp, root);
+         print_ast_nodes(fp, root);
       }
    }
 
@@ -1180,7 +1243,7 @@ public:
          if (C_make_ast) {
             find_root (PS[0].node);
             print_ast(fp);
-            traverse(fp, FIRST_PASS);
+            traverse_nact(fp, FIRST_PASS);
          }
 
          if (C_debug_parser) {
@@ -1212,70 +1275,7 @@ public:
 
 
    void
-   print_node(FILE *fp, char *indent, Node *n)
-   {
-      int id  = n->id;
-      int sti = n->sti;
-
-      if (sti != 0) {           // zero means no symbol.
-         long  col;
-         int   line = n->line;
-         char *p    = n->start - 1;
-
-         while (*p != '\n') {
-            p--;
-         }
-         col = n->start - p;
-
-         fprintf(fp, "  %4d  %4d  %4ld  %s%s", sti, line, col,
-                 indent, pt.node_name[id]);
-
-         if (sti > 0) {         // In the symbol table?
-            char *pp  = symbol[sti].start + symbol[sti].length;
-            char  ch;
-
-            ch = *pp;
-            *pp = '\0';
-            fprintf(fp, " (%s)\n", symbol[sti].start);
-            *pp = ch;
-         } else {               // A terminal symbol of the grammar!
-            fprintf(fp, " (%s)\n", pt.term_symb[-sti]);
-         }
-      } else {
-         fprintf(fp,"     .     .     .  %s%s\n", indent, pt.node_name[id]);
-      }
-   }
-
-
-   void
-   traverse(FILE *fp, char *indent, Node *n)
-   {
-      while (n->next != 0) {
-         strcat(indent, draw_plus);
-         print_node(fp, indent, n);
-         indent[strlen(indent) - 2] = 0;
-
-         if (n->child != 0) {
-            strcat(indent, draw_vbar);
-            traverse(fp, indent, n->child);
-            indent[strlen(indent) - 2] = '\0';
-         }
-         n = n->next;
-      }
-
-      strcat(indent, draw_last);
-      print_node(fp, indent, n);
-      indent[strlen(indent) - 2] = '\0';
-      if (n->child != 0) {
-         strcat(indent, draw_space);
-         traverse(fp, indent, n->child);
-         indent[strlen(indent) - 2] = '\0';
-      }
-   }
-
-
-   void
-   traverse(FILE *fp, Node *n)
+   traverse_invoke_nact(FILE *fp, Node *n)
    {
       if (C_node_actions) {
          int   i  = n->id;             // Node id.
@@ -1294,7 +1294,7 @@ public:
          }
 
          while (c != 0) {
-            traverse(fp, c);
+            traverse_invoke_nact(fp, c);
             c = c->next;
          }
 
@@ -1309,14 +1309,14 @@ public:
 
 
    void
-   traverse(FILE *fp, ast_pass_t trav)
+   traverse_nact(FILE *fp, ast_pass_t trav)
    {
       if (C_node_actions) {
          if (n_nodes > 1) {           // Any nodes in the tree?
             if (pt.n_nodeactns > 0) { // Any node actions?
                stacki  = -1;
-               stack   = new Stack [C_stksize];
-               counter = new int [pt.n_nodenames];
+               stack   = new Stack[C_stksize];
+               counter = new int[pt.n_nodenames];
 
                for (int i = 0; i < pt.n_nodenames; i++) {
                   counter[i] = 0;
@@ -1331,7 +1331,7 @@ public:
                traversal = trav;
                Node *n   = root;
                do {
-                  traverse(fp, n);
+                  traverse_invoke_nact(fp, n);
                   n = n->next;
                } while (n != 0);
             }
