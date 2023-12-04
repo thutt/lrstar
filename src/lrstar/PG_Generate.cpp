@@ -1750,7 +1750,7 @@ static void makefile_fn(FILE       *fp,
       "\t$(GRM)_Parser.cpp\t\\\n"
       "\t$(GRM)_user.cpp\t\t\\\n"
       "\n\n"
-      "OBJS\t:= $\t$(SOURCE:.cpp=.o) $(LRSTAR_INSTALL_ROOT)/lib/lowercase.o\n"
+      "OBJS\t:= $\t$(SOURCE:.cpp=.o) $(LRSTAR_INSTALL_ROOT)/lib/lrstar.a\n"
       "\n\n"
       "$(GRM)_Parser.cpp:\t$(GRM).grm\n"
       "\t$(LRSTAR) $<\n"

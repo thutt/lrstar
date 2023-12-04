@@ -28,8 +28,8 @@ DISTRIB_LOWERCASE_HEADER	:=	\
 	$(DISTRIB_ROOT)/include/lowercase.h
 
 
-DISTRIB_LOWERCASE_LIB	:=	\
-	$(DISTRIB_ROOT)/lib/lowercase.o
+DISTRIB_LRSTAR_LIB	:=	\
+	$(DISTRIB_ROOT)/lib/lrstar.a
 
 DISTRIB_BASIC_DEFS_GCC_HEADER	:=	\
 	$(DISTRIB_ROOT)/include/lrstar_basic_defs_gcc.h
@@ -49,7 +49,7 @@ DISTRIB_SAMPLE_MAKE_DEFS	:=	\
 	$(DISTRIB_ROOT)/make/sample.defs
 
 $(DISTRIB_LOWERCASE_HEADER):	$(LRSTAR_DIR)/src/include/lowercase.h
-$(DISTRIB_LOWERCASE_LIB):	$(LOWERCASE_LIB)
+$(DISTRIB_LRSTAR_LIB):		$(LRSTAR_LIB)
 
 $(DISTRIB_MAIN_CODE):		$(LRSTAR_DIR)/src/code/lrstar_main.cpp
 $(DISTRIB_MAIN_HEADER):		$(LRSTAR_DIR)/src/code/lrstar_main.h
@@ -85,19 +85,19 @@ $(DISTRIB_LOWERCASE_HEADER):
 		-D						\
 		"$(LRSTAR_DIR)/src/include/$(notdir $@)"	\
 		$@;						\
-	echo "lowercase.h: $@";
+	echo "HEADER: $@";
 
 
-# Always installed because $(LOWERCASE_LIB) is .PHONY.
+# Always installed because $(LRSTAR_LIB) is .PHONY.
 #
-$(DISTRIB_LOWERCASE_LIB):
+$(DISTRIB_LRSTAR_LIB):
 	$(PROLOG);					\
 	$(INSTALL)					\
 		--mode=444				\
 		-D					\
 		$<					\
 		$@;					\
-	echo "lowercase.o: $@";
+	echo "LIB: $@";
 
 
 $(DISTRIB_SAMPLE_MAKE_DEFS):
@@ -158,8 +158,8 @@ distribution:						\
 		$(DISTRIB_BASIC_DEFS_HEADER)		\
 		$(DISTRIB_DFA)				\
 		$(DISTRIB_LEXER_HEADER)			\
-		$(DISTRIB_LOWERCASE_LIB)		\
 		$(DISTRIB_LOWERCASE_HEADER)		\
+		$(DISTRIB_LRSTAR_LIB)			\
 		$(DISTRIB_LRSTAR)			\
 		$(DISTRIB_MAIN_CODE)			\
 		$(DISTRIB_MAIN_HEADER)			\

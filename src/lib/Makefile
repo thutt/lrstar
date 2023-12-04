@@ -17,11 +17,13 @@ fail:
 	echo "This Makefile must be used via $(LRSTAR_DIR)/Makefile";	\
 	false;
 
-$(LOWERCASE_LIB):	$(SOURCE)
-	$(PROLOG);				\
-	$(CC) -g $(PROFILE) -c -I$(LRSTAR_DIR)/src/include -o $@ $<;
+$(LRSTAR_LIB):	$(OBJ)
+	$(PROLOG);							\
+	echo "Create LRSTAR library";					\
+	ar r $@ $?
 
-$(LOWERCASE_LIB).d:	$(LOWERCASE_LIB)
+
+$(LRSTAR_LIB).d:	$(LRSTAR_LIB)
 	$(PROLOG);				\
 	true;
 

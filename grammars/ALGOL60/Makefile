@@ -19,7 +19,7 @@ SOURCE	:=			\
 	$(GRM)_user.cpp		\
 
 
-OBJS	:= $	$(SOURCE:.cpp=.o) $(LRSTAR_INSTALL_ROOT)/lib/lowercase.o
+OBJS	:= $	$(SOURCE:.cpp=.o) $(LRSTAR_INSTALL_ROOT)/lib/lrstar.a
 
 
 $(GRM)_Parser.cpp:	$(GRM).grm
