@@ -131,7 +131,7 @@ public:
 
 public:
    // Parser variables
-   char      path[256];         // Path of input file.
+   char      path[PATH_MAX];    // Path of input file.
    PStack   *PSstart;           // Parser stack start.
    PStack   *PS;                // Parse stack pointer.
    unsigned  n_nodes;           // Number of nodes in AST.
@@ -1423,7 +1423,7 @@ public:
          n_warnings = 0;
       }
 
-      strcpy (path, patharg);
+      strcpy(path, patharg);
       PS           = PSstart;             // Set parse-stack pointer.
       n_nodes      = 0;                   // In case of no parser creation.
 
