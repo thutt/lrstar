@@ -177,9 +177,6 @@ public:                          // AST Area ...
 private:
    unsigned  max_nodes;         // Maximum number of AST nodes.
    int      *counter;           // Node counter array.
-   char      draw_plus[3];
-   char      draw_vbar[3];
-   char      draw_last[3];
    char      draw_space[3];
 
 private:                        // LR Parser
@@ -1051,6 +1048,10 @@ public:
    void
    traverse_print_ast(FILE *fp, char *indent, Node *n)
    {
+      static const char draw_plus[] = "+ ";
+      static const char draw_vbar[] = "| ";
+      static const char draw_last[] = "+ ";
+
       while (n->next != 0) {
          strcat(indent, draw_plus);
          print_node(fp, indent, n);
@@ -1078,7 +1079,7 @@ public:
    void
    print_ast_nodes(FILE *fp, Node *n) // Print subtree.
    {
-      char indent [512];
+      char indent[512];
       strcpy(indent, draw_space);
       fprintf(fp, "\nAbstract Syntax Tree ...\n\n");
       if (n != 0) {
@@ -1399,9 +1400,6 @@ public:
       max_nodes    = max;       // max_nodes to allocate as needed.
       node         = new_node(-1);
 
-      strcpy(draw_plus,  "+ ");
-      strcpy(draw_vbar,  "| ");
-      strcpy(draw_last,  "+ ");
       strcpy(draw_space, "  ");
    }
 
