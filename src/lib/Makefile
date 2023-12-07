@@ -4,6 +4,7 @@ MAKEFILE	:= $(lastword $(MAKEFILE_LIST))
 
 SOURCE	:=					\
 	lowercase.cpp				\
+	lrstar_cmdline.cpp
 
 
 OBJ	= $(SOURCE:.cpp=.o)

@@ -27,6 +27,9 @@ DISTRIB_BASIC_DEFS_HEADER	:=	\
 DISTRIB_LOWERCASE_HEADER	:=	\
 	$(DISTRIB_ROOT)/include/lowercase.h
 
+DISTRIB_CMDLINE_HEADER	:=	\
+	$(DISTRIB_ROOT)/include/lrstar_cmdline.h
+
 
 DISTRIB_LRSTAR_LIB	:=	\
 	$(DISTRIB_ROOT)/lib/lrstar.a
@@ -49,6 +52,7 @@ DISTRIB_SAMPLE_MAKE_DEFS	:=	\
 	$(DISTRIB_ROOT)/make/sample.defs
 
 $(DISTRIB_LOWERCASE_HEADER):	$(LRSTAR_DIR)/src/include/lowercase.h
+$(DISTRIB_CMDLINE_HEADER):	$(LRSTAR_DIR)/src/include/lrstar_cmdline.h
 $(DISTRIB_LRSTAR_LIB):		$(LRSTAR_LIB)
 
 $(DISTRIB_MAIN_CODE):		$(LRSTAR_DIR)/src/code/lrstar_main.cpp
@@ -78,7 +82,7 @@ $(DISTRIB_PARSER_TABLES_HEADER):
 	echo "LIBRARY: $@";
 
 
-$(DISTRIB_LOWERCASE_HEADER):
+$(DISTRIB_CMDLINE_HEADER) $(DISTRIB_LOWERCASE_HEADER):
 	$(PROLOG);						\
 	$(INSTALL)						\
 		--mode=444					\
@@ -158,6 +162,7 @@ distribution:						\
 		$(DISTRIB_BASIC_DEFS_HEADER)		\
 		$(DISTRIB_DFA)				\
 		$(DISTRIB_LEXER_HEADER)			\
+		$(DISTRIB_CMDLINE_HEADER)		\
 		$(DISTRIB_LOWERCASE_HEADER)		\
 		$(DISTRIB_LRSTAR_LIB)			\
 		$(DISTRIB_LRSTAR)			\
