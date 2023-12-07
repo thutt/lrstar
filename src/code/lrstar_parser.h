@@ -545,19 +545,20 @@ public:
       tact_func(tact_func_),
       nact_func(nact_func_),
       n_errors(0)
-      {
-         PSstart = new PStack[C_stksize];
-         RSstart = new RStack[C_stksize];
+   {
+      PSstart = new PStack[C_stksize];
+      RSstart = new RStack[C_stksize];
 
-         if (C_nd_parsing) {
-            SS      = new SStack *[C_nd_threads];
-            SSstart = new SStack *[C_nd_threads];
-            State   = new int[C_nd_threads];
-            Action  = new int[C_nd_threads];
-            Parsed  = new int[C_nd_threads];
-            LAcount = new int[C_lookaheads + 1];
-         }
+      if (C_nd_parsing) {
+         SS      = new SStack *[C_nd_threads];
+         SSstart = new SStack *[C_nd_threads];
+         State   = new int[C_nd_threads];
+         Action  = new int[C_nd_threads];
+         Parsed  = new int[C_nd_threads];
+         LAcount = new int[C_lookaheads + 1];
       }
+   }
+
 
    bool opt_semantics(void)  { return C_semantics;  }
    bool opt_nd_parsing(void) { return C_nd_parsing; }
