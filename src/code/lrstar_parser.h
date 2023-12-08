@@ -29,7 +29,7 @@ class Symbol {                   // Symbol in Symbol Table.
 public:
    char     *start;             // Start of symbol in input file or ?.
    unsigned  length;            // Length of symbol.
-   unsigned  cell;              // Cell number in hash vector (if need to delete later).
+   unsigned  cell;              // Cell number in hash vector (if need to free later).
    int       type;              // Type of symbol: int, char, float, short, ...
    int       term;              // Terminal number for lookup function.
    int       scope;             // Scope: global, local, inner loop, ...
@@ -46,25 +46,26 @@ public:
    Node *next;                  // Next node.
    Node *child;                 // Child node.
    Node *parent;                // Parent node.
+   Node *alloc_link;            // Linked list of all nodes;
    Node(int id_) :
       id(id_),
       sti(0), line(0),
       ref(-1),                  // Invalid reference number.
       start(0),
-      prev(0), next(0), child(0), parent(0)
+      prev(0), next(0), child(0), parent(0), alloc_link(0)
    {
    }
 };
 
 class PStack {       // Parser stack.
 public:
-   int    state;     // Parser state.
-   int    sym;       // Tail symbol.
-   int    sti;       // Symbol table index.
-   int    line;      // Input line number.
-   char*  start;     // Start of symbol in input file area.
-   Node*  node;      // Pointer to node.
-   Node*  last;      // Pointer to last in list.
+   int   state;                 // Parser state.
+   int   sym;                   // Tail symbol.
+   int   sti;                   // Symbol table index.
+   int   line;                  // Input line number.
+   char *start;                 // Start of symbol in input file area.
+   Node *node;                  // Pointer to node.
+   Node *last;                  // Pointer to last in list.
 };
 
 class RStack {       // Restore Stack.
@@ -117,12 +118,14 @@ public:
 
 public:
    lrstar_user_data_t *user_data;
-   const char *grammar;         /* Name of grammar. */
+   const char         *grammar; /* Name of grammar. */
 
 private:
    init_func_t *init_func; /* Pointer to init_func table. */
    tact_func_t *tact_func; /* Pointer to tact_func table.  */
    nact_func_t *nact_func; /* Pointer to nact_func table.  */
+
+   Node  *allocated_nodes;      // List of allocated nodes
 
 public:
    T_lexer_t         lt;        /* Lexer tables. */
@@ -131,7 +134,7 @@ public:
 
 public:
    // Parser variables
-   char      path[PATH_MAX];    // Path of input file.
+   char     *path;              // Path of input file.
    PStack   *PSstart;           // Parser stack start.
    PStack   *PS;                // Parse stack pointer.
    unsigned  n_nodes;           // Number of nodes in AST.
@@ -192,7 +195,7 @@ private:                        // LR Parser
       if (C_make_ast) {
          int psi;                                        // Parse stack index.
          if (pt.node_numb[p] >= 0) {                     // MAKE NODE ?
-            Node *n = new_node(pt.node_numb[p]);         // Get a new node.
+            Node *n = new_node(pt.node_numb[p]);
             if (pt.argx[p] >= 0) {                       // If first argument specified.
                psi      = pt.argx[p];                    // Get parse-stack index.
                n->sti   = PS[psi].sti;                   // Move sti from parse stack to node.
@@ -397,7 +400,7 @@ private:                        // LR Parser
       // COPY PARSE STACK TO ND STATE STACK FOR EACH ACTION ...
       for (i = 0; i < na; i++) {
          SS[i] = SSstart[i];
-         for (PStack* P = PSstart; P < PS;) {
+         for (PStack *P = PSstart; P < PS;) {
             (++SS[i])->state = (++P)->state;
          }
          Parsed[i] = 1;
@@ -544,6 +547,7 @@ public:
       init_func(init_func_),
       tact_func(tact_func_),
       nact_func(nact_func_),
+      allocated_nodes(0),
       n_errors(0)
    {
       PSstart = new PStack[C_stksize];
@@ -556,6 +560,40 @@ public:
          Action  = new int[C_nd_threads];
          Parsed  = new int[C_nd_threads];
          LAcount = new int[C_lookaheads + 1];
+      }
+   }
+
+
+   ~lrstar_parser()
+   {
+      free(path);
+
+      delete [] symbol;
+      delete [] hashvec;
+
+      delete [] T_exp;
+      delete [] S_exam;
+
+      if (C_node_actions) {
+         if (n_nodes >  1 && pt.n_nodeactns > 0) {
+            delete [] stack;
+            delete [] counter;
+         }
+      }
+
+      if (C_nd_parsing) {
+         for (int i = 0; i < C_nd_threads; i++) {
+            delete [] SSstart[i];
+         }
+
+         delete [] PSstart;
+         delete [] RSstart;
+         delete [] SS;
+         delete [] SSstart;
+         delete [] State;
+         delete [] Action;
+         delete [] Parsed;
+         delete [] LAcount;
       }
    }
 
@@ -574,8 +612,6 @@ public:
    term_symtab()
    {
       n_symbols--;
-      delete [] symbol;
-      delete [] hashvec;
    }
 
 
@@ -583,23 +619,21 @@ public:
    term_ast()
    {
       n_nodes--;
-      delete [] stack;
-      delete [] counter;
    }
 
 
    void
    term_parser()
-      {
-         if (C_make_ast) {
-            term_ast();
-         }
-
-         term_symtab();
-         if (C_action) {
-            (*init_func[1])(this);               // term_action()
-         }
+   {
+      if (C_make_ast) {
+         term_ast();
       }
+
+      term_symtab();
+      if (C_action) {
+         (*init_func[1])(this);               // term_action()
+      }
+   }
 
 
    void
@@ -1390,6 +1424,8 @@ public:
    {
       Node *n = new Node(id);
       n_nodes++;
+      n->alloc_link   = allocated_nodes;
+      allocated_nodes = n;
       return n;
    }
 
@@ -1422,11 +1458,11 @@ public:
          n_warnings = 0;
       }
 
-      strcpy(path, patharg);
-      PS           = PSstart;             // Set parse-stack pointer.
-      n_nodes      = 0;                   // In case of no parser creation.
+      path    = strdup(patharg);
+      PS      = PSstart;                  // Set parse-stack pointer.
+      n_nodes = 0;                        // In case of no parser creation.
 
-      lt.init_lexer(input_start, 3);     // Initialize the lexer.
+      lt.init_lexer(input_start, 3);      // Initialize the lexer.
       if (!init_symtab(max_syms)) {       // Initialize the symbol table.
          return false;
       }
@@ -1459,7 +1495,6 @@ public:
       memset(S_exam, false, static_cast<size_t>(pt.n_states));
       return true;
    }
-
 
    int
    add_symbol(int t, char* token_start, char* token_end)
@@ -1500,16 +1535,15 @@ public:
                }
                start++;
                p++;
-            } while (start < end);                // while end not reached.
-            return sti;                         // Return sti.
+            } while (start < end);           // while end not reached.
+            return sti;                      // Return sti.
          }
       Cont:
          hash *= 65549;
-         cell = hash / hashdiv;        // Get new cell number.
-         sti  = hashvec[cell];                     // Get symbol table index.
+         cell = hash / hashdiv;               // Get cell number.
+         sti  = hashvec[cell];                // Get symbol table index.
       }
 
-      // NEW SYMBOL ...
       if (n_symbols >= max_symbols) {          // Reached maximum number?
          printf("\nNumber of symbols exceeds %d.\n\n", max_symbols);
          internal_error("%s:%d: Symbol table full; "
