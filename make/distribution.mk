@@ -45,9 +45,6 @@ $(DISTRIB_LEXER_HEADER):	$(LRSTAR_DIR)/src/include/lrstar_lexer.h
 DISTRIB_MAIN_CODE	:=	\
 	$(DISTRIB_ROOT)/include/lrstar_main.cpp
 
-DISTRIB_MAIN_HEADER	:=	\
-	$(DISTRIB_ROOT)/include/lrstar_main.h
-
 DISTRIB_SAMPLE_MAKE_DEFS	:=	\
 	$(DISTRIB_ROOT)/make/sample.defs
 
@@ -56,7 +53,6 @@ $(DISTRIB_CMDLINE_HEADER):	$(LRSTAR_DIR)/src/include/lrstar_cmdline.h
 $(DISTRIB_LRSTAR_LIB):		$(LRSTAR_LIB)
 
 $(DISTRIB_MAIN_CODE):		$(LRSTAR_DIR)/src/code/lrstar_main.cpp
-$(DISTRIB_MAIN_HEADER):		$(LRSTAR_DIR)/src/code/lrstar_main.h
 
 
 DISTRIB_PARSER_HEADER	:=	\
@@ -69,8 +65,7 @@ $(DISTRIB_PARSER_HEADER):		$(LRSTAR_DIR)/src/include/lrstar_parser.h
 $(DISTRIB_PARSER_TABLES_HEADER):	$(LRSTAR_DIR)/src/include/lrstar_parser_tables.h
 $(DISTRIB_SAMPLE_MAKE_DEFS):		$(LRSTAR_DIR)/make/sample.defs
 
-$(DISTRIB_MAIN_CODE)				\
-$(DISTRIB_MAIN_HEADER):
+$(DISTRIB_MAIN_CODE):
 	$(PROLOG);					\
 	$(INSTALL)					\
 		--mode=444				\
@@ -177,7 +172,6 @@ distribution:						\
 		$(DISTRIB_LRSTAR_LIB)			\
 		$(DISTRIB_LRSTAR)			\
 		$(DISTRIB_MAIN_CODE)			\
-		$(DISTRIB_MAIN_HEADER)			\
 		$(DISTRIB_PARSER_HEADER)		\
 		$(DISTRIB_PARSER_TABLES_HEADER)		\
 		$(DISTRIB_SAMPLE_MAKE_DEFS)

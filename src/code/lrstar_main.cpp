@@ -16,7 +16,6 @@
 #include <conio.h>
 #endif
 
-#include "lrstar_main.h"
 #include "lrstar_cmdline.h"
 
 
