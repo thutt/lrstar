@@ -39,7 +39,7 @@ DISTRIB_BASIC_DEFS_GCC_HEADER	:=	\
 
 DISTRIB_LEXER_HEADER	:=	\
 	$(DISTRIB_ROOT)/include/lrstar_lexer.h
-$(DISTRIB_LEXER_HEADER):	$(LRSTAR_DIR)/src/code/lrstar_lexer.h
+$(DISTRIB_LEXER_HEADER):	$(LRSTAR_DIR)/src/include/lrstar_lexer.h
 
 
 DISTRIB_MAIN_CODE	:=	\
@@ -65,20 +65,30 @@ DISTRIB_PARSER_HEADER	:=	\
 DISTRIB_PARSER_TABLES_HEADER	:=	\
 	$(DISTRIB_ROOT)/include/lrstar_parser_tables.h
 
-$(DISTRIB_PARSER_HEADER):		$(LRSTAR_DIR)/src/code/lrstar_parser.h
-$(DISTRIB_PARSER_TABLES_HEADER):	$(LRSTAR_DIR)/src/code/lrstar_parser_tables.h
+$(DISTRIB_PARSER_HEADER):		$(LRSTAR_DIR)/src/include/lrstar_parser.h
+$(DISTRIB_PARSER_TABLES_HEADER):	$(LRSTAR_DIR)/src/include/lrstar_parser_tables.h
 $(DISTRIB_SAMPLE_MAKE_DEFS):		$(LRSTAR_DIR)/make/sample.defs
 
-$(DISTRIB_LEXER_HEADER)					\
-$(DISTRIB_MAIN_CODE)	$(DISTRIB_MAIN_HEADER)		\
-$(DISTRIB_PARSER_HEADER)				\
-$(DISTRIB_PARSER_TABLES_HEADER):
+$(DISTRIB_MAIN_CODE)				\
+$(DISTRIB_MAIN_HEADER):
 	$(PROLOG);					\
 	$(INSTALL)					\
 		--mode=444				\
 		-D					\
 		"$(LRSTAR_DIR)/src/code/$(notdir $@)"	\
 		$@;					\
+	echo "MAIN: $@";
+
+
+$(DISTRIB_LEXER_HEADER)					\
+$(DISTRIB_PARSER_HEADER)				\
+$(DISTRIB_PARSER_TABLES_HEADER):
+	$(PROLOG);						\
+	$(INSTALL)						\
+		--mode=444					\
+		-D						\
+		"$(LRSTAR_DIR)/src/include/$(notdir $@)"	\
+		$@;						\
 	echo "LIBRARY: $@";
 
 
