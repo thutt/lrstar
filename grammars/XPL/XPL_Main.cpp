@@ -4,6 +4,7 @@
 
 const char XPL_grammar_name[] = "XPL";
 
+
 void XPL_init_actions(UNUSED_PARAM(XPL_parser_t *parser)); /* User-supplied */
 void XPL_term_actions(UNUSED_PARAM(XPL_parser_t *parser)); /* User-supplied */
 static XPL_parser_t::init_func_t XPL_init_funcs_[2] = {
@@ -19,10 +20,14 @@ static XPL_parser_t::tact_func_t XPL_tact_funcs_[2] = {
    XPL_lookup,
 };
 
+XPL_parser_t *
+XPL_new_parser()
+{
+   return new XPL_parser_t(/* init_func    */   &XPL_init_funcs_[0],
+                           /* tact_func    */   &XPL_tact_funcs_[0],
+                           /* nact_func    */   0);
+}
 
-XPL_parser_t
-generated_parser(/* init_func    */   &XPL_init_funcs_[0],
-                 /* tact_func    */   &XPL_tact_funcs_[0],
-                 /* nact_func    */   0);
+XPL_parser_t *generated_parser = XPL_new_parser();
 
 #include "lrstar_main.cpp"

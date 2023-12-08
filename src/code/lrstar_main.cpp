@@ -33,6 +33,7 @@ static void
 cleanup(void)
 {
    delete [] input_start;
+   delete generated_parser;
    if (output_fp != NULL) {
       fclose(output_fp);
    }
@@ -149,17 +150,17 @@ main(int argc, char **argv)
       fatal(6);
    }
 
-   printf("%s parser.\n", generated_parser.grammar);
-   if (!generated_parser.init_parser(argv[optind], input_start,
-                                     100000, 1000000)) {
+   printf("%s parser.\n", generated_parser->grammar);
+   if (!generated_parser->init_parser(argv[optind], input_start,
+                                      100000, 1000000)) {
       fprintf(stderr, "Failed to initialize parser.\n");
       fatal(7);
    }
 
    start = clock();
-   nl    = generated_parser.parse(output_fp);
+   nl    = generated_parser->parse(output_fp);
    end   = clock();
-   generated_parser.term_parser();
+   generated_parser->term_parser();
    if (nl <= 0) {
       printf("\nError in parse().\n");
       fatal(8);
@@ -176,8 +177,8 @@ main(int argc, char **argv)
    thou -= sec * 1000;
 
    printf("\nSuccess ...\n");
-   printf("%10s symbols in symbol table.\n",  number(generated_parser.n_symbols));
-   printf("%10s nodes in AST.\n",             number(generated_parser.n_nodes));
+   printf("%10s symbols in symbol table.\n",  number(generated_parser->n_symbols));
+   printf("%10s nodes in AST.\n",             number(generated_parser->n_nodes));
    printf("%10s lines read in input file.\n", number(nl));
    printf("%10s lines per second.\n",         number(nlps));
    printf("%6ld.%03ld seconds.\n",            sec, thou);

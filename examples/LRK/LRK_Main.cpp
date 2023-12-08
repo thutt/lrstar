@@ -4,6 +4,7 @@
 
 const char LRK_grammar_name[] = "LRK";
 
+
 void LRK_init_actions(UNUSED_PARAM(LRK_parser_t *parser)); /* User-supplied */
 void LRK_term_actions(UNUSED_PARAM(LRK_parser_t *parser)); /* User-supplied */
 static LRK_parser_t::init_func_t LRK_init_funcs_[2] = {
@@ -31,10 +32,14 @@ static LRK_parser_t::nact_func_t LRK_nact_funcs_[8] = {
    0,
 };
 
+LRK_parser_t *
+LRK_new_parser()
+{
+   return new LRK_parser_t(/* init_func    */   &LRK_init_funcs_[0],
+                           /* tact_func    */   &LRK_tact_funcs_[0],
+                           /* nact_func    */   &LRK_nact_funcs_[0]);
+}
 
-LRK_parser_t
-generated_parser(/* init_func    */   &LRK_init_funcs_[0],
-                 /* tact_func    */   &LRK_tact_funcs_[0],
-                 /* nact_func    */   &LRK_nact_funcs_[0]);
+LRK_parser_t *generated_parser = LRK_new_parser();
 
 #include "lrstar_main.cpp"

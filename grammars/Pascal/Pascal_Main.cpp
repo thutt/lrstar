@@ -4,6 +4,7 @@
 
 const char Pascal_grammar_name[] = "Pascal";
 
+
 void Pascal_init_actions(UNUSED_PARAM(Pascal_parser_t *parser)); /* User-supplied */
 void Pascal_term_actions(UNUSED_PARAM(Pascal_parser_t *parser)); /* User-supplied */
 static Pascal_parser_t::init_func_t Pascal_init_funcs_[2] = {
@@ -208,10 +209,14 @@ static Pascal_parser_t::nact_func_t Pascal_nact_funcs_[185] = {
    0,
 };
 
+Pascal_parser_t *
+Pascal_new_parser()
+{
+   return new Pascal_parser_t(/* init_func    */   &Pascal_init_funcs_[0],
+                              /* tact_func    */   &Pascal_tact_funcs_[0],
+                              /* nact_func    */   &Pascal_nact_funcs_[0]);
+}
 
-Pascal_parser_t
-generated_parser(/* init_func    */   &Pascal_init_funcs_[0],
-                 /* tact_func    */   &Pascal_tact_funcs_[0],
-                 /* nact_func    */   &Pascal_nact_funcs_[0]);
+Pascal_parser_t *generated_parser = Pascal_new_parser();
 
 #include "lrstar_main.cpp"

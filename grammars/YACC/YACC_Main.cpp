@@ -5,9 +5,14 @@
 const char YACC_grammar_name[] = "YACC";
 
 
-YACC_parser_t
-generated_parser(/* init_func    */   0,
-                 /* tact_func    */   0,
-                 /* nact_func    */   0);
+YACC_parser_t *
+YACC_new_parser()
+{
+   return new YACC_parser_t(/* init_func    */   0,
+                            /* tact_func    */   0,
+                            /* nact_func    */   0);
+}
+
+YACC_parser_t *generated_parser = YACC_new_parser();
 
 #include "lrstar_main.cpp"

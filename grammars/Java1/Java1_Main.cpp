@@ -4,6 +4,7 @@
 
 const char Java1_grammar_name[] = "Java1";
 
+
 void Java1_init_actions(UNUSED_PARAM(Java1_parser_t *parser)); /* User-supplied */
 void Java1_term_actions(UNUSED_PARAM(Java1_parser_t *parser)); /* User-supplied */
 static Java1_parser_t::init_func_t Java1_init_funcs_[2] = {
@@ -19,10 +20,14 @@ static Java1_parser_t::tact_func_t Java1_tact_funcs_[2] = {
    Java1_lookup,
 };
 
+Java1_parser_t *
+Java1_new_parser()
+{
+   return new Java1_parser_t(/* init_func    */   &Java1_init_funcs_[0],
+                             /* tact_func    */   &Java1_tact_funcs_[0],
+                             /* nact_func    */   0);
+}
 
-Java1_parser_t
-generated_parser(/* init_func    */   &Java1_init_funcs_[0],
-                 /* tact_func    */   &Java1_tact_funcs_[0],
-                 /* nact_func    */   0);
+Java1_parser_t *generated_parser = Java1_new_parser();
 
 #include "lrstar_main.cpp"

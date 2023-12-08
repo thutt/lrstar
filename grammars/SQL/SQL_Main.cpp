@@ -4,6 +4,7 @@
 
 const char SQL_grammar_name[] = "SQL";
 
+
 void SQL_init_actions(UNUSED_PARAM(SQL_parser_t *parser)); /* User-supplied */
 void SQL_term_actions(UNUSED_PARAM(SQL_parser_t *parser)); /* User-supplied */
 static SQL_parser_t::init_func_t SQL_init_funcs_[2] = {
@@ -19,10 +20,14 @@ static SQL_parser_t::tact_func_t SQL_tact_funcs_[2] = {
    SQL_lookup,
 };
 
+SQL_parser_t *
+SQL_new_parser()
+{
+   return new SQL_parser_t(/* init_func    */   &SQL_init_funcs_[0],
+                           /* tact_func    */   &SQL_tact_funcs_[0],
+                           /* nact_func    */   0);
+}
 
-SQL_parser_t
-generated_parser(/* init_func    */   &SQL_init_funcs_[0],
-                 /* tact_func    */   &SQL_tact_funcs_[0],
-                 /* nact_func    */   0);
+SQL_parser_t *generated_parser = SQL_new_parser();
 
 #include "lrstar_main.cpp"

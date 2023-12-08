@@ -4,6 +4,7 @@
 
 const char Zeus_grammar_name[] = "Zeus";
 
+
 void Zeus_init_actions(UNUSED_PARAM(Zeus_parser_t *parser)); /* User-supplied */
 void Zeus_term_actions(UNUSED_PARAM(Zeus_parser_t *parser)); /* User-supplied */
 static Zeus_parser_t::init_func_t Zeus_init_funcs_[2] = {
@@ -19,10 +20,14 @@ static Zeus_parser_t::tact_func_t Zeus_tact_funcs_[2] = {
    Zeus_lookup,
 };
 
+Zeus_parser_t *
+Zeus_new_parser()
+{
+   return new Zeus_parser_t(/* init_func    */   &Zeus_init_funcs_[0],
+                            /* tact_func    */   &Zeus_tact_funcs_[0],
+                            /* nact_func    */   0);
+}
 
-Zeus_parser_t
-generated_parser(/* init_func    */   &Zeus_init_funcs_[0],
-                 /* tact_func    */   &Zeus_tact_funcs_[0],
-                 /* nact_func    */   0);
+Zeus_parser_t *generated_parser = Zeus_new_parser();
 
 #include "lrstar_main.cpp"

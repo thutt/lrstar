@@ -4,6 +4,7 @@
 
 const char Typedef_grammar_name[] = "Typedef";
 
+
 void Typedef_init_actions(UNUSED_PARAM(Typedef_parser_t *parser)); /* User-supplied */
 void Typedef_term_actions(UNUSED_PARAM(Typedef_parser_t *parser)); /* User-supplied */
 static Typedef_parser_t::init_func_t Typedef_init_funcs_[2] = {
@@ -24,10 +25,14 @@ static Typedef_parser_t::nact_func_t Typedef_nact_funcs_[1] = {
    0,
 };
 
+Typedef_parser_t *
+Typedef_new_parser()
+{
+   return new Typedef_parser_t(/* init_func    */   &Typedef_init_funcs_[0],
+                               /* tact_func    */   &Typedef_tact_funcs_[0],
+                               /* nact_func    */   &Typedef_nact_funcs_[0]);
+}
 
-Typedef_parser_t
-generated_parser(/* init_func    */   &Typedef_init_funcs_[0],
-                 /* tact_func    */   &Typedef_tact_funcs_[0],
-                 /* nact_func    */   &Typedef_nact_funcs_[0]);
+Typedef_parser_t *generated_parser = Typedef_new_parser();
 
 #include "lrstar_main.cpp"

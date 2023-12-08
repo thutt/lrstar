@@ -1383,18 +1383,18 @@ generate_grammar_parser_typedef(FILE *fp, const char *grammar)
 
 
 static void
-instantiate_generated_parser(FILE *fp)
+generate_parser_allocation(FILE *fp)
 {
-   static const int  stksize = 100;       // Parser-stack size.
-   static const char *b[] = { "false", "true" };
-   static const char templ[] = "generated_parser(";
-   bool init_fn;
-   bool tact_fn;
-   bool nact_fn;
+   static const int  stksize  = 100; // Parser-stack size.
+   static const char *b[]     = { "false", "true" };
+   static const char prefix[] = "   return new ";
+   static const char suffix[] = "_parser_t(";
+   char             *templ;
+   int               templ_len;
+   bool              init_fn;
+   bool              tact_fn;
+   bool              nact_fn;
 
-   fprintf(fp, "\n");
-   fprintf(fp, "const char %s_grammar_name[] = \"%s\";\n", gfn, gfn);
-   fprintf(fp, "\n");
    init_fn = main_init_functions(fp,
                                  callback_info.N_tacts,
                                  callback_info.N_nacts);
@@ -1407,11 +1407,17 @@ instantiate_generated_parser(FILE *fp)
                                  callback_info.N_nacts,
                                  callback_info.Nact_start);
 
+   templ_len = ((sizeof(prefix) / sizeof(prefix[0]) - 1) +
+                (sizeof(suffix) / sizeof(suffix[0]) - 1) +
+                strlen(gfn));
+   templ = new char[templ_len + 1];
+   sprintf(templ, "%s%s%s", prefix, gfn, suffix);
 
-   fprintf(fp, "\n");
-
-   fprintf(fp, "%s_parser_t\n", gfn);
-   fprintf(fp, "%s", templ);
+   fprintf(fp,
+           "%s_parser_t *\n%s_new_parser()\n"
+           "{\n"
+           "%s",
+           gfn, gfn, templ);
 
    if (init_fn) {
       fprintf(fp, "/* init_func    */   &%s_init_funcs_[0]", gfn);
@@ -1422,27 +1428,41 @@ instantiate_generated_parser(FILE *fp)
    if (tact_fn) {
       fprintf(fp, ",\n%*s"
               "/* tact_func    */   &%s_tact_funcs_[0]",
-              static_cast<int>(sizeof(templ) / sizeof(templ[0])) - 1, " ",
+              static_cast<int>(templ_len), " ",
               gfn);
    } else {
       fprintf(fp, ",\n%*s"
               "/* tact_func    */   0",
-              static_cast<int>(sizeof(templ) / sizeof(templ[0])) - 1, " ");
+              static_cast<int>(templ_len), " ");
    }
 
    if (nact_fn) {
       fprintf(fp, ",\n%*s"
               "/* nact_func    */   &%s_nact_funcs_[0]",
-              static_cast<int>(sizeof(templ) / sizeof(templ[0])) - 1, " ",
+              static_cast<int>(templ_len), " ",
               gfn);
 
    } else {
       fprintf(fp, ",\n%*s"
               "/* nact_func    */   0",
-              static_cast<int>(sizeof(templ) / sizeof(templ[0])) - 1, " ");
+              static_cast<int>(templ_len), " ");
    }
 
-   fprintf(fp, ");\n\n");
+   fprintf(fp, ");\n}\n\n");
+
+}
+
+static void
+instantiate_generated_parser(FILE *fp)
+{
+   fprintf(fp, "\n");
+   fprintf(fp, "const char %s_grammar_name[] = \"%s\";\n", gfn, gfn);
+   fprintf(fp, "\n");
+
+   fprintf(fp, "\n");
+   generate_parser_allocation(fp);
+   fprintf(fp, "%s_parser_t *generated_parser = %s_new_parser();\n\n",
+           gfn, gfn);
 }
 
 

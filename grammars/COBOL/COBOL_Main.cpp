@@ -4,6 +4,7 @@
 
 const char COBOL_grammar_name[] = "COBOL";
 
+
 void COBOL_init_actions(UNUSED_PARAM(COBOL_parser_t *parser)); /* User-supplied */
 void COBOL_term_actions(UNUSED_PARAM(COBOL_parser_t *parser)); /* User-supplied */
 static COBOL_parser_t::init_func_t COBOL_init_funcs_[2] = {
@@ -19,10 +20,14 @@ static COBOL_parser_t::tact_func_t COBOL_tact_funcs_[2] = {
    COBOL_lookup,
 };
 
+COBOL_parser_t *
+COBOL_new_parser()
+{
+   return new COBOL_parser_t(/* init_func    */   &COBOL_init_funcs_[0],
+                             /* tact_func    */   &COBOL_tact_funcs_[0],
+                             /* nact_func    */   0);
+}
 
-COBOL_parser_t
-generated_parser(/* init_func    */   &COBOL_init_funcs_[0],
-                 /* tact_func    */   &COBOL_tact_funcs_[0],
-                 /* nact_func    */   0);
+COBOL_parser_t *generated_parser = COBOL_new_parser();
 
 #include "lrstar_main.cpp"

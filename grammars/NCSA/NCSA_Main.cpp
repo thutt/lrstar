@@ -4,6 +4,7 @@
 
 const char NCSA_grammar_name[] = "NCSA";
 
+
 void NCSA_init_actions(UNUSED_PARAM(NCSA_parser_t *parser)); /* User-supplied */
 void NCSA_term_actions(UNUSED_PARAM(NCSA_parser_t *parser)); /* User-supplied */
 static NCSA_parser_t::init_func_t NCSA_init_funcs_[2] = {
@@ -34,10 +35,14 @@ static NCSA_parser_t::nact_func_t NCSA_nact_funcs_[11] = {
    0,
 };
 
+NCSA_parser_t *
+NCSA_new_parser()
+{
+   return new NCSA_parser_t(/* init_func    */   &NCSA_init_funcs_[0],
+                            /* tact_func    */   &NCSA_tact_funcs_[0],
+                            /* nact_func    */   &NCSA_nact_funcs_[0]);
+}
 
-NCSA_parser_t
-generated_parser(/* init_func    */   &NCSA_init_funcs_[0],
-                 /* tact_func    */   &NCSA_tact_funcs_[0],
-                 /* nact_func    */   &NCSA_nact_funcs_[0]);
+NCSA_parser_t *generated_parser = NCSA_new_parser();
 
 #include "lrstar_main.cpp"
