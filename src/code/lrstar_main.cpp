@@ -5,17 +5,9 @@
 #include <stdlib.h>
 #include <string.h>
 #include <time.h>
+#include <unistd.h>
 
 #include "lrstar_basic_defs.h"
-#if defined(LRSTAR_LINUX)
-#include <sys/types.h>
-#include <sys/stat.h>
-#include <unistd.h>
-#elif defined(LRSTAR_WINDOWS)
-#include <io.h>
-#include <conio.h>
-#endif
-
 #include "lrstar_cmdline.h"
 #include "lrstar_sample.h"
 
