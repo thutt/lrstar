@@ -23,8 +23,11 @@ extern "C" {
     static void
     help(const char *exec)
     {
-        printf("%s [--help] <file>\n\n", exec);
-        printf("  --help:   Print this help message and exit.\n");
+        printf("\n"
+               "%s [--help | --output <pathname>]... <file>\n\n", exec);
+        printf("  --help  :   Print this help message and exit.\n"
+               "  --output:   Provides path of file to which lrstar will write.\n"
+               "\n");
     }
 
 
