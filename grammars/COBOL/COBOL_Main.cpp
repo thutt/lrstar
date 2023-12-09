@@ -2,6 +2,7 @@
 #include "COBOL_LexerTables_typedef.h"
 #include "COBOL_Parser.h"
 
+
 const char COBOL_grammar_name[] = "COBOL";
 
 
@@ -30,4 +31,3 @@ COBOL_new_parser()
 
 COBOL_parser_t *generated_parser = COBOL_new_parser();
 
-#include "lrstar_main.cpp"

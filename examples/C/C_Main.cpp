@@ -2,6 +2,7 @@
 #include "C_LexerTables_typedef.h"
 #include "C_Parser.h"
 
+
 const char C_grammar_name[] = "C";
 
 
@@ -15,4 +16,3 @@ C_new_parser()
 
 C_parser_t *generated_parser = C_new_parser();
 
-#include "lrstar_main.cpp"

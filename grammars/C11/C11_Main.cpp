@@ -2,6 +2,7 @@
 #include "C11_LexerTables_typedef.h"
 #include "C11_Parser.h"
 
+
 const char C11_grammar_name[] = "C11";
 
 
@@ -30,4 +31,3 @@ C11_new_parser()
 
 C11_parser_t *generated_parser = C11_new_parser();
 
-#include "lrstar_main.cpp"

@@ -2,6 +2,7 @@
 #include "LRK_LexerTables_typedef.h"
 #include "LRK_Parser.h"
 
+
 const char LRK_grammar_name[] = "LRK";
 
 
@@ -42,4 +43,3 @@ LRK_new_parser()
 
 LRK_parser_t *generated_parser = LRK_new_parser();
 
-#include "lrstar_main.cpp"

@@ -2,6 +2,7 @@
 #include "PL1_LexerTables_typedef.h"
 #include "PL1_Parser.h"
 
+
 const char PL1_grammar_name[] = "PL1";
 
 
@@ -30,4 +31,3 @@ PL1_new_parser()
 
 PL1_parser_t *generated_parser = PL1_new_parser();
 
-#include "lrstar_main.cpp"

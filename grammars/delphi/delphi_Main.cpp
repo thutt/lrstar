@@ -2,6 +2,7 @@
 #include "delphi_LexerTables_typedef.h"
 #include "delphi_Parser.h"
 
+
 const char delphi_grammar_name[] = "delphi";
 
 
@@ -15,4 +16,3 @@ delphi_new_parser()
 
 delphi_parser_t *generated_parser = delphi_new_parser();
 
-#include "lrstar_main.cpp"

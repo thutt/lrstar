@@ -2,6 +2,7 @@
 #include "Zeus_LexerTables_typedef.h"
 #include "Zeus_Parser.h"
 
+
 const char Zeus_grammar_name[] = "Zeus";
 
 
@@ -30,4 +31,3 @@ Zeus_new_parser()
 
 Zeus_parser_t *generated_parser = Zeus_new_parser();
 
-#include "lrstar_main.cpp"

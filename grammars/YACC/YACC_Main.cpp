@@ -2,6 +2,7 @@
 #include "YACC_LexerTables_typedef.h"
 #include "YACC_Parser.h"
 
+
 const char YACC_grammar_name[] = "YACC";
 
 
@@ -15,4 +16,3 @@ YACC_new_parser()
 
 YACC_parser_t *generated_parser = YACC_new_parser();
 
-#include "lrstar_main.cpp"

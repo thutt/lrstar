@@ -2,6 +2,7 @@
 #include "Java1_LexerTables_typedef.h"
 #include "Java1_Parser.h"
 
+
 const char Java1_grammar_name[] = "Java1";
 
 
@@ -30,4 +31,3 @@ Java1_new_parser()
 
 Java1_parser_t *generated_parser = Java1_new_parser();
 
-#include "lrstar_main.cpp"

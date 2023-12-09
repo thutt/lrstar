@@ -2,6 +2,7 @@
 #include "PLM_LexerTables_typedef.h"
 #include "PLM_Parser.h"
 
+
 const char PLM_grammar_name[] = "PLM";
 
 
@@ -28,4 +29,3 @@ PLM_new_parser()
 
 PLM_parser_t *generated_parser = PLM_new_parser();
 
-#include "lrstar_main.cpp"

@@ -2,6 +2,7 @@
 #include "Fortran_LexerTables_typedef.h"
 #include "Fortran_Parser.h"
 
+
 const char Fortran_grammar_name[] = "Fortran";
 
 
@@ -30,4 +31,3 @@ Fortran_new_parser()
 
 Fortran_parser_t *generated_parser = Fortran_new_parser();
 
-#include "lrstar_main.cpp"

@@ -2,6 +2,7 @@
 #include "Python_LexerTables_typedef.h"
 #include "Python_Parser.h"
 
+
 const char Python_grammar_name[] = "Python";
 
 
@@ -15,4 +16,3 @@ Python_new_parser()
 
 Python_parser_t *generated_parser = Python_new_parser();
 
-#include "lrstar_main.cpp"

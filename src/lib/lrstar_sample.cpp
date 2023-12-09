@@ -43,7 +43,7 @@ fatal(int rc)
 }
 
 
-void
+char *
 read_input(const char *pathname)
 {
    size_t       nb;
@@ -51,6 +51,7 @@ read_input(const char *pathname)
    struct stat  statbuf;
    FILE        *input_fp;
    char        *input_end;
+   char        *input_start;
 
    input_fp = fopen(pathname, "r");
    if (input_fp == NULL) {
@@ -79,6 +80,7 @@ read_input(const char *pathname)
    *input_end++ = EOF_CHAR;
    *input_end++ = '\0';
    fclose(input_fp);
+   return input_start;
 }
 
 

@@ -47,18 +47,13 @@ DISTRIB_LEXER_HEADER	:=	\
 $(DISTRIB_LEXER_HEADER):	$(LRSTAR_DIR)/src/include/lrstar_lexer.h
 
 
-DISTRIB_MAIN_CODE	:=	\
-	$(DISTRIB_ROOT)/include/lrstar_main.cpp
-
 DISTRIB_SAMPLE_MAKE_DEFS	:=	\
 	$(DISTRIB_ROOT)/make/sample.defs
 
 $(DISTRIB_LOWERCASE_HEADER):	$(LRSTAR_DIR)/src/include/lowercase.h
 $(DISTRIB_SAMPLE_HEADER):	$(LRSTAR_DIR)/src/include/lrstar_sample.h
-$(DISTRIB_CMDLINE_HEADER):	$(LRSTAR_DIR)/src/include/lrstar_cmdline.h
 $(DISTRIB_LRSTAR_LIB):		$(LRSTAR_LIB)
 
-$(DISTRIB_MAIN_CODE):		$(LRSTAR_DIR)/src/code/lrstar_main.cpp
 
 
 DISTRIB_PARSER_HEADER	:=	\
@@ -70,16 +65,6 @@ DISTRIB_PARSER_TABLES_HEADER	:=	\
 $(DISTRIB_PARSER_HEADER):		$(LRSTAR_DIR)/src/include/lrstar_parser.h
 $(DISTRIB_PARSER_TABLES_HEADER):	$(LRSTAR_DIR)/src/include/lrstar_parser_tables.h
 $(DISTRIB_SAMPLE_MAKE_DEFS):		$(LRSTAR_DIR)/make/sample.defs
-
-$(DISTRIB_MAIN_CODE):
-	$(PROLOG);					\
-	$(INSTALL)					\
-		--mode=444				\
-		-D					\
-		"$(LRSTAR_DIR)/src/code/$(notdir $@)"	\
-		$@;					\
-	echo "MAIN: $@";
-
 
 $(DISTRIB_LEXER_HEADER)					\
 $(DISTRIB_PARSER_HEADER)				\
@@ -93,7 +78,6 @@ $(DISTRIB_PARSER_TABLES_HEADER):
 	echo "LIBRARY: $@";
 
 
-$(DISTRIB_CMDLINE_HEADER)			\
 $(DISTRIB_SAMPLE_HEADER)			\
 $(DISTRIB_LOWERCASE_HEADER):
 	$(PROLOG);						\
@@ -173,13 +157,11 @@ $(DISTRIB_DFA):		$(DFA)
 distribution:						\
 		$(DISTRIB_BASIC_DEFS_GCC_HEADER)	\
 		$(DISTRIB_BASIC_DEFS_HEADER)		\
-		$(DISTRIB_CMDLINE_HEADER)		\
 		$(DISTRIB_DFA)				\
 		$(DISTRIB_LEXER_HEADER)			\
 		$(DISTRIB_LOWERCASE_HEADER)		\
 		$(DISTRIB_LRSTAR)			\
 		$(DISTRIB_LRSTAR_LIB)			\
-		$(DISTRIB_MAIN_CODE)			\
 		$(DISTRIB_PARSER_HEADER)		\
 		$(DISTRIB_PARSER_TABLES_HEADER)		\
 		$(DISTRIB_SAMPLE_HEADER)		\

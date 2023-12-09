@@ -2,6 +2,7 @@
 #include "Vba_LexerTables_typedef.h"
 #include "Vba_Parser.h"
 
+
 const char Vba_grammar_name[] = "Vba";
 
 
@@ -115,4 +116,3 @@ Vba_new_parser()
 
 Vba_parser_t *generated_parser = Vba_new_parser();
 
-#include "lrstar_main.cpp"

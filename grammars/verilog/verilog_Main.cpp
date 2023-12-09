@@ -2,6 +2,7 @@
 #include "verilog_LexerTables_typedef.h"
 #include "verilog_Parser.h"
 
+
 const char verilog_grammar_name[] = "verilog";
 
 
@@ -30,4 +31,3 @@ verilog_new_parser()
 
 verilog_parser_t *generated_parser = verilog_new_parser();
 
-#include "lrstar_main.cpp"

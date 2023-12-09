@@ -2,6 +2,7 @@
 #include "XPL_LexerTables_typedef.h"
 #include "XPL_Parser.h"
 
+
 const char XPL_grammar_name[] = "XPL";
 
 
@@ -30,4 +31,3 @@ XPL_new_parser()
 
 XPL_parser_t *generated_parser = XPL_new_parser();
 
-#include "lrstar_main.cpp"

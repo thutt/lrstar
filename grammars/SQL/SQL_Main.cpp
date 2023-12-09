@@ -2,6 +2,7 @@
 #include "SQL_LexerTables_typedef.h"
 #include "SQL_Parser.h"
 
+
 const char SQL_grammar_name[] = "SQL";
 
 
@@ -30,4 +31,3 @@ SQL_new_parser()
 
 SQL_parser_t *generated_parser = SQL_new_parser();
 
-#include "lrstar_main.cpp"

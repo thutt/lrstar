@@ -2,6 +2,7 @@
 #include "CPP5_LexerTables_typedef.h"
 #include "CPP5_Parser.h"
 
+
 const char CPP5_grammar_name[] = "CPP5";
 
 
@@ -15,4 +16,3 @@ CPP5_new_parser()
 
 CPP5_parser_t *generated_parser = CPP5_new_parser();
 
-#include "lrstar_main.cpp"

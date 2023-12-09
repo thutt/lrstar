@@ -2,6 +2,7 @@
 #include "Calc_LexerTables_typedef.h"
 #include "Calc_Parser.h"
 
+
 const char Calc_grammar_name[] = "Calc";
 
 
@@ -68,4 +69,3 @@ Calc_new_parser()
 
 Calc_parser_t *generated_parser = Calc_new_parser();
 
-#include "lrstar_main.cpp"

@@ -2,6 +2,7 @@
 #include "NCSA_LexerTables_typedef.h"
 #include "NCSA_Parser.h"
 
+
 const char NCSA_grammar_name[] = "NCSA";
 
 
@@ -45,4 +46,3 @@ NCSA_new_parser()
 
 NCSA_parser_t *generated_parser = NCSA_new_parser();
 
-#include "lrstar_main.cpp"

@@ -2,6 +2,7 @@
 #include "Ada_LexerTables_typedef.h"
 #include "Ada_Parser.h"
 
+
 const char Ada_grammar_name[] = "Ada";
 
 
@@ -30,4 +31,3 @@ Ada_new_parser()
 
 Ada_parser_t *generated_parser = Ada_new_parser();
 
-#include "lrstar_main.cpp"

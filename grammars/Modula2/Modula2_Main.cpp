@@ -2,6 +2,7 @@
 #include "Modula2_LexerTables_typedef.h"
 #include "Modula2_Parser.h"
 
+
 const char Modula2_grammar_name[] = "Modula2";
 
 
@@ -30,4 +31,3 @@ Modula2_new_parser()
 
 Modula2_parser_t *generated_parser = Modula2_new_parser();
 
-#include "lrstar_main.cpp"

@@ -2,6 +2,7 @@
 #include "PLSQL_LexerTables_typedef.h"
 #include "PLSQL_Parser.h"
 
+
 const char PLSQL_grammar_name[] = "PLSQL";
 
 
@@ -15,4 +16,3 @@ PLSQL_new_parser()
 
 PLSQL_parser_t *generated_parser = PLSQL_new_parser();
 
-#include "lrstar_main.cpp"

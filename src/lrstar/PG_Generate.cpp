@@ -1689,17 +1689,19 @@ user_written_cpp_fn(FILE       *fp,
    }
 }
 
+
 static void main_cpp_fn(FILE       *fp,
                         const char *pathname,
                         const char *grammar,
                         const char *fname)
 {
-   fprintf (fp, ("#include \"lrstar_basic_defs.h\"\n"
-                 "#include \"%s_LexerTables_typedef.h\"\n"
-                 "#include \"%s_Parser.h\"\n"), grammar, grammar);
+   fprintf(fp,
+           "#include \"lrstar_basic_defs.h\"\n"
+           "#include \"%s_LexerTables_typedef.h\"\n"
+           "#include \"%s_Parser.h\"\n"
+           "\n", grammar, grammar);
    if (lrstar_linux) {
-      instantiate_generated_parser(fp);
-      fprintf (fp, "#include \"lrstar_main.cpp\"\n");
+      instantiate_generated_parser(fp); /* move pointer to main! XXX */
    } else {
       assert(lrstar_windows);
       fprintf (fp, "#include \"../../code/main.cpp\"\n");
@@ -1769,6 +1771,7 @@ static void makefile_fn(FILE       *fp,
       "\t$(GRM)_Main.cpp\t\t\\\n"
       "\t$(GRM)_Parser.cpp\t\\\n"
       "\t$(GRM)_user.cpp\t\t\\\n"
+      "\t$(GRM)_user_main.cpp\t\t\\\n"
       "\n\n"
       "OBJS\t:= $\t$(SOURCE:.cpp=.o) $(LRSTAR_INSTALL_ROOT)/lib/lrstar.a\n"
       "\n\n"
@@ -1836,6 +1839,192 @@ static void write_file(const char       *gdn,
 }
 
 
+static void instantiate_getopt(FILE *fp)
+{
+   fprintf(fp,
+           "extern \"C\" {\n"
+           "    typedef struct options_t {\n"
+           "       char *output;           /* Pathname of lrstar output file. */\n"
+           "    } options_t;\n"
+           "\n"
+           "\n"
+           "    options_t options;\n"
+           "\n"
+           "    static struct option long_options[] = {\n"
+           "        { \"help\",    no_argument,       NULL,  256 },\n"
+           "        { \"output\",  required_argument, NULL,  257 },\n"
+           "        { NULL,      no_argument,       NULL,    0 }\n"
+           "    };\n"
+           "\n"
+           "\n"
+           "    static void\n"
+           "    help(const char *exec)\n"
+           "    {\n"
+           "        printf(\"\\n\\n\"\n"
+           "               \"%%s [--help | --output <pathname>]... <file>\\n\\n\", exec);\n"
+           "        printf(\"  --help  :   Print this help message and exit.\\n\"\n"
+           "               \"  --output:   Provides path of file to which lrstar will write.\\n\"\n"
+           "               \"\\n\");\n"
+           "    }\n"
+           "\n"
+           "\n"
+           "    static void\n"
+           "    init_options(options_t *opts)\n"
+           "    {\n"
+           "        opts->output = 0;\n"
+           "    }\n"
+           "\n"
+           "\n"
+           "    static int                  // Returns optind\n"
+           "    get_options(int argc, char *argv[], options_t *opts)\n"
+           "    {\n"
+           "        int c;\n"
+           "\n"
+           "        init_options(opts);\n"
+           "\n"
+           "        while (1) {\n"
+           "            int option_index = 0;\n"
+           "\n"
+           "            c = getopt_long(argc, argv, \"\", long_options, &option_index);\n"
+           "            if (c == -1) {\n"
+           "                break;\n"
+           "            }\n"
+           "\n"
+           "            switch (c) {\n"
+           "            case 256:\n"
+           "                help(argv[0]);\n"
+           "                exit(0);\n"
+           "                break;\n"
+           "\n"
+           "            case 257:\n"
+           "                opts->output = strdup(optarg);\n"
+           "                break;\n"
+           "\n"
+           "            default:\n"
+           "                printf(\"?? getopt returned character code 0%%o ??\\n\", c);\n"
+           "            }\n"
+           "        }\n"
+           "\n"
+           "        return optind;          /* Remaining non-options arguments are\n"
+           "                                 * in [optind, argc).\n"
+           "                                 */\n"
+           "    }\n"
+           "}\n"
+           "\n");
+}
+
+
+static void instantiate_main(FILE *fp, const char *grammar)
+{
+   fprintf(fp,
+           "\n\n"
+           "%s_parser_t *%s_new_parser();\n", grammar, grammar);
+
+   fprintf(fp,
+           "int\n"
+           "main(int argc, char **argv)\n"
+           "{\n"
+           "    int         nl;\n"
+           "    clock_t     start;\n"
+           "    clock_t     end;\n"
+           "    clock_t     thou;\n"
+           "    clock_t     sec;\n"
+           "    clock_t     nlps;\n"
+           "    clock_t     t;\n"
+           "    char *input_start;\n"
+           "    FILE *output_fp;\n"
+           "    %s_parser_t *parser;\n", grammar); //  = ANTLR_new_parser();
+
+   fprintf(fp, "\n"
+           "    get_options(argc, argv, &options);\n"
+           "\n"
+           "    if (options.output == 0) {\n"
+           "       printf(\"--output option must be specified.\\n\");\n"
+           "       fatal(4);\n"
+           "    }\n"
+           "\n"
+           "    if (optind >= argc) {\n"
+           "        printf(\"No input file supplied.\\n\");\n"
+           "        fatal(5);\n"
+           "    }\n"
+           "\n"
+           "    input_start = read_input(argv[optind]);\n"
+           "\n"
+           "    output_fp = fopen(options.output, \"w\");\n"
+           "    if (output_fp == NULL) {\n"
+           "        printf(\"Output file '%%s' cannot be opened for writing.\\n\",\n"
+           "               options.output);\n"
+           "        fatal(6);\n"
+           "    }\n"
+           "\n");
+   fprintf(fp,
+           "    parser = %s_new_parser();\n", grammar);
+   fprintf(fp,
+           "    printf(\"%%s parser.\\n\", parser->grammar);\n"
+           "    if (!parser->init_parser(argv[optind], input_start,\n"
+           "                             100000, 1000000)) {\n"
+           "        fprintf(stderr, \"Failed to initialize parser.\\n\");\n"
+           "        fatal(7);\n"
+           "    }\n"
+           "\n"
+           "    start = clock();\n"
+           "    nl    = parser->parse(output_fp);\n"
+           "    end   = clock();\n"
+           "    parser->term_parser();\n"
+           "    if (nl <= 0) {\n"
+           "        printf(\"\\nError in parse().\\n\");\n"
+           "        fatal(8);\n"
+           "    }\n"
+           "\n"
+           "    t = end - start;\n"
+           "    if (t == 0) {\n"
+           "        t = 1;\n"
+           "    }\n"
+           "\n"
+           "    nlps = CLOCKS_PER_SEC * nl / t;\n"
+           "    thou = t * 1000 / CLOCKS_PER_SEC;\n"
+           "    sec  = thou / 1000;\n"
+           "    thou -= sec * 1000;\n"
+           "\n"
+           "    printf(\"\\nSuccess ...\\n\");\n"
+           "    printf(\"%%10s symbols in symbol table.\\n\",  number(parser->n_symbols));\n"
+           "    printf(\"%%10s nodes in AST.\\n\",             number(parser->n_nodes));\n"
+           "    printf(\"%%10s lines read in input file.\\n\", number(nl));\n"
+           "    printf(\"%%10s lines per second.\\n\",         number(nlps));\n"
+           "    printf(\"%%6ld.%%03ld seconds.\\n\",            sec, thou);\n"
+           "\n"
+           "    delete [] input_start;\n"
+           "    delete parser;\n"
+           "    fclose(output_fp);\n"
+           "    return 0;\n"
+           "}\n"
+           "\n");
+}
+
+static void user_main_cpp_fn(FILE       *fp,
+                             const char *pathname,
+                             const char *grammar,
+                             const char *fname)
+{
+   fprintf(fp,
+           "#include <assert.h>\n"
+           "#include <fcntl.h>\n"
+           "#include <getopt.h>\n"
+           "#include <stdio.h>\n"
+           "#include <stdlib.h>\n"
+           "#include <string.h>\n"
+           "#include <time.h>\n"
+           "\n"
+           "#include \"lrstar_basic_defs.h\"\n"
+           "#include \"lrstar_sample.h\"\n"
+           "#include \"%s_LexerTables_typedef.h\"\n"
+           "#include \"%s_Parser.h\"\n"
+           "\n\n", grammar, grammar);
+   instantiate_getopt(fp);
+   instantiate_main(fp, grammar);
+}
+
+
 void  PG_Main::GenerateOtherFiles ()
 {
    callback_info.N_tacts    = N_tacts;
@@ -1845,6 +2034,7 @@ void  PG_Main::GenerateOtherFiles ()
 
    write_file(gdn, gfn, NULL, "_Parser.h", true, parser_header_fn);
    write_file(gdn, gfn, NULL, "_Main.cpp", true, main_cpp_fn);
+   write_file(gdn, gfn, NULL, "_user_main.cpp", true, user_main_cpp_fn);
    write_file(gdn, gfn, NULL, "_Parser.cpp", true, parser_cpp_fn);
    if (lrstar_linux) {
       write_file(gdn, gfn, NULL, "_user.cpp", true,

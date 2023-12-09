@@ -17,6 +17,7 @@ SOURCE	:=			\
 	$(GRM)_Main.cpp		\
 	$(GRM)_Parser.cpp	\
 	$(GRM)_user.cpp		\
+	$(GRM)_user_main.cpp		\
 
 
 OBJS	:= $	$(SOURCE:.cpp=.o) $(LRSTAR_INSTALL_ROOT)/lib/lrstar.a

@@ -2,6 +2,7 @@
 #include "ANTLR_LexerTables_typedef.h"
 #include "ANTLR_Parser.h"
 
+
 const char ANTLR_grammar_name[] = "ANTLR";
 
 
@@ -30,4 +31,3 @@ ANTLR_new_parser()
 
 ANTLR_parser_t *generated_parser = ANTLR_new_parser();
 
-#include "lrstar_main.cpp"

@@ -2,6 +2,7 @@
 #include "CICS_LexerTables_typedef.h"
 #include "CICS_Parser.h"
 
+
 const char CICS_grammar_name[] = "CICS";
 
 
@@ -30,4 +31,3 @@ CICS_new_parser()
 
 CICS_parser_t *generated_parser = CICS_new_parser();
 
-#include "lrstar_main.cpp"

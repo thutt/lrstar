@@ -2,6 +2,7 @@
 #include "Pascal_LexerTables_typedef.h"
 #include "Pascal_Parser.h"
 
+
 const char Pascal_grammar_name[] = "Pascal";
 
 
@@ -219,4 +220,3 @@ Pascal_new_parser()
 
 Pascal_parser_t *generated_parser = Pascal_new_parser();
 
-#include "lrstar_main.cpp"

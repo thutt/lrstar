@@ -2,6 +2,7 @@
 #include "Java9_LexerTables_typedef.h"
 #include "Java9_Parser.h"
 
+
 const char Java9_grammar_name[] = "Java9";
 
 
@@ -35,4 +36,3 @@ Java9_new_parser()
 
 Java9_parser_t *generated_parser = Java9_new_parser();
 
-#include "lrstar_main.cpp"

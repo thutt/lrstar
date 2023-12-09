@@ -2,6 +2,7 @@
 #include "Typedef_LexerTables_typedef.h"
 #include "Typedef_Parser.h"
 
+
 const char Typedef_grammar_name[] = "Typedef";
 
 
@@ -35,4 +36,3 @@ Typedef_new_parser()
 
 Typedef_parser_t *generated_parser = Typedef_new_parser();
 
-#include "lrstar_main.cpp"

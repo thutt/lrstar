@@ -2,6 +2,7 @@
 #include "ALGOL60_LexerTables_typedef.h"
 #include "ALGOL60_Parser.h"
 
+
 const char ALGOL60_grammar_name[] = "ALGOL60";
 
 
@@ -15,4 +16,3 @@ ALGOL60_new_parser()
 
 ALGOL60_parser_t *generated_parser = ALGOL60_new_parser();
 
-#include "lrstar_main.cpp"

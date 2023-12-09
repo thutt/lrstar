@@ -2,6 +2,7 @@
 #include "Dbase_LexerTables_typedef.h"
 #include "Dbase_Parser.h"
 
+
 const char Dbase_grammar_name[] = "Dbase";
 
 
@@ -30,4 +31,3 @@ Dbase_new_parser()
 
 Dbase_parser_t *generated_parser = Dbase_new_parser();
 
-#include "lrstar_main.cpp"
