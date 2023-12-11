@@ -27,12 +27,15 @@ static Java9_parser_t::nact_func_t Java9_nact_funcs_[1] = {
 };
 
 Java9_parser_t *
-Java9_new_parser()
+Java9_new_parser(const char *input_path,
+                 char       *input_text,
+                 unsigned    max_symbols)
 {
-   return new Java9_parser_t(/* init_func    */   &Java9_init_funcs_[0],
+   return new Java9_parser_t(/* input path   */   input_path,
+                             /* input text   */   input_text,
+                             /* max symbols  */   max_symbols,
+                             /* init_func    */   &Java9_init_funcs_[0],
                              /* tact_func    */   &Java9_tact_funcs_[0],
                              /* nact_func    */   &Java9_nact_funcs_[0]);
 }
-
-Java9_parser_t *generated_parser = Java9_new_parser();
 

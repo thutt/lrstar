@@ -22,12 +22,15 @@ static ANTLR_parser_t::tact_func_t ANTLR_tact_funcs_[2] = {
 };
 
 ANTLR_parser_t *
-ANTLR_new_parser()
+ANTLR_new_parser(const char *input_path,
+                 char       *input_text,
+                 unsigned    max_symbols)
 {
-   return new ANTLR_parser_t(/* init_func    */   &ANTLR_init_funcs_[0],
+   return new ANTLR_parser_t(/* input path   */   input_path,
+                             /* input text   */   input_text,
+                             /* max symbols  */   max_symbols,
+                             /* init_func    */   &ANTLR_init_funcs_[0],
                              /* tact_func    */   &ANTLR_tact_funcs_[0],
                              /* nact_func    */   0);
 }
-
-ANTLR_parser_t *generated_parser = ANTLR_new_parser();
 

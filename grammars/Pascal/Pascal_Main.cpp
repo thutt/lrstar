@@ -211,12 +211,15 @@ static Pascal_parser_t::nact_func_t Pascal_nact_funcs_[185] = {
 };
 
 Pascal_parser_t *
-Pascal_new_parser()
+Pascal_new_parser(const char *input_path,
+                  char       *input_text,
+                  unsigned    max_symbols)
 {
-   return new Pascal_parser_t(/* init_func    */   &Pascal_init_funcs_[0],
+   return new Pascal_parser_t(/* input path   */   input_path,
+                              /* input text   */   input_text,
+                              /* max symbols  */   max_symbols,
+                              /* init_func    */   &Pascal_init_funcs_[0],
                               /* tact_func    */   &Pascal_tact_funcs_[0],
                               /* nact_func    */   &Pascal_nact_funcs_[0]);
 }
-
-Pascal_parser_t *generated_parser = Pascal_new_parser();
 

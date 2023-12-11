@@ -7,12 +7,15 @@ const char CPP5_grammar_name[] = "CPP5";
 
 
 CPP5_parser_t *
-CPP5_new_parser()
+CPP5_new_parser(const char *input_path,
+                char       *input_text,
+                unsigned    max_symbols)
 {
-   return new CPP5_parser_t(/* init_func    */   0,
+   return new CPP5_parser_t(/* input path   */   input_path,
+                            /* input text   */   input_text,
+                            /* max symbols  */   max_symbols,
+                            /* init_func    */   0,
                             /* tact_func    */   0,
                             /* nact_func    */   0);
 }
-
-CPP5_parser_t *generated_parser = CPP5_new_parser();
 

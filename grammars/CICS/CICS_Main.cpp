@@ -22,12 +22,15 @@ static CICS_parser_t::tact_func_t CICS_tact_funcs_[2] = {
 };
 
 CICS_parser_t *
-CICS_new_parser()
+CICS_new_parser(const char *input_path,
+                char       *input_text,
+                unsigned    max_symbols)
 {
-   return new CICS_parser_t(/* init_func    */   &CICS_init_funcs_[0],
+   return new CICS_parser_t(/* input path   */   input_path,
+                            /* input text   */   input_text,
+                            /* max symbols  */   max_symbols,
+                            /* init_func    */   &CICS_init_funcs_[0],
                             /* tact_func    */   &CICS_tact_funcs_[0],
                             /* nact_func    */   0);
 }
-
-CICS_parser_t *generated_parser = CICS_new_parser();
 

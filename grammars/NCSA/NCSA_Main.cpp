@@ -37,12 +37,15 @@ static NCSA_parser_t::nact_func_t NCSA_nact_funcs_[11] = {
 };
 
 NCSA_parser_t *
-NCSA_new_parser()
+NCSA_new_parser(const char *input_path,
+                char       *input_text,
+                unsigned    max_symbols)
 {
-   return new NCSA_parser_t(/* init_func    */   &NCSA_init_funcs_[0],
+   return new NCSA_parser_t(/* input path   */   input_path,
+                            /* input text   */   input_text,
+                            /* max symbols  */   max_symbols,
+                            /* init_func    */   &NCSA_init_funcs_[0],
                             /* tact_func    */   &NCSA_tact_funcs_[0],
                             /* nact_func    */   &NCSA_nact_funcs_[0]);
 }
-
-NCSA_parser_t *generated_parser = NCSA_new_parser();
 

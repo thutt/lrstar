@@ -22,12 +22,15 @@ static verilog_parser_t::tact_func_t verilog_tact_funcs_[2] = {
 };
 
 verilog_parser_t *
-verilog_new_parser()
+verilog_new_parser(const char *input_path,
+                   char       *input_text,
+                   unsigned    max_symbols)
 {
-   return new verilog_parser_t(/* init_func    */   &verilog_init_funcs_[0],
+   return new verilog_parser_t(/* input path   */   input_path,
+                               /* input text   */   input_text,
+                               /* max symbols  */   max_symbols,
+                               /* init_func    */   &verilog_init_funcs_[0],
                                /* tact_func    */   &verilog_tact_funcs_[0],
                                /* nact_func    */   0);
 }
-
-verilog_parser_t *generated_parser = verilog_new_parser();
 

@@ -7,12 +7,15 @@ const char ALGOL60_grammar_name[] = "ALGOL60";
 
 
 ALGOL60_parser_t *
-ALGOL60_new_parser()
+ALGOL60_new_parser(const char *input_path,
+                   char       *input_text,
+                   unsigned    max_symbols)
 {
-   return new ALGOL60_parser_t(/* init_func    */   0,
+   return new ALGOL60_parser_t(/* input path   */   input_path,
+                               /* input text   */   input_text,
+                               /* max symbols  */   max_symbols,
+                               /* init_func    */   0,
                                /* tact_func    */   0,
                                /* nact_func    */   0);
 }
-
-ALGOL60_parser_t *generated_parser = ALGOL60_new_parser();
 

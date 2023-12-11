@@ -27,12 +27,15 @@ static Typedef_parser_t::nact_func_t Typedef_nact_funcs_[1] = {
 };
 
 Typedef_parser_t *
-Typedef_new_parser()
+Typedef_new_parser(const char *input_path,
+                   char       *input_text,
+                   unsigned    max_symbols)
 {
-   return new Typedef_parser_t(/* init_func    */   &Typedef_init_funcs_[0],
+   return new Typedef_parser_t(/* input path   */   input_path,
+                               /* input text   */   input_text,
+                               /* max symbols  */   max_symbols,
+                               /* init_func    */   &Typedef_init_funcs_[0],
                                /* tact_func    */   &Typedef_tact_funcs_[0],
                                /* nact_func    */   &Typedef_nact_funcs_[0]);
 }
-
-Typedef_parser_t *generated_parser = Typedef_new_parser();
 

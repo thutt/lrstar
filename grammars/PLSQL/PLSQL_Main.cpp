@@ -7,12 +7,15 @@ const char PLSQL_grammar_name[] = "PLSQL";
 
 
 PLSQL_parser_t *
-PLSQL_new_parser()
+PLSQL_new_parser(const char *input_path,
+                 char       *input_text,
+                 unsigned    max_symbols)
 {
-   return new PLSQL_parser_t(/* init_func    */   0,
+   return new PLSQL_parser_t(/* input path   */   input_path,
+                             /* input text   */   input_text,
+                             /* max symbols  */   max_symbols,
+                             /* init_func    */   0,
                              /* tact_func    */   0,
                              /* nact_func    */   0);
 }
-
-PLSQL_parser_t *generated_parser = PLSQL_new_parser();
 

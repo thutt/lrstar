@@ -60,12 +60,15 @@ static Calc_parser_t::nact_func_t Calc_nact_funcs_[17] = {
 };
 
 Calc_parser_t *
-Calc_new_parser()
+Calc_new_parser(const char *input_path,
+                char       *input_text,
+                unsigned    max_symbols)
 {
-   return new Calc_parser_t(/* init_func    */   &Calc_init_funcs_[0],
+   return new Calc_parser_t(/* input path   */   input_path,
+                            /* input text   */   input_text,
+                            /* max symbols  */   max_symbols,
+                            /* init_func    */   &Calc_init_funcs_[0],
                             /* tact_func    */   &Calc_tact_funcs_[0],
                             /* nact_func    */   &Calc_nact_funcs_[0]);
 }
-
-Calc_parser_t *generated_parser = Calc_new_parser();
 

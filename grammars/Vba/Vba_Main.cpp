@@ -107,12 +107,15 @@ static Vba_parser_t::nact_func_t Vba_nact_funcs_[81] = {
 };
 
 Vba_parser_t *
-Vba_new_parser()
+Vba_new_parser(const char *input_path,
+               char       *input_text,
+               unsigned    max_symbols)
 {
-   return new Vba_parser_t(/* init_func    */   &Vba_init_funcs_[0],
+   return new Vba_parser_t(/* input path   */   input_path,
+                           /* input text   */   input_text,
+                           /* max symbols  */   max_symbols,
+                           /* init_func    */   &Vba_init_funcs_[0],
                            /* tact_func    */   &Vba_tact_funcs_[0],
                            /* nact_func    */   &Vba_nact_funcs_[0]);
 }
-
-Vba_parser_t *generated_parser = Vba_new_parser();
 

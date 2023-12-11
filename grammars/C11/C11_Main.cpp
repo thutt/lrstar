@@ -22,12 +22,15 @@ static C11_parser_t::tact_func_t C11_tact_funcs_[2] = {
 };
 
 C11_parser_t *
-C11_new_parser()
+C11_new_parser(const char *input_path,
+               char       *input_text,
+               unsigned    max_symbols)
 {
-   return new C11_parser_t(/* init_func    */   &C11_init_funcs_[0],
+   return new C11_parser_t(/* input path   */   input_path,
+                           /* input text   */   input_text,
+                           /* max symbols  */   max_symbols,
+                           /* init_func    */   &C11_init_funcs_[0],
                            /* tact_func    */   &C11_tact_funcs_[0],
                            /* nact_func    */   0);
 }
-
-C11_parser_t *generated_parser = C11_new_parser();
 

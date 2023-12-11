@@ -22,12 +22,15 @@ static Fortran_parser_t::tact_func_t Fortran_tact_funcs_[2] = {
 };
 
 Fortran_parser_t *
-Fortran_new_parser()
+Fortran_new_parser(const char *input_path,
+                   char       *input_text,
+                   unsigned    max_symbols)
 {
-   return new Fortran_parser_t(/* init_func    */   &Fortran_init_funcs_[0],
+   return new Fortran_parser_t(/* input path   */   input_path,
+                               /* input text   */   input_text,
+                               /* max symbols  */   max_symbols,
+                               /* init_func    */   &Fortran_init_funcs_[0],
                                /* tact_func    */   &Fortran_tact_funcs_[0],
                                /* nact_func    */   0);
 }
-
-Fortran_parser_t *generated_parser = Fortran_new_parser();
 

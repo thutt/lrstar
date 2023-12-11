@@ -22,12 +22,15 @@ static COBOL_parser_t::tact_func_t COBOL_tact_funcs_[2] = {
 };
 
 COBOL_parser_t *
-COBOL_new_parser()
+COBOL_new_parser(const char *input_path,
+                 char       *input_text,
+                 unsigned    max_symbols)
 {
-   return new COBOL_parser_t(/* init_func    */   &COBOL_init_funcs_[0],
+   return new COBOL_parser_t(/* input path   */   input_path,
+                             /* input text   */   input_text,
+                             /* max symbols  */   max_symbols,
+                             /* init_func    */   &COBOL_init_funcs_[0],
                              /* tact_func    */   &COBOL_tact_funcs_[0],
                              /* nact_func    */   0);
 }
-
-COBOL_parser_t *generated_parser = COBOL_new_parser();
 

@@ -22,12 +22,15 @@ static SQL_parser_t::tact_func_t SQL_tact_funcs_[2] = {
 };
 
 SQL_parser_t *
-SQL_new_parser()
+SQL_new_parser(const char *input_path,
+               char       *input_text,
+               unsigned    max_symbols)
 {
-   return new SQL_parser_t(/* init_func    */   &SQL_init_funcs_[0],
+   return new SQL_parser_t(/* input path   */   input_path,
+                           /* input text   */   input_text,
+                           /* max symbols  */   max_symbols,
+                           /* init_func    */   &SQL_init_funcs_[0],
                            /* tact_func    */   &SQL_tact_funcs_[0],
                            /* nact_func    */   0);
 }
-
-SQL_parser_t *generated_parser = SQL_new_parser();
 

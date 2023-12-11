@@ -22,12 +22,15 @@ static XPL_parser_t::tact_func_t XPL_tact_funcs_[2] = {
 };
 
 XPL_parser_t *
-XPL_new_parser()
+XPL_new_parser(const char *input_path,
+               char       *input_text,
+               unsigned    max_symbols)
 {
-   return new XPL_parser_t(/* init_func    */   &XPL_init_funcs_[0],
+   return new XPL_parser_t(/* input path   */   input_path,
+                           /* input text   */   input_text,
+                           /* max symbols  */   max_symbols,
+                           /* init_func    */   &XPL_init_funcs_[0],
                            /* tact_func    */   &XPL_tact_funcs_[0],
                            /* nact_func    */   0);
 }
-
-XPL_parser_t *generated_parser = XPL_new_parser();
 

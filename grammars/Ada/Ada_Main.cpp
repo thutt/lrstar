@@ -22,12 +22,15 @@ static Ada_parser_t::tact_func_t Ada_tact_funcs_[2] = {
 };
 
 Ada_parser_t *
-Ada_new_parser()
+Ada_new_parser(const char *input_path,
+               char       *input_text,
+               unsigned    max_symbols)
 {
-   return new Ada_parser_t(/* init_func    */   &Ada_init_funcs_[0],
+   return new Ada_parser_t(/* input path   */   input_path,
+                           /* input text   */   input_text,
+                           /* max symbols  */   max_symbols,
+                           /* init_func    */   &Ada_init_funcs_[0],
                            /* tact_func    */   &Ada_tact_funcs_[0],
                            /* nact_func    */   0);
 }
-
-Ada_parser_t *generated_parser = Ada_new_parser();
 

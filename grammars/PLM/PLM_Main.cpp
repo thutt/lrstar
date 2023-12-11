@@ -20,12 +20,15 @@ static PLM_parser_t::tact_func_t PLM_tact_funcs_[1] = {
 };
 
 PLM_parser_t *
-PLM_new_parser()
+PLM_new_parser(const char *input_path,
+               char       *input_text,
+               unsigned    max_symbols)
 {
-   return new PLM_parser_t(/* init_func    */   &PLM_init_funcs_[0],
+   return new PLM_parser_t(/* input path   */   input_path,
+                           /* input text   */   input_text,
+                           /* max symbols  */   max_symbols,
+                           /* init_func    */   &PLM_init_funcs_[0],
                            /* tact_func    */   &PLM_tact_funcs_[0],
                            /* nact_func    */   0);
 }
-
-PLM_parser_t *generated_parser = PLM_new_parser();
 

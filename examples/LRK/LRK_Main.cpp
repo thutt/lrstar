@@ -34,12 +34,15 @@ static LRK_parser_t::nact_func_t LRK_nact_funcs_[8] = {
 };
 
 LRK_parser_t *
-LRK_new_parser()
+LRK_new_parser(const char *input_path,
+               char       *input_text,
+               unsigned    max_symbols)
 {
-   return new LRK_parser_t(/* init_func    */   &LRK_init_funcs_[0],
+   return new LRK_parser_t(/* input path   */   input_path,
+                           /* input text   */   input_text,
+                           /* max symbols  */   max_symbols,
+                           /* init_func    */   &LRK_init_funcs_[0],
                            /* tact_func    */   &LRK_tact_funcs_[0],
                            /* nact_func    */   &LRK_nact_funcs_[0]);
 }
-
-LRK_parser_t *generated_parser = LRK_new_parser();
 

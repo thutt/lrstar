@@ -22,12 +22,15 @@ static PL1_parser_t::tact_func_t PL1_tact_funcs_[2] = {
 };
 
 PL1_parser_t *
-PL1_new_parser()
+PL1_new_parser(const char *input_path,
+               char       *input_text,
+               unsigned    max_symbols)
 {
-   return new PL1_parser_t(/* init_func    */   &PL1_init_funcs_[0],
+   return new PL1_parser_t(/* input path   */   input_path,
+                           /* input text   */   input_text,
+                           /* max symbols  */   max_symbols,
+                           /* init_func    */   &PL1_init_funcs_[0],
                            /* tact_func    */   &PL1_tact_funcs_[0],
                            /* nact_func    */   0);
 }
-
-PL1_parser_t *generated_parser = PL1_new_parser();
 
