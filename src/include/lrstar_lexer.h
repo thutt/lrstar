@@ -4,7 +4,7 @@
 #if !defined(__LRSTAR_LEXER_H__)
 #define __LRSTAR_LEXER_H__
 
-#include <assert.h>
+#include <stdio.h>
 #include "lrstar_basic_defs.h"
 
 class Token
@@ -14,6 +14,13 @@ public:
    char *end;                   // End of token (character following token).
    int   sti;                   // Symbol table index.
    int   line;                  // Line number.
+   Token(char *input_start) :
+      start(input_start),
+      end(input_start),
+      sti(~0),
+      line(~0)
+   {
+   }
 };
 
 template<bool C_debug, typename T_term_numb, typename T_Tm, typename T_Tr, typename T_Tc>
@@ -33,23 +40,19 @@ private:
 public:
     Token   token;               // Token being read.
     Token   lookahead;           // Lookahead being read.
-    int     tab;                 // Tab setting in input file.
     int     linenumb;            // Line number in input file.
     int     linenumb_printed;    // Line number already printed.
     int     lookahead_linenumb;  // Line number in input file.
 
-   void
-   init_lexer(char *input_start, int tab_setting)
-   {
-      linenumb          = 0;
-      linenumb_printed  = 0;
-      tab               = tab_setting; // Tab.
-      token.start       = input_start; // Point at beginning of first line.
-      token.end         = input_start; // Point at beginning of first line.
-      lookahead.start   = 0;           // Not activated.
-      lookahead.end     = 0;           // Not activated.
-   }
 
+   templ_lrstar_lexer(char *input_start) :
+      token(input_start),
+      lookahead(0),
+      linenumb(0),
+      linenumb_printed(0),
+      lookahead_linenumb(0)
+   {
+   }
 
    int
    get_token()

@@ -1389,6 +1389,7 @@ generate_parser_allocation(FILE *fp)
    static const char *b[]     = { "false", "true" };
    static const char prefix[] = "   return new ";
    static const char suffix[] = "_parser_t(";
+   int               space_width;
    char             *templ;
    int               templ_len;
    bool              init_fn;
@@ -1413,16 +1414,35 @@ generate_parser_allocation(FILE *fp)
    templ = new char[templ_len + 1];
    sprintf(templ, "%s%s%s", prefix, gfn, suffix);
 
+   space_width = strlen(gfn) + strlen("_new_parser") + 1;
    fprintf(fp,
-           "%s_parser_t *\n%s_new_parser()\n"
+           "%s_parser_t *\n%s_new_parser(const char *input_path,\n"
+           "%*schar       *input_text,\n"
+           "%*sunsigned    max_symbols"
+           ")\n"
            "{\n"
            "%s",
-           gfn, gfn, templ);
+           gfn, gfn, space_width, " ", space_width, " ", templ);
+
+   fprintf(fp, "/* input path   */   input_path");
+
+   fprintf(fp, ",\n%*s"
+           "/* input text   */   input_text",
+           static_cast<int>(templ_len), " ");
+
+   fprintf(fp, ",\n%*s"
+           "/* max symbols  */   max_symbols",
+           static_cast<int>(templ_len), " ");
 
    if (init_fn) {
-      fprintf(fp, "/* init_func    */   &%s_init_funcs_[0]", gfn);
+      fprintf(fp, ",\n%*s"
+              "/* init_func    */   &%s_init_funcs_[0]",
+              static_cast<int>(templ_len), " ",
+              gfn);
    } else {
-      fprintf(fp, "/* init_func    */   0");
+      fprintf(fp, ",\n%*s"
+              "/* init_func    */   0",
+              static_cast<int>(templ_len), " ");
    }
 
    if (tact_fn) {
@@ -1461,8 +1481,6 @@ instantiate_generated_parser(FILE *fp)
 
    fprintf(fp, "\n");
    generate_parser_allocation(fp);
-   fprintf(fp, "%s_parser_t *generated_parser = %s_new_parser();\n\n",
-           gfn, gfn);
 }
 
 
@@ -1701,7 +1719,7 @@ static void main_cpp_fn(FILE       *fp,
            "#include \"%s_Parser.h\"\n"
            "\n", grammar, grammar);
    if (lrstar_linux) {
-      instantiate_generated_parser(fp); /* move pointer to main! XXX */
+      instantiate_generated_parser(fp);
    } else {
       assert(lrstar_windows);
       fprintf (fp, "#include \"../../code/main.cpp\"\n");
@@ -1845,14 +1863,16 @@ static void instantiate_getopt(FILE *fp)
            "extern \"C\" {\n"
            "    typedef struct options_t {\n"
            "       char *output;           /* Pathname of lrstar output file. */\n"
+           "       unsigned iterations;    /* Number of times to parse file. */\n"
            "    } options_t;\n"
            "\n"
            "\n"
            "    options_t options;\n"
            "\n"
            "    static struct option long_options[] = {\n"
-           "        { \"help\",    no_argument,       NULL,  256 },\n"
-           "        { \"output\",  required_argument, NULL,  257 },\n"
+           "        { \"help\",        no_argument,       NULL,  256 },\n"
+           "        { \"output\",      required_argument, NULL,  257 },\n"
+           "        { \"iterations\",  required_argument, NULL,  258 },\n"
            "        { NULL,      no_argument,       NULL,    0 }\n"
            "    };\n"
            "\n"
@@ -1872,6 +1892,7 @@ static void instantiate_getopt(FILE *fp)
            "    init_options(options_t *opts)\n"
            "    {\n"
            "        opts->output = 0;\n"
+           "        opts->iterations = 1;\n"
            "    }\n"
            "\n"
            "\n"
@@ -1900,6 +1921,10 @@ static void instantiate_getopt(FILE *fp)
            "                opts->output = strdup(optarg);\n"
            "                break;\n"
            "\n"
+           "            case 258:\n"
+           "                opts->iterations = static_cast<unsigned>(abs(atoi(optarg)));\n"
+           "                break;\n"
+           "\n"
            "            default:\n"
            "                printf(\"?? getopt returned character code 0%%o ??\\n\", c);\n"
            "            }\n"
@@ -1918,7 +1943,11 @@ static void instantiate_main(FILE *fp, const char *grammar)
 {
    fprintf(fp,
            "\n\n"
-           "%s_parser_t *%s_new_parser();\n", grammar, grammar);
+           "%s_parser_t *%s_new_parser(const char *input_path,\n"
+           "                                 char       *input_text,\n"
+           "                                 unsigned    max_symbols"
+           ");\n",
+           grammar, grammar);
 
    fprintf(fp,
            "int\n"
@@ -1931,9 +1960,10 @@ static void instantiate_main(FILE *fp, const char *grammar)
            "    clock_t     sec;\n"
            "    clock_t     nlps;\n"
            "    clock_t     t;\n"
+           "    unsigned    iteration;\n"
            "    char *input_start;\n"
            "    FILE *output_fp;\n"
-           "    %s_parser_t *parser;\n", grammar); //  = ANTLR_new_parser();
+           "    %s_parser_t *parser;\n", grammar);
 
    fprintf(fp, "\n"
            "    get_options(argc, argv, &options);\n"
@@ -1948,8 +1978,6 @@ static void instantiate_main(FILE *fp, const char *grammar)
            "        fatal(5);\n"
            "    }\n"
            "\n"
-           "    input_start = read_input(argv[optind]);\n"
-           "\n"
            "    output_fp = fopen(options.output, \"w\");\n"
            "    if (output_fp == NULL) {\n"
            "        printf(\"Output file '%%s' cannot be opened for writing.\\n\",\n"
@@ -1958,43 +1986,46 @@ static void instantiate_main(FILE *fp, const char *grammar)
            "    }\n"
            "\n");
    fprintf(fp,
-           "    parser = %s_new_parser();\n", grammar);
+           "    iteration = 0;\n"
+           "    while (iteration < options.iterations) {\n"
+           "        ++iteration;\n");
    fprintf(fp,
-           "    printf(\"%%s parser.\\n\", parser->grammar);\n"
-           "    if (!parser->init_parser(argv[optind], input_start,\n"
-           "                             100000, 1000000)) {\n"
-           "        fprintf(stderr, \"Failed to initialize parser.\\n\");\n"
-           "        fatal(7);\n"
-           "    }\n"
+           "        input_start = read_input(argv[optind]);\n"
            "\n"
-           "    start = clock();\n"
-           "    nl    = parser->parse(output_fp);\n"
-           "    end   = clock();\n"
-           "    parser->term_parser();\n"
-           "    if (nl <= 0) {\n"
-           "        printf(\"\\nError in parse().\\n\");\n"
-           "        fatal(8);\n"
-           "    }\n"
+           "        parser = %s_new_parser(argv[optind], input_start, 100000);\n",
+           grammar);
+   fprintf(fp,
+           "        printf(\"%%s parser.\\n\", parser->grammar);\n"
            "\n"
-           "    t = end - start;\n"
-           "    if (t == 0) {\n"
-           "        t = 1;\n"
-           "    }\n"
+           "        start = clock();\n"
+           "        nl    = parser->parse(output_fp);\n"
+           "        end   = clock();\n"
+           "        parser->term_parser();\n"
+           "        if (nl <= 0) {\n"
+           "            printf(\"\\nError in parse().\\n\");\n"
+           "            fatal(8);\n"
+           "        }\n"
            "\n"
-           "    nlps = CLOCKS_PER_SEC * nl / t;\n"
-           "    thou = t * 1000 / CLOCKS_PER_SEC;\n"
-           "    sec  = thou / 1000;\n"
-           "    thou -= sec * 1000;\n"
+           "        t = end - start;\n"
+           "        if (t == 0) {\n"
+           "            t = 1;\n"
+           "        }\n"
            "\n"
-           "    printf(\"\\nSuccess ...\\n\");\n"
-           "    printf(\"%%10s symbols in symbol table.\\n\",  number(parser->n_symbols));\n"
-           "    printf(\"%%10s nodes in AST.\\n\",             number(parser->n_nodes));\n"
-           "    printf(\"%%10s lines read in input file.\\n\", number(nl));\n"
-           "    printf(\"%%10s lines per second.\\n\",         number(nlps));\n"
-           "    printf(\"%%6ld.%%03ld seconds.\\n\",            sec, thou);\n"
+           "        nlps = CLOCKS_PER_SEC * nl / t;\n"
+           "        thou = t * 1000 / CLOCKS_PER_SEC;\n"
+           "        sec  = thou / 1000;\n"
+           "        thou -= sec * 1000;\n"
            "\n"
-           "    delete [] input_start;\n"
-           "    delete parser;\n"
+           "        printf(\"\\nSuccess ...\\n\");\n"
+           "        printf(\"%%10s symbols in symbol table.\\n\",  number(parser->n_symbols));\n"
+           "        printf(\"%%10s nodes in AST.\\n\",             number(parser->n_nodes));\n"
+           "        printf(\"%%10s lines read in input file.\\n\", number(nl));\n"
+           "        printf(\"%%10s lines per second.\\n\",         number(nlps));\n"
+           "        printf(\"%%6ld.%%03ld seconds.\\n\",            sec, thou);\n"
+           "\n"
+           "        delete parser;\n"
+           "        delete [] input_start;\n"
+           "    }\n\n"
            "    fclose(output_fp);\n"
            "    return 0;\n"
            "}\n"

@@ -2,6 +2,7 @@
 
 #if !defined(_LRSTAR_PARSER_H_)
 #define _LRSTAR_PARSER_H_
+#include <assert.h>
 #include <limits.h>
 #include <stdarg.h>
 #include <stdio.h>
@@ -49,10 +50,15 @@ public:
    Node *alloc_link;            // Linked list of all nodes;
    Node(int id_) :
       id(id_),
-      sti(0), line(0),
+      sti(~0),
+      line(~0),
       ref(-1),                  // Invalid reference number.
       start(0),
-      prev(0), next(0), child(0), parent(0), alloc_link(0)
+      prev(0),
+      next(0),
+      child(0),
+      parent(0),
+      alloc_link(0)
    {
    }
 };
@@ -66,13 +72,29 @@ public:
    char *start;                 // Start of symbol in input file area.
    Node *node;                  // Pointer to node.
    Node *last;                  // Pointer to last in list.
+   PStack() :
+      state(~0),
+      sym(~0),
+      sti(~0),
+      line(~0),
+      start(0),
+      node(0),
+      last(0)
+   {
+   }
 };
 
 class RStack {       // Restore Stack.
 public:
-   PStack* ptr;      // Parse stack pointer.       4  4
-   int     state;    // State.                        4
-   int     sym;      // Symbol.                       4  12 bytes.
+   PStack *ptr;                 // Parse stack pointer.       4  4
+   int     state;               // State.                        4
+   int     sym;                 // Symbol.                       4  12 bytes.
+   RStack() :
+      ptr(0),
+      state(~0),
+      sym(~0)
+   {
+   }
 };
 
 class SStack {       // State stack.
@@ -93,23 +115,23 @@ class lrstar_user_data_t {
     */
 };
 
-template<const char *C_grammar,
-         bool        C_action,
-         bool        C_debug_parser,
-         bool        C_debug_trace,
-         bool        C_expecting,
-         bool        C_insensitive,
-         int         C_lookaheads,
-         bool        C_make_ast,
-         bool        C_nd_parsing,
-         int         C_nd_threads,
-         bool        C_node_actions,
-         bool        C_reversable,
-         bool        C_semantics,
-         int         C_stksize,
-         bool        C_term_actions,
-         typename    T_lexer_t,
-         typename    T_parser_tables_t>
+template<const char    *C_grammar,
+         bool           C_action,
+         bool           C_debug_parser,
+         bool           C_debug_trace,
+         bool           C_expecting,
+         bool           C_insensitive,
+         int            C_lookaheads,
+         bool           C_make_ast,
+         bool           C_nd_parsing,
+         int            C_nd_threads,
+         bool           C_node_actions,
+         bool           C_reversable,
+         bool           C_semantics,
+         unsigned long  C_stksize,
+         bool           C_term_actions,
+         typename       T_lexer_t,
+         typename       T_parser_tables_t>
 class lrstar_parser {
 public:
    typedef void (*init_func_t)(lrstar_parser *parser);
@@ -131,12 +153,11 @@ public:
    T_lexer_t         lt;        /* Lexer tables. */
    T_parser_tables_t pt;        /* Parser tables. */
 
-
 public:
    // Parser variables
    char     *path;              // Path of input file.
-   PStack   *PSstart;           // Parser stack start.
    PStack   *PS;                // Parse stack pointer.
+   PStack    PSstart[C_stksize]; // Parser stack start.
    unsigned  n_nodes;           // Number of nodes in AST.
    unsigned  n_symbols;         // Number of symbols.
    int       n_errors;
@@ -145,9 +166,9 @@ public:
 private:
    // Parser variables
    RStack *RS;
-   RStack *RSstart;
    bool   *T_exp;       // Terminal expected.
    bool   *S_exam;      // State examined.
+   RStack RSstart[C_stksize];
 
    // ND parsing ...
    int     LA;                     // Look Ahead token.
@@ -178,7 +199,6 @@ public:                          // AST Area ...
    Stack             *stack;     // AST stack array.
 
 private:
-   unsigned  max_nodes;         // Maximum number of AST nodes.
    int      *counter;           // Node counter array.
    char      draw_space[3];
 
@@ -400,7 +420,7 @@ private:                        // LR Parser
       // COPY PARSE STACK TO ND STATE STACK FOR EACH ACTION ...
       for (i = 0; i < na; i++) {
          SS[i] = SSstart[i];
-         for (PStack *P = PSstart; P < PS;) {
+         for (PStack *P = &PSstart[0]; P < PS;) {
             (++SS[i])->state = (++P)->state;
          }
          Parsed[i] = 1;
@@ -539,19 +559,51 @@ public:
       exit(100);
    }
 
-   lrstar_parser(init_func_t         *init_func_,
-                 tact_func_t         *tact_func_,
-                 nact_func_t         *nact_func_) :
+   lrstar_parser(const char  *input_path_,
+                 char        *input_text_,
+                 unsigned     max_symb_,
+                 init_func_t *init_func_,
+                 tact_func_t *tact_func_,
+                 nact_func_t *nact_func_) :
       user_data(0),
       grammar(C_grammar),
       init_func(init_func_),
       tact_func(tact_func_),
       nact_func(nact_func_),
       allocated_nodes(0),
-      n_errors(0)
+      lt(input_text_),
+      pt(),
+      path(strdup(input_path_)),
+      PS(0),
+      n_nodes(0),
+      n_symbols(0),
+      n_errors(0),
+      RS(0),
+      T_exp(0),
+      S_exam(0),
+      LA(0),
+      n_warnings(0),
+      last_line(0),
+      SS(0),
+      SSstart(0),
+      State(0),
+      Action(0),
+      Parsed(0),
+      LAcount(0),
+      symbol(0),
+      hashdiv(0),
+      hashvec(0),
+      max_cells(0),
+      max_symbols(max_symb_),
+      traversal(FIRST_PASS),
+      direction(TOP_DOWN),
+      stacki(0),
+      root(0),
+      node(0),
+      stack(0),
+      counter(0)
    {
-      PSstart = new PStack[C_stksize];
-      RSstart = new RStack[C_stksize];
+      unsigned i;
 
       if (C_nd_parsing) {
          SS      = new SStack *[C_nd_threads];
@@ -561,11 +613,87 @@ public:
          Parsed  = new int[C_nd_threads];
          LAcount = new int[C_lookaheads + 1];
       }
+
+      if (C_nd_parsing) {
+         for (i = 0; i < C_nd_threads; i++) {
+            SSstart[i] = new SStack[C_stksize];
+         }
+         for (i = 0; i < C_lookaheads + 1; i++) {
+            LAcount[i] = 0;
+         }
+         last_line = 0;
+         n_warnings = 0;
+      }
+
+      PS      = &PSstart[0];              // Set parse-stack pointer.
+      n_nodes = 0;                        // In case of no parser creation.
+
+      {                                   // Initialize symbol table.
+
+         assert(max_symb_ > 0);           // Prerequisite.
+
+         n_symbols   = 1;                 // 0 is reserved for null symbol.
+         max_symbols = max_symb_;
+         max_cells   = 2 * max_symbols;
+         symbol      = new Symbol[max_symbols];
+         hashvec     = new int[max_cells];
+         hashdiv     = UINT_MAX / max_cells + 1;
+
+         for (i = 0; i < max_cells; i++) {
+            hashvec[i] = -1;
+         }
+      }
+
+      if (C_make_ast) {
+         n_nodes      = 1;
+         node         = new_node(-1);
+         strcpy(draw_space, "  ");
+      }
+
+      if (C_action) {
+         (*init_func[0])(this);          // init_action()
+      }
+
+      {
+         /* Work around gcc defect.
+          *
+          * If the 'pt' variables are left in the 'new' expresions,
+          * gcc issues the following diagnostic:
+          *
+          *   error: conversion to 'long unsigned int' from 'sizetype' may change
+          *          the sign of the result [-Werror=sign-conversion]
+          */
+         int n_terms  = pt.n_terms;
+         int n_states = pt.n_states;
+
+         T_exp  = new bool[n_terms];
+         S_exam = new bool[n_states];
+      }
+
+      i = 0;
+      while (i < static_cast<unsigned>(pt.n_terms)) {
+         T_exp[i] = false;
+         ++i;
+      }
+
+      i = 0;
+      while (i < static_cast<unsigned>(pt.n_states)) {
+         S_exam[i] = false;
+         ++i;
+      }
    }
 
 
    ~lrstar_parser()
    {
+      Node *n = allocated_nodes;
+
+      while (n != 0) {
+         Node *next = n->alloc_link;
+         delete n;
+         n = next;
+      }
+
       free(path);
 
       delete [] symbol;
@@ -586,8 +714,6 @@ public:
             delete [] SSstart[i];
          }
 
-         delete [] PSstart;
-         delete [] RSstart;
          delete [] SS;
          delete [] SSstart;
          delete [] State;
@@ -784,7 +910,7 @@ public:
    int
    restore()
    {
-      while (RS > RSstart) {           // Restore PS, RS and states.
+      while (RS > &RSstart[0]) {       // Restore PS, RS and states.
          RS->ptr->state = RS->state;   // Reset state to saved state.
          RS->ptr->sym   = RS->sym;     // Reset symbol to saved symbol.
          RS--;
@@ -998,7 +1124,7 @@ public:
    {
       if (C_debug_parser) {
          printf("\nParse stack:\n");
-         for (PStack* ps = PSstart + 1; ps <= PS; ps++) {
+         for (PStack* ps = &PSstart[1]; ps <= PS; ps++) {
             const char *name;
             const char *name2;
             int         sym = ps->sym;
@@ -1019,28 +1145,6 @@ public:
             }
          }
       }
-   }
-
-
-   bool
-   init_symtab(unsigned max_symb)
-   {
-      unsigned i;
-
-      n_symbols = 1;                // 0 is reserved for null symbol.
-
-      if (max_symb > 0) {
-         max_symbols = max_symb;
-         max_cells   = 2 * max_symbols;
-         symbol      = new Symbol[max_symbols];
-         hashvec     = new int[max_cells];
-         hashdiv     = UINT_MAX / max_cells + 1;
-
-         for (i = 0; i < max_cells; i++) {
-            hashvec[i] = -1;
-         }
-      }
-      return max_symb > 0;
    }
 
 
@@ -1163,7 +1267,7 @@ public:
          lt.token.sti = -t;
       }
       if (C_expecting) {
-         RS = RSstart;
+         RS = &RSstart[0];
          RS->state = x;
          RS->ptr = PS;
       }
@@ -1429,72 +1533,6 @@ public:
       return n;
    }
 
-
-   void
-   init_ast(unsigned max)
-   {
-      n_nodes      = 1;
-      max_nodes    = max;       // max_nodes to allocate as needed.
-      node         = new_node(-1);
-
-      strcpy(draw_space, "  ");
-   }
-
-
-   bool
-   init_parser(char     *patharg,
-               char     *input_start,
-               unsigned  max_syms,
-               unsigned  max_nodes_)
-   {
-      if (C_nd_parsing) {
-         for (int i = 0; i < C_nd_threads; i++) {
-            SSstart[i] = new SStack[C_stksize];
-         }
-         for (int i = 0; i < C_lookaheads + 1; i++) {
-            LAcount[i] = 0;
-         }
-         last_line = 0;
-         n_warnings = 0;
-      }
-
-      path    = strdup(patharg);
-      PS      = PSstart;                  // Set parse-stack pointer.
-      n_nodes = 0;                        // In case of no parser creation.
-
-      lt.init_lexer(input_start, 3);      // Initialize the lexer.
-      if (!init_symtab(max_syms)) {       // Initialize the symbol table.
-         return false;
-      }
-
-      if (C_make_ast) {
-         init_ast(max_nodes_);            // Initialize the parser.
-      }
-
-      if (C_action) {
-         (*init_func[0])(this);          // init_action()
-      }
-
-      {
-         /* Work around gcc defect.
-          *
-          * If the 'pt' variables are left in the 'new' expresions,
-          * gcc issues the following diagnostic:
-          *
-          *   error: conversion to 'long unsigned int' from 'sizetype' may change
-          *          the sign of the result [-Werror=sign-conversion]
-          */
-         int n_terms  = pt.n_terms;
-         int n_states = pt.n_states;
-
-         T_exp  = new bool[n_terms];
-         S_exam = new bool[n_states];
-      }
-
-      memset(T_exp,  false, static_cast<size_t>(pt.n_terms));
-      memset(S_exam, false, static_cast<size_t>(pt.n_states));
-      return true;
-   }
 
    int
    add_symbol(int t, char* token_start, char* token_end)

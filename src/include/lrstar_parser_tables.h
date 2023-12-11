@@ -143,5 +143,7 @@ public:
     static const T_node_numb  *node_numb;
     static const T_nact_numb  *nact_numb;
     static const T_reverse    *reverse;
+
+    templ_lrstar_parser_tables() { }
 };
 #endif
