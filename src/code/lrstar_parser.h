@@ -1136,7 +1136,7 @@ public:
 
       if (C_nd_parsing) {
          int y;
-         uint i, j, na, y;
+         uint i, j, na;
 
          // For all ND terminals in this state.
          for (i = pt.nd_fterm[x]; i < pt.nd_fterm[x+1]; i++) {
