@@ -43,7 +43,7 @@ static uint      hash_no;
 static int*      already;
 static int*      added;
 static int       term_free;
-static int       r_states;
+//static int       r_states;
 static CLOSURE*  closure;
 static int       max_states;
 static int       n_clo;

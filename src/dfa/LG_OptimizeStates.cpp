@@ -6,19 +6,19 @@
 #include "LG_OptimizeStates.h"
 
 static int   nosl;
-static int   tnsr;
-static int   n_cres;
+//static int   tnsr;
+//static int   n_cres;
 static int   nt_left;
-static int   n_changed;
-static int   n_usedheads;
-static int   n_usedprods;
+//static int   n_changed;
+//static int   n_usedheads;
+//static int   n_usedprods;
 static int   n_jumps;
-static int   nrs;
-static int   depth;
+//static int   nrs;
+//static int   depth;
 static int*  active;
 
 static int*  jumpto;
-static int*  done;
+//static int*  done;
 static int*  T_hit;
 static int*  goesto;
 static int*  LA;

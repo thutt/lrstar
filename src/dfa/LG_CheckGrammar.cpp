@@ -171,7 +171,7 @@ void  LG_CheckGrammar::CHECK_LEXICALS ()
 
 void  LG_CheckGrammar::P_UNDEFINED ()
 {
-   int t, n = n_errors;
+   int t; //, n = n_errors;
 
    if (N_terms > max_char_set+1)
    {

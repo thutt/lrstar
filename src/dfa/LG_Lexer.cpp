@@ -56,7 +56,7 @@ int   LG_Lexer::get_token ()     // DFA LG_Lexer Engine.
       token.start = token.end;            // Set start of token.
       token.line  = line_numb;            // Set line number of token.
       token.column = col_numb + 1;        // Set column number.
-      while (next = Tm [Tr [state] + Tc [*token.end]])
+      while ((next = Tm [Tr [state] + Tc [*token.end]]))
       {
          if (*token.end == '\n')          // If end-of-line character.
          {
