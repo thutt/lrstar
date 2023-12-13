@@ -318,10 +318,10 @@ private:                        // LR Parser
       }
 
       // LOOK FOR A SHIFT ACTION FOR THIS TOKEN ...
-      for (int j = pt.nd_fterm[State[i]];
+      for (uint j = pt.nd_fterm[State[i]];
            j < pt.nd_fterm[State[i] + 1]; j++) {
          if (pt.nd_term[j] == LA) {
-            int k = pt.nd_faction[j];
+            uint k = pt.nd_faction[j];
 
             if (pt.nd_action[k] > 0) {                    // Shift action (always first one)?
                SS[i]++;
@@ -666,6 +666,10 @@ public:
          }
          name[i] = 0;
       }
+      else if (sti == 0) // Undefined?
+      {
+        name[0] = 0; // Make null.
+      }
       else {                    // Input file symbol.
          unsigned L;
 
@@ -932,7 +936,7 @@ public:
       }
 
       if (C_nd_parsing) {
-         int i, j;
+         uint i, j;
          for (i = pt.nd_fterm[x];
               i < pt.nd_fterm[x+1]; i++) {         // For all terminals in this state.
             for (j = pt.nd_faction[i];
@@ -1131,7 +1135,8 @@ public:
       }
 
       if (C_nd_parsing) {
-         int i, j, na, y;
+         int y;
+         uint i, j, na, y;
 
          // For all ND terminals in this state.
          for (i = pt.nd_fterm[x]; i < pt.nd_fterm[x+1]; i++) {
