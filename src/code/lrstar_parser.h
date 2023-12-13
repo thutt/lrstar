@@ -561,6 +561,18 @@ public:
             LAcount = new int[C_lookaheads + 1];
          }
       }
+   ~lrstar_parser() {
+       if (C_nd_parsing) {
+           delete[] LAcount;
+           delete[] Parsed;
+           delete[] Action;
+           delete[] State;
+           delete[] SSstart;
+           delete[] SS;
+       }
+       delete[] RSstart;
+       delete[] PSstart;
+   }
 
    bool opt_semantics(void)  { return C_semantics;  }
    bool opt_nd_parsing(void) { return C_nd_parsing; }
@@ -601,6 +613,8 @@ public:
          if (C_action) {
             (*init_func[1])(this);               // term_action()
          }
+         delete[] S_exam;
+         delete[] T_exp;
       }
 
 
