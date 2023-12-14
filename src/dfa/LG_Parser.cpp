@@ -25,7 +25,6 @@ char*    LG_Parser::T_start;
 char*    LG_Parser::T_end;
 int      LG_Parser::T_line;
 
-static char*   prt_line   (char* ls, int ln);
 
 ///////////////////////////////////////////////////////////////////////////////
 //                                                                           //
@@ -73,7 +72,7 @@ Read: RS = R_stack;                             // Reset reduction stack pointer
    t = get_token ();                         // Get next token.
 Cont: if (tact_numb[t] >= 0)                    // If input action ...
    {
-      int t1 = t;
+      //int t1 = t;
       // T_start = token.start;                 // Set token start.
       // T_end   = token.end;                   // Set token end.
       t = (*tact_func[tact_numb [t]]) (t);   // Call token action.
@@ -345,7 +344,7 @@ void  LG_Parser::collect (int x) // Collect terminals that cause a transition or
             if (term_symb[t][0] == '{') continue;
             prt_log ("\t%-32s", term_symb[t]);
             char first = 1;
-            char blank[21] = "                    ";
+            //char blank[21] = "                    ";
 /*             for (h = 0; h < n_heads; h++)
                {
                if (H_list[h] == t)

@@ -355,51 +355,47 @@ int   get_fid (char *arg, char *dir, char *fn, char *ft)
 
 ///////////////////////////////////////////////////////////////////////////////
 
-char* alloc_debug (int n_bytes, const char *fname, size_t lineno)
-{
-   char *x = (char *)malloc(n_bytes);
-   if (x == NULL)
-   {
-      n_errors++;
-      prt_log ("%s:%s: Allocation failure; %u bytes not available.\n\n",
-               fname, lineno, n_bytes);
-      Quit ();
-   }
-   memory_usage += n_bytes;
-   if (memory_usage > memory_max) memory_max = memory_usage;
-   return (x);
-}
+#ifdef _DEBUG
 
-char*  alloc (int n_bytes)
-{
-   char *x = (char*)malloc (n_bytes);
-   if (x == NULL)
-   {
-      n_errors++;
-      prt_log ("Allocation error, %u bytes not available.\n\n", n_bytes);
-      Quit ();
-   }
-   memory_usage += n_bytes;
-   if (memory_usage > memory_max) memory_max = memory_usage;
-   return (x);
+char* alloc(char *s, char** x, int size, int n) {
+    *x = (char*) malloc(n * size);
+    if (*x == NULL) {
+        n_errors++;
+        prt_log("Allocation error for '%s', %u bytes not available.\n\n", s, size * n);
+        Quit();
+    }
+    memory_usage += n*size;
+    if (memory_usage > memory_max) memory_max = memory_usage;
+    return (*x);
 }
+#else
 
+char* alloc(char** x, int size, int n) {
+    *x = (char*) malloc(n * size);
+    if (*x == NULL) {
+        n_errors++;
+        prt_log("Allocation error, %u bytes not available.\n\n", size * n);
+        Quit();
+    }
+    memory_usage += n*size;
+    if (memory_usage > memory_max) memory_max = memory_usage;
+    return (*x);
+}
+#endif
 
 ///////////////////////////////////////////////////////////////////////////////
 
-char *ralloc (char *x, int no_bytes, int nn_bytes)
-{
-   x = (char*)realloc(x, nn_bytes);
-   memory_usage -= (no_bytes - nn_bytes);
-   return x;
+void ralloc(char** x, int size, int n1, int n2) {
+    *x = (char*) realloc(*x, size * n2);
+    memory_usage -= (n1 - n2) * size;
 }
 
 ///////////////////////////////////////////////////////////////////////////////
 
-void  frea  (char *x, int n_bytes)
-{
-   free(x);
-   memory_usage -= n_bytes;
+void frea(char** x, int size, int n) {
+    free(*x);
+    memory_usage -= n*size;
+    *x = NULL;
 }
 
 ///////////////////////////////////////////////////////////////////////////////

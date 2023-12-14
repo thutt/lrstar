@@ -132,40 +132,14 @@ enum options
 #define ZERO_OR_ONE     5    // ? 1.0.4.0
 
 // Function-call defines ...
-#define ALLOC(_x, _n_elem)                                        \
-   do {                                                           \
-      char         **p_       = reinterpret_cast<char **>(&_x);   \
-      const size_t   n_el_    = _n_elem;                          \
-      const size_t   el_size_ = sizeof(*_x);                      \
-      const size_t   n_bytes_ = n_el_ * el_size_;                 \
-      if (_debug) {                                               \
-         *p_ = alloc_debug(n_bytes_, __FILE__, __LINE__);         \
-      } else {                                                    \
-         *p_ = alloc(n_bytes_);                                   \
-      }                                                           \
-   } while (0)
+#ifdef _DEBUG
+#define ALLOC(x,norg)    alloc (#x, (char**)&x, sizeof(*x), norg)
+#else
+#define ALLOC(x,norg)    alloc ((char**)&x, sizeof(*x), norg)
+#endif
 
-#define REALLOC(_x, _no_elem, _nn_elem)                           \
-   do {                                                           \
-      char         **p_        = reinterpret_cast<char **>(&_x);  \
-      const size_t   no_el_    = _no_elem;                        \
-      const size_t   nn_el_    = _nn_elem;                        \
-      const size_t   el_size_  = sizeof(*_x);                     \
-      const size_t   no_bytes_ = no_el_ * el_size_;               \
-      const size_t   nn_bytes_ = nn_el_ * el_size_;               \
-      *p_ = ralloc(reinterpret_cast<char *>(_x),                  \
-                   no_bytes_, nn_bytes_);                         \
-   } while (0)
-
-#define FREE(_x, _n_elem)                                         \
-   do {                                                           \
-      char         **p_        = reinterpret_cast<char **>(&_x);  \
-      const size_t   n_el_    = _n_elem;                          \
-      const size_t   el_size_  = sizeof(*_x);                     \
-      const size_t   n_bytes_ = (n_el_) * (el_size_);             \
-      frea(*p_, n_bytes_);                                        \
-      _x = 0;                                                     \
-   } while (0)
+#define REALLOC(x,norg,nnew)  ralloc((char**)&x, sizeof(*x), norg, nnew)
+#define FREE(x,n)      frea  ((char**)&x, sizeof(*x), n)
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////
 //                                                                                                 //
@@ -388,8 +362,6 @@ extern void   fastor  (int*, int*, int);
 #define FASTMRG(a,b,n)           fastmrg ((int*)a, (int*)b, n)
 #define FASTOR(a,b,n)            fastor  ((int*)a, (int*)b, n)
 
-extern void   frea (char* x, int n_bytes);
-
 extern bool   itsakeyword (const char* terminal);
 extern void   inputt ();
 
@@ -407,15 +379,19 @@ extern void   prt_sta     (const char* format, ...);
 
 extern void   Quit ();
 
-char *ralloc (char *x, int no_bytes, int nn_bytes);
-
 extern void   SORT2 (int* first, int* second, int n);
 extern void   SORTNAMES(const char** start, int n, int* seq);
 
 extern int    set_optn (OPTION* option, char* opt);
 
-extern char*  alloc_debug (int n_bytes, const char *fname, size_t lineno);
-extern char*  alloc (int n_bytes);
+#ifdef _DEBUG
+extern char* alloc(char *s, char** x, int size, int n);
+#else
+extern char* alloc(char** x, int size, int n);
+#endif
+
+extern void ralloc(char** x, int size, int n1, int n2);
+extern void frea(char** x, int size, int n);
 
 extern int    ATTACH   (int x, int y);
 extern void   T_GRAPH  (char **graph, int nr, int nc);

@@ -10,7 +10,7 @@ enum {
    ts_Tr,
    ts_Tc,
    ts_N_ELEMENTS
-} type_sizes;
+}; // type_sizes;
 
 struct data_types_t {           /* Tm, Tr, Tc, term_numb */
    const char *type;            /* C type, string form. */

@@ -168,7 +168,7 @@ int   PG_NodeActions::prod_ (void* v)
 
 int   PG_NodeActions::tail_list_(void* v)
 {
-   Node* np = (Node*)v;
+   //Node* np = (Node*)v;
    return 0;
 }
 
@@ -503,7 +503,7 @@ int   PG_NodeActions::tail_eof_ (void* v)
 
 int   PG_NodeActions::sep_(void* v)
 {
-   Node* np = (Node*)v;
+   //Node* np = (Node*)v;
    return 0;
 }
 
@@ -1354,7 +1354,7 @@ int   PG_NodeActions::targs_ (void* v)
 
 int   PG_NodeActions::semargs_ (void* v)
 {
-   Node* np = (Node*)v;
+   //Node* np = (Node*)v;
    if (pass == THIRD_PASS)
    {
       switch (direction)

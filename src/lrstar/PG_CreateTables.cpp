@@ -197,7 +197,7 @@ void  PGCreateTables::MIN_N (int *ni, int *nj)
    T1 = total1;
    T2 = total2;
 
-   int n = 0;
+   //int n = 0;
    for (i = 1; i <= 2; i++)
    {
       for (j = 1; j <= 2; j++)
@@ -1082,10 +1082,12 @@ int   PGCreateTables::DISP_EQ2 (int **matrix, int *newmat, int *row, int nr, int
          indx [r] = r;
          p = matrix [r];
          density [r] = 0;
-         if (opt1 == 1) // Must do this order for R_matrix. (why?)
+         if (opt1 == 1) {// Must do this order for R_matrix. (why?)
             for (c = 0; c < nc; c++) if (*p++ != 1) density [r]--; // Do most dense rows first.
-               else if (opt1 == 2)
-                  for (c = 0; c < nc; c++) if (*p++ != 1) density [r]++; // Do most dense rows last.
+         }
+         else if (opt1 == 2) {
+            for (c = 0; c < nc; c++) if (*p++ != 1) density [r]++; // Do most dense rows last.
+         }
       }
       SORT2 (density, indx, nr);
       FREE (density, nr);

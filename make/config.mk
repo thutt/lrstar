@@ -55,7 +55,7 @@ export DEBUG
 
 
 OPT	:=							\
-	$(if $(filter release,$(LRSTAR_BUILD_TYPE)),-Os,-Og)	\
+	$(if $(filter release,$(LRSTAR_BUILD_TYPE)),-Wall -Os,-Wall -Og)	\
 	-fdata-sections						\
 	-ffunction-sections					\
 	-fno-rtti						\

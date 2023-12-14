@@ -29,10 +29,10 @@ int    PG_ComputeLA::sr_con;
 int    PG_ComputeLA::nd_maxcount;
 
 static char*  ntt_done;
-static int    top;
-static int*   ntt_stack;
+//static int    top;
+//static int*   ntt_stack;
 static int    nw;
-static int    sum;
+//static int    sum;
 static char** LA;
 static int*   ntt_include;
 static int*   action;
@@ -947,7 +947,7 @@ int   PG_ComputeLA::prt_sym (int s, const char *sp)
 
 void  PG_ComputeLA::BF_TRACE_BACK (int state, int sr, int rr)
 {
-   int lb, ntti, orig, next, last, i, t, f, p, h, n, dot;
+   int lb, ntti, orig, next, last, i, t, f, p, /*h,*/ n, dot;
    if (!optn[PG_CONTRACEBACK]) return;
 
 #ifdef _DEBUG
@@ -978,7 +978,7 @@ void  PG_ComputeLA::BF_TRACE_BACK (int state, int sr, int rr)
          for (f = f_final[state]; f < f_final[state+1]; f++)      // For each reduction.
          {
             p = item [final[f]].prod;
-            h = head_sym[p];
+            //h = head_sym[p];
             if (p == -conflict[t] || p == -action[t])
             {
                prt_con ("%d   reduce ", ++n);
@@ -1105,7 +1105,7 @@ int   PG_ComputeLA::bf_look_back (int d, int t, int p, int dot, int state, int& 
 
 void  PG_ComputeLA::DF_TRACE_BACK (int state, int sr, int rr)
 {
-   int lb, ntti, orig, next, last, i, t, f, p, h, n, dot;
+   int lb, ntti, orig, next, last, i, t, f, p, /*h,*/ n, dot;
    if (!optn[PG_CONTRACEBACK]) return;
 
    prt_con ("CONFLICT ANALYSIS for state %d:\n\n", state);
@@ -1134,7 +1134,7 @@ void  PG_ComputeLA::DF_TRACE_BACK (int state, int sr, int rr)
          for (f = f_final[state]; f < f_final[state+1]; f++)      // For each reduction.
          {
             p = item [final[f]].prod;
-            h = head_sym[p];
+            //h = head_sym[p];
             if (p == -conflict[t] || p == -action[t])
             {
                prt_con ("%2d. reduce ", ++n);
@@ -1276,7 +1276,7 @@ int   PG_ComputeLA::df_look_back (int t, int p, int dot, int state, int& next, i
 
 void  PG_ComputeLA::CYCLE_CHECK (int state)
 {
-   int lb, ntti, orig, next, last, i, t, f, p, h, n, dot;
+   int lb, ntti, orig, next, last, i, t, f, p, /*h, n,*/ dot;
    // prt_con ("\nCYCLE CHECK for state %d:\n\n", state);
    // prt_state (state);
    // prt_con ("\n");
@@ -1286,13 +1286,13 @@ void  PG_ComputeLA::CYCLE_CHECK (int state)
    {
       if (conflict[t] && action[t] >= 0) // conflict and shift action?
       {
-         n = 0;
+         //n = 0;
          memset (ntt_done, 0, n_nttran);
          if (action[t] == 0) action[t] = tt_action [actionindx[t]];
          for (f = f_final[state]; f < f_final[state+1]; f++)      // For each reduction.
          {
             p = item [final[f]].prod;
-            h = head_sym[p];
+            //h = head_sym[p];
             if (p == -conflict[t] || p == -action[t])
             {
                // prt_con ("%d   reduce ", ++n);

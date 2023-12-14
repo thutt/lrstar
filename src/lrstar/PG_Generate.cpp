@@ -1076,9 +1076,9 @@ PG_Main::GenerateParserTableEnums(FILE *fp)
 
 void  PG_Main::GenerateParserTables ()
 {
-   int   i;
+   //int   i;
    int   count;
-   FILE* header;
+   //FILE* header;
    const char* name  = "_ParserTables";
 
    if (optn[PG_TERMACTIONS ] == 0) N_tacts = 0;
@@ -1385,8 +1385,8 @@ generate_grammar_parser_typedef(FILE *fp, const char *grammar)
 static void
 generate_parser_allocation(FILE *fp)
 {
-   static const int  stksize  = 100; // Parser-stack size.
-   static const char *b[]     = { "false", "true" };
+   //static const int  stksize  = 100; // Parser-stack size.
+   //static const char *b[]     = { "false", "true" };
    static const char prefix[] = "   return new ";
    static const char suffix[] = "_parser_t(";
    int               space_width;
