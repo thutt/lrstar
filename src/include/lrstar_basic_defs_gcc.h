@@ -59,6 +59,9 @@ typedef signed int         int32;
 #if __SIZEOF_LONG__ == 8
 typedef unsigned long int  uint64;
 typedef signed long int    int64;
+#elif __SIZEOF_LONG_LONG__ == 8
+typedef unsigned long long int  uint64;
+typedef signed long long int    int64;
 #else
 #error A long integer is not 64-bits with this Gcc.
 #endif

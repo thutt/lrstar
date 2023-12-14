@@ -229,7 +229,7 @@ public:
    static short    length;          // Current length of symbol name.
    static int      cell;            // Current hash cell number.
    static int      sti;             // Current symbol-table index.
-   static uint     hashdiv;         // Hash divisor.
+   static uint32     hashdiv;         // Hash divisor.
    static int*     hashvec;         // Hash vector.
    static int      max_cells;       // Maximum number of cells in the hash vector = 2*max_symbols.
    static int      max_symbols;     // Maximum number of symbols.
