@@ -2027,6 +2027,7 @@ static void instantiate_main(FILE *fp, const char *grammar)
            "        delete [] input_start;\n"
            "    }\n\n"
            "    fclose(output_fp);\n"
+           "    if(options.output) free(options.output);\n"
            "    return 0;\n"
            "}\n"
            "\n");
