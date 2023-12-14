@@ -1935,6 +1935,13 @@ static void instantiate_getopt(FILE *fp)
            "                                 */\n"
            "    }\n"
            "}\n"
+           "\n"
+           "    static void\n"
+           "    fatal_free_opt(int rc)\n"
+           "    {\n"
+           "        if(options.output) free(options.output);\n"
+           "        fatal(rc);\n"
+           "    }\n"
            "\n");
 }
 
@@ -1970,19 +1977,19 @@ static void instantiate_main(FILE *fp, const char *grammar)
            "\n"
            "    if (options.output == 0) {\n"
            "       printf(\"--output option must be specified.\\n\");\n"
-           "       fatal(4);\n"
+           "       fatal_free_opt(4);\n"
            "    }\n"
            "\n"
            "    if (optind >= argc) {\n"
            "        printf(\"No input file supplied.\\n\");\n"
-           "        fatal(5);\n"
+           "        fatal_free_opt(5);\n"
            "    }\n"
            "\n"
            "    output_fp = fopen(options.output, \"w\");\n"
            "    if (output_fp == NULL) {\n"
            "        printf(\"Output file '%%s' cannot be opened for writing.\\n\",\n"
            "               options.output);\n"
-           "        fatal(6);\n"
+           "        fatal_free_opt(6);\n"
            "    }\n"
            "\n");
    fprintf(fp,
@@ -2003,7 +2010,10 @@ static void instantiate_main(FILE *fp, const char *grammar)
            "        parser->term_parser();\n"
            "        if (nl <= 0) {\n"
            "            printf(\"\\nError in parse().\\n\");\n"
-           "            fatal(8);\n"
+           "            delete parser;\n"
+           "            delete [] input_start;\n"
+           "            fclose(output_fp);\n"
+           "            fatal_free_opt(8);\n"
            "        }\n"
            "\n"
            "        t = end - start;\n"
@@ -2084,7 +2094,7 @@ void  PG_Main::GenerateOtherFiles ()
 
 void  PG_Main::nd_optimize()
 {
-   int i, j, k, n, sum, lastterm;
+   int i, j = 0, k, n, sum, lastterm;
    // COUNT NUMBER OF TERMINALS FOR NEW LIST ...
    n = 0;
    for (i = 0; i < N_states; i++)
