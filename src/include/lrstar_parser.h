@@ -34,6 +34,16 @@ public:
    int       type;              // Type of symbol: int, char, float, short, ...
    int       term;              // Terminal number for lookup function.
    int       scope;             // Scope: global, local, inner loop, ...
+
+   Symbol() :
+      start(0),
+      length(0),
+      cell(~0U),
+      type(~0),
+      term(~0),
+      scope(~0)
+   {
+   }
 };
 
 class Node {         // AST Node.
@@ -60,6 +70,24 @@ public:
       parent(0),
       alloc_link(0)
    {
+   }
+
+   void
+   set_no_symbol()
+   {
+      // Establish the Node to adhere to the invariant needed to state
+      // no Symbol is associated with the Node instance.
+      sti   = 0;
+      line  = 0;
+      start = 0;
+   }
+
+
+   bool
+   has_symbol()
+   {
+      // Is a symbol associated with node?
+      return (start != 0) && (sti != 0) && (line != 0);
    }
 };
 
@@ -222,9 +250,7 @@ private:                        // LR Parser
                n->line  = PS[psi].line;                  // Move line from parse stack to node.
                n->start = PS[psi].start;                 // Move start from parse stack to node.
             } else { // No argument on production.
-               n->sti   = 0;                             // Set symbol-table index to zero.
-               n->line  = 0;                             // Set line number to zero.
-               n->start = 0;
+               n->set_no_symbol();
             }
             psi = linkup(p);                             // Linkup the nodes in this rule.
             if (psi >= 0) {                              // Any nodes found in this rule?
@@ -827,6 +853,7 @@ public:
       else {                    // Input file symbol.
          unsigned L;
 
+         assert(symbol[sti].length != ~0U); // Uninitialized structure?
          p = symbol[sti].start;
          L = symbol[sti].length;
 
@@ -1484,6 +1511,7 @@ public:
    tracer(Node *n)
    {
       if (C_debug_trace) {
+         const char *name;
          if (C_node_actions) {
             const char *dir;
             switch (direction) {
@@ -1494,8 +1522,12 @@ public:
                dir = "<*";
                break;
             }
+            name = "";
+            if (n->has_symbol()) {
+               name = symbol_name(n->sti);
+            }
             printf("   %d %s %s (%s)\n", traversal, dir,
-                   pt.node_name[n->id], symbol_name(n->sti));
+                   pt.node_name[n->id], name);
          }
       }
    }
