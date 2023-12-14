@@ -699,8 +699,8 @@ void  PG_Parser::init_symtab (int max_symb)
 
 void  PG_Parser::term_symtab ()
 {
-   if (symbol != NULL) delete [] symbol;
-   if (symbol != NULL) delete [] hashvec;
+   if (symbol != NULL) FREE(symbol, max_symbols);
+   if (symbol != NULL) FREE(hashvec, max_cells);
 }
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////
