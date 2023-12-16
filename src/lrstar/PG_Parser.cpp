@@ -217,7 +217,7 @@ Read: t = get_token ();                                  // Get incoming token.
    token.sti = -t;                                    // Point at terminal symbol.
    if (tact_numb[t] >= 0)                             // If token action ...
    {
-      token.sti = (*tact_func [tact_numb[t]])(t);     // Call token-action function.
+      token.sti = (*tact_func [static_cast<unsigned char>(tact_numb[t])])(t);     // Call token-action function.
       if (t < 0) goto Read;                           // To bypass {...} yacc code.
    }
    RS = R_stack;                                      // Set restore-stack pointer.
@@ -333,7 +333,7 @@ int   PG_Parser::reduce (int p)
    if (pact_numb[p] >= 0)                       // PARSE ACTION ?
    {
       int rc;                                   // Return code.
-      rc = (*pact_func [pact_numb[p]])(p);      // Call parse action with production number.
+      rc = (*pact_func [static_cast<unsigned char>(pact_numb[p])])(p);      // Call parse action with production number.
       if (rc < 0)                               // Bypass make node operation?
          goto Linkup;
    }
@@ -1080,10 +1080,10 @@ short PG_Parser::emitstr (Node* np, char* str)
       }
       if (*s == '&') // &-code ?
       {
-         if (numeric[*++p]) // number ?
+         if (numeric[static_cast<unsigned char>(*++p)]) // number ?
          {
             x = *p - '0';
-            while (numeric[*++p]) x = 10*x + *p - '0';
+            while (numeric[static_cast<unsigned char>(*++p)]) x = 10*x + *p - '0';
             i = stacki - x;
             if (i < 0) *s++ = '?'; // Error.
             else

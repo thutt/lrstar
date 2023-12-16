@@ -61,7 +61,7 @@ static char *mystrlwr (char* s)
 {
    for (char* p = s; *p != 0; p++)
    {
-      *p = lower[*p];
+      *p = lower[static_cast<unsigned char>(*p)];
    }
    return s;
 }
@@ -192,6 +192,14 @@ int   main (int na, char *arg[])
    {
       char input[100];
       int nb = read (fd, input, 100);
+      if (nb == -1) {
+         /* Failed to read.
+          *
+          * The use of this file will be removed, so no actual fix is
+          * being made to fix error conditions at this point.
+          * See https://github.com/thutt/lrstar/issues/7
+          */
+      }
       close (fd);
       unlink ("lrstar.txt");
       if (*input != '0') exit(1);

@@ -31,7 +31,7 @@ void  PG_PrintGrammar::PrintGrammar ()
 
    // TERMINALS.
 
-   int *seq, i, n;
+   int *seq, n;
    ALLOC (seq, N_terms);
    SORTNAMES (const_name, N_terms, seq);
 
@@ -40,7 +40,6 @@ void  PG_PrintGrammar::PrintGrammar ()
    for (t = 0; t < N_terms; t++)
    {
       const char* con;
-      i = seq[t]; // In alphabetical order.
       if (term_const[t] >= 0)
       {
          n++;
@@ -53,7 +52,6 @@ void  PG_PrintGrammar::PrintGrammar ()
    SORTNAMES (term_name, N_terms, seq);
    for (t = 0; t < N_terms; t++)
    {
-      i = seq[t]; // In alphabetical order.
       // fprintf (grmfp, " %4d  %-24s  ", i, term_name[i]);
       fprintf (grmfp, " %4d  %s\n",    t, term_name[t]);
    }

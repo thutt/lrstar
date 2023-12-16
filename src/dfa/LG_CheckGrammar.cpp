@@ -171,7 +171,7 @@ void  LG_CheckGrammar::CHECK_LEXICALS ()
 
 void  LG_CheckGrammar::P_UNDEFINED ()
 {
-   int t, n = n_errors;
+   int t;
 
    if (N_terms > max_char_set+1)
    {
@@ -207,7 +207,7 @@ void  LG_CheckGrammar::P_UNDEFINED ()
       {
          if (!(term_type[t] & LEXFILE))
          {
-            char code = charcode[*term_name[t]];
+            char code = charcode[static_cast<unsigned char>(*term_name[t])];
             if ( code == DIGIT || code == QUOTE)
             {
                prt_error ("'%s' is not a predefined symbol", term_name[t], 0, term_line[t]);

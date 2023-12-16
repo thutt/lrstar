@@ -88,34 +88,6 @@ static const char *get_typestr(int *x, int n)
 }
 
 
-static const char *
-template_decl(void)
-{
-#define PFCP(pf_) PF(pf_)
-#define PF(pf_) "typename T_" #pf_ ", "
-#define PFL(pfl_) "typename T_" #pfl_
-   static const char *decl = "template<" PARSER_FIELDS ">";
-#undef PF
-#undef PFCP
-#undef PFL
-   return decl;
-}
-
-
-static const char *
-parser_tables_decl(void)
-{
-#define PFCP(pf_) PF(pf_)
-#define PF(pf_) "T_" #pf_ ", "
-#define PFL(pfl_) "T_" #pfl_
-   static const char *inst = "templ_lrstar_parser_tables<" PARSER_FIELDS ">";
-#undef PF
-#undef PFL
-#undef PFCP
-   return inst;
-}
-
-
 static void
 parser_tables_inst(char *buf, size_t buf_len)
 {
@@ -1076,9 +1048,7 @@ PG_Main::GenerateParserTableEnums(FILE *fp)
 
 void  PG_Main::GenerateParserTables ()
 {
-   int   i;
    int   count;
-   FILE* header;
    const char* name  = "_ParserTables";
 
    if (optn[PG_TERMACTIONS ] == 0) N_tacts = 0;
@@ -1385,8 +1355,6 @@ generate_grammar_parser_typedef(FILE *fp, const char *grammar)
 static void
 generate_parser_allocation(FILE *fp)
 {
-   static const int  stksize  = 100; // Parser-stack size.
-   static const char *b[]     = { "false", "true" };
    static const char prefix[] = "   return new ";
    static const char suffix[] = "_parser_t(";
    int               space_width;
@@ -2083,7 +2051,8 @@ void  PG_Main::GenerateOtherFiles ()
 
 void  PG_Main::nd_optimize()
 {
-   int i, j, k, n, sum, lastterm;
+   int i, k, n, sum, lastterm;
+   int j = 0;
    // COUNT NUMBER OF TERMINALS FOR NEW LIST ...
    n = 0;
    for (i = 0; i < N_states; i++)

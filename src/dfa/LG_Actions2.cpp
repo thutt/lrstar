@@ -40,8 +40,6 @@ static int*   L_tail;
 static char*  ebnfspace;
 static char*  ebnfspace_start;
 
-static int    c;
-static int    warning_off = 0;
 static uchar  char_set [256];
 static int    range_start;
 static int    range_end;
@@ -315,8 +313,6 @@ int   LG_ParseActions::ADD_CODE (int prod)
    int   s;
    int   level = 0;
    char* p = token.start;
-   int   codeblock = 1;
-   int   codeblockline = line_numb;
 
 Scan: while (*p != '{' && *p != '}' && *p != '\n' && *p != 26 && *p != '/' && *p != '\'' && *p != '"') p++;
    switch (*p)
@@ -332,7 +328,6 @@ Scan: while (*p != '{' && *p != '}' && *p != '\n' && *p != 26 && *p != '/' && *p
       p++;
       if (--level) goto Scan;
       token.end = p;
-      codeblock = 0;
       goto Ret;
    }
    case '\n':
@@ -465,7 +460,7 @@ Ret:  T_end = token.end;
 int   LG_ParseActions::START_GRM ()
 {
    int rc = 0;
-   short p = 0, a = 0;
+   short p = 0;
    T_start = dollar_start;
    T_end   = T_start + 6;
    ADD_GOAL(p);                        // Nonterminal 0
@@ -540,7 +535,12 @@ int   LG_ParseActions::ADD_TOKEN2 (int p)
       {
          for (char* p = T_start+1; p < T_end-1; p++)
          {
-            *p = lower[*p]; // Set each character to lower case and later add upper case.
+            *p = lower[static_cast<unsigned char>(*p)]; // Set each
+                                                        // character
+                                                        // to lower
+                                                        // case and
+                                                        // later add
+                                                        // upper case.
          }
       }
       ADD_PROD(p);
@@ -940,7 +940,7 @@ int   LG_ParseActions::SUB_SET(int p)
    }
    ADD_PRODSUB ();
    Tail [n_tails++] = curr_symb;
-   return (0);
+   return rc;
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -1562,8 +1562,10 @@ void  LG_ParseActions::EXPAND_SETS () /* Expand set productions. */
 
 void  LG_ParseActions::MAKE_SET (int s)
 {
-   char* hit;
-   int   i, p, sym, lastsym, lastcode;
+   char *hit;
+   int   i, p, sym;
+   int   lastcode = 0;
+   int   lastsym  = 0;
 
    // Collect characters for this set ...
    // printf ("Making: %s\n", sym_start[s]);
@@ -1682,9 +1684,9 @@ void  LG_ParseActions::CHECK_SET (int s)
 
 int   LG_ParseActions::GEN_EBNF () /* Generate EBNF symbols. */
 {
-   int *sp, *spend, h, t, s, z;
+   int *sp, *spend, h, t, s;
 
-   t = 0; z = 0;
+   t = 0;
    for (s = 0; s < n_symbs; s++)
    {
       if (sym_type [s] & GENERATED)

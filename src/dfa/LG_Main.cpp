@@ -57,14 +57,13 @@ int   LG::Main () /* Display program information. */
 
 int   LG::Start () // Display program information.
 {
-   int i, ne;
+   int i;
 
    time1 = clock();
    if (!CheckOptions()) return 0;
 
    memory_usage       =  0;
    memory_max         =  0;
-   ne                 =  0;
    n_errors           =  0;
    max_child_usage    =  0;
    exefid[0]          =  0;
@@ -74,7 +73,6 @@ int   LG::Start () // Display program information.
 
    memory_usage  = 0;
    memory_max    = 0;
-   ne            = 0;
    n_warnings    = 0;
    n_errors      = 0;
    return 1;

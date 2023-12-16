@@ -339,7 +339,7 @@ static char *mystrlwr(char *s)
 {
    for (char* p = s; *p != 0; p++)
    {
-      *p = lower[*p];
+      *p = lower[static_cast<unsigned char>(*p)];
    }
    return s;
 }
@@ -453,7 +453,6 @@ static void PRT_ARGS(int na, char **arg, int destination)
 
 int   PG_Main::Start (int na, char** arg) /* Display program information. */
 {
-   int ne = 0;
    time1 = clock();
    PRT_ARGS (na, arg, 0);
    if (na == 1) // No arguments?
@@ -518,7 +517,7 @@ int   PG_Main::Start (int na, char** arg) /* Display program information. */
 
 static int SET_OPTNS(int na, char **arg, OPTION *optionlist)
 {
-   int i, ne = 0;
+   int i;
    for (i = 2; i < na; i++)
    {
       if (arg[i][0] == '/' || arg[i][0] == '-' || arg[i][0] == '!')
@@ -754,7 +753,6 @@ void  PG_Main::OutputLexFile ()
    /* Keywords */
 
    n = 0;
-   char quote = '\'';
    for (i = 0; i < N_terms; i++)
    {
       if (!(term_type[seq[i]] & CONSTANT))
@@ -819,10 +817,8 @@ char* PG_Main::slash_inside (char* term_name)
 {
    static char string[128];
    char *p = term_name;
-
-   // printf("%s\n", term_name);
-   char  c = 0;
    int   i = 0;
+
    do
    {
       // if (*p != '\\')

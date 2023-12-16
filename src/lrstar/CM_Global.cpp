@@ -253,7 +253,7 @@ bool  itsakeyword (const char* terminal)
    if (terminal[0] == '{') return 0;
    for (p = terminal; *p != 0; p++)
    {
-      if (alpha[*p] & 3) // upper or lower case letter?
+      if (alpha[static_cast<unsigned char>(*p)] & 3) // upper or lower case letter?
       {
          return true;
       }

@@ -10,7 +10,7 @@ enum {
    ts_Tr,
    ts_Tc,
    ts_N_ELEMENTS
-} type_sizes;
+};
 
 struct data_types_t {           /* Tm, Tr, Tc, term_numb */
    const char *type;            /* C type, string form. */
@@ -85,28 +85,6 @@ create_filename(char       *dst,
    strncat(dst, suffix, filename_remaining(dst, dst_len));
    strncat(dst, ext, filename_remaining(dst, dst_len));
    dst[dst_len - 1] = '\0';
-}
-
-
-static const char *
-template_decl(void)
-{
-   static const char *decl = ("template<"
-                              "bool C_debug, "
-                              "typename T_term_numb, "
-                              "typename T_Tm, "
-                              "typename T_Tr, "
-                              "typename T_Tc>");
-   return decl;
-}
-
-
-static const char *
-lexer_decl(void)
-{
-   static const char *inst = ("templ_lrstar_lexer<C_debug, T_term_numb, "
-                              "T_Tm, T_Tr, T_Tc>");
-   return inst;
 }
 
 

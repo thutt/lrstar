@@ -15,7 +15,7 @@ int*   LG_ComputeLA::la_red;
 int    LG_ComputeLA::n_lookbacks;
 int    LG_ComputeLA::n_lookah;
 int    LG_ComputeLA::n_includes;
-static int    nwarn;
+
 static char** LA;
 // static int*   term; not used?
 static int*   lb_num;

@@ -170,7 +170,8 @@ void  LG_AddExtra::GOTO (int s, int agoto)
             else
             {
                trace_top = n_symbols;
-               TRACE (x, agoto, n_symbols, ++n_symbols);
+               TRACE (x, agoto, n_symbols, n_symbols + 1);
+               ++n_symbols;
             }
             traceable[x] = 0;
             l_finalx[x] = n_finalx;
@@ -282,7 +283,8 @@ void  LG_AddExtra::TRACE_REDUCE (int x, int y)
 void  LG_AddExtra::ADDING (int x, int y)
 {
    char name[16];
-   int len, b, i, h;
+   int len, b, i;
+   int h = 0;
    // printf ("\n--> ADDING (%d, %d)\n", x, y);
    // p_all();
    n_added++;
@@ -524,7 +526,7 @@ void  LG_AddExtra::MERGE_NTTRANS ()
 
 void  LG_AddExtra::DETECT_CYCLES ()
 {
-   int s, t, f, x, sym, p, nj;
+   int s, t, f, x, p, nj;
 
    n_words = (N_states +  3)/4;  // Number of 4-byte words.
    n_bytes = 4*n_words;          // Number of bytes to allocate.
@@ -545,16 +547,12 @@ void  LG_AddExtra::DETECT_CYCLES ()
       for (t = tt_start[s]; t < tt_start[s+1]; t++)
       {
          x   = tt_action[t];
-         sym = tt_symb[t];
-         // printf ("T-transition: [%2d,%s] -> %2d\n", s, term_name[sym], x);
          ATTACH (s, x);
          TRANS[s][x] = 1;
       }
       for (t = ntt_start[s]; t < ntt_start[s+1]; t++)
       {
          x   = ntt_action[t];
-         sym = ntt_symb[t];
-         // printf ("N-transition: [%2d,%s] -> %2d\n", s, head_name[sym], x);
          ATTACH (s, x);
          TRANS[s][x] = 1;
       }
@@ -609,8 +607,8 @@ void  LG_AddExtra::LOOK_BACK (int p, int dot, int x, int& nj, int* jumpto)
 
 void  LG_AddExtra::DEF_CYCLES ()
 {
-   int n = 0, s, i, f, p, sum;
-   // printf ("\n*****************************************\n\n");
+   int s, i, f, p, sum;
+
    for (s = 0; s < N_states; s++)
    {
       if (TRANS[s][s])    // In cycle?

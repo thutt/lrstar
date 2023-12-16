@@ -7,16 +7,8 @@
 #include "PG_Actions.h"
 
 static int n_terms      =   34; // Number of terminals.
-static int n_heads      =   64; // Number of nonterminals.
-static int n_prods      =  141; // Number of productions.
 static int n_states     =   86; // Number of states.
 static int accept_state =   85; // Accept state.
-static int n_termactns  =    8; // Number of terminal actions.
-static int n_parsactns  =   20; // Number of parse actions.
-static int n_nodenames  =   38; // Number of node names.
-static int n_nodeactns  =   38; // Number of node actions.
-static int eof_symb     =    1; // <eof> symbol number.
-static int err_used     =    0; // <error> used in grammar?
 
 // Terminal symbols of the grammar ...
 const char* PG_ParserTables::term_symb[34] =

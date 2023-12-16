@@ -28,27 +28,24 @@ uchar range[256] = /* characters within a range. */
 
 void  LG_PrintStates::PrintStates (int type)
 {
-   const char *type_of_sm;
-   const char *optstr;
-   int c, t, s, n, A, action, R, i, first_n, count, last_n, a, b, opt;
+   const char *type_of_sm = 0;
+   int c, t, s, n, A;
+   int action = 0;
+   int R, i, first_n, count, last_n, a, b;
 
    switch (type)
    {
    case 1:
       if (optn[LG_STATELIST] == 0) return;
       type_of_sm = "(for checking conflicts)";
-      opt = optn [LG_STATELIST];
       for (i = 0; *LGOption[i].name != 0; i++) if (LGOption[i].numb == LG_STATELIST) break;
-      optstr = LGOption[i].name;
       break;
    case 2:
       if (optn[LG_STATELISTOPT] == 0) return;
       type_of_sm = "(final optimized one)";
-      opt = optn [LG_STATELISTOPT];
       for (i = 0; *LGOption[i].name != 0; i++)
          if (LGOption[i].numb == LG_STATELISTOPT)
             break;
-      optstr = LGOption[i].name;
       break;
    default:
       InternalError(7);

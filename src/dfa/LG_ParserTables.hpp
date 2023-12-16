@@ -9,14 +9,7 @@
 static int n_terms      =   24; // Number of terminals.
 static int n_heads      =   36; // Number of nonterminals.
 static int n_prods      =   80; // Number of productions.
-static int n_states     =   40; // Number of states.
 static int accept_state =   39; // Accept state.
-static int n_termactns  =    3; // Number of terminal actions.
-static int n_parsactns  =   32; // Number of parse actions.
-static int n_nodenames  =    0; // Number of node names.
-static int n_nodeactns  =    0; // Number of node actions.
-static int eof_symb     =    1; // <eof> symbol number.
-static int err_used     =    0; // <error> used in grammar?
 
 // Terminal symbols of the grammar ...
 const char* LG_ParserTables::term_symb[24] =

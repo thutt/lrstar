@@ -20,10 +20,8 @@ int    LG_CreateTables::T_size;
 
 int    LG_CreateTables::err_ret_numb;
 
-static int    quiet;
-static int    T0, T1, T2;
 static int    total0, total1, total2;
-static int    T_total, N_total;
+static int    T_total;
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////
 //                                                                                                 //
@@ -31,7 +29,7 @@ static int    T_total, N_total;
 int   LG_CreateTables::CreateTables ()
 {
    const char *m;
-   int s, nx = 1;
+   int s;
 
    err_ret_numb = 0;
    for (s = 0; s < N_states; s++)
@@ -47,11 +45,6 @@ int   LG_CreateTables::CreateTables ()
 
    m = " ";
    total0 = total1 = total2 = 0;
-   const char* tablesize;
-   if      (optn[LG_TABL_SMALL])  tablesize = "Small ";
-   else if (optn[LG_TABL_MEDIUM]) tablesize = "";
-   else if (optn[LG_TABL_LARGE])  tablesize = "Large ";
-   else                           tablesize = "??????";
    if (optn[LG_VERBOSE] > 1)
    {
       prt_logonly("\n");
@@ -828,7 +821,7 @@ int   LG_CreateTables::DISP_EQ1B (char** matrix, char* newmat, int* row, int nr,
 {
    char* p;
    int*  base;
-   int*  indx;
+   int*  indx = 0;
    int*  density;
    int   size, i, n;
    int   r, x, c, inc;

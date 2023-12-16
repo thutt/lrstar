@@ -168,7 +168,6 @@ int   PG_NodeActions::prod_ (void* v)
 
 int   PG_NodeActions::tail_list_(void* v)
 {
-   Node* np = (Node*)v;
    return 0;
 }
 
@@ -503,7 +502,6 @@ int   PG_NodeActions::tail_eof_ (void* v)
 
 int   PG_NodeActions::sep_(void* v)
 {
-   Node* np = (Node*)v;
    return 0;
 }
 
@@ -530,7 +528,7 @@ int   PG_NodeActions::make_ebnf (Node* np, int type, char oper)
 
 int   PG_NodeActions::get_length (Node* np, int type)
 {
-   int leng;
+   int leng = 0;
    Node *s, *t;
    if (type == EBNF_REPEAT)
    {
@@ -1354,7 +1352,6 @@ int   PG_NodeActions::targs_ (void* v)
 
 int   PG_NodeActions::semargs_ (void* v)
 {
-   Node* np = (Node*)v;
    if (pass == THIRD_PASS)
    {
       switch (direction)
@@ -1595,7 +1592,7 @@ void  PG_NodeActions::check_for_quotes () // Check for quotes on terminals.
          int len = (int)strlen(term_name[t]);
          for (int i = 0; i < len; i++)
          {
-            result |= which_case[term_name[t][i]];
+            result |= which_case[static_cast<unsigned char>(term_name[t][i])];
          }
          if (result == 3 && optn[PG_MIXEDCASEUNDECL]) // Mixed case?
          {

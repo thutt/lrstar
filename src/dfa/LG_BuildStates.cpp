@@ -43,11 +43,9 @@ int*   LG_BuildStates::l_camefrom;
 int*   LG_BuildStates::camefrom;
 
 static int    n_clo;
-static uint   hash_div;
 static uint   hash_no;
 static int    head_free;
 static int    term_free;
-static int    n_camefroms;
 static int    accept_tran;
 
 static int*   added;

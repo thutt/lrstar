@@ -25,7 +25,6 @@ char*    LG_Parser::T_start;
 char*    LG_Parser::T_end;
 int      LG_Parser::T_line;
 
-static char*   prt_line   (char* ls, int ln);
 
 ///////////////////////////////////////////////////////////////////////////////
 //                                                                           //
@@ -73,10 +72,9 @@ Read: RS = R_stack;                             // Reset reduction stack pointer
    t = get_token ();                         // Get next token.
 Cont: if (tact_numb[t] >= 0)                    // If input action ...
    {
-      int t1 = t;
       // T_start = token.start;                 // Set token start.
       // T_end   = token.end;                   // Set token end.
-      t = (*tact_func[tact_numb [t]]) (t);   // Call token action.
+      t = (*tact_func[static_cast<unsigned char>(tact_numb[t])]) (t);   // Call token action.
    }
    /* For debugging ...
       char ch = *token.end;
@@ -164,7 +162,7 @@ int   LG_Parser::apply (int p)
          T_end   = token.end;             // Define T_end working pointer.
          T_line  = token.line;            // Define T_line.
       }
-      r = (*pact_func [pact_numb[p]]) (p);   // Call production action.
+      r = (*pact_func [static_cast<unsigned char>(pact_numb[static_cast<unsigned char>(p)])]) (p);   // Call production action.
       if (r != 0) return (r);
    }
    return (0);
@@ -345,23 +343,6 @@ void  LG_Parser::collect (int x) // Collect terminals that cause a transition or
             if (term_symb[t][0] == '{') continue;
             prt_log ("\t%-32s", term_symb[t]);
             char first = 1;
-            char blank[21] = "                    ";
-/*             for (h = 0; h < n_heads; h++)
-               {
-               if (H_list[h] == t)
-               {
-               if (first)
-               {
-               prt_log (" => %s\n", head_symb[h]);
-               first = 0;
-               }
-               else
-               {
-               prt_log ("\t%-32s => %s\n", blank, head_symb[h]);
-               }
-               }
-               }
-*/
             if (first)
             {
                prt_log ("\n");

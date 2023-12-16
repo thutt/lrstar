@@ -238,33 +238,30 @@ int   PG_PrintStates::C_max_symbl (int s)
 
 void  PG_PrintStates::P_HEAD (int s)
 {
-   int L = 0;
    prt_sta ("           ");
-   L = p_head (s, " ");
+   p_head (s, " ");
 }
 
 ///////////////////////////////////////////////////////////////////////////////
 
 void  PG_PrintStates::P_SYMBOL (int s)
 {
-   int L = 0;
    if (s >= 0)           prt_sta ("     %4d  ",  s);
    else if (s == -32767) prt_sta ("           "   );
    else if (s == -32768) prt_sta ("           "   );
    else                  prt_sta ("     %4d  ", -s);
-   L = p_sym60 (s, " ");
+   p_sym60 (s, " ");
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 
 void  PG_PrintStates::P_SYMBOL (int s, const char* prefix)
 {
-   int L = 0;
    if (s >= 0)           prt_sta ("%s%4d  ", prefix, s);
    else if (s == -32767) prt_sta ("%s      ", prefix); // (default)
    else if (s == -32768) prt_sta ("           ");      // (error)
    else                  prt_sta ("     %4d  ", -s);
-   L = p_sym60 (s, " ");
+   p_sym60 (s, " ");
 }
 
 ///////////////////////////////////////////////////////////////////////////////

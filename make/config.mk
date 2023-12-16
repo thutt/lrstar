@@ -55,6 +55,8 @@ export DEBUG
 
 
 OPT	:=							\
+	-Wall							\
+	-Werror							\
 	$(if $(filter release,$(LRSTAR_BUILD_TYPE)),-Os,-Og)	\
 	-fdata-sections						\
 	-ffunction-sections					\
