@@ -119,4 +119,6 @@ args=$(/usr/bin/getopt -o a:b:o: --longoptions architecture:,bod:,build-type: --
 set -- "${args}"            # Set postional args to ${args}.
 unset args;
 
+export LANG=C;              # Make gcc not use UTF-8.
+
 main ${@};
