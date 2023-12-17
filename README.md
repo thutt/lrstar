@@ -25,6 +25,42 @@ in a business setting.
 Paul has given his approval for this repository and the changes to
 make it build & run well on Linux.
 
+Included in this repository are sample grammars for the following languages:  
+
+  + ALGOL60  
+  + ANTLR  
+  + Ada  
+  + C11  
+  + CICS  
+  + COBOL  
+  + CPP5  
+  + Dbase  
+  + Fortran  
+  + Java1  
+  + Java9  
+  + Kotlin  
+  + Modula2  
+  + NCSA  
+  + PL1  
+  + PLM  
+  + PLSQL  
+  + Pascal  
+  + Python  
+  + SQL  
+  + Vba  
+  + XPL  
+  + YACC  
+  + Zeus  
+  + delphi  
+  + verilog  
+
+And sample projects for:  
+
+  + C       : Creates AST for preprocessed C.  
+  + Calc    : Simple calculator that generates pseudo-assembly.  
+  + LRK     : Example showing LR(*) parsing.  
+  + Typedef : Handling context-sensitive grammars with 'typedef' example.  
+
 
 --- >8 ------ >8 ------ >8 (cut here)
 
@@ -39,14 +75,14 @@ file into your Bash environment, like so:
 
   git checkout linux-port
 
-  source ./scripts/setup --build-type release --bod /tmp/lrstar
-  LRSTAR_DIR          : '/tmp/x/lrstar'
-  LRSTAR_ARCHITECTURE : ''
-  LRSTAR_BUILD_OPTIONS: ''
-  LRSTAR_BUILD_DIR    : '/tmp/lrstar'
-
-  Build types         : debug release
-  Build options       : profile strict
+  source ./scripts/setup --build-type release --bod /tmp/lrstar  
+  LRSTAR_DIR          : '/tmp/x/lrstar'  
+  LRSTAR_ARCHITECTURE : ''  
+  LRSTAR_BUILD_OPTIONS: ''  
+  LRSTAR_BUILD_DIR    : '/tmp/lrstar'  
+  
+  Build types         : debug release  
+  Build options       : profile strict  
 
 Sourcing the setup file sets several environment variables that are
 used by the build process and the shell functions in
