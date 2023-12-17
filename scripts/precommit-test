@@ -20,6 +20,7 @@ SCRIPT="${0}";
 PN=${SCRIPT##*/};      # Program name (remove all before last '/').
 DN=${SCRIPT%/*};       # Directory name (removall all after last '/').
 
+
 function fatal ()
 {
     local msg="${1}";
@@ -28,95 +29,86 @@ function fatal ()
 }
 
 
-function lrstar ()
+function lrgen ()
 {
-    local lrstar="$(lrstar-path)";
+
+    declare -A lrstar_options=(
+        ["ALGOL60"]="ast o"
+        ["ANTLR"]=""
+        ["Ada"]="ci m"
+        ["C"]="o !ta !na !ast !exp"
+        ["C11"]="k=10"
+        ["CICS"]=""
+        ["COBOL"]=""
+        ["CPP5"]="/st"
+        ["Calc"]="d dt"
+        ["Dbase"]=""
+        ["Fortran"]=""
+        ["JSON"]="ast d"
+        ["Java1"]=""
+        ["Java9"]="/k=30"
+        ["Kotlin"]=""
+        ["LRK"]="k=100 st d"
+        ["Modula2"]=""
+        ["NCSA"]="st g"
+        ["PL1"]="o"
+        ["PLM"]=""
+        ["PLSQL"]="m"
+        ["Pascal"]="ci"
+        ["Python"]="/k=3 /st"
+        ["SQL"]=""
+        ["Typedef"]="d st"
+        ["Vba"]=""
+        ["XPL"]=""
+        ["YACC"]=""
+        ["Zeus"]=""
+        ["delphi"]="ci"
+        ["verilog"]=""
+    );
+
+    declare -A dfa_options=(
+        ["ALGOL60"]=""
+        ["ANTLR"]=""
+        ["Ada"]=""
+        ["C"]="m"
+        ["C11"]=""
+        ["CICS"]=""
+        ["COBOL"]=""
+        ["CPP5"]=""
+        ["Calc"]=""
+        ["Dbase"]=""
+        ["Fortran"]=""
+        ["JSON"]=""
+        ["Java1"]=""
+        ["Java9"]="st"
+        ["Kotlin"]=""
+        ["LRK"]=""
+        ["Modula2"]=""
+        ["NCSA"]=""
+        ["PL1"]=""
+        ["PLM"]="sto m"
+        ["PLSQL"]="sto m"
+        ["Pascal"]=""
+        ["Python"]=""
+        ["SQL"]=""
+        ["Typedef"]=""
+        ["Vba"]=""
+        ["XPL"]=""
+        ["YACC"]=""
+        ["Zeus"]=""
+        ["delphi"]=""
+        ["verilog"]=""
+    );
+
     local grm="${1}";
-    local grm_name="$(basename "${grm}")";
+    local grm_name="$(basename "${grm}" ".grm")";
     local grm_dir="$(dirname "${grm}")";
-    declare -A options=(
-        ["ALGOL60.grm"]="ast o"
-        ["ANTLR.grm"]=""
-        ["Ada.grm"]="ci m"
-        ["C.grm"]="o !ta !na !ast !exp"
-        ["C11.grm"]="k=10"
-        ["CICS.grm"]=""
-        ["COBOL.grm"]=""
-        ["CPP5.grm"]="/st"
-        ["Calc.grm"]="d dt"
-        ["Dbase.grm"]=""
-        ["Fortran.grm"]=""
-        ["JSON.grm"]="ast d"
-        ["Java1.grm"]=""
-        ["Java9.grm"]="/k=30"
-        ["Kotlin.grm"]=""
-        ["LRK.grm"]="k=100 st d"
-        ["Modula2.grm"]=""
-        ["NCSA.grm"]="st g"
-        ["PL1.grm"]="o"
-        ["PLM.grm"]=""
-        ["PLSQL.grm"]="m"
-        ["Pascal.grm"]="ci"
-        ["Python.grm"]="/k=3 /st"
-        ["SQL.grm"]=""
-        ["Typedef.grm"]="d st"
-        ["Vba.grm"]=""
-        ["XPL.grm"]=""
-        ["YACC.grm"]=""
-        ["Zeus.grm"]=""
-        ["delphi.grm"]="ci"
-        ["verilog.grm"]=""
-    );
 
-    pushd "${grm_dir}" >/dev/null;
-    "${lrstar}" "${grm_name}" ${options[${grm_name}]};
-    popd >/dev/null
-}
-
-
-function dfa ()
-{
-    local dfa="$(dfa-path)";
-    local lgr="${1}";
-    local lgr_name="$(basename "${lgr}")";
-    local lgr_dir="$(dirname "${lgr}")";
-    declare -A options=(
-        ["ALGOL60.lgr"]=""
-        ["ANTLR.lgr"]=""
-        ["Ada.lgr"]=""
-        ["C.lgr"]="m"
-        ["C11.lgr"]=""
-        ["CICS.lgr"]=""
-        ["COBOL.lgr"]=""
-        ["CPP5.lgr"]=""
-        ["Calc.lgr"]=""
-        ["Dbase.lgr"]=""
-        ["Fortran.lgr"]=""
-        ["JSON.lgr"]=""
-        ["Java1.lgr"]=""
-        ["Java9.lgr"]="st"
-        ["Kotlin.lgr"]=""
-        ["LRK.lgr"]=""
-        ["Modula2.lgr"]=""
-        ["NCSA.lgr"]=""
-        ["PL1.lgr"]=""
-        ["PLM.lgr"]="sto m"
-        ["PLSQL.lgr"]="sto m"
-        ["Pascal.lgr"]=""
-        ["Python.lgr"]=""
-        ["SQL.lgr"]=""
-        ["Typedef.lgr"]=""
-        ["Vba.lgr"]=""
-        ["XPL.lgr"]=""
-        ["YACC.lgr"]=""
-        ["Zeus.lgr"]=""
-        ["delphi.lgr"]=""
-        ["verilog.lgr"]=""
-    );
-
-    pushd "${lgr_dir}" >/dev/null;
-    "${dfa}" "${lgr_name}" ${options[${lgr_name}]};
-    popd >/dev/null;
+    ${LRSTAR_DIR}/scripts/lrgen                         \
+        --directory "${grm_dir}"                        \
+        --grm "${grm_name}"                             \
+        --grmopt "${lrstar_options[${grm_name}]}"       \
+        --lgropt "${dfa_options[${grm_name}]}";
 }
 
 
@@ -130,6 +122,7 @@ function build ()
         LRSTAR_INSTALL_ROOT=${LRSTAR_BUILD_DIR}/${LRSTAR_BUILD_TYPE}/usr/local
  }
 
+
 function process ()
 {
     local grm_dir="${1}";
@@ -139,15 +132,9 @@ function process ()
     local makefile="${grm_dir}/Makefile"
 
     if [ -r "${grm}" ] ; then
-        lrstar "${grm}";
+        lrgen "${grm}";
     else
         echo "${grm} does not exist";
-    fi;
-
-    if [ -r "${lgr}" ] ; then
-        dfa "${lgr}";
-    else
-        echo "${lgr} does not exist.";
     fi;
 
     if [ -r "${lgr}" ] ; then
@@ -166,6 +153,7 @@ function cleanup ()
        ${grm_dir}/*.o                           \
        ${grm_dir}/$(basename "${grm_dir}");
 }
+
 
 function main ()
 {

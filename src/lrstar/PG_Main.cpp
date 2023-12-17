@@ -461,7 +461,7 @@ int   PG_Main::Start (int na, char** arg) /* Display program information. */
       printf ("|   LR(*) PARSER GENERATOR\n|\n");
       printf ("|   lrstar <grammar> [<option>...]\n|\n");
       ShowOptions ();
-      Quit ();
+      exit(0);
    }
 
    if (!get_fid (arg[1], gdn, gfn, gft)) Quit ();

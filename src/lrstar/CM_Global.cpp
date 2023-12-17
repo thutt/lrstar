@@ -133,10 +133,6 @@ int   main (int na, char *arg[])
    PG_Main::Main (na, arg);
    PG_Main::Terminate ();
    close_log ();
-   unlink("lrstar.txt");
-   FILE* fp = fopen ("lrstar.txt", "w");
-   fprintf (fp, "%d\n", n_errors);
-   fclose (fp);
 
 #if defined(LRSTAR_WINDOWS)
 #ifdef _DEBUG
@@ -1100,11 +1096,6 @@ void  Quit ()
 {
    inputt ();
    PG_Main::Terminate ();
-   unlink("lrstar.txt");
-   FILE* fp = fopen ("lrstar.txt", "w");
-   if (n_errors > 0) n_errors = 1;
-   fprintf (fp, "%d\n", n_errors);
-   fclose (fp);
    exit (1);
 }
 

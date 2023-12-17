@@ -187,30 +187,12 @@ PRT_ARGS (int na, char **arg, int destination)
 
 int   main (int na, char *arg[])
 {
-   int fd = open ("lrstar.txt", 0);
-   if (fd >= 0)
-   {
-      char input[100];
-      int nb = read (fd, input, 100);
-      if (nb == -1) {
-         /* Failed to read.
-          *
-          * The use of this file will be removed, so no actual fix is
-          * being made to fix error conditions at this point.
-          * See https://github.com/thutt/lrstar/issues/7
-          */
-      }
-      close (fd);
-      unlink ("lrstar.txt");
-      if (*input != '0') exit(1);
-   }
-
    InitOptions ();
    PRT_ARGS (na, arg, 0);
    if (na == 1) // No arguments after program name?
    {
       ShowOptions();
-      Quit ();
+      exit(0);
    }
 
    if (!SET_OPTNS (na, arg)) Quit ();
