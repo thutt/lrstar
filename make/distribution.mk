@@ -20,12 +20,17 @@ DISTRIB_DFA	:=	\
 	$(DISTRIB_ROOT)/bin/dfa
 
 
+DISTRIB_LRGEN	:= 	\
+	$(DISTRIB_ROOT)/bin/lrgen
+
+
 DISTRIB_BASIC_DEFS_HEADER	:=	\
 	$(DISTRIB_ROOT)/include/lrstar_basic_defs.h
 
 
 DISTRIB_LOWERCASE_HEADER	:=	\
 	$(DISTRIB_ROOT)/include/lowercase.h
+
 
 
 DISTRIB_SAMPLE_HEADER	:=	\
@@ -87,6 +92,9 @@ $(DISTRIB_LOWERCASE_HEADER):
 		"$(LRSTAR_DIR)/src/include/$(notdir $@)"	\
 		$@;						\
 	echo "HEADER: $@";
+
+
+
 
 
 # Always installed because $(LRSTAR_LIB) is .PHONY.
@@ -151,6 +159,16 @@ $(DISTRIB_DFA):		$(DFA)
 	echo "DFA: $@";
 
 
+$(DISTRIB_LRGEN):	$(LRSTAR_DIR)/scripts/lrgen
+	$(PROLOG);				\
+	$(INSTALL)				\
+		--mode=555			\
+		-D				\
+		"$<"				\
+		$@;				\
+	echo "LRGEN: $@";
+
+
 # The 'distribution' target uses Gnu Coreutils 'install' program to
 # put all the delivered build artifacts into the '/usr/local'
 # directory tree.
@@ -160,6 +178,7 @@ distribution:						\
 		$(DISTRIB_DFA)				\
 		$(DISTRIB_LEXER_HEADER)			\
 		$(DISTRIB_LOWERCASE_HEADER)		\
+		$(DISTRIB_LRGEN)			\
 		$(DISTRIB_LRSTAR)			\
 		$(DISTRIB_LRSTAR_LIB)			\
 		$(DISTRIB_PARSER_HEADER)		\

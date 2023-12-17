@@ -106,7 +106,6 @@ function lrgen ()
 
     ${LRSTAR_DIR}/scripts/lrgen                         \
         --directory "${grm_dir}"                        \
-        --grm "${grm_name}"                             \
         --grmopt "${lrstar_options[${grm_name}]}"       \
         --lgropt "${dfa_options[${grm_name}]}";
 }
