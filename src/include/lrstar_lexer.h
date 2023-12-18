@@ -67,7 +67,9 @@ public:
             x = y;
             if (*token.end == '\n') {
                linenumb++;
+#ifdef DEBUG_LEXER
                prt_line();
+#endif
             }
             token.end++;
          }
@@ -91,8 +93,11 @@ public:
             linenumb_printed = linenumb;
 
             if (*ls != 26) {    // Not end of file?
-               printf("%6d  %s\n", linenumb, ls);
-               fprintf(stderr, "%6d  %s\n", linenumb, ls);
+               fprintf(stderr, "%6d  ", linenumb);
+               for(; *ls != '\n'; ++ls) {
+                   fputc(*ls, stderr);
+               }
+               fprintf(stderr,"\n");
             }
          }
       }
