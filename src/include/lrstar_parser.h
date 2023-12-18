@@ -164,7 +164,10 @@ class lrstar_parser {
 public:
    typedef void (*init_func_t)(lrstar_parser *parser);
    typedef int  (*tact_func_t)(lrstar_parser *parser, int &t);
-   typedef int  (*nact_func_t)(lrstar_parser *parser, Node *t);
+   typedef void (*nact_func_t)(ast_pass_t         pass,
+                               parse_direction_t  direction,
+                               lrstar_parser     *parser,
+                               Node              *t);
 
 public:
    lrstar_user_data_t *user_data;
@@ -219,12 +222,11 @@ private:
    unsigned  max_symbols;       // Maximum number of symbols.
 
 public:                          // AST Area ...
-   ast_pass_t         traversal; // AST traversal number: 1, 2, 3 ...
-   parse_direction_t  direction; // Node traversal direction.
-   int                stacki;    // AST stack index.
-   Node              *root;      // Current root node.
-   Node              *node;      // Current AST node.
-   Stack             *stack;     // AST stack array.
+   ast_pass_t  traversal;       // AST traversal number: 1, 2, 3 ...
+   int         stacki;          // AST stack index.
+   Node       *root;            // Current root node.
+   Node       *node;            // Current AST node.
+   Stack      *stack;           // AST stack array.
 
 private:
    int      *counter;           // Node counter array.
@@ -622,7 +624,6 @@ public:
       max_cells(0),
       max_symbols(max_symb_),
       traversal(FIRST_PASS),
-      direction(TOP_DOWN),
       stacki(0),
       root(0),
       node(0),
@@ -1445,30 +1446,28 @@ public:
    traverse_invoke_nact(FILE *fp, Node *n)
    {
       if (C_node_actions) {
-         int   i  = n->id;             // Node id.
-         Node *c  = n->child;          // Child node pointer.
+         Node *c;
 
          stacki++;
-         counter[i]++;
+         counter[n->id]++;
 
-         stack[stacki].id      = i;
-         stack[stacki].counter = counter[i];
+         stack[stacki].id      = n->id;
+         stack[stacki].counter = counter[n->id];
 
-         if (nact_func[i] != 0) { // Got a node action ?
-            direction = TOP_DOWN;
-            tracer(n);
-            (*nact_func[i])(this, n);
+         if (nact_func[n->id] != 0) { // Got a node action ?
+            tracer(n, TOP_DOWN);
+            (*nact_func[n->id])(traversal, TOP_DOWN, this, n);
          }
 
+         c = n->child;          // Child node pointer.
          while (c != 0) {
             traverse_invoke_nact(fp, c);
             c = c->next;
          }
 
-         if (nact_func[i] != 0) { // Got a node action ?
-            direction = BOTTOM_UP;
-            tracer(n);
-            (*nact_func[i])(this, n);
+         if (nact_func[n->id] != 0) { // Got a node action ?
+            tracer(n, BOTTOM_UP);
+            (*nact_func[n->id])(traversal, BOTTOM_UP, this, n);
          }
          stacki--;
       }
@@ -1508,7 +1507,7 @@ public:
 
 
    void
-   tracer(Node *n)
+   tracer(Node *n, parse_direction_t direction)
    {
       if (C_debug_trace) {
          const char *name;

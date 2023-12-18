@@ -222,11 +222,24 @@ main_nact_functions(FILE *fp, int N_nacts, const char **Nact_start)
 {
    if (N_nacts > 0) {           // Number of node actions
       for (int n = 0; n < N_nacts; n++) {
+         int prefix_len = (strlen("void ") +
+                           strlen(gfn) +
+                           1 /* '_' */ +
+                           strlen(Nact_start[n]) +
+                           1 /* ' ' */);
+
          if (strcmp (Nact_start[n], "NULL") != 0) {
             fprintf(fp,
-                    "int %s_%s(UNUSED_PARAM(%s_parser_t *parser), "
-                    "UNUSED_PARAM(Node *node));\n",
-                    gfn, Nact_start[n], gfn);
+                    "void %s_%s(UNUSED_PARAM(ast_pass_t pass),\n"
+                    "%*sUNUSED_PARAM(parse_direction_t direction),\n"
+                    "%*sUNUSED_PARAM(%s_parser_t *parser),\n"
+                    "%*sUNUSED_PARAM(Node *node));\n",
+                    gfn,
+                    Nact_start[n],
+                    prefix_len, " ",
+                    prefix_len, " ",
+                    gfn,
+                    prefix_len, " ");
          }
       }
 
@@ -1570,14 +1583,27 @@ write_user_lookup(FILE *fp, const char *fn_name)
 static void
 write_user_nact(FILE *fp, const char *fn_name)
 {
+   int prefix_len = (strlen(gfn) +
+                     1 /* '_' */ +
+                     strlen(fn_name) +
+                     1 /* ' ' */);
+
    write_user_preamble(fp);
    fprintf(fp,
            "void\n"
-           "%s_%s(UNUSED_PARAM(%s_parser_t *parser), "
-           "UNUSED_PARAM(Node *v))\n"
+           "%s_%s(UNUSED_PARAM(ast_pass_t pass),\n"
+           "%*sUNUSED_PARAM(parse_direction_t direction),\n"
+           "%*sUNUSED_PARAM(%s_parser_t *parser),\n"
+           "%*sUNUSED_PARAM(Node *v))\n"
            "{\n"
            "}\n",
-           gfn, fn_name, gfn);
+           gfn,
+           fn_name,
+           prefix_len, " ",
+           prefix_len, " ",
+           gfn,
+           prefix_len, " ");
+
 }
 
 

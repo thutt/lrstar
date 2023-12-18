@@ -1,10 +1,13 @@
 void
-Calc_ident_(UNUSED_PARAM(Calc_parser_t *parser), UNUSED_PARAM(Node *v))
+Calc_ident_(UNUSED_PARAM(ast_pass_t pass),
+            UNUSED_PARAM(parse_direction_t direction),
+            UNUSED_PARAM(Calc_parser_t *parser),
+            UNUSED_PARAM(Node *v))
 {
     Node *n = v;
 
-    if (parser->traversal == FIRST_PASS) {
-        switch (parser->direction) {
+    if (pass == FIRST_PASS) {
+        switch (direction) {
         case TOP_DOWN:
             break;
 

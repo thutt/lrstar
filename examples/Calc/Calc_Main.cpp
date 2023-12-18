@@ -21,23 +21,74 @@ static Calc_parser_t::tact_func_t Calc_tact_funcs_[2] = {
    Calc_lookup,
 };
 
-int Calc_goal_(UNUSED_PARAM(Calc_parser_t *parser), UNUSED_PARAM(Node *node));
-int Calc_program_(UNUSED_PARAM(Calc_parser_t *parser), UNUSED_PARAM(Node *node));
-int Calc_store_(UNUSED_PARAM(Calc_parser_t *parser), UNUSED_PARAM(Node *node));
-int Calc_if_(UNUSED_PARAM(Calc_parser_t *parser), UNUSED_PARAM(Node *node));
-int Calc_target_(UNUSED_PARAM(Calc_parser_t *parser), UNUSED_PARAM(Node *node));
-int Calc_eq_(UNUSED_PARAM(Calc_parser_t *parser), UNUSED_PARAM(Node *node));
-int Calc_ne_(UNUSED_PARAM(Calc_parser_t *parser), UNUSED_PARAM(Node *node));
-int Calc_add_(UNUSED_PARAM(Calc_parser_t *parser), UNUSED_PARAM(Node *node));
-int Calc_sub_(UNUSED_PARAM(Calc_parser_t *parser), UNUSED_PARAM(Node *node));
-int Calc_mul_(UNUSED_PARAM(Calc_parser_t *parser), UNUSED_PARAM(Node *node));
-int Calc_div_(UNUSED_PARAM(Calc_parser_t *parser), UNUSED_PARAM(Node *node));
-int Calc_pwr_(UNUSED_PARAM(Calc_parser_t *parser), UNUSED_PARAM(Node *node));
-int Calc_int_(UNUSED_PARAM(Calc_parser_t *parser), UNUSED_PARAM(Node *node));
-int Calc_ident_(UNUSED_PARAM(Calc_parser_t *parser), UNUSED_PARAM(Node *node));
-int Calc_then_(UNUSED_PARAM(Calc_parser_t *parser), UNUSED_PARAM(Node *node));
-int Calc_then2_(UNUSED_PARAM(Calc_parser_t *parser), UNUSED_PARAM(Node *node));
-int Calc_else2_(UNUSED_PARAM(Calc_parser_t *parser), UNUSED_PARAM(Node *node));
+void Calc_goal_(UNUSED_PARAM(ast_pass_t pass),
+                UNUSED_PARAM(parse_direction_t direction),
+                UNUSED_PARAM(Calc_parser_t *parser),
+                UNUSED_PARAM(Node *node));
+void Calc_program_(UNUSED_PARAM(ast_pass_t pass),
+                   UNUSED_PARAM(parse_direction_t direction),
+                   UNUSED_PARAM(Calc_parser_t *parser),
+                   UNUSED_PARAM(Node *node));
+void Calc_store_(UNUSED_PARAM(ast_pass_t pass),
+                 UNUSED_PARAM(parse_direction_t direction),
+                 UNUSED_PARAM(Calc_parser_t *parser),
+                 UNUSED_PARAM(Node *node));
+void Calc_if_(UNUSED_PARAM(ast_pass_t pass),
+              UNUSED_PARAM(parse_direction_t direction),
+              UNUSED_PARAM(Calc_parser_t *parser),
+              UNUSED_PARAM(Node *node));
+void Calc_target_(UNUSED_PARAM(ast_pass_t pass),
+                  UNUSED_PARAM(parse_direction_t direction),
+                  UNUSED_PARAM(Calc_parser_t *parser),
+                  UNUSED_PARAM(Node *node));
+void Calc_eq_(UNUSED_PARAM(ast_pass_t pass),
+              UNUSED_PARAM(parse_direction_t direction),
+              UNUSED_PARAM(Calc_parser_t *parser),
+              UNUSED_PARAM(Node *node));
+void Calc_ne_(UNUSED_PARAM(ast_pass_t pass),
+              UNUSED_PARAM(parse_direction_t direction),
+              UNUSED_PARAM(Calc_parser_t *parser),
+              UNUSED_PARAM(Node *node));
+void Calc_add_(UNUSED_PARAM(ast_pass_t pass),
+               UNUSED_PARAM(parse_direction_t direction),
+               UNUSED_PARAM(Calc_parser_t *parser),
+               UNUSED_PARAM(Node *node));
+void Calc_sub_(UNUSED_PARAM(ast_pass_t pass),
+               UNUSED_PARAM(parse_direction_t direction),
+               UNUSED_PARAM(Calc_parser_t *parser),
+               UNUSED_PARAM(Node *node));
+void Calc_mul_(UNUSED_PARAM(ast_pass_t pass),
+               UNUSED_PARAM(parse_direction_t direction),
+               UNUSED_PARAM(Calc_parser_t *parser),
+               UNUSED_PARAM(Node *node));
+void Calc_div_(UNUSED_PARAM(ast_pass_t pass),
+               UNUSED_PARAM(parse_direction_t direction),
+               UNUSED_PARAM(Calc_parser_t *parser),
+               UNUSED_PARAM(Node *node));
+void Calc_pwr_(UNUSED_PARAM(ast_pass_t pass),
+               UNUSED_PARAM(parse_direction_t direction),
+               UNUSED_PARAM(Calc_parser_t *parser),
+               UNUSED_PARAM(Node *node));
+void Calc_int_(UNUSED_PARAM(ast_pass_t pass),
+               UNUSED_PARAM(parse_direction_t direction),
+               UNUSED_PARAM(Calc_parser_t *parser),
+               UNUSED_PARAM(Node *node));
+void Calc_ident_(UNUSED_PARAM(ast_pass_t pass),
+                 UNUSED_PARAM(parse_direction_t direction),
+                 UNUSED_PARAM(Calc_parser_t *parser),
+                 UNUSED_PARAM(Node *node));
+void Calc_then_(UNUSED_PARAM(ast_pass_t pass),
+                UNUSED_PARAM(parse_direction_t direction),
+                UNUSED_PARAM(Calc_parser_t *parser),
+                UNUSED_PARAM(Node *node));
+void Calc_then2_(UNUSED_PARAM(ast_pass_t pass),
+                 UNUSED_PARAM(parse_direction_t direction),
+                 UNUSED_PARAM(Calc_parser_t *parser),
+                 UNUSED_PARAM(Node *node));
+void Calc_else2_(UNUSED_PARAM(ast_pass_t pass),
+                 UNUSED_PARAM(parse_direction_t direction),
+                 UNUSED_PARAM(Calc_parser_t *parser),
+                 UNUSED_PARAM(Node *node));
 // Node action function pointers ...
 static Calc_parser_t::nact_func_t Calc_nact_funcs_[17] = {
    Calc_goal_,
