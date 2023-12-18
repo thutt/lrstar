@@ -144,6 +144,13 @@ def parse_arguments():
     return options
 
 
+def IsElfImage(img):
+    cmd = [ "/usr/bin/file",
+            img ]
+    (stdout, stderr, rc) = execute.process(cmd)
+    return (rc == 0) and ("ELF" in stdout[0])
+
+
 def gather_artifacts(options, root):
     cmd = [ "/usr/bin/find",
             root,
@@ -156,8 +163,9 @@ def gather_artifacts(options, root):
         for img in stdout:
             if len(img) == 0:
                 break
-            artifact = Artifact(options, root, img)
-            artifacts[artifact._relpath] = artifact
+            if IsElfImage(img):
+                artifact = Artifact(options, root, img)
+                artifacts[artifact._relpath] = artifact
 
     return artifacts
 
