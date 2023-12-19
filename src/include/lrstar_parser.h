@@ -48,22 +48,35 @@ public:
 
 class Node {         // AST Node.
 public:
-   int   id;                    // Node ID number.
-   int   sti;                   // Symbol-table index (perm or temp var).
-   int   line;                  // Line number in input file.
-   int   ref;                   // Number used to refer to a node in AST dump.
-   char *start;                 // Start of symbol in input area.
-   Node *prev;                  // Previous node.
-   Node *next;                  // Next node.
-   Node *child;                 // Child node.
-   Node *parent;                // Parent node.
-   Node *alloc_link;            // Linked list of all nodes;
-   Node(int id_) :
+   int         nodenum;         // Number used to refer to a node in AST dump.
+   int         id;              // Node ID number.
+   int         sti;             // Symbol-table index (perm or temp var).
+   int         line;            // Line number in input file.
+   const char *token;           // Token referenced, iff applicable.
+   size_t      token_len;
+   const char *node_name;       // Name as defined by '+>' or '*>' productions.
+   char       *start;           // Start of symbol in input area.
+   Node       *prev;            // Previous node.
+   Node       *next;            // Next node.
+   Node       *child;           // Child node.
+   Node       *parent;          // Parent node.
+   Node       *alloc_link;      // Linked list of all nodes;
+   Node(int         nodenum_,
+        int         id_,
+        int         sti_,
+        int         line_,
+        char       *start_,
+        const char *token_,
+        size_t      token_len_,
+        const char *node_name_) :
+      nodenum(nodenum_),
       id(id_),
-      sti(~0),
-      line(~0),
-      ref(-1),                  // Invalid reference number.
-      start(0),
+      sti(sti_),
+      line(line_),
+      token(token_),
+      token_len(token_len_),
+      node_name(node_name_),
+      start(start_),
       prev(0),
       next(0),
       child(0),
@@ -72,22 +85,44 @@ public:
    {
    }
 
-   void
-   set_no_symbol()
-   {
-      // Establish the Node to adhere to the invariant needed to state
-      // no Symbol is associated with the Node instance.
-      sti   = 0;
-      line  = 0;
-      start = 0;
-   }
-
 
    bool
    has_symbol()
    {
       // Is a symbol associated with node?
       return (start != 0) && (sti != 0) && (line != 0);
+   }
+
+
+   void print_node_ref_(FILE *fp,
+                        const char *label,
+                        const Node *n)
+   {
+      if (n != NULL) {
+         fprintf(fp, "%s=%d  ", label, n->nodenum);
+      } else {
+         fprintf(fp, "%s=--  ", label);
+      }
+   }
+
+
+   void
+   print(FILE *fp)
+   {
+      fprintf(fp, "%d:  %s  ln=%d  ", nodenum, node_name, line);
+      print_node_ref_(fp, "prv", prev);
+      print_node_ref_(fp, "nxt", next);
+      print_node_ref_(fp, "par", parent);
+      print_node_ref_(fp, "chd", child);
+
+      if (token != 0) {
+         fprintf(fp, "tok=%*.*s",
+                  static_cast<int>(token_len), static_cast<int>(token_len),
+                  token);
+      } else {
+         fprintf(fp, "tok=--");
+      }
+      fprintf(fp, "\n");
    }
 };
 
@@ -230,7 +265,6 @@ public:                          // AST Area ...
 
 private:
    int      *counter;           // Node counter array.
-   char      draw_space[3];
 
 private:                        // LR Parser
    void
@@ -245,14 +279,16 @@ private:                        // LR Parser
       if (C_make_ast) {
          int psi;                                        // Parse stack index.
          if (pt.node_numb[p] >= 0) {                     // MAKE NODE ?
-            Node *n = new_node(pt.node_numb[p]);
+            Node *n;
             if (pt.argx[p] >= 0) {                       // If first argument specified.
-               psi      = pt.argx[p];                    // Get parse-stack index.
-               n->sti   = PS[psi].sti;                   // Move sti from parse stack to node.
-               n->line  = PS[psi].line;                  // Move line from parse stack to node.
-               n->start = PS[psi].start;                 // Move start from parse stack to node.
+               psi = pt.argx[p];               // Parse Stack Index.
+               n   = new_node(pt.node_numb[p],
+                              PS[psi].sti,     // Move sti from parse stack to node.
+                              PS[psi].line,    // Move line from parse stack to node.
+                              PS[psi].start);  // Move start from parse stack to node.
             } else { // No argument on production.
-               n->set_no_symbol();
+               // Create a Node with no Symbol attachment.
+               n = new_node(pt.node_numb[p], 0, 0, 0);
             }
             psi = linkup(p);                             // Linkup the nodes in this rule.
             if (psi >= 0) {                              // Any nodes found in this rule?
@@ -672,9 +708,8 @@ public:
       }
 
       if (C_make_ast) {
-         n_nodes      = 1;
-         node         = new_node(-1);
-         strcpy(draw_space, "  ");
+         n_nodes = 1;
+         node    = new_node(-1, 0, 0, 0); // Invalid Node.
       }
 
       if (C_action) {
@@ -1177,81 +1212,30 @@ public:
 
 
    void
-   print_node(FILE *fp, char *indent, Node *n)
+   traverse_print_ast(FILE *fp, Node *n)
    {
-      int id  = n->id;
-      int sti = n->sti;
-
-      if (sti != 0) {           // zero means no symbol.
-         long  col;
-         int   line = n->line;
-         char *p    = n->start - 1;
-
-         while (*p != '\n') {
-            p--;
-         }
-         col = n->start - p;
-
-         fprintf(fp, "  %4d  %4d  %4ld  %s%s", sti, line, col,
-                 indent, pt.node_name[id]);
-
-         if (sti > 0) {         // In the symbol table?
-            char *pp  = symbol[sti].start + symbol[sti].length;
-            char  ch;
-
-            ch = *pp;
-            *pp = '\0';
-            fprintf(fp, " (%s)\n", symbol[sti].start);
-            *pp = ch;
-         } else {               // A terminal symbol of the grammar!
-            fprintf(fp, " (%s)\n", pt.term_symb[-sti]);
-         }
-      } else {
-         fprintf(fp,"     .     .     .  %s%s\n", indent, pt.node_name[id]);
-      }
-   }
-
-
-   void
-   traverse_print_ast(FILE *fp, char *indent, Node *n)
-   {
-      static const char draw_plus[] = "+ ";
-      static const char draw_vbar[] = "| ";
-      static const char draw_last[] = "+ ";
-
       while (n->next != 0) {
-         strcat(indent, draw_plus);
-         print_node(fp, indent, n);
-         indent[strlen(indent) - 2] = 0;
+         n->print(fp);
 
          if (n->child != 0) {
-            strcat(indent, draw_vbar);
-            traverse_print_ast(fp, indent, n->child);
-            indent[strlen(indent) - 2] = '\0';
+            traverse_print_ast(fp, n->child);
          }
          n = n->next;
       }
 
-      strcat(indent, draw_last);
-      print_node(fp, indent, n);
-      indent[strlen(indent) - 2] = '\0';
+      n->print(fp);
       if (n->child != 0) {
-         strcat(indent, draw_space);
-         traverse_print_ast(fp, indent, n->child);
-         indent[strlen(indent) - 2] = '\0';
+         traverse_print_ast(fp, n->child);
       }
    }
 
 
    void
-   print_ast_nodes(FILE *fp, Node *n) // Print subtree.
+   print_ast_nodes(FILE *fp, Node *n)
    {
-      char indent[512];
-      strcpy(indent, draw_space);
       fprintf(fp, "\nAbstract Syntax Tree ...\n\n");
       if (n != 0) {
-         fprintf(fp, "   sti  line   col  \n");
-         traverse_print_ast(fp, indent, n); // Start parser traversal.
+         traverse_print_ast(fp, n);
       } else {
          fprintf(fp, "   Parser is empty.\n");
       }
@@ -1555,9 +1539,36 @@ public:
    }
 
    Node *
-   new_node(int id)
+   new_node(int id, int sti, int line, char *start)
    {
-      Node *n = new Node(id);
+      static int  node_num = 0;
+      Node       *n;
+      const char *node_name;
+      const char *label;
+      size_t      label_len;;
+
+      node_name = "<invalid>";
+      if (id != -1) {
+         node_name = pt.node_name[id];
+      }
+
+      if (sti == 0) {
+         label     = NULL;
+         label_len = 0;
+      } else if (sti > 0) {
+         /* References symbol table. */
+         label     = symbol[sti].start;
+         label_len = symbol[sti].length;
+      } else {
+         // invariant: sti < 0
+         /* References terminal symbol. */
+         label     = pt.term_symb[-sti];
+         label_len = strlen(label);
+      }
+
+      n = new Node(node_num, id, sti, line, start,
+                   label, label_len, node_name);
+      ++node_num;
       n_nodes++;
       n->alloc_link   = allocated_nodes;
       allocated_nodes = n;
