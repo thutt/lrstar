@@ -106,6 +106,20 @@ public:
    }
 
 
+   char *
+   get_token()
+   {
+      // Caller is responsible for 'delete []' on the result.
+      if (token != 0) {
+         char *result = new char[token_len + 1];
+         strncpy(result, token, token_len);
+         result[token_len] = '\0';
+         return result;
+      } else {
+         return 0;
+      }
+   }
+
    void
    print(FILE *fp)
    {
@@ -116,9 +130,10 @@ public:
       print_node_ref_(fp, "chd", child);
 
       if (token != 0) {
-         fprintf(fp, "tok=%*.*s",
-                  static_cast<int>(token_len), static_cast<int>(token_len),
-                  token);
+         char *tok = get_token();
+
+         fprintf(fp, "tok=%s", tok);
+         delete [] tok;
       } else {
          fprintf(fp, "tok=--");
       }
