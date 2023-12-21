@@ -12,7 +12,7 @@ SRC_DIR=$(dirname "${SCRIPT}");
 if [ ! -z "${LRSTAR_DIR}" ]; then
     # Development environment being used.
     # Resolve LRSTAR and DFA with developmental shell functions.
-    source $(readlink -f "${SRC_DIR}/functions");
+    source $(readlink -f "${LRSTAR_DIR}/scripts/functions");
 fi;
 
 LRSTAR="${LRSTAR:-lrstar}";
@@ -54,18 +54,18 @@ Details:
     This is used to specify the directory that contains the 'grm' and,
     optionally, the 'lgr' grammars.
 
-  -g | -grm         (optional)
+  -g | --grm         (optional)
 
     This specifies the name of both the syntax grammar ('grm') and
     lexical grammar ('lgr') files.  If not specified, the final
     component of the '--directory' value will be used.
 
-  -G | -grmopt      (optional)
+  -G | --grmopt      (optional)
 
     This facilitates providing options to the invocation of lrstar for
     the specified grammar.
 
-  -L | -lgropt      (optional)
+  -L | --lgropt      (optional)
 
     This facilitates providing options to the invocation of dfa for
     the specified grammar.
