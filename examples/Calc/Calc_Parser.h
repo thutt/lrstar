@@ -40,6 +40,7 @@ enum nodecon {
 extern const char Calc_grammar_name[];
 
 typedef lrstar_parser</* grammar           */   Calc_grammar_name,
+                      /* AST traversals    */   1,
                       /* actions           */   true,
                       /* debug_parser      */   true,
                       /* debug_trace       */   true,

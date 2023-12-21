@@ -230,7 +230,7 @@ main_nact_functions(FILE *fp, int N_nacts, const char **Nact_start)
 
          if (strcmp (Nact_start[n], "NULL") != 0) {
             fprintf(fp,
-                    "void %s_%s(UNUSED_PARAM(ast_pass_t pass),\n"
+                    "void %s_%s(UNUSED_PARAM(unsigned traversal_number),\n"
                     "%*sUNUSED_PARAM(parse_direction_t direction),\n"
                     "%*sUNUSED_PARAM(%s_parser_t *parser),\n"
                     "%*sUNUSED_PARAM(Node *node));\n",
@@ -1297,6 +1297,21 @@ generate_grammar_parser_typedef(FILE *fp, const char *grammar)
    fprintf(fp, "%s", templ);
    fprintf(fp,
            "/* grammar           */   %s_grammar_name", gfn);
+   {
+      /* Number of AST traversals.  Must be > 0.  An error should be
+       * produced if the value is not greater than 0, but bounding it
+       * to 1 will suffice.
+       */
+      unsigned traversals = optn[PG_AST_TRAVERSALS];
+
+      if (traversals == 0) {
+         traversals = 1;
+      }
+      fprintf(fp, ",\n%*s"
+              "/* AST traversals    */   %u",
+              static_cast<int>(sizeof(templ) / sizeof(templ[0])) - 1, " ",
+              traversals);
+   }
    fprintf(fp, ",\n%*s"
            "/* actions           */   %s",
            static_cast<int>(sizeof(templ) / sizeof(templ[0])) - 1, " ",
@@ -1591,7 +1606,7 @@ write_user_nact(FILE *fp, const char *fn_name)
    write_user_preamble(fp);
    fprintf(fp,
            "void\n"
-           "%s_%s(UNUSED_PARAM(ast_pass_t pass),\n"
+           "%s_%s(UNUSED_PARAM(unsigned traversal_number),\n"
            "%*sUNUSED_PARAM(parse_direction_t direction),\n"
            "%*sUNUSED_PARAM(%s_parser_t *parser),\n"
            "%*sUNUSED_PARAM(Node *v))\n"

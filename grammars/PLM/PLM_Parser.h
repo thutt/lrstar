@@ -13,6 +13,7 @@
 extern const char PLM_grammar_name[];
 
 typedef lrstar_parser</* grammar           */   PLM_grammar_name,
+                      /* AST traversals    */   1,
                       /* actions           */   true,
                       /* debug_parser      */   false,
                       /* debug_trace       */   false,

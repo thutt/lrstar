@@ -13,12 +13,6 @@
 
 #define EOF_CHAR 26             // End Of File character.
 
-enum ast_pass_t {
-   FIRST_PASS  = 1,
-   SECOND_PASS = 2,
-   THIRD_PASS  = 3,
-   FOURTH_PASS = 4,
-};
 
 typedef enum parse_direction_t {
    TOP_DOWN,
@@ -194,6 +188,7 @@ class lrstar_user_data_t {
 };
 
 template<const char    *C_grammar,
+         unsigned       C_num_ast_traversal,
          bool           C_action,
          bool           C_debug_parser,
          bool           C_debug_trace,
@@ -214,7 +209,7 @@ class lrstar_parser {
 public:
    typedef void (*init_func_t)(lrstar_parser *parser);
    typedef int  (*tact_func_t)(lrstar_parser *parser, int &t);
-   typedef void (*nact_func_t)(ast_pass_t         pass,
+   typedef void (*nact_func_t)(unsigned           traverse_num,
                                parse_direction_t  direction,
                                lrstar_parser     *parser,
                                Node              *t);
@@ -272,7 +267,6 @@ private:
    unsigned  max_symbols;       // Maximum number of symbols.
 
 public:                          // AST Area ...
-   ast_pass_t  traversal;       // AST traversal number: 1, 2, 3 ...
    int         stacki;          // AST stack index.
    Node       *root;            // Current root node.
    Node       *node;            // Current AST node.
@@ -674,7 +668,6 @@ public:
       hashvec(0),
       max_cells(0),
       max_symbols(max_symb_),
-      traversal(FIRST_PASS),
       stacki(0),
       root(0),
       node(0),
@@ -1408,9 +1401,14 @@ public:
          }
          print_symtab(fp);                            // Print the symbol table contents.
          if (C_make_ast) {
+            unsigned ast_traversal;
             find_root (PS[0].node);
             print_ast(fp);
-            traverse_nact(fp, FIRST_PASS);
+            ast_traversal = 0;
+            while (ast_traversal < C_num_ast_traversal) {
+               traverse_nact(fp, ast_traversal + 1);
+               ++ast_traversal;
+            }
          }
 
          if (C_debug_parser) {
@@ -1442,7 +1440,7 @@ public:
 
 
    void
-   traverse_invoke_nact(FILE *fp, Node *n)
+   traverse_invoke_nact(FILE *fp, Node *n, unsigned traverse_num)
    {
       if (C_node_actions) {
          Node *c;
@@ -1454,19 +1452,19 @@ public:
          stack[stacki].counter = counter[n->id];
 
          if (nact_func[n->id] != 0) { // Got a node action ?
-            tracer(n, TOP_DOWN);
-            (*nact_func[n->id])(traversal, TOP_DOWN, this, n);
+            tracer(n, traverse_num, TOP_DOWN);
+            (*nact_func[n->id])(traverse_num, TOP_DOWN, this, n);
          }
 
          c = n->child;          // Child node pointer.
          while (c != 0) {
-            traverse_invoke_nact(fp, c);
+            traverse_invoke_nact(fp, c, traverse_num);
             c = c->next;
          }
 
          if (nact_func[n->id] != 0) { // Got a node action ?
-            tracer(n, BOTTOM_UP);
-            (*nact_func[n->id])(traversal, BOTTOM_UP, this, n);
+            tracer(n, traverse_num, BOTTOM_UP);
+            (*nact_func[n->id])(traverse_num, BOTTOM_UP, this, n);
          }
          stacki--;
       }
@@ -1474,11 +1472,13 @@ public:
 
 
    void
-   traverse_nact(FILE *fp, ast_pass_t trav)
+   traverse_nact(FILE *fp, unsigned traverse_num)
    {
       if (C_node_actions) {
          if (n_nodes > 1) {           // Any nodes in the tree?
             if (pt.n_nodeactns > 0) { // Any node actions?
+               Node *n;
+
                stacki  = -1;
                stack   = new Stack[C_stksize];
                counter = new int[pt.n_nodenames];
@@ -1493,10 +1493,9 @@ public:
                   fprintf(fp,"\n");
                }
 
-               traversal = trav;
-               Node *n   = root;
+               n = root;
                do {
-                  traverse_invoke_nact(fp, n);
+                  traverse_invoke_nact(fp, n, traverse_num);
                   n = n->next;
                } while (n != 0);
             }
@@ -1506,7 +1505,7 @@ public:
 
 
    void
-   tracer(Node *n, parse_direction_t direction)
+   tracer(Node *n, unsigned traverse_num, parse_direction_t direction)
    {
       if (C_debug_trace) {
          const char *name;
@@ -1524,7 +1523,7 @@ public:
             if (n->has_symbol()) {
                name = symbol_name(n->sti);
             }
-            printf("   %d %s %s (%s)\n", traversal, dir,
+            printf("   %u  %s %s (%s)\n", traverse_num, dir,
                    pt.node_name[n->id], name);
          }
       }

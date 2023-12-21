@@ -13,6 +13,7 @@
 extern const char Python_grammar_name[];
 
 typedef lrstar_parser</* grammar           */   Python_grammar_name,
+                      /* AST traversals    */   1,
                       /* actions           */   false,
                       /* debug_parser      */   false,
                       /* debug_trace       */   false,

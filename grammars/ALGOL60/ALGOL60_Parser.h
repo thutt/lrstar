@@ -13,6 +13,7 @@
 extern const char ALGOL60_grammar_name[];
 
 typedef lrstar_parser</* grammar           */   ALGOL60_grammar_name,
+                      /* AST traversals    */   1,
                       /* actions           */   false,
                       /* debug_parser      */   false,
                       /* debug_trace       */   false,

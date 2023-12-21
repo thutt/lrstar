@@ -33,6 +33,7 @@ OPTION PGOption[]= // Parser Generator Options
    "k",        "k-lookaheads for LR(*) parsing",         PG_LOOKAHEADS,       1,
    "",         "",                           1,                   0,
    "ast",      "AST activated in parser",                PG_ASTCONST,         1,
+   "astp",     "Number of AST traversals",               PG_AST_TRAVERSALS,   1,
    "exp",      "Expecting-list activated",               PG_EXPECTING,        1,
    "ta",       "Terminal-actions activated",             PG_TERMACTIONS,      1,
    "na",       "Node-actions activated",                 PG_NODEACTIONS,      1,

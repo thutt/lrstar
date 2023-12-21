@@ -1,10 +1,10 @@
 void
-Calc_div_(UNUSED_PARAM(ast_pass_t pass),
+Calc_div_(UNUSED_PARAM(unsigned traversal_number),
           UNUSED_PARAM(parse_direction_t direction),
           UNUSED_PARAM(Calc_parser_t *parser),
           UNUSED_PARAM(Node *v))
 {
-    if (pass == FIRST_PASS) {
+    if (traversal_number == 1) {
         switch (direction) {
         case TOP_DOWN:
             break;

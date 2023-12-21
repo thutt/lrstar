@@ -13,6 +13,7 @@
 extern const char CPP5_grammar_name[];
 
 typedef lrstar_parser</* grammar           */   CPP5_grammar_name,
+                      /* AST traversals    */   1,
                       /* actions           */   false,
                       /* debug_parser      */   false,
                       /* debug_trace       */   false,

@@ -42,6 +42,7 @@ enum options
 {
    PG_ARGPOINTATNT  ,
    PG_ASTCONST      ,
+   PG_AST_TRAVERSALS,
    PG_BACKSLASH     ,
    PG_BOOLMATRIX    ,
    PG_CLR           ,
