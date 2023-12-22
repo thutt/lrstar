@@ -20,8 +20,8 @@ INCLUDES	:=				\
 BUILD_TYPE	:=						\
 	$(if $(filter debug,$(LRSTAR_BUILD_TYPE)),DEBUG,RELEASE)
 
-LRSTAR  := $(INSTALL_ROOT)/bin/lrstar
-DFA     := $(INSTALL_ROOT)/bin/dfa
+LRGEN  := $(INSTALL_ROOT)/bin/lrgen
+
 
 DEFINES	:=			\
 	LRSTAR_LINUX
@@ -76,7 +76,7 @@ $(GRM_BUILD_DIR):
 	mkdir --parents $(GRM_BUILD_DIR)
 
 recurse:	| $(GRM_BUILD_DIR)
-	$(MAKE) -C $(GRM_BUILD_DIR) --makefile $(GRM_DIR)/Makefile $(GRM) VPATH=$(GRM_DIR);
+	$(MAKE) -C $(GRM_BUILD_DIR) --makefile $(GRM_DIR)/$(GRM).make $(GRM) VPATH=$(GRM_DIR);
 
 # Local Variables:
 # mode: makefile

@@ -114,11 +114,14 @@ function lrgen ()
 function build ()
 {
     local grm_dir="${1}";
+    local grm="${2}";
+    local root="${LRSTAR_BUILD_DIR}/${LRSTAR_BUILD_TYPE}/usr/local";
 
     rm -f "${grm_dir}/*.o";
-    make \
-        -C "${grm_dir}" \
-        LRSTAR_INSTALL_ROOT=${LRSTAR_BUILD_DIR}/${LRSTAR_BUILD_TYPE}/usr/local
+    make                                        \
+        -C "${grm_dir}"                         \
+        --makefile ${grm_dir}/${grm}.make       \
+        LRSTAR_INSTALL_ROOT=${root}
  }
 
 
@@ -139,7 +142,7 @@ function process ()
     if [ -r "${lgr}" ] ; then
         # The lexical grammer exists, the project should build into an
         # executable with the generated Makefile.
-        build "${grm_dir}";
+        build "${grm_dir}" "${grm_name}";
    fi;
 }
 

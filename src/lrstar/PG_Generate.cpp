@@ -1777,48 +1777,6 @@ static void make_bat_fn(FILE       *fp,
 }
 
 
-static void makefile_fn(FILE       *fp,
-                        const char *pathname,
-                        const char *grammar,
-                        const char *fname)
-{
-   static const char *make = (
-      "# Build '%s' parser.\n" /* grammar */
-      "\n\n"
-      "GRM\t\t:= %s\n" /* grammar */
-      ".DEFAULT_GOAL\t:= recurse\n"
-      "\n\n"
-      "INSTALL_ROOT :=\t\t\t\\\n"
-      "\t$(if $(LRSTAR_INSTALL_ROOT),$(LRSTAR_INSTALL_ROOT),/usr/local)\n"
-      "\n\n"
-      "include $(LRSTAR_INSTALL_ROOT)/make/sample.defs\n"
-      "\n\n"
-      "SOURCE\t:=\t\t\t\\\n"
-      "\t$(GRM)_Lexer.cpp\t\\\n"
-      "\t$(GRM)_Main.cpp\t\t\\\n"
-      "\t$(GRM)_Parser.cpp\t\\\n"
-      "\t$(GRM)_user.cpp\t\t\\\n"
-      "\t$(GRM)_user_main.cpp\t\t\\\n"
-      "\n\n"
-      "OBJS\t:= $\t$(SOURCE:.cpp=.o) $(LRSTAR_INSTALL_ROOT)/lib/lrstar.a\n"
-      "\n\n"
-      "$(GRM)_Parser.cpp:\t$(GRM).grm\n"
-      "\t$(LRSTAR) $<\n"
-      "\n\n"
-      "$(GRM)_LexerTables_typedef.h:\t$(GRM).lgr $(GRM)_Parser.cpp\n"
-      "\t$(DFA) $<\n"
-      "\n\n"
-      "$(GRM)_Lexer.o:\t$(GRM)_LexerTables_typedef.h\n"
-      "\n\n"
-      "$(GRM):\t$(OBJS)\n"
-      "\t$(CC) $(CXXFLAGS) -o $@ $(OBJS);\n"
-      "\n\n"
-      "clean:\n"
-      "\trm $(SOURCE) $(OBJS) $(GRM);");
-   fprintf(fp, make, grammar, grammar, grammar, pathname);
-}
-
-
 static void write_file(const char       *gdn,
                        const char       *grammar,
                        const char       *fname,
@@ -2080,10 +2038,7 @@ void  PG_Main::GenerateOtherFiles ()
       write_file(gdn, gfn, NULL, "_user.cpp", true,
                  user_written_cpp_fn);
    }
-   if (lrstar_linux) {
-      write_file(gdn, gfn,  "Makefile", "", true, makefile_fn);
-   } else {
-      assert(lrstar_windows);
+   if (lrstar_windows) {
       write_file(gdn, gfn, "make.bat", "", true, make_bat_fn);
    }
 }
