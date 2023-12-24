@@ -291,7 +291,7 @@ OBJS	:=				\\
 	\$(INSTALL_ROOT)/lib/lrstar.a
 
 
-\$(GRM).sentinel:	\$(GRM).grm \$(GRM).lgr
+\$(GRM).sentinel:	\$(GRM).grm \$(GRM).lgr \$(GRM).make
 	\$(LRGEN)			\\
 	  --directory \$(GRM_DIR)	\\
 	  --grm \$(GRM)			\\
