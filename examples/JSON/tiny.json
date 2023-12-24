@@ -1,0 +1,8 @@
+[
+    { "alpha": null },
+    { "beta": true },
+    null,
+    { "gamma": false,
+      "zeta" : 6.5 },
+    { "iota": [ 10, { "gungla":"fnord" } ] }
+] 

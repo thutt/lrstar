@@ -22,7 +22,7 @@ exp                  -> 'e' digit+
                      -> 'e' '+' digit+
                      -> 'E' '+' digit+
 
-<string>             -> '"' schar* '"'
+<string>             -> '"' schar* '"'   // Quotes are included.
 
 schar                -> sany
                      -> '\' '\'
