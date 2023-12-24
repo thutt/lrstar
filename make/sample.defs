@@ -31,6 +31,8 @@ ERROR_FORMAT	:=				\
 	-fdiagnostics-color=never		\
 	-fno-diagnostics-show-caret
 
+DEBUG	:=							\
+	$(if $(filter debug,$(LRSTAR_BUILD_TYPE)),-g)
 
 CXXFLAGS	:=					\
 	-MMD						\
@@ -61,6 +63,7 @@ CXXFLAGS	:=					\
 	-Wunused-label					\
 	-Wunused-value					\
 	-pedantic					\
+	$(DEBUG)					\
 	$(ERROR_FORMAT)					\
 	$(addprefix -I,$(INCLUDES))			\
 	$(addprefix -D,LRSTAR_$(BUILD_TYPE) $(DEFINES))
