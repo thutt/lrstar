@@ -40,6 +40,12 @@ public:
    }
 };
 
+struct NodeData {
+   /* Extend this type and use 'set_user_data' to attach information
+    * to an AST node.
+    */
+};
+
 class Node {         // AST Node.
 public:
    int         nodenum;         // Number used to refer to a node in AST dump.
@@ -55,6 +61,7 @@ public:
    Node       *child;           // Child node.
    Node       *parent;          // Parent node.
    Node       *alloc_link;      // Linked list of all nodes;
+   NodeData   *user_data;
    Node(int         nodenum_,
         int         id_,
         int         sti_,
@@ -75,7 +82,8 @@ public:
       next(0),
       child(0),
       parent(0),
-      alloc_link(0)
+      alloc_link(0),
+      user_data(0)
    {
    }
 
@@ -87,6 +95,17 @@ public:
       return (start != 0) && (sti != 0) && (line != 0);
    }
 
+
+   void
+   set_node_data(NodeData *ud)
+   {
+      /* Note that the client is responsible for releasing attached
+       * user data.  It is not deleted at the time the node is
+       * destroyed because it could have a lifetime longer than the
+       * AST.
+       */
+      user_data = ud;
+   }
 
    void print_node_ref_(FILE *fp,
                         const char *label,
@@ -1488,9 +1507,7 @@ public:
                }
 
                if (C_debug_parser) {
-                  fprintf(fp,"\nDoing Tree Traversal ...\n\n");
-               } else {
-                  fprintf(fp,"\n");
+                  fprintf(fp,"\nDoing Tree Traversal ...\n");
                }
 
                n = root;
