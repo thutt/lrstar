@@ -58,6 +58,7 @@ And sample projects for:
 
   + C       : Creates AST for preprocessed C.  
   + Calc    : Simple calculator that generates pseudo-assembly.  
+  + JSON    : Reads JSON files into a data structure and prints data.  
   + LRK     : Example showing LR(*) parsing.  
   + Typedef : Handling context-sensitive grammars with 'typedef' example.  
 
