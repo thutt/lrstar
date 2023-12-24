@@ -34,7 +34,7 @@ fail:
 
 $(LRSTAR):	$(OBJ)
 	$(PROLOG);				\
-	$(CC) -g $(PROFILE) $(OBJ) -o lrstar;
+	$(CC) $(PROFILE) $(OBJ) $(CXXFLAGS) -o lrstar;
 
 $(LRSTAR).d:	$(LRSTAR)
 	$(PROLOG);				\

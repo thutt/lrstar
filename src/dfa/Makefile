@@ -34,7 +34,7 @@ fail:
 
 $(DFA):	$(OBJ)
 	$(PROLOG);				\
-	$(CC) -g $(PROFILE) $(OBJ) -o dfa;
+	$(CC) -g $(PROFILE) $(OBJ) $(CXXFLAGS) -o dfa;
 
 
 $(DFA).d:	$(DFA)
