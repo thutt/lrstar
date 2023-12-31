@@ -300,6 +300,8 @@ private:                        // LR Parser
    {
       if (C_semantics) {
          if (pt.argy[p] >= 0) {
+            // Switch terminal number to semantic symbol.  See
+            // {typename} in Typedef example.
             symbol[PS[0].sti].term = pt.argy[p];
          }
       }
@@ -1668,7 +1670,7 @@ public:
       symbol[sti].length = static_cast<unsigned>(length);      // Length of symbol.
       symbol[sti].cell   = cell;        // Cell in the hash vector.
       symbol[sti].type   = 0;           // Type of symbol: int, char, float, short.
-      symbol[sti].term   = t;           // Terminal number for lookup funciton.
+      symbol[sti].term   = t;           // Terminal number for lookup function.
       symbol[sti].scope  = 0;           // Scope: global, local, inner loop.
       n_symbols++;
       return sti;                               // Return symbol table index.
