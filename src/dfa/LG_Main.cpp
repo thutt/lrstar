@@ -108,7 +108,7 @@ int   LG::CheckOptions ()
    if      (n_outputs == 0) optn[LG_TABL_MEDIUM] = 1;
    else if (n_outputs > 1)
    {
-      printf ("More than one table size spedified, choosing 'medium'.\n\n");
+      printf ("More than one table size specified, choosing 'medium'.\n\n");
       optn[LG_TABL_SMALL]  = 0;
       optn[LG_TABL_MEDIUM] = 1;
       optn[LG_TABL_LARGE]  = 0;

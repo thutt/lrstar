@@ -55,8 +55,7 @@ public:
    static void DELETE_LEX_FILE     ();
    static void instantiate_lexer(const char *dname,
                                  const char *fname,
-                                 const char *cname,
-                                 const char *lexer_instantiation);
+                                 const char *cname);
 };
 
 /* Local Variables:      */

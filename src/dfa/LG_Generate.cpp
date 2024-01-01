@@ -1,5 +1,6 @@
 /* Copyright 2018, 2023 Paul B Mann.  BSD License. */
 
+#include <assert.h>
 #include "CM_Global.h"
 #include "LG_Global.h"
 #include "LG_CreateTables.h"
@@ -89,11 +90,13 @@ create_filename(char       *dst,
 
 
 static void
-lexer_inst(char *buf, size_t buf_len)
+lexer_inst(char *buf, size_t buf_len, const char *fname /* grammar name */)
 {
    static const char *b[] = { "false", "true" };
+
    snprintf(buf, buf_len,
-            "templ_lrstar_lexer<%s, %s, %s, %s, %s>",
+            "%s_lexer_<%s, %s, %s, %s, %s>",
+            fname,
             b[!!optn[LG_DEBUG]],
             data_types[ts_TermNumb].type,
             data_types[ts_Tm].type,
@@ -125,8 +128,7 @@ static void close_guard(FILE *fp)
 void
 LG::instantiate_lexer(const char *dname,
                       const char *fname,
-                      const char *cname,
-                      const char *lexer_instantiation)
+                      const char *cname)
 {
    FILE *fp;
    char pathname[PATH_MAX];
@@ -160,27 +162,12 @@ LG::instantiate_lexer(const char *dname,
       fprintf(fp, "};\n\n");
    }
 
-   fprintf(fp,
-           "template<>\n"
-           "const int %s_lexer_t::n_term_numb = %d;\n",
-           fname, data_types[ts_TermNumb].n_elem);
-   fprintf(fp,
-           "template<>\n"
-           "const int %s_lexer_t::n_Tm = %d;\n",
-           fname, data_types[ts_Tm].n_elem);
-   fprintf(fp,
-           "template<>\n"
-           "const int %s_lexer_t::n_Tr = %d;\n",
-           fname, data_types[ts_Tr].n_elem);
-   fprintf(fp,
-           "template<>\n"
-           "const int %s_lexer_t::n_Tc = %d;\n\n",
-           fname, data_types[ts_Tc].n_elem);
-
-
    fprintf(fp, "// Terminal number ...\n");
-   fprintf(fp, "static const %s term_numb_[%d] = { \n",
-           data_types[ts_TermNumb].type, N_states);
+   fprintf(fp, "extern const %s %s_term_numb[%d];\n",
+           data_types[ts_TermNumb].type, fname, N_states);
+   fprintf(fp, "const %s %s_term_numb[%d] = {\n",
+           data_types[ts_TermNumb].type, fname, N_states);
+
    for (int i = 0; i < N_states; i++) {
       if (i % 10 == 0) {
          fprintf(fp, "\n   %5d, ", D_red[i]);
@@ -188,15 +175,12 @@ LG::instantiate_lexer(const char *dname,
       else fprintf(fp, "%5d, ", D_red[i]);
    }
    fprintf(fp, "\n};\n\n");
-   fprintf(fp,
-           "template<>\n"
-           "const %s *%s_lexer_t::term_numb = &term_numb_[0];\n\n",
-           data_types[ts_TermNumb].type, fname);
-
 
    fprintf(fp, "// Terminal transition matrix ...\n");
-   fprintf(fp, "static const %s Tm_[%d] = {\n",
-           data_types[ts_Tm].type, T_size);
+   fprintf(fp, "extern const %s %s_Tm[%d];\n",
+           data_types[ts_Tm].type, fname, T_size);
+   fprintf(fp, "const %s %s_Tm[%d] = {\n",
+           data_types[ts_Tm].type, fname, T_size);
    for (int i = 0; i < T_size; i++) {
       if (i % 10 == 0) {
          if (T_matrix[i] == INT_MAX) {
@@ -214,16 +198,13 @@ LG::instantiate_lexer(const char *dname,
    }
    fprintf(fp, "\n};\n\n");
 
-   fprintf(fp,
-           "template<>\n"
-           "const %s *%s_lexer_t::Tm = &Tm_[0];\n\n",
-           data_types[ts_Tm].type, fname);
-
-   if (optn[LG_TABL_MEDIUM])
-   {
+   assert(optn[LG_TABL_MEDIUM]); /* Cannot set option; untested. */
+   if (optn[LG_TABL_MEDIUM]) {
       fprintf(fp, "// Terminal transition matrix row ...\n");
-      fprintf(fp, "static const %s Tr_[%d] = { \n",
-              data_types[ts_Tr].type, tt_states);
+      fprintf(fp, "extern const %s %s_Tr[%d];\n",
+              data_types[ts_Tr].type, fname, tt_states);
+      fprintf(fp, "const %s %s_Tr[%d] = {\n",
+              data_types[ts_Tr].type, fname, tt_states);
       for (int i = 0; i < tt_states; i++) {
          if (i % 10 == 0) {
             fprintf(fp, "\n   %5d, ", T_row[i]);
@@ -232,23 +213,16 @@ LG::instantiate_lexer(const char *dname,
          }
       }
       fprintf(fp, "\n};\n\n");
-      fprintf(fp,
-              "template<>\n"
-              "const %s *%s_lexer_t::Tr = &Tr_[0];\n\n",
-              data_types[ts_Tr].type, fname);
    } else {
-      fprintf(fp,
-              "template<>\n"
-              "const %s *%s_lexer_t::Tr = 0;\n\n",
-              data_types[ts_Tr].type, fname);
+      /* Non-existant Tr is handled in method Tr_() */
    }
 
-
-   if (optn[LG_TABL_MEDIUM])
-   {
+   if (optn[LG_TABL_MEDIUM]) {
       fprintf(fp, "// Terminal transition matrix column ...\n");
-      fprintf(fp, "static const %s Tc_[%d] = {\n",
-              data_types[ts_Tc].type, N_terms);
+      fprintf(fp, "extern const %s %s_Tc[%d];\n",
+              data_types[ts_Tc].type, fname, N_terms);
+      fprintf(fp, "const %s %s_Tc[%d] = {\n",
+              data_types[ts_Tc].type, fname, N_terms);
       for (int i = 0; i < N_terms; i++) {
          if (i % 10 == 0) {
             fprintf(fp, "\n%5d, ", T_col[i]);
@@ -257,17 +231,8 @@ LG::instantiate_lexer(const char *dname,
          }
       }
       fprintf(fp, "\n};\n\n");
-
-      fprintf(fp,
-              "template<>\n"
-              "const %s *%s_lexer_t::Tc = &Tc_[0];\n\n",
-              data_types[ts_Tc].type, fname);
-
    } else {
-      fprintf(fp,
-              "template<>\n"
-              "const %s *%s::Tc = 0;\n\n",
-              data_types[ts_Tc].type, fname);
+      /* Non-existant Tc is handled in method Tc_() */
    }
    fclose(fp);
 }
@@ -292,7 +257,49 @@ typedef_lexer(const char *dname,
    }
 
    open_guard(fp, fname, cname, "TYPEDEF");
-   fprintf(fp, "#include \"lrstar_lexer.h\"\n");
+   fprintf(fp, "#include \"lrstar_lexer.h\"\n\n");
+
+   fprintf(fp,
+           "extern const %s %s_term_numb[%d];\n"
+           "extern const %s %s_Tm[%d];\n"
+           "extern const %s %s_Tr[%d];\n"
+           "extern const %s %s_Tc[%d];\n"
+           "\n",
+           data_types[ts_TermNumb].type, fname, data_types[ts_TermNumb].n_elem,
+           data_types[ts_Tm].type, fname, data_types[ts_Tm].n_elem,
+           data_types[ts_Tr].type, fname, data_types[ts_Tr].n_elem,
+           data_types[ts_Tc].type, fname, data_types[ts_Tc].n_elem);
+   /* Extend lrstar_lexer */
+   fprintf(fp,
+           "template<bool C_debug, typename T_term_numb, "
+           "typename T_Tm, typename T_Tr, typename T_Tc>\n"
+           "class %s_lexer_ : public lrstar_lexer<C_debug, T_term_numb, "
+           "T_Tm, T_Tr, T_Tc> {\n", fname);
+
+   /* Cannot set option; untested.
+    *
+    * If LG_TABL_MEDIUM is not set, one or more of the matrices may
+    * not be created.  In this case, the pointers should be set to
+    * NULL.  Refer to the places where the matrices are generated to
+    * see the conditions, and then update the code below accordingly.
+    */
+   assert(optn[LG_TABL_MEDIUM]);
+   fprintf(fp,
+           "public:\n"
+           "    %s_lexer_(char *input_start) :\n"
+           "      lrstar_lexer<C_debug, T_term_numb, "
+           "T_Tm, T_Tr, T_Tc>(&%s_term_numb[0], &%s_Tm[0], &%s_Tr[0], &%s_Tc[0], input_start)\n"
+           "    {\n"
+           "\n"
+           "    }\n"
+           "\n\n",
+           fname,
+           fname, fname, fname, fname);
+   fprintf(fp,
+           "};\n"
+           "\n\n");
+
+
    fprintf(fp, "typedef %s %s_lexer_t;\n", lexer_instantiation, fname);
    close_guard(fp);
    fclose(fp);
@@ -302,7 +309,7 @@ typedef_lexer(const char *dname,
 void LG::GenerateLexerDefines ()
 {
    const char *lexer_class = "_LexerTables";
-   char        lexer[128];
+   char        lexer[PATH_MAX + 128];
 
    // T_matrix ...
 
@@ -310,6 +317,7 @@ void LG::GenerateLexerDefines ()
    data_types[ts_Tm].n_elem = T_size;
 
    // T_matrix row ...
+   assert(optn[LG_TABL_MEDIUM]); /* Cannot set option; untested. */
    if (optn[LG_TABL_MEDIUM])
    {
       data_types[ts_Tr].type = get_typestr (T_row, tt_states);
@@ -330,8 +338,8 @@ void LG::GenerateLexerDefines ()
       data_types[ts_TermNumb].n_elem = N_states;
    }
 
-   lexer_inst(lexer, 128);
-   LG::instantiate_lexer(gdn, gfn, "_Lexer", lexer);
+   LG::instantiate_lexer(gdn, gfn, "_Lexer");
+   lexer_inst(lexer, sizeof(lexer) / sizeof(lexer[0]), gfn);
    typedef_lexer(gdn, gfn, lexer_class, lexer);
 }
 

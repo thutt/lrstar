@@ -1,5 +1,6 @@
 
 /* Copyright 2018, 2023 Paul B Mann.  BSD License. */
+#include <assert.h>
 
 #include "CM_Global.h"
 #include "LG_CreateTables.h"
@@ -37,6 +38,7 @@ int   LG_CreateTables::CreateTables ()
       if (D_red[s] > 0)
       {
          D_red[s] = ret_numb[D_red[s]];
+         assert(!optn[LG_TABL_LARGE]); /* Cannot set option; untested. */
          if (optn[LG_TABL_LARGE] == 0 && D_red[s] == INT_MAX)
             D_red[s] = -1;
       }
@@ -55,6 +57,9 @@ int   LG_CreateTables::CreateTables ()
       prt_logonly("\n");
       prt_logonly("            rows   cols          matrix       list      vect     total\n");
    }
+   assert(!optn[LG_TABL_SMALL]); /* Cannot set option; untested. */
+   assert(optn[LG_TABL_MEDIUM]); /* Cannot set option; untested. */
+   assert(!optn[LG_TABL_LARGE]); /* Cannot set option; untested. */
    if (optn[LG_TABL_SMALL])
    {
       BLD_B (0, m);
@@ -410,6 +415,7 @@ int   LG_CreateTables::MRG_ROWE2T (int **matrix, int *row, int N_states)
    {
       count[s] = 0;
       hash = INT_MAX;
+      assert(!optn[LG_TABL_LARGE]); // Cannot set option; untested.
       if (optn[LG_TABL_LARGE])
       {
          for (t = 0; t < N_terms; t++)

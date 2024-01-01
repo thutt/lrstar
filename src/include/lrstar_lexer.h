@@ -24,18 +24,13 @@ public:
 };
 
 template<bool C_debug, typename T_term_numb, typename T_Tm, typename T_Tr, typename T_Tc>
-class templ_lrstar_lexer
+class lrstar_lexer
 {
-private:
-    static const int n_term_numb;
-    static const int n_Tm;
-    static const int n_Tr;
-    static const int n_Tc;
-
-    static const T_term_numb *term_numb;
-    static const T_Tm        *Tm;
-    static const T_Tr        *Tr;
-    static const T_Tc        *Tc;
+protected:
+   const T_term_numb *term_numb;
+   const T_Tm        *Tm;
+   const T_Tr        *Tr;
+   const T_Tc        *Tc;
 
 public:
     Token   token;               // Token being read.
@@ -45,7 +40,16 @@ public:
     int     lookahead_linenumb;  // Line number in input file.
 
 
-   templ_lrstar_lexer(char *input_start) :
+   lrstar_lexer(
+      const T_term_numb *term_numb_,
+      const T_Tm        *Tm_,
+      const T_Tr        *Tr_,
+      const T_Tc        *Tc_,
+      char              *input_start) :
+      term_numb(term_numb_),
+      Tm(Tm_),
+      Tr(Tr_),
+      Tc(Tc_),
       token(input_start),
       lookahead(0),
       linenumb(0),
@@ -53,6 +57,7 @@ public:
       lookahead_linenumb(0)
    {
    }
+
 
    int
    get_token()
