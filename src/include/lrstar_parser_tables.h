@@ -45,7 +45,7 @@ template<typename T_term_symb,
          typename T_node_numb,
          typename T_nact_numb,
          typename T_reverse>
-struct templ_lrstar_parser_tables {
+struct lrstar_parser_tables {
 public:
     static const int n_terms;
     static const int n_heads;
@@ -57,7 +57,7 @@ public:
     static const int n_nodeactns;
     static const int eof_symb;
     static const int err_used;
-
+    
 public:
     static const int n_term_symb; // Terminal symbols of the grammar.
     static const int n_head_symb; // Nonterminal symbols of the grammar.
@@ -144,6 +144,6 @@ public:
     static const T_nact_numb  *nact_numb;
     static const T_reverse    *reverse;
 
-    templ_lrstar_parser_tables() { }
+    lrstar_parser_tables() { }
 };
 #endif

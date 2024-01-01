@@ -93,7 +93,7 @@ parser_tables_inst(char *buf, size_t buf_len)
 {
 
    snprintf(buf, buf_len,
-            "templ_lrstar_parser_tables<\n"
+            "lrstar_parser_tables<\n"
 #define PFCP(pf_) PF(pf_)
 #define PF(pf_)   "   /* " #pf_ " */  %s,\n"
 #define PFL(pfl_) "   /* " #pfl_ " */ %s"
