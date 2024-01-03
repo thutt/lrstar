@@ -1,4 +1,4 @@
-/* Copyright 2023 Logic Magicians Software
+/* Copyright 2023, 2024 Logic Magicians Software
  * BSD License.
  */
 #if !defined(_LRSTAR_PARSER_TABLES_H_)
@@ -47,103 +47,151 @@ template<typename T_term_symb,
          typename T_reverse>
 struct lrstar_parser_tables {
 public:
-    static const int n_terms;
-    static const int n_heads;
-    static const int n_prods;
-    static const int n_states;
-    static const int accept_state;
-    static const int n_termactns;
-    static const int n_nodenames;
-    static const int n_nodeactns;
-    static const int eof_symb;
-    static const int err_used;
-    
-public:
-    static const int n_term_symb; // Terminal symbols of the grammar.
-    static const int n_head_symb; // Nonterminal symbols of the grammar.
-    static const int n_tact_name; // Terminal action names in grammar.
-    static const int n_node_name; // Node names found in grammar.
-
-    static const int n_head_numb; // Head symbol number for production.
-    static const int n_f_tail; // First tail in a production.
-    static const int n_tail; // Tail symbol number.
-
-    static const int n_arga; // Arguments for terminal actions.
-    static const int n_argx; // Arguments for terminal actions.
-    static const int n_argy; // Arguments for terminal actions.
-
-    static const int n_Bm; // Boolean matrix.
-    static const int n_Br; // Boolean matrix row.
-    static const int n_Bc; // Boolean matrix column.
-    static const int n_Bf; // Boolean matrix filter/mask.
-
-    static const int n_Tm; // Terminal transition matrix.
-    static const int n_Tr; // Terminal transition matrix row.
-    static const int n_Tc; // Terminal transition matrix column.
-
-    static const int n_Nm; // Nonterminal transition matrix.
-    static const int n_Nr; // Nonterminal transition matrix row.
-    static const int n_Nc; // Nonterminal transition matrix column.
-
-    static const int n_Rm; // Reduction matrix.
-    static const int n_Rr; // Reduction matrix row.
-    static const int n_Rc; // Reduction matrix column.
-
-    static const int n_PL; // Production length minus one.
-
-    static const int n_nd_fterm;
-    static const int n_nd_term;
-    static const int n_nd_faction;
-    static const int n_nd_action;
-
-    static const int n_tact_numb; // Terminal action numbers.
-    static const int n_node_numb;
-    static const int n_nact_numb;
-    static const int n_reverse;
+   const int  n_terms;
+   const int  n_heads;
+   const int  n_prods;
+   const int  n_states;
+   const int  accept_state;
+   const int  n_termactns;
+   const int  n_nodenames;
+   const int  n_nodeactns;
+   const int  eof_symb;
+   const bool err_used;
 
 public:
-    static const T_term_symb  *term_symb; // Terminal symbols of the grammar.
-    static const T_head_symb  *head_symb; // Nonterminal symbols of the grammar.
-    static const T_tact_name  *tact_name; // Terminal action names in grammar.
-    static const T_node_name  *node_name; // Node names found in grammar.
+   const T_term_symb  *term_symb; // Terminal symbols of the grammar.
+   const T_head_symb  *head_symb; // Nonterminal symbols of the grammar.
+   const T_tact_name  *tact_name; // Terminal action names in grammar.
+   const T_node_name  *node_name; // Node names found in grammar.
 
-    static const T_head_numb  *head_numb; // Head symbol number for production.
-    static const T_f_tail     *f_tail; // First tail in a production.
-    static const T_tail       *tail; // Tail symbol number.
+   const T_head_numb  *head_numb; // Head symbol number for production.
+   const T_f_tail     *f_tail; // First tail in a production.
+   const T_tail       *tail; // Tail symbol number.
 
-    static const T_arga       *arga; // Arguments for terminal actions.
-    static const T_argx       *argx; // Arguments for terminal actions.
-    static const T_argy       *argy; // Arguments for terminal actions.
+   const T_arga       *arga; // Arguments for terminal actions.
+   const T_argx       *argx; // Arguments for terminal actions.
+   const T_argy       *argy; // Arguments for terminal actions.
 
-    static const T_Bm         *Bm; // Boolean matrix.
-    static const T_Br         *Br; // Boolean matrix row.
-    static const T_Bc         *Bc; // Boolean matrix column.
-    static const T_Bf         *Bf; // Boolean matrix filter/mask.
+   const T_Bm         *Bm; // Boolean matrix.
+   const T_Br         *Br; // Boolean matrix row.
+   const T_Bc         *Bc; // Boolean matrix column.
+   const T_Bf         *Bf; // Boolean matrix filter/mask.
 
-    static const T_Tm         *Tm; // Terminal transition matrix.
-    static const T_Tr         *Tr; // Terminal transition matrix row.
-    static const T_Tc         *Tc; // Terminal transition matrix column.
+   const T_Tm         *Tm; // Terminal transition matrix.
+   const T_Tr         *Tr; // Terminal transition matrix row.
+   const T_Tc         *Tc; // Terminal transition matrix column.
 
-    static const T_Nm         *Nm; // Nonterminal transition matrix.
-    static const T_Nr         *Nr; // Nonterminal transition matrix row.
-    static const T_Nc         *Nc; // Nonterminal transition matrix column.
+   const T_Nm         *Nm; // Nonterminal transition matrix.
+   const T_Nr         *Nr; // Nonterminal transition matrix row.
+   const T_Nc         *Nc; // Nonterminal transition matrix column.
 
-    static const T_Rm         *Rm; // Reduction matrix.
-    static const T_Rr         *Rr; // Reduction matrix row.
-    static const T_Rc         *Rc; // Reduction matrix column.
+   const T_Rm         *Rm; // Reduction matrix.
+   const T_Rr         *Rr; // Reduction matrix row.
+   const T_Rc         *Rc; // Reduction matrix column.
 
-    static const T_PL         *PL; // Production length minus one.
+   const T_PL         *PL; // Production length minus one.
 
-    static const T_nd_fterm   *nd_fterm;
-    static const T_nd_term    *nd_term;
-    static const T_nd_faction *nd_faction;
-    static const T_nd_action  *nd_action;
+   const T_nd_fterm   *nd_fterm;
+   const T_nd_term    *nd_term;
+   const T_nd_faction *nd_faction;
+   const T_nd_action  *nd_action;
 
-    static const T_tact_numb  *tact_numb; // Terminal action numbers.
-    static const T_node_numb  *node_numb;
-    static const T_nact_numb  *nact_numb;
-    static const T_reverse    *reverse;
+   const T_tact_numb  *tact_numb; // Terminal action numbers.
+   const T_node_numb  *node_numb;
+   const T_nact_numb  *nact_numb;
+   const T_reverse    *reverse;
 
-    lrstar_parser_tables() { }
+   lrstar_parser_tables(int                 n_terms_,
+                        int                 n_heads_,
+                        int                 n_prods_,
+                        int                 n_states_,
+                        int                 accept_state_,
+                        int                 n_termactns_,
+                        int                 n_nodenames_,
+                        int                 n_nodeactns_,
+                        int                 eof_symb_,
+                        bool                err_used_,
+                        const T_term_symb  *term_symb_,
+                        const T_head_symb  *head_symb_,
+                        const T_tact_name  *tact_name_,
+                        const T_node_name  *node_name_,
+                        const T_head_numb  *head_numb_,
+                        const T_f_tail     *f_tail_,
+                        const T_tail       *tail_,
+                        const T_arga       *arga_,
+                        const T_argx       *argx_,
+                        const T_argy       *argy_,
+                        const T_Bm         *Bm_,
+                        const T_Br         *Br_,
+                        const T_Bc         *Bc_,
+                        const T_Bf         *Bf_,
+                        const T_Tm         *Tm_,
+                        const T_Tr         *Tr_,
+                        const T_Tc         *Tc_,
+                        const T_Nm         *Nm_,
+                        const T_Nr         *Nr_,
+                        const T_Nc         *Nc_,
+                        const T_Rm         *Rm_,
+                        const T_Rr         *Rr_,
+                        const T_Rc         *Rc_,
+                        const T_PL         *PL_,
+                        const T_nd_fterm   *nd_fterm_,
+                        const T_nd_term    *nd_term_,
+                        const T_nd_faction *nd_faction_,
+                        const T_nd_action  *nd_action_,
+                        const T_tact_numb  *tact_numb_,
+                        const T_node_numb  *node_numb_,
+                        const T_nact_numb  *nact_numb_,
+                        const T_reverse    *reverse_) :
+      n_terms(n_terms_),
+      n_heads(n_heads_),
+      n_prods(n_prods_),
+      n_states(n_states_),
+      accept_state(accept_state_),
+      n_termactns(n_termactns_),
+      n_nodenames(n_nodenames_),
+      n_nodeactns(n_nodeactns_),
+      eof_symb(eof_symb_),
+      err_used(err_used_),
+      term_symb(term_symb_),
+      head_symb(head_symb_),
+      tact_name(tact_name_),
+      node_name(node_name_),
+      head_numb(head_numb_),
+      f_tail(f_tail_),
+      tail(tail_),
+      arga(arga_),
+      argx(argx_),
+      argy(argy_),
+      Bm(Bm_),
+      Br(Br_),
+      Bc(Bc_),
+      Bf(Bf_),
+      Tm(Tm_),
+      Tr(Tr_),
+      Tc(Tc_),
+      Nm(Nm_),
+      Nr(Nr_),
+      Nc(Nc_),
+      Rm(Rm_),
+      Rr(Rr_),
+      Rc(Rc_),
+      PL(PL_),
+      nd_fterm(nd_fterm_),
+      nd_term(nd_term_),
+      nd_faction(nd_faction_),
+      nd_action(nd_action_),
+      tact_numb(tact_numb_),
+      node_numb(node_numb_),
+      nact_numb(nact_numb_),
+      reverse(reverse_)
+   {
+   }
 };
 #endif
+/* Local Variables:      */
+/* mode: c++             */
+/* c-basic-offset: 3     */
+/* tab-width: 3          */
+/* indent-tabs-mode: nil */
+/* End:                  */

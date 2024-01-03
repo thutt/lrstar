@@ -1,4 +1,4 @@
-/* Copyright 2018, 2023 Paul B Mann.  BSD License. */
+/* Copyright 2018, 2023, 2024 Paul B Mann.  BSD License. */
 
 #include <assert.h>
 #include <fcntl.h>
@@ -89,11 +89,10 @@ static const char *get_typestr(int *x, int n)
 
 
 static void
-parser_tables_inst(char *buf, size_t buf_len)
+parser_tables_inst_(char *buf, size_t buf_len, const char *cname)
 {
-
    snprintf(buf, buf_len,
-            "lrstar_parser_tables<\n"
+            "%s<\n"
 #define PFCP(pf_) PF(pf_)
 #define PF(pf_)   "   /* " #pf_ " */  %s,\n"
 #define PFL(pfl_) "   /* " #pfl_ " */ %s"
@@ -102,6 +101,7 @@ PARSER_FIELDS
 #undef PFCP
 #undef PFL
             ">",
+            cname,
 #define PFCP(pf_) PF(pf_)
 #define PF(pf_)   data_types[ts_T_##pf_].type,
 #define PFL(pfl_) data_types[ts_T_##pfl_].type
@@ -110,6 +110,12 @@ PARSER_FIELDS
 #undef PFCP
 #undef PFL
       );
+}
+
+static void
+parser_tables_inst(char *buf, size_t buf_len)
+{
+   parser_tables_inst_(buf, buf_len, "lrstar_parser_tables");
 }
 
 
@@ -264,6 +270,7 @@ main_nact_functions(FILE *fp, int N_nacts, const char **Nact_start)
 static void
 instantiate_field_lengths(FILE *fp)
 {
+   return;               /* XXX remove function. */
    /* Define the lengths of each array field. */
 #define PFCP(pf_) PF(pf_)
 #define PFL(pf_) PF(pf_)
@@ -284,6 +291,7 @@ void
 PG_Main::instantiate_constants(FILE *fp)
 {
    // Special constants in the parser.
+#if 0
    fprintf(fp,
            "template<>\n"
            "const int %s_parser_tables_t::n_terms = %d; "
@@ -343,12 +351,14 @@ PG_Main::instantiate_constants(FILE *fp)
            "const int %s_parser_tables_t::err_used = %d; "
            "// <error> used in grammar?\n\n\n",
            gfn, error_used);
+#endif
 }
 
 void PG_Main::instantiate_term_symb_data(FILE *fp)
 {
    fprintf(fp, "// Terminal symbols of the grammar.\n");
-   fprintf(fp, "static const char *term_symb_[%d] = {\n",
+   fprintf(fp, "const char *%s_grm_term_symb[%d] = {\n",
+           gfn,
            data_types[ts_T_term_symb].n_elem);
    for (int i = 0; i < N_terms; i++) {
       fprintf(fp, "   \"%s\",\n", make_term(term_name[i]));
@@ -360,7 +370,8 @@ void PG_Main::instantiate_term_symb_data(FILE *fp)
 void PG_Main::instantiate_head_symb_data(FILE *fp)
 {
    fprintf(fp, "// Nonterminal symbols of the grammar.\n");
-   fprintf(fp, "static const char *head_symb_[%d] = {\n",
+   fprintf(fp, "const char *%s_grm_head_symb[%d] = {\n",
+           gfn,
            data_types[ts_T_head_symb].n_elem);
    for (int i = 0; i < N_heads; i++) {
       fprintf(fp, "   \"%s\",\n", head_name[i]);
@@ -372,7 +383,8 @@ void PG_Main::instantiate_head_symb_data(FILE *fp)
 void PG_Main::instantiate_tact_name_data(FILE *fp)
 {
    fprintf(fp, "// Terninal action names found in the grammar ...\n");
-   fprintf(fp, "static const char *tact_name_[%d] = {\n",
+   fprintf(fp, "const char *%s_grm_tact_name[%d] = {\n",
+           gfn,
            data_types[ts_T_tact_name].n_elem);
    for (int i = 0; i < N_tacts; i++) {
       fprintf (fp, "   \"%s\",\n", Tact_start[i]);
@@ -385,7 +397,7 @@ void PG_Main::instantiate_node_name_data(FILE *fp)
 {
    if (N_nodes > 0) {
       fprintf(fp, "// Node names found in the grammar.\n");
-      fprintf(fp, "static const char * node_name_[%d] = {\n", N_nodes);
+      fprintf(fp, "const char *%s_grm_node_name[%d] = {\n", gfn, N_nodes);
       for (int i = 0; i < N_nodes; i++) {
          fprintf(fp, "   \"%s\",\n", Node_start[i]);
       }
@@ -397,8 +409,9 @@ void PG_Main::instantiate_node_name_data(FILE *fp)
 void PG_Main::instantiate_head_numb_data(FILE *fp)
 {
    fprintf(fp, "// Head symbol numbers for the productions.\n");
-   fprintf(fp, "static const %s head_numb_[%d] = {",
+   fprintf(fp, "const %s %s_grm_head_numb[%d] = {",
            data_types[ts_T_head_numb].type,
+           gfn,
            data_types[ts_T_head_numb].n_elem);
    for (int i = 0; i < N_prods; i++) {
       if (i % 10 == 0) {
@@ -415,8 +428,9 @@ void PG_Main::instantiate_head_numb_data(FILE *fp)
 void PG_Main::instantiate_f_tail_data(FILE *fp)
 {
    fprintf(fp, "// First tail symbol index into the tail list ...\n");
-   fprintf(fp, "static const %s f_tail_[%d] = {",
+   fprintf(fp, "const %s %s_grm_f_tail[%d] = {",
            data_types[ts_T_f_tail].type,
+           gfn,
            data_types[ts_T_f_tail].n_elem);
    for (int i = 0; i < N_prods+1; i++) {
       if (i % 10 == 0) {
@@ -431,9 +445,10 @@ void PG_Main::instantiate_f_tail_data(FILE *fp)
 void PG_Main::instantiate_tail_data(FILE *fp)
 {
    fprintf(fp, "// Tail symbol numbers ...\n");
-   fprintf(fp, "static const %s tail_[%d] = {",
-            data_types[ts_T_tail].type,
-            data_types[ts_T_tail].n_elem);
+   fprintf(fp, "const %s %s_grm_tail[%d] = {",
+           data_types[ts_T_tail].type,
+           gfn,
+           data_types[ts_T_tail].n_elem);
    for (int i = 0; i < N_tails; i++) {
       if (i % 10 == 0) {
          fprintf(fp, "\n   %5d, ", Tail[i]);
@@ -456,8 +471,9 @@ void PG_Main::instantiate_arga_data(FILE *fp)
          }
       }
       fprintf(fp, "// Arguments for token actions ...\n");
-      fprintf(fp, "static const %s arga_[%d] = {",
+      fprintf(fp, "const %s %s_grm_arga[%d] = {",
               data_types[ts_T_arga].type,
+              gfn,
               data_types[ts_T_arga].n_elem);
       for (int i = 0; i < N_terms; i++) {
          if (i % 10 == 0) {
@@ -478,7 +494,7 @@ void PG_Main::instantiate_Bm_data(FILE *fp)
    if (optn[PG_BOOLMATRIX] > 0) {
       // B_matrix ...
       fprintf(fp, "// Boolean matrix ...\n");
-      fprintf(fp, "static const uint8 Bm_[%d] = {", B_size);
+      fprintf(fp, "const uint8 %s_grm_Bm[%d] = {", gfn, B_size);
       if (optn[PG_BOOLMATRIX] == 1) { // char
          for (int i = 0; i < B_size; i++) {
             int x = static_cast<uint8>(B_matrix[i]);
@@ -508,8 +524,9 @@ void PG_Main::instantiate_Br_data(FILE *fp)
 {
    if (optn[PG_BOOLMATRIX] > 0) {
       fprintf(fp, "// Boolean matrix row (for state)...\n");
-      fprintf(fp, "static const %s Br_[%d] = {",
+      fprintf(fp, "const %s %s_grm_Br[%d] = {",
               data_types[ts_T_Br].type,
+              gfn,
               data_types[ts_T_Br].n_elem);
       for (int i = 0; i < N_states; i++) {
          if (i % 10 == 0) {
@@ -527,8 +544,13 @@ void PG_Main::instantiate_Bc_data(FILE *fp)
 {
    if (optn[PG_BOOLMATRIX] > 0) {
       fprintf(fp, "// Boolean matrix column (displacement) ...\n");
-      fprintf(fp, "static const %s Bc_[%d] = {",
+      fprintf(fp, "extern const %s %s_grm_Bc[%d];\n",
               data_types[ts_T_Bc].type,
+              gfn,
+              data_types[ts_T_Bc].n_elem);
+      fprintf(fp, "const %s %s_grm_Bc[%d] = {",
+              data_types[ts_T_Bc].type,
+              gfn,
               data_types[ts_T_Bc].n_elem);
       for (int i = 0; i < N_terms; i++) {
          if (i % 10 == 0) {
@@ -548,7 +570,7 @@ void PG_Main::instantiate_Bf_data(FILE *fp)
    if (optn[PG_BOOLMATRIX] > 1) {
       // B_matrix mask ...
       fprintf(fp, "// Boolean matrix filter/mask value ...\n");
-      fprintf(fp, "static const uint8 Bf_[%d] = {", N_terms);
+      fprintf(fp, "const uint8 %s_grm_Bf[%d] = {", gfn, N_terms);
       for (int i = 0; i < N_terms; i++) {
          if (i % 10 == 0) {
             fprintf(fp, "\n   %5d, ", B_mask[i]);
@@ -565,8 +587,9 @@ void PG_Main::instantiate_Bf_data(FILE *fp)
 void PG_Main::instantiate_Tm_data(FILE *fp)
 {
    fprintf(fp, "// Terminal transition matrix ...\n");
-   fprintf(fp, "static const %s Tm_[%d] = {",
+   fprintf(fp, "const %s %s_grm_Tm[%d] = {",
            data_types[ts_T_Tm].type,
+           gfn,
            data_types[ts_T_Tm].n_elem);
    for (int i = 0; i < T_size; i++)
    {
@@ -583,8 +606,9 @@ void PG_Main::instantiate_Tm_data(FILE *fp)
 void PG_Main::instantiate_Tr_data(FILE *fp)
 {
    fprintf(fp, "// Terminal transition matrix row ...\n");
-   fprintf(fp, "static const %s Tr_[%d] = {",
+   fprintf(fp, "const %s %s_grm_Tr[%d] = {",
            data_types[ts_T_Tr].type,
+           gfn,
            data_types[ts_T_Tr].n_elem);
    for (int i = 0; i < tt_states; i++) {
       if (i % 10 == 0) {
@@ -600,8 +624,9 @@ void PG_Main::instantiate_Tr_data(FILE *fp)
 void PG_Main::instantiate_Tc_data(FILE *fp)
 {
    fprintf(fp, "// Terminal transition matrix column ...\n");
-   fprintf(fp, "static const %s Tc_[%d] = {",
+   fprintf(fp, "const %s %s_grm_Tc[%d] = {",
            data_types[ts_T_Tc].type,
+           gfn,
            data_types[ts_T_Tc].n_elem);
 
    for (int i = 0; i < N_terms; i++) {
@@ -618,8 +643,9 @@ void PG_Main::instantiate_Tc_data(FILE *fp)
 void PG_Main::instantiate_Nm_data(FILE *fp)
 {
    fprintf(fp, "// Nonterminal transition matrix ...\n");
-   fprintf(fp, "static const %s Nm_[%d] = {",
+   fprintf(fp, "const %s %s_grm_Nm[%d] = {",
            data_types[ts_T_Nm].type,
+           gfn,
            data_types[ts_T_Nm].n_elem);
    for (int i = 0; i < N_size; i++) {
       if (i % 10 == 0) {
@@ -635,8 +661,9 @@ void PG_Main::instantiate_Nm_data(FILE *fp)
 void PG_Main::instantiate_Nr_data(FILE *fp)
 {
    fprintf(fp, "// Nonterminal transition matrix row ...\n");
-   fprintf(fp, "static const %s Nr_[%d] = {",
+   fprintf(fp, "const %s %s_grm_Nr[%d] = {",
            data_types[ts_T_Nr].type,
+           gfn,
            data_types[ts_T_Nr].n_elem);
    for (int i = 0; i < ntt_states; i++) {
       if (i % 10 == 0) {
@@ -652,8 +679,9 @@ void PG_Main::instantiate_Nr_data(FILE *fp)
 void PG_Main::instantiate_Nc_data(FILE *fp)
 {
    fprintf(fp, "// Nonterminal transition matrix column ...\n");
-   fprintf(fp, "static const %s Nc_[%d] = {",
+   fprintf(fp, "const %s %s_grm_Nc[%d] = {",
            data_types[ts_T_Nc].type,
+           gfn,
            data_types[ts_T_Nc].n_elem);
    for (int i = 0; i < N_prods; i++) {
       if (i % 10 == 0) {
@@ -669,8 +697,9 @@ void PG_Main::instantiate_Nc_data(FILE *fp)
 void PG_Main::instantiate_Rm_data(FILE *fp)
 {
    fprintf(fp, "// Reduction matrix ...\n");
-   fprintf(fp, "static const %s Rm_[%d] = {",
+   fprintf(fp, "const %s %s_grm_Rm[%d] = {",
            data_types[ts_T_Rm].type,
+           gfn,
            data_types[ts_T_Rm].n_elem);
    for (int i = 0; i < R_size; i++) {
       if (i % 10 == 0) {
@@ -686,8 +715,9 @@ void PG_Main::instantiate_Rm_data(FILE *fp)
 void PG_Main::instantiate_Rr_data(FILE *fp)
 {
    fprintf(fp, "// Reduction matrix row ...\n");
-   fprintf(fp, "static const %s Rr_[%d] = {",
+   fprintf(fp, "const %s %s_grm_Rr[%d] = {",
            data_types[ts_T_Rr].type,
+           gfn,
            data_types[ts_T_Rr].n_elem);
    for (int i = 0; i < N_states; i++) {
       if (i % 10 == 0) {
@@ -703,8 +733,9 @@ void PG_Main::instantiate_Rr_data(FILE *fp)
 void PG_Main::instantiate_Rc_data(FILE *fp)
 {
    fprintf(fp, "// Reduction matrix column ...\n");
-   fprintf(fp, "static const %s Rc_[%d] = {",
+   fprintf(fp, "const %s %s_grm_Rc[%d] = {",
            data_types[ts_T_Rc].type,
+           gfn,
            data_types[ts_T_Rc].n_elem);
    for (int i = 0; i < N_terms; i++) {
       if (i % 10 == 0) {
@@ -720,8 +751,9 @@ void PG_Main::instantiate_Rc_data(FILE *fp)
 void PG_Main::instantiate_PL_data(FILE *fp)
 {
    fprintf(fp, "// Production lengths (minus one) ...\n");
-   fprintf(fp, "static const %s PL_[%d] = {",
+   fprintf(fp, "const %s %s_grm_PL[%d] = {",
            data_types[ts_T_PL].type,
+           gfn,
            data_types[ts_T_PL].n_elem);
    for (int i = 0; i < N_prods; i++) {
       if (i % 10 == 0) {
@@ -738,8 +770,9 @@ void PG_Main::instantiate_tact_numb_data(FILE *fp)
 {
    if (N_tacts > 0) {           // Number of terminal actions.
       fprintf(fp, "// Terminal action number ...\n");
-      fprintf(fp, "static const %s tact_numb_[%d] = {",
+      fprintf(fp, "const %s %s_grm_tact_numb[%d] = {",
               data_types[ts_T_tact_numb].type,
+              gfn,
               data_types[ts_T_tact_numb].n_elem);
       for (int i = 0; i < N_terms; i++) {
          if (i % 10 == 0) {
@@ -765,8 +798,9 @@ void PG_Main::instantiate_argx_data(FILE *fp)
          }
       }
       fprintf(fp, "// First arguments for productions ...\n");
-      fprintf(fp, "static const %s argx_[%d] = {",
+      fprintf(fp, "const %s %s_grm_argx[%d] = {",
               data_types[ts_T_argx].type,
+              gfn,
               data_types[ts_T_argx].n_elem);
       for (int i = 0; i < N_prods; i++) {
          if (i % 10 == 0) {
@@ -795,9 +829,10 @@ void PG_Main::instantiate_argy_data(FILE *fp)
       }
 
       fprintf(fp, "// Second arguments for productions ...\n");
-      fprintf(fp, "static const %s argy_[%d] = {",
-               data_types[ts_T_argy].type,
-               data_types[ts_T_argy].n_elem);
+      fprintf(fp, "const %s %s_grm_argy[%d] = {",
+              data_types[ts_T_argy].type,
+              gfn,
+              data_types[ts_T_argy].n_elem);
 
       for (int i = 0; i < N_prods; i++) {
          if (i % 10 == 0) {
@@ -818,8 +853,9 @@ void PG_Main::instantiate_nd_fterm_data(FILE *fp)
       // Nondeterministic Items (terminals) in a state ...
       int count = N_states + 1;
       fprintf(fp, "// Nondeterministic first terminal in the list ...\n");
-      fprintf(fp, "static const %s nd_fterm_[%d] = {",
+      fprintf(fp, "const %s %s_grm_nd_fterm[%d] = {",
               data_types[ts_T_nd_fterm].type,
+              gfn,
               data_types[ts_T_nd_fterm].n_elem);
       for (int i = 0; i < count; i++) {
          if (i % 10 == 0) {
@@ -839,8 +875,9 @@ void PG_Main::instantiate_nd_term_data(FILE *fp)
       // Nondeterministic Terminal List ...
       int count = n_ndterms;
       fprintf(fp, "// Nondeterministic terminal list ...\n");
-      fprintf(fp, "const %s nd_term_[%d] = {",
+      fprintf(fp, "const %s %s_grm_nd_term[%d] = {",
               data_types[ts_T_nd_term].type,
+              gfn,
               data_types[ts_T_nd_term].n_elem);
       for (int i = 0; i < count; i++) {
          if (i % 10 == 0) {
@@ -860,8 +897,9 @@ void PG_Main::instantiate_nd_faction_data(FILE *fp)
       // Nondeterministic Start of a terminal's actions for state ...
       int count = n_ndterms + 1;
       fprintf(fp, "// Nondeterministic first action in the list ...\n");
-      fprintf(fp, "static const %s nd_faction_[%d] = {",
+      fprintf(fp, "const %s %s_grm_nd_faction[%d] = {",
               data_types[ts_T_nd_faction].type,
+              gfn,
               data_types[ts_T_nd_faction].n_elem);
       for (int i = 0; i < count; i++) {
          if (i % 10 == 0) {
@@ -881,8 +919,9 @@ void PG_Main::instantiate_nd_action_data(FILE *fp)
       // Nondeterministic Action ...
       int count = n_nditems;
       fprintf(fp, "// Nondeterministic actions list ...\n");
-      fprintf(fp, "static const %s nd_action_[%d] = {",
+      fprintf(fp, "const %s %s_grm_nd_action[%d] = {",
               data_types[ts_T_nd_action].type,
+              gfn,
               data_types[ts_T_nd_action].n_elem);
       for (int i = 0; i < count; i++) {
          if (i % 10 == 0) {
@@ -900,8 +939,9 @@ void PG_Main::instantiate_node_numb_data(FILE *fp)
 {
    if (optn[PG_ASTCONST] > 0 && N_nodes > 0) {
       fprintf(fp, "// Node number for each production ...\n");
-      fprintf(fp, "static const %s node_numb_[%d] = {",
+      fprintf(fp, "const %s %s_grm_node_numb[%d] = {",
               data_types[ts_T_node_numb].type,
+              gfn,
               data_types[ts_T_node_numb].n_elem);
       for (int i = 0; i < N_prods; i++) {
          if (i % 10 == 0) {
@@ -920,8 +960,9 @@ void PG_Main::instantiate_nact_numb_data(FILE *fp)
    if (optn[PG_ASTCONST] > 0 && N_nodes > 0) {
       if (N_nacts > 0) {
          fprintf(fp, "// Node action numbers ...\n");
-         fprintf(fp, "static const %s nact_numb_[%d] = {",
+         fprintf(fp, "const %s %s_grm_nact_numb[%d] = {",
                  data_types[ts_T_nact_numb].type,
+                 gfn,
                  data_types[ts_T_nact_numb].n_elem);
          for (int i = 0; i < N_prods; i++) {
             if (i % 10 == 0) {
@@ -942,7 +983,7 @@ void PG_Main::instantiate_reverse_data(FILE *fp)
       if (N_reverses > 0) {
          // Reverse the order of nodes (for a production/rule) ...
          fprintf(fp, "// Reverse the order of nodes ...\n");
-         fprintf(fp, "static const uint8 reverse_[%d] = {", N_prods);
+         fprintf(fp, "const uint8 %s_grm_reverse[%d] = {", gfn, N_prods);
          for (int i = 0; i < N_prods; i++) {
             if (i % 10 == 0) {
                fprintf(fp, "\n   %5d, ", Reverse[i]);
@@ -966,13 +1007,15 @@ PG_Main::instantiate_fields(FILE *fp)
 #define PFCP(pf_)                                           \
    if (data_types[ts_T_##pf_].n_elem != 0) {                \
       instantiate_##pf_##_data(fp);                         \
-      fprintf(fp, ("template<>\n"                           \
-                   "%s *%s_parser_tables_t::" #pf_ " = &%s[0];\n\n"         \
-                   ""),                                     \
-              data_types[ts_T_##pf_].type,                  \
-              gfn,                                          \
-              #pf_ "_");                                    \
-   } else {                                                 \
+      if (0) {                                                          \
+         fprintf(fp, ("template<>\n"                                    \
+                      "%s *%s_parser_tables_t::" #pf_ " = &%s[0];\n\n"  \
+                      ""),                                              \
+                 data_types[ts_T_##pf_].type,                           \
+                 gfn,                                                   \
+                 #pf_ "_");                                             \
+      }                                                                 \
+   } else if (0) {                                                      \
       fprintf(fp, ("template<>\n"                           \
                    "%s *%s_parser_tables_t::" #pf_ " = 0;\n\n"              \
                    ""),                                     \
@@ -983,13 +1026,15 @@ PG_Main::instantiate_fields(FILE *fp)
 #define PF(pf_)                                             \
    if (data_types[ts_T_##pf_].n_elem != 0) {                \
       instantiate_##pf_##_data(fp);                         \
-      fprintf(fp, ("template<>\n"                           \
-                   "const %s *%s_parser_tables_t::" #pf_ " = &%s[0];\n\n"   \
-                   ""),                                     \
-              data_types[ts_T_##pf_].type,                  \
-              gfn,                                          \
-              #pf_ "_");                                    \
-   } else {                                                 \
+      if (0) { \
+         fprintf(fp, ("template<>\n"                                    \
+                      "const %s *%s_parser_tables_t::" #pf_ " = &%s[0];\n\n" \
+                      ""),                                              \
+                 data_types[ts_T_##pf_].type,                           \
+                 gfn,                                                   \
+                 #pf_ "_");                                             \
+      }                                                                 \
+   } else if (0) {                                                      \
       fprintf(fp, ("template<>\n"                           \
                    "const %s *%s_parser_tables_t::" #pf_ " = 0;\n\n"        \
                    ""),                                     \
@@ -1003,14 +1048,78 @@ PG_Main::instantiate_fields(FILE *fp)
 }
 
 
+static void
+parser_tables_instantiate_args(FILE *fp)
+{
+   fprintf(fp, "<");
+#define PFCP(pf_)                                           \
+   fprintf(fp, "%s, ", data_types[ts_T_##pf_].type);
+
+#define PFL(pf_)                                            \
+   fprintf(fp, "%s", data_types[ts_T_##pf_].type);
+
+#define PF(pf_)                                             \
+   fprintf(fp, "%s, ", data_types[ts_T_##pf_].type);
+   PARSER_FIELDS
+#undef PF
+#undef PFCP
+#undef PFL
+   fprintf(fp, ">");
+}
+
+
+static void
+parser_tables_template_args(FILE *fp)
+{
+   fprintf(fp,
+           "<"
+           "T_term_symb, "
+           "T_head_symb, "
+           "T_tact_name, "
+           "T_node_name, "
+           "T_head_numb, "
+           "T_f_tail, "
+           "T_tail, "
+           "T_arga, "
+           "T_argx, "
+           "T_argy, "
+           "T_Bm, "
+           "T_Br, "
+           "T_Bc, "
+           "T_Bf, "
+           "T_Tm, "
+           "T_Tr, "
+           "T_Tc, "
+           "T_Nm, "
+           "T_Nr, "
+           "T_Nc, "
+           "T_Rm, "
+           "T_Rr, "
+           "T_Rc, "
+           "T_PL, "
+           "T_nd_fterm, "
+           "T_nd_term, "
+           "T_nd_faction, "
+           "T_nd_action, "
+           "T_tact_numb, "
+           "T_node_numb, "
+           "T_nact_numb, "
+           "T_reverse"
+           ">");
+}
+
+
 void
 PG_Main::typedef_tables(const char *dname,
                         const char *fname,
                         const char *cname)
 {
    FILE *fp;
+   static const char *b[] = { "false", "true" };
    char parser[1024];
    char pathname[PATH_MAX];
+   const char templ[] = "template<";
+   const int width = sizeof(templ) / sizeof(templ[0]) - 1;
 
    parser_tables_inst(parser, sizeof(parser) / sizeof(parser[0]));
    create_filename(pathname, PATH_MAX, dname, fname, cname,
@@ -1023,8 +1132,379 @@ PG_Main::typedef_tables(const char *dname,
    }
 
    open_guard(fp, fname, cname, "TYPEDEF");
-   fprintf(fp, "#include \"lrstar_parser_tables.h\"\n");
-   fprintf(fp, "typedef %s %s_parser_tables_t;\n\n", parser, gfn);
+   fprintf(fp, "#include \"lrstar_parser_tables.h\"\n\n");
+
+   /* External references to generate parser tables for the grammar. */
+   fprintf(fp, "extern const char *%s_grm_head_symb[%d];\n",
+           gfn,
+           data_types[ts_T_head_symb].n_elem);
+
+   if (N_tacts > 0) {
+      fprintf(fp, "extern const char *%s_grm_tact_name[%d];\n",
+              gfn,
+              data_types[ts_T_tact_name].n_elem);
+   }
+
+   if (N_nodes > 0) {
+      fprintf(fp, "extern const char *%s_grm_node_name[%d];\n", gfn, N_nodes);
+   }
+
+   fprintf(fp, "extern const %s %s_grm_head_numb[%d];\n",
+           data_types[ts_T_head_numb].type,
+           gfn,
+           data_types[ts_T_head_numb].n_elem);
+
+   fprintf(fp, "extern const %s %s_grm_f_tail[%d];\n",
+           data_types[ts_T_f_tail].type,
+           gfn,
+           data_types[ts_T_f_tail].n_elem);
+
+   fprintf(fp, "extern const %s %s_grm_tail[%d];\n",
+           data_types[ts_T_tail].type,
+           gfn,
+           data_types[ts_T_tail].n_elem);
+
+   fprintf(fp, "extern const char *%s_grm_term_symb[%d];\n",
+           gfn,
+           data_types[ts_T_term_symb].n_elem);
+
+   if (N_tacts > 0) {
+      fprintf(fp, "extern const %s %s_grm_arga[%d];\n",
+              data_types[ts_T_arga].type,
+              gfn,
+              data_types[ts_T_arga].n_elem);
+   }
+
+   if (optn[PG_BOOLMATRIX] > 0) {
+      fprintf(fp, "extern const uint8 %s_grm_Bm[%d];\n", gfn, B_size);
+      fprintf(fp, "extern const %s %s_grm_Br[%d];\n",
+              data_types[ts_T_Br].type,
+              gfn,
+              data_types[ts_T_Br].n_elem);
+   }
+
+   if (optn[PG_BOOLMATRIX] > 0) {
+      fprintf(fp, "extern const %s %s_grm_Bc[%d];\n",
+              data_types[ts_T_Bc].type,
+              gfn,
+              data_types[ts_T_Bc].n_elem);
+   }
+
+   if (optn[PG_BOOLMATRIX] > 1) {
+      fprintf(fp, "extern const uint8 %s_grm_Bf[%d];\n", gfn, N_terms);
+   }
+
+   fprintf(fp, "extern const %s %s_grm_Tm[%d];\n",
+           data_types[ts_T_Tm].type,
+           gfn,
+           data_types[ts_T_Tm].n_elem);
+
+   fprintf(fp, "extern const %s %s_grm_Tr[%d];\n",
+           data_types[ts_T_Tr].type,
+           gfn,
+           data_types[ts_T_Tr].n_elem);
+
+   fprintf(fp, "extern const %s %s_grm_Tc[%d];\n",
+           data_types[ts_T_Tc].type,
+           gfn,
+           data_types[ts_T_Tc].n_elem);
+
+   fprintf(fp, "extern const %s %s_grm_Nm[%d];\n",
+           data_types[ts_T_Nm].type,
+           gfn,
+           data_types[ts_T_Nm].n_elem);
+
+   fprintf(fp, "extern const %s %s_grm_Nr[%d];\n",
+           data_types[ts_T_Nr].type,
+           gfn,
+           data_types[ts_T_Nr].n_elem);
+
+   fprintf(fp, "extern const %s %s_grm_Nc[%d];\n",
+           data_types[ts_T_Nc].type,
+           gfn,
+           data_types[ts_T_Nc].n_elem);
+
+   fprintf(fp, "extern const %s %s_grm_Rm[%d];\n",
+           data_types[ts_T_Rm].type,
+           gfn,
+           data_types[ts_T_Rm].n_elem);
+
+   fprintf(fp, "extern const %s %s_grm_Rr[%d];\n",
+           data_types[ts_T_Rr].type,
+           gfn,
+           data_types[ts_T_Rr].n_elem);
+
+   fprintf(fp, "extern const %s %s_grm_Rc[%d];\n",
+           data_types[ts_T_Rc].type,
+           gfn,
+           data_types[ts_T_Rc].n_elem);
+
+   fprintf(fp, "extern const %s %s_grm_PL[%d];\n",
+           data_types[ts_T_PL].type,
+           gfn,
+           data_types[ts_T_PL].n_elem);
+
+   if (N_tacts > 0) {           // Number of terminal actions.
+      fprintf(fp, "extern const %s %s_grm_tact_numb[%d];\n",
+              data_types[ts_T_tact_numb].type,
+              gfn,
+              data_types[ts_T_tact_numb].n_elem);
+   }
+
+   if (N_nodes > 0 || N_semantics > 0) {
+      fprintf(fp, "extern const %s %s_grm_argx[%d];\n",
+              data_types[ts_T_argx].type,
+              gfn,
+              data_types[ts_T_argx].n_elem);
+   }
+
+   if (N_semantics > 0) {
+      fprintf(fp, "extern const %s %s_grm_argy[%d];\n",
+              data_types[ts_T_argy].type,
+              gfn,
+              data_types[ts_T_argy].n_elem);
+   }
+
+   if (n_ndstates > 0) {
+      fprintf(fp, "extern const %s %s_grm_nd_fterm[%d];\n",
+              data_types[ts_T_nd_fterm].type,
+              gfn,
+              data_types[ts_T_nd_fterm].n_elem);
+
+      fprintf(fp, "extern const %s %s_grm_nd_term[%d];\n",
+              data_types[ts_T_nd_term].type,
+              gfn,
+              data_types[ts_T_nd_term].n_elem);
+
+      fprintf(fp, "extern const %s %s_grm_nd_faction[%d];\n",
+              data_types[ts_T_nd_faction].type,
+              gfn,
+              data_types[ts_T_nd_faction].n_elem);
+
+      fprintf(fp, "extern const %s %s_grm_nd_action[%d];\n",
+              data_types[ts_T_nd_action].type,
+              gfn,
+              data_types[ts_T_nd_action].n_elem);
+   }
+
+   if (optn[PG_ASTCONST] > 0 && N_nodes > 0) {
+      fprintf(fp, "extern const %s %s_grm_node_numb[%d];\n",
+              data_types[ts_T_node_numb].type,
+              gfn,
+              data_types[ts_T_node_numb].n_elem);
+   }
+
+   if (N_nacts > 0) {
+      fprintf(fp, "extern const %s %s_grm_nact_numb[%d];\n",
+              data_types[ts_T_nact_numb].type,
+              gfn,
+              data_types[ts_T_nact_numb].n_elem);
+   }
+
+   if (optn[PG_ASTCONST] > 0 && N_nodes > 0) {
+      if (N_reverses > 0) {
+         fprintf(fp, "extern const uint8 %s_grm_reverse[%d];\n", gfn, N_prods);
+      }
+   }
+   fprintf(fp, "\n\n");
+
+   /* Extend lrstar_parser_tables to have constructor that initializes
+    * tables. */
+   fprintf(fp,
+           "%s"
+           "typename T_term_symb,\n"
+           "%*stypename T_head_symb,\n"
+           "%*stypename T_tact_name,\n"
+           "%*stypename T_node_name,\n"
+           "%*stypename T_head_numb,\n"
+           "%*stypename T_f_tail,\n"
+           "%*stypename T_tail,\n"
+           "%*stypename T_arga,\n"
+           "%*stypename T_argx,\n"
+           "%*stypename T_argy,\n"
+           "%*stypename T_Bm,\n"
+           "%*stypename T_Br,\n"
+           "%*stypename T_Bc,\n"
+           "%*stypename T_Bf,\n"
+           "%*stypename T_Tm,\n"
+           "%*stypename T_Tr,\n"
+           "%*stypename T_Tc,\n"
+           "%*stypename T_Nm,\n"
+           "%*stypename T_Nr,\n"
+           "%*stypename T_Nc,\n"
+           "%*stypename T_Rm,\n"
+           "%*stypename T_Rr,\n"
+           "%*stypename T_Rc,\n"
+           "%*stypename T_PL,\n"
+           "%*stypename T_nd_fterm,\n"
+           "%*stypename T_nd_term,\n"
+           "%*stypename T_nd_faction,\n"
+           "%*stypename T_nd_action,\n"
+           "%*stypename T_tact_numb,\n"
+           "%*stypename T_node_numb,\n"
+           "%*stypename T_nact_numb,\n"
+           "%*stypename T_reverse"
+           ">\n",
+           templ,
+           width, " ",
+           width, " ",
+           width, " ",
+           width, " ",
+           width, " ",
+           width, " ",
+           width, " ",
+           width, " ",
+           width, " ",
+           width, " ",
+           width, " ",
+           width, " ",
+           width, " ",
+           width, " ",
+           width, " ",
+           width, " ",
+           width, " ",
+           width, " ",
+           width, " ",
+           width, " ",
+           width, " ",
+           width, " ",
+           width, " ",
+           width, " ",
+           width, " ",
+           width, " ",
+           width, " ",
+           width, " ",
+           width, " ",
+           width, " ",
+           width, " ");
+   fprintf(fp, "   class %s_parser_tables_ : public lrstar_parser_tables", gfn);
+   parser_tables_template_args(fp);
+   fprintf(fp, "   {\n");
+   fprintf(fp, "\npublic:\n\n");
+   fprintf(fp, "      %s_parser_tables_() : lrstar_parser_tables", gfn);
+   parser_tables_template_args(fp);
+
+   fprintf(fp, "(");
+   fprintf(fp, "%d, ", N_terms);
+   fprintf(fp, "%d, ", N_heads);
+   fprintf(fp, "%d, ", N_prods);
+   fprintf(fp, "%d, ", N_states);
+   fprintf(fp, "%d, ", Accept_state);
+   fprintf(fp, "%d, ", N_tacts);
+   fprintf(fp, "%d, ", N_nodes);
+   fprintf(fp, "%d, ", N_nacts);
+   fprintf(fp, "%d, ", eof_term);
+   fprintf(fp, "%s, ", b[!!error_used]);
+
+   fprintf(fp, "&%s_grm_term_symb[0], ", gfn);
+   fprintf(fp, "&%s_grm_head_symb[0], ", gfn);
+   if (N_tacts > 0) {
+      fprintf(fp, "&%s_grm_tact_name[0], ", gfn);
+   } else {
+      fprintf(fp, "0, ");
+   }
+
+   if (N_nodes > 0) {
+      fprintf(fp, "&%s_grm_node_name[0], ", gfn);
+   } else {
+      fprintf(fp, "0, ");
+   }
+
+   fprintf(fp, "&%s_grm_head_numb[0], ", gfn);
+   fprintf(fp, "&%s_grm_f_tail[0], ", gfn);
+   fprintf(fp, "&%s_grm_tail[0], ", gfn);
+
+   if (N_tacts > 0) {
+      fprintf(fp, "&%s_grm_arga[0], ", gfn);
+   } else {
+      fprintf(fp, "0, ");
+   }
+
+   if (N_nodes > 0 || N_semantics > 0) {
+      fprintf(fp, "&%s_grm_argx[0], ", gfn);
+   } else {
+      fprintf(fp, "0, ");
+   }
+
+   if (N_semantics > 0) {
+      fprintf(fp, "&%s_grm_argy[0], ", gfn);
+   } else {
+      fprintf(fp, "0, ");
+   }
+
+   if (optn[PG_BOOLMATRIX] > 0) {
+      fprintf(fp, "&%s_grm_Bm[0], ", gfn);
+      fprintf(fp, "&%s_grm_Br[0], ", gfn);
+      fprintf(fp, "&%s_grm_Bc[0], ", gfn);
+   } else {
+      fprintf(fp, "0, 0, 0, ");
+   }
+   if (optn[PG_BOOLMATRIX] > 1) {
+      fprintf(fp, "&%s_grm_Bf[0], ", gfn);
+   } else {
+      fprintf(fp, "0, ");
+   }
+
+   fprintf(fp, "&%s_grm_Tm[0], ", gfn);
+   fprintf(fp, "&%s_grm_Tr[0], ", gfn);
+   fprintf(fp, "&%s_grm_Tc[0], ", gfn);
+
+   fprintf(fp, "&%s_grm_Nm[0], ", gfn);
+   fprintf(fp, "&%s_grm_Nr[0], ", gfn);
+   fprintf(fp, "&%s_grm_Nc[0], ", gfn);
+
+   fprintf(fp, "&%s_grm_Rm[0], ", gfn);
+   fprintf(fp, "&%s_grm_Rr[0], ", gfn);
+   fprintf(fp, "&%s_grm_Rc[0], ", gfn);
+
+   fprintf(fp, "&%s_grm_PL[0], ", gfn);
+
+   if (n_ndstates > 0) {
+      fprintf(fp,
+              "&%s_grm_nd_fterm[0], "
+              "&%s_grm_nd_term[0], "
+              "&%s_grm_nd_faction[0], "
+              "&%s_grm_nd_action[0], ",
+              gfn, gfn, gfn, gfn);
+   } else {
+      fprintf(fp, "0, 0, 0, 0, ");
+   }
+
+   if (N_tacts > 0) {           // Number of terminal actions.
+      fprintf(fp, "&%s_grm_tact_numb[0], ", gfn);
+   } else {
+      fprintf(fp, "0, ");
+   }
+   if (optn[PG_ASTCONST] > 0 && N_nodes > 0) {
+      fprintf(fp, "&%s_grm_node_numb[0], ", gfn);
+   } else {
+      fprintf(fp, "0, ");
+   }
+
+   if (N_nacts > 0) {
+      fprintf(fp, "&%s_grm_nact_numb[0], ", gfn);
+   } else {
+      fprintf(fp, "0, ");
+   }
+
+   if (optn[PG_ASTCONST] > 0 && N_nodes > 0) {
+      if (N_reverses > 0) {
+         fprintf(fp, "&%s_grm_reverse[0]", gfn);
+      } else {
+         fprintf(fp, "0");
+      }
+   } else {
+      fprintf(fp, "0");
+   }
+   fprintf(fp, ")\n");
+   fprintf(fp,
+           "      {\n"
+           "      }\n");
+   fprintf(fp, "   };\n\n");
+
+   fprintf(fp, "typedef %s_parser_tables_", gfn);
+   parser_tables_instantiate_args(fp);
+   fprintf(fp, " %s_parser_tables_t;\n\n", gfn);
    close_guard(fp);
    fclose(fp);
 }
