@@ -5,39 +5,70 @@
 #define __delphi__ParserTables_TYPEDEF
 
 #include "lrstar_parser_tables.h"
-typedef templ_lrstar_parser_tables<
-   /* term_symb */  const char * const,
-   /* head_symb */  const char * const,
-   /* tact_name */  const char * const,
-   /* node_name */  const char * const,
-   /* head_numb */  uint8,
-   /* f_tail */  uint16,
-   /* tail */  int16,
-   /* arga */  int32,
-   /* argx */  int32,
-   /* argy */  int32,
-   /* Bm */  uint8,
-   /* Br */  uint16,
-   /* Bc */  uint8,
-   /* Bf */  uint8,
-   /* Tm */  int16,
-   /* Tr */  uint16,
-   /* Tc */  uint8,
-   /* Nm */  int16,
-   /* Nr */  uint16,
-   /* Nc */  uint8,
-   /* Rm */  uint16,
-   /* Rr */  int16,
-   /* Rc */  uint8,
-   /* PL */  int8,
-   /* nd_fterm */  int32,
-   /* nd_term */  int32,
-   /* nd_faction */  int32,
-   /* nd_action */  int32,
-   /* tact_numb */  int32,
-   /* node_numb */  int32,
-   /* nact_numb */  int32,
-   /* reverse */ int32> delphi_parser_tables_t;
+
+extern const char *delphi_grm_head_symb[166];
+extern const uint8 delphi_grm_head_numb[355];
+extern const uint16 delphi_grm_f_tail[356];
+extern const int16 delphi_grm_tail[678];
+extern const char *delphi_grm_term_symb[101];
+extern const uint8 delphi_grm_Bm[394];
+extern const uint16 delphi_grm_Br[343];
+extern const uint8 delphi_grm_Bc[101];
+extern const uint8 delphi_grm_Bf[101];
+extern const int16 delphi_grm_Tm[580];
+extern const uint16 delphi_grm_Tr[343];
+extern const uint8 delphi_grm_Tc[101];
+extern const int16 delphi_grm_Nm[2246];
+extern const uint16 delphi_grm_Nr[343];
+extern const uint8 delphi_grm_Nc[355];
+extern const uint16 delphi_grm_Rm[91];
+extern const int16 delphi_grm_Rr[343];
+extern const uint8 delphi_grm_Rc[101];
+extern const int8 delphi_grm_PL[355];
+
+
+template<typename T_term_symb,
+         typename T_head_symb,
+         typename T_tact_name,
+         typename T_node_name,
+         typename T_head_numb,
+         typename T_f_tail,
+         typename T_tail,
+         typename T_arga,
+         typename T_argx,
+         typename T_argy,
+         typename T_Bm,
+         typename T_Br,
+         typename T_Bc,
+         typename T_Bf,
+         typename T_Tm,
+         typename T_Tr,
+         typename T_Tc,
+         typename T_Nm,
+         typename T_Nr,
+         typename T_Nc,
+         typename T_Rm,
+         typename T_Rr,
+         typename T_Rc,
+         typename T_PL,
+         typename T_nd_fterm,
+         typename T_nd_term,
+         typename T_nd_faction,
+         typename T_nd_action,
+         typename T_tact_numb,
+         typename T_node_numb,
+         typename T_nact_numb,
+         typename T_reverse>
+   class delphi_parser_tables_ : public lrstar_parser_tables<T_term_symb, T_head_symb, T_tact_name, T_node_name, T_head_numb, T_f_tail, T_tail, T_arga, T_argx, T_argy, T_Bm, T_Br, T_Bc, T_Bf, T_Tm, T_Tr, T_Tc, T_Nm, T_Nr, T_Nc, T_Rm, T_Rr, T_Rc, T_PL, T_nd_fterm, T_nd_term, T_nd_faction, T_nd_action, T_tact_numb, T_node_numb, T_nact_numb, T_reverse>   {
+
+public:
+
+      delphi_parser_tables_() : lrstar_parser_tables<T_term_symb, T_head_symb, T_tact_name, T_node_name, T_head_numb, T_f_tail, T_tail, T_arga, T_argx, T_argy, T_Bm, T_Br, T_Bc, T_Bf, T_Tm, T_Tr, T_Tc, T_Nm, T_Nr, T_Nc, T_Rm, T_Rr, T_Rc, T_PL, T_nd_fterm, T_nd_term, T_nd_faction, T_nd_action, T_tact_numb, T_node_numb, T_nact_numb, T_reverse>(101, 166, 355, 343, 342, 0, 0, 0, 1, false, &delphi_grm_term_symb[0], &delphi_grm_head_symb[0], 0, 0, &delphi_grm_head_numb[0], &delphi_grm_f_tail[0], &delphi_grm_tail[0], 0, 0, 0, &delphi_grm_Bm[0], &delphi_grm_Br[0], &delphi_grm_Bc[0], &delphi_grm_Bf[0], &delphi_grm_Tm[0], &delphi_grm_Tr[0], &delphi_grm_Tc[0], &delphi_grm_Nm[0], &delphi_grm_Nr[0], &delphi_grm_Nc[0], &delphi_grm_Rm[0], &delphi_grm_Rr[0], &delphi_grm_Rc[0], &delphi_grm_PL[0], 0, 0, 0, 0, 0, 0, 0, 0)
+      {
+      }
+   };
+
+typedef delphi_parser_tables_<const char * const, const char * const, const char * const, const char * const, uint8, uint16, int16, int32, int32, int32, uint8, uint16, uint8, uint8, int16, uint16, uint8, int16, uint16, uint8, uint16, int16, uint8, int8, int32, int32, int32, int32, int32, int32, int32, int32> delphi_parser_tables_t;
 
 
 #endif

@@ -5,39 +5,78 @@
 #define __Pascal__ParserTables_TYPEDEF
 
 #include "lrstar_parser_tables.h"
-typedef templ_lrstar_parser_tables<
-   /* term_symb */  const char * const,
-   /* head_symb */  const char * const,
-   /* tact_name */  const char * const,
-   /* node_name */  const char * const,
-   /* head_numb */  uint8,
-   /* f_tail */  uint16,
-   /* tail */  int16,
-   /* arga */  int8,
-   /* argx */  int8,
-   /* argy */  int8,
-   /* Bm */  uint8,
-   /* Br */  uint16,
-   /* Bc */  uint8,
-   /* Bf */  uint8,
-   /* Tm */  int16,
-   /* Tr */  uint16,
-   /* Tc */  uint8,
-   /* Nm */  int16,
-   /* Nr */  uint16,
-   /* Nc */  uint8,
-   /* Rm */  uint16,
-   /* Rr */  int16,
-   /* Rc */  uint8,
-   /* PL */  int8,
-   /* nd_fterm */  int32,
-   /* nd_term */  int32,
-   /* nd_faction */  int32,
-   /* nd_action */  int32,
-   /* tact_numb */  int8,
-   /* node_numb */  int16,
-   /* nact_numb */  int8,
-   /* reverse */ int32> Pascal_parser_tables_t;
+
+extern const char *Pascal_grm_head_symb[194];
+extern const char *Pascal_grm_tact_name[2];
+extern const char *Pascal_grm_node_name[185];
+extern const uint8 Pascal_grm_head_numb[379];
+extern const uint16 Pascal_grm_f_tail[380];
+extern const int16 Pascal_grm_tail[695];
+extern const char *Pascal_grm_term_symb[113];
+extern const int8 Pascal_grm_arga[113];
+extern const uint8 Pascal_grm_Bm[530];
+extern const uint16 Pascal_grm_Br[344];
+extern const uint8 Pascal_grm_Bc[113];
+extern const uint8 Pascal_grm_Bf[113];
+extern const int16 Pascal_grm_Tm[703];
+extern const uint16 Pascal_grm_Tr[344];
+extern const uint8 Pascal_grm_Tc[113];
+extern const int16 Pascal_grm_Nm[3240];
+extern const uint16 Pascal_grm_Nr[344];
+extern const uint8 Pascal_grm_Nc[379];
+extern const uint16 Pascal_grm_Rm[12];
+extern const int16 Pascal_grm_Rr[344];
+extern const uint8 Pascal_grm_Rc[113];
+extern const int8 Pascal_grm_PL[379];
+extern const int8 Pascal_grm_tact_numb[113];
+extern const int8 Pascal_grm_argx[379];
+extern const int8 Pascal_grm_argy[379];
+extern const int16 Pascal_grm_node_numb[379];
+extern const int8 Pascal_grm_nact_numb[379];
+
+
+template<typename T_term_symb,
+         typename T_head_symb,
+         typename T_tact_name,
+         typename T_node_name,
+         typename T_head_numb,
+         typename T_f_tail,
+         typename T_tail,
+         typename T_arga,
+         typename T_argx,
+         typename T_argy,
+         typename T_Bm,
+         typename T_Br,
+         typename T_Bc,
+         typename T_Bf,
+         typename T_Tm,
+         typename T_Tr,
+         typename T_Tc,
+         typename T_Nm,
+         typename T_Nr,
+         typename T_Nc,
+         typename T_Rm,
+         typename T_Rr,
+         typename T_Rc,
+         typename T_PL,
+         typename T_nd_fterm,
+         typename T_nd_term,
+         typename T_nd_faction,
+         typename T_nd_action,
+         typename T_tact_numb,
+         typename T_node_numb,
+         typename T_nact_numb,
+         typename T_reverse>
+   class Pascal_parser_tables_ : public lrstar_parser_tables<T_term_symb, T_head_symb, T_tact_name, T_node_name, T_head_numb, T_f_tail, T_tail, T_arga, T_argx, T_argy, T_Bm, T_Br, T_Bc, T_Bf, T_Tm, T_Tr, T_Tc, T_Nm, T_Nr, T_Nc, T_Rm, T_Rr, T_Rc, T_PL, T_nd_fterm, T_nd_term, T_nd_faction, T_nd_action, T_tact_numb, T_node_numb, T_nact_numb, T_reverse>   {
+
+public:
+
+      Pascal_parser_tables_() : lrstar_parser_tables<T_term_symb, T_head_symb, T_tact_name, T_node_name, T_head_numb, T_f_tail, T_tail, T_arga, T_argx, T_argy, T_Bm, T_Br, T_Bc, T_Bf, T_Tm, T_Tr, T_Tc, T_Nm, T_Nr, T_Nc, T_Rm, T_Rr, T_Rc, T_PL, T_nd_fterm, T_nd_term, T_nd_faction, T_nd_action, T_tact_numb, T_node_numb, T_nact_numb, T_reverse>(113, 194, 379, 344, 343, 2, 185, 185, 1, false, &Pascal_grm_term_symb[0], &Pascal_grm_head_symb[0], &Pascal_grm_tact_name[0], &Pascal_grm_node_name[0], &Pascal_grm_head_numb[0], &Pascal_grm_f_tail[0], &Pascal_grm_tail[0], &Pascal_grm_arga[0], &Pascal_grm_argx[0], &Pascal_grm_argy[0], &Pascal_grm_Bm[0], &Pascal_grm_Br[0], &Pascal_grm_Bc[0], &Pascal_grm_Bf[0], &Pascal_grm_Tm[0], &Pascal_grm_Tr[0], &Pascal_grm_Tc[0], &Pascal_grm_Nm[0], &Pascal_grm_Nr[0], &Pascal_grm_Nc[0], &Pascal_grm_Rm[0], &Pascal_grm_Rr[0], &Pascal_grm_Rc[0], &Pascal_grm_PL[0], 0, 0, 0, 0, &Pascal_grm_tact_numb[0], &Pascal_grm_node_numb[0], &Pascal_grm_nact_numb[0], 0)
+      {
+      }
+   };
+
+typedef Pascal_parser_tables_<const char * const, const char * const, const char * const, const char * const, uint8, uint16, int16, int8, int8, int8, uint8, uint16, uint8, uint8, int16, uint16, uint8, int16, uint16, uint8, uint16, int16, uint8, int8, int32, int32, int32, int32, int8, int16, int8, int32> Pascal_parser_tables_t;
 
 
 #endif

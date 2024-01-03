@@ -5,6 +5,25 @@
 #define __C11__LexerTables_TYPEDEF
 
 #include "lrstar_lexer.h"
-typedef templ_lrstar_lexer<false, int8, uint16, uint16, uint8> C11_lexer_t;
+
+extern const int8 C11_lgr_term_numb[288];
+extern const uint16 C11_lgr_Tm[14927];
+extern const uint16 C11_lgr_Tr[288];
+extern const uint8 C11_lgr_Tc[256];
+
+template<bool C_debug, typename T_term_numb, typename T_Tm, typename T_Tr, typename T_Tc>
+class C11_lexer_ : public lrstar_lexer<C_debug, T_term_numb, T_Tm, T_Tr, T_Tc> {
+public:
+    C11_lexer_(char *input_start) :
+      lrstar_lexer<C_debug, T_term_numb, T_Tm, T_Tr, T_Tc>(&C11_lgr_term_numb[0], &C11_lgr_Tm[0], &C11_lgr_Tr[0], &C11_lgr_Tc[0], input_start)
+    {
+
+    }
+
+
+};
+
+
+typedef C11_lexer_<false, int8, uint16, uint16, uint8> C11_lexer_t;
 
 #endif

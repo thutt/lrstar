@@ -5,6 +5,25 @@
 #define __Calc__LexerTables_TYPEDEF
 
 #include "lrstar_lexer.h"
-typedef templ_lrstar_lexer<false, int8, uint8, uint16, uint8> Calc_lexer_t;
+
+extern const int8 Calc_lgr_term_numb[55];
+extern const uint8 Calc_lgr_Tm[1428];
+extern const uint16 Calc_lgr_Tr[55];
+extern const uint8 Calc_lgr_Tc[256];
+
+template<bool C_debug, typename T_term_numb, typename T_Tm, typename T_Tr, typename T_Tc>
+class Calc_lexer_ : public lrstar_lexer<C_debug, T_term_numb, T_Tm, T_Tr, T_Tc> {
+public:
+    Calc_lexer_(char *input_start) :
+      lrstar_lexer<C_debug, T_term_numb, T_Tm, T_Tr, T_Tc>(&Calc_lgr_term_numb[0], &Calc_lgr_Tm[0], &Calc_lgr_Tr[0], &Calc_lgr_Tc[0], input_start)
+    {
+
+    }
+
+
+};
+
+
+typedef Calc_lexer_<false, int8, uint8, uint16, uint8> Calc_lexer_t;
 
 #endif

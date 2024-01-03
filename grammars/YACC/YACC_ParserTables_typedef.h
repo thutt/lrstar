@@ -5,39 +5,70 @@
 #define __YACC__ParserTables_TYPEDEF
 
 #include "lrstar_parser_tables.h"
-typedef templ_lrstar_parser_tables<
-   /* term_symb */  const char * const,
-   /* head_symb */  const char * const,
-   /* tact_name */  const char * const,
-   /* node_name */  const char * const,
-   /* head_numb */  uint8,
-   /* f_tail */  uint8,
-   /* tail */  int8,
-   /* arga */  int32,
-   /* argx */  int32,
-   /* argy */  int32,
-   /* Bm */  uint8,
-   /* Br */  uint8,
-   /* Bc */  uint8,
-   /* Bf */  uint8,
-   /* Tm */  int8,
-   /* Tr */  uint8,
-   /* Tc */  uint8,
-   /* Nm */  int8,
-   /* Nr */  uint8,
-   /* Nc */  uint8,
-   /* Rm */  uint8,
-   /* Rr */  uint8,
-   /* Rc */  uint8,
-   /* PL */  int8,
-   /* nd_fterm */  int32,
-   /* nd_term */  int32,
-   /* nd_faction */  int32,
-   /* nd_action */  int32,
-   /* tact_numb */  int32,
-   /* node_numb */  int32,
-   /* nact_numb */  int32,
-   /* reverse */ int32> YACC_parser_tables_t;
+
+extern const char *YACC_grm_head_symb[17];
+extern const uint8 YACC_grm_head_numb[59];
+extern const uint8 YACC_grm_f_tail[60];
+extern const int8 YACC_grm_tail[110];
+extern const char *YACC_grm_term_symb[27];
+extern const uint8 YACC_grm_Bm[44];
+extern const uint8 YACC_grm_Br[43];
+extern const uint8 YACC_grm_Bc[27];
+extern const uint8 YACC_grm_Bf[27];
+extern const int8 YACC_grm_Tm[86];
+extern const uint8 YACC_grm_Tr[43];
+extern const uint8 YACC_grm_Tc[27];
+extern const int8 YACC_grm_Nm[48];
+extern const uint8 YACC_grm_Nr[43];
+extern const uint8 YACC_grm_Nc[59];
+extern const uint8 YACC_grm_Rm[1];
+extern const uint8 YACC_grm_Rr[43];
+extern const uint8 YACC_grm_Rc[27];
+extern const int8 YACC_grm_PL[59];
+
+
+template<typename T_term_symb,
+         typename T_head_symb,
+         typename T_tact_name,
+         typename T_node_name,
+         typename T_head_numb,
+         typename T_f_tail,
+         typename T_tail,
+         typename T_arga,
+         typename T_argx,
+         typename T_argy,
+         typename T_Bm,
+         typename T_Br,
+         typename T_Bc,
+         typename T_Bf,
+         typename T_Tm,
+         typename T_Tr,
+         typename T_Tc,
+         typename T_Nm,
+         typename T_Nr,
+         typename T_Nc,
+         typename T_Rm,
+         typename T_Rr,
+         typename T_Rc,
+         typename T_PL,
+         typename T_nd_fterm,
+         typename T_nd_term,
+         typename T_nd_faction,
+         typename T_nd_action,
+         typename T_tact_numb,
+         typename T_node_numb,
+         typename T_nact_numb,
+         typename T_reverse>
+   class YACC_parser_tables_ : public lrstar_parser_tables<T_term_symb, T_head_symb, T_tact_name, T_node_name, T_head_numb, T_f_tail, T_tail, T_arga, T_argx, T_argy, T_Bm, T_Br, T_Bc, T_Bf, T_Tm, T_Tr, T_Tc, T_Nm, T_Nr, T_Nc, T_Rm, T_Rr, T_Rc, T_PL, T_nd_fterm, T_nd_term, T_nd_faction, T_nd_action, T_tact_numb, T_node_numb, T_nact_numb, T_reverse>   {
+
+public:
+
+      YACC_parser_tables_() : lrstar_parser_tables<T_term_symb, T_head_symb, T_tact_name, T_node_name, T_head_numb, T_f_tail, T_tail, T_arga, T_argx, T_argy, T_Bm, T_Br, T_Bc, T_Bf, T_Tm, T_Tr, T_Tc, T_Nm, T_Nr, T_Nc, T_Rm, T_Rr, T_Rc, T_PL, T_nd_fterm, T_nd_term, T_nd_faction, T_nd_action, T_tact_numb, T_node_numb, T_nact_numb, T_reverse>(27, 17, 59, 43, 42, 0, 0, 0, 1, false, &YACC_grm_term_symb[0], &YACC_grm_head_symb[0], 0, 0, &YACC_grm_head_numb[0], &YACC_grm_f_tail[0], &YACC_grm_tail[0], 0, 0, 0, &YACC_grm_Bm[0], &YACC_grm_Br[0], &YACC_grm_Bc[0], &YACC_grm_Bf[0], &YACC_grm_Tm[0], &YACC_grm_Tr[0], &YACC_grm_Tc[0], &YACC_grm_Nm[0], &YACC_grm_Nr[0], &YACC_grm_Nc[0], &YACC_grm_Rm[0], &YACC_grm_Rr[0], &YACC_grm_Rc[0], &YACC_grm_PL[0], 0, 0, 0, 0, 0, 0, 0, 0)
+      {
+      }
+   };
+
+typedef YACC_parser_tables_<const char * const, const char * const, const char * const, const char * const, uint8, uint8, int8, int32, int32, int32, uint8, uint8, uint8, uint8, int8, uint8, uint8, int8, uint8, uint8, uint8, uint8, uint8, int8, int32, int32, int32, int32, int32, int32, int32, int32> YACC_parser_tables_t;
 
 
 #endif

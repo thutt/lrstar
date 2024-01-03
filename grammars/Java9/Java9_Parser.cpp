@@ -4,135 +4,8 @@
 #include "Java9_ParserTables_typedef.h"
 #include "Java9_Parser.h"
 
-template<>
-const int Java9_parser_tables_t::n_term_symb = 110;
-
-template<>
-const int Java9_parser_tables_t::n_head_symb = 366;
-
-template<>
-const int Java9_parser_tables_t::n_tact_name = 2;
-
-template<>
-const int Java9_parser_tables_t::n_node_name = 1;
-
-template<>
-const int Java9_parser_tables_t::n_head_numb = 733;
-
-template<>
-const int Java9_parser_tables_t::n_f_tail = 734;
-
-template<>
-const int Java9_parser_tables_t::n_tail = 1440;
-
-template<>
-const int Java9_parser_tables_t::n_arga = 110;
-
-template<>
-const int Java9_parser_tables_t::n_argx = 733;
-
-template<>
-const int Java9_parser_tables_t::n_argy = 0;
-
-template<>
-const int Java9_parser_tables_t::n_Bm = 555;
-
-template<>
-const int Java9_parser_tables_t::n_Br = 745;
-
-template<>
-const int Java9_parser_tables_t::n_Bc = 110;
-
-template<>
-const int Java9_parser_tables_t::n_Bf = 110;
-
-template<>
-const int Java9_parser_tables_t::n_Tm = 1084;
-
-template<>
-const int Java9_parser_tables_t::n_Tr = 745;
-
-template<>
-const int Java9_parser_tables_t::n_Tc = 110;
-
-template<>
-const int Java9_parser_tables_t::n_Nm = 20133;
-
-template<>
-const int Java9_parser_tables_t::n_Nr = 745;
-
-template<>
-const int Java9_parser_tables_t::n_Nc = 733;
-
-template<>
-const int Java9_parser_tables_t::n_Rm = 6436;
-
-template<>
-const int Java9_parser_tables_t::n_Rr = 745;
-
-template<>
-const int Java9_parser_tables_t::n_Rc = 110;
-
-template<>
-const int Java9_parser_tables_t::n_PL = 733;
-
-template<>
-const int Java9_parser_tables_t::n_nd_fterm = 746;
-
-template<>
-const int Java9_parser_tables_t::n_nd_term = 1456;
-
-template<>
-const int Java9_parser_tables_t::n_nd_faction = 1457;
-
-template<>
-const int Java9_parser_tables_t::n_nd_action = 3079;
-
-template<>
-const int Java9_parser_tables_t::n_tact_numb = 110;
-
-template<>
-const int Java9_parser_tables_t::n_node_numb = 733;
-
-template<>
-const int Java9_parser_tables_t::n_nact_numb = 733;
-
-template<>
-const int Java9_parser_tables_t::n_reverse = 0;
-
-template<>
-const int Java9_parser_tables_t::n_terms = 110; // Number of terminals.
-
-template<>
-const int Java9_parser_tables_t::n_heads = 366; // Number of nonterminals.
-
-template<>
-const int Java9_parser_tables_t::n_prods = 733; // Number of productions.
-
-template<>
-const int Java9_parser_tables_t::n_states = 745; // Number of states.
-
-template<>
-const int Java9_parser_tables_t::accept_state = 744; // Accept state.
-
-template<>
-const int Java9_parser_tables_t::n_termactns = 2; // Number of terminal actions.
-
-template<>
-const int Java9_parser_tables_t::n_nodenames = 1; // Number of node names.
-
-template<>
-const int Java9_parser_tables_t::n_nodeactns = 1; // Number of node actions.
-
-template<>
-const int Java9_parser_tables_t::eof_symb = 1; // <eof> symbol number.
-
-template<>
-const int Java9_parser_tables_t::err_used = 0; // <error> used in grammar?
-
-
 // Terminal symbols of the grammar.
-static const char *term_symb_[110] = {
+const char *Java9_grm_term_symb[110] = {
    "<error>",
    "<eof>",
    "<identifier>",
@@ -245,11 +118,8 @@ static const char *term_symb_[110] = {
    "\'!\'",
 };
 
-template<>
-const char * const *Java9_parser_tables_t::term_symb = &term_symb_[0];
-
 // Nonterminal symbols of the grammar.
-static const char *head_symb_[366] = {
+const char *Java9_grm_head_symb[366] = {
    "Start",
    "primitiveType",
    "numericType",
@@ -618,29 +488,20 @@ static const char *head_symb_[366] = {
    "(postIncrementExpression_lf_postfixExpression | postDecrementExpression_lf_postfixExpression)*",
 };
 
-template<>
-const char * const *Java9_parser_tables_t::head_symb = &head_symb_[0];
-
 // Terninal action names found in the grammar ...
-static const char *tact_name_[2] = {
+const char *Java9_grm_tact_name[2] = {
    "error",
    "lookup",
 };
 
-template<>
-const char * const *Java9_parser_tables_t::tact_name = &tact_name_[0];
-
 // Node names found in the grammar.
-static const char * node_name_[1] = {
+const char *Java9_grm_node_name[1] = {
    "start",
 
 };
 
-template<>
-const char * const *Java9_parser_tables_t::node_name = &node_name_[0];
-
 // Head symbol numbers for the productions.
-static const uint16 head_numb_[733] = {
+const uint16 Java9_grm_head_numb[733] = {
        0,     1,     1,     2,     2,     3,     3,     3,     3,     3, 
        4,     4,     5,     5,     5,     6,     7,     7,     8,     9, 
       10,    11,    12,    13,    14,    14,    14,    15,    16,    17, 
@@ -717,11 +578,8 @@ static const uint16 head_numb_[733] = {
      364,   365,   365, 
 };
 
-template<>
-const uint16 *Java9_parser_tables_t::head_numb = &head_numb_[0];
-
 // First tail symbol index into the tail list ...
-static const uint16 f_tail_[734] = {
+const uint16 Java9_grm_f_tail[734] = {
        0,     2,     4,     6,     7,     8,     9,    10,    11,    12, 
       13,    14,    15,    16,    17,    18,    20,    23,    28,    32, 
       35,    36,    37,    38,    40,    42,    44,    46,    50,    53, 
@@ -798,11 +656,8 @@ static const uint16 f_tail_[734] = {
     1437,  1438,  1438,  1440, 
 };
 
-template<>
-const uint16 *Java9_parser_tables_t::f_tail = &f_tail_[0];
-
 // Tail symbol numbers ...
-static const int16 tail_[1440] = {
+const int16 Java9_grm_tail[1440] = {
      -31,     1,  -239,    -2,  -239,     3,    -3,    -4,     4,     5, 
        6,     7,     8,     9,    10,    -6,   -13,   -14,  -240,  -242, 
     -239,     2,  -243,    -6,    11,  -239,     2,  -243,    11,  -239, 
@@ -949,11 +804,8 @@ static const int16 tail_[1440] = {
     -361,  -360,  -218,  -210,  -179,   -28,  -235,  -237,  -365,  -364, 
 };
 
-template<>
-const int16 *Java9_parser_tables_t::tail = &tail_[0];
-
 // Arguments for token actions ...
-static const int8 arga_[110] = {
+const int8 Java9_grm_arga[110] = {
       -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1, 
       -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1, 
       -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1, 
@@ -967,11 +819,8 @@ static const int8 arga_[110] = {
       -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1, 
 };
 
-template<>
-const int8 *Java9_parser_tables_t::arga = &arga_[0];
-
 // First arguments for productions ...
-static const int8 argx_[733] = {
+const int8 Java9_grm_argx[733] = {
        0,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1, 
       -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1, 
       -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1, 
@@ -1048,14 +897,8 @@ static const int8 argx_[733] = {
       -1,    -1,    -1, 
 };
 
-template<>
-const int8 *Java9_parser_tables_t::argx = &argx_[0];
-
-template<>
-const int32 *Java9_parser_tables_t::argy = 0;
-
 // Boolean matrix ...
-static const uint8 Bm_[555] = {
+const uint8 Java9_grm_Bm[555] = {
        0,     0,     0,     0,     0,     0,     0,     0,     0,     2, 
        0,     0,     0,     0,     0,     0,     0,    64,     0,     0, 
        0,     0,     2,     0,     0,     1,     0,     0,     0,     0, 
@@ -1114,11 +957,8 @@ static const uint8 Bm_[555] = {
        0,     0,     0,     0,     0, 
 };
 
-template<>
-const uint8 *Java9_parser_tables_t::Bm = &Bm_[0];
-
 // Boolean matrix row (for state)...
-static const uint16 Br_[745] = {
+const uint16 Java9_grm_Br[745] = {
        0,     9,     0,    16,    23,    23,    31,    31,    37,    45, 
       52,    60,    68,    74,    60,    31,    80,    87,    31,    31, 
       94,    31,   103,   111,    31,    31,    31,   119,     4,     0, 
@@ -1196,11 +1036,9 @@ static const uint16 Br_[745] = {
        4,     4,    52,    52,     0, 
       };
 
-template<>
-const uint16 *Java9_parser_tables_t::Br = &Br_[0];
-
 // Boolean matrix column (displacement) ...
-static const uint8 Bc_[110] = {
+extern const uint8 Java9_grm_Bc[110];
+const uint8 Java9_grm_Bc[110] = {
        0,     0,     0,     0,     0,     0,     0,     0,     0,     0, 
        0,     0,     0,     0,     0,     1,     1,     1,     1,     1, 
        1,     1,     1,     2,     2,     2,     2,     2,     2,     2, 
@@ -1214,11 +1052,8 @@ static const uint8 Bc_[110] = {
        0,     0,     7,     7,     0,     0,     8,     8,     8,     8, 
       };
 
-template<>
-const uint8 *Java9_parser_tables_t::Bc = &Bc_[0];
-
 // Boolean matrix filter/mask value ...
-static const uint8 Bf_[110] = {
+const uint8 Java9_grm_Bf[110] = {
        1,     2,     4,     8,     8,     8,     8,     8,     8,     8, 
        8,    16,    32,    64,   128,     1,     2,     4,     8,    16, 
       32,    64,   128,     1,     2,     4,     8,    16,    32,    64, 
@@ -1232,11 +1067,8 @@ static const uint8 Bf_[110] = {
        1,     1,   128,   128,     1,     1,     1,     1,     2,     2, 
 };
 
-template<>
-const uint8 *Java9_parser_tables_t::Bf = &Bf_[0];
-
 // Terminal transition matrix ...
-static const int16 Tm_[1084] = {
+const int16 Java9_grm_Tm[1084] = {
        0,     0,     0,     0,     0,     0,     0,     0,     0,     0, 
        0,     0,     0,   742,     0,     0,     0,     0,     7,     7, 
        7,     7,     7,     7,   656,   709,   721,   734,   722,   735, 
@@ -1348,11 +1180,8 @@ static const int16 Tm_[1084] = {
       64,    65,    74,    75, 
 };
 
-template<>
-const int16 *Java9_parser_tables_t::Tm = &Tm_[0];
-
 // Terminal transition matrix row ...
-static const uint16 Tr_[745] = {
+const uint16 Java9_grm_Tr[745] = {
      978,   978,   978,   978,   978,   978,   978,  1030,   978,  1030, 
      978,  1030,   978,   978,   772,  1030,   978,   772,   772,   874, 
     1030,   606,   874,   874,   516,   335,   314,  1030,   978,   978, 
@@ -1430,11 +1259,8 @@ static const uint16 Tr_[745] = {
        7,   274,   109,    69,   978, 
 };
 
-template<>
-const uint16 *Java9_parser_tables_t::Tr = &Tr_[0];
-
 // Terminal transition matrix column ...
-static const uint8 Tc_[110] = {
+const uint8 Java9_grm_Tc[110] = {
       20,    20,    38,    20,    23,    17,    14,    18,    19,    21, 
       22,    49,    39,     0,    23,    17,    12,    14,     3,    39, 
       40,    18,    41,    19,    20,    15,    21,    22,    42,     2, 
@@ -1448,11 +1274,8 @@ static const uint8 Tc_[110] = {
       44,    45,    46,    47,    48,    49,    50,    51,    52,    53, 
 };
 
-template<>
-const uint8 *Java9_parser_tables_t::Tc = &Tc_[0];
-
 // Nonterminal transition matrix ...
-static const int16 Nm_[20133] = {
+const int16 Java9_grm_Nm[20133] = {
        0,     0,     0,     0,     0,     0,     0,     0,     0,  -130, 
     -131,  -132,     0,  -579,  -579,     0,  -579,  -579,     0,     0, 
        0,   272,     0,     0,     0,   498,     0,     0,     0,     0, 
@@ -3469,11 +3292,8 @@ static const int16 Nm_[20133] = {
      120,  -732,   105, 
 };
 
-template<>
-const int16 *Java9_parser_tables_t::Nm = &Nm_[0];
-
 // Nonterminal transition matrix row ...
-static const uint16 Nr_[745] = {
+const uint16 Java9_grm_Nr[745] = {
 19960, 19960, 10571, 19960, 19960, 19960, 19960, 19960, 10571, 10571, 
 19960, 19960, 19960, 19960, 19960,  3257,  3257,  2619, 19960, 19960, 
 17566, 19960, 19960, 19960, 19960, 19960, 19960, 19960, 19960, 19960, 
@@ -3551,11 +3371,8 @@ static const uint16 Nr_[745] = {
 19960, 19960, 19960, 19960, 19960, 
 };
 
-template<>
-const uint16 *Java9_parser_tables_t::Nr = &Nr_[0];
-
 // Nonterminal transition matrix column ...
-static const uint8 Nc_[733] = {
+const uint8 Java9_grm_Nc[733] = {
    86,    86,    86,    96,    96,     0,     0,     0,     0,     0, 
     2,     2,    22,    22,    22,     1,   117,   117,    86,    21, 
    22,    96,    51,    63,    81,    81,    81,     1,   117,    92, 
@@ -3632,11 +3449,8 @@ static const uint8 Nc_[733] = {
   171,   172,   172, 
 };
 
-template<>
-const uint8 *Java9_parser_tables_t::Nc = &Nc_[0];
-
 // Reduction matrix ...
-static const uint16 Rm_[6436] = {
+const uint16 Java9_grm_Rm[6436] = {
        0,   531,     0,     0,     0,     0,     0,     0,     0,     0, 
        0,     0,     0,   537,   531,     0,   531,   533,     0,     0, 
      531,   531,     0,     0,     0,     0,     0,     0,     0,     0, 
@@ -4283,11 +4097,8 @@ static const uint16 Rm_[6436] = {
      383,   383,   383,   383,   383,   383, 
 };
 
-template<>
-const uint16 *Java9_parser_tables_t::Rm = &Rm_[0];
-
 // Reduction matrix row ...
-static const int16 Rr_[745] = {
+const int16 Java9_grm_Rr[745] = {
        0,   -34,   533,   -34,   507,   535,   -34,   -34,   539,   -34, 
      -84,   -34,   239,   -34,   -34,   -34,   -34,   -34,   -34,   -34, 
     -118,   -34,   -34,   -34,   -34,   -34,   -34,   -34,   -34,   646, 
@@ -4365,11 +4176,8 @@ static const int16 Rr_[745] = {
      -34,   -34,   -34,   -34,   -34, 
 };
 
-template<>
-const int16 *Java9_parser_tables_t::Rr = &Rr_[0];
-
 // Reduction matrix column ...
-static const uint8 Rc_[110] = {
+const uint8 Java9_grm_Rc[110] = {
        0,     1,     2,     3,     3,     3,     3,     3,     3,     3, 
        3,     4,     5,     6,     0,     7,     8,     9,    10,    11, 
       12,    13,    14,     0,    15,    16,    17,    17,    18,    19, 
@@ -4383,11 +4191,8 @@ static const uint8 Rc_[110] = {
       48,    48,    49,    49,    15,    15,    50,    50,     0,     0, 
 };
 
-template<>
-const uint8 *Java9_parser_tables_t::Rc = &Rc_[0];
-
 // Production lengths (minus one) ...
-static const int8 PL_[733] = {
+const int8 Java9_grm_PL[733] = {
        1,     1,     1,     0,     0,     0,     0,     0,     0,     0, 
        0,     0,     0,     0,     0,     1,     2,     4,     3,     2, 
        0,     0,     0,     1,     1,     1,     1,     3,     2,     0, 
@@ -4464,11 +4269,8 @@ static const int8 PL_[733] = {
        0,    -1,     1, 
 };
 
-template<>
-const int8 *Java9_parser_tables_t::PL = &PL_[0];
-
 // Nondeterministic first terminal in the list ...
-static const uint16 nd_fterm_[746] = {
+const uint16 Java9_grm_nd_fterm[746] = {
        0,     2,     2,     2,     2,     2,     2,     2,     2,     2, 
        2,     9,     9,     9,     9,     9,     9,     9,     9,     9, 
        9,    19,    19,    19,    19,    19,    19,    19,    19,    19, 
@@ -4546,11 +4348,8 @@ static const uint16 nd_fterm_[746] = {
     1456,  1456,  1456,  1456,  1456,  1456, 
 };
 
-template<>
-const uint16 *Java9_parser_tables_t::nd_fterm = &nd_fterm_[0];
-
 // Nondeterministic terminal list ...
-const uint8 nd_term_[1456] = {
+const uint8 Java9_grm_nd_term[1456] = {
       23,    61,    25,    39,    40,    41,    42,    44,    61,     2, 
        3,     4,     5,     6,     7,     8,     9,    10,    61,    19, 
       94,    95,    77,    96,    15,    97,    98,    16,    17,    99, 
@@ -4699,11 +4498,8 @@ const uint8 nd_term_[1456] = {
        5,     6,     7,     8,     9,    10, 
 };
 
-template<>
-const uint8 *Java9_parser_tables_t::nd_term = &nd_term_[0];
-
 // Nondeterministic first action in the list ...
-static const uint16 nd_faction_[1457] = {
+const uint16 Java9_grm_nd_faction[1457] = {
        0,     2,     5,     7,     9,    11,    13,    15,    17,    19, 
       21,    23,    25,    27,    29,    31,    33,    35,    37,    39, 
       41,    43,    45,    47,    49,    51,    53,    55,    57,    59, 
@@ -4852,11 +4648,8 @@ static const uint16 nd_faction_[1457] = {
     3067,  3069,  3071,  3073,  3075,  3077,  3079, 
 };
 
-template<>
-const uint16 *Java9_parser_tables_t::nd_faction = &nd_faction_[0];
-
 // Nondeterministic actions list ...
-static const int16 nd_action_[3079] = {
+const int16 Java9_grm_nd_action[3079] = {
     -531,  -533,  -531,  -537,  -533,  -554,  -627,  -554,  -627,  -554, 
     -627,  -554,  -627,  -554,  -627,  -554,  -627,  -554,  -627,    63, 
     -507,   862,  -507,   749,  -507,   750,  -507,   751,  -507,   752, 
@@ -5167,11 +4960,8 @@ static const int16 nd_action_[3079] = {
     -507,   752,  -507,   753,  -507,   754,  -507,   755,  -507, 
 };
 
-template<>
-const int16 *Java9_parser_tables_t::nd_action = &nd_action_[0];
-
 // Terminal action number ...
-static const int8 tact_numb_[110] = {
+const int8 Java9_grm_tact_numb[110] = {
        0,    -1,     1,    -1,    -1,    -1,    -1,    -1,    -1,    -1, 
       -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1, 
       -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1, 
@@ -5185,11 +4975,8 @@ static const int8 tact_numb_[110] = {
       -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1, 
 };
 
-template<>
-const int8 *Java9_parser_tables_t::tact_numb = &tact_numb_[0];
-
 // Node number for each production ...
-static const int8 node_numb_[733] = {
+const int8 Java9_grm_node_numb[733] = {
        0,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1, 
       -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1, 
       -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1, 
@@ -5266,11 +5053,8 @@ static const int8 node_numb_[733] = {
       -1,    -1,    -1, 
 };
 
-template<>
-const int8 *Java9_parser_tables_t::node_numb = &node_numb_[0];
-
 // Node action numbers ...
-static const int8 nact_numb_[733] = {
+const int8 Java9_grm_nact_numb[733] = {
       -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1, 
       -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1, 
       -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1, 
@@ -5346,10 +5130,4 @@ static const int8 nact_numb_[733] = {
       -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1, 
       -1,    -1,    -1, 
 };
-
-template<>
-const int8 *Java9_parser_tables_t::nact_numb = &nact_numb_[0];
-
-template<>
-const int32 *Java9_parser_tables_t::reverse = 0;
 

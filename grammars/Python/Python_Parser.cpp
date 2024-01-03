@@ -4,135 +4,8 @@
 #include "Python_ParserTables_typedef.h"
 #include "Python_Parser.h"
 
-template<>
-const int Python_parser_tables_t::n_term_symb = 94;
-
-template<>
-const int Python_parser_tables_t::n_head_symb = 220;
-
-template<>
-const int Python_parser_tables_t::n_tact_name = 0;
-
-template<>
-const int Python_parser_tables_t::n_node_name = 0;
-
-template<>
-const int Python_parser_tables_t::n_head_numb = 396;
-
-template<>
-const int Python_parser_tables_t::n_f_tail = 397;
-
-template<>
-const int Python_parser_tables_t::n_tail = 600;
-
-template<>
-const int Python_parser_tables_t::n_arga = 0;
-
-template<>
-const int Python_parser_tables_t::n_argx = 0;
-
-template<>
-const int Python_parser_tables_t::n_argy = 0;
-
-template<>
-const int Python_parser_tables_t::n_Bm = 236;
-
-template<>
-const int Python_parser_tables_t::n_Br = 257;
-
-template<>
-const int Python_parser_tables_t::n_Bc = 94;
-
-template<>
-const int Python_parser_tables_t::n_Bf = 94;
-
-template<>
-const int Python_parser_tables_t::n_Tm = 320;
-
-template<>
-const int Python_parser_tables_t::n_Tr = 257;
-
-template<>
-const int Python_parser_tables_t::n_Tc = 94;
-
-template<>
-const int Python_parser_tables_t::n_Nm = 3046;
-
-template<>
-const int Python_parser_tables_t::n_Nr = 257;
-
-template<>
-const int Python_parser_tables_t::n_Nc = 396;
-
-template<>
-const int Python_parser_tables_t::n_Rm = 368;
-
-template<>
-const int Python_parser_tables_t::n_Rr = 257;
-
-template<>
-const int Python_parser_tables_t::n_Rc = 94;
-
-template<>
-const int Python_parser_tables_t::n_PL = 396;
-
-template<>
-const int Python_parser_tables_t::n_nd_fterm = 258;
-
-template<>
-const int Python_parser_tables_t::n_nd_term = 83;
-
-template<>
-const int Python_parser_tables_t::n_nd_faction = 84;
-
-template<>
-const int Python_parser_tables_t::n_nd_action = 166;
-
-template<>
-const int Python_parser_tables_t::n_tact_numb = 0;
-
-template<>
-const int Python_parser_tables_t::n_node_numb = 0;
-
-template<>
-const int Python_parser_tables_t::n_nact_numb = 0;
-
-template<>
-const int Python_parser_tables_t::n_reverse = 0;
-
-template<>
-const int Python_parser_tables_t::n_terms = 94; // Number of terminals.
-
-template<>
-const int Python_parser_tables_t::n_heads = 220; // Number of nonterminals.
-
-template<>
-const int Python_parser_tables_t::n_prods = 396; // Number of productions.
-
-template<>
-const int Python_parser_tables_t::n_states = 257; // Number of states.
-
-template<>
-const int Python_parser_tables_t::accept_state = 256; // Accept state.
-
-template<>
-const int Python_parser_tables_t::n_termactns = 0; // Number of terminal actions.
-
-template<>
-const int Python_parser_tables_t::n_nodenames = 0; // Number of node names.
-
-template<>
-const int Python_parser_tables_t::n_nodeactns = 0; // Number of node actions.
-
-template<>
-const int Python_parser_tables_t::eof_symb = 1; // <eof> symbol number.
-
-template<>
-const int Python_parser_tables_t::err_used = 0; // <error> used in grammar?
-
-
 // Terminal symbols of the grammar.
-static const char *term_symb_[94] = {
+const char *Python_grm_term_symb[94] = {
    "<error>",
    "<eof>",
    "<newline>",
@@ -229,11 +102,8 @@ static const char *term_symb_[94] = {
    "<binary_integer>",
 };
 
-template<>
-const char * const *Python_parser_tables_t::term_symb = &term_symb_[0];
-
 // Nonterminal symbols of the grammar.
-static const char *head_symb_[220] = {
+const char *Python_grm_head_symb[220] = {
    "Goal",
    "single_input",
    "file_input",
@@ -456,17 +326,8 @@ static const char *head_symb_[220] = {
    "yield_arg?",
 };
 
-template<>
-const char * const *Python_parser_tables_t::head_symb = &head_symb_[0];
-
-template<>
-const char * const *Python_parser_tables_t::tact_name = 0;
-
-template<>
-const char * const *Python_parser_tables_t::node_name = 0;
-
 // Head symbol numbers for the productions.
-static const uint8 head_numb_[396] = {
+const uint8 Python_grm_head_numb[396] = {
        0,     1,     1,     1,     2,     3,     4,     5,     6,     7, 
        8,     9,     9,     9,    10,    11,    11,    11,    12,    13, 
       13,    14,    15,    15,    15,    15,    15,    15,    15,    15, 
@@ -509,11 +370,8 @@ static const uint8 head_numb_[396] = {
      217,   217,   218,   218,   219,   219, 
 };
 
-template<>
-const uint8 *Python_parser_tables_t::head_numb = &head_numb_[0];
-
 // First tail symbol index into the tail list ...
-static const uint16 f_tail_[397] = {
+const uint16 Python_grm_f_tail[397] = {
        0,     2,     3,     4,     6,     7,     9,    13,    14,    16, 
       22,    25,    29,    33,    35,    37,    41,    45,    47,    48, 
       49,    50,    54,    55,    56,    57,    58,    59,    60,    61, 
@@ -556,11 +414,8 @@ static const uint16 f_tail_[397] = {
      597,   597,   598,   598,   599,   599,   600, 
 };
 
-template<>
-const uint16 *Python_parser_tables_t::f_tail = &f_tail_[0];
-
 // Tail symbol numbers ...
-static const int16 tail_[600] = {
+const int16 Python_grm_tail[600] = {
      -85,     1,     2,   -14,   -38,     2,   -87,   -72,   -88,     3, 
      -34,   -91,     2,   -92,    -5,   -93,     6,     7,    -8,   -95, 
        9,   -46,     4,   -96,     5,   -10,   -98,  -100,  -107,    12, 
@@ -623,20 +478,8 @@ static const int16 tail_[600] = {
     -130,    12,   -47,  -213,  -215,    13,   -47,   -78,   -77,   -81, 
 };
 
-template<>
-const int16 *Python_parser_tables_t::tail = &tail_[0];
-
-template<>
-const int32 *Python_parser_tables_t::arga = 0;
-
-template<>
-const int32 *Python_parser_tables_t::argx = 0;
-
-template<>
-const int32 *Python_parser_tables_t::argy = 0;
-
 // Boolean matrix ...
-static const uint8 Bm_[236] = {
+const uint8 Python_grm_Bm[236] = {
        0,     0,     0,     0,     0,     0,     2,     0,     0,     0, 
        0,     0,   128,     0,     0,     0,     0,    64,     0,     0, 
        0,   144,     0,    16,     0,     0,    26,     1,     4,     0, 
@@ -663,11 +506,8 @@ static const uint8 Bm_[236] = {
        0,    64,     4,     0,     0,     0, 
 };
 
-template<>
-const uint8 *Python_parser_tables_t::Bm = &Bm_[0];
-
 // Boolean matrix row (for state)...
-static const uint8 Br_[257] = {
+const uint8 Python_grm_Br[257] = {
        0,     6,     0,    11,     0,     0,    15,     0,     0,     0, 
       21,    28,    34,    40,    46,     0,    52,    58,    63,    68, 
       68,    73,    79,     0,    79,    79,    68,    68,    68,    63, 
@@ -696,11 +536,9 @@ static const uint8 Br_[257] = {
       68,     0,    68,     5,    39,    68,     0, 
       };
 
-template<>
-const uint8 *Python_parser_tables_t::Br = &Br_[0];
-
 // Boolean matrix column (displacement) ...
-static const uint8 Bc_[94] = {
+extern const uint8 Python_grm_Bc[94];
+const uint8 Python_grm_Bc[94] = {
        0,     0,     0,     0,     0,     0,     0,     0,     1,     1, 
        1,     1,     1,     1,     1,     1,     1,     1,     1,     1, 
        1,     1,     1,     1,     1,     1,     1,     1,     2,     2, 
@@ -713,11 +551,8 @@ static const uint8 Bc_[94] = {
        5,     5,     5,     5, 
       };
 
-template<>
-const uint8 *Python_parser_tables_t::Bc = &Bc_[0];
-
 // Boolean matrix filter/mask value ...
-static const uint8 Bf_[94] = {
+const uint8 Python_grm_Bf[94] = {
        1,     2,     4,     8,    16,    32,    64,   128,     1,     2, 
        4,     8,    16,    32,    64,   128,   128,   128,   128,   128, 
      128,   128,   128,   128,   128,   128,   128,   128,     1,     1, 
@@ -730,11 +565,8 @@ static const uint8 Bf_[94] = {
        8,     8,     8,     8, 
 };
 
-template<>
-const uint8 *Python_parser_tables_t::Bf = &Bf_[0];
-
 // Terminal transition matrix ...
-static const int16 Tm_[320] = {
+const int16 Python_grm_Tm[320] = {
        0,     0,     0,   250,   255,  -261,   196,   190,  -133,   202, 
      225,  -270,   204,   228,  -273,   211,   231,   177,   242,   -18, 
      234,   236,   161,   198,   191,  -258,   177,   200,   218,   178, 
@@ -769,11 +601,8 @@ static const int16 Tm_[320] = {
       33,    21,  -153,  -154,  -156,  -157,  -158,  -159,  -160,  -161, 
 };
 
-template<>
-const int16 *Python_parser_tables_t::Tm = &Tm_[0];
-
 // Terminal transition matrix row ...
-static const uint8 Tr_[257] = {
+const uint8 Python_grm_Tr[257] = {
      252,   252,   252,   252,   252,   252,   252,   252,   252,   252, 
      252,   252,   252,   252,   192,   252,   252,    83,   252,   252, 
      252,   252,   192,   252,   132,    58,   252,   252,   252,   252, 
@@ -802,11 +631,8 @@ static const uint8 Tr_[257] = {
      252,   252,   252,     1,    17,    44,   252, 
 };
 
-template<>
-const uint8 *Python_parser_tables_t::Tr = &Tr_[0];
-
 // Terminal transition matrix column ...
-static const uint8 Tc_[94] = {
+const uint8 Python_grm_Tc[94] = {
       37,    37,     0,    32,    47,     1,    33,     2,    38,     3, 
       48,     4,     5,    17,    39,    49,     6,     7,    13,    14, 
       15,    19,    22,    24,    27,    34,    35,    36,    37,    38, 
@@ -819,11 +645,8 @@ static const uint8 Tc_[94] = {
       64,    65,    66,    67, 
 };
 
-template<>
-const uint8 *Python_parser_tables_t::Tc = &Tc_[0];
-
 // Nonterminal transition matrix ...
-static const int16 Nm_[3046] = {
+const int16 Python_grm_Nm[3046] = {
        0,     0,     0,     0,     0,     0,     0,     0,     0,  -315, 
     -370,    64,  -312,   -95,     0,    59,  -309,     8,   -95,     0, 
       59,     0,   230,     7,     8,   -95,   188,    59,  -276,     0, 
@@ -1131,11 +954,8 @@ static const int16 Nm_[3046] = {
     -386,  -388,   -71,   -72,   -73,  -164, 
 };
 
-template<>
-const int16 *Python_parser_tables_t::Nm = &Nm_[0];
-
 // Nonterminal transition matrix row ...
-static const uint16 Nr_[257] = {
+const uint16 Python_grm_Nr[257] = {
  2873,  2873,  2873,  2873,  2873,  2873,  2873,  2873,  2873,  2873, 
  2873,  2873,  2536,  2536,  2701,  2873,  2536,  2873,   772,   882, 
  2163,   968,  2873,  2873,  2873,  2873,   711,   591,   482,   284, 
@@ -1164,11 +984,8 @@ static const uint16 Nr_[257] = {
   164,  2701,   172,  2873,  2536,   181,  2873, 
 };
 
-template<>
-const uint16 *Python_parser_tables_t::Nr = &Nr_[0];
-
 // Nonterminal transition matrix column ...
-static const uint8 Nc_[396] = {
+const uint8 Python_grm_Nc[396] = {
    30,    30,    30,    30,   153,   172,     1,     3,    19,    21, 
    22,    24,    24,    24,    26,    29,    29,    29,    75,    30, 
    30,    32,    34,    34,    34,    34,    34,    34,    34,    34, 
@@ -1211,11 +1028,8 @@ static const uint8 Nc_[396] = {
   170,   170,   171,   171,   172,   172, 
 };
 
-template<>
-const uint8 *Python_parser_tables_t::Nc = &Nc_[0];
-
 // Reduction matrix ...
-static const uint16 Rm_[368] = {
+const uint16 Python_grm_Rm[368] = {
        0,   167,     0,     0,     0,     0,     0,     0,     0,     0, 
        0,     0,     0,     0,     0,     0,     0,     0,     0,   359, 
        0,     0,     0,     0,     0,   235,     0,     0,   235,   235, 
@@ -1255,11 +1069,8 @@ static const uint16 Rm_[368] = {
        0,     0,     0,     0,     0,     0,   366,     0, 
 };
 
-template<>
-const uint16 *Python_parser_tables_t::Rm = &Rm_[0];
-
 // Reduction matrix row ...
-static const int16 Rr_[257] = {
+const int16 Python_grm_Rr[257] = {
        0,    -2,   222,   231,   238,   -18,   305,   310,   313,   -34, 
       -2,    -2,    -2,     7,   -50,   169,   318,   307,   318,   -65, 
      -80,   -95,    -2,  -107,    -2,    -2,   318,   318,   318,   318, 
@@ -1288,11 +1099,8 @@ static const int16 Rr_[257] = {
      318,   189,   318,    -2,   194,   318,    -2, 
 };
 
-template<>
-const int16 *Python_parser_tables_t::Rr = &Rr_[0];
-
 // Reduction matrix column ...
-static const uint8 Rc_[94] = {
+const uint8 Python_grm_Rc[94] = {
        0,     1,     2,     0,     3,     4,     0,     5,     0,     6, 
        7,     8,     9,     9,    10,    11,    11,    11,    11,    11, 
       11,    11,    11,    11,    11,    11,    11,    11,     0,     0, 
@@ -1305,11 +1113,8 @@ static const uint8 Rc_[94] = {
        3,     3,     3,     3, 
 };
 
-template<>
-const uint8 *Python_parser_tables_t::Rc = &Rc_[0];
-
 // Production lengths (minus one) ...
-static const int8 PL_[396] = {
+const int8 Python_grm_PL[396] = {
        1,     0,     0,     1,     0,     1,     3,     0,     1,     5, 
        2,     3,     3,     1,     1,     3,     3,     1,     0,     0, 
        0,     3,     0,     0,     0,     0,     0,     0,     0,     0, 
@@ -1352,11 +1157,8 @@ static const int8 PL_[396] = {
       -1,     0,    -1,     0,    -1,     0, 
 };
 
-template<>
-const int8 *Python_parser_tables_t::PL = &PL_[0];
-
 // Nondeterministic first terminal in the list ...
-static const uint8 nd_fterm_[258] = {
+const uint8 Python_grm_nd_fterm[258] = {
        0,    43,    43,    43,    43,    43,    45,    45,    45,    45, 
       62,    62,    62,    62,    62,    62,    62,    62,    62,    62, 
       62,    62,    62,    62,    64,    64,    64,    64,    64,    64, 
@@ -1385,11 +1187,8 @@ static const uint8 nd_fterm_[258] = {
       83,    83,    83,    83,    83,    83,    83,    83, 
 };
 
-template<>
-const uint8 *Python_parser_tables_t::nd_fterm = &nd_fterm_[0];
-
 // Nondeterministic terminal list ...
-const uint8 nd_term_[83] = {
+const uint8 Python_grm_nd_term[83] = {
        2,     3,     4,     6,     7,    12,    28,    29,    30,    31, 
       32,    33,    34,    35,    37,    39,    40,    41,    42,    45, 
       46,    48,    50,    54,    57,    71,    72,    76,    77,    79, 
@@ -1401,11 +1200,8 @@ const uint8 nd_term_[83] = {
       91,    92,    93, 
 };
 
-template<>
-const uint8 *Python_parser_tables_t::nd_term = &nd_term_[0];
-
 // Nondeterministic first action in the list ...
-static const uint8 nd_faction_[84] = {
+const uint8 Python_grm_nd_faction[84] = {
        0,     2,     4,     6,     8,    10,    12,    14,    16,    18, 
       20,    22,    24,    26,    28,    30,    32,    34,    36,    38, 
       40,    42,    44,    46,    48,    50,    52,    54,    56,    58, 
@@ -1417,11 +1213,8 @@ static const uint8 nd_faction_[84] = {
      160,   162,   164,   166, 
 };
 
-template<>
-const uint8 *Python_parser_tables_t::nd_faction = &nd_faction_[0];
-
 // Nondeterministic actions list ...
-static const int16 nd_action_[166] = {
+const int16 Python_grm_nd_action[166] = {
      257,  -167,    34,  -167,  -318,  -167,    32,  -167,  -318,  -167, 
      575,  -167,    18,  -167,   302,  -167,   308,  -167,   309,  -167, 
       19,  -167,    20,  -167,    23,  -167,    22,  -167,  -318,  -167, 
@@ -1440,19 +1233,4 @@ static const int16 nd_action_[166] = {
     -319,  -318,  -319,  -318,  -319,  -318,  -319,  -318,  -319,  -318, 
     -319,  -318,  -319,  -318,  -319,  -318, 
 };
-
-template<>
-const int16 *Python_parser_tables_t::nd_action = &nd_action_[0];
-
-template<>
-const int32 *Python_parser_tables_t::tact_numb = 0;
-
-template<>
-const int32 *Python_parser_tables_t::node_numb = 0;
-
-template<>
-const int32 *Python_parser_tables_t::nact_numb = 0;
-
-template<>
-const int32 *Python_parser_tables_t::reverse = 0;
 

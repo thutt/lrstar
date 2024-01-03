@@ -4,17 +4,9 @@
 
 #define MAX    0x80000000
 
-template<>
-const int LRK_lexer_t::n_term_numb = 61;
-template<>
-const int LRK_lexer_t::n_Tm = 1632;
-template<>
-const int LRK_lexer_t::n_Tr = 61;
-template<>
-const int LRK_lexer_t::n_Tc = 256;
-
 // Terminal number ...
-static const int8 term_numb_[61] = { 
+extern const int8 LRK_lgr_term_numb[61];
+const int8 LRK_lgr_term_numb[61] = {
 
        0,     2,    -1,    -1,     0,     0,     0,     0,     0,     0, 
        0,     0,     2,     2,     2,     2,     2,     2,     0,     0, 
@@ -25,11 +17,9 @@ static const int8 term_numb_[61] = {
        0, 
 };
 
-template<>
-const int8 *LRK_lexer_t::term_numb = &term_numb_[0];
-
 // Terminal transition matrix ...
-static const uint8 Tm_[1632] = {
+extern const uint8 LRK_lgr_Tm[1632];
+const uint8 LRK_lgr_Tm[1632] = {
 
       60,     2,     2,    57,    50,    51,    52,    53,    18,    19, 
       60,    54,     1,     1,    12,     1,     1,     1,     1,     1, 
@@ -197,11 +187,9 @@ static const uint8 Tm_[1632] = {
        0,     0, 
 };
 
-template<>
-const uint8 *LRK_lexer_t::Tm = &Tm_[0];
-
 // Terminal transition matrix row ...
-static const uint16 Tr_[61] = { 
+extern const uint16 LRK_lgr_Tr[61];
+const uint16 LRK_lgr_Tr[61] = {
 
        0,    32,    64,    96,   128,   160,   192,   224,   256,   288, 
      320,   352,   384,   416,   448,   480,   512,   544,   576,   608, 
@@ -212,11 +200,9 @@ static const uint16 Tr_[61] = {
     1600, 
 };
 
-template<>
-const uint16 *LRK_lexer_t::Tr = &Tr_[0];
-
 // Terminal transition matrix column ...
-static const uint8 Tc_[256] = {
+extern const uint8 LRK_lgr_Tc[256];
+const uint8 LRK_lgr_Tc[256] = {
 
     0,     0,     0,     0,     0,     0,     0,     0,     0,     1, 
     2,     1,     1,     1,     0,     0,     0,     0,     0,     0, 
@@ -245,7 +231,4 @@ static const uint8 Tc_[256] = {
     0,     0,     0,     0,     0,     0,     0,     0,     0,     0, 
     0,     0,     0,     0,     0,     0, 
 };
-
-template<>
-const uint8 *LRK_lexer_t::Tc = &Tc_[0];
 

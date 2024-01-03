@@ -4,135 +4,8 @@
 #include "Dbase_ParserTables_typedef.h"
 #include "Dbase_Parser.h"
 
-template<>
-const int Dbase_parser_tables_t::n_term_symb = 280;
-
-template<>
-const int Dbase_parser_tables_t::n_head_symb = 174;
-
-template<>
-const int Dbase_parser_tables_t::n_tact_name = 2;
-
-template<>
-const int Dbase_parser_tables_t::n_node_name = 0;
-
-template<>
-const int Dbase_parser_tables_t::n_head_numb = 618;
-
-template<>
-const int Dbase_parser_tables_t::n_f_tail = 619;
-
-template<>
-const int Dbase_parser_tables_t::n_tail = 1265;
-
-template<>
-const int Dbase_parser_tables_t::n_arga = 280;
-
-template<>
-const int Dbase_parser_tables_t::n_argx = 0;
-
-template<>
-const int Dbase_parser_tables_t::n_argy = 0;
-
-template<>
-const int Dbase_parser_tables_t::n_Bm = 785;
-
-template<>
-const int Dbase_parser_tables_t::n_Br = 635;
-
-template<>
-const int Dbase_parser_tables_t::n_Bc = 280;
-
-template<>
-const int Dbase_parser_tables_t::n_Bf = 280;
-
-template<>
-const int Dbase_parser_tables_t::n_Tm = 1996;
-
-template<>
-const int Dbase_parser_tables_t::n_Tr = 635;
-
-template<>
-const int Dbase_parser_tables_t::n_Tc = 280;
-
-template<>
-const int Dbase_parser_tables_t::n_Nm = 1094;
-
-template<>
-const int Dbase_parser_tables_t::n_Nr = 635;
-
-template<>
-const int Dbase_parser_tables_t::n_Nc = 618;
-
-template<>
-const int Dbase_parser_tables_t::n_Rm = 13;
-
-template<>
-const int Dbase_parser_tables_t::n_Rr = 635;
-
-template<>
-const int Dbase_parser_tables_t::n_Rc = 280;
-
-template<>
-const int Dbase_parser_tables_t::n_PL = 618;
-
-template<>
-const int Dbase_parser_tables_t::n_nd_fterm = 0;
-
-template<>
-const int Dbase_parser_tables_t::n_nd_term = 0;
-
-template<>
-const int Dbase_parser_tables_t::n_nd_faction = 0;
-
-template<>
-const int Dbase_parser_tables_t::n_nd_action = 0;
-
-template<>
-const int Dbase_parser_tables_t::n_tact_numb = 280;
-
-template<>
-const int Dbase_parser_tables_t::n_node_numb = 0;
-
-template<>
-const int Dbase_parser_tables_t::n_nact_numb = 0;
-
-template<>
-const int Dbase_parser_tables_t::n_reverse = 0;
-
-template<>
-const int Dbase_parser_tables_t::n_terms = 280; // Number of terminals.
-
-template<>
-const int Dbase_parser_tables_t::n_heads = 174; // Number of nonterminals.
-
-template<>
-const int Dbase_parser_tables_t::n_prods = 618; // Number of productions.
-
-template<>
-const int Dbase_parser_tables_t::n_states = 635; // Number of states.
-
-template<>
-const int Dbase_parser_tables_t::accept_state = 634; // Accept state.
-
-template<>
-const int Dbase_parser_tables_t::n_termactns = 2; // Number of terminal actions.
-
-template<>
-const int Dbase_parser_tables_t::n_nodenames = 0; // Number of node names.
-
-template<>
-const int Dbase_parser_tables_t::n_nodeactns = 0; // Number of node actions.
-
-template<>
-const int Dbase_parser_tables_t::eof_symb = 1; // <eof> symbol number.
-
-template<>
-const int Dbase_parser_tables_t::err_used = 0; // <error> used in grammar?
-
-
 // Terminal symbols of the grammar.
-static const char *term_symb_[280] = {
+const char *Dbase_grm_term_symb[280] = {
    "<error>",
    "<eof>",
    "<identifier>",
@@ -415,11 +288,8 @@ static const char *term_symb_[280] = {
    "\'YEAR\'",
 };
 
-template<>
-const char * const *Dbase_parser_tables_t::term_symb = &term_symb_[0];
-
 // Nonterminal symbols of the grammar.
-static const char *head_symb_[174] = {
+const char *Dbase_grm_head_symb[174] = {
    "goal",
    "cmdlist",
    "command",
@@ -596,23 +466,14 @@ static const char *head_symb_[174] = {
    "(',' field WITH exp)*",
 };
 
-template<>
-const char * const *Dbase_parser_tables_t::head_symb = &head_symb_[0];
-
 // Terninal action names found in the grammar ...
-static const char *tact_name_[2] = {
+const char *Dbase_grm_tact_name[2] = {
    "error",
    "lookup",
 };
 
-template<>
-const char * const *Dbase_parser_tables_t::tact_name = &tact_name_[0];
-
-template<>
-const char * const *Dbase_parser_tables_t::node_name = 0;
-
 // Head symbol numbers for the productions.
-static const uint8 head_numb_[618] = {
+const uint8 Dbase_grm_head_numb[618] = {
        0,     1,     2,     3,     3,     3,     3,     3,     3,     3, 
        3,     3,     3,     3,     3,     3,     3,     3,     3,     3, 
        3,     3,     3,     3,     3,     3,     3,     3,     3,     3, 
@@ -677,11 +538,8 @@ static const uint8 head_numb_[618] = {
      169,   169,   170,   171,   171,   172,   173,   173, 
 };
 
-template<>
-const uint8 *Dbase_parser_tables_t::head_numb = &head_numb_[0];
-
 // First tail symbol index into the tail list ...
-static const uint16 f_tail_[619] = {
+const uint16 Dbase_grm_f_tail[619] = {
        0,     2,     3,     5,     7,     9,    11,    13,    18,    23, 
       28,    33,    36,    40,    42,    43,    45,    47,    50,    51, 
       53,    55,    57,    58,    61,    63,    65,    69,    71,    73, 
@@ -746,11 +604,8 @@ static const uint16 f_tail_[619] = {
     1253,  1253,  1255,  1257,  1257,  1259,  1263,  1263,  1265, 
 };
 
-template<>
-const uint16 *Dbase_parser_tables_t::f_tail = &f_tail_[0];
-
 // Tail symbol numbers ...
-static const int16 tail_[1265] = {
+const int16 Dbase_grm_tail[1265] = {
       -1,     1,   -57,   -58,     5,     6,    -5,     7,    -2,     8, 
      -59,     9,   -24,    10,   -14,    11,    12,   -14,    10,   -14, 
       13,   -54,   -61,    10,   -14,    16,   -11,   -62,    10,   -14, 
@@ -880,11 +735,8 @@ static const int16 tail_[1265] = {
      -37,    37,   -11,  -173,  -172, 
 };
 
-template<>
-const int16 *Dbase_parser_tables_t::tail = &tail_[0];
-
 // Arguments for token actions ...
-static const int8 arga_[280] = {
+const int8 Dbase_grm_arga[280] = {
       -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1, 
       -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1, 
       -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1, 
@@ -915,17 +767,8 @@ static const int8 arga_[280] = {
       -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1, 
 };
 
-template<>
-const int8 *Dbase_parser_tables_t::arga = &arga_[0];
-
-template<>
-const int32 *Dbase_parser_tables_t::argx = 0;
-
-template<>
-const int32 *Dbase_parser_tables_t::argy = 0;
-
 // Boolean matrix ...
-static const uint8 Bm_[785] = {
+const uint8 Dbase_grm_Bm[785] = {
        0,     0,     0,     0,     0,     0,     0,     0,     0,     0, 
        0,     0,   196,     3,     8,   192,     8,     0,    36,     0, 
       10,     0,     0,     0,     2,     0,     0,     0,     0,     0, 
@@ -1007,11 +850,8 @@ static const uint8 Bm_[785] = {
        0,     0,     4,    16,     0, 
 };
 
-template<>
-const uint8 *Dbase_parser_tables_t::Bm = &Bm_[0];
-
 // Boolean matrix row (for state)...
-static const uint16 Br_[635] = {
+const uint16 Dbase_grm_Br[635] = {
       12,    24,    12,    35,    45,     0,    12,    57,    57,    69, 
       81,     0,     0,     0,    93,     0,   102,   111,   119,     0, 
      127,     0,    93,   136,   148,     0,   160,    92,   172,   184, 
@@ -1078,11 +918,9 @@ static const uint16 Br_[635] = {
       57,    70,    71,   263,     0, 
       };
 
-template<>
-const uint16 *Dbase_parser_tables_t::Br = &Br_[0];
-
 // Boolean matrix column (displacement) ...
-static const uint8 Bc_[280] = {
+extern const uint8 Dbase_grm_Bc[280];
+const uint8 Dbase_grm_Bc[280] = {
        0,     0,     0,     0,     0,     0,     0,     0,     1,     0, 
        0,     1,     1,     1,     1,     1,     1,     1,     1,     0, 
        0,     2,     2,     2,     2,     0,     0,     2,     0,     2, 
@@ -1113,11 +951,8 @@ static const uint8 Bc_[280] = {
       11,    11,    11,    11,    11,    11,    11,    11,    11,    11, 
       };
 
-template<>
-const uint8 *Dbase_parser_tables_t::Bc = &Bc_[0];
-
 // Boolean matrix filter/mask value ...
-static const uint8 Bf_[280] = {
+const uint8 Dbase_grm_Bf[280] = {
        1,     2,     4,     8,    16,    32,    64,   128,     1,   128, 
      128,     2,     4,     8,    16,    32,     8,    64,   128,   128, 
      128,     1,     2,     4,     8,   128,   128,    16,   128,    32, 
@@ -1148,11 +983,8 @@ static const uint8 Bf_[280] = {
        2,     2,     2,     2,     2,     2,     2,     2,     2,     2, 
 };
 
-template<>
-const uint8 *Dbase_parser_tables_t::Bf = &Bf_[0];
-
 // Terminal transition matrix ...
-static const int16 Tm_[1996] = {
+const int16 Dbase_grm_Tm[1996] = {
        0,     0,     0,     0,     0,     0,     0,     0,     0,     0, 
        0,     0,     0,     0,     0,     0,     0,     0,     0,     0, 
        0,     0,     0,     0,     0,     0,     0,     0,     0,     0, 
@@ -1355,11 +1187,8 @@ static const int16 Tm_[1996] = {
       28,    69,    70,  -158,  -190,  -589, 
 };
 
-template<>
-const int16 *Dbase_parser_tables_t::Tm = &Tm_[0];
-
 // Terminal transition matrix row ...
-static const uint16 Tr_[635] = {
+const uint16 Dbase_grm_Tr[635] = {
     1861,  1861,  1861,  1861,  1861,  1861,  1861,  1726,  1726,  1861, 
     1861,  1861,  1861,  1861,   817,  1861,  1861,  1726,  1861,  1861, 
     1726,  1861,   868,  1726,   933,  1861,   868,  1861,   817,   868, 
@@ -1426,11 +1255,8 @@ static const uint16 Tr_[635] = {
     1726,  1861,  1321,  1726,  1861, 
 };
 
-template<>
-const uint16 *Dbase_parser_tables_t::Tr = &Tr_[0];
-
 // Terminal transition matrix column ...
-static const uint8 Tc_[280] = {
+const uint8 Dbase_grm_Tc[280] = {
       23,    23,     5,     0,     9,    14,    10,    26,    13,     3, 
        8,    22,     1,    23,    11,    24,    26,    27,    16,    28, 
       45,    34,    21,     3,    25,    37,    39,     8,    41,     2, 
@@ -1461,11 +1287,8 @@ static const uint8 Tc_[280] = {
      125,   126,   127,   128,   129,   130,   131,   132,   133,   134, 
 };
 
-template<>
-const uint8 *Dbase_parser_tables_t::Tc = &Tc_[0];
-
 // Nonterminal transition matrix ...
-static const int16 Nm_[1094] = {
+const int16 Dbase_grm_Nm[1094] = {
     -171,  -171,  -171,  -171,  -171,  -171,  -171,     0,  -171,  -171, 
      509,   510,  -171,  -171,  -171,   511,   512,     0,  -171,     0, 
      517,  -171,  -171,   523,   524,     0,     0,     0,  -177,  -177, 
@@ -1578,11 +1401,8 @@ static const int16 Nm_[1094] = {
     -614,   396,  -617,   605, 
 };
 
-template<>
-const int16 *Dbase_parser_tables_t::Nm = &Nm_[0];
-
 // Nonterminal transition matrix row ...
-static const uint16 Nr_[635] = {
+const uint16 Dbase_grm_Nr[635] = {
   948,   948,   815,   948,   948,   948,   699,   948,   815,   948, 
   948,   948,   948,   948,   948,   948,   948,   948,   948,   948, 
   948,   948,   948,   948,   948,   815,   815,   948,   948,   948, 
@@ -1649,11 +1469,8 @@ static const uint16 Nr_[635] = {
     5,   599,   948,   948,   948, 
 };
 
-template<>
-const uint16 *Dbase_parser_tables_t::Nr = &Nr_[0];
-
 // Nonterminal transition matrix column ...
-static const uint8 Nc_[618] = {
+const uint8 Dbase_grm_Nc[618] = {
    79,    79,    86,     1,     1,     1,     1,     1,     1,     1, 
     1,     1,     1,     1,     1,     1,     1,     1,     1,     1, 
     1,     1,     1,     1,     1,     1,     1,     1,     1,     1, 
@@ -1718,20 +1535,14 @@ static const uint8 Nc_[618] = {
   141,   141,   142,   143,   143,   144,   145,   145, 
 };
 
-template<>
-const uint8 *Dbase_parser_tables_t::Nc = &Nc_[0];
-
 // Reduction matrix ...
-static const uint16 Rm_[13] = {
+const uint16 Dbase_grm_Rm[13] = {
        0,     0,     0,     0,     0,     1,     0,   298,     0,     0, 
      373,   382,   382, 
 };
 
-template<>
-const uint16 *Dbase_parser_tables_t::Rm = &Rm_[0];
-
 // Reduction matrix row ...
-static const int16 Rr_[635] = {
+const int16 Dbase_grm_Rr[635] = {
      298,     0,    -4,     0,     0,   568,   298,   300,     0,     0, 
      310,   316,   323,   332,     0,   340,     0,     0,   365,   371, 
       -8,   387,   389,   396,     0,   340,     0,     0,     0,     0, 
@@ -1798,11 +1609,8 @@ static const int16 Rr_[635] = {
        0,   497,     0,   615,     0, 
 };
 
-template<>
-const int16 *Dbase_parser_tables_t::Rr = &Rr_[0];
-
 // Reduction matrix column ...
-static const uint8 Rc_[280] = {
+const uint8 Dbase_grm_Rc[280] = {
        0,     1,     2,     0,     0,     3,     0,     0,     0,     0, 
        0,     0,     0,     0,     0,     0,     0,     0,     0,     0, 
        0,     0,     4,     0,     0,     0,     0,     0,     0,     0, 
@@ -1833,11 +1641,8 @@ static const uint8 Rc_[280] = {
        0,     0,     0,     0,     0,     0,     0,     0,     0,     0, 
 };
 
-template<>
-const uint8 *Dbase_parser_tables_t::Rc = &Rc_[0];
-
 // Production lengths (minus one) ...
-static const int8 PL_[618] = {
+const int8 Dbase_grm_PL[618] = {
        1,     0,     1,     1,     1,     1,     1,     4,     4,     4, 
        4,     2,     3,     1,     0,     1,     1,     2,     0,     1, 
        1,     1,     0,     2,     1,     1,     3,     1,     1,     1, 
@@ -1902,23 +1707,8 @@ static const int8 PL_[618] = {
       -1,     1,     1,    -1,     1,     3,    -1,     1, 
 };
 
-template<>
-const int8 *Dbase_parser_tables_t::PL = &PL_[0];
-
-template<>
-const int32 *Dbase_parser_tables_t::nd_fterm = 0;
-
-template<>
-const int32 *Dbase_parser_tables_t::nd_term = 0;
-
-template<>
-const int32 *Dbase_parser_tables_t::nd_faction = 0;
-
-template<>
-const int32 *Dbase_parser_tables_t::nd_action = 0;
-
 // Terminal action number ...
-static const int8 tact_numb_[280] = {
+const int8 Dbase_grm_tact_numb[280] = {
        0,    -1,     1,     1,     1,    -1,    -1,    -1,    -1,    -1, 
       -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1, 
       -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1, 
@@ -1948,16 +1738,4 @@ static const int8 tact_numb_[280] = {
       -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1, 
       -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1, 
 };
-
-template<>
-const int8 *Dbase_parser_tables_t::tact_numb = &tact_numb_[0];
-
-template<>
-const int32 *Dbase_parser_tables_t::node_numb = 0;
-
-template<>
-const int32 *Dbase_parser_tables_t::nact_numb = 0;
-
-template<>
-const int32 *Dbase_parser_tables_t::reverse = 0;
 

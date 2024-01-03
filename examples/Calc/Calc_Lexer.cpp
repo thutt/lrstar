@@ -4,17 +4,9 @@
 
 #define MAX    0x80000000
 
-template<>
-const int Calc_lexer_t::n_term_numb = 55;
-template<>
-const int Calc_lexer_t::n_Tm = 1428;
-template<>
-const int Calc_lexer_t::n_Tr = 55;
-template<>
-const int Calc_lexer_t::n_Tc = 256;
-
 // Terminal number ...
-static const int8 term_numb_[55] = { 
+extern const int8 Calc_lgr_term_numb[55];
+const int8 Calc_lgr_term_numb[55] = {
 
        0,     2,     3,    -1,    -1,     0,     0,     0,     0,     0, 
        0,     0,     0,     2,     2,     2,     2,     0,     9,    14, 
@@ -24,11 +16,9 @@ static const int8 term_numb_[55] = {
        1,     5,     4,    -1,     0, 
 };
 
-template<>
-const int8 *Calc_lexer_t::term_numb = &term_numb_[0];
-
 // Terminal transition matrix ...
-static const uint8 Tm_[1428] = {
+extern const uint8 Calc_lgr_Tm[1428];
+const uint8 Calc_lgr_Tm[1428] = {
 
       54,     3,     3,    50,    17,    41,    42,    43,    44,    45, 
       18,     2,    46,    19,     1,    47,     1,     1,    13,     1, 
@@ -175,11 +165,9 @@ static const uint8 Tm_[1428] = {
        0,     0,     0,     0,     0,     0,     0,     0, 
 };
 
-template<>
-const uint8 *Calc_lexer_t::Tm = &Tm_[0];
-
 // Terminal transition matrix row ...
-static const uint16 Tr_[55] = { 
+extern const uint16 Calc_lgr_Tr[55];
+const uint16 Calc_lgr_Tr[55] = {
 
        0,    34,    68,   102,   136,   170,   204,   238,   272,   306, 
      340,   374,   408,   442,   476,   510,   544,   578,   612,   646, 
@@ -189,11 +177,9 @@ static const uint16 Tr_[55] = {
     1394,  1394,  1394,  1394,  1394, 
 };
 
-template<>
-const uint16 *Calc_lexer_t::Tr = &Tr_[0];
-
 // Terminal transition matrix column ...
-static const uint8 Tc_[256] = {
+extern const uint8 Calc_lgr_Tc[256];
+const uint8 Calc_lgr_Tc[256] = {
 
     0,     0,     0,     0,     0,     0,     0,     0,     0,     1, 
     2,     0,     0,     0,     0,     0,     0,     0,     0,     0, 
@@ -222,7 +208,4 @@ static const uint8 Tc_[256] = {
    33,    33,    33,    33,    33,    33,    33,    33,    33,    33, 
    33,    33,    33,    33,    33,    33, 
 };
-
-template<>
-const uint8 *Calc_lexer_t::Tc = &Tc_[0];
 

@@ -4,135 +4,8 @@
 #include "PLSQL_ParserTables_typedef.h"
 #include "PLSQL_Parser.h"
 
-template<>
-const int PLSQL_parser_tables_t::n_term_symb = 2285;
-
-template<>
-const int PLSQL_parser_tables_t::n_head_symb = 2242;
-
-template<>
-const int PLSQL_parser_tables_t::n_tact_name = 0;
-
-template<>
-const int PLSQL_parser_tables_t::n_node_name = 0;
-
-template<>
-const int PLSQL_parser_tables_t::n_head_numb = 6574;
-
-template<>
-const int PLSQL_parser_tables_t::n_f_tail = 6575;
-
-template<>
-const int PLSQL_parser_tables_t::n_tail = 9789;
-
-template<>
-const int PLSQL_parser_tables_t::n_arga = 0;
-
-template<>
-const int PLSQL_parser_tables_t::n_argx = 0;
-
-template<>
-const int PLSQL_parser_tables_t::n_argy = 0;
-
-template<>
-const int PLSQL_parser_tables_t::n_Bm = 35849;
-
-template<>
-const int PLSQL_parser_tables_t::n_Br = 3750;
-
-template<>
-const int PLSQL_parser_tables_t::n_Bc = 2285;
-
-template<>
-const int PLSQL_parser_tables_t::n_Bf = 2285;
-
-template<>
-const int PLSQL_parser_tables_t::n_Tm = 67135;
-
-template<>
-const int PLSQL_parser_tables_t::n_Tr = 3750;
-
-template<>
-const int PLSQL_parser_tables_t::n_Tc = 2285;
-
-template<>
-const int PLSQL_parser_tables_t::n_Nm = 18970;
-
-template<>
-const int PLSQL_parser_tables_t::n_Nr = 3750;
-
-template<>
-const int PLSQL_parser_tables_t::n_Nc = 6574;
-
-template<>
-const int PLSQL_parser_tables_t::n_Rm = 42894;
-
-template<>
-const int PLSQL_parser_tables_t::n_Rr = 3750;
-
-template<>
-const int PLSQL_parser_tables_t::n_Rc = 2285;
-
-template<>
-const int PLSQL_parser_tables_t::n_PL = 6574;
-
-template<>
-const int PLSQL_parser_tables_t::n_nd_fterm = 0;
-
-template<>
-const int PLSQL_parser_tables_t::n_nd_term = 0;
-
-template<>
-const int PLSQL_parser_tables_t::n_nd_faction = 0;
-
-template<>
-const int PLSQL_parser_tables_t::n_nd_action = 0;
-
-template<>
-const int PLSQL_parser_tables_t::n_tact_numb = 0;
-
-template<>
-const int PLSQL_parser_tables_t::n_node_numb = 0;
-
-template<>
-const int PLSQL_parser_tables_t::n_nact_numb = 0;
-
-template<>
-const int PLSQL_parser_tables_t::n_reverse = 0;
-
-template<>
-const int PLSQL_parser_tables_t::n_terms = 2285; // Number of terminals.
-
-template<>
-const int PLSQL_parser_tables_t::n_heads = 2242; // Number of nonterminals.
-
-template<>
-const int PLSQL_parser_tables_t::n_prods = 6574; // Number of productions.
-
-template<>
-const int PLSQL_parser_tables_t::n_states = 3750; // Number of states.
-
-template<>
-const int PLSQL_parser_tables_t::accept_state = 3749; // Accept state.
-
-template<>
-const int PLSQL_parser_tables_t::n_termactns = 0; // Number of terminal actions.
-
-template<>
-const int PLSQL_parser_tables_t::n_nodenames = 0; // Number of node names.
-
-template<>
-const int PLSQL_parser_tables_t::n_nodeactns = 0; // Number of node actions.
-
-template<>
-const int PLSQL_parser_tables_t::eof_symb = 1; // <eof> symbol number.
-
-template<>
-const int PLSQL_parser_tables_t::err_used = 0; // <error> used in grammar?
-
-
 // Terminal symbols of the grammar.
-static const char *term_symb_[2285] = {
+const char *PLSQL_grm_term_symb[2285] = {
    "<error>",
    "<eof>",
    "\'SEMICOLON\'",
@@ -2420,11 +2293,8 @@ static const char *term_symb_[2285] = {
    "\'XS_SYS_CONTEXT\'",
 };
 
-template<>
-const char * const *PLSQL_parser_tables_t::term_symb = &term_symb_[0];
-
 // Nonterminal symbols of the grammar.
-static const char *head_symb_[2242] = {
+const char *PLSQL_grm_head_symb[2242] = {
    "sql_script",
    "unit_statement",
    "drop_function",
@@ -4669,17 +4539,8 @@ static const char *head_symb_[2242] = {
    "(TO (DAY | HOUR | MINUTE | SECOND ('(' (UNSIGNED_INTEGER | bind_variable) ')')?))?",
 };
 
-template<>
-const char * const *PLSQL_parser_tables_t::head_symb = &head_symb_[0];
-
-template<>
-const char * const *PLSQL_parser_tables_t::tact_name = 0;
-
-template<>
-const char * const *PLSQL_parser_tables_t::node_name = 0;
-
 // Head symbol numbers for the productions.
-static const uint16 head_numb_[6574] = {
+const uint16 PLSQL_grm_head_numb[6574] = {
        0,     1,     1,     1,     1,     1,     1,     1,     1,     1, 
        1,     1,     1,     1,     1,     1,     1,     1,     1,     1, 
        1,     1,     1,     1,     1,     1,     1,     1,     1,     1, 
@@ -5340,11 +5201,8 @@ static const uint16 head_numb_[6574] = {
     2239,  2240,  2241,  2241, 
 };
 
-template<>
-const uint16 *PLSQL_parser_tables_t::head_numb = &head_numb_[0];
-
 // First tail symbol index into the tail list ...
-static const uint16 f_tail_[6575] = {
+const uint16 PLSQL_grm_f_tail[6575] = {
        0,     2,     3,     4,     5,     6,     7,     8,     9,    10, 
       11,    12,    13,    14,    15,    16,    17,    18,    19,    20, 
       21,    22,    23,    24,    25,    26,    27,    28,    29,    30, 
@@ -6005,11 +5863,8 @@ static const uint16 f_tail_[6575] = {
     9784,  9786,  9788,  9788,  9789, 
 };
 
-template<>
-const uint16 *PLSQL_parser_tables_t::f_tail = &f_tail_[0];
-
 // Tail symbol numbers ...
-static const int16 tail_[9789] = {
+const int16 PLSQL_grm_tail[9789] = {
     -755,     1,  -512,  -328,  -331,    -3,   -11,   -19,   -83,   -84, 
      -24,   -43,  -375,  -212,  -114,  -195,  -237,  -242,  -135,  -201, 
     -153,  -160,  -175,  -173,    -4,   -22,   -12,   -13,   -89,  -258, 
@@ -6991,20 +6846,8 @@ static const int16 tail_[9789] = {
    -2237,   679,   841,   842,   680, -2238,    49, -2239, -2240, 
 };
 
-template<>
-const int16 *PLSQL_parser_tables_t::tail = &tail_[0];
-
-template<>
-const int32 *PLSQL_parser_tables_t::arga = 0;
-
-template<>
-const int32 *PLSQL_parser_tables_t::argx = 0;
-
-template<>
-const int32 *PLSQL_parser_tables_t::argy = 0;
-
 // Boolean matrix ...
-static const uint8 Bm_[35849] = {
+const uint8 PLSQL_grm_Bm[35849] = {
      144,   103,   206,   251,    92,   239,   156,   253,   229,   249, 
      255,   239,   254,   127,   255,   255,   239,    31,   197,   249, 
      255,   127,   255,   111,   255,   244,   255,   239,   255,   239, 
@@ -10592,11 +10435,8 @@ static const uint8 Bm_[35849] = {
        0,     0,     0,     0,     0,     0,     0,     0,     0, 
 };
 
-template<>
-const uint8 *PLSQL_parser_tables_t::Bm = &Bm_[0];
-
 // Boolean matrix row (for state)...
-static const uint16 Br_[3750] = {
+const uint16 PLSQL_grm_Br[3750] = {
    35765,   419, 34515, 35765, 13399, 27098, 35765, 20141, 34594, 34676, 
    35765,  1332,  1747, 20400, 20400, 13258,  2888, 13478, 34591, 35765, 
    27099,  6539, 35765, 34695, 34587, 35765, 20171, 34769, 34681, 18045, 
@@ -10974,11 +10814,9 @@ static const uint16 Br_[3750] = {
     7700, 30877,  1747, 35765,  1747, 35328, 27902, 35328,  7629, 35765, 
       };
 
-template<>
-const uint16 *PLSQL_parser_tables_t::Br = &Br_[0];
-
 // Boolean matrix column (displacement) ...
-static const uint8 Bc_[2285] = {
+extern const uint8 PLSQL_grm_Bc[2285];
+const uint8 PLSQL_grm_Bc[2285] = {
        0,     0,     0,     0,     0,     0,     0,     0,     1,     1, 
        1,     1,     1,     1,     1,     1,     2,     2,     2,     2, 
        2,     2,     2,     2,     3,     2,     3,     3,     3,     3, 
@@ -11210,11 +11048,8 @@ static const uint8 Bc_[2285] = {
        7,     7,     7,     7,     7, 
       };
 
-template<>
-const uint8 *PLSQL_parser_tables_t::Bc = &Bc_[0];
-
 // Boolean matrix filter/mask value ...
-static const uint8 Bf_[2285] = {
+const uint8 PLSQL_grm_Bf[2285] = {
        1,     2,     4,     8,    16,    32,    64,   128,     1,     2, 
        4,     8,    16,    32,    64,   128,     1,     2,     4,     8, 
       16,    32,    64,   128,     1,   128,     2,     4,     8,    16, 
@@ -11446,11 +11281,8 @@ static const uint8 Bf_[2285] = {
       32,    32,    32,    32,    32, 
 };
 
-template<>
-const uint8 *PLSQL_parser_tables_t::Bf = &Bf_[0];
-
 // Terminal transition matrix ...
-static const int16 Tm_[67135] = {
+const int16 PLSQL_grm_Tm[67135] = {
    -3570,  1105, -2225,   -78,  2597, -1975, -2064, -2928, -2994,  2505, 
     2347, -2907,   932,   207,  2720, -2927, -1446, -1468, -3598, -3599, 
    -2065, -1433, -3479, -1467, -2746,   324, -6103, -2246, -2849, -2386, 
@@ -18167,11 +17999,8 @@ static const int16 Tm_[67135] = {
        0,     0,     0,     0,     0, 
 };
 
-template<>
-const int16 *PLSQL_parser_tables_t::Tm = &Tm_[0];
-
 // Terminal transition matrix row ...
-static const uint16 Tr_[3750] = {
+const uint16 PLSQL_grm_Tr[3750] = {
        0,  9040,     0,     0, 61323,     0,     0, 18075, 58720, 45171, 
        0, 31623, 51945, 58720, 58720,     0, 61985, 64696, 58720,     0, 
     2260, 62641,     0, 58720,     0,     0, 58720, 61823, 58720,     0, 
@@ -18549,11 +18378,8 @@ static const uint16 Tr_[3750] = {
    58720, 60257, 31623,     0, 31623,  2250, 18649,  2255, 62641,     0, 
 };
 
-template<>
-const uint16 *PLSQL_parser_tables_t::Tr = &Tr_[0];
-
 // Terminal transition matrix column ...
-static const uint16 Tc_[2285] = {
+const uint16 PLSQL_grm_Tc[2285] = {
        0,     0,     0,     1,     2,     3,     4,     5,     6,     7, 
        8,     9,    10,    11,    12,    13,    14,    15,    16,    17, 
       18,    19,    20,    21,    22,    23,    24,    25,    26,    27, 
@@ -18785,11 +18611,8 @@ static const uint16 Tc_[2285] = {
     2255,  2256,  2257,  2258,  2259, 
 };
 
-template<>
-const uint16 *PLSQL_parser_tables_t::Tc = &Tc_[0];
-
 // Nonterminal transition matrix ...
-static const int16 Nm_[18970] = {
+const int16 PLSQL_grm_Nm[18970] = {
    -3619, -3700, -3621, -3723, -3778, -3770,  1665, -3612, -3696, -3679, 
    -3708, -3731, -3681, -3664, -3665,  -164,  2611, -3671, -3663, -3667, 
    -3737, -3814,  -183,  -178, -3736, -3819, -3914, -3845,  2504, -3930, 
@@ -20689,11 +20512,8 @@ static const int16 Nm_[18970] = {
        0,     0,     0,     0,     0,     0,     0,     0,     0,     0, 
 };
 
-template<>
-const int16 *PLSQL_parser_tables_t::Nm = &Nm_[0];
-
 // Nonterminal transition matrix row ...
-static const uint16 Nr_[3750] = {
+const uint16 PLSQL_grm_Nr[3750] = {
     0,  6166,     0,     0,     0,     0,     0,  1316,     0,  1316, 
     0, 11049, 10459,     0,  1316,  5933,     0,     0,     0,     0, 
     0,  2229,     0,     0,     0,     0,     0,     0,     0,     0, 
@@ -21071,11 +20891,8 @@ static const uint16 Nr_[3750] = {
  7184,     0, 11217,  4785, 11356,     0,     0,     0,  5662,     0, 
 };
 
-template<>
-const uint16 *PLSQL_parser_tables_t::Nr = &Nr_[0];
-
 // Nonterminal transition matrix column ...
-static const uint16 Nc_[6574] = {
+const uint16 PLSQL_grm_Nc[6574] = {
     0,     0,     0,     0,     0,     0,     0,     0,     0,     0, 
     0,     0,     0,     0,     0,     0,     0,     0,     0,     0, 
     0,     0,     0,     0,     0,     0,     0,     0,     0,     0, 
@@ -21736,11 +21553,8 @@ static const uint16 Nc_[6574] = {
  1313,  1314,  1315,  1315, 
 };
 
-template<>
-const uint16 *PLSQL_parser_tables_t::Nc = &Nc_[0];
-
 // Reduction matrix ...
-static const uint16 Rm_[42894] = {
+const uint16 PLSQL_grm_Rm[42894] = {
        0,     0,     0,     0,     0,     0,     0,     0,     0,     0, 
        0,     0,     0,     0,     0,     0,     0,     0,     0,     0, 
        0,     0,     0,     0,     0,     0,     0,     0,     0,     0, 
@@ -26033,11 +25847,8 @@ static const uint16 Rm_[42894] = {
        0,     0,     0,     0, 
 };
 
-template<>
-const uint16 *PLSQL_parser_tables_t::Rm = &Rm_[0];
-
 // Reduction matrix row ...
-static const int32 Rr_[3750] = {
+const int32 PLSQL_grm_Rr[3750] = {
     3572,  5707,  3569,  4068,     0,     0,  5713,     0,     0,  3692, 
     6349,     0,  1482,  -177,  -354,  -531,     0,  1434,  1856,  1436, 
     1970,  -708,  1451,  2168,  2447,  1476,  2999,  3412,  3508,  -885, 
@@ -26415,11 +26226,8 @@ static const int32 Rr_[3750] = {
        0,     0,     0,  3947,     0,     0,     0,     0,  3949,     0, 
 };
 
-template<>
-const int32 *PLSQL_parser_tables_t::Rr = &Rr_[0];
-
 // Reduction matrix column ...
-static const uint8 Rc_[2285] = {
+const uint8 PLSQL_grm_Rc[2285] = {
        0,     1,     1,     2,     3,     4,     5,     6,     7,     8, 
        9,     5,    10,     9,    11,    12,    13,     9,    14,     9, 
       15,    16,     9,    17,    18,    17,    19,    20,    21,     9, 
@@ -26651,11 +26459,8 @@ static const uint8 Rc_[2285] = {
        9,     9,     9,     9,     9, 
 };
 
-template<>
-const uint8 *PLSQL_parser_tables_t::Rc = &Rc_[0];
-
 // Production lengths (minus one) ...
-static const int8 PL_[6574] = {
+const int8 PLSQL_grm_PL[6574] = {
        1,     0,     0,     0,     0,     0,     0,     0,     0,     0, 
        0,     0,     0,     0,     0,     0,     0,     0,     0,     0, 
        0,     0,     0,     0,     0,     0,     0,     0,     0,     0, 
@@ -27315,31 +27120,4 @@ static const int8 PL_[6574] = {
        0,     3,    -1,     0,     2,    -1,     0,     0,     0,     0, 
        1,     1,    -1,     0, 
 };
-
-template<>
-const int8 *PLSQL_parser_tables_t::PL = &PL_[0];
-
-template<>
-const int32 *PLSQL_parser_tables_t::nd_fterm = 0;
-
-template<>
-const int32 *PLSQL_parser_tables_t::nd_term = 0;
-
-template<>
-const int32 *PLSQL_parser_tables_t::nd_faction = 0;
-
-template<>
-const int32 *PLSQL_parser_tables_t::nd_action = 0;
-
-template<>
-const int32 *PLSQL_parser_tables_t::tact_numb = 0;
-
-template<>
-const int32 *PLSQL_parser_tables_t::node_numb = 0;
-
-template<>
-const int32 *PLSQL_parser_tables_t::nact_numb = 0;
-
-template<>
-const int32 *PLSQL_parser_tables_t::reverse = 0;
 

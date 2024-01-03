@@ -4,17 +4,9 @@
 
 #define MAX    0x80000000
 
-template<>
-const int JSON_lexer_t::n_term_numb = 33;
-template<>
-const int JSON_lexer_t::n_Tm = 616;
-template<>
-const int JSON_lexer_t::n_Tr = 33;
-template<>
-const int JSON_lexer_t::n_Tc = 256;
-
 // Terminal number ...
-static const int8 term_numb_[33] = { 
+extern const int8 JSON_lgr_term_numb[33];
+const int8 JSON_lgr_term_numb[33] = {
 
        0,     0,     0,     3,    -1,     4,     0,     0,     4,     0, 
        0,     0,     3,     0,     0,     0,     0,     0,     0,     0, 
@@ -22,11 +14,9 @@ static const int8 term_numb_[33] = {
        6,     8,     0, 
 };
 
-template<>
-const int8 *JSON_lexer_t::term_numb = &term_numb_[0];
-
 // Terminal transition matrix ...
-static const uint8 Tm_[616] = {
+extern const uint8 JSON_lgr_Tm[616];
+const uint8 JSON_lgr_Tm[616] = {
 
       32,     4,     4,    27,     2,    32,    32,    21,     1,    32, 
       12,     3,    22,    32,    23,    32,    24,    32,    32,     9, 
@@ -92,11 +82,9 @@ static const uint8 Tm_[616] = {
        0,     0,     0,     0,     0,     0, 
 };
 
-template<>
-const uint8 *JSON_lexer_t::Tm = &Tm_[0];
-
 // Terminal transition matrix row ...
-static const uint16 Tr_[33] = { 
+extern const uint16 JSON_lgr_Tr[33];
+const uint16 JSON_lgr_Tr[33] = {
 
        0,    28,    56,    84,   112,   140,   168,   196,   224,   252, 
      280,   308,   336,   364,   392,   420,   448,   476,   504,   532, 
@@ -104,11 +92,9 @@ static const uint16 Tr_[33] = {
      588,   588,   588, 
 };
 
-template<>
-const uint16 *JSON_lexer_t::Tr = &Tr_[0];
-
 // Terminal transition matrix column ...
-static const uint8 Tc_[256] = {
+extern const uint8 JSON_lgr_Tc[256];
+const uint8 JSON_lgr_Tc[256] = {
 
     0,     0,     0,     0,     0,     0,     0,     0,     0,     1, 
     2,     1,     0,     0,     0,     0,     0,     0,     0,     0, 
@@ -137,7 +123,4 @@ static const uint8 Tc_[256] = {
     0,     0,     0,     0,     0,     0,     0,     0,     0,     0, 
     0,     0,     0,     0,     0,     0, 
 };
-
-template<>
-const uint8 *JSON_lexer_t::Tc = &Tc_[0];
 

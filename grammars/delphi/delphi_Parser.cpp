@@ -4,135 +4,8 @@
 #include "delphi_ParserTables_typedef.h"
 #include "delphi_Parser.h"
 
-template<>
-const int delphi_parser_tables_t::n_term_symb = 101;
-
-template<>
-const int delphi_parser_tables_t::n_head_symb = 166;
-
-template<>
-const int delphi_parser_tables_t::n_tact_name = 0;
-
-template<>
-const int delphi_parser_tables_t::n_node_name = 0;
-
-template<>
-const int delphi_parser_tables_t::n_head_numb = 355;
-
-template<>
-const int delphi_parser_tables_t::n_f_tail = 356;
-
-template<>
-const int delphi_parser_tables_t::n_tail = 678;
-
-template<>
-const int delphi_parser_tables_t::n_arga = 0;
-
-template<>
-const int delphi_parser_tables_t::n_argx = 0;
-
-template<>
-const int delphi_parser_tables_t::n_argy = 0;
-
-template<>
-const int delphi_parser_tables_t::n_Bm = 394;
-
-template<>
-const int delphi_parser_tables_t::n_Br = 343;
-
-template<>
-const int delphi_parser_tables_t::n_Bc = 101;
-
-template<>
-const int delphi_parser_tables_t::n_Bf = 101;
-
-template<>
-const int delphi_parser_tables_t::n_Tm = 580;
-
-template<>
-const int delphi_parser_tables_t::n_Tr = 343;
-
-template<>
-const int delphi_parser_tables_t::n_Tc = 101;
-
-template<>
-const int delphi_parser_tables_t::n_Nm = 2246;
-
-template<>
-const int delphi_parser_tables_t::n_Nr = 343;
-
-template<>
-const int delphi_parser_tables_t::n_Nc = 355;
-
-template<>
-const int delphi_parser_tables_t::n_Rm = 91;
-
-template<>
-const int delphi_parser_tables_t::n_Rr = 343;
-
-template<>
-const int delphi_parser_tables_t::n_Rc = 101;
-
-template<>
-const int delphi_parser_tables_t::n_PL = 355;
-
-template<>
-const int delphi_parser_tables_t::n_nd_fterm = 0;
-
-template<>
-const int delphi_parser_tables_t::n_nd_term = 0;
-
-template<>
-const int delphi_parser_tables_t::n_nd_faction = 0;
-
-template<>
-const int delphi_parser_tables_t::n_nd_action = 0;
-
-template<>
-const int delphi_parser_tables_t::n_tact_numb = 0;
-
-template<>
-const int delphi_parser_tables_t::n_node_numb = 0;
-
-template<>
-const int delphi_parser_tables_t::n_nact_numb = 0;
-
-template<>
-const int delphi_parser_tables_t::n_reverse = 0;
-
-template<>
-const int delphi_parser_tables_t::n_terms = 101; // Number of terminals.
-
-template<>
-const int delphi_parser_tables_t::n_heads = 166; // Number of nonterminals.
-
-template<>
-const int delphi_parser_tables_t::n_prods = 355; // Number of productions.
-
-template<>
-const int delphi_parser_tables_t::n_states = 343; // Number of states.
-
-template<>
-const int delphi_parser_tables_t::accept_state = 342; // Accept state.
-
-template<>
-const int delphi_parser_tables_t::n_termactns = 0; // Number of terminal actions.
-
-template<>
-const int delphi_parser_tables_t::n_nodenames = 0; // Number of node names.
-
-template<>
-const int delphi_parser_tables_t::n_nodeactns = 0; // Number of node actions.
-
-template<>
-const int delphi_parser_tables_t::eof_symb = 1; // <eof> symbol number.
-
-template<>
-const int delphi_parser_tables_t::err_used = 0; // <error> used in grammar?
-
-
 // Terminal symbols of the grammar.
-static const char *term_symb_[101] = {
+const char *delphi_grm_term_symb[101] = {
    "<error>",
    "<eof>",
    "\'package\'",
@@ -236,11 +109,8 @@ static const char *term_symb_[101] = {
    "\'DIESE\'",
 };
 
-template<>
-const char * const *delphi_parser_tables_t::term_symb = &term_symb_[0];
-
 // Nonterminal symbols of the grammar.
-static const char *head_symb_[166] = {
+const char *delphi_grm_head_symb[166] = {
    "start",
    "compilation_unit",
    "program",
@@ -409,17 +279,8 @@ static const char *head_symb_[166] = {
    "general_string_const",
 };
 
-template<>
-const char * const *delphi_parser_tables_t::head_symb = &head_symb_[0];
-
-template<>
-const char * const *delphi_parser_tables_t::tact_name = 0;
-
-template<>
-const char * const *delphi_parser_tables_t::node_name = 0;
-
 // Head symbol numbers for the productions.
-static const uint8 head_numb_[355] = {
+const uint8 delphi_grm_head_numb[355] = {
        0,     1,     1,     1,     1,     2,     3,     3,     4,     4, 
        5,     5,     6,     6,     7,     8,     9,    10,    11,    11, 
       12,    12,    13,    13,    14,    15,    15,    16,    16,    17, 
@@ -458,11 +319,8 @@ static const uint8 head_numb_[355] = {
      163,   164,   164,   165,   165, 
 };
 
-template<>
-const uint8 *delphi_parser_tables_t::head_numb = &head_numb_[0];
-
 // First tail symbol index into the tail list ...
-static const uint16 f_tail_[356] = {
+const uint16 delphi_grm_f_tail[356] = {
        0,     2,     3,     4,     5,     6,    10,    13,    19,    19, 
       22,    23,    26,    27,    30,    32,    39,    42,    45,    45, 
       48,    49,    52,    53,    56,    59,    59,    61,    61,    63, 
@@ -501,11 +359,8 @@ static const uint16 f_tail_[356] = {
      670,   671,   672,   675,   676,   678, 
 };
 
-template<>
-const uint16 *delphi_parser_tables_t::f_tail = &f_tail_[0];
-
 // Tail symbol numbers ...
-static const int16 tail_[678] = {
+const int16 delphi_grm_tail[678] = {
       -1,     1,    -2,    -8,   -17,     2,    -3,    -4,    -7,     3, 
        4,  -163,     5,     4,  -163,     6,   -13,     7,     5,     8, 
       -5,     5,    -6,    -5,     9,    -6,  -163,  -163,    10,    11, 
@@ -576,20 +431,8 @@ static const int16 tail_[678] = {
       51,  -163,  -164,     3,  -163,    11,   100,    20, 
 };
 
-template<>
-const int16 *delphi_parser_tables_t::tail = &tail_[0];
-
-template<>
-const int32 *delphi_parser_tables_t::arga = 0;
-
-template<>
-const int32 *delphi_parser_tables_t::argx = 0;
-
-template<>
-const int32 *delphi_parser_tables_t::argy = 0;
-
 // Boolean matrix ...
-static const uint8 Bm_[394] = {
+const uint8 delphi_grm_Bm[394] = {
        0,     0,     0,     0,     0,     0,     0,     0,     4,     0, 
        0,     0,     0,     0,     0,     0,     2,     0,     0,     0, 
        0,     0,     0,   128,     0,     0,     0,     0,     0,     0, 
@@ -632,11 +475,8 @@ static const uint8 Bm_[394] = {
        0,     0,     0,     0, 
 };
 
-template<>
-const uint8 *delphi_parser_tables_t::Bm = &Bm_[0];
-
 // Boolean matrix row (for state)...
-static const uint16 Br_[343] = {
+const uint16 delphi_grm_Br[343] = {
        8,    16,    23,    30,    23,    33,    33,    33,     0,    33, 
       41,    23,     0,    33,    49,    57,    57,    65,    71,    79, 
       15,    85,    23,     0,    65,    91,    79,    33,    33,    33, 
@@ -674,11 +514,9 @@ static const uint16 Br_[343] = {
       82,    33,     0, 
       };
 
-template<>
-const uint16 *delphi_parser_tables_t::Br = &Br_[0];
-
 // Boolean matrix column (displacement) ...
-static const uint8 Bc_[101] = {
+extern const uint8 delphi_grm_Bc[101];
+const uint8 delphi_grm_Bc[101] = {
        0,     0,     0,     0,     0,     0,     0,     0,     0,     1, 
        1,     1,     1,     0,     1,     1,     1,     1,     0,     2, 
        2,     2,     2,     2,     2,     2,     2,     2,     3,     2, 
@@ -692,11 +530,8 @@ static const uint8 Bc_[101] = {
        2, 
       };
 
-template<>
-const uint8 *delphi_parser_tables_t::Bc = &Bc_[0];
-
 // Boolean matrix filter/mask value ...
-static const uint8 Bf_[101] = {
+const uint8 delphi_grm_Bf[101] = {
        1,     2,     4,     8,     4,    16,    32,    64,   128,     1, 
        2,     4,     8,     4,    16,    32,    64,   128,     4,     1, 
        2,     4,     4,     8,    16,    32,    64,   128,     1,   128, 
@@ -710,11 +545,8 @@ static const uint8 Bf_[101] = {
      128, 
 };
 
-template<>
-const uint8 *delphi_parser_tables_t::Bf = &Bf_[0];
-
 // Terminal transition matrix ...
-static const int16 Tm_[580] = {
+const int16 delphi_grm_Tm[580] = {
        0,  -105,   242,  -210,  -219,   -66,   288,  -274,   326,  -194, 
     -192,  -185,  -187,  -188,  -196,  -186,  -167,   -51,   265,   272, 
      309,    92,   308,  -191,   -92,  -221,  -285,     0,    87,   316, 
@@ -775,11 +607,8 @@ static const int16 Tm_[580] = {
     -326,  -327,  -328,  -329,  -330,  -331,  -332,   143,  -349,  -204, 
 };
 
-template<>
-const int16 *delphi_parser_tables_t::Tm = &Tm_[0];
-
 // Terminal transition matrix row ...
-static const uint16 Tr_[343] = {
+const uint16 delphi_grm_Tr[343] = {
      509,   509,   509,   509,   297,   509,   509,   509,   509,   509, 
      509,   297,   509,   509,   509,   297,   368,   509,   509,   439, 
      509,   509,   297,   509,   297,   297,   104,   509,   509,   509, 
@@ -817,11 +646,8 @@ static const uint16 Tr_[343] = {
       46,   509,   509, 
 };
 
-template<>
-const uint16 *delphi_parser_tables_t::Tr = &Tr_[0];
-
 // Terminal transition matrix column ...
-static const uint8 Tc_[101] = {
+const uint8 delphi_grm_Tc[101] = {
       19,    19,    52,     0,    53,     1,     2,     3,    55,     4, 
        9,     5,     6,    54,    16,    25,    15,    17,    18,    19, 
        7,    20,    21,    28,    29,     8,    52,    53,     9,    54, 
@@ -835,11 +661,8 @@ static const uint8 Tc_[101] = {
       70, 
 };
 
-template<>
-const uint8 *delphi_parser_tables_t::Tc = &Tc_[0];
-
 // Nonterminal transition matrix ...
-static const int16 Nm_[2246] = {
+const int16 delphi_grm_Nm[2246] = {
        0,     0,     0,     0,     0,     0,     0,     0,     0,     0, 
        0,     0,     0,     0,     0,     0,     0,     0,     0,     0, 
        0,     0,     0,     0,     0,     0,     0,     0,   -49,     0, 
@@ -1067,11 +890,8 @@ static const int16 Nm_[2246] = {
        3,  -146,  -206,    14,   212,   -63, 
 };
 
-template<>
-const int16 *delphi_parser_tables_t::Nm = &Nm_[0];
-
 // Nonterminal transition matrix row ...
-static const uint16 Nr_[343] = {
+const uint16 delphi_grm_Nr[343] = {
  2187,  2187,  2187,  2187,  2187,  2187,  2069,   256,  2187,   270, 
  2187,  2069,  2187,   164,  2187,  2187,  2187,  2187,  2187,  2187, 
  2187,  2187,   256,  2069,  2187,  2069,  2187,   179,    92,    94, 
@@ -1109,11 +929,8 @@ static const uint16 Nr_[343] = {
  2187,    13,  2187, 
 };
 
-template<>
-const uint16 *delphi_parser_tables_t::Nr = &Nr_[0];
-
 // Nonterminal transition matrix column ...
-static const uint8 Nc_[355] = {
+const uint8 delphi_grm_Nc[355] = {
    27,    27,    27,    27,    27,    34,    20,    20,     1,     1, 
    27,    27,    34,    34,    45,    46,    53,    13,    16,    16, 
    20,    20,     1,     1,     0,     2,     2,     3,     3,     4, 
@@ -1152,11 +969,8 @@ static const uint8 Nc_[355] = {
    56,    57,    57,    58,    58, 
 };
 
-template<>
-const uint8 *delphi_parser_tables_t::Nc = &Nc_[0];
-
 // Reduction matrix ...
-static const uint16 Rm_[91] = {
+const uint16 delphi_grm_Rm[91] = {
        0,     0,     0,     0,     0,     0,     0,     0,     0,     0, 
        0,     0,     0,     0,   351,   351,   351,     0,     0,     0, 
       46,   351,     0,     0,   351,     0,   351,   110,     0,   110, 
@@ -1169,11 +983,8 @@ static const uint16 Rm_[91] = {
        0, 
 };
 
-template<>
-const uint16 *delphi_parser_tables_t::Rm = &Rm_[0];
-
 // Reduction matrix row ...
-static const int16 Rr_[343] = {
+const int16 delphi_grm_Rr[343] = {
        0,     0,     8,     0,    18,     0,     0,     0,    58,     0, 
        0,    18,    31,     0,     0,     0,     0,     0,     0,     0, 
       12,    25,    18,    58,     0,     0,     0,     0,    60,    61, 
@@ -1211,11 +1022,8 @@ static const int16 Rr_[343] = {
      175,     0,     0, 
 };
 
-template<>
-const int16 *delphi_parser_tables_t::Rr = &Rr_[0];
-
 // Reduction matrix column ...
-static const uint8 Rc_[101] = {
+const uint8 delphi_grm_Rc[101] = {
        0,     0,     0,     1,     0,     2,     3,     4,     0,     4, 
        5,     0,     2,     0,     0,     0,     0,     0,     0,     0, 
        0,     0,     0,     6,     0,     7,     0,     0,     0,     0, 
@@ -1229,11 +1037,8 @@ static const uint8 Rc_[101] = {
        0, 
 };
 
-template<>
-const uint8 *delphi_parser_tables_t::Rc = &Rc_[0];
-
 // Production lengths (minus one) ...
-static const int8 PL_[355] = {
+const int8 delphi_grm_PL[355] = {
        1,     0,     0,     0,     0,     3,     2,     5,    -1,     2, 
        0,     2,     0,     2,     1,     6,     2,     2,    -1,     2, 
        0,     2,     0,     2,     2,    -1,     1,    -1,     1,     3, 
@@ -1271,31 +1076,4 @@ static const int8 PL_[355] = {
        2,     3,     1,    -1,     0,     0,     2,     0,     2,     0, 
        0,     0,     2,     0,     1, 
 };
-
-template<>
-const int8 *delphi_parser_tables_t::PL = &PL_[0];
-
-template<>
-const int32 *delphi_parser_tables_t::nd_fterm = 0;
-
-template<>
-const int32 *delphi_parser_tables_t::nd_term = 0;
-
-template<>
-const int32 *delphi_parser_tables_t::nd_faction = 0;
-
-template<>
-const int32 *delphi_parser_tables_t::nd_action = 0;
-
-template<>
-const int32 *delphi_parser_tables_t::tact_numb = 0;
-
-template<>
-const int32 *delphi_parser_tables_t::node_numb = 0;
-
-template<>
-const int32 *delphi_parser_tables_t::nact_numb = 0;
-
-template<>
-const int32 *delphi_parser_tables_t::reverse = 0;
 

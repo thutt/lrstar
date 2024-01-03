@@ -4,135 +4,8 @@
 #include "Zeus_ParserTables_typedef.h"
 #include "Zeus_Parser.h"
 
-template<>
-const int Zeus_parser_tables_t::n_term_symb = 71;
-
-template<>
-const int Zeus_parser_tables_t::n_head_symb = 114;
-
-template<>
-const int Zeus_parser_tables_t::n_tact_name = 2;
-
-template<>
-const int Zeus_parser_tables_t::n_node_name = 0;
-
-template<>
-const int Zeus_parser_tables_t::n_head_numb = 222;
-
-template<>
-const int Zeus_parser_tables_t::n_f_tail = 223;
-
-template<>
-const int Zeus_parser_tables_t::n_tail = 479;
-
-template<>
-const int Zeus_parser_tables_t::n_arga = 71;
-
-template<>
-const int Zeus_parser_tables_t::n_argx = 0;
-
-template<>
-const int Zeus_parser_tables_t::n_argy = 0;
-
-template<>
-const int Zeus_parser_tables_t::n_Bm = 340;
-
-template<>
-const int Zeus_parser_tables_t::n_Br = 229;
-
-template<>
-const int Zeus_parser_tables_t::n_Bc = 71;
-
-template<>
-const int Zeus_parser_tables_t::n_Bf = 71;
-
-template<>
-const int Zeus_parser_tables_t::n_Tm = 400;
-
-template<>
-const int Zeus_parser_tables_t::n_Tr = 229;
-
-template<>
-const int Zeus_parser_tables_t::n_Tc = 71;
-
-template<>
-const int Zeus_parser_tables_t::n_Nm = 1154;
-
-template<>
-const int Zeus_parser_tables_t::n_Nr = 229;
-
-template<>
-const int Zeus_parser_tables_t::n_Nc = 222;
-
-template<>
-const int Zeus_parser_tables_t::n_Rm = 1;
-
-template<>
-const int Zeus_parser_tables_t::n_Rr = 229;
-
-template<>
-const int Zeus_parser_tables_t::n_Rc = 71;
-
-template<>
-const int Zeus_parser_tables_t::n_PL = 222;
-
-template<>
-const int Zeus_parser_tables_t::n_nd_fterm = 0;
-
-template<>
-const int Zeus_parser_tables_t::n_nd_term = 0;
-
-template<>
-const int Zeus_parser_tables_t::n_nd_faction = 0;
-
-template<>
-const int Zeus_parser_tables_t::n_nd_action = 0;
-
-template<>
-const int Zeus_parser_tables_t::n_tact_numb = 71;
-
-template<>
-const int Zeus_parser_tables_t::n_node_numb = 0;
-
-template<>
-const int Zeus_parser_tables_t::n_nact_numb = 0;
-
-template<>
-const int Zeus_parser_tables_t::n_reverse = 0;
-
-template<>
-const int Zeus_parser_tables_t::n_terms = 71; // Number of terminals.
-
-template<>
-const int Zeus_parser_tables_t::n_heads = 114; // Number of nonterminals.
-
-template<>
-const int Zeus_parser_tables_t::n_prods = 222; // Number of productions.
-
-template<>
-const int Zeus_parser_tables_t::n_states = 229; // Number of states.
-
-template<>
-const int Zeus_parser_tables_t::accept_state = 228; // Accept state.
-
-template<>
-const int Zeus_parser_tables_t::n_termactns = 2; // Number of terminal actions.
-
-template<>
-const int Zeus_parser_tables_t::n_nodenames = 0; // Number of node names.
-
-template<>
-const int Zeus_parser_tables_t::n_nodeactns = 0; // Number of node actions.
-
-template<>
-const int Zeus_parser_tables_t::eof_symb = 1; // <eof> symbol number.
-
-template<>
-const int Zeus_parser_tables_t::err_used = 0; // <error> used in grammar?
-
-
 // Terminal symbols of the grammar.
-static const char *term_symb_[71] = {
+const char *Zeus_grm_term_symb[71] = {
    "<error>",
    "<eof>",
    "<identifier>",
@@ -206,11 +79,8 @@ static const char *term_symb_[71] = {
    "\'RESULT\'",
 };
 
-template<>
-const char * const *Zeus_parser_tables_t::term_symb = &term_symb_[0];
-
 // Nonterminal symbols of the grammar.
-static const char *head_symb_[114] = {
+const char *Zeus_grm_head_symb[114] = {
    "Grammar",
    "HardwareCompilationUnit",
    "HardwareDefinitionModule",
@@ -327,23 +197,14 @@ static const char *head_symb_[114] = {
    "Result",
 };
 
-template<>
-const char * const *Zeus_parser_tables_t::head_symb = &head_symb_[0];
-
 // Terninal action names found in the grammar ...
-static const char *tact_name_[2] = {
+const char *Zeus_grm_tact_name[2] = {
    "error",
    "lookup",
 };
 
-template<>
-const char * const *Zeus_parser_tables_t::tact_name = &tact_name_[0];
-
-template<>
-const char * const *Zeus_parser_tables_t::node_name = 0;
-
 // Head symbol numbers for the productions.
-static const uint8 head_numb_[222] = {
+const uint8 Zeus_grm_head_numb[222] = {
        0,     1,     1,     2,     3,     4,     4,     5,     5,     6, 
        6,     7,     7,     8,     8,     9,     9,    10,    10,    11, 
       11,    12,    12,    13,    13,    14,    14,    15,    15,    16, 
@@ -369,11 +230,8 @@ static const uint8 head_numb_[222] = {
      112,   113, 
 };
 
-template<>
-const uint8 *Zeus_parser_tables_t::head_numb = &head_numb_[0];
-
 // First tail symbol index into the tail list ...
-static const uint16 f_tail_[223] = {
+const uint16 Zeus_grm_f_tail[223] = {
        0,     2,     3,     4,    13,    15,    23,    32,    32,    34, 
       35,    36,    37,    38,    39,    42,    43,    46,    46,    48, 
       51,    56,    59,    63,    64,    65,    66,    69,    70,    73, 
@@ -399,11 +257,8 @@ static const uint16 f_tail_[223] = {
      469,   477,   479, 
 };
 
-template<>
-const uint16 *Zeus_parser_tables_t::f_tail = &f_tail_[0];
-
 // Tail symbol numbers ...
-static const int8 tail_[479] = {
+const int8 Zeus_grm_tail[479] = {
       -1,     1,    -2,    -3,     3,     4,     2,     5,   -10,    -5, 
        6,     2,     7,     8,    -4,     4,     2,     5,   -10,   -58, 
        6,     2,   -13,     4,     2,     5,   -10,   -12,   -58,     6, 
@@ -454,11 +309,8 @@ static const int8 tail_[479] = {
      -40,    49,   -58,  -111,    54,   -58,     6,    70,   -84, 
 };
 
-template<>
-const int8 *Zeus_parser_tables_t::tail = &tail_[0];
-
 // Arguments for token actions ...
-static const int8 arga_[71] = {
+const int8 Zeus_grm_arga[71] = {
       -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1, 
       -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1, 
       -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1, 
@@ -469,17 +321,8 @@ static const int8 arga_[71] = {
       -1, 
 };
 
-template<>
-const int8 *Zeus_parser_tables_t::arga = &arga_[0];
-
-template<>
-const int32 *Zeus_parser_tables_t::argx = 0;
-
-template<>
-const int32 *Zeus_parser_tables_t::argy = 0;
-
 // Boolean matrix ...
-static const uint8 Bm_[340] = {
+const uint8 Zeus_grm_Bm[340] = {
        0,     0,     0,     0,     0,     0,     0,     8,     0,     0, 
        0,     0,     0,     0,     2,     0,     0,     0,     0,     0, 
        0,    16,     0,     0,     0,     0,     0,     0,     4,     0, 
@@ -516,11 +359,8 @@ static const uint8 Bm_[340] = {
        0,     0,     1,    64,     0,     0,     0,     0,     0,     0, 
 };
 
-template<>
-const uint8 *Zeus_parser_tables_t::Bm = &Bm_[0];
-
 // Boolean matrix row (for state)...
-static const uint16 Br_[229] = {
+const uint16 Zeus_grm_Br[229] = {
        7,    14,    21,    21,    28,    28,    34,    34,     0,     0, 
       40,    47,    53,    28,    28,    60,    28,    28,    28,    28, 
       67,     0,     0,    74,    81,    28,    28,    87,    27,    28, 
@@ -546,11 +386,9 @@ static const uint16 Br_[229] = {
       30,   333,     0,     0,    17,   192,    26,    26,     0, 
       };
 
-template<>
-const uint16 *Zeus_parser_tables_t::Br = &Br_[0];
-
 // Boolean matrix column (displacement) ...
-static const uint8 Bc_[71] = {
+extern const uint8 Zeus_grm_Bc[71];
+const uint8 Zeus_grm_Bc[71] = {
        0,     0,     0,     0,     0,     0,     0,     0,     0,     1, 
        1,     1,     1,     1,     1,     1,     1,     2,     2,     2, 
        2,     2,     2,     2,     2,     2,     2,     2,     2,     3, 
@@ -561,11 +399,8 @@ static const uint8 Bc_[71] = {
        6, 
       };
 
-template<>
-const uint8 *Zeus_parser_tables_t::Bc = &Bc_[0];
-
 // Boolean matrix filter/mask value ...
-static const uint8 Bf_[71] = {
+const uint8 Zeus_grm_Bf[71] = {
        1,     2,     4,     8,    16,    32,    64,   128,     8,     1, 
        2,     4,     8,    16,    32,    64,   128,     1,     2,     4, 
        8,    16,    32,    32,    64,    64,    64,   128,   128,     1, 
@@ -576,11 +411,8 @@ static const uint8 Bf_[71] = {
       16, 
 };
 
-template<>
-const uint8 *Zeus_parser_tables_t::Bf = &Bf_[0];
-
 // Terminal transition matrix ...
-static const int16 Tm_[400] = {
+const int16 Zeus_grm_Tm[400] = {
      110,   114,   154,   -26,   178,   -36,  -121,   107,     0,    65, 
     -126,  -177,   176,    51,     0,  -217,     0,   125,    57,   -24, 
      166,     0,   -23,    51,   -22,    55,    51,     0,   -34,   -43, 
@@ -623,11 +455,8 @@ static const int16 Tm_[400] = {
     -191,   -61,   145,   -44,   191,   215,     3,   131,  -219,    13, 
 };
 
-template<>
-const int16 *Zeus_parser_tables_t::Tm = &Tm_[0];
-
 // Terminal transition matrix row ...
-static const uint16 Tr_[229] = {
+const uint16 Zeus_grm_Tr[229] = {
      357,   357,   357,   314,   357,   314,   357,   314,   357,   357, 
      357,   314,   357,   228,   271,   314,   126,   156,    45,   228, 
      314,   357,   357,   185,   228,    45,    56,   228,   228,    18, 
@@ -653,11 +482,8 @@ static const uint16 Tr_[229] = {
       56,    56,   357,   357,   314,   115,   314,   314,   357, 
 };
 
-template<>
-const uint16 *Zeus_parser_tables_t::Tr = &Tr_[0];
-
 // Terminal transition matrix column ...
-static const uint8 Tc_[71] = {
+const uint8 Zeus_grm_Tc[71] = {
        6,     6,     0,     7,     3,     1,     8,     4,    39,    13, 
       14,    42,     5,     6,     7,    15,    16,    17,    36,     2, 
       40,    18,     3,     4,    22,    24,    25,    27,    34,    28, 
@@ -668,11 +494,8 @@ static const uint8 Tc_[71] = {
       42, 
 };
 
-template<>
-const uint8 *Zeus_parser_tables_t::Tc = &Tc_[0];
-
 // Nonterminal transition matrix ...
-static const int16 Nm_[1154] = {
+const int16 Zeus_grm_Nm[1154] = {
      -42,  -194,   -42,   206,   -42,  -193,   -42,    47,     0,     0, 
      -90,   -87,   -42,    47,     0,   123,   -90,   -86,   -42,    47, 
        0,   -42,   102,   -42,   102,     0,     0,     0,     0,     0, 
@@ -791,11 +614,8 @@ static const int16 Nm_[1154] = {
      -40,   -18,    81,   117, 
 };
 
-template<>
-const int16 *Zeus_parser_tables_t::Nm = &Nm_[0];
-
 // Nonterminal transition matrix row ...
-static const uint16 Nr_[229] = {
+const uint16 Zeus_grm_Nr[229] = {
  1089,  1089,  1089,  1089,  1089,  1089,  1089,  1089,  1089,  1024, 
  1089,  1024,  1089,  1089,  1089,   848,  1089,  1089,  1089,  1024, 
   735,  1089,  1089,  1089,   848,  1089,  1089,  1089,  1089,  1089, 
@@ -821,11 +641,8 @@ static const uint16 Nr_[229] = {
  1089,  1089,   654,   679,  1089,   170,  1089,  1089,  1089, 
 };
 
-template<>
-const uint16 *Zeus_parser_tables_t::Nr = &Nr_[0];
-
 // Nonterminal transition matrix column ...
-static const uint8 Nc_[222] = {
+const uint8 Zeus_grm_Nc[222] = {
     5,     5,     5,    50,    11,    18,    18,    13,    13,    48, 
    48,     2,     2,     3,     3,     4,     4,    49,    49,    62, 
    62,     5,     5,     6,     6,    17,    17,    50,    50,    11, 
@@ -851,19 +668,13 @@ static const uint8 Nc_[222] = {
    63,    64, 
 };
 
-template<>
-const uint8 *Zeus_parser_tables_t::Nc = &Nc_[0];
-
 // Reduction matrix ...
-static const uint8 Rm_[1] = {
+const uint8 Zeus_grm_Rm[1] = {
        0, 
 };
 
-template<>
-const uint8 *Zeus_parser_tables_t::Rm = &Rm_[0];
-
 // Reduction matrix row ...
-static const uint8 Rr_[229] = {
+const uint8 Zeus_grm_Rr[229] = {
        0,     0,     0,     0,     0,     0,     0,     0,    17,    17, 
        7,     0,     0,     0,     0,     0,    11,    12,   114,   115, 
        0,   173,   180,     0,     0,    10,     0,     0,     0,     0, 
@@ -889,11 +700,8 @@ static const uint8 Rr_[229] = {
        0,     0,   173,   173,     0,     0,   200,   214,     0, 
 };
 
-template<>
-const uint8 *Zeus_parser_tables_t::Rr = &Rr_[0];
-
 // Reduction matrix column ...
-static const uint8 Rc_[71] = {
+const uint8 Zeus_grm_Rc[71] = {
        0,     0,     0,     0,     0,     0,     0,     0,     0,     0, 
        0,     0,     0,     0,     0,     0,     0,     0,     0,     0, 
        0,     0,     0,     0,     0,     0,     0,     0,     0,     0, 
@@ -904,11 +712,8 @@ static const uint8 Rc_[71] = {
        0, 
 };
 
-template<>
-const uint8 *Zeus_parser_tables_t::Rc = &Rc_[0];
-
 // Production lengths (minus one) ...
-static const int8 PL_[222] = {
+const int8 Zeus_grm_PL[222] = {
        1,     0,     0,     8,     1,     7,     8,    -1,     1,     0, 
        0,     0,     0,     0,     2,     0,     2,    -1,     1,     2, 
        4,     2,     3,     0,     0,     0,     2,     0,     2,     4, 
@@ -934,23 +739,8 @@ static const int8 PL_[222] = {
        7,     1, 
 };
 
-template<>
-const int8 *Zeus_parser_tables_t::PL = &PL_[0];
-
-template<>
-const int32 *Zeus_parser_tables_t::nd_fterm = 0;
-
-template<>
-const int32 *Zeus_parser_tables_t::nd_term = 0;
-
-template<>
-const int32 *Zeus_parser_tables_t::nd_faction = 0;
-
-template<>
-const int32 *Zeus_parser_tables_t::nd_action = 0;
-
 // Terminal action number ...
-static const int8 tact_numb_[71] = {
+const int8 Zeus_grm_tact_numb[71] = {
        0,    -1,     1,    -1,    -1,    -1,    -1,    -1,    -1,    -1, 
       -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1, 
       -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1, 
@@ -960,16 +750,4 @@ static const int8 tact_numb_[71] = {
       -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1, 
       -1, 
 };
-
-template<>
-const int8 *Zeus_parser_tables_t::tact_numb = &tact_numb_[0];
-
-template<>
-const int32 *Zeus_parser_tables_t::node_numb = 0;
-
-template<>
-const int32 *Zeus_parser_tables_t::nact_numb = 0;
-
-template<>
-const int32 *Zeus_parser_tables_t::reverse = 0;
 

@@ -4,135 +4,8 @@
 #include "PL1_ParserTables_typedef.h"
 #include "PL1_Parser.h"
 
-template<>
-const int PL1_parser_tables_t::n_term_symb = 226;
-
-template<>
-const int PL1_parser_tables_t::n_head_symb = 632;
-
-template<>
-const int PL1_parser_tables_t::n_tact_name = 2;
-
-template<>
-const int PL1_parser_tables_t::n_node_name = 0;
-
-template<>
-const int PL1_parser_tables_t::n_head_numb = 1272;
-
-template<>
-const int PL1_parser_tables_t::n_f_tail = 1273;
-
-template<>
-const int PL1_parser_tables_t::n_tail = 2199;
-
-template<>
-const int PL1_parser_tables_t::n_arga = 226;
-
-template<>
-const int PL1_parser_tables_t::n_argx = 0;
-
-template<>
-const int PL1_parser_tables_t::n_argy = 0;
-
-template<>
-const int PL1_parser_tables_t::n_Bm = 668;
-
-template<>
-const int PL1_parser_tables_t::n_Br = 860;
-
-template<>
-const int PL1_parser_tables_t::n_Bc = 226;
-
-template<>
-const int PL1_parser_tables_t::n_Bf = 226;
-
-template<>
-const int PL1_parser_tables_t::n_Tm = 4576;
-
-template<>
-const int PL1_parser_tables_t::n_Tr = 860;
-
-template<>
-const int PL1_parser_tables_t::n_Tc = 226;
-
-template<>
-const int PL1_parser_tables_t::n_Nm = 9999;
-
-template<>
-const int PL1_parser_tables_t::n_Nr = 860;
-
-template<>
-const int PL1_parser_tables_t::n_Nc = 1272;
-
-template<>
-const int PL1_parser_tables_t::n_Rm = 121;
-
-template<>
-const int PL1_parser_tables_t::n_Rr = 860;
-
-template<>
-const int PL1_parser_tables_t::n_Rc = 226;
-
-template<>
-const int PL1_parser_tables_t::n_PL = 1272;
-
-template<>
-const int PL1_parser_tables_t::n_nd_fterm = 0;
-
-template<>
-const int PL1_parser_tables_t::n_nd_term = 0;
-
-template<>
-const int PL1_parser_tables_t::n_nd_faction = 0;
-
-template<>
-const int PL1_parser_tables_t::n_nd_action = 0;
-
-template<>
-const int PL1_parser_tables_t::n_tact_numb = 226;
-
-template<>
-const int PL1_parser_tables_t::n_node_numb = 0;
-
-template<>
-const int PL1_parser_tables_t::n_nact_numb = 0;
-
-template<>
-const int PL1_parser_tables_t::n_reverse = 0;
-
-template<>
-const int PL1_parser_tables_t::n_terms = 226; // Number of terminals.
-
-template<>
-const int PL1_parser_tables_t::n_heads = 632; // Number of nonterminals.
-
-template<>
-const int PL1_parser_tables_t::n_prods = 1272; // Number of productions.
-
-template<>
-const int PL1_parser_tables_t::n_states = 860; // Number of states.
-
-template<>
-const int PL1_parser_tables_t::accept_state = 859; // Accept state.
-
-template<>
-const int PL1_parser_tables_t::n_termactns = 2; // Number of terminal actions.
-
-template<>
-const int PL1_parser_tables_t::n_nodenames = 0; // Number of node names.
-
-template<>
-const int PL1_parser_tables_t::n_nodeactns = 0; // Number of node actions.
-
-template<>
-const int PL1_parser_tables_t::eof_symb = 1; // <eof> symbol number.
-
-template<>
-const int PL1_parser_tables_t::err_used = 0; // <error> used in grammar?
-
-
 // Terminal symbols of the grammar.
-static const char *term_symb_[226] = {
+const char *PL1_grm_term_symb[226] = {
    "<error>",
    "<eof>",
    "<identifier>",
@@ -361,11 +234,8 @@ static const char *term_symb_[226] = {
    "\'SUB\'",
 };
 
-template<>
-const char * const *PL1_parser_tables_t::term_symb = &term_symb_[0];
-
 // Nonterminal symbols of the grammar.
-static const char *head_symb_[632] = {
+const char *PL1_grm_head_symb[632] = {
    "Goal",
    "TranUnit",
    "TranList",
@@ -1000,23 +870,14 @@ static const char *head_symb_[632] = {
    "IsubInt",
 };
 
-template<>
-const char * const *PL1_parser_tables_t::head_symb = &head_symb_[0];
-
 // Terninal action names found in the grammar ...
-static const char *tact_name_[2] = {
+const char *PL1_grm_tact_name[2] = {
    "error",
    "lookup",
 };
 
-template<>
-const char * const *PL1_parser_tables_t::tact_name = &tact_name_[0];
-
-template<>
-const char * const *PL1_parser_tables_t::node_name = 0;
-
 // Head symbol numbers for the productions.
-static const uint16 head_numb_[1272] = {
+const uint16 PL1_grm_head_numb[1272] = {
        0,     1,     1,     2,     2,     3,     4,     5,     6,     6, 
        7,     8,     9,     9,    10,    11,    12,    12,    12,    12, 
       12,    12,    12,    12,    13,    14,    15,    16,    17,    18, 
@@ -1147,11 +1008,8 @@ static const uint16 head_numb_[1272] = {
      630,   631, 
 };
 
-template<>
-const uint16 *PL1_parser_tables_t::head_numb = &head_numb_[0];
-
 // First tail symbol index into the tail list ...
-static const uint16 f_tail_[1273] = {
+const uint16 PL1_grm_f_tail[1273] = {
        0,     2,     2,     3,     4,     6,     7,    11,    12,    12, 
       14,    15,    17,    17,    19,    20,    21,    23,    24,    26, 
       27,    29,    31,    32,    33,    34,    35,    36,    37,    38, 
@@ -1282,11 +1140,8 @@ static const uint16 f_tail_[1273] = {
     2196,  2198,  2199, 
 };
 
-template<>
-const uint16 *PL1_parser_tables_t::f_tail = &f_tail_[0];
-
 // Tail symbol numbers ...
-static const int16 tail_[2199] = {
+const int16 PL1_grm_tail[2199] = {
       -1,     1,    -2,    -3,    -2,    -3,    -4,  -376,    -5,    -6, 
       -8,  -268,    -6,    -7,   -12,    -9,   -11,    -9,   -10,  -380, 
     -138,  -376,   -13,   -13,  -376,   -14,   -14,  -376,   -15,  -376, 
@@ -1509,11 +1364,8 @@ static const int16 tail_[2199] = {
      203,   203,   207,   207,  -622,   224,  -631,   225,     5, 
 };
 
-template<>
-const int16 *PL1_parser_tables_t::tail = &tail_[0];
-
 // Arguments for token actions ...
-static const int8 arga_[226] = {
+const int8 PL1_grm_arga[226] = {
       -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1, 
       -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1, 
       -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1, 
@@ -1539,17 +1391,8 @@ static const int8 arga_[226] = {
       -1,    -1,    -1,    -1,    -1,    -1, 
 };
 
-template<>
-const int8 *PL1_parser_tables_t::arga = &arga_[0];
-
-template<>
-const int32 *PL1_parser_tables_t::argx = 0;
-
-template<>
-const int32 *PL1_parser_tables_t::argy = 0;
-
 // Boolean matrix ...
-static const uint8 Bm_[668] = {
+const uint8 PL1_grm_Bm[668] = {
        0,     0,     0,     0,     0,     0,     0,     0,     0,     0, 
        4,     8,     0,     0,     0,     0,     0,     0,     0,     0, 
        2,     0,     0,     0,     0,     0,     0,     0,     0,     0, 
@@ -1619,11 +1462,8 @@ static const uint8 Bm_[668] = {
        0,    32,     0,     0,     0,     0,     0,     0, 
 };
 
-template<>
-const uint8 *PL1_parser_tables_t::Bm = &Bm_[0];
-
 // Boolean matrix row (for state)...
-static const uint16 Br_[860] = {
+const uint16 PL1_grm_Br[860] = {
       10,    20,    10,    30,    39,    42,     0,    39,    50,    53, 
       62,    72,    81,    78,    91,    62,   101,   101,    50,    42, 
      111,   121,    39,   101,   130,     0,   140,     0,    89,   148, 
@@ -1712,11 +1552,9 @@ static const uint16 Br_[860] = {
      319,   356,    62,   503,   451,   503,   503,   503,   503,     0, 
       };
 
-template<>
-const uint16 *PL1_parser_tables_t::Br = &Br_[0];
-
 // Boolean matrix column (displacement) ...
-static const uint8 Bc_[226] = {
+extern const uint8 PL1_grm_Bc[226];
+const uint8 PL1_grm_Bc[226] = {
        0,     0,     0,     0,     0,     0,     0,     0,     1,     1, 
        1,     1,     1,     1,     1,     1,     1,     2,     2,     1, 
        2,     1,     1,     2,     2,     2,     2,     2,     2,     2, 
@@ -1742,11 +1580,8 @@ static const uint8 Bc_[226] = {
        9,     9,     9,     9,     9,     9, 
       };
 
-template<>
-const uint8 *PL1_parser_tables_t::Bc = &Bc_[0];
-
 // Boolean matrix filter/mask value ...
-static const uint8 Bf_[226] = {
+const uint8 PL1_grm_Bf[226] = {
        1,     2,     4,     8,    16,    32,    64,   128,     1,     1, 
        2,     4,     8,    16,    32,    64,   128,     1,     2,     1, 
        4,     1,     1,     8,    16,    16,    32,    32,    32,    32, 
@@ -1772,11 +1607,8 @@ static const uint8 Bf_[226] = {
        4,     8,    16,    32,    64,   128, 
 };
 
-template<>
-const uint8 *PL1_parser_tables_t::Bf = &Bf_[0];
-
 // Terminal transition matrix ...
-static const int16 Tm_[4576] = {
+const int16 PL1_grm_Tm[4576] = {
        0,     0,     0,   745,   775,   780,   782,   783,   814,   819, 
      842,   845,   331,  -919,   332,  -923,   343,  -183,   345,  -110, 
      346,  -112,   347,  -202,   348,  -290,   349,  -302,   352,  -375, 
@@ -2237,11 +2069,8 @@ static const int16 Tm_[4576] = {
       29,    46,    47,    48,    49,    50, 
 };
 
-template<>
-const int16 *PL1_parser_tables_t::Tm = &Tm_[0];
-
 // Terminal transition matrix row ...
-static const uint16 Tr_[860] = {
+const uint16 PL1_grm_Tr[860] = {
     4030,  4030,  4030,  4030,  3490,  4030,  4030,  1893,  4030,  4030, 
     4030,  4108,  4030,  4030,  3490,  3490,  3490,  1893,  3490,  3490, 
     4030,  4420,  3490,  4108,  1387,  4030,  1893,  4030,  4030,  1893, 
@@ -2330,11 +2159,8 @@ static const uint16 Tr_[860] = {
     4030,   223,   195,  3952,   460,  2252,  2001,  2318,  2318,  4030, 
 };
 
-template<>
-const uint16 *PL1_parser_tables_t::Tr = &Tr_[0];
-
 // Terminal transition matrix column ...
-static const uint8 Tc_[226] = {
+const uint8 PL1_grm_Tc[226] = {
       65,    65,     0,    66,    16,     1,    17,    18,    65,    66, 
        2,     6,     3,     4,     7,     5,    39,    32,    26,    16, 
       13,    17,    18,    33,    67,    60,     6,     7,     8,     8, 
@@ -2360,11 +2186,8 @@ static const uint8 Tc_[226] = {
       72,    73,    74,    75,    76,    77, 
 };
 
-template<>
-const uint8 *PL1_parser_tables_t::Tc = &Tc_[0];
-
 // Nonterminal transition matrix ...
-static const int16 Nm_[9999] = {
+const int16 PL1_grm_Nm[9999] = {
        0,     0,     0,     0,     0,     0,     0,     0,     0,   398, 
        0,     0,     0,     0,     0,     0,     0,     0,     0,     0, 
        0,     0,     0,     0,     0,     0,     0,     0,     0,     0, 
@@ -3367,11 +3190,8 @@ static const int16 Nm_[9999] = {
      100,   101, -1256,   237, -1261, -1252,   511,   799,  -295, 
 };
 
-template<>
-const int16 *PL1_parser_tables_t::Nm = &Nm_[0];
-
 // Nonterminal transition matrix row ...
-static const uint16 Nr_[860] = {
+const uint16 PL1_grm_Nr[860] = {
  9768,  9768,  9537,  8197,  9768,  9768,  9768,  9768,  9768,  9768, 
  9768,  9308,  9768,  9768,  9768,  9768,  9768,  9768,  9768,  9537, 
  6322,  9086,  9768,  9768,  9768,  9768,  5577,  9768,  9768,  8197, 
@@ -3460,11 +3280,8 @@ static const uint16 Nr_[860] = {
  9768,  9768,  9768,  1252,  3879,  6126,  7588,  5363,  5363,  9768, 
 };
 
-template<>
-const uint16 *PL1_parser_tables_t::Nr = &Nr_[0];
-
 // Nonterminal transition matrix column ...
-static const uint8 Nc_[1272] = {
+const uint8 PL1_grm_Nc[1272] = {
    13,    13,    13,    76,    76,    76,    76,    13,    51,    51, 
    76,    13,    51,    51,    76,    13,    76,    76,    76,    76, 
    76,    76,    76,    76,    76,   170,    51,    86,    76,   170, 
@@ -3595,11 +3412,8 @@ static const uint8 Nc_[1272] = {
   229,   230, 
 };
 
-template<>
-const uint8 *PL1_parser_tables_t::Nc = &Nc_[0];
-
 // Reduction matrix ...
-static const uint16 Rm_[121] = {
+const uint16 PL1_grm_Rm[121] = {
        0,     0,     0,     0,     0,     0,     0,     0,     0,     0, 
        0,     0,     0,  1230,     0,     0,  1230,     0,   603,  1230, 
        0,     0,    40,    75,    40,     0,    40,     0,     0,     0, 
@@ -3615,11 +3429,8 @@ static const uint16 Rm_[121] = {
        0, 
 };
 
-template<>
-const uint16 *PL1_parser_tables_t::Rm = &Rm_[0];
-
 // Reduction matrix row ...
-static const int16 Rr_[860] = {
+const int16 PL1_grm_Rr[860] = {
        1,     0,     2,     0,   603,     0,     8,   438,     0,     0, 
        0,    12,     0,   443,     0,     0,     0,     0,     0,     0, 
        0,     0,    -9,     0,     0,    82,     0,    92,   125,     0, 
@@ -3708,11 +3519,8 @@ static const int16 Rr_[860] = {
      511,     0,     0,  1044,     0,  1078,  1041,  1043,  1040,     0, 
 };
 
-template<>
-const int16 *PL1_parser_tables_t::Rr = &Rr_[0];
-
 // Reduction matrix column ...
-static const uint8 Rc_[226] = {
+const uint8 PL1_grm_Rc[226] = {
        0,     0,     1,     0,     0,     0,     0,     2,     3,     3, 
        4,     0,     5,     6,     0,     5,     7,     0,     0,     3, 
        8,     3,     3,     8,     8,     8,     3,     3,     3,     3, 
@@ -3738,11 +3546,8 @@ static const uint8 Rc_[226] = {
        0,     0,     0,     7,     0,    12, 
 };
 
-template<>
-const uint8 *PL1_parser_tables_t::Rc = &Rc_[0];
-
 // Production lengths (minus one) ...
-static const int8 PL_[1272] = {
+const int8 PL1_grm_PL[1272] = {
        1,    -1,     0,     0,     1,     0,     3,     0,    -1,     1, 
        0,     1,    -1,     1,     0,     0,     1,     0,     1,     0, 
        1,     1,     0,     0,     0,     0,     0,     0,     0,     0, 
@@ -3873,23 +3678,8 @@ static const int8 PL_[1272] = {
        1,     0, 
 };
 
-template<>
-const int8 *PL1_parser_tables_t::PL = &PL_[0];
-
-template<>
-const int32 *PL1_parser_tables_t::nd_fterm = 0;
-
-template<>
-const int32 *PL1_parser_tables_t::nd_term = 0;
-
-template<>
-const int32 *PL1_parser_tables_t::nd_faction = 0;
-
-template<>
-const int32 *PL1_parser_tables_t::nd_action = 0;
-
 // Terminal action number ...
-static const int8 tact_numb_[226] = {
+const int8 PL1_grm_tact_numb[226] = {
        0,    -1,     1,     1,     1,     1,     1,    -1,    -1,    -1, 
       -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1, 
       -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1, 
@@ -3914,16 +3704,4 @@ static const int8 tact_numb_[226] = {
       -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1, 
       -1,    -1,    -1,    -1,    -1,    -1, 
 };
-
-template<>
-const int8 *PL1_parser_tables_t::tact_numb = &tact_numb_[0];
-
-template<>
-const int32 *PL1_parser_tables_t::node_numb = 0;
-
-template<>
-const int32 *PL1_parser_tables_t::nact_numb = 0;
-
-template<>
-const int32 *PL1_parser_tables_t::reverse = 0;
 

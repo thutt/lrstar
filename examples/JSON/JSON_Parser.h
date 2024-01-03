@@ -26,7 +26,7 @@ enum nodecon {
 extern const char JSON_grammar_name[];
 
 typedef lrstar_parser</* grammar           */   JSON_grammar_name,
-                      /* AST traversals    */   3,
+                      /* AST traversals    */   1,
                       /* actions           */   true,
                       /* debug_parser      */   true,
                       /* debug_trace       */   false,

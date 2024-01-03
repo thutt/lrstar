@@ -4,17 +4,9 @@
 
 #define MAX    0x80000000
 
-template<>
-const int Modula2_lexer_t::n_term_numb = 218;
-template<>
-const int Modula2_lexer_t::n_Tm = 10530;
-template<>
-const int Modula2_lexer_t::n_Tr = 218;
-template<>
-const int Modula2_lexer_t::n_Tc = 256;
-
 // Terminal number ...
-static const int8 term_numb_[218] = { 
+extern const int8 Modula2_lgr_term_numb[218];
+const int8 Modula2_lgr_term_numb[218] = {
 
        0,     0,    11,     0,    68,     2,     4,     4,    -1,     5, 
        0,     0,     0,     0,     5,     0,     0,     0,     5,     0, 
@@ -40,11 +32,9 @@ static const int8 term_numb_[218] = {
       26,    40,    55,    53,    57,    -1,    -1,     0, 
 };
 
-template<>
-const int8 *Modula2_lexer_t::term_numb = &term_numb_[0];
-
 // Terminal transition matrix ...
-static const uint8 Tm_[10530] = {
+extern const uint8 Modula2_lgr_Tm[10530];
+const uint8 Modula2_lgr_Tm[10530] = {
 
        8,   217,     8,   208,   194,     1,     3,    39,   195,   196, 
      197,   198,   199,     2,   200,     6,    40,   201,    41,   202, 
@@ -1101,11 +1091,9 @@ static const uint8 Tm_[10530] = {
        0,     0,     0,     0,     0,     0,     0,     0,     0,     0, 
 };
 
-template<>
-const uint8 *Modula2_lexer_t::Tm = &Tm_[0];
-
 // Terminal transition matrix row ...
-static const uint16 Tr_[218] = { 
+extern const uint16 Modula2_lgr_Tr[218];
+const uint16 Modula2_lgr_Tr[218] = {
 
        0,    54,   108,   162,   216,   270,   324,   378,   432,   486, 
      540,   594,   648,   702,   756,   810,   864,   918,   972,  1026, 
@@ -1131,11 +1119,9 @@ static const uint16 Tr_[218] = {
    10476, 10476, 10476, 10476, 10476, 10476, 10476, 10476, 
 };
 
-template<>
-const uint16 *Modula2_lexer_t::Tr = &Tr_[0];
-
 // Terminal transition matrix column ...
-static const uint8 Tc_[256] = {
+extern const uint8 Modula2_lgr_Tc[256];
+const uint8 Modula2_lgr_Tc[256] = {
 
     0,     1,     1,     1,     1,     1,     1,     1,     1,     0, 
     2,     1,     1,     1,     1,     1,     1,     1,     1,     1, 
@@ -1164,7 +1150,4 @@ static const uint8 Tc_[256] = {
     1,     1,     1,     1,     1,     1,     1,     1,     1,     1, 
     1,     1,     1,     1,     1,     0, 
 };
-
-template<>
-const uint8 *Modula2_lexer_t::Tc = &Tc_[0];
 

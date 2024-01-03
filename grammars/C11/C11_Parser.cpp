@@ -4,135 +4,8 @@
 #include "C11_ParserTables_typedef.h"
 #include "C11_Parser.h"
 
-template<>
-const int C11_parser_tables_t::n_term_symb = 99;
-
-template<>
-const int C11_parser_tables_t::n_head_symb = 78;
-
-template<>
-const int C11_parser_tables_t::n_tact_name = 2;
-
-template<>
-const int C11_parser_tables_t::n_node_name = 0;
-
-template<>
-const int C11_parser_tables_t::n_head_numb = 275;
-
-template<>
-const int C11_parser_tables_t::n_f_tail = 276;
-
-template<>
-const int C11_parser_tables_t::n_tail = 647;
-
-template<>
-const int C11_parser_tables_t::n_arga = 99;
-
-template<>
-const int C11_parser_tables_t::n_argx = 0;
-
-template<>
-const int C11_parser_tables_t::n_argy = 0;
-
-template<>
-const int C11_parser_tables_t::n_Bm = 276;
-
-template<>
-const int C11_parser_tables_t::n_Br = 256;
-
-template<>
-const int C11_parser_tables_t::n_Bc = 99;
-
-template<>
-const int C11_parser_tables_t::n_Bf = 99;
-
-template<>
-const int C11_parser_tables_t::n_Tm = 1352;
-
-template<>
-const int C11_parser_tables_t::n_Tr = 256;
-
-template<>
-const int C11_parser_tables_t::n_Tc = 99;
-
-template<>
-const int C11_parser_tables_t::n_Nm = 3182;
-
-template<>
-const int C11_parser_tables_t::n_Nr = 256;
-
-template<>
-const int C11_parser_tables_t::n_Nc = 275;
-
-template<>
-const int C11_parser_tables_t::n_Rm = 10;
-
-template<>
-const int C11_parser_tables_t::n_Rr = 256;
-
-template<>
-const int C11_parser_tables_t::n_Rc = 99;
-
-template<>
-const int C11_parser_tables_t::n_PL = 275;
-
-template<>
-const int C11_parser_tables_t::n_nd_fterm = 257;
-
-template<>
-const int C11_parser_tables_t::n_nd_term = 2;
-
-template<>
-const int C11_parser_tables_t::n_nd_faction = 3;
-
-template<>
-const int C11_parser_tables_t::n_nd_action = 4;
-
-template<>
-const int C11_parser_tables_t::n_tact_numb = 99;
-
-template<>
-const int C11_parser_tables_t::n_node_numb = 0;
-
-template<>
-const int C11_parser_tables_t::n_nact_numb = 0;
-
-template<>
-const int C11_parser_tables_t::n_reverse = 0;
-
-template<>
-const int C11_parser_tables_t::n_terms = 99; // Number of terminals.
-
-template<>
-const int C11_parser_tables_t::n_heads = 78; // Number of nonterminals.
-
-template<>
-const int C11_parser_tables_t::n_prods = 275; // Number of productions.
-
-template<>
-const int C11_parser_tables_t::n_states = 256; // Number of states.
-
-template<>
-const int C11_parser_tables_t::accept_state = 255; // Accept state.
-
-template<>
-const int C11_parser_tables_t::n_termactns = 2; // Number of terminal actions.
-
-template<>
-const int C11_parser_tables_t::n_nodenames = 0; // Number of node names.
-
-template<>
-const int C11_parser_tables_t::n_nodeactns = 0; // Number of node actions.
-
-template<>
-const int C11_parser_tables_t::eof_symb = 1; // <eof> symbol number.
-
-template<>
-const int C11_parser_tables_t::err_used = 0; // <error> used in grammar?
-
-
 // Terminal symbols of the grammar.
-static const char *term_symb_[99] = {
+const char *C11_grm_term_symb[99] = {
    "<error>",
    "<eof>",
    "<f_constant>",
@@ -234,11 +107,8 @@ static const char *term_symb_[99] = {
    "\';\'",
 };
 
-template<>
-const char * const *C11_parser_tables_t::term_symb = &term_symb_[0];
-
 // Nonterminal symbols of the grammar.
-static const char *head_symb_[78] = {
+const char *C11_grm_head_symb[78] = {
    "Goal",
    "primary_expression",
    "constant",
@@ -319,23 +189,14 @@ static const char *head_symb_[78] = {
    "declaration_list",
 };
 
-template<>
-const char * const *C11_parser_tables_t::head_symb = &head_symb_[0];
-
 // Terninal action names found in the grammar ...
-static const char *tact_name_[2] = {
+const char *C11_grm_tact_name[2] = {
    "error",
    "lookup",
 };
 
-template<>
-const char * const *C11_parser_tables_t::tact_name = &tact_name_[0];
-
-template<>
-const char * const *C11_parser_tables_t::node_name = 0;
-
 // Head symbol numbers for the productions.
-static const uint8 head_numb_[275] = {
+const uint8 C11_grm_head_numb[275] = {
        0,     1,     1,     1,     1,     1,     2,     2,     2,     3, 
        4,     4,     5,     6,     6,     7,     7,     8,     8,     8, 
        8,     8,     8,     8,     8,     8,     8,     9,     9,    10, 
@@ -366,11 +227,8 @@ static const uint8 head_numb_[275] = {
       75,    76,    76,    77,    77, 
 };
 
-template<>
-const uint8 *C11_parser_tables_t::head_numb = &head_numb_[0];
-
 // First tail symbol index into the tail list ...
-static const uint16 f_tail_[276] = {
+const uint16 C11_grm_f_tail[276] = {
        0,     2,     3,     4,     5,     8,     9,    10,    11,    12, 
       13,    14,    15,    21,    22,    25,    28,    31,    32,    36, 
       39,    43,    46,    49,    51,    53,    59,    66,    67,    70, 
@@ -401,11 +259,8 @@ static const uint16 f_tail_[276] = {
      636,   637,   641,   644,   645,   647, 
 };
 
-template<>
-const uint16 *C11_parser_tables_t::f_tail = &f_tail_[0];
-
 // Tail symbol numbers ...
-static const int8 tail_[647] = {
+const int8 C11_grm_tail[647] = {
      -74,     1,     3,    -2,    -4,    75,   -26,    76,    -5,     4, 
        2,    28,     3,     5,    33,    34,    75,   -24,    77,    -6, 
       76,    -7,    -6,    77,    -7,   -56,    78,   -24,    21,    78, 
@@ -473,11 +328,8 @@ static const int8 tail_[647] = {
      -67,   -29,   -48,   -67,   -28,   -77,   -28, 
 };
 
-template<>
-const int8 *C11_parser_tables_t::tail = &tail_[0];
-
 // Arguments for token actions ...
-static const int8 arga_[99] = {
+const int8 C11_grm_arga[99] = {
       -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1, 
       -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1, 
       -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1, 
@@ -490,17 +342,8 @@ static const int8 arga_[99] = {
       -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1, 
 };
 
-template<>
-const int8 *C11_parser_tables_t::arga = &arga_[0];
-
-template<>
-const int32 *C11_parser_tables_t::argx = 0;
-
-template<>
-const int32 *C11_parser_tables_t::argy = 0;
-
 // Boolean matrix ...
-static const uint8 Bm_[276] = {
+const uint8 C11_grm_Bm[276] = {
        0,     0,     0,     0,     0,    64,     3,    24,     0,     0, 
       66,     3,    24,     0,     0,     8,     0,    64,     0,    65, 
       64,     3,     8,     0,     0,    32,     0,     0,    64,     0, 
@@ -531,11 +374,8 @@ static const uint8 Bm_[276] = {
        3,     0,    19,     0,     0,     0, 
 };
 
-template<>
-const uint8 *C11_parser_tables_t::Bm = &Bm_[0];
-
 // Boolean matrix row (for state)...
-static const uint16 Br_[256] = {
+const uint16 C11_grm_Br[256] = {
        5,    10,    15,    20,    20,    22,    20,    20,    20,     0, 
       22,    26,    26,    29,    33,    38,    41,    45,    50,    55, 
       58,    62,    67,    58,    72,    77,    50,    82,    15,    87, 
@@ -564,11 +404,9 @@ static const uint16 Br_[256] = {
       77,   184,     1,   184,   184,     0, 
       };
 
-template<>
-const uint16 *C11_parser_tables_t::Br = &Br_[0];
-
 // Boolean matrix column (displacement) ...
-static const uint8 Bc_[99] = {
+extern const uint8 C11_grm_Bc[99];
+const uint8 C11_grm_Bc[99] = {
        0,     0,     0,     0,     0,     0,     0,     0,     0,     0, 
        0,     1,     0,     1,     1,     1,     1,     1,     1,     1, 
        1,     1,     0,     1,     1,     1,     0,     1,     0,     1, 
@@ -581,11 +419,8 @@ static const uint8 Bc_[99] = {
        4,     4,     1,     1,     4,     4,     2,     4,     4, 
       };
 
-template<>
-const uint8 *C11_parser_tables_t::Bc = &Bc_[0];
-
 // Boolean matrix filter/mask value ...
-static const uint8 Bf_[99] = {
+const uint8 C11_grm_Bf[99] = {
        1,     2,     4,     8,     4,    16,    32,    64,     4,    32, 
      128,     1,    64,     2,     4,     4,     2,     2,     1,     4, 
        8,    16,    32,     4,     2,    32,     1,     2,     4,    64, 
@@ -598,11 +433,8 @@ static const uint8 Bf_[99] = {
        4,     4,   128,   128,     8,    16,     2,    32,    64, 
 };
 
-template<>
-const uint8 *C11_parser_tables_t::Bf = &Bf_[0];
-
 // Terminal transition matrix ...
-static const int16 Tm_[1352] = {
+const int16 C11_grm_Tm[1352] = {
        0,     0,     0,     0,     0,   -21,     0,   -22,     0,     0, 
        0,     0,     0,  -234,     0,     0,     0,     0,     0,  -196, 
        0,     0,     0,     0,     0,     0,     0,     0,     0,     0, 
@@ -741,11 +573,8 @@ static const int16 Tm_[1352] = {
       83,  -251, 
 };
 
-template<>
-const int16 *C11_parser_tables_t::Tm = &Tm_[0];
-
 // Terminal transition matrix row ...
-static const uint16 Tr_[256] = {
+const uint16 C11_grm_Tr[256] = {
     1154,  1154,  1154,  1154,  1154,    96,  1154,  1154,  1154,  1154, 
      326,    96,   326,    96,  1154,  1154,   697,    96,  1154,  1154, 
      697,  1154,   697,  1022,  1022,  1022,  1154,  1154,  1154,   749, 
@@ -774,11 +603,8 @@ static const uint16 Tr_[256] = {
     1022,  1286,   196,  1286,  1286,  1154, 
 };
 
-template<>
-const uint16 *C11_parser_tables_t::Tr = &Tr_[0];
-
 // Terminal transition matrix column ...
-static const uint8 Tc_[99] = {
+const uint8 C11_grm_Tc[99] = {
       20,    20,    20,     2,     1,     0,    20,    10,    14,     1, 
       14,    15,    18,    23,    48,     6,    31,    41,    57,    11, 
       12,    46,     0,    16,    58,     1,     2,     3,    19,    48, 
@@ -791,11 +617,8 @@ static const uint8 Tc_[99] = {
       57,    58,    59,    60,    61,    62,    63,    64,    65, 
 };
 
-template<>
-const uint8 *C11_parser_tables_t::Tc = &Tc_[0];
-
 // Nonterminal transition matrix ...
-static const int16 Nm_[3182] = {
+const int16 C11_grm_Nm[3182] = {
      -17,    -2,    -3,    -5,    58,   -42,    59,   -17,    -2,    -3, 
       -5,    58,   -42,    59,     0,     0,     0,     0,     0,     0, 
      -45,     0,     0,     0,     0,     0,     0,   -46,   -17,    -2, 
@@ -1117,11 +940,8 @@ static const int16 Nm_[3182] = {
     -269,   133, 
 };
 
-template<>
-const int16 *C11_parser_tables_t::Nm = &Nm_[0];
-
 // Nonterminal transition matrix row ...
-static const uint16 Nr_[256] = {
+const uint16 C11_grm_Nr[256] = {
  3136,  3044,  3136,  1566,   535,  3136,  1069,  1107,  2952,  3136, 
  3136,  3136,  3136,  3136,  2906,  3044,  3136,  2683,  1566,  2860, 
  3136,  1839,  3136,  3136,  1878,  3136,   535,  2775,  1069,  3044, 
@@ -1150,11 +970,8 @@ static const uint16 Nr_[256] = {
   505,  2285,  3136,  2331,  2377,  3136, 
 };
 
-template<>
-const uint16 *C11_parser_tables_t::Nr = &Nr_[0];
-
 // Nonterminal transition matrix column ...
-static const uint8 Nc_[275] = {
+const uint8 C11_grm_Nc[275] = {
     0,     0,     0,     0,     0,     0,     1,     1,     1,    28, 
     2,     2,     3,    28,    28,    10,    10,     4,     4,     4, 
     4,     4,     4,     4,     4,     4,     4,    28,    28,     5, 
@@ -1185,19 +1002,13 @@ static const uint8 Nc_[275] = {
    43,    44,    44,    45,    45, 
 };
 
-template<>
-const uint8 *C11_parser_tables_t::Nc = &Nc_[0];
-
 // Reduction matrix ...
-static const uint8 Rm_[10] = {
+const uint8 C11_grm_Rm[10] = {
        0,     0,     0,     0,   161,   161,     0,   253,   253,     0, 
 };
 
-template<>
-const uint8 *C11_parser_tables_t::Rm = &Rm_[0];
-
 // Reduction matrix row ...
-static const int16 Rr_[256] = {
+const int16 C11_grm_Rr[256] = {
        0,     0,     0,    94,    96,     0,    98,   100,   102,    -2, 
        0,     0,     0,     0,   106,     0,   167,   185,     0,     0, 
      131,     0,     0,   152,     0,     0,     0,     0,     0,     0, 
@@ -1226,11 +1037,8 @@ static const int16 Rr_[256] = {
        0,     0,     0,     0,     0,     0, 
 };
 
-template<>
-const int16 *C11_parser_tables_t::Rr = &Rr_[0];
-
 // Reduction matrix column ...
-static const uint8 Rc_[99] = {
+const uint8 C11_grm_Rc[99] = {
        0,     0,     1,     2,     1,     1,     0,     2,     1,     0, 
        0,     2,     2,     2,     1,     1,     2,     2,     2,     1, 
        1,     1,     0,     1,     2,     0,     0,     2,     1,     0, 
@@ -1243,11 +1051,8 @@ static const uint8 Rc_[99] = {
        0,     0,     0,     0,     0,     0,     0,     0,     2, 
 };
 
-template<>
-const uint8 *C11_parser_tables_t::Rc = &Rc_[0];
-
 // Production lengths (minus one) ...
-static const uint8 PL_[275] = {
+const uint8 C11_grm_PL[275] = {
        1,     0,     0,     0,     2,     0,     0,     0,     0,     0, 
        0,     0,     5,     0,     2,     2,     2,     0,     3,     2, 
        3,     2,     2,     1,     1,     5,     6,     0,     2,     0, 
@@ -1278,11 +1083,8 @@ static const uint8 PL_[275] = {
        0,     3,     2,     0,     1, 
 };
 
-template<>
-const uint8 *C11_parser_tables_t::PL = &PL_[0];
-
 // Nondeterministic first terminal in the list ...
-static const uint8 nd_fterm_[257] = {
+const uint8 C11_grm_nd_fterm[257] = {
        0,     0,     0,     0,     0,     0,     0,     0,     0,     0, 
        1,     1,     1,     1,     1,     1,     1,     1,     1,     1, 
        1,     1,     1,     1,     1,     1,     1,     1,     1,     1, 
@@ -1311,35 +1113,23 @@ static const uint8 nd_fterm_[257] = {
        2,     2,     2,     2,     2,     2,     2, 
 };
 
-template<>
-const uint8 *C11_parser_tables_t::nd_fterm = &nd_fterm_[0];
-
 // Nondeterministic terminal list ...
-const uint8 nd_term_[2] = {
+const uint8 C11_grm_nd_term[2] = {
       75,    26, 
 };
 
-template<>
-const uint8 *C11_parser_tables_t::nd_term = &nd_term_[0];
-
 // Nondeterministic first action in the list ...
-static const uint8 nd_faction_[3] = {
+const uint8 C11_grm_nd_faction[3] = {
        0,     2,     4, 
 };
 
-template<>
-const uint8 *C11_parser_tables_t::nd_faction = &nd_faction_[0];
-
 // Nondeterministic actions list ...
-static const int16 nd_action_[4] = {
+const int16 C11_grm_nd_action[4] = {
       21,  -161,   251,  -253, 
 };
 
-template<>
-const int16 *C11_parser_tables_t::nd_action = &nd_action_[0];
-
 // Terminal action number ...
-static const int8 tact_numb_[99] = {
+const int8 C11_grm_tact_numb[99] = {
        0,    -1,     1,     1,     1,     1,    -1,    -1,    -1,    -1, 
       -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1, 
       -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1, 
@@ -1351,16 +1141,4 @@ static const int8 tact_numb_[99] = {
       -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1, 
       -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1, 
 };
-
-template<>
-const int8 *C11_parser_tables_t::tact_numb = &tact_numb_[0];
-
-template<>
-const int32 *C11_parser_tables_t::node_numb = 0;
-
-template<>
-const int32 *C11_parser_tables_t::nact_numb = 0;
-
-template<>
-const int32 *C11_parser_tables_t::reverse = 0;
 

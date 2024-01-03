@@ -4,135 +4,8 @@
 #include "Pascal_ParserTables_typedef.h"
 #include "Pascal_Parser.h"
 
-template<>
-const int Pascal_parser_tables_t::n_term_symb = 113;
-
-template<>
-const int Pascal_parser_tables_t::n_head_symb = 194;
-
-template<>
-const int Pascal_parser_tables_t::n_tact_name = 2;
-
-template<>
-const int Pascal_parser_tables_t::n_node_name = 185;
-
-template<>
-const int Pascal_parser_tables_t::n_head_numb = 379;
-
-template<>
-const int Pascal_parser_tables_t::n_f_tail = 380;
-
-template<>
-const int Pascal_parser_tables_t::n_tail = 695;
-
-template<>
-const int Pascal_parser_tables_t::n_arga = 113;
-
-template<>
-const int Pascal_parser_tables_t::n_argx = 379;
-
-template<>
-const int Pascal_parser_tables_t::n_argy = 379;
-
-template<>
-const int Pascal_parser_tables_t::n_Bm = 530;
-
-template<>
-const int Pascal_parser_tables_t::n_Br = 344;
-
-template<>
-const int Pascal_parser_tables_t::n_Bc = 113;
-
-template<>
-const int Pascal_parser_tables_t::n_Bf = 113;
-
-template<>
-const int Pascal_parser_tables_t::n_Tm = 703;
-
-template<>
-const int Pascal_parser_tables_t::n_Tr = 344;
-
-template<>
-const int Pascal_parser_tables_t::n_Tc = 113;
-
-template<>
-const int Pascal_parser_tables_t::n_Nm = 3240;
-
-template<>
-const int Pascal_parser_tables_t::n_Nr = 344;
-
-template<>
-const int Pascal_parser_tables_t::n_Nc = 379;
-
-template<>
-const int Pascal_parser_tables_t::n_Rm = 12;
-
-template<>
-const int Pascal_parser_tables_t::n_Rr = 344;
-
-template<>
-const int Pascal_parser_tables_t::n_Rc = 113;
-
-template<>
-const int Pascal_parser_tables_t::n_PL = 379;
-
-template<>
-const int Pascal_parser_tables_t::n_nd_fterm = 0;
-
-template<>
-const int Pascal_parser_tables_t::n_nd_term = 0;
-
-template<>
-const int Pascal_parser_tables_t::n_nd_faction = 0;
-
-template<>
-const int Pascal_parser_tables_t::n_nd_action = 0;
-
-template<>
-const int Pascal_parser_tables_t::n_tact_numb = 113;
-
-template<>
-const int Pascal_parser_tables_t::n_node_numb = 379;
-
-template<>
-const int Pascal_parser_tables_t::n_nact_numb = 379;
-
-template<>
-const int Pascal_parser_tables_t::n_reverse = 0;
-
-template<>
-const int Pascal_parser_tables_t::n_terms = 113; // Number of terminals.
-
-template<>
-const int Pascal_parser_tables_t::n_heads = 194; // Number of nonterminals.
-
-template<>
-const int Pascal_parser_tables_t::n_prods = 379; // Number of productions.
-
-template<>
-const int Pascal_parser_tables_t::n_states = 344; // Number of states.
-
-template<>
-const int Pascal_parser_tables_t::accept_state = 343; // Accept state.
-
-template<>
-const int Pascal_parser_tables_t::n_termactns = 2; // Number of terminal actions.
-
-template<>
-const int Pascal_parser_tables_t::n_nodenames = 185; // Number of node names.
-
-template<>
-const int Pascal_parser_tables_t::n_nodeactns = 185; // Number of node actions.
-
-template<>
-const int Pascal_parser_tables_t::eof_symb = 1; // <eof> symbol number.
-
-template<>
-const int Pascal_parser_tables_t::err_used = 0; // <error> used in grammar?
-
-
 // Terminal symbols of the grammar.
-static const char *term_symb_[113] = {
+const char *Pascal_grm_term_symb[113] = {
    "<error>",
    "<eof>",
    "<identifier>",
@@ -248,11 +121,8 @@ static const char *term_symb_[113] = {
    "\'DOWNTO\'",
 };
 
-template<>
-const char * const *Pascal_parser_tables_t::term_symb = &term_symb_[0];
-
 // Nonterminal symbols of the grammar.
-static const char *head_symb_[194] = {
+const char *Pascal_grm_head_symb[194] = {
    "Goal",
    "Unit",
    "Program",
@@ -449,20 +319,14 @@ static const char *head_symb_[194] = {
    "(Identifier '.')?",
 };
 
-template<>
-const char * const *Pascal_parser_tables_t::head_symb = &head_symb_[0];
-
 // Terninal action names found in the grammar ...
-static const char *tact_name_[2] = {
+const char *Pascal_grm_tact_name[2] = {
    "error",
    "lookup",
 };
 
-template<>
-const char * const *Pascal_parser_tables_t::tact_name = &tact_name_[0];
-
 // Node names found in the grammar.
-static const char * node_name_[185] = {
+const char *Pascal_grm_node_name[185] = {
    "Comp_Unit",
    "Unit_Tree",
    "Prog_Tree",
@@ -651,11 +515,8 @@ static const char * node_name_[185] = {
 
 };
 
-template<>
-const char * const *Pascal_parser_tables_t::node_name = &node_name_[0];
-
 // Head symbol numbers for the productions.
-static const uint8 head_numb_[379] = {
+const uint8 Pascal_grm_head_numb[379] = {
        0,     1,     2,     3,     4,     5,     6,     7,     7,     7, 
        7,     8,     8,     9,    10,    11,    11,    11,    11,    11, 
       12,    12,    13,    14,    15,    16,    17,    18,    19,    20, 
@@ -696,11 +557,8 @@ static const uint8 head_numb_[379] = {
      189,   190,   191,   191,   192,   192,   192,   193,   193, 
 };
 
-template<>
-const uint8 *Pascal_parser_tables_t::head_numb = &head_numb_[0];
-
 // First tail symbol index into the tail list ...
-static const uint16 f_tail_[380] = {
+const uint16 Pascal_grm_f_tail[380] = {
        0,     2,     8,    12,    15,    17,    19,    22,    23,    24, 
       25,    26,    29,    32,    35,    37,    38,    39,    40,    41, 
       42,    44,    47,    48,    50,    51,    52,    54,    58,    63, 
@@ -741,11 +599,8 @@ static const uint16 f_tail_[380] = {
      681,   683,   685,   686,   689,   689,   690,   693,   693,   695, 
 };
 
-template<>
-const uint16 *Pascal_parser_tables_t::f_tail = &f_tail_[0];
-
 // Tail symbol numbers ...
-static const int16 tail_[695] = {
+const int16 Pascal_grm_tail[695] = {
     -119,     1,    -5,    23,    -6,    -9,  -100,    24,  -120,  -121, 
      -10,    24,    25,  -104,  -123,    29,  -125,    30,  -104,    31, 
     -121,  -126,   -14,   -17,   -44,    -8,   -84,    23,  -127,   -82, 
@@ -818,11 +673,8 @@ static const int16 tail_[695] = {
     -192,    23,  -151,  -104,    24, 
 };
 
-template<>
-const int16 *Pascal_parser_tables_t::tail = &tail_[0];
-
 // Arguments for token actions ...
-static const int8 arga_[113] = {
+const int8 Pascal_grm_arga[113] = {
       -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1, 
       -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1, 
       -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1, 
@@ -837,11 +689,8 @@ static const int8 arga_[113] = {
       -1,    -1,    -1, 
 };
 
-template<>
-const int8 *Pascal_parser_tables_t::arga = &arga_[0];
-
 // First arguments for productions ...
-static const int8 argx_[379] = {
+const int8 Pascal_grm_argx[379] = {
       -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1, 
       -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1, 
       -1,    -1,     0,    -1,    -1,     0,    -1,    -1,    -1,    -1, 
@@ -882,11 +731,8 @@ static const int8 argx_[379] = {
       -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1, 
 };
 
-template<>
-const int8 *Pascal_parser_tables_t::argx = &argx_[0];
-
 // Second arguments for productions ...
-static const int8 argy_[379] = {
+const int8 Pascal_grm_argy[379] = {
       -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1, 
       -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1, 
       -1,    -1,    34,    -1,    -1,    36,    -1,    -1,    -1,    -1, 
@@ -927,11 +773,8 @@ static const int8 argy_[379] = {
       -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1, 
 };
 
-template<>
-const int8 *Pascal_parser_tables_t::argy = &argy_[0];
-
 // Boolean matrix ...
-static const uint8 Bm_[530] = {
+const uint8 Pascal_grm_Bm[530] = {
        0,     0,     0,     0,     0,     0,     0,     0,     0,     2, 
        0,     0,     0,     0,     0,     0,     0,    64,     0,     0, 
        0,     0,     0,     0,     4,     0,     0,     0,     0,     0, 
@@ -987,11 +830,8 @@ static const uint8 Bm_[530] = {
        4,     0,     0,     0,     0,     0,     0,     0,   128,     0, 
 };
 
-template<>
-const uint8 *Pascal_parser_tables_t::Bm = &Bm_[0];
-
 // Boolean matrix row (for state)...
-static const uint16 Br_[344] = {
+const uint16 Pascal_grm_Br[344] = {
        0,     9,    15,     7,     7,    24,    24,    30,     0,    38, 
       45,    22,     3,    48,     7,    56,     7,    65,    24,    24, 
       24,    24,    24,    24,    71,    15,    24,    21,    75,    83, 
@@ -1029,11 +869,9 @@ static const uint16 Br_[344] = {
      158,    24,   386,     0, 
       };
 
-template<>
-const uint16 *Pascal_parser_tables_t::Br = &Br_[0];
-
 // Boolean matrix column (displacement) ...
-static const uint8 Bc_[113] = {
+extern const uint8 Pascal_grm_Bc[113];
+const uint8 Pascal_grm_Bc[113] = {
        0,     0,     0,     0,     0,     0,     0,     0,     1,     1, 
        1,     1,     1,     1,     1,     1,     1,     1,     1,     1, 
        1,     1,     2,     2,     2,     0,     2,     2,     2,     2, 
@@ -1048,11 +886,8 @@ static const uint8 Bc_[113] = {
        8,     8,     8, 
       };
 
-template<>
-const uint8 *Pascal_parser_tables_t::Bc = &Bc_[0];
-
 // Boolean matrix filter/mask value ...
-static const uint8 Bf_[113] = {
+const uint8 Pascal_grm_Bf[113] = {
        1,     2,     4,     8,    16,    32,    64,   128,     1,     2, 
        4,     4,     8,     8,    16,    16,    32,    32,    64,   128, 
       64,    64,     1,     2,     4,     2,     8,    16,    32,    64, 
@@ -1067,11 +902,8 @@ static const uint8 Bf_[113] = {
        4,     8,     8, 
 };
 
-template<>
-const uint8 *Pascal_parser_tables_t::Bf = &Bf_[0];
-
 // Terminal transition matrix ...
-static const int16 Tm_[703] = {
+const int16 Pascal_grm_Tm[703] = {
        0,     0,     0,     0,     0,     0,     0,     0,     0,     0, 
        0,     0,  -252,   341,   163,   179,  -132,   166,   329,  -345, 
      174,   312,  -190,   207,  -173,   -33,   162,   340,  -131,  -355, 
@@ -1145,11 +977,8 @@ static const int16 Tm_[703] = {
     -213,   155,  -211, 
 };
 
-template<>
-const int16 *Pascal_parser_tables_t::Tm = &Tm_[0];
-
 // Terminal transition matrix row ...
-static const uint16 Tr_[344] = {
+const uint16 Pascal_grm_Tr[344] = {
      630,   630,   630,   630,   366,   630,   630,   630,   630,   630, 
      630,   630,   630,   630,   184,   630,   557,   436,   366,   630, 
      184,   557,   177,   630,   630,   630,   630,   630,   630,   630, 
@@ -1187,11 +1016,8 @@ static const uint16 Tr_[344] = {
      436,   630,   250,   630, 
 };
 
-template<>
-const uint16 *Pascal_parser_tables_t::Tr = &Tr_[0];
-
 // Terminal transition matrix column ...
-static const uint8 Tc_[113] = {
+const uint8 Pascal_grm_Tc[113] = {
        3,     3,    38,     0,     1,    39,    53,    16,     2,     3, 
        4,     5,     6,     7,    21,    22,     8,     9,    23,    24, 
       25,    26,    10,    11,    12,    27,    13,    14,    15,    28, 
@@ -1206,11 +1032,8 @@ static const uint8 Tc_[113] = {
       70,    71,    72, 
 };
 
-template<>
-const uint8 *Pascal_parser_tables_t::Tc = &Tc_[0];
-
 // Nonterminal transition matrix ...
-static const int16 Nm_[3240] = {
+const int16 Pascal_grm_Nm[3240] = {
        0,     0,     0,     0,     0,     0,     0,     0,     0,     0, 
        0,     0,  -231,   217,     0,     0,     0,     0,     0,  -360, 
      242,  -363,   197,   310,  -142,  -143,    85,  -126,     0,   180, 
@@ -1537,11 +1360,8 @@ static const int16 Nm_[3240] = {
     -245,   287,     4,   176,  -334,  -371,   -19,  -246,    24,    16, 
 };
 
-template<>
-const int16 *Pascal_parser_tables_t::Nm = &Nm_[0];
-
 // Nonterminal transition matrix row ...
-static const uint16 Nr_[344] = {
+const uint16 Pascal_grm_Nr[344] = {
  3140,  3140,  3140,  3140,  3140,  3140,  2851,  3140,  3140,  3140, 
  3140,  3140,  3140,  2851,  3140,  2851,  3140,  3140,  3140,  2940, 
  3140,  3140,  3140,  2508,  3140,  2851,  2706,  3140,  3140,  2940, 
@@ -1579,11 +1399,8 @@ static const uint16 Nr_[344] = {
   240,   525,  3140,  3140, 
 };
 
-template<>
-const uint16 *Pascal_parser_tables_t::Nr = &Nr_[0];
-
 // Nonterminal transition matrix column ...
-static const uint8 Nc_[379] = {
+const uint8 Pascal_grm_Nc[379] = {
    10,    10,    41,    57,     6,    92,    98,    10,    10,    10, 
    10,    41,    41,    44,    47,    90,    90,    90,    90,    90, 
     2,     2,    97,     3,     4,    42,    59,    57,     5,     6, 
@@ -1624,20 +1441,14 @@ static const uint8 Nc_[379] = {
    95,    96,    97,    97,    98,    98,    98,    99,    99, 
 };
 
-template<>
-const uint8 *Pascal_parser_tables_t::Nc = &Nc_[0];
-
 // Reduction matrix ...
-static const uint16 Rm_[12] = {
+const uint16 Pascal_grm_Rm[12] = {
        0,     0,     0,     0,     0,   308,   326,     0,   287,   285, 
        0,     0, 
 };
 
-template<>
-const uint16 *Pascal_parser_tables_t::Rm = &Rm_[0];
-
 // Reduction matrix row ...
-static const int16 Rr_[344] = {
+const int16 Pascal_grm_Rr[344] = {
      225,   227,   229,     0,     0,     0,     0,   244,   236,     0, 
      233,     0,     0,   170,     0,   171,     0,     0,     0,     0, 
        0,     0,     0,     4,     0,   229,     0,   317,   354,   244, 
@@ -1675,11 +1486,8 @@ static const int16 Rr_[344] = {
        0,   283,     0,     0, 
 };
 
-template<>
-const int16 *Pascal_parser_tables_t::Rr = &Rr_[0];
-
 // Reduction matrix column ...
-static const uint8 Rc_[113] = {
+const uint8 Pascal_grm_Rc[113] = {
        0,     0,     0,     0,     0,     0,     0,     0,     0,     0, 
        0,     0,     0,     0,     0,     0,     0,     0,     0,     0, 
        0,     0,     0,     0,     0,     0,     0,     0,     1,     0, 
@@ -1694,11 +1502,8 @@ static const uint8 Rc_[113] = {
        0,     0,     0, 
 };
 
-template<>
-const uint8 *Pascal_parser_tables_t::Rc = &Rc_[0];
-
 // Production lengths (minus one) ...
-static const int8 PL_[379] = {
+const int8 Pascal_grm_PL[379] = {
        1,     5,     3,     2,     1,     1,     2,     0,     0,     0, 
        0,     2,     2,     2,     1,     0,     0,     0,     0,     0, 
        1,     2,     0,     1,     0,     0,     1,     3,     4,     0, 
@@ -1739,23 +1544,8 @@ static const int8 PL_[379] = {
        1,     1,     0,     2,    -1,     0,     2,    -1,     1, 
 };
 
-template<>
-const int8 *Pascal_parser_tables_t::PL = &PL_[0];
-
-template<>
-const int32 *Pascal_parser_tables_t::nd_fterm = 0;
-
-template<>
-const int32 *Pascal_parser_tables_t::nd_term = 0;
-
-template<>
-const int32 *Pascal_parser_tables_t::nd_faction = 0;
-
-template<>
-const int32 *Pascal_parser_tables_t::nd_action = 0;
-
 // Terminal action number ...
-static const int8 tact_numb_[113] = {
+const int8 Pascal_grm_tact_numb[113] = {
        0,    -1,     1,     1,     1,    -1,    -1,    -1,    -1,    -1, 
       -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1, 
       -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1, 
@@ -1770,11 +1560,8 @@ static const int8 tact_numb_[113] = {
       -1,    -1,    -1, 
 };
 
-template<>
-const int8 *Pascal_parser_tables_t::tact_numb = &tact_numb_[0];
-
 // Node number for each production ...
-static const int16 node_numb_[379] = {
+const int16 Pascal_grm_node_numb[379] = {
        0,     1,     2,     3,     4,     5,     6,     7,     8,     9, 
       10,    11,    12,    13,    14,    15,    16,    17,    18,    19, 
       -1,    -1,    -1,    20,    -1,    -1,    -1,    -1,    -1,    21, 
@@ -1815,11 +1602,8 @@ static const int16 node_numb_[379] = {
       -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1, 
 };
 
-template<>
-const int16 *Pascal_parser_tables_t::node_numb = &node_numb_[0];
-
 // Node action numbers ...
-static const int8 nact_numb_[379] = {
+const int8 Pascal_grm_nact_numb[379] = {
       -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1, 
       -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1, 
       -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1, 
@@ -1859,10 +1643,4 @@ static const int8 nact_numb_[379] = {
       -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1, 
       -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1, 
 };
-
-template<>
-const int8 *Pascal_parser_tables_t::nact_numb = &nact_numb_[0];
-
-template<>
-const int32 *Pascal_parser_tables_t::reverse = 0;
 

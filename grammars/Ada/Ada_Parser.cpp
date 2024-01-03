@@ -4,135 +4,8 @@
 #include "Ada_ParserTables_typedef.h"
 #include "Ada_Parser.h"
 
-template<>
-const int Ada_parser_tables_t::n_term_symb = 93;
-
-template<>
-const int Ada_parser_tables_t::n_head_symb = 205;
-
-template<>
-const int Ada_parser_tables_t::n_tact_name = 2;
-
-template<>
-const int Ada_parser_tables_t::n_node_name = 0;
-
-template<>
-const int Ada_parser_tables_t::n_head_numb = 414;
-
-template<>
-const int Ada_parser_tables_t::n_f_tail = 415;
-
-template<>
-const int Ada_parser_tables_t::n_tail = 903;
-
-template<>
-const int Ada_parser_tables_t::n_arga = 93;
-
-template<>
-const int Ada_parser_tables_t::n_argx = 0;
-
-template<>
-const int Ada_parser_tables_t::n_argy = 0;
-
-template<>
-const int Ada_parser_tables_t::n_Bm = 723;
-
-template<>
-const int Ada_parser_tables_t::n_Br = 464;
-
-template<>
-const int Ada_parser_tables_t::n_Bc = 93;
-
-template<>
-const int Ada_parser_tables_t::n_Bf = 93;
-
-template<>
-const int Ada_parser_tables_t::n_Tm = 607;
-
-template<>
-const int Ada_parser_tables_t::n_Tr = 464;
-
-template<>
-const int Ada_parser_tables_t::n_Tc = 93;
-
-template<>
-const int Ada_parser_tables_t::n_Nm = 3098;
-
-template<>
-const int Ada_parser_tables_t::n_Nr = 464;
-
-template<>
-const int Ada_parser_tables_t::n_Nc = 414;
-
-template<>
-const int Ada_parser_tables_t::n_Rm = 374;
-
-template<>
-const int Ada_parser_tables_t::n_Rr = 464;
-
-template<>
-const int Ada_parser_tables_t::n_Rc = 93;
-
-template<>
-const int Ada_parser_tables_t::n_PL = 414;
-
-template<>
-const int Ada_parser_tables_t::n_nd_fterm = 0;
-
-template<>
-const int Ada_parser_tables_t::n_nd_term = 0;
-
-template<>
-const int Ada_parser_tables_t::n_nd_faction = 0;
-
-template<>
-const int Ada_parser_tables_t::n_nd_action = 0;
-
-template<>
-const int Ada_parser_tables_t::n_tact_numb = 93;
-
-template<>
-const int Ada_parser_tables_t::n_node_numb = 0;
-
-template<>
-const int Ada_parser_tables_t::n_nact_numb = 0;
-
-template<>
-const int Ada_parser_tables_t::n_reverse = 0;
-
-template<>
-const int Ada_parser_tables_t::n_terms = 93; // Number of terminals.
-
-template<>
-const int Ada_parser_tables_t::n_heads = 205; // Number of nonterminals.
-
-template<>
-const int Ada_parser_tables_t::n_prods = 414; // Number of productions.
-
-template<>
-const int Ada_parser_tables_t::n_states = 464; // Number of states.
-
-template<>
-const int Ada_parser_tables_t::accept_state = 463; // Accept state.
-
-template<>
-const int Ada_parser_tables_t::n_termactns = 2; // Number of terminal actions.
-
-template<>
-const int Ada_parser_tables_t::n_nodenames = 0; // Number of node names.
-
-template<>
-const int Ada_parser_tables_t::n_nodeactns = 0; // Number of node actions.
-
-template<>
-const int Ada_parser_tables_t::eof_symb = 1; // <eof> symbol number.
-
-template<>
-const int Ada_parser_tables_t::err_used = 0; // <error> used in grammar?
-
-
 // Terminal symbols of the grammar.
-static const char *term_symb_[93] = {
+const char *Ada_grm_term_symb[93] = {
    "<error>",
    "<eof>",
    "<identifier>",
@@ -228,11 +101,8 @@ static const char *term_symb_[93] = {
    "\'AT\'",
 };
 
-template<>
-const char * const *Ada_parser_tables_t::term_symb = &term_symb_[0];
-
 // Nonterminal symbols of the grammar.
-static const char *head_symb_[205] = {
+const char *Ada_grm_head_symb[205] = {
    "Goal",
    "Units",
    "Unit",
@@ -440,23 +310,14 @@ static const char *head_symb_[205] = {
    "LocList?",
 };
 
-template<>
-const char * const *Ada_parser_tables_t::head_symb = &head_symb_[0];
-
 // Terninal action names found in the grammar ...
-static const char *tact_name_[2] = {
+const char *Ada_grm_tact_name[2] = {
    "error",
    "lookup",
 };
 
-template<>
-const char * const *Ada_parser_tables_t::tact_name = &tact_name_[0];
-
-template<>
-const char * const *Ada_parser_tables_t::node_name = 0;
-
 // Head symbol numbers for the productions.
-static const uint8 head_numb_[414] = {
+const uint8 Ada_grm_head_numb[414] = {
        0,     1,     1,     2,     3,     3,     4,     4,     5,     5, 
        6,     7,     8,     8,     9,     9,     9,     9,     9,     9, 
       10,    11,    11,    11,    11,    11,    12,    13,    14,    15, 
@@ -501,11 +362,8 @@ static const uint8 head_numb_[414] = {
      203,   203,   204,   204, 
 };
 
-template<>
-const uint8 *Ada_parser_tables_t::head_numb = &head_numb_[0];
-
 // First tail symbol index into the tail list ...
-static const uint16 f_tail_[415] = {
+const uint16 Ada_grm_f_tail[415] = {
        0,     2,     3,     5,     8,    11,    17,    18,    21,    22, 
       25,    27,    30,    31,    34,    35,    36,    37,    38,    39, 
       40,    43,    44,    45,    46,    47,    48,    53,    61,    70, 
@@ -550,11 +408,8 @@ static const uint16 f_tail_[415] = {
      901,   901,   902,   902,   903, 
 };
 
-template<>
-const uint16 *Ada_parser_tables_t::f_tail = &f_tail_[0];
-
 // Tail symbol numbers ...
-static const int16 tail_[903] = {
+const int16 Ada_grm_tail[903] = {
       -1,     1,    -2,    -1,    -2,  -166,  -167,   -11,     5,     2, 
        6,     5,     2,     7,    -4,     8,     6,    -5,    -4,     9, 
       -5,   -72,     2,    10,   -72,    -7,  -168,    11,    -8,     6, 
@@ -648,11 +503,8 @@ static const int16 tail_[903] = {
      -91,  -163,  -164, 
 };
 
-template<>
-const int16 *Ada_parser_tables_t::tail = &tail_[0];
-
 // Arguments for token actions ...
-static const int8 arga_[93] = {
+const int8 Ada_grm_arga[93] = {
       -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1, 
       -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1, 
       -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1, 
@@ -665,17 +517,8 @@ static const int8 arga_[93] = {
       -1,    -1,    -1, 
 };
 
-template<>
-const int8 *Ada_parser_tables_t::arga = &arga_[0];
-
-template<>
-const int32 *Ada_parser_tables_t::argx = 0;
-
-template<>
-const int32 *Ada_parser_tables_t::argy = 0;
-
 // Boolean matrix ...
-static const uint8 Bm_[723] = {
+const uint8 Ada_grm_Bm[723] = {
        0,     0,     0,     0,     0,     0,     0,     0,     0,     0, 
        2,     0,     0,     0,     0,     0,     0,     0,     0,    32, 
        0,     0,     0,     0,     0,     0,     0,     0,     0,     4, 
@@ -751,11 +594,8 @@ static const uint8 Bm_[723] = {
       46,   133,     2, 
 };
 
-template<>
-const uint8 *Ada_parser_tables_t::Bm = &Bm_[0];
-
 // Boolean matrix row (for state)...
-static const uint16 Br_[464] = {
+const uint16 Ada_grm_Br[464] = {
        0,    10,    19,   537,    29,     0,    38,   547,    38,    47, 
       56,    29,    84,    94,    84,   103,    37,   613,    38,    38, 
       38,   112,    29,    84,    29,    58,    29,    84,    84,   121, 
@@ -805,11 +645,9 @@ static const uint16 Br_[464] = {
       38,   193,    63,     0, 
       };
 
-template<>
-const uint16 *Ada_parser_tables_t::Br = &Br_[0];
-
 // Boolean matrix column (displacement) ...
-static const uint8 Bc_[93] = {
+extern const uint8 Ada_grm_Bc[93];
+const uint8 Ada_grm_Bc[93] = {
        0,     0,     0,     0,     0,     0,     0,     0,     1,     1, 
        1,     1,     1,     1,     1,     1,     2,     2,     2,     2, 
        2,     2,     2,     2,     2,     3,     3,     3,     3,     3, 
@@ -822,11 +660,8 @@ static const uint8 Bc_[93] = {
        9,     9,     9, 
       };
 
-template<>
-const uint8 *Ada_parser_tables_t::Bc = &Bc_[0];
-
 // Boolean matrix filter/mask value ...
-static const uint8 Bf_[93] = {
+const uint8 Ada_grm_Bf[93] = {
        1,     2,     4,     8,    16,    32,    64,   128,     1,     2, 
        4,     8,    16,    32,    64,   128,     1,     2,     4,     8, 
       16,    32,    64,    64,   128,     1,     2,     4,     8,    16, 
@@ -839,11 +674,8 @@ static const uint8 Bf_[93] = {
        4,     8,    16, 
 };
 
-template<>
-const uint8 *Ada_parser_tables_t::Bf = &Bf_[0];
-
 // Terminal transition matrix ...
-static const int16 Tm_[607] = {
+const int16 Ada_grm_Tm[607] = {
     -266,   463,   161,   336,  -184,    49,    14,    10,    36,   350, 
       13,   338,   218,   216,   219,   220,   185,   323,   341,   337, 
      160,    48,   169,   301,     4,   221,   282,  -249,   155,    31, 
@@ -907,11 +739,8 @@ static const int16 Tm_[607] = {
        0,     0,     0,     0,     0,     0,     0, 
 };
 
-template<>
-const int16 *Ada_parser_tables_t::Tm = &Tm_[0];
-
 // Terminal transition matrix row ...
-static const uint16 Tr_[464] = {
+const uint16 Ada_grm_Tr[464] = {
        0,     0,     0,     0,   220,     0,   318,   358,   488,     0, 
      188,   137,   121,   495,   443,   285,     0,   240,   188,   201, 
      224,     0,   488,   121,   188,   393,   201,   443,   443,   514, 
@@ -961,11 +790,8 @@ static const uint16 Tr_[464] = {
      315,   393,   162,     0, 
 };
 
-template<>
-const uint16 *Ada_parser_tables_t::Tr = &Tr_[0];
-
 // Terminal transition matrix column ...
-static const uint8 Tc_[93] = {
+const uint8 Ada_grm_Tc[93] = {
        0,     1,     2,    13,    27,    24,     0,     3,     4,     5, 
       32,     6,    66,     7,     8,     9,    10,    29,    76,    11, 
       12,    13,    14,    15,    16,    17,    18,    19,    20,    21, 
@@ -978,11 +804,8 @@ static const uint8 Tc_[93] = {
       78,    79,    80, 
 };
 
-template<>
-const uint8 *Ada_parser_tables_t::Tc = &Tc_[0];
-
 // Nonterminal transition matrix ...
-static const int16 Nm_[3098] = {
+const int16 Ada_grm_Nm[3098] = {
       -1,   -86,  -116,     1,   156,   -85,  -125,  -126,   -95,   -92, 
     -110,   377,   -47,  -111,   -43,   -48,   -49,   -50,  -113,   263, 
     -114,   378,  -100,  -353,    40,  -351,   335,  -115,   -97,    16, 
@@ -1295,11 +1118,8 @@ static const int16 Nm_[3098] = {
        0,     0,     0,     0,     0,     0,     0,     0, 
 };
 
-template<>
-const int16 *Ada_parser_tables_t::Nm = &Nm_[0];
-
 // Nonterminal transition matrix row ...
-static const uint16 Nr_[464] = {
+const uint16 Ada_grm_Nr[464] = {
     0,   138,  1963,   273,     0,     0,     0,   496,     0,   273, 
     0,     0,    81,     0,   224,     0,     0,     0,     0,     0, 
     0,     0,     0,   141,     0,   605,     0,   799,  2795,     0, 
@@ -1349,11 +1169,8 @@ static const uint16 Nr_[464] = {
     0,     0,   138,     0, 
 };
 
-template<>
-const uint16 *Ada_parser_tables_t::Nr = &Nr_[0];
-
 // Nonterminal transition matrix column ...
-static const uint8 Nc_[414] = {
+const uint8 Ada_grm_Nc[414] = {
     3,     3,     3,     0,     1,     1,     3,     3,     2,     2, 
     3,     0,     3,     3,     4,     4,     4,     4,     4,     4, 
     5,     2,     2,     2,     2,     2,    10,     6,     7,     8, 
@@ -1398,11 +1215,8 @@ static const uint8 Nc_[414] = {
   136,   136,   137,   137, 
 };
 
-template<>
-const uint8 *Ada_parser_tables_t::Nc = &Nc_[0];
-
 // Reduction matrix ...
-static const uint16 Rm_[374] = {
+const uint16 Ada_grm_Rm[374] = {
        0,     0,     0,     0,     0,     0,     0,     0,     0,     0, 
        0,     0,     0,     0,     0,     0,     0,     0,     0,     0, 
        0,   141,   249,   141,   141,   141,     0,     0,   141,   141, 
@@ -1443,11 +1257,8 @@ static const uint16 Rm_[374] = {
        0,   226,   226,   376, 
 };
 
-template<>
-const uint16 *Ada_parser_tables_t::Rm = &Rm_[0];
-
 // Reduction matrix row ...
-static const int16 Rr_[464] = {
+const int16 Ada_grm_Rr[464] = {
      328,   328,   330,     0,     0,   354,     0,     0,     0,   332, 
        0,     0,     0,     0,     0,     0,     0,   356,     0,     0, 
        0,     0,     0,     0,     0,     0,     0,     0,     0,   394, 
@@ -1497,11 +1308,8 @@ static const int16 Rr_[464] = {
        0,     0,   344,     0, 
 };
 
-template<>
-const int16 *Ada_parser_tables_t::Rr = &Rr_[0];
-
 // Reduction matrix column ...
-static const uint8 Rc_[93] = {
+const uint8 Ada_grm_Rc[93] = {
        0,     0,     1,     0,     1,     0,     2,     3,     4,     5, 
        6,     0,     0,     0,     7,     8,     0,     0,     2,     0, 
        9,    10,    11,    11,     0,     0,     0,     0,     1,    12, 
@@ -1514,11 +1322,8 @@ static const uint8 Rc_[93] = {
        0,     0,     0, 
 };
 
-template<>
-const uint8 *Ada_parser_tables_t::Rc = &Rc_[0];
-
 // Production lengths (minus one) ...
-static const int8 PL_[414] = {
+const int8 Ada_grm_PL[414] = {
        1,     0,     1,     2,     2,     5,     0,     2,     0,     2, 
        1,     2,     0,     2,     0,     0,     0,     0,     0,     0, 
        2,     0,     0,     0,     0,     0,     4,     7,     8,     1, 
@@ -1563,23 +1368,8 @@ static const int8 PL_[414] = {
       -1,     0,    -1,     0, 
 };
 
-template<>
-const int8 *Ada_parser_tables_t::PL = &PL_[0];
-
-template<>
-const int32 *Ada_parser_tables_t::nd_fterm = 0;
-
-template<>
-const int32 *Ada_parser_tables_t::nd_term = 0;
-
-template<>
-const int32 *Ada_parser_tables_t::nd_faction = 0;
-
-template<>
-const int32 *Ada_parser_tables_t::nd_action = 0;
-
 // Terminal action number ...
-static const int8 tact_numb_[93] = {
+const int8 Ada_grm_tact_numb[93] = {
        0,    -1,     1,     1,     1,    -1,    -1,    -1,    -1,    -1, 
       -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1, 
       -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1, 
@@ -1591,16 +1381,4 @@ static const int8 tact_numb_[93] = {
       -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1, 
       -1,    -1,    -1, 
 };
-
-template<>
-const int8 *Ada_parser_tables_t::tact_numb = &tact_numb_[0];
-
-template<>
-const int32 *Ada_parser_tables_t::node_numb = 0;
-
-template<>
-const int32 *Ada_parser_tables_t::nact_numb = 0;
-
-template<>
-const int32 *Ada_parser_tables_t::reverse = 0;
 

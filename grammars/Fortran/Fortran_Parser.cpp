@@ -4,135 +4,8 @@
 #include "Fortran_ParserTables_typedef.h"
 #include "Fortran_Parser.h"
 
-template<>
-const int Fortran_parser_tables_t::n_term_symb = 268;
-
-template<>
-const int Fortran_parser_tables_t::n_head_symb = 572;
-
-template<>
-const int Fortran_parser_tables_t::n_tact_name = 2;
-
-template<>
-const int Fortran_parser_tables_t::n_node_name = 0;
-
-template<>
-const int Fortran_parser_tables_t::n_head_numb = 1133;
-
-template<>
-const int Fortran_parser_tables_t::n_f_tail = 1134;
-
-template<>
-const int Fortran_parser_tables_t::n_tail = 1911;
-
-template<>
-const int Fortran_parser_tables_t::n_arga = 268;
-
-template<>
-const int Fortran_parser_tables_t::n_argx = 0;
-
-template<>
-const int Fortran_parser_tables_t::n_argy = 0;
-
-template<>
-const int Fortran_parser_tables_t::n_Bm = 762;
-
-template<>
-const int Fortran_parser_tables_t::n_Br = 724;
-
-template<>
-const int Fortran_parser_tables_t::n_Bc = 268;
-
-template<>
-const int Fortran_parser_tables_t::n_Bf = 268;
-
-template<>
-const int Fortran_parser_tables_t::n_Tm = 1750;
-
-template<>
-const int Fortran_parser_tables_t::n_Tr = 724;
-
-template<>
-const int Fortran_parser_tables_t::n_Tc = 268;
-
-template<>
-const int Fortran_parser_tables_t::n_Nm = 3405;
-
-template<>
-const int Fortran_parser_tables_t::n_Nr = 724;
-
-template<>
-const int Fortran_parser_tables_t::n_Nc = 1133;
-
-template<>
-const int Fortran_parser_tables_t::n_Rm = 298;
-
-template<>
-const int Fortran_parser_tables_t::n_Rr = 724;
-
-template<>
-const int Fortran_parser_tables_t::n_Rc = 268;
-
-template<>
-const int Fortran_parser_tables_t::n_PL = 1133;
-
-template<>
-const int Fortran_parser_tables_t::n_nd_fterm = 0;
-
-template<>
-const int Fortran_parser_tables_t::n_nd_term = 0;
-
-template<>
-const int Fortran_parser_tables_t::n_nd_faction = 0;
-
-template<>
-const int Fortran_parser_tables_t::n_nd_action = 0;
-
-template<>
-const int Fortran_parser_tables_t::n_tact_numb = 268;
-
-template<>
-const int Fortran_parser_tables_t::n_node_numb = 0;
-
-template<>
-const int Fortran_parser_tables_t::n_nact_numb = 0;
-
-template<>
-const int Fortran_parser_tables_t::n_reverse = 0;
-
-template<>
-const int Fortran_parser_tables_t::n_terms = 268; // Number of terminals.
-
-template<>
-const int Fortran_parser_tables_t::n_heads = 572; // Number of nonterminals.
-
-template<>
-const int Fortran_parser_tables_t::n_prods = 1133; // Number of productions.
-
-template<>
-const int Fortran_parser_tables_t::n_states = 724; // Number of states.
-
-template<>
-const int Fortran_parser_tables_t::accept_state = 723; // Accept state.
-
-template<>
-const int Fortran_parser_tables_t::n_termactns = 2; // Number of terminal actions.
-
-template<>
-const int Fortran_parser_tables_t::n_nodenames = 0; // Number of node names.
-
-template<>
-const int Fortran_parser_tables_t::n_nodeactns = 0; // Number of node actions.
-
-template<>
-const int Fortran_parser_tables_t::eof_symb = 1; // <eof> symbol number.
-
-template<>
-const int Fortran_parser_tables_t::err_used = 0; // <error> used in grammar?
-
-
 // Terminal symbols of the grammar.
-static const char *term_symb_[268] = {
+const char *Fortran_grm_term_symb[268] = {
    "<error>",
    "<eof>",
    "<identifier>",
@@ -403,11 +276,8 @@ static const char *term_symb_[268] = {
    "\'DTANH\'",
 };
 
-template<>
-const char * const *Fortran_parser_tables_t::term_symb = &term_symb_[0];
-
 // Nonterminal symbols of the grammar.
-static const char *head_symb_[572] = {
+const char *Fortran_grm_head_symb[572] = {
    "Goal",
    "TranUnit",
    "ProgList",
@@ -982,23 +852,14 @@ static const char *head_symb_[572] = {
    "BuiltIn",
 };
 
-template<>
-const char * const *Fortran_parser_tables_t::head_symb = &head_symb_[0];
-
 // Terninal action names found in the grammar ...
-static const char *tact_name_[2] = {
+const char *Fortran_grm_tact_name[2] = {
    "error",
    "lookup",
 };
 
-template<>
-const char * const *Fortran_parser_tables_t::tact_name = &tact_name_[0];
-
-template<>
-const char * const *Fortran_parser_tables_t::node_name = 0;
-
 // Head symbol numbers for the productions.
-static const uint16 head_numb_[1133] = {
+const uint16 Fortran_grm_head_numb[1133] = {
        0,     1,     1,     2,     2,     3,     3,     3,     3,     4, 
        4,     5,     6,     7,     8,     9,     9,    10,    11,    11, 
       12,    12,    12,    12,    12,    12,    12,    13,    13,    14, 
@@ -1115,11 +976,8 @@ static const uint16 head_numb_[1133] = {
      571,   571,   571, 
 };
 
-template<>
-const uint16 *Fortran_parser_tables_t::head_numb = &head_numb_[0];
-
 // First tail symbol index into the tail list ...
-static const uint16 f_tail_[1134] = {
+const uint16 Fortran_grm_f_tail[1134] = {
        0,     2,     2,     3,     4,     6,     7,     8,     9,    10, 
       12,    13,    15,    17,    19,    24,    26,    27,    28,    28, 
       30,    32,    34,    35,    37,    38,    40,    41,    41,    43, 
@@ -1236,11 +1094,8 @@ static const uint16 f_tail_[1134] = {
     1908,  1909,  1910,  1911, 
 };
 
-template<>
-const uint16 *Fortran_parser_tables_t::f_tail = &f_tail_[0];
-
 // Tail symbol numbers ...
-static const int16 tail_[1911] = {
+const int16 Fortran_grm_tail[1911] = {
       -1,     1,    -2,    -3,    -2,    -3,    -4,    -5,    -6,    -7, 
     -324,    -8,    -8,  -189,    -8,  -395,    -8,   -38,    -8,   -11, 
      -13,   -15,   -17,    -9,   -10,  -128,  -128,     6,   -11,   -12, 
@@ -1435,11 +1290,8 @@ static const int16 tail_[1911] = {
       28, 
 };
 
-template<>
-const int16 *Fortran_parser_tables_t::tail = &tail_[0];
-
 // Arguments for token actions ...
-static const int8 arga_[268] = {
+const int8 Fortran_grm_arga[268] = {
       -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1, 
       -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1, 
       -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1, 
@@ -1469,17 +1321,8 @@ static const int8 arga_[268] = {
       -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1, 
 };
 
-template<>
-const int8 *Fortran_parser_tables_t::arga = &arga_[0];
-
-template<>
-const int32 *Fortran_parser_tables_t::argx = 0;
-
-template<>
-const int32 *Fortran_parser_tables_t::argy = 0;
-
 // Boolean matrix ...
-static const uint8 Bm_[762] = {
+const uint8 Fortran_grm_Bm[762] = {
        0,     0,     0,     0,     0,     0,     0,     0,     0,     0, 
        4,     0,     0,   192,     2,    32,     0,     0,     2,     0, 
        0,     0,     0,     0,     0,     0,     0,     0,     4,     0, 
@@ -1559,11 +1402,8 @@ static const uint8 Bm_[762] = {
        0,     2, 
 };
 
-template<>
-const uint8 *Fortran_parser_tables_t::Bm = &Bm_[0];
-
 // Boolean matrix row (for state)...
-static const uint16 Br_[724] = {
+const uint16 Fortran_grm_Br[724] = {
        8,    18,     8,     0,    28,    37,     0,     4,    16,    16, 
        0,    28,     0,    28,    45,    53,    62,    71,    79,    28, 
       87,    96,    28,   105,   114,    96,    62,   123,   130,   137, 
@@ -1639,11 +1479,9 @@ static const uint16 Br_[724] = {
      104,   209,     0,     0, 
       };
 
-template<>
-const uint16 *Fortran_parser_tables_t::Br = &Br_[0];
-
 // Boolean matrix column (displacement) ...
-static const uint8 Bc_[268] = {
+extern const uint8 Fortran_grm_Bc[268];
+const uint8 Fortran_grm_Bc[268] = {
        0,     0,     0,     0,     0,     0,     0,     0,     1,     1, 
        1,     1,     1,     1,     1,     1,     1,     2,     2,     2, 
        2,     1,     1,     2,     2,     2,     2,     1,     3,     3, 
@@ -1673,11 +1511,8 @@ static const uint8 Bc_[268] = {
        9,     9,     9,     9,     9,     9,     9,     9, 
       };
 
-template<>
-const uint8 *Fortran_parser_tables_t::Bc = &Bc_[0];
-
 // Boolean matrix filter/mask value ...
-static const uint8 Bf_[268] = {
+const uint8 Fortran_grm_Bf[268] = {
        1,     2,     4,     8,    16,    32,    64,   128,     1,     2, 
        4,     8,    16,     4,    32,    64,   128,     1,     2,     4, 
        8,     4,     4,    16,    32,    64,   128,     4,     1,     2, 
@@ -1707,11 +1542,8 @@ static const uint8 Bf_[268] = {
        8,     8,     8,     8,     8,     8,     8,     8, 
 };
 
-template<>
-const uint8 *Fortran_parser_tables_t::Bf = &Bf_[0];
-
 // Terminal transition matrix ...
-static const int16 Tm_[1750] = {
+const int16 Fortran_grm_Tm[1750] = {
        0,     0,     0,   555,   556,   557,   558,   559,   564,   565, 
      566,   568,   569,   570,   571,   576,   577,   578,   579,   580, 
      581,   582,   583,   584,   585,   586,   587,   622,   660,   719, 
@@ -1889,11 +1721,8 @@ static const int16 Tm_[1750] = {
    -1122, -1123, -1124, -1125, -1126, -1127, -1128, -1129, -1130, -1131, 
 };
 
-template<>
-const int16 *Fortran_parser_tables_t::Tm = &Tm_[0];
-
 // Terminal transition matrix row ...
-static const uint16 Tr_[724] = {
+const uint16 Fortran_grm_Tr[724] = {
     1542,  1542,  1542,  1542,  1542,  1542,  1542,  1542,  1542,  1480, 
     1542,  1480,  1542,  1418,  1542,  1542,  1542,  1480,  1542,   538, 
     1418,  1542,   475,  1542,  1480,  1418,  1480,  1480,  1480,   492, 
@@ -1969,11 +1798,8 @@ static const uint16 Tr_[724] = {
      100,    59,  1542,  1542, 
 };
 
-template<>
-const uint16 *Fortran_parser_tables_t::Tr = &Tr_[0];
-
 // Terminal transition matrix column ...
-static const uint8 Tc_[268] = {
+const uint8 Fortran_grm_Tc[268] = {
       14,    14,     0,    32,     1,    14,    58,     2,     3,     8, 
       32,     4,     5,    14,     6,    31,    30,    58,     7,    10, 
       61,     8,    30,    32,    34,    14,    44,    10,    33,    12, 
@@ -2003,11 +1829,8 @@ static const uint8 Tc_[268] = {
      137,   138,   139,   140,   141,   142,   143,   144, 
 };
 
-template<>
-const uint8 *Fortran_parser_tables_t::Tc = &Tc_[0];
-
 // Nonterminal transition matrix ...
-static const int16 Nm_[3405] = {
+const int16 Fortran_grm_Nm[3405] = {
        0,     0,     0,     0,     0,     0,     0,     0,     0,     0, 
     -477,     0,     0,     0,     0,     0,     0,     0,     0,     0, 
        0,     0,     0,     0,     0,     0,     0,     0,     0,     0, 
@@ -2351,11 +2174,8 @@ static const int16 Nm_[3405] = {
      670,    -3, -1010,  -995,  -999, 
 };
 
-template<>
-const int16 *Fortran_parser_tables_t::Nm = &Nm_[0];
-
 // Nonterminal transition matrix row ...
-static const uint16 Nr_[724] = {
+const uint16 Fortran_grm_Nr[724] = {
  3092,  3092,  2782,  1865,  3092,  3092,  1365,  3092,  3092,  3092, 
  1640,  3092,  2173,  3092,  3092,  3092,  3092,  2782,  1865,  3092, 
  3092,  3092,  3092,  3092,  3092,  3092,  3092,  1365,  1640,  3092, 
@@ -2431,11 +2251,8 @@ static const uint16 Nr_[724] = {
  3092,  3092,     0,  3092, 
 };
 
-template<>
-const uint16 *Fortran_parser_tables_t::Nr = &Nr_[0];
-
 // Nonterminal transition matrix column ...
-static const uint16 Nc_[1133] = {
+const uint16 Fortran_grm_Nc[1133] = {
     1,     1,     1,   307,   307,   309,   309,   309,   309,     0, 
     0,     2,    55,    84,     3,     1,     1,   302,    13,    13, 
     4,     4,     4,     4,     4,     4,     4,   168,   168,   307, 
@@ -2552,11 +2369,8 @@ static const uint16 Nc_[1133] = {
   312,   312,   312, 
 };
 
-template<>
-const uint16 *Fortran_parser_tables_t::Nc = &Nc_[0];
-
 // Reduction matrix ...
-static const uint16 Rm_[298] = {
+const uint16 Fortran_grm_Rm[298] = {
        0,     1,    18,     0,    18,     0,     0,     0,     0,     0, 
        0,    18,     0,     0,     0,     0,     0,     0,     0,     0, 
        0,     0,     0,     0,     0,     0,     0,     0,     0,     0, 
@@ -2589,11 +2403,8 @@ static const uint16 Rm_[298] = {
        0,     0,     0,     0,     0,   882,   996,   882, 
 };
 
-template<>
-const uint16 *Fortran_parser_tables_t::Rm = &Rm_[0];
-
 // Reduction matrix row ...
-static const int16 Rr_[724] = {
+const int16 Fortran_grm_Rr[724] = {
        0,   -12,   -31,    18,   -12,    27,    18,   -12,   379,   383, 
       18,   -12,    18,   -12,   -12,   -12,   -12,    52,   -12,   -12, 
      -12,   -12,   -12,   -12,   -12,   716,   -12,    59,   -12,   -12, 
@@ -2669,11 +2480,8 @@ static const int16 Rr_[724] = {
      -12,   -12,   891,   -12, 
 };
 
-template<>
-const int16 *Fortran_parser_tables_t::Rr = &Rr_[0];
-
 // Reduction matrix column ...
-static const uint8 Rc_[268] = {
+const uint8 Fortran_grm_Rc[268] = {
        0,     1,     2,     3,     3,     0,     4,     5,     0,     0, 
        4,     6,     7,     4,     8,     4,     0,     0,     9,     0, 
        4,     4,     4,     0,     0,     4,    10,     4,    11,     0, 
@@ -2703,11 +2511,8 @@ static const uint8 Rc_[268] = {
       11,    11,    11,    11,    11,    11,    11,    11, 
 };
 
-template<>
-const uint8 *Fortran_parser_tables_t::Rc = &Rc_[0];
-
 // Production lengths (minus one) ...
-static const int8 PL_[1133] = {
+const int8 Fortran_grm_PL[1133] = {
        1,    -1,     0,     0,     1,     0,     0,     0,     0,     1, 
        0,     1,     1,     1,     4,     1,     0,     0,    -1,     1, 
        1,     1,     0,     1,     0,     1,     0,    -1,     1,     1, 
@@ -2824,23 +2629,8 @@ static const int8 PL_[1133] = {
        0,     0,     0, 
 };
 
-template<>
-const int8 *Fortran_parser_tables_t::PL = &PL_[0];
-
-template<>
-const int32 *Fortran_parser_tables_t::nd_fterm = 0;
-
-template<>
-const int32 *Fortran_parser_tables_t::nd_term = 0;
-
-template<>
-const int32 *Fortran_parser_tables_t::nd_faction = 0;
-
-template<>
-const int32 *Fortran_parser_tables_t::nd_action = 0;
-
 // Terminal action number ...
-static const int8 tact_numb_[268] = {
+const int8 Fortran_grm_tact_numb[268] = {
        0,    -1,     1,     1,     1,     1,     1,    -1,    -1,    -1, 
       -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1, 
       -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1, 
@@ -2869,16 +2659,4 @@ static const int8 tact_numb_[268] = {
       -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1, 
       -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1, 
 };
-
-template<>
-const int8 *Fortran_parser_tables_t::tact_numb = &tact_numb_[0];
-
-template<>
-const int32 *Fortran_parser_tables_t::node_numb = 0;
-
-template<>
-const int32 *Fortran_parser_tables_t::nact_numb = 0;
-
-template<>
-const int32 *Fortran_parser_tables_t::reverse = 0;
 

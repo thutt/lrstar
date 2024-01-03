@@ -5,39 +5,78 @@
 #define __Typedef__ParserTables_TYPEDEF
 
 #include "lrstar_parser_tables.h"
-typedef templ_lrstar_parser_tables<
-   /* term_symb */  const char * const,
-   /* head_symb */  const char * const,
-   /* tact_name */  const char * const,
-   /* node_name */  const char * const,
-   /* head_numb */  uint8,
-   /* f_tail */  uint8,
-   /* tail */  int8,
-   /* arga */  int8,
-   /* argx */  int8,
-   /* argy */  int8,
-   /* Bm */  uint8,
-   /* Br */  uint8,
-   /* Bc */  uint8,
-   /* Bf */  uint8,
-   /* Tm */  int8,
-   /* Tr */  uint8,
-   /* Tc */  uint8,
-   /* Nm */  int8,
-   /* Nr */  uint8,
-   /* Nc */  uint8,
-   /* Rm */  uint8,
-   /* Rr */  uint8,
-   /* Rc */  uint8,
-   /* PL */  int8,
-   /* nd_fterm */  int32,
-   /* nd_term */  int32,
-   /* nd_faction */  int32,
-   /* nd_action */  int32,
-   /* tact_numb */  int8,
-   /* node_numb */  int8,
-   /* nact_numb */  int8,
-   /* reverse */ int32> Typedef_parser_tables_t;
+
+extern const char *Typedef_grm_head_symb[14];
+extern const char *Typedef_grm_tact_name[2];
+extern const char *Typedef_grm_node_name[1];
+extern const uint8 Typedef_grm_head_numb[24];
+extern const uint8 Typedef_grm_f_tail[25];
+extern const int8 Typedef_grm_tail[37];
+extern const char *Typedef_grm_term_symb[12];
+extern const int8 Typedef_grm_arga[12];
+extern const uint8 Typedef_grm_Bm[6];
+extern const uint8 Typedef_grm_Br[14];
+extern const uint8 Typedef_grm_Bc[12];
+extern const uint8 Typedef_grm_Bf[12];
+extern const int8 Typedef_grm_Tm[18];
+extern const uint8 Typedef_grm_Tr[14];
+extern const uint8 Typedef_grm_Tc[12];
+extern const int8 Typedef_grm_Nm[32];
+extern const uint8 Typedef_grm_Nr[14];
+extern const uint8 Typedef_grm_Nc[24];
+extern const uint8 Typedef_grm_Rm[1];
+extern const uint8 Typedef_grm_Rr[14];
+extern const uint8 Typedef_grm_Rc[12];
+extern const int8 Typedef_grm_PL[24];
+extern const int8 Typedef_grm_tact_numb[12];
+extern const int8 Typedef_grm_argx[24];
+extern const int8 Typedef_grm_argy[24];
+extern const int8 Typedef_grm_node_numb[24];
+extern const int8 Typedef_grm_nact_numb[24];
+
+
+template<typename T_term_symb,
+         typename T_head_symb,
+         typename T_tact_name,
+         typename T_node_name,
+         typename T_head_numb,
+         typename T_f_tail,
+         typename T_tail,
+         typename T_arga,
+         typename T_argx,
+         typename T_argy,
+         typename T_Bm,
+         typename T_Br,
+         typename T_Bc,
+         typename T_Bf,
+         typename T_Tm,
+         typename T_Tr,
+         typename T_Tc,
+         typename T_Nm,
+         typename T_Nr,
+         typename T_Nc,
+         typename T_Rm,
+         typename T_Rr,
+         typename T_Rc,
+         typename T_PL,
+         typename T_nd_fterm,
+         typename T_nd_term,
+         typename T_nd_faction,
+         typename T_nd_action,
+         typename T_tact_numb,
+         typename T_node_numb,
+         typename T_nact_numb,
+         typename T_reverse>
+   class Typedef_parser_tables_ : public lrstar_parser_tables<T_term_symb, T_head_symb, T_tact_name, T_node_name, T_head_numb, T_f_tail, T_tail, T_arga, T_argx, T_argy, T_Bm, T_Br, T_Bc, T_Bf, T_Tm, T_Tr, T_Tc, T_Nm, T_Nr, T_Nc, T_Rm, T_Rr, T_Rc, T_PL, T_nd_fterm, T_nd_term, T_nd_faction, T_nd_action, T_tact_numb, T_node_numb, T_nact_numb, T_reverse>   {
+
+public:
+
+      Typedef_parser_tables_() : lrstar_parser_tables<T_term_symb, T_head_symb, T_tact_name, T_node_name, T_head_numb, T_f_tail, T_tail, T_arga, T_argx, T_argy, T_Bm, T_Br, T_Bc, T_Bf, T_Tm, T_Tr, T_Tc, T_Nm, T_Nr, T_Nc, T_Rm, T_Rr, T_Rc, T_PL, T_nd_fterm, T_nd_term, T_nd_faction, T_nd_action, T_tact_numb, T_node_numb, T_nact_numb, T_reverse>(12, 14, 24, 14, 13, 2, 1, 1, 1, false, &Typedef_grm_term_symb[0], &Typedef_grm_head_symb[0], &Typedef_grm_tact_name[0], &Typedef_grm_node_name[0], &Typedef_grm_head_numb[0], &Typedef_grm_f_tail[0], &Typedef_grm_tail[0], &Typedef_grm_arga[0], &Typedef_grm_argx[0], &Typedef_grm_argy[0], &Typedef_grm_Bm[0], &Typedef_grm_Br[0], &Typedef_grm_Bc[0], &Typedef_grm_Bf[0], &Typedef_grm_Tm[0], &Typedef_grm_Tr[0], &Typedef_grm_Tc[0], &Typedef_grm_Nm[0], &Typedef_grm_Nr[0], &Typedef_grm_Nc[0], &Typedef_grm_Rm[0], &Typedef_grm_Rr[0], &Typedef_grm_Rc[0], &Typedef_grm_PL[0], 0, 0, 0, 0, &Typedef_grm_tact_numb[0], &Typedef_grm_node_numb[0], &Typedef_grm_nact_numb[0], 0)
+      {
+      }
+   };
+
+typedef Typedef_parser_tables_<const char * const, const char * const, const char * const, const char * const, uint8, uint8, int8, int8, int8, int8, uint8, uint8, uint8, uint8, int8, uint8, uint8, int8, uint8, uint8, uint8, uint8, uint8, int8, int32, int32, int32, int32, int8, int8, int8, int32> Typedef_parser_tables_t;
 
 
 #endif

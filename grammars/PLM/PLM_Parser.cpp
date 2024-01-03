@@ -4,135 +4,8 @@
 #include "PLM_ParserTables_typedef.h"
 #include "PLM_Parser.h"
 
-template<>
-const int PLM_parser_tables_t::n_term_symb = 70;
-
-template<>
-const int PLM_parser_tables_t::n_head_symb = 152;
-
-template<>
-const int PLM_parser_tables_t::n_tact_name = 1;
-
-template<>
-const int PLM_parser_tables_t::n_node_name = 0;
-
-template<>
-const int PLM_parser_tables_t::n_head_numb = 255;
-
-template<>
-const int PLM_parser_tables_t::n_f_tail = 256;
-
-template<>
-const int PLM_parser_tables_t::n_tail = 410;
-
-template<>
-const int PLM_parser_tables_t::n_arga = 70;
-
-template<>
-const int PLM_parser_tables_t::n_argx = 0;
-
-template<>
-const int PLM_parser_tables_t::n_argy = 0;
-
-template<>
-const int PLM_parser_tables_t::n_Bm = 190;
-
-template<>
-const int PLM_parser_tables_t::n_Br = 148;
-
-template<>
-const int PLM_parser_tables_t::n_Bc = 70;
-
-template<>
-const int PLM_parser_tables_t::n_Bf = 70;
-
-template<>
-const int PLM_parser_tables_t::n_Tm = 69;
-
-template<>
-const int PLM_parser_tables_t::n_Tr = 148;
-
-template<>
-const int PLM_parser_tables_t::n_Tc = 70;
-
-template<>
-const int PLM_parser_tables_t::n_Nm = 2415;
-
-template<>
-const int PLM_parser_tables_t::n_Nr = 148;
-
-template<>
-const int PLM_parser_tables_t::n_Nc = 255;
-
-template<>
-const int PLM_parser_tables_t::n_Rm = 5;
-
-template<>
-const int PLM_parser_tables_t::n_Rr = 148;
-
-template<>
-const int PLM_parser_tables_t::n_Rc = 70;
-
-template<>
-const int PLM_parser_tables_t::n_PL = 255;
-
-template<>
-const int PLM_parser_tables_t::n_nd_fterm = 0;
-
-template<>
-const int PLM_parser_tables_t::n_nd_term = 0;
-
-template<>
-const int PLM_parser_tables_t::n_nd_faction = 0;
-
-template<>
-const int PLM_parser_tables_t::n_nd_action = 0;
-
-template<>
-const int PLM_parser_tables_t::n_tact_numb = 70;
-
-template<>
-const int PLM_parser_tables_t::n_node_numb = 0;
-
-template<>
-const int PLM_parser_tables_t::n_nact_numb = 0;
-
-template<>
-const int PLM_parser_tables_t::n_reverse = 0;
-
-template<>
-const int PLM_parser_tables_t::n_terms = 70; // Number of terminals.
-
-template<>
-const int PLM_parser_tables_t::n_heads = 152; // Number of nonterminals.
-
-template<>
-const int PLM_parser_tables_t::n_prods = 255; // Number of productions.
-
-template<>
-const int PLM_parser_tables_t::n_states = 148; // Number of states.
-
-template<>
-const int PLM_parser_tables_t::accept_state = 147; // Accept state.
-
-template<>
-const int PLM_parser_tables_t::n_termactns = 1; // Number of terminal actions.
-
-template<>
-const int PLM_parser_tables_t::n_nodenames = 0; // Number of node names.
-
-template<>
-const int PLM_parser_tables_t::n_nodeactns = 0; // Number of node actions.
-
-template<>
-const int PLM_parser_tables_t::eof_symb = 1; // <eof> symbol number.
-
-template<>
-const int PLM_parser_tables_t::err_used = 0; // <error> used in grammar?
-
-
 // Terminal symbols of the grammar.
-static const char *term_symb_[70] = {
+const char *PLM_grm_term_symb[70] = {
    "<error>",
    "<eof>",
    "\'AND\'",
@@ -205,11 +78,8 @@ static const char *term_symb_[70] = {
    "\'XOR\'",
 };
 
-template<>
-const char * const *PLM_parser_tables_t::term_symb = &term_symb_[0];
-
 // Nonterminal symbols of the grammar.
-static const char *head_symb_[152] = {
+const char *PLM_grm_head_symb[152] = {
    "Goal",
    "Compiland",
    "Compiland_component",
@@ -364,22 +234,13 @@ static const char *head_symb_[152] = {
    "Xor",
 };
 
-template<>
-const char * const *PLM_parser_tables_t::head_symb = &head_symb_[0];
-
 // Terninal action names found in the grammar ...
-static const char *tact_name_[1] = {
+const char *PLM_grm_tact_name[1] = {
    "error",
 };
 
-template<>
-const char * const *PLM_parser_tables_t::tact_name = &tact_name_[0];
-
-template<>
-const char * const *PLM_parser_tables_t::node_name = 0;
-
 // Head symbol numbers for the productions.
-static const uint8 head_numb_[255] = {
+const uint8 PLM_grm_head_numb[255] = {
        0,     1,     2,     2,     3,     4,     4,     5,     5,     6, 
        6,     7,     7,     7,     7,     7,     8,     9,    10,    10, 
       11,    11,    12,    12,    13,    13,    13,    14,    14,    14, 
@@ -408,11 +269,8 @@ static const uint8 head_numb_[255] = {
      147,   148,   149,   150,   151, 
 };
 
-template<>
-const uint8 *PLM_parser_tables_t::head_numb = &head_numb_[0];
-
 // First tail symbol index into the tail list ...
-static const uint16 f_tail_[256] = {
+const uint16 PLM_grm_f_tail[256] = {
        0,     2,     3,     4,     6,    10,    11,    14,    15,    18, 
       18,    20,    21,    22,    23,    24,    25,    29,    30,    31, 
       32,    32,    33,    36,    39,    40,    41,    42,    43,    44, 
@@ -441,11 +299,8 @@ static const uint16 f_tail_[256] = {
      405,   406,   407,   408,   409,   410, 
 };
 
-template<>
-const uint16 *PLM_parser_tables_t::f_tail = &f_tail_[0];
-
 // Tail symbol numbers ...
-static const int16 tail_[410] = {
+const int16 PLM_grm_tail[410] = {
       -1,     1,    -2,   -36,    -2,   -36,    -4,   -11,   -13,    -6, 
     -113,  -113,   -88,    -5,  -113,  -113,   -99,  -113,    -6,    -7, 
     -134,    -8,   -27,  -107,    -9,   -86,  -104,   -65,  -106,   -95, 
@@ -489,11 +344,8 @@ static const int16 tail_[410] = {
       60,    61,    62,    63,    64,    65,    66,    67,    68,    69, 
 };
 
-template<>
-const int16 *PLM_parser_tables_t::tail = &tail_[0];
-
 // Arguments for token actions ...
-static const int8 arga_[70] = {
+const int8 PLM_grm_arga[70] = {
       -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1, 
       -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1, 
       -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1, 
@@ -503,17 +355,8 @@ static const int8 arga_[70] = {
       -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1, 
 };
 
-template<>
-const int8 *PLM_parser_tables_t::arga = &arga_[0];
-
-template<>
-const int32 *PLM_parser_tables_t::argx = 0;
-
-template<>
-const int32 *PLM_parser_tables_t::argy = 0;
-
 // Boolean matrix ...
-static const uint8 Bm_[190] = {
+const uint8 PLM_grm_Bm[190] = {
        0,     0,     0,     0,     0,     9,   144,     0,     4,     2, 
        0,     0,     0,     0,   128,     0,    16,   144,    16,    48, 
       24,     0,     4,     1,     0,     0,   128,     0,     0,     0, 
@@ -535,11 +378,8 @@ static const uint8 Bm_[190] = {
       68,     0,     4,    64,     0,     0,     0,     0,    32,     0, 
 };
 
-template<>
-const uint8 *PLM_parser_tables_t::Bm = &Bm_[0];
-
 // Boolean matrix row (for state)...
-static const uint8 Br_[148] = {
+const uint8 PLM_grm_Br[148] = {
        4,     9,     4,    11,    16,    21,    25,    28,    10,    28, 
       33,    38,    38,    38,    38,     0,    43,     0,     0,     0, 
       48,     0,    52,    11,    57,    58,    63,    68,    73,    78, 
@@ -557,11 +397,9 @@ static const uint8 Br_[148] = {
      119,     7,   166,     7,     0,     7,    16,     0, 
       };
 
-template<>
-const uint8 *PLM_parser_tables_t::Br = &Br_[0];
-
 // Boolean matrix column (displacement) ...
-static const uint8 Bc_[70] = {
+extern const uint8 PLM_grm_Bc[70];
+const uint8 PLM_grm_Bc[70] = {
        0,     0,     0,     0,     0,     0,     0,     0,     1,     1, 
        1,     1,     0,     1,     1,     1,     1,     0,     1,     1, 
        1,     1,     2,     2,     2,     1,     1,     2,     2,     1, 
@@ -571,11 +409,8 @@ static const uint8 Bc_[70] = {
        4,     3,     3,     4,     4,     4,     4,     1,     0,     3, 
       };
 
-template<>
-const uint8 *PLM_parser_tables_t::Bc = &Bc_[0];
-
 // Boolean matrix filter/mask value ...
-static const uint8 Bf_[70] = {
+const uint8 PLM_grm_Bf[70] = {
        1,     2,     4,     8,    16,    32,    64,   128,     1,     2, 
        1,     4,     8,     8,     1,     1,    16,   128,    32,     1, 
       64,   128,     1,     2,     4,     1,     1,     8,     8,     1, 
@@ -585,11 +420,8 @@ static const uint8 Bf_[70] = {
        8,     8,     8,    16,    32,    64,   128,     2,   128,    64, 
 };
 
-template<>
-const uint8 *PLM_parser_tables_t::Bf = &Bf_[0];
-
 // Terminal transition matrix ...
-static const int16 Tm_[69] = {
+const int16 PLM_grm_Tm[69] = {
      147,  -187,  -188,  -189,  -190,  -191,  -192,  -193,  -194,  -195, 
     -196,  -197,  -198,  -199,  -200,  -201,  -202,  -203,  -204,  -205, 
     -206,  -207,  -208,  -209,  -210,  -211,  -212,  -213,  -214,  -215, 
@@ -599,11 +431,8 @@ static const int16 Tm_[69] = {
     -246,  -247,  -248,  -249,  -250,  -251,  -252,  -253,  -254, 
 };
 
-template<>
-const int16 *PLM_parser_tables_t::Tm = &Tm_[0];
-
 // Terminal transition matrix row ...
-static const uint8 Tr_[148] = {
+const uint8 PLM_grm_Tr[148] = {
        0,     0,     0,     0,     0,     0,     0,     0,     0,     0, 
        0,     0,     0,     0,     0,     0,     0,     0,     0,     0, 
        0,     0,     0,     0,     0,     0,     0,     0,     0,     0, 
@@ -621,11 +450,8 @@ static const uint8 Tr_[148] = {
        0,     0,     0,     0,     0,     0,     0,     0, 
 };
 
-template<>
-const uint8 *PLM_parser_tables_t::Tr = &Tr_[0];
-
 // Terminal transition matrix column ...
-static const uint8 Tc_[70] = {
+const uint8 PLM_grm_Tc[70] = {
        0,     0,     1,     2,     3,     4,     5,     6,     7,     8, 
        9,    10,    11,    12,    13,    14,    15,    16,    17,    18, 
       19,    20,    21,    22,    23,    24,    25,    26,    27,    28, 
@@ -635,11 +461,8 @@ static const uint8 Tc_[70] = {
       59,    60,    61,    62,    63,    64,    65,    66,    67,    68, 
 };
 
-template<>
-const uint8 *PLM_parser_tables_t::Tc = &Tc_[0];
-
 // Nonterminal transition matrix ...
-static const int16 Nm_[2415] = {
+const int16 PLM_grm_Nm[2415] = {
        0,     0,     0,     0,     0,     0,     0,     0,     0,    -6, 
      112,   141,     0,    82,     0,     0,     0,     0,     0,     0, 
        0,     0,     0,     0,     0,     0,     0,     0,     0,     0, 
@@ -884,11 +707,8 @@ static const int16 Nm_[2415] = {
       60,    40,   -46,   -32,  -151, 
 };
 
-template<>
-const int16 *PLM_parser_tables_t::Nm = &Nm_[0];
-
 // Nonterminal transition matrix row ...
-static const uint16 Nr_[148] = {
+const uint16 PLM_grm_Nr[148] = {
  2325,  2325,  2236,  2325,  2148,  2325,  2325,   224,  2325,   269, 
  1193,  2148,   224,   269,   204,  2325,    90,  2236,  2148,   224, 
   204,  2325,  2003,  2236,  2325,  2325,  2325,   388,  2236,  2325, 
@@ -906,11 +726,8 @@ static const uint16 Nr_[148] = {
  2236,  2003,   388,    75,  2325,  1256,   954,  2325, 
 };
 
-template<>
-const uint16 *PLM_parser_tables_t::Nr = &Nr_[0];
-
 // Nonterminal transition matrix column ...
-static const uint8 Nc_[255] = {
+const uint8 PLM_grm_Nc[255] = {
     3,     3,    56,    56,     3,    56,    56,     3,     3,     2, 
     2,    56,    56,    56,    56,    56,     3,     2,    56,    56, 
     3,     3,     2,     2,    56,    56,    56,    74,    74,    74, 
@@ -939,19 +756,13 @@ static const uint8 Nc_[255] = {
    85,    86,    87,    88,    89, 
 };
 
-template<>
-const uint8 *PLM_parser_tables_t::Nc = &Nc_[0];
-
 // Reduction matrix ...
-static const uint8 Rm_[5] = {
+const uint8 PLM_grm_Rm[5] = {
        0,     0,     0,   126,    61, 
 };
 
-template<>
-const uint8 *PLM_parser_tables_t::Rm = &Rm_[0];
-
 // Reduction matrix row ...
-static const int16 Rr_[148] = {
+const int16 PLM_grm_Rr[148] = {
        0,     0,     1,    77,     0,     0,   128,     0,     0,     0, 
        0,     0,     0,     0,     0,    75,     0,    75,    75,    75, 
        0,    62,     0,    79,     0,   145,   148,     0,   157,   159, 
@@ -969,11 +780,8 @@ static const int16 Rr_[148] = {
        0,     0,     0,     0,    -2,     0,     0,     0, 
 };
 
-template<>
-const int16 *PLM_parser_tables_t::Rr = &Rr_[0];
-
 // Reduction matrix column ...
-static const uint8 Rc_[70] = {
+const uint8 PLM_grm_Rc[70] = {
        0,     0,     1,     0,     0,     0,     0,     0,     0,     0, 
        0,     2,     0,     0,     0,     0,     0,     0,     0,     0, 
        0,     0,     1,     2,     0,     0,     0,     1,     1,     0, 
@@ -983,11 +791,8 @@ static const uint8 Rc_[70] = {
        1,     1,     1,     0,     0,     0,     0,     0,     0,     1, 
 };
 
-template<>
-const uint8 *PLM_parser_tables_t::Rc = &Rc_[0];
-
 // Production lengths (minus one) ...
-static const int8 PL_[255] = {
+const int8 PLM_grm_PL[255] = {
        1,     0,     0,     1,     3,     0,     2,     0,     2,    -1, 
        1,     0,     0,     0,     0,     0,     3,     0,     0,     0, 
       -1,     0,     2,     2,     0,     0,     0,     0,     0,     0, 
@@ -1016,23 +821,8 @@ static const int8 PL_[255] = {
        0,     0,     0,     0,     0, 
 };
 
-template<>
-const int8 *PLM_parser_tables_t::PL = &PL_[0];
-
-template<>
-const int32 *PLM_parser_tables_t::nd_fterm = 0;
-
-template<>
-const int32 *PLM_parser_tables_t::nd_term = 0;
-
-template<>
-const int32 *PLM_parser_tables_t::nd_faction = 0;
-
-template<>
-const int32 *PLM_parser_tables_t::nd_action = 0;
-
 // Terminal action number ...
-static const int8 tact_numb_[70] = {
+const int8 PLM_grm_tact_numb[70] = {
        0,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1, 
       -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1, 
       -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1, 
@@ -1041,16 +831,4 @@ static const int8 tact_numb_[70] = {
       -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1, 
       -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1, 
 };
-
-template<>
-const int8 *PLM_parser_tables_t::tact_numb = &tact_numb_[0];
-
-template<>
-const int32 *PLM_parser_tables_t::node_numb = 0;
-
-template<>
-const int32 *PLM_parser_tables_t::nact_numb = 0;
-
-template<>
-const int32 *PLM_parser_tables_t::reverse = 0;
 

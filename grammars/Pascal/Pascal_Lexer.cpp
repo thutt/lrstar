@@ -4,17 +4,9 @@
 
 #define MAX    0x80000000
 
-template<>
-const int Pascal_lexer_t::n_term_numb = 353;
-template<>
-const int Pascal_lexer_t::n_Tm = 18592;
-template<>
-const int Pascal_lexer_t::n_Tr = 353;
-template<>
-const int Pascal_lexer_t::n_Tc = 256;
-
 // Terminal number ...
-static const int8 term_numb_[353] = { 
+extern const int8 Pascal_lgr_term_numb[353];
+const int8 Pascal_lgr_term_numb[353] = {
 
        0,     0,    24,     0,     0,     2,     3,     3,    -1,     3, 
        0,     0,     0,     0,     3,     0,     0,     0,     3,     0, 
@@ -54,11 +46,9 @@ static const int8 term_numb_[353] = {
       -1,    -1,     0, 
 };
 
-template<>
-const int8 *Pascal_lexer_t::term_numb = &term_numb_[0];
-
 // Terminal transition matrix ...
-static const uint16 Tm_[18592] = {
+extern const uint16 Pascal_lgr_Tm[18592];
+const uint16 Pascal_lgr_Tm[18592] = {
 
        8,   352,     8,   343,   352,     1,     3,    41,   331,   332, 
      333,   334,   335,     2,   336,     7,    42,   337,    43,   338, 
@@ -1922,11 +1912,9 @@ static const uint16 Tm_[18592] = {
        0,     0, 
 };
 
-template<>
-const uint16 *Pascal_lexer_t::Tm = &Tm_[0];
-
 // Terminal transition matrix row ...
-static const uint16 Tr_[353] = { 
+extern const uint16 Pascal_lgr_Tr[353];
+const uint16 Pascal_lgr_Tr[353] = {
 
        0,    56,   112,   168,   224,   280,   336,   392,   448,   504, 
      560,   616,   672,   728,   784,   840,   896,   952,  1008,  1064, 
@@ -1966,11 +1954,9 @@ static const uint16 Tr_[353] = {
    18536, 18536, 18536, 
 };
 
-template<>
-const uint16 *Pascal_lexer_t::Tr = &Tr_[0];
-
 // Terminal transition matrix column ...
-static const uint8 Tc_[256] = {
+extern const uint8 Pascal_lgr_Tc[256];
+const uint8 Pascal_lgr_Tc[256] = {
 
     0,     1,     1,     1,     1,     1,     1,     1,     1,     0, 
     2,     1,     1,     1,     1,     1,     1,     1,     1,     1, 
@@ -1999,7 +1985,4 @@ static const uint8 Tc_[256] = {
     1,     1,     1,     1,     1,     1,     1,     1,     1,     1, 
     1,     1,     1,     1,     1,     0, 
 };
-
-template<>
-const uint8 *Pascal_lexer_t::Tc = &Tc_[0];
 

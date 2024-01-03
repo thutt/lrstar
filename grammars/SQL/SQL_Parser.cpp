@@ -4,135 +4,8 @@
 #include "SQL_ParserTables_typedef.h"
 #include "SQL_Parser.h"
 
-template<>
-const int SQL_parser_tables_t::n_term_symb = 138;
-
-template<>
-const int SQL_parser_tables_t::n_head_symb = 154;
-
-template<>
-const int SQL_parser_tables_t::n_tact_name = 2;
-
-template<>
-const int SQL_parser_tables_t::n_node_name = 0;
-
-template<>
-const int SQL_parser_tables_t::n_head_numb = 399;
-
-template<>
-const int SQL_parser_tables_t::n_f_tail = 400;
-
-template<>
-const int SQL_parser_tables_t::n_tail = 1063;
-
-template<>
-const int SQL_parser_tables_t::n_arga = 138;
-
-template<>
-const int SQL_parser_tables_t::n_argx = 0;
-
-template<>
-const int SQL_parser_tables_t::n_argy = 0;
-
-template<>
-const int SQL_parser_tables_t::n_Bm = 736;
-
-template<>
-const int SQL_parser_tables_t::n_Br = 532;
-
-template<>
-const int SQL_parser_tables_t::n_Bc = 138;
-
-template<>
-const int SQL_parser_tables_t::n_Bf = 138;
-
-template<>
-const int SQL_parser_tables_t::n_Tm = 1073;
-
-template<>
-const int SQL_parser_tables_t::n_Tr = 532;
-
-template<>
-const int SQL_parser_tables_t::n_Tc = 138;
-
-template<>
-const int SQL_parser_tables_t::n_Nm = 981;
-
-template<>
-const int SQL_parser_tables_t::n_Nr = 532;
-
-template<>
-const int SQL_parser_tables_t::n_Nc = 399;
-
-template<>
-const int SQL_parser_tables_t::n_Rm = 28;
-
-template<>
-const int SQL_parser_tables_t::n_Rr = 532;
-
-template<>
-const int SQL_parser_tables_t::n_Rc = 138;
-
-template<>
-const int SQL_parser_tables_t::n_PL = 399;
-
-template<>
-const int SQL_parser_tables_t::n_nd_fterm = 0;
-
-template<>
-const int SQL_parser_tables_t::n_nd_term = 0;
-
-template<>
-const int SQL_parser_tables_t::n_nd_faction = 0;
-
-template<>
-const int SQL_parser_tables_t::n_nd_action = 0;
-
-template<>
-const int SQL_parser_tables_t::n_tact_numb = 138;
-
-template<>
-const int SQL_parser_tables_t::n_node_numb = 0;
-
-template<>
-const int SQL_parser_tables_t::n_nact_numb = 0;
-
-template<>
-const int SQL_parser_tables_t::n_reverse = 0;
-
-template<>
-const int SQL_parser_tables_t::n_terms = 138; // Number of terminals.
-
-template<>
-const int SQL_parser_tables_t::n_heads = 154; // Number of nonterminals.
-
-template<>
-const int SQL_parser_tables_t::n_prods = 399; // Number of productions.
-
-template<>
-const int SQL_parser_tables_t::n_states = 532; // Number of states.
-
-template<>
-const int SQL_parser_tables_t::accept_state = 531; // Accept state.
-
-template<>
-const int SQL_parser_tables_t::n_termactns = 2; // Number of terminal actions.
-
-template<>
-const int SQL_parser_tables_t::n_nodenames = 0; // Number of node names.
-
-template<>
-const int SQL_parser_tables_t::n_nodeactns = 0; // Number of node actions.
-
-template<>
-const int SQL_parser_tables_t::eof_symb = 1; // <eof> symbol number.
-
-template<>
-const int SQL_parser_tables_t::err_used = 0; // <error> used in grammar?
-
-
 // Terminal symbols of the grammar.
-static const char *term_symb_[138] = {
+const char *SQL_grm_term_symb[138] = {
    "<error>",
    "<eof>",
    "<string>",
@@ -273,11 +146,8 @@ static const char *term_symb_[138] = {
    "\'PRECISION\'",
 };
 
-template<>
-const char * const *SQL_parser_tables_t::term_symb = &term_symb_[0];
-
 // Nonterminal symbols of the grammar.
-static const char *head_symb_[154] = {
+const char *SQL_grm_head_symb[154] = {
    "Goal",
    "SQL",
    "D",
@@ -434,23 +304,14 @@ static const char *head_symb_[154] = {
    "order*",
 };
 
-template<>
-const char * const *SQL_parser_tables_t::head_symb = &head_symb_[0];
-
 // Terninal action names found in the grammar ...
-static const char *tact_name_[2] = {
+const char *SQL_grm_tact_name[2] = {
    "error",
    "lookup",
 };
 
-template<>
-const char * const *SQL_parser_tables_t::tact_name = &tact_name_[0];
-
-template<>
-const char * const *SQL_parser_tables_t::node_name = 0;
-
 // Head symbol numbers for the productions.
-static const uint8 head_numb_[399] = {
+const uint8 SQL_grm_head_numb[399] = {
        0,     1,     1,     2,     2,     2,     3,     3,     4,     4, 
        5,     5,     6,     6,     6,     6,     6,     6,     6,     6, 
        6,     6,     6,     6,     6,     6,     6,     6,     6,     6, 
@@ -493,11 +354,8 @@ static const uint8 head_numb_[399] = {
      149,   150,   150,   151,   151,   152,   152,   153,   153, 
 };
 
-template<>
-const uint8 *SQL_parser_tables_t::head_numb = &head_numb_[0];
-
 // First tail symbol index into the tail list ...
-static const uint16 f_tail_[400] = {
+const uint16 SQL_grm_f_tail[400] = {
        0,     2,     3,     5,     6,     7,     8,     9,    11,    12, 
       14,    15,    17,    21,    25,    28,    37,    43,    48,    56, 
       64,    69,    71,    74,    77,    82,    89,    94,    98,   103, 
@@ -540,11 +398,8 @@ static const uint16 f_tail_[400] = {
     1047,  1050,  1051,  1054,  1055,  1057,  1058,  1061,  1061,  1063, 
 };
 
-template<>
-const uint16 *SQL_parser_tables_t::f_tail = &f_tail_[0];
-
 // Tail symbol numbers ...
-static const int16 tail_[1063] = {
+const int16 SQL_grm_tail[1063] = {
       -1,     1,    -2,    -1,    -2,    -3,    -4,    -5,    -6,    -3, 
       -6,    -7,    -4,    -7,   -10,    -5,   -10,     5,     6,     7, 
        8,     9,     6,     7,     8,    10,   -91,     8,     6,   -91, 
@@ -654,11 +509,8 @@ static const int16 tail_[1063] = {
      -90,  -153,   -79, 
 };
 
-template<>
-const int16 *SQL_parser_tables_t::tail = &tail_[0];
-
 // Arguments for token actions ...
-static const int8 arga_[138] = {
+const int8 SQL_grm_arga[138] = {
       -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1, 
       -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1, 
       -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1, 
@@ -675,17 +527,8 @@ static const int8 arga_[138] = {
       -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1, 
 };
 
-template<>
-const int8 *SQL_parser_tables_t::arga = &arga_[0];
-
-template<>
-const int32 *SQL_parser_tables_t::argx = 0;
-
-template<>
-const int32 *SQL_parser_tables_t::argy = 0;
-
 // Boolean matrix ...
-static const uint8 Bm_[736] = {
+const uint8 SQL_grm_Bm[736] = {
        0,     0,     0,     0,     0,     0,     0,     0,     0,     0, 
        0,   120,     8,    80,    20,     9,   160,    32,     0,    24, 
        8,     8,   122,     8,    80,    20,     9,   160,    32,     0, 
@@ -762,11 +605,8 @@ static const uint8 Bm_[736] = {
        0,     0,     0,     0,     0,     0, 
 };
 
-template<>
-const uint8 *SQL_parser_tables_t::Bm = &Bm_[0];
-
 // Boolean matrix row (for state)...
-static const uint16 Br_[532] = {
+const uint16 SQL_grm_Br[532] = {
       11,    22,    33,    44,    51,    57,    68,    79,    85,    92, 
      103,   103,   114,   114,   125,   114,   134,    11,   145,   114, 
      101,   101,   101,   101,   101,   153,   114,   164,   173,     0, 
@@ -823,11 +663,9 @@ static const uint16 Br_[532] = {
       79,     0, 
       };
 
-template<>
-const uint16 *SQL_parser_tables_t::Br = &Br_[0];
-
 // Boolean matrix column (displacement) ...
-static const uint8 Bc_[138] = {
+extern const uint8 SQL_grm_Bc[138];
+const uint8 SQL_grm_Bc[138] = {
        0,     0,     0,     0,     0,     0,     0,     0,     1,     0, 
        0,     1,     1,     1,     1,     1,     1,     1,     0,     2, 
        0,     2,     0,     0,     2,     2,     2,     2,     0,     0, 
@@ -844,11 +682,8 @@ static const uint8 Bc_[138] = {
       10,    10,    10,    10,    10,    10,    10,    10, 
       };
 
-template<>
-const uint8 *SQL_parser_tables_t::Bc = &Bc_[0];
-
 // Boolean matrix filter/mask value ...
-static const uint8 Bf_[138] = {
+const uint8 SQL_grm_Bf[138] = {
        1,     2,     4,     8,    16,    32,    64,   128,     1,    32, 
       32,     2,     4,     8,    16,    32,    64,   128,    32,     1, 
       32,     2,    32,    32,     4,     8,    16,    32,    32,    32, 
@@ -865,11 +700,8 @@ static const uint8 Bf_[138] = {
       32,    32,    32,    32,    32,    32,    32,    64, 
 };
 
-template<>
-const uint8 *SQL_parser_tables_t::Bf = &Bf_[0];
-
 // Terminal transition matrix ...
-static const int16 Tm_[1073] = {
+const int16 SQL_grm_Tm[1073] = {
        0,     0,  -107,  -108,  -109,  -110,   -80,   -66,   -71,   -72, 
      -73,   -74,   -75,   -76,   -70,   -17,   -20,   -24,   -26,   -28, 
      -31,   -51,   -97,   -81,   -16,   -32,   -43,   -44,   -77,   -82, 
@@ -980,11 +812,8 @@ static const int16 Tm_[1073] = {
     -259,   303,  -260, 
 };
 
-template<>
-const int16 *SQL_parser_tables_t::Tm = &Tm_[0];
-
 // Terminal transition matrix row ...
-static const uint16 Tr_[532] = {
+const uint16 SQL_grm_Tr[532] = {
      952,   952,   844,   952,   737,   952,   737,   952,   737,   952, 
      737,   524,   524,   524,   457,   457,   952,   952,   457,   524, 
      737,   524,   737,   737,   737,   952,   352,   308,   952,   952, 
@@ -1041,11 +870,8 @@ static const uint16 Tr_[532] = {
       58,   952, 
 };
 
-template<>
-const uint16 *SQL_parser_tables_t::Tr = &Tr_[0];
-
 // Terminal transition matrix column ...
-static const uint8 Tc_[138] = {
+const uint8 SQL_grm_Tc[138] = {
       66,    66,     0,    27,     1,    11,    28,    35,     2,    49, 
       50,    59,     3,    93,     4,     5,   100,     6,   101,   103, 
      104,     7,     8,     9,    66,    79,    10,    11,    12,    13, 
@@ -1062,11 +888,8 @@ static const uint8 Tc_[138] = {
      113,   114,   115,   116,   117,   118,   119,   120, 
 };
 
-template<>
-const uint8 *SQL_parser_tables_t::Tc = &Tc_[0];
-
 // Nonterminal transition matrix ...
-static const int16 Nm_[981] = {
+const int16 SQL_grm_Nm[981] = {
        0,     0,     0,     0,     0,     0,     0,     0,     0,     0, 
        0,     0,     0,     0,  -355,     0,  -357,     0,     0,     0, 
        0,   351,  -181,     0,     0,     0,     0,     0,     0,     0, 
@@ -1168,11 +991,8 @@ static const int16 Nm_[981] = {
      528, 
 };
 
-template<>
-const int16 *SQL_parser_tables_t::Nm = &Nm_[0];
-
 // Nonterminal transition matrix row ...
-static const uint16 Nr_[532] = {
+const uint16 SQL_grm_Nr[532] = {
   879,   778,   684,   879,   879,   552,   879,   879,   684,   684, 
   879,   879,   879,   778,   552,   242,   879,   604,   172,   684, 
   879,   879,   778,   684,   552,   879,   778,   879,   879,   879, 
@@ -1229,11 +1049,8 @@ static const uint16 Nr_[532] = {
   879,   879, 
 };
 
-template<>
-const uint16 *SQL_parser_tables_t::Nr = &Nr_[0];
-
 // Nonterminal transition matrix column ...
-static const uint8 Nc_[399] = {
+const uint8 SQL_grm_Nc[399] = {
    90,    90,    90,    87,    87,    87,     1,     1,     2,     2, 
     3,     3,     5,     5,     5,     5,     5,     5,     5,     5, 
     5,     5,     5,     5,     5,     5,     5,     5,     5,     5, 
@@ -1276,21 +1093,15 @@ static const uint8 Nc_[399] = {
    97,    98,    98,    99,    99,   100,   100,   101,   101, 
 };
 
-template<>
-const uint8 *SQL_parser_tables_t::Nc = &Nc_[0];
-
 // Reduction matrix ...
-static const uint16 Rm_[28] = {
+const uint16 SQL_grm_Rm[28] = {
        0,     0,     0,     0,     0,     0,     0,     0,   232,     0, 
      300,   232,     0,     0,     0,   272,   271,   271,   271,   271, 
        0,   233,   395,     0,     0,     0,     0,   233, 
 };
 
-template<>
-const uint16 *SQL_parser_tables_t::Rm = &Rm_[0];
-
 // Reduction matrix row ...
-static const int16 Rr_[532] = {
+const int16 SQL_grm_Rr[532] = {
      300,   300,     3,     0,     0,    -4,     0,     0,     4,     5, 
        0,     0,     0,     0,     0,     0,   292,   300,     0,     0, 
        0,     0,     0,     0,     0,     0,     0,     0,     0,   -12, 
@@ -1347,11 +1158,8 @@ static const int16 Rr_[532] = {
        0,     0, 
 };
 
-template<>
-const int16 *SQL_parser_tables_t::Rr = &Rr_[0];
-
 // Reduction matrix column ...
-static const uint8 Rc_[138] = {
+const uint8 SQL_grm_Rc[138] = {
        0,     0,     0,     0,     0,     0,     0,     0,     1,     0, 
        0,     0,     0,     0,     0,     0,     0,     0,     0,     0, 
        0,     0,     0,     0,     0,     0,     0,     0,     0,     0, 
@@ -1368,11 +1176,8 @@ static const uint8 Rc_[138] = {
        0,     0,     0,     0,     0,     0,     0,     0, 
 };
 
-template<>
-const uint8 *SQL_parser_tables_t::Rc = &Rc_[0];
-
 // Production lengths (minus one) ...
-static const int8 PL_[399] = {
+const int8 SQL_grm_PL[399] = {
        1,     0,     1,     0,     0,     0,     0,     1,     0,     1, 
        0,     1,     3,     3,     2,     8,     5,     4,     7,     7, 
        4,     1,     2,     2,     4,     6,     4,     3,     4,     6, 
@@ -1415,23 +1220,8 @@ static const int8 PL_[399] = {
        2,     0,     2,     0,     1,     0,     2,    -1,     1, 
 };
 
-template<>
-const int8 *SQL_parser_tables_t::PL = &PL_[0];
-
-template<>
-const int32 *SQL_parser_tables_t::nd_fterm = 0;
-
-template<>
-const int32 *SQL_parser_tables_t::nd_term = 0;
-
-template<>
-const int32 *SQL_parser_tables_t::nd_faction = 0;
-
-template<>
-const int32 *SQL_parser_tables_t::nd_action = 0;
-
 // Terminal action number ...
-static const int8 tact_numb_[138] = {
+const int8 SQL_grm_tact_numb[138] = {
        0,    -1,     1,     1,     1,    -1,    -1,    -1,    -1,    -1, 
       -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1, 
       -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1, 
@@ -1447,16 +1237,4 @@ static const int8 tact_numb_[138] = {
       -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1, 
       -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1, 
 };
-
-template<>
-const int8 *SQL_parser_tables_t::tact_numb = &tact_numb_[0];
-
-template<>
-const int32 *SQL_parser_tables_t::node_numb = 0;
-
-template<>
-const int32 *SQL_parser_tables_t::nact_numb = 0;
-
-template<>
-const int32 *SQL_parser_tables_t::reverse = 0;
 

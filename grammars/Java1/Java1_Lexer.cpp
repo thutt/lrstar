@@ -4,17 +4,9 @@
 
 #define MAX    0x80000000
 
-template<>
-const int Java1_lexer_t::n_term_numb = 393;
-template<>
-const int Java1_lexer_t::n_Tm = 26280;
-template<>
-const int Java1_lexer_t::n_Tr = 393;
-template<>
-const int Java1_lexer_t::n_Tc = 256;
-
 // Terminal number ...
-static const int8 term_numb_[393] = { 
+extern const int8 Java1_lgr_term_numb[393];
+const int8 Java1_lgr_term_numb[393] = {
 
        0,    55,     0,     0,     2,     3,     3,     0,     0,    -1, 
        0,     0,     0,     0,     3,     0,     0,     0,    -1,     0, 
@@ -58,11 +50,9 @@ static const int8 term_numb_[393] = {
       86,    -1,     0, 
 };
 
-template<>
-const int8 *Java1_lexer_t::term_numb = &term_numb_[0];
-
 // Terminal transition matrix ...
-static const uint16 Tm_[26280] = {
+extern const uint16 Java1_lgr_Tm[26280];
+const uint16 Java1_lgr_Tm[26280] = {
 
      392,     9,     9,   370,   112,     3,     4,   113,   114,     2, 
      359,   360,   115,   116,   361,   117,     1,   118,   298,   299, 
@@ -2694,11 +2684,9 @@ static const uint16 Tm_[26280] = {
        0,     0,     0,     0,     0,     0,     0,     0,     0,     0, 
 };
 
-template<>
-const uint16 *Java1_lexer_t::Tm = &Tm_[0];
-
 // Terminal transition matrix row ...
-static const uint16 Tr_[393] = { 
+extern const uint16 Java1_lgr_Tr[393];
+const uint16 Java1_lgr_Tr[393] = {
 
        0,    73,   146,   219,   292,   365,   438,   511,   584,   657, 
      730,   803,   876,   949,  1022,  1095,  1168,  1241,  1314,  1387, 
@@ -2742,11 +2730,9 @@ static const uint16 Tr_[393] = {
    26207, 26207, 26207, 
 };
 
-template<>
-const uint16 *Java1_lexer_t::Tr = &Tr_[0];
-
 // Terminal transition matrix column ...
-static const uint8 Tc_[256] = {
+extern const uint8 Java1_lgr_Tc[256];
+const uint8 Java1_lgr_Tc[256] = {
 
     0,     0,     0,     0,     0,     0,     0,     0,     0,     1, 
     2,     1,     1,     1,     0,     0,     0,     0,     0,     0, 
@@ -2775,7 +2761,4 @@ static const uint8 Tc_[256] = {
     0,     0,     0,     0,     0,     0,     0,     0,     0,     0, 
     0,     0,     0,     0,     0,     0, 
 };
-
-template<>
-const uint8 *Java1_lexer_t::Tc = &Tc_[0];
 

@@ -5,39 +5,74 @@
 #define __Python__ParserTables_TYPEDEF
 
 #include "lrstar_parser_tables.h"
-typedef templ_lrstar_parser_tables<
-   /* term_symb */  const char * const,
-   /* head_symb */  const char * const,
-   /* tact_name */  const char * const,
-   /* node_name */  const char * const,
-   /* head_numb */  uint8,
-   /* f_tail */  uint16,
-   /* tail */  int16,
-   /* arga */  int32,
-   /* argx */  int32,
-   /* argy */  int32,
-   /* Bm */  uint8,
-   /* Br */  uint8,
-   /* Bc */  uint8,
-   /* Bf */  uint8,
-   /* Tm */  int16,
-   /* Tr */  uint8,
-   /* Tc */  uint8,
-   /* Nm */  int16,
-   /* Nr */  uint16,
-   /* Nc */  uint8,
-   /* Rm */  uint16,
-   /* Rr */  int16,
-   /* Rc */  uint8,
-   /* PL */  int8,
-   /* nd_fterm */  uint8,
-   /* nd_term */  uint8,
-   /* nd_faction */  uint8,
-   /* nd_action */  int16,
-   /* tact_numb */  int32,
-   /* node_numb */  int32,
-   /* nact_numb */  int32,
-   /* reverse */ int32> Python_parser_tables_t;
+
+extern const char *Python_grm_head_symb[220];
+extern const uint8 Python_grm_head_numb[396];
+extern const uint16 Python_grm_f_tail[397];
+extern const int16 Python_grm_tail[600];
+extern const char *Python_grm_term_symb[94];
+extern const uint8 Python_grm_Bm[236];
+extern const uint8 Python_grm_Br[257];
+extern const uint8 Python_grm_Bc[94];
+extern const uint8 Python_grm_Bf[94];
+extern const int16 Python_grm_Tm[320];
+extern const uint8 Python_grm_Tr[257];
+extern const uint8 Python_grm_Tc[94];
+extern const int16 Python_grm_Nm[3046];
+extern const uint16 Python_grm_Nr[257];
+extern const uint8 Python_grm_Nc[396];
+extern const uint16 Python_grm_Rm[368];
+extern const int16 Python_grm_Rr[257];
+extern const uint8 Python_grm_Rc[94];
+extern const int8 Python_grm_PL[396];
+extern const uint8 Python_grm_nd_fterm[258];
+extern const uint8 Python_grm_nd_term[83];
+extern const uint8 Python_grm_nd_faction[84];
+extern const int16 Python_grm_nd_action[166];
+
+
+template<typename T_term_symb,
+         typename T_head_symb,
+         typename T_tact_name,
+         typename T_node_name,
+         typename T_head_numb,
+         typename T_f_tail,
+         typename T_tail,
+         typename T_arga,
+         typename T_argx,
+         typename T_argy,
+         typename T_Bm,
+         typename T_Br,
+         typename T_Bc,
+         typename T_Bf,
+         typename T_Tm,
+         typename T_Tr,
+         typename T_Tc,
+         typename T_Nm,
+         typename T_Nr,
+         typename T_Nc,
+         typename T_Rm,
+         typename T_Rr,
+         typename T_Rc,
+         typename T_PL,
+         typename T_nd_fterm,
+         typename T_nd_term,
+         typename T_nd_faction,
+         typename T_nd_action,
+         typename T_tact_numb,
+         typename T_node_numb,
+         typename T_nact_numb,
+         typename T_reverse>
+   class Python_parser_tables_ : public lrstar_parser_tables<T_term_symb, T_head_symb, T_tact_name, T_node_name, T_head_numb, T_f_tail, T_tail, T_arga, T_argx, T_argy, T_Bm, T_Br, T_Bc, T_Bf, T_Tm, T_Tr, T_Tc, T_Nm, T_Nr, T_Nc, T_Rm, T_Rr, T_Rc, T_PL, T_nd_fterm, T_nd_term, T_nd_faction, T_nd_action, T_tact_numb, T_node_numb, T_nact_numb, T_reverse>   {
+
+public:
+
+      Python_parser_tables_() : lrstar_parser_tables<T_term_symb, T_head_symb, T_tact_name, T_node_name, T_head_numb, T_f_tail, T_tail, T_arga, T_argx, T_argy, T_Bm, T_Br, T_Bc, T_Bf, T_Tm, T_Tr, T_Tc, T_Nm, T_Nr, T_Nc, T_Rm, T_Rr, T_Rc, T_PL, T_nd_fterm, T_nd_term, T_nd_faction, T_nd_action, T_tact_numb, T_node_numb, T_nact_numb, T_reverse>(94, 220, 396, 257, 256, 0, 0, 0, 1, false, &Python_grm_term_symb[0], &Python_grm_head_symb[0], 0, 0, &Python_grm_head_numb[0], &Python_grm_f_tail[0], &Python_grm_tail[0], 0, 0, 0, &Python_grm_Bm[0], &Python_grm_Br[0], &Python_grm_Bc[0], &Python_grm_Bf[0], &Python_grm_Tm[0], &Python_grm_Tr[0], &Python_grm_Tc[0], &Python_grm_Nm[0], &Python_grm_Nr[0], &Python_grm_Nc[0], &Python_grm_Rm[0], &Python_grm_Rr[0], &Python_grm_Rc[0], &Python_grm_PL[0], &Python_grm_nd_fterm[0], &Python_grm_nd_term[0], &Python_grm_nd_faction[0], &Python_grm_nd_action[0], 0, 0, 0, 0)
+      {
+      }
+   };
+
+typedef Python_parser_tables_<const char * const, const char * const, const char * const, const char * const, uint8, uint16, int16, int32, int32, int32, uint8, uint8, uint8, uint8, int16, uint8, uint8, int16, uint16, uint8, uint16, int16, uint8, int8, uint8, uint8, uint8, int16, int32, int32, int32, int32> Python_parser_tables_t;
 
 
 #endif

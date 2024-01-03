@@ -4,135 +4,8 @@
 #include "Vba_ParserTables_typedef.h"
 #include "Vba_Parser.h"
 
-template<>
-const int Vba_parser_tables_t::n_term_symb = 139;
-
-template<>
-const int Vba_parser_tables_t::n_head_symb = 181;
-
-template<>
-const int Vba_parser_tables_t::n_tact_name = 2;
-
-template<>
-const int Vba_parser_tables_t::n_node_name = 81;
-
-template<>
-const int Vba_parser_tables_t::n_head_numb = 405;
-
-template<>
-const int Vba_parser_tables_t::n_f_tail = 406;
-
-template<>
-const int Vba_parser_tables_t::n_tail = 830;
-
-template<>
-const int Vba_parser_tables_t::n_arga = 139;
-
-template<>
-const int Vba_parser_tables_t::n_argx = 405;
-
-template<>
-const int Vba_parser_tables_t::n_argy = 405;
-
-template<>
-const int Vba_parser_tables_t::n_Bm = 892;
-
-template<>
-const int Vba_parser_tables_t::n_Br = 453;
-
-template<>
-const int Vba_parser_tables_t::n_Bc = 139;
-
-template<>
-const int Vba_parser_tables_t::n_Bf = 139;
-
-template<>
-const int Vba_parser_tables_t::n_Tm = 1439;
-
-template<>
-const int Vba_parser_tables_t::n_Tr = 453;
-
-template<>
-const int Vba_parser_tables_t::n_Tc = 139;
-
-template<>
-const int Vba_parser_tables_t::n_Nm = 4121;
-
-template<>
-const int Vba_parser_tables_t::n_Nr = 453;
-
-template<>
-const int Vba_parser_tables_t::n_Nc = 405;
-
-template<>
-const int Vba_parser_tables_t::n_Rm = 265;
-
-template<>
-const int Vba_parser_tables_t::n_Rr = 453;
-
-template<>
-const int Vba_parser_tables_t::n_Rc = 139;
-
-template<>
-const int Vba_parser_tables_t::n_PL = 405;
-
-template<>
-const int Vba_parser_tables_t::n_nd_fterm = 0;
-
-template<>
-const int Vba_parser_tables_t::n_nd_term = 0;
-
-template<>
-const int Vba_parser_tables_t::n_nd_faction = 0;
-
-template<>
-const int Vba_parser_tables_t::n_nd_action = 0;
-
-template<>
-const int Vba_parser_tables_t::n_tact_numb = 139;
-
-template<>
-const int Vba_parser_tables_t::n_node_numb = 405;
-
-template<>
-const int Vba_parser_tables_t::n_nact_numb = 405;
-
-template<>
-const int Vba_parser_tables_t::n_reverse = 0;
-
-template<>
-const int Vba_parser_tables_t::n_terms = 139; // Number of terminals.
-
-template<>
-const int Vba_parser_tables_t::n_heads = 181; // Number of nonterminals.
-
-template<>
-const int Vba_parser_tables_t::n_prods = 405; // Number of productions.
-
-template<>
-const int Vba_parser_tables_t::n_states = 453; // Number of states.
-
-template<>
-const int Vba_parser_tables_t::accept_state = 452; // Accept state.
-
-template<>
-const int Vba_parser_tables_t::n_termactns = 2; // Number of terminal actions.
-
-template<>
-const int Vba_parser_tables_t::n_nodenames = 81; // Number of node names.
-
-template<>
-const int Vba_parser_tables_t::n_nodeactns = 81; // Number of node actions.
-
-template<>
-const int Vba_parser_tables_t::eof_symb = 1; // <eof> symbol number.
-
-template<>
-const int Vba_parser_tables_t::err_used = 1; // <error> used in grammar?
-
-
 // Terminal symbols of the grammar.
-static const char *term_symb_[139] = {
+const char *Vba_grm_term_symb[139] = {
    "<error>",
    "<eof>",
    "<ident0>",
@@ -274,11 +147,8 @@ static const char *term_symb_[139] = {
    "{DLLFuncName}",
 };
 
-template<>
-const char * const *Vba_parser_tables_t::term_symb = &term_symb_[0];
-
 // Nonterminal symbols of the grammar.
-static const char *head_symb_[181] = {
+const char *Vba_grm_head_symb[181] = {
    "ScriptFile",
    "GlobalStmtEOL",
    "StmtEOL",
@@ -462,20 +332,14 @@ static const char *head_symb_[181] = {
    "(<ident> | <keyword> | {Member})",
 };
 
-template<>
-const char * const *Vba_parser_tables_t::head_symb = &head_symb_[0];
-
 // Terninal action names found in the grammar ...
-static const char *tact_name_[2] = {
+const char *Vba_grm_tact_name[2] = {
    "error",
    "lookup",
 };
 
-template<>
-const char * const *Vba_parser_tables_t::tact_name = &tact_name_[0];
-
 // Node names found in the grammar.
-static const char * node_name_[81] = {
+const char *Vba_grm_node_name[81] = {
    "label",
    "RemStmt",
    "DimStmt",
@@ -560,11 +424,8 @@ static const char * node_name_[81] = {
 
 };
 
-template<>
-const char * const *Vba_parser_tables_t::node_name = &node_name_[0];
-
 // Head symbol numbers for the productions.
-static const uint8 head_numb_[405] = {
+const uint8 Vba_grm_head_numb[405] = {
        0,     1,     1,     2,     2,     2,     3,     3,     4,     4, 
        5,     6,     6,     6,     6,     6,     6,     6,     6,     6, 
        7,     8,     9,    10,    10,    10,    10,    10,    10,    10, 
@@ -608,11 +469,8 @@ static const uint8 head_numb_[405] = {
      179,   179,   180,   180,   180, 
 };
 
-template<>
-const uint8 *Vba_parser_tables_t::head_numb = &head_numb_[0];
-
 // First tail symbol index into the tail list ...
-static const uint16 f_tail_[406] = {
+const uint16 Vba_grm_f_tail[406] = {
        0,     2,     3,     5,     6,     8,    11,    12,    13,    15, 
       18,    19,    20,    21,    22,    24,    26,    28,    30,    33, 
       36,    37,    38,    39,    40,    41,    42,    43,    44,    45, 
@@ -656,11 +514,8 @@ static const uint16 f_tail_[406] = {
      823,   824,   827,   828,   829,   830, 
 };
 
-template<>
-const uint16 *Vba_parser_tables_t::f_tail = &f_tail_[0];
-
 // Tail symbol numbers ...
-static const int16 tail_[830] = {
+const int16 Vba_grm_tail[830] = {
     -137,     1,    23,    -6,    23,    23,    -3,    23,    -4,    -3, 
       23,   -11,   -10,    -5,    24,    -5,    24,  -138,     3,   -80, 
      -34,   -78,    -9,   -25,    -8,   -28,    -8,   -35,    -8,   -95, 
@@ -746,11 +601,8 @@ static const int16 tail_[830] = {
     -178,  -136,  -105,  -105,  -179,    32,  -105,     3,   129,   130, 
 };
 
-template<>
-const int16 *Vba_parser_tables_t::tail = &tail_[0];
-
 // Arguments for token actions ...
-static const int8 arga_[139] = {
+const int8 Vba_grm_arga[139] = {
       -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1, 
       -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1, 
       -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1, 
@@ -767,11 +619,8 @@ static const int8 arga_[139] = {
       -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1, 
 };
 
-template<>
-const int8 *Vba_parser_tables_t::arga = &arga_[0];
-
 // First arguments for productions ...
-static const int8 argx_[405] = {
+const int8 Vba_grm_argx[405] = {
       -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1, 
        0,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1, 
       -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1, 
@@ -815,11 +664,8 @@ static const int8 argx_[405] = {
       -1,    -1,    -1,    -1,    -1, 
 };
 
-template<>
-const int8 *Vba_parser_tables_t::argx = &argx_[0];
-
 // Second arguments for productions ...
-static const int16 argy_[405] = {
+const int16 Vba_grm_argy[405] = {
       -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1, 
        1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1, 
       -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1, 
@@ -863,11 +709,8 @@ static const int16 argy_[405] = {
       -1,    -1,    -1,    -1,    -1, 
 };
 
-template<>
-const int16 *Vba_parser_tables_t::argy = &argy_[0];
-
 // Boolean matrix ...
-static const uint8 Bm_[892] = {
+const uint8 Vba_grm_Bm[892] = {
        0,     0,     0,     0,     0,     0,     0,     0,     0,     0, 
        0,     2,     0,     2,     0,     0,     4,     0,     0,     0, 
        0,     0,     2,     0,     0,     0,     0,     0,     0,     0, 
@@ -960,11 +803,8 @@ static const uint8 Bm_[892] = {
        0,     0, 
 };
 
-template<>
-const uint8 *Vba_parser_tables_t::Bm = &Bm_[0];
-
 // Boolean matrix row (for state)...
-static const uint16 Br_[453] = {
+const uint16 Vba_grm_Br[453] = {
        0,    11,    20,    27,    38,    49,    60,    60,    71,     0, 
        0,    82,    60,    90,    97,    97,   103,   114,    49,   122, 
      122,   133,   139,   149,   139,   160,   114,   114,   114,   114, 
@@ -1013,11 +853,9 @@ static const uint16 Br_[453] = {
       20,    20,     0, 
       };
 
-template<>
-const uint16 *Vba_parser_tables_t::Br = &Br_[0];
-
 // Boolean matrix column (displacement) ...
-static const uint8 Bc_[139] = {
+extern const uint8 Vba_grm_Bc[139];
+const uint8 Vba_grm_Bc[139] = {
        0,     0,     0,     0,     0,     0,     0,     0,     0,     1, 
        1,     1,     1,     1,     1,     1,     1,     1,     1,     1, 
        1,     1,     2,     2,     2,     2,     2,     0,     0,     0, 
@@ -1034,11 +872,8 @@ static const uint8 Bc_[139] = {
       10,    10,    10,    10,    10,    10,    10,    10,    10, 
       };
 
-template<>
-const uint8 *Vba_parser_tables_t::Bc = &Bc_[0];
-
 // Boolean matrix filter/mask value ...
-static const uint8 Bf_[139] = {
+const uint8 Vba_grm_Bf[139] = {
        1,     2,     4,     8,    16,    32,    32,    64,   128,     1, 
        2,     4,     4,     4,     4,     4,     8,     8,    16,    32, 
       64,   128,     1,     2,     4,     8,    16,     2,     2,     2, 
@@ -1055,11 +890,8 @@ static const uint8 Bf_[139] = {
        4,     8,    16,    32,    64,    64,    64,    64,    64, 
 };
 
-template<>
-const uint8 *Vba_parser_tables_t::Bf = &Bf_[0];
-
 // Terminal transition matrix ...
-static const int16 Tm_[1439] = {
+const int16 Vba_grm_Tm[1439] = {
        0,     0,     0,     0,  -268,   150,  -263,     0,     0,    84, 
      218,  -254,     0,     0,     0,   417,     0,   219,  -255,     0, 
        0,     0,     0,     0,     0,     0,     0,     0,  -269,   194, 
@@ -1206,11 +1038,8 @@ static const int16 Tm_[1439] = {
      452,  -291,  -289,  -318,    16,    -1,   -92,    44,  -292, 
 };
 
-template<>
-const int16 *Vba_parser_tables_t::Tm = &Tm_[0];
-
 // Terminal transition matrix row ...
-static const uint16 Tr_[453] = {
+const uint16 Vba_grm_Tr[453] = {
     1366,  1366,  1148,  1366,  1366,  1366,  1366,  1366,  1366,  1366, 
     1366,  1148,  1366,  1366,  1366,  1148,  1366,   797,  1148,  1366, 
     1366,  1366,  1148,  1366,  1148,  1148,   435,     3,    39,   653, 
@@ -1259,11 +1088,8 @@ static const uint16 Tr_[453] = {
       27,    15,  1366, 
 };
 
-template<>
-const uint16 *Vba_parser_tables_t::Tr = &Tr_[0];
-
 // Terminal transition matrix column ...
-static const uint8 Tc_[139] = {
+const uint8 Vba_grm_Tc[139] = {
       32,    64,    20,    68,    63,    64,    20,    70,    32,    63, 
       53,    64,    70,    42,    67,     7,    15,    25,     0,     4, 
       71,     5,    41,    69,    42,    20,    67,     7,    15,    25, 
@@ -1280,11 +1106,8 @@ static const uint8 Tc_[139] = {
       64,    65,    66,    67,    68,    69,    70,    71,    72, 
 };
 
-template<>
-const uint8 *Vba_parser_tables_t::Tc = &Tc_[0];
-
 // Nonterminal transition matrix ...
-static const int16 Nm_[4121] = {
+const int16 Vba_grm_Nm[4121] = {
        0,   303,     0,     0,     0,  -378,   175,     0,     0,     0, 
        0,     0,     0,     0,     0,     0,     0,     0,     0,     0, 
        0,     0,     0,     0,     0,     0,     0,     0,     0,     0, 
@@ -1700,11 +1523,8 @@ static const int16 Nm_[4121] = {
     -277, 
 };
 
-template<>
-const int16 *Vba_parser_tables_t::Nm = &Nm_[0];
-
 // Nonterminal transition matrix row ...
-static const uint16 Nr_[453] = {
+const uint16 Vba_grm_Nr[453] = {
  4013,  4013,  4013,  4013,  4013,  4013,  3581,  1967,  4013,  4013, 
  4013,  4013,  1727,  4013,  4013,  4013,  4013,  4013,  4013,  4013, 
  4013,  4013,  3581,  4013,  1967,  4013,  4013,  4013,  4013,  4013, 
@@ -1753,11 +1573,8 @@ static const uint16 Nr_[453] = {
     0,  4013,  4013, 
 };
 
-template<>
-const uint16 *Vba_parser_tables_t::Nr = &Nr_[0];
-
 // Nonterminal transition matrix column ...
-static const uint8 Nc_[405] = {
+const uint8 Vba_grm_Nc[405] = {
    83,    83,    83,    83,    83,    83,     2,     2,     3,     3, 
     5,     2,     2,     2,     2,     2,     2,     2,     2,     2, 
     3,     5,     6,     6,     6,     6,     6,     6,     6,     6, 
@@ -1801,11 +1618,8 @@ static const uint8 Nc_[405] = {
   106,   106,   107,   107,   107, 
 };
 
-template<>
-const uint8 *Vba_parser_tables_t::Nc = &Nc_[0];
-
 // Reduction matrix ...
-static const uint16 Rm_[265] = {
+const uint16 Vba_grm_Rm[265] = {
        0,   319,   319,     0,     0,     0,     0,     0,     0,   319, 
        0,     0,   319,     0,     0,     0,     0,   322,     0,   319, 
        0,     0,     0,     0,     0,     0,     0,     0,     0,     0, 
@@ -1835,11 +1649,8 @@ static const uint16 Rm_[265] = {
        0,     0,     0,   335,     0, 
 };
 
-template<>
-const uint16 *Vba_parser_tables_t::Rm = &Rm_[0];
-
 // Reduction matrix row ...
-static const int16 Rr_[453] = {
+const int16 Vba_grm_Rr[453] = {
      313,     0,   -20,   -20,   317,   191,   -20,   -20,   -20,   -39, 
      -59,   -20,   100,   -20,   -20,   -20,   -79,   -20,   192,    98, 
       99,   -20,   340,   -20,   340,   365,   -20,   -20,   -20,   -20, 
@@ -1888,11 +1699,8 @@ static const int16 Rr_[453] = {
      -20,    67,   -20, 
 };
 
-template<>
-const int16 *Vba_parser_tables_t::Rr = &Rr_[0];
-
 // Reduction matrix column ...
-static const uint8 Rc_[139] = {
+const uint8 Vba_grm_Rc[139] = {
        0,     0,     1,     2,     3,     3,     3,     3,     4,     4, 
        5,     4,     4,     4,     4,     4,     6,     6,     4,     4, 
        4,     4,     4,     7,     8,     0,     9,     0,     0,     0, 
@@ -1909,11 +1717,8 @@ static const uint8 Rc_[139] = {
        0,    12,    19,     0,     0,     0,     0,     0,     0, 
 };
 
-template<>
-const uint8 *Vba_parser_tables_t::Rc = &Rc_[0];
-
 // Production lengths (minus one) ...
-static const int8 PL_[405] = {
+const int8 Vba_grm_PL[405] = {
        1,     0,     1,     0,     1,     2,     0,     0,     1,     2, 
        0,     0,     0,     0,     1,     1,     1,     1,     2,     2, 
        0,     0,     0,     0,     0,     0,     0,     0,     0,     0, 
@@ -1957,23 +1762,8 @@ static const int8 PL_[405] = {
        0,     2,     0,     0,     0, 
 };
 
-template<>
-const int8 *Vba_parser_tables_t::PL = &PL_[0];
-
-template<>
-const int32 *Vba_parser_tables_t::nd_fterm = 0;
-
-template<>
-const int32 *Vba_parser_tables_t::nd_term = 0;
-
-template<>
-const int32 *Vba_parser_tables_t::nd_faction = 0;
-
-template<>
-const int32 *Vba_parser_tables_t::nd_action = 0;
-
 // Terminal action number ...
-static const int8 tact_numb_[139] = {
+const int8 Vba_grm_tact_numb[139] = {
        0,    -1,     1,     1,     1,     1,     1,     1,    -1,    -1, 
       -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1, 
       -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1, 
@@ -1990,11 +1780,8 @@ static const int8 tact_numb_[139] = {
       -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1, 
 };
 
-template<>
-const int8 *Vba_parser_tables_t::tact_numb = &tact_numb_[0];
-
 // Node number for each production ...
-static const int8 node_numb_[405] = {
+const int8 Vba_grm_node_numb[405] = {
       -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1, 
        0,     1,     2,     3,     4,     5,     6,     7,     8,     9, 
       -1,    -1,    -1,    10,    11,    12,    13,    14,    15,    16, 
@@ -2038,11 +1825,8 @@ static const int8 node_numb_[405] = {
       -1,    -1,    -1,    -1,    -1, 
 };
 
-template<>
-const int8 *Vba_parser_tables_t::node_numb = &node_numb_[0];
-
 // Node action numbers ...
-static const int8 nact_numb_[405] = {
+const int8 Vba_grm_nact_numb[405] = {
       -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1, 
       -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1, 
       -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1, 
@@ -2085,10 +1869,4 @@ static const int8 nact_numb_[405] = {
       -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1, 
       -1,    -1,    -1,    -1,    -1, 
 };
-
-template<>
-const int8 *Vba_parser_tables_t::nact_numb = &nact_numb_[0];
-
-template<>
-const int32 *Vba_parser_tables_t::reverse = 0;
 

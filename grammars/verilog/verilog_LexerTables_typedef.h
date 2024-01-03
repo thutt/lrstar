@@ -5,6 +5,25 @@
 #define __verilog__LexerTables_TYPEDEF
 
 #include "lrstar_lexer.h"
-typedef templ_lrstar_lexer<false, uint8, uint16, uint16, uint8> verilog_lexer_t;
+
+extern const uint8 verilog_lgr_term_numb[500];
+extern const uint16 verilog_lgr_Tm[27877];
+extern const uint16 verilog_lgr_Tr[500];
+extern const uint8 verilog_lgr_Tc[256];
+
+template<bool C_debug, typename T_term_numb, typename T_Tm, typename T_Tr, typename T_Tc>
+class verilog_lexer_ : public lrstar_lexer<C_debug, T_term_numb, T_Tm, T_Tr, T_Tc> {
+public:
+    verilog_lexer_(char *input_start) :
+      lrstar_lexer<C_debug, T_term_numb, T_Tm, T_Tr, T_Tc>(&verilog_lgr_term_numb[0], &verilog_lgr_Tm[0], &verilog_lgr_Tr[0], &verilog_lgr_Tc[0], input_start)
+    {
+
+    }
+
+
+};
+
+
+typedef verilog_lexer_<false, uint8, uint16, uint16, uint8> verilog_lexer_t;
 
 #endif

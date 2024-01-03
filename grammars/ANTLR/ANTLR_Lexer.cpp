@@ -4,17 +4,9 @@
 
 #define MAX    0x80000000
 
-template<>
-const int ANTLR_lexer_t::n_term_numb = 136;
-template<>
-const int ANTLR_lexer_t::n_Tm = 6441;
-template<>
-const int ANTLR_lexer_t::n_Tr = 136;
-template<>
-const int ANTLR_lexer_t::n_Tc = 256;
-
 // Terminal number ...
-static const int8 term_numb_[136] = { 
+extern const int8 ANTLR_lgr_term_numb[136];
+const int8 ANTLR_lgr_term_numb[136] = {
 
        0,     0,     0,     2,     5,     6,    -1,     0,     0,    -1, 
        0,     0,     0,     0,     0,     0,     0,     0,     5,     5, 
@@ -32,11 +24,9 @@ static const int8 term_numb_[136] = {
       33,    27,    36,    23,    -1,     0, 
 };
 
-template<>
-const int8 *ANTLR_lexer_t::term_numb = &term_numb_[0];
-
 // Terminal transition matrix ...
-static const uint8 Tm_[6441] = {
+extern const uint8 ANTLR_lgr_Tm[6441];
+const uint8 ANTLR_lgr_Tm[6441] = {
 
      135,     6,     6,   127,   135,   135,   112,     2,   113,   114, 
      115,    28,   116,    29,    30,    32,     3,     3,    31,   117, 
@@ -685,11 +675,9 @@ static const uint8 Tm_[6441] = {
        0, 
 };
 
-template<>
-const uint8 *ANTLR_lexer_t::Tm = &Tm_[0];
-
 // Terminal transition matrix row ...
-static const uint16 Tr_[136] = { 
+extern const uint16 ANTLR_lgr_Tr[136];
+const uint16 ANTLR_lgr_Tr[136] = {
 
        0,    57,   114,   171,   228,   285,   342,   399,   456,   513, 
      570,   627,   684,   741,   798,   855,   912,   969,  1026,  1083, 
@@ -707,11 +695,9 @@ static const uint16 Tr_[136] = {
     6384,  6384,  6384,  6384,  6384,  6384, 
 };
 
-template<>
-const uint16 *ANTLR_lexer_t::Tr = &Tr_[0];
-
 // Terminal transition matrix column ...
-static const uint8 Tc_[256] = {
+extern const uint8 ANTLR_lgr_Tc[256];
+const uint8 ANTLR_lgr_Tc[256] = {
 
     0,     0,     0,     0,     0,     0,     0,     0,     0,     1, 
     2,     1,     1,     1,     0,     0,     0,     0,     0,     0, 
@@ -740,7 +726,4 @@ static const uint8 Tc_[256] = {
     0,     0,     0,     0,     0,     0,     0,     0,     0,     0, 
     0,     0,     0,     0,     0,     0, 
 };
-
-template<>
-const uint8 *ANTLR_lexer_t::Tc = &Tc_[0];
 

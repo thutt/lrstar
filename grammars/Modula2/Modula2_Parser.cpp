@@ -4,135 +4,8 @@
 #include "Modula2_ParserTables_typedef.h"
 #include "Modula2_Parser.h"
 
-template<>
-const int Modula2_parser_tables_t::n_term_symb = 71;
-
-template<>
-const int Modula2_parser_tables_t::n_head_symb = 122;
-
-template<>
-const int Modula2_parser_tables_t::n_tact_name = 2;
-
-template<>
-const int Modula2_parser_tables_t::n_node_name = 0;
-
-template<>
-const int Modula2_parser_tables_t::n_head_numb = 226;
-
-template<>
-const int Modula2_parser_tables_t::n_f_tail = 227;
-
-template<>
-const int Modula2_parser_tables_t::n_tail = 397;
-
-template<>
-const int Modula2_parser_tables_t::n_arga = 71;
-
-template<>
-const int Modula2_parser_tables_t::n_argx = 0;
-
-template<>
-const int Modula2_parser_tables_t::n_argy = 0;
-
-template<>
-const int Modula2_parser_tables_t::n_Bm = 158;
-
-template<>
-const int Modula2_parser_tables_t::n_Br = 205;
-
-template<>
-const int Modula2_parser_tables_t::n_Bc = 71;
-
-template<>
-const int Modula2_parser_tables_t::n_Bf = 71;
-
-template<>
-const int Modula2_parser_tables_t::n_Tm = 229;
-
-template<>
-const int Modula2_parser_tables_t::n_Tr = 205;
-
-template<>
-const int Modula2_parser_tables_t::n_Tc = 71;
-
-template<>
-const int Modula2_parser_tables_t::n_Nm = 1169;
-
-template<>
-const int Modula2_parser_tables_t::n_Nr = 205;
-
-template<>
-const int Modula2_parser_tables_t::n_Nc = 226;
-
-template<>
-const int Modula2_parser_tables_t::n_Rm = 239;
-
-template<>
-const int Modula2_parser_tables_t::n_Rr = 205;
-
-template<>
-const int Modula2_parser_tables_t::n_Rc = 71;
-
-template<>
-const int Modula2_parser_tables_t::n_PL = 226;
-
-template<>
-const int Modula2_parser_tables_t::n_nd_fterm = 0;
-
-template<>
-const int Modula2_parser_tables_t::n_nd_term = 0;
-
-template<>
-const int Modula2_parser_tables_t::n_nd_faction = 0;
-
-template<>
-const int Modula2_parser_tables_t::n_nd_action = 0;
-
-template<>
-const int Modula2_parser_tables_t::n_tact_numb = 71;
-
-template<>
-const int Modula2_parser_tables_t::n_node_numb = 0;
-
-template<>
-const int Modula2_parser_tables_t::n_nact_numb = 0;
-
-template<>
-const int Modula2_parser_tables_t::n_reverse = 0;
-
-template<>
-const int Modula2_parser_tables_t::n_terms = 71; // Number of terminals.
-
-template<>
-const int Modula2_parser_tables_t::n_heads = 122; // Number of nonterminals.
-
-template<>
-const int Modula2_parser_tables_t::n_prods = 226; // Number of productions.
-
-template<>
-const int Modula2_parser_tables_t::n_states = 205; // Number of states.
-
-template<>
-const int Modula2_parser_tables_t::accept_state = 204; // Accept state.
-
-template<>
-const int Modula2_parser_tables_t::n_termactns = 2; // Number of terminal actions.
-
-template<>
-const int Modula2_parser_tables_t::n_nodenames = 0; // Number of node names.
-
-template<>
-const int Modula2_parser_tables_t::n_nodeactns = 0; // Number of node actions.
-
-template<>
-const int Modula2_parser_tables_t::eof_symb = 1; // <eof> symbol number.
-
-template<>
-const int Modula2_parser_tables_t::err_used = 0; // <error> used in grammar?
-
-
 // Terminal symbols of the grammar.
-static const char *term_symb_[71] = {
+const char *Modula2_grm_term_symb[71] = {
    "<error>",
    "<eof>",
    "<identifier>",
@@ -206,11 +79,8 @@ static const char *term_symb_[71] = {
    "\'^\'",
 };
 
-template<>
-const char * const *Modula2_parser_tables_t::term_symb = &term_symb_[0];
-
 // Nonterminal symbols of the grammar.
-static const char *head_symb_[122] = {
+const char *Modula2_grm_head_symb[122] = {
    "Goal",
    "CompilationUnit",
    "DefinitionModule",
@@ -335,23 +205,14 @@ static const char *head_symb_[122] = {
    "Identifier/','+",
 };
 
-template<>
-const char * const *Modula2_parser_tables_t::head_symb = &head_symb_[0];
-
 // Terninal action names found in the grammar ...
-static const char *tact_name_[2] = {
+const char *Modula2_grm_tact_name[2] = {
    "error",
    "lookup",
 };
 
-template<>
-const char * const *Modula2_parser_tables_t::tact_name = &tact_name_[0];
-
-template<>
-const char * const *Modula2_parser_tables_t::node_name = 0;
-
 // Head symbol numbers for the productions.
-static const uint8 head_numb_[226] = {
+const uint8 Modula2_grm_head_numb[226] = {
        0,     1,     1,     2,     3,     4,     5,     6,     7,     7, 
        7,     7,     8,     9,     9,     9,     9,     9,    10,    11, 
       12,    13,    14,    15,    16,    16,    16,    16,    16,    16, 
@@ -377,11 +238,8 @@ static const uint8 head_numb_[226] = {
      119,   119,   120,   120,   121,   121, 
 };
 
-template<>
-const uint8 *Modula2_parser_tables_t::head_numb = &head_numb_[0];
-
 // First tail symbol index into the tail list ...
-static const uint16 f_tail_[227] = {
+const uint16 Modula2_grm_f_tail[227] = {
        0,     2,     4,     5,    15,    23,    27,    31,    34,    36, 
       38,    40,    42,    45,    47,    49,    51,    53,    55,    58, 
       61,    64,    68,    76,    80,    81,    82,    83,    84,    85, 
@@ -407,11 +265,8 @@ static const uint16 f_tail_[227] = {
      387,   387,   389,   390,   393,   394,   397, 
 };
 
-template<>
-const uint16 *Modula2_parser_tables_t::f_tail = &f_tail_[0];
-
 // Tail symbol numbers ...
-static const int8 tail_[397] = {
+const int8 Modula2_grm_tail[397] = {
       -1,     1,   -65,    -3,    -2,     7,     8,   -60,     9,   -66, 
      -67,   -68,    10,   -60,    11,     8,   -60,   -69,     9,   -66, 
       -8,   -60,    11,   -70,    13,   -61,     9,    14,    15,   -61, 
@@ -454,11 +309,8 @@ static const int8 tail_[397] = {
     -120,    11,   -60,   -60,  -121,    28,   -60, 
 };
 
-template<>
-const int8 *Modula2_parser_tables_t::tail = &tail_[0];
-
 // Arguments for token actions ...
-static const int8 arga_[71] = {
+const int8 Modula2_grm_arga[71] = {
       -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1, 
       -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1, 
       -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1, 
@@ -469,17 +321,8 @@ static const int8 arga_[71] = {
       -1, 
 };
 
-template<>
-const int8 *Modula2_parser_tables_t::arga = &arga_[0];
-
-template<>
-const int32 *Modula2_parser_tables_t::argx = 0;
-
-template<>
-const int32 *Modula2_parser_tables_t::argy = 0;
-
 // Boolean matrix ...
-static const uint8 Bm_[158] = {
+const uint8 Modula2_grm_Bm[158] = {
        0,     0,     0,     0,     0,     0,    16,     0,     0,     0, 
        0,     0,     2,     0,     0,     0,     0,     0,    32,     0, 
        0,     0,     0,     0,     4,     0,     0,     0,     0,    64, 
@@ -498,11 +341,8 @@ static const uint8 Bm_[158] = {
        0,     0,     0,     8,     0,     0,     0,     0, 
 };
 
-template<>
-const uint8 *Modula2_parser_tables_t::Bm = &Bm_[0];
-
 // Boolean matrix row (for state)...
-static const uint8 Br_[205] = {
+const uint8 Modula2_grm_Br[205] = {
        6,    12,    18,    18,    24,    24,    17,    29,    29,    30, 
        0,     0,    28,    33,    39,    44,    11,    30,     0,     0, 
       46,     0,    52,     4,    30,    39,     0,    23,     5,    24, 
@@ -526,11 +366,9 @@ static const uint8 Br_[205] = {
       61,   134,    30,   134,     0, 
       };
 
-template<>
-const uint8 *Modula2_parser_tables_t::Br = &Br_[0];
-
 // Boolean matrix column (displacement) ...
-static const uint8 Bc_[71] = {
+extern const uint8 Modula2_grm_Bc[71];
+const uint8 Modula2_grm_Bc[71] = {
        0,     0,     0,     0,     0,     0,     0,     0,     0,     0, 
        0,     1,     1,     1,     1,     1,     1,     1,     1,     1, 
        2,     2,     2,     2,     2,     2,     2,     2,     3,     3, 
@@ -541,11 +379,8 @@ static const uint8 Bc_[71] = {
        5, 
       };
 
-template<>
-const uint8 *Modula2_parser_tables_t::Bc = &Bc_[0];
-
 // Boolean matrix filter/mask value ...
-static const uint8 Bf_[71] = {
+const uint8 Modula2_grm_Bf[71] = {
        1,     2,     4,     8,     8,     8,    16,    16,    32,    64, 
      128,     1,     2,     4,     8,    16,    32,    64,   128,   128, 
        1,     2,     4,     8,    16,    32,    64,   128,     1,     2, 
@@ -556,11 +391,8 @@ static const uint8 Bf_[71] = {
       32, 
 };
 
-template<>
-const uint8 *Modula2_parser_tables_t::Bf = &Bf_[0];
-
 // Terminal transition matrix ...
-static const int16 Tm_[229] = {
+const int16 Modula2_grm_Tm[229] = {
        0,     0,  -141,  -134,   125,  -130,   174,   -23,    95,   -75, 
     -126,   -40,   143,    -5,   -68,     0,    -6,   -69,     0,   -17, 
      -76,     0,   -11,   -36,     0,     0,     0,   142,   188,   203, 
@@ -586,11 +418,8 @@ static const int16 Tm_[229] = {
      -92,   -93,   -94,   -95,   -96,    25,    34,  -103,    29, 
 };
 
-template<>
-const int16 *Modula2_parser_tables_t::Tm = &Tm_[0];
-
 // Terminal transition matrix row ...
-static const uint8 Tr_[205] = {
+const uint8 Modula2_grm_Tr[205] = {
      166,   166,   166,   103,   166,   166,   166,   166,   103,   166, 
      166,   166,   166,   166,   166,   166,   166,   166,   166,   166, 
      166,   166,   166,   103,   166,   166,   166,   166,   166,   166, 
@@ -614,11 +443,8 @@ static const uint8 Tr_[205] = {
        8,   103,   166,   103,   166, 
 };
 
-template<>
-const uint8 *Modula2_parser_tables_t::Tr = &Tr_[0];
-
 // Terminal transition matrix column ...
-static const uint8 Tc_[71] = {
+const uint8 Modula2_grm_Tc[71] = {
       14,    14,     0,    22,    26,    27,    35,    53,     1,     2, 
        3,     4,    62,     5,     6,     7,     8,     9,    10,    11, 
       12,    13,    14,    15,    16,    17,    18,    19,    20,    21, 
@@ -629,11 +455,8 @@ static const uint8 Tc_[71] = {
       62, 
 };
 
-template<>
-const uint8 *Modula2_parser_tables_t::Tc = &Tc_[0];
-
 // Nonterminal transition matrix ...
-static const int16 Nm_[1169] = {
+const int16 Modula2_grm_Nm[1169] = {
        0,     0,   -22,  -155,  -224,  -224,  -175,  -222,   -51,  -222, 
      194,  -222,  -224,     0,     0,     0,     0,    13,     0,  -223, 
     -224,    13,     0,  -219,     0,    13,   176,    42,     0,    13, 
@@ -753,11 +576,8 @@ static const int16 Nm_[1169] = {
       32,  -211,    33,    30,  -119,  -221,    35,    39,  -188, 
 };
 
-template<>
-const int16 *Modula2_parser_tables_t::Nm = &Nm_[0];
-
 // Nonterminal transition matrix row ...
-static const uint16 Nr_[205] = {
+const uint16 Modula2_grm_Nr[205] = {
  1109,  1109,  1109,  1109,  1109,   841,  1109,  1109,  1109,  1109, 
  1109,   841,  1109,  1109,   929,  1109,  1109,   841,  1109,  1109, 
  1109,  1109,  1109,  1109,   929,   676,  1109,  1109,  1109,    29, 
@@ -781,11 +601,8 @@ static const uint16 Nr_[205] = {
  1109,   113,  1049,   115,  1109, 
 };
 
-template<>
-const uint16 *Modula2_parser_tables_t::Nr = &Nr_[0];
-
 // Nonterminal transition matrix column ...
-static const uint8 Nc_[226] = {
+const uint8 Modula2_grm_Nc[226] = {
    46,    46,    46,     4,     5,     9,    55,    42,    46,    46, 
    46,    46,    54,     3,     3,     3,     3,     3,     4,     5, 
     9,    12,    40,    55,    42,    42,    42,    42,    42,    42, 
@@ -811,11 +628,8 @@ static const uint8 Nc_[226] = {
    57,    57,    58,    58,    59,    59, 
 };
 
-template<>
-const uint8 *Modula2_parser_tables_t::Nc = &Nc_[0];
-
 // Reduction matrix ...
-static const uint8 Rm_[239] = {
+const uint8 Modula2_grm_Rm[239] = {
        0,     0,     0,     0,     0,     0,     0,     0,     0,     0, 
        0,     0,     0,     0,     0,     0,     0,     0,     0,     0, 
      118,     0,   124,     0,     0,   118,     0,     0,     0,     0, 
@@ -842,11 +656,8 @@ static const uint8 Rm_[239] = {
      203,     0,     0,     0,     0,    41,     0,   203,     0, 
 };
 
-template<>
-const uint8 *Modula2_parser_tables_t::Rm = &Rm_[0];
-
 // Reduction matrix row ...
-static const int16 Rr_[205] = {
+const int16 Modula2_grm_Rr[205] = {
      114,     0,     0,     0,     0,     0,   122,     0,     0,   203, 
      116,   116,     0,   201,   148,   -15,   -32,   203,   207,   210, 
        0,   -48,   107,   187,   203,   148,   120,     0,     0,     0, 
@@ -870,11 +681,8 @@ static const int16 Rr_[205] = {
        0,    38,  -219,    38,     0, 
 };
 
-template<>
-const int16 *Modula2_parser_tables_t::Rr = &Rr_[0];
-
 // Reduction matrix column ...
-static const uint8 Rc_[71] = {
+const uint8 Modula2_grm_Rc[71] = {
        0,     0,     1,     2,     2,     2,     0,     0,     3,     4, 
        5,     6,     0,     7,     8,     0,     9,     6,    10,    10, 
        6,    10,     3,     6,    11,    12,     6,    13,    14,    15, 
@@ -885,11 +693,8 @@ static const uint8 Rc_[71] = {
        6, 
 };
 
-template<>
-const uint8 *Modula2_parser_tables_t::Rc = &Rc_[0];
-
 // Production lengths (minus one) ...
-static const int8 PL_[226] = {
+const int8 Modula2_grm_PL[226] = {
        1,     1,     0,     9,     7,     3,     3,     2,     1,     1, 
        1,     1,     2,     1,     1,     1,     1,     1,     2,     2, 
        2,     3,     7,     3,     0,     0,     0,     0,     0,     0, 
@@ -915,23 +720,8 @@ static const int8 PL_[226] = {
       -1,     1,     0,     2,     0,     2, 
 };
 
-template<>
-const int8 *Modula2_parser_tables_t::PL = &PL_[0];
-
-template<>
-const int32 *Modula2_parser_tables_t::nd_fterm = 0;
-
-template<>
-const int32 *Modula2_parser_tables_t::nd_term = 0;
-
-template<>
-const int32 *Modula2_parser_tables_t::nd_faction = 0;
-
-template<>
-const int32 *Modula2_parser_tables_t::nd_action = 0;
-
 // Terminal action number ...
-static const int8 tact_numb_[71] = {
+const int8 Modula2_grm_tact_numb[71] = {
        0,    -1,     1,     1,     1,     1,    -1,    -1,    -1,    -1, 
       -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1, 
       -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1, 
@@ -941,16 +731,4 @@ static const int8 tact_numb_[71] = {
       -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1, 
       -1, 
 };
-
-template<>
-const int8 *Modula2_parser_tables_t::tact_numb = &tact_numb_[0];
-
-template<>
-const int32 *Modula2_parser_tables_t::node_numb = 0;
-
-template<>
-const int32 *Modula2_parser_tables_t::nact_numb = 0;
-
-template<>
-const int32 *Modula2_parser_tables_t::reverse = 0;
 

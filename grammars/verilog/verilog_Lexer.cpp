@@ -4,17 +4,9 @@
 
 #define MAX    0x80000000
 
-template<>
-const int verilog_lexer_t::n_term_numb = 500;
-template<>
-const int verilog_lexer_t::n_Tm = 27877;
-template<>
-const int verilog_lexer_t::n_Tr = 500;
-template<>
-const int verilog_lexer_t::n_Tc = 256;
-
 // Terminal number ...
-static const uint8 term_numb_[500] = { 
+extern const uint8 verilog_lgr_term_numb[500];
+const uint8 verilog_lgr_term_numb[500] = {
 
        0,    22,     0,     9,    13,    10,     0,     0,     0,     0, 
        0,     0,     0,     0,     4,     3,     2,    12,     6,     5, 
@@ -68,11 +60,9 @@ static const uint8 term_numb_[500] = {
      153,   132,   173,   169,   165,   175,   160,   164,   162,     0, 
 };
 
-template<>
-const uint8 *verilog_lexer_t::term_numb = &term_numb_[0];
-
 // Terminal transition matrix ...
-static const uint16 Tm_[27877] = {
+extern const uint16 verilog_lgr_Tm[27877];
+const uint16 verilog_lgr_Tm[27877] = {
 
      499,   471,   499,    45,     2,   456,    44,   457,    46,   499, 
      458,   459,    47,   460,   461,    48,     1,   462,   350,   351, 
@@ -2864,11 +2854,9 @@ static const uint16 Tm_[27877] = {
        0,     0,     0,     0,     0,     0,     0, 
 };
 
-template<>
-const uint16 *verilog_lexer_t::Tm = &Tm_[0];
-
 // Terminal transition matrix row ...
-static const uint16 Tr_[500] = { 
+extern const uint16 verilog_lgr_Tr[500];
+const uint16 verilog_lgr_Tr[500] = {
 
        0,    61,   122,   183,   244,   305,   366,   427,   488,   549, 
      610,   671,   732,   793,   854,   915,   976,  1037,  1098,  1159, 
@@ -2922,11 +2910,9 @@ static const uint16 Tr_[500] = {
    27816, 27816, 27816, 27816, 27816, 27816, 27816, 27816, 27816, 27816, 
 };
 
-template<>
-const uint16 *verilog_lexer_t::Tr = &Tr_[0];
-
 // Terminal transition matrix column ...
-static const uint8 Tc_[256] = {
+extern const uint8 verilog_lgr_Tc[256];
+const uint8 verilog_lgr_Tc[256] = {
 
     0,     0,     0,     0,     0,     0,     0,     0,     0,     0, 
     0,     0,     0,     0,     0,     0,     0,     0,     0,     0, 
@@ -2955,7 +2941,4 @@ static const uint8 Tc_[256] = {
     0,     0,     0,     0,     0,     0,     0,     0,     0,     0, 
     0,     0,     0,     0,     0,     0, 
 };
-
-template<>
-const uint8 *verilog_lexer_t::Tc = &Tc_[0];
 

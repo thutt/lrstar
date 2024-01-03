@@ -4,135 +4,8 @@
 #include "XPL_ParserTables_typedef.h"
 #include "XPL_Parser.h"
 
-template<>
-const int XPL_parser_tables_t::n_term_symb = 49;
-
-template<>
-const int XPL_parser_tables_t::n_head_symb = 49;
-
-template<>
-const int XPL_parser_tables_t::n_tact_name = 2;
-
-template<>
-const int XPL_parser_tables_t::n_node_name = 0;
-
-template<>
-const int XPL_parser_tables_t::n_head_numb = 109;
-
-template<>
-const int XPL_parser_tables_t::n_f_tail = 110;
-
-template<>
-const int XPL_parser_tables_t::n_tail = 221;
-
-template<>
-const int XPL_parser_tables_t::n_arga = 49;
-
-template<>
-const int XPL_parser_tables_t::n_argx = 0;
-
-template<>
-const int XPL_parser_tables_t::n_argy = 0;
-
-template<>
-const int XPL_parser_tables_t::n_Bm = 118;
-
-template<>
-const int XPL_parser_tables_t::n_Br = 97;
-
-template<>
-const int XPL_parser_tables_t::n_Bc = 49;
-
-template<>
-const int XPL_parser_tables_t::n_Bf = 49;
-
-template<>
-const int XPL_parser_tables_t::n_Tm = 144;
-
-template<>
-const int XPL_parser_tables_t::n_Tr = 97;
-
-template<>
-const int XPL_parser_tables_t::n_Tc = 49;
-
-template<>
-const int XPL_parser_tables_t::n_Nm = 580;
-
-template<>
-const int XPL_parser_tables_t::n_Nr = 97;
-
-template<>
-const int XPL_parser_tables_t::n_Nc = 109;
-
-template<>
-const int XPL_parser_tables_t::n_Rm = 1;
-
-template<>
-const int XPL_parser_tables_t::n_Rr = 97;
-
-template<>
-const int XPL_parser_tables_t::n_Rc = 49;
-
-template<>
-const int XPL_parser_tables_t::n_PL = 109;
-
-template<>
-const int XPL_parser_tables_t::n_nd_fterm = 0;
-
-template<>
-const int XPL_parser_tables_t::n_nd_term = 0;
-
-template<>
-const int XPL_parser_tables_t::n_nd_faction = 0;
-
-template<>
-const int XPL_parser_tables_t::n_nd_action = 0;
-
-template<>
-const int XPL_parser_tables_t::n_tact_numb = 49;
-
-template<>
-const int XPL_parser_tables_t::n_node_numb = 0;
-
-template<>
-const int XPL_parser_tables_t::n_nact_numb = 0;
-
-template<>
-const int XPL_parser_tables_t::n_reverse = 0;
-
-template<>
-const int XPL_parser_tables_t::n_terms = 49; // Number of terminals.
-
-template<>
-const int XPL_parser_tables_t::n_heads = 49; // Number of nonterminals.
-
-template<>
-const int XPL_parser_tables_t::n_prods = 109; // Number of productions.
-
-template<>
-const int XPL_parser_tables_t::n_states = 97; // Number of states.
-
-template<>
-const int XPL_parser_tables_t::accept_state = 96; // Accept state.
-
-template<>
-const int XPL_parser_tables_t::n_termactns = 2; // Number of terminal actions.
-
-template<>
-const int XPL_parser_tables_t::n_nodenames = 0; // Number of node names.
-
-template<>
-const int XPL_parser_tables_t::n_nodeactns = 0; // Number of node actions.
-
-template<>
-const int XPL_parser_tables_t::eof_symb = 1; // <eof> symbol number.
-
-template<>
-const int XPL_parser_tables_t::err_used = 0; // <error> used in grammar?
-
-
 // Terminal symbols of the grammar.
-static const char *term_symb_[49] = {
+const char *XPL_grm_term_symb[49] = {
    "<error>",
    "<eof>",
    "<identifier>",
@@ -184,11 +57,8 @@ static const char *term_symb_[49] = {
    "\'MOD\'",
 };
 
-template<>
-const char * const *XPL_parser_tables_t::term_symb = &term_symb_[0];
-
 // Nonterminal symbols of the grammar.
-static const char *head_symb_[49] = {
+const char *XPL_grm_head_symb[49] = {
    "program",
    "statement_list",
    "statement",
@@ -240,23 +110,14 @@ static const char *head_symb_[49] = {
    "subscript_head",
 };
 
-template<>
-const char * const *XPL_parser_tables_t::head_symb = &head_symb_[0];
-
 // Terninal action names found in the grammar ...
-static const char *tact_name_[2] = {
+const char *XPL_grm_tact_name[2] = {
    "error",
    "lookup",
 };
 
-template<>
-const char * const *XPL_parser_tables_t::tact_name = &tact_name_[0];
-
-template<>
-const char * const *XPL_parser_tables_t::node_name = 0;
-
 // Head symbol numbers for the productions.
-static const uint8 head_numb_[109] = {
+const uint8 XPL_grm_head_numb[109] = {
        0,     1,     1,     2,     2,     3,     3,     3,     3,     3, 
        3,     3,     3,     3,     4,     4,     4,     5,     6,     7, 
        8,     8,     8,     8,     8,     9,    10,    10,    11,    12, 
@@ -270,11 +131,8 @@ static const uint8 head_numb_[109] = {
       45,    45,    45,    46,    46,    47,    47,    48,    48, 
 };
 
-template<>
-const uint8 *XPL_parser_tables_t::head_numb = &head_numb_[0];
-
 // First tail symbol index into the tail list ...
-static const uint8 f_tail_[110] = {
+const uint8 XPL_grm_f_tail[110] = {
        0,     2,     3,     5,     6,     7,     9,    11,    13,    15, 
       17,    19,    21,    22,    24,    26,    29,    31,    34,    36, 
       38,    40,    43,    46,    49,    51,    55,    57,    61,    63, 
@@ -288,11 +146,8 @@ static const uint8 f_tail_[110] = {
      205,   206,   207,   210,   211,   212,   213,   216,   218,   221, 
 };
 
-template<>
-const uint8 *XPL_parser_tables_t::f_tail = &f_tail_[0];
-
 // Tail symbol numbers ...
-static const int8 tail_[221] = {
+const int8 XPL_grm_tail[221] = {
       -1,     1,    -2,    -1,    -2,    -3,    -4,   -34,     5,    -7, 
        5,   -13,     5,   -20,     5,   -21,     5,   -22,     5,   -24, 
        5,     5,   -19,    -3,    -5,    -2,    -5,    -6,    -2,   -19, 
@@ -318,11 +173,8 @@ static const int8 tail_[221] = {
       17, 
 };
 
-template<>
-const int8 *XPL_parser_tables_t::tail = &tail_[0];
-
 // Arguments for token actions ...
-static const int8 arga_[49] = {
+const int8 XPL_grm_arga[49] = {
       -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1, 
       -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1, 
       -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1, 
@@ -330,17 +182,8 @@ static const int8 arga_[49] = {
       -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1, 
 };
 
-template<>
-const int8 *XPL_parser_tables_t::arga = &arga_[0];
-
-template<>
-const int32 *XPL_parser_tables_t::argx = 0;
-
-template<>
-const int32 *XPL_parser_tables_t::argy = 0;
-
 // Boolean matrix ...
-static const uint8 Bm_[118] = {
+const uint8 XPL_grm_Bm[118] = {
        0,     0,     0,     0,   100,     0,     0,     0,   102,     0, 
        0,     0,    32,     0,     0,   128,    64,     0,    28,    64, 
        0,    18,     4,     0,     0,     0,   100,     0,     1,     0, 
@@ -355,11 +198,8 @@ static const uint8 Bm_[118] = {
        0,     0,     2,   128,     0,     4,   128,     0, 
 };
 
-template<>
-const uint8 *XPL_parser_tables_t::Bm = &Bm_[0];
-
 // Boolean matrix row (for state)...
-static const uint8 Br_[97] = {
+const uint8 XPL_grm_Br[97] = {
        4,     8,    12,    14,    18,    22,    12,    26,    12,     4, 
       30,    34,    12,    12,    12,    22,    38,     4,    40,    44, 
       18,    22,    47,    51,    18,    18,    54,    57,    61,    65, 
@@ -372,11 +212,9 @@ static const uint8 Br_[97] = {
      100,    66,    18,   114,    18,    13,     0, 
       };
 
-template<>
-const uint8 *XPL_parser_tables_t::Br = &Br_[0];
-
 // Boolean matrix column (displacement) ...
-static const uint8 Bc_[49] = {
+extern const uint8 XPL_grm_Bc[49];
+const uint8 XPL_grm_Bc[49] = {
        0,     0,     0,     0,     0,     0,     0,     0,     1,     0, 
        1,     1,     1,     1,     1,     1,     1,     1,     2,     2, 
        0,     0,     0,     0,     0,     2,     2,     2,     2,     2, 
@@ -384,11 +222,8 @@ static const uint8 Bc_[49] = {
        3,     3,     3,     3,     3,     3,     3,     3,     3, 
       };
 
-template<>
-const uint8 *XPL_parser_tables_t::Bc = &Bc_[0];
-
 // Boolean matrix filter/mask value ...
-static const uint8 Bf_[49] = {
+const uint8 XPL_grm_Bf[49] = {
        1,     2,     4,     8,    16,    32,    64,   128,     1,    64, 
        2,     4,     8,     8,    16,    32,    64,   128,     1,     2, 
       64,    64,    64,    64,    64,     4,     8,    16,    16,    16, 
@@ -396,11 +231,8 @@ static const uint8 Bf_[49] = {
        4,     4,     4,     8,    16,    16,    32,    32,    32, 
 };
 
-template<>
-const uint8 *XPL_parser_tables_t::Bf = &Bf_[0];
-
 // Terminal transition matrix ...
-static const int8 Tm_[144] = {
+const int8 XPL_grm_Tm[144] = {
        0,     0,   -10,   -32,   -21,   -22,   -23,   -34,   -11,     0, 
       31,     0,   -20,    44,    52,   -46,     0,    -6,     0,   -52, 
      -59,   -60,    58,     0,    -7,     0,   -33,   -36,   -64,   -38, 
@@ -418,11 +250,8 @@ static const int8 Tm_[144] = {
       66,    67,    68,    69, 
 };
 
-template<>
-const int8 *XPL_parser_tables_t::Tm = &Tm_[0];
-
 // Terminal transition matrix row ...
-static const uint8 Tr_[97] = {
+const uint8 XPL_grm_Tr[97] = {
      106,   106,    71,   106,    71,    71,    15,   106,    22,   106, 
       51,   106,    44,    30,     0,    15,     6,   106,   106,    10, 
       71,    71,   106,    22,    71,    71,    71,   106,    71,   106, 
@@ -435,11 +264,8 @@ static const uint8 Tr_[97] = {
       30,   106,    71,   106,    71,   106,   106, 
 };
 
-template<>
-const uint8 *XPL_parser_tables_t::Tr = &Tr_[0];
-
 // Terminal transition matrix column ...
-static const uint8 Tc_[49] = {
+const uint8 XPL_grm_Tc[49] = {
       29,    29,     0,     4,     1,     2,    24,    25,    26,    27, 
        3,    28,    29,     4,    30,     5,     6,     7,    31,     8, 
        9,    10,    11,    12,    13,    14,    15,    16,    17,    18, 
@@ -447,11 +273,8 @@ static const uint8 Tc_[49] = {
       29,    30,    31,    32,    33,    34,    35,    36,    37, 
 };
 
-template<>
-const uint8 *XPL_parser_tables_t::Tc = &Tc_[0];
-
 // Nonterminal transition matrix ...
-static const int8 Nm_[580] = {
+const int8 XPL_grm_Nm[580] = {
        0,     0,     0,     0,     0,     0,     0,     0,     0,     0, 
        0,     0,     0,     0,     0,     0,     0,     0,     0,     0, 
        0,     0,     0,     0,     0,     0,     0,     0,     0,     0, 
@@ -512,11 +335,8 @@ static const int8 Nm_[580] = {
        7,    -1,    63,   -25,    -3,    -4,     8,    90,     3,     4, 
 };
 
-template<>
-const int8 *XPL_parser_tables_t::Nm = &Nm_[0];
-
 // Nonterminal transition matrix row ...
-static const uint16 Nr_[97] = {
+const uint16 XPL_grm_Nr[97] = {
   545,   510,   545,   545,   230,    63,   545,   370,   545,   405, 
   545,   265,   545,   545,   545,   545,   545,   440,   545,    21, 
   112,     0,   545,   545,   124,   136,   545,   545,   545,   545, 
@@ -529,11 +349,8 @@ static const uint16 Nr_[97] = {
   545,    63,   196,   545,   208,   545,   545, 
 };
 
-template<>
-const uint16 *XPL_parser_tables_t::Nr = &Nr_[0];
-
 // Nonterminal transition matrix column ...
-static const uint8 Nc_[109] = {
+const uint8 XPL_grm_Nc[109] = {
     4,     4,     4,    26,    26,    29,    29,    29,    29,    29, 
    29,    29,    29,    29,    30,    30,    30,    23,     4,    24, 
    25,    25,    25,    25,    25,    26,    28,    28,    29,    30, 
@@ -547,19 +364,13 @@ static const uint8 Nc_[109] = {
    31,    31,    31,    32,    32,    33,    33,    34,    34, 
 };
 
-template<>
-const uint8 *XPL_parser_tables_t::Nc = &Nc_[0];
-
 // Reduction matrix ...
-static const uint8 Rm_[1] = {
+const uint8 XPL_grm_Rm[1] = {
        0, 
 };
 
-template<>
-const uint8 *XPL_parser_tables_t::Rm = &Rm_[0];
-
 // Reduction matrix row ...
-static const uint8 Rr_[97] = {
+const uint8 XPL_grm_Rr[97] = {
        0,     0,     0,     0,     0,     0,     0,     0,     0,     0, 
        0,     0,     0,     0,     0,     0,     0,     0,   105,     0, 
       43,     0,     0,     0,     0,     0,     0,    73,    79,    89, 
@@ -572,11 +383,8 @@ static const uint8 Rr_[97] = {
        0,     0,     0,    26,     0,    27,     0, 
 };
 
-template<>
-const uint8 *XPL_parser_tables_t::Rr = &Rr_[0];
-
 // Reduction matrix column ...
-static const uint8 Rc_[49] = {
+const uint8 XPL_grm_Rc[49] = {
        0,     0,     0,     0,     0,     0,     0,     0,     0,     0, 
        0,     0,     0,     0,     0,     0,     0,     0,     0,     0, 
        0,     0,     0,     0,     0,     0,     0,     0,     0,     0, 
@@ -584,11 +392,8 @@ static const uint8 Rc_[49] = {
        0,     0,     0,     0,     0,     0,     0,     0,     0, 
 };
 
-template<>
-const uint8 *XPL_parser_tables_t::Rc = &Rc_[0];
-
 // Production lengths (minus one) ...
-static const uint8 PL_[109] = {
+const uint8 XPL_grm_PL[109] = {
        1,     0,     1,     0,     0,     1,     1,     1,     1,     1, 
        1,     1,     0,     1,     1,     2,     1,     2,     1,     1, 
        1,     2,     2,     2,     1,     3,     1,     3,     1,     1, 
@@ -602,39 +407,12 @@ static const uint8 PL_[109] = {
        0,     0,     2,     0,     0,     0,     2,     1,     2, 
 };
 
-template<>
-const uint8 *XPL_parser_tables_t::PL = &PL_[0];
-
-template<>
-const int32 *XPL_parser_tables_t::nd_fterm = 0;
-
-template<>
-const int32 *XPL_parser_tables_t::nd_term = 0;
-
-template<>
-const int32 *XPL_parser_tables_t::nd_faction = 0;
-
-template<>
-const int32 *XPL_parser_tables_t::nd_action = 0;
-
 // Terminal action number ...
-static const int8 tact_numb_[49] = {
+const int8 XPL_grm_tact_numb[49] = {
        0,    -1,     1,     1,     1,    -1,    -1,    -1,    -1,    -1, 
       -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1, 
       -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1, 
       -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1, 
       -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1, 
 };
-
-template<>
-const int8 *XPL_parser_tables_t::tact_numb = &tact_numb_[0];
-
-template<>
-const int32 *XPL_parser_tables_t::node_numb = 0;
-
-template<>
-const int32 *XPL_parser_tables_t::nact_numb = 0;
-
-template<>
-const int32 *XPL_parser_tables_t::reverse = 0;
 

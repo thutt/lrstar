@@ -4,17 +4,9 @@
 
 #define MAX    0x80000000
 
-template<>
-const int Typedef_lexer_t::n_term_numb = 50;
-template<>
-const int Typedef_lexer_t::n_Tm = 1170;
-template<>
-const int Typedef_lexer_t::n_Tr = 50;
-template<>
-const int Typedef_lexer_t::n_Tc = 256;
-
 // Terminal number ...
-static const int8 term_numb_[50] = { 
+extern const int8 Typedef_lgr_term_numb[50];
+const int8 Typedef_lgr_term_numb[50] = {
 
        0,     2,    -1,    -1,     0,     0,     0,     0,     0,     0, 
        0,     0,     2,     2,     2,     2,     2,     0,     2,     2, 
@@ -23,11 +15,9 @@ static const int8 term_numb_[50] = {
        8,    10,     4,    11,     7,     5,     3,     1,    -1,     0, 
 };
 
-template<>
-const int8 *Typedef_lexer_t::term_numb = &term_numb_[0];
-
 // Terminal transition matrix ...
-static const uint8 Tm_[1170] = {
+extern const uint8 Typedef_lgr_Tm[1170];
+const uint8 Typedef_lgr_Tm[1170] = {
 
       49,     2,     2,    47,    44,    45,    17,    49,    46,     1, 
        1,    12,     1,     1,     1,     1,     1,    13,     1,     1, 
@@ -148,11 +138,9 @@ static const uint8 Tm_[1170] = {
        0,     0,     0,     0,     0,     0,     0,     0,     0,     0, 
 };
 
-template<>
-const uint8 *Typedef_lexer_t::Tm = &Tm_[0];
-
 // Terminal transition matrix row ...
-static const uint16 Tr_[50] = { 
+extern const uint16 Typedef_lgr_Tr[50];
+const uint16 Typedef_lgr_Tr[50] = {
 
        0,    26,    52,    78,   104,   130,   156,   182,   208,   234, 
      260,   286,   312,   338,   364,   390,   416,   442,   468,   494, 
@@ -161,11 +149,9 @@ static const uint16 Tr_[50] = {
     1040,  1066,  1092,  1118,  1144,  1144,  1144,  1144,  1144,  1144, 
 };
 
-template<>
-const uint16 *Typedef_lexer_t::Tr = &Tr_[0];
-
 // Terminal transition matrix column ...
-static const uint8 Tc_[256] = {
+extern const uint8 Typedef_lgr_Tc[256];
+const uint8 Typedef_lgr_Tc[256] = {
 
     0,     0,     0,     0,     0,     0,     0,     0,     0,     1, 
     2,     0,     0,     0,     0,     0,     0,     0,     0,     0, 
@@ -194,7 +180,4 @@ static const uint8 Tc_[256] = {
     0,     0,     0,     0,     0,     0,     0,     0,     0,     0, 
     0,     0,     0,     0,     0,     0, 
 };
-
-template<>
-const uint8 *Typedef_lexer_t::Tc = &Tc_[0];
 

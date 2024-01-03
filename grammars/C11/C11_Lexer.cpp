@@ -4,17 +4,9 @@
 
 #define MAX    0x80000000
 
-template<>
-const int C11_lexer_t::n_term_numb = 288;
-template<>
-const int C11_lexer_t::n_Tm = 14927;
-template<>
-const int C11_lexer_t::n_Tr = 288;
-template<>
-const int C11_lexer_t::n_Tc = 256;
-
 // Terminal number ...
-static const int8 term_numb_[288] = { 
+extern const int8 C11_lgr_term_numb[288];
+const int8 C11_lgr_term_numb[288] = {
 
        0,    81,     0,     0,     4,     3,    -1,     4,    -1,     0, 
        0,     0,     0,     0,     2,     0,     0,     0,     0,     0, 
@@ -47,11 +39,9 @@ static const int8 term_numb_[288] = {
       29,    35,    56,    74,    50,    51,    -1,     0, 
 };
 
-template<>
-const int8 *C11_lexer_t::term_numb = &term_numb_[0];
-
 // Terminal transition matrix ...
-static const uint16 Tm_[14927] = {
+extern const uint16 C11_lgr_Tm[14927];
+const uint16 C11_lgr_Tm[14927] = {
 
      287,     6,     6,   263,    36,     2,    37,    38,     3,   252, 
      253,    39,    40,   254,    41,     1,    42,     4,     4,   255, 
@@ -1548,11 +1538,9 @@ static const uint16 Tm_[14927] = {
        0,     0,     0,     0,     0,     0,     0, 
 };
 
-template<>
-const uint16 *C11_lexer_t::Tm = &Tm_[0];
-
 // Terminal transition matrix row ...
-static const uint16 Tr_[288] = { 
+extern const uint16 C11_lgr_Tr[288];
+const uint16 C11_lgr_Tr[288] = {
 
        0,    59,   118,   177,   236,   295,   354,   413,   472,   531, 
      590,   649,   708,   767,   826,   885,   944,  1003,  1062,  1121, 
@@ -1585,11 +1573,9 @@ static const uint16 Tr_[288] = {
    14868, 14868, 14868, 14868, 14868, 14868, 14868, 14868, 
 };
 
-template<>
-const uint16 *C11_lexer_t::Tr = &Tr_[0];
-
 // Terminal transition matrix column ...
-static const uint8 Tc_[256] = {
+extern const uint8 C11_lgr_Tc[256];
+const uint8 C11_lgr_Tc[256] = {
 
     0,     0,     0,     0,     0,     0,     0,     0,     0,     1, 
     2,     1,     1,     1,     0,     0,     0,     0,     0,     0, 
@@ -1618,7 +1604,4 @@ static const uint8 Tc_[256] = {
     0,     0,     0,     0,     0,     0,     0,     0,     0,     0, 
     0,     0,     0,     0,     0,     0, 
 };
-
-template<>
-const uint8 *C11_lexer_t::Tc = &Tc_[0];
 

@@ -4,135 +4,8 @@
 #include "CICS_ParserTables_typedef.h"
 #include "CICS_Parser.h"
 
-template<>
-const int CICS_parser_tables_t::n_term_symb = 216;
-
-template<>
-const int CICS_parser_tables_t::n_head_symb = 369;
-
-template<>
-const int CICS_parser_tables_t::n_tact_name = 2;
-
-template<>
-const int CICS_parser_tables_t::n_node_name = 0;
-
-template<>
-const int CICS_parser_tables_t::n_head_numb = 821;
-
-template<>
-const int CICS_parser_tables_t::n_f_tail = 822;
-
-template<>
-const int CICS_parser_tables_t::n_tail = 1488;
-
-template<>
-const int CICS_parser_tables_t::n_arga = 216;
-
-template<>
-const int CICS_parser_tables_t::n_argx = 0;
-
-template<>
-const int CICS_parser_tables_t::n_argy = 0;
-
-template<>
-const int CICS_parser_tables_t::n_Bm = 310;
-
-template<>
-const int CICS_parser_tables_t::n_Br = 668;
-
-template<>
-const int CICS_parser_tables_t::n_Bc = 216;
-
-template<>
-const int CICS_parser_tables_t::n_Bf = 216;
-
-template<>
-const int CICS_parser_tables_t::n_Tm = 1304;
-
-template<>
-const int CICS_parser_tables_t::n_Tr = 668;
-
-template<>
-const int CICS_parser_tables_t::n_Tc = 216;
-
-template<>
-const int CICS_parser_tables_t::n_Nm = 733;
-
-template<>
-const int CICS_parser_tables_t::n_Nr = 668;
-
-template<>
-const int CICS_parser_tables_t::n_Nc = 821;
-
-template<>
-const int CICS_parser_tables_t::n_Rm = 1;
-
-template<>
-const int CICS_parser_tables_t::n_Rr = 668;
-
-template<>
-const int CICS_parser_tables_t::n_Rc = 216;
-
-template<>
-const int CICS_parser_tables_t::n_PL = 821;
-
-template<>
-const int CICS_parser_tables_t::n_nd_fterm = 0;
-
-template<>
-const int CICS_parser_tables_t::n_nd_term = 0;
-
-template<>
-const int CICS_parser_tables_t::n_nd_faction = 0;
-
-template<>
-const int CICS_parser_tables_t::n_nd_action = 0;
-
-template<>
-const int CICS_parser_tables_t::n_tact_numb = 216;
-
-template<>
-const int CICS_parser_tables_t::n_node_numb = 0;
-
-template<>
-const int CICS_parser_tables_t::n_nact_numb = 0;
-
-template<>
-const int CICS_parser_tables_t::n_reverse = 0;
-
-template<>
-const int CICS_parser_tables_t::n_terms = 216; // Number of terminals.
-
-template<>
-const int CICS_parser_tables_t::n_heads = 369; // Number of nonterminals.
-
-template<>
-const int CICS_parser_tables_t::n_prods = 821; // Number of productions.
-
-template<>
-const int CICS_parser_tables_t::n_states = 668; // Number of states.
-
-template<>
-const int CICS_parser_tables_t::accept_state = 667; // Accept state.
-
-template<>
-const int CICS_parser_tables_t::n_termactns = 2; // Number of terminal actions.
-
-template<>
-const int CICS_parser_tables_t::n_nodenames = 0; // Number of node names.
-
-template<>
-const int CICS_parser_tables_t::n_nodeactns = 0; // Number of node actions.
-
-template<>
-const int CICS_parser_tables_t::eof_symb = 1; // <eof> symbol number.
-
-template<>
-const int CICS_parser_tables_t::err_used = 0; // <error> used in grammar?
-
-
 // Terminal symbols of the grammar.
-static const char *term_symb_[216] = {
+const char *CICS_grm_term_symb[216] = {
    "<error>",
    "<eof>",
    "<identifier>",
@@ -351,11 +224,8 @@ static const char *term_symb_[216] = {
    "\'XCTL\'",
 };
 
-template<>
-const char * const *CICS_parser_tables_t::term_symb = &term_symb_[0];
-
 // Nonterminal symbols of the grammar.
-static const char *head_symb_[369] = {
+const char *CICS_grm_head_symb[369] = {
    "Goal",
    "CICS",
    "Stmt",
@@ -727,23 +597,14 @@ static const char *head_symb_[369] = {
    "XctlLength",
 };
 
-template<>
-const char * const *CICS_parser_tables_t::head_symb = &head_symb_[0];
-
 // Terninal action names found in the grammar ...
-static const char *tact_name_[2] = {
+const char *CICS_grm_tact_name[2] = {
    "error",
    "lookup",
 };
 
-template<>
-const char * const *CICS_parser_tables_t::tact_name = &tact_name_[0];
-
-template<>
-const char * const *CICS_parser_tables_t::node_name = 0;
-
 // Head symbol numbers for the productions.
-static const uint16 head_numb_[821] = {
+const uint16 CICS_grm_head_numb[821] = {
        0,     1,     2,     2,     2,     2,     2,     2,     2,     2, 
        2,     2,     2,     2,     2,     2,     2,     2,     2,     2, 
        2,     2,     2,     2,     2,     2,     2,     2,     2,     2, 
@@ -829,11 +690,8 @@ static const uint16 head_numb_[821] = {
      368, 
 };
 
-template<>
-const uint16 *CICS_parser_tables_t::head_numb = &head_numb_[0];
-
 // First tail symbol index into the tail list ...
-static const uint16 f_tail_[822] = {
+const uint16 CICS_grm_f_tail[822] = {
        0,     2,     5,     6,     7,     8,     9,    10,    11,    12, 
       13,    14,    15,    16,    17,    18,    19,    20,    21,    22, 
       23,    24,    25,    26,    27,    28,    29,    30,    31,    32, 
@@ -919,11 +777,8 @@ static const uint16 f_tail_[822] = {
     1487,  1488, 
 };
 
-template<>
-const uint16 *CICS_parser_tables_t::f_tail = &f_tail_[0];
-
 // Tail symbol numbers ...
-static const int16 tail_[1488] = {
+const int16 CICS_grm_tail[1488] = {
       -1,     1,    -2,    -3,     8,    -4,    -9,   -17,   -18,   -24, 
      -30,   -40,   -47,   -50,   -55,   -61,   -68,   -71,   -77,   -83, 
      -86,   -93,  -164,  -170,  -181,  -188,  -195,  -203,  -205,  -215, 
@@ -1075,11 +930,8 @@ static const int16 tail_[1488] = {
       13,  -368,    14,     6,     2,     2,     3,     2, 
 };
 
-template<>
-const int16 *CICS_parser_tables_t::tail = &tail_[0];
-
 // Arguments for token actions ...
-static const int8 arga_[216] = {
+const int8 CICS_grm_arga[216] = {
       -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1, 
       -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1, 
       -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1, 
@@ -1104,17 +956,8 @@ static const int8 arga_[216] = {
       -1,    -1,    -1,    -1,    -1,    -1, 
 };
 
-template<>
-const int8 *CICS_parser_tables_t::arga = &arga_[0];
-
-template<>
-const int32 *CICS_parser_tables_t::argx = 0;
-
-template<>
-const int32 *CICS_parser_tables_t::argy = 0;
-
 // Boolean matrix ...
-static const uint8 Bm_[310] = {
+const uint8 CICS_grm_Bm[310] = {
        0,     0,     0,     0,     0,     0,     0,     0,   128,    17, 
        0,    64,     0,    10,   192,     0,     2,     0,     0,     0, 
        0,     0,     0,     0,    64,     0,     0,     0,     0,     0, 
@@ -1148,11 +991,8 @@ static const uint8 Bm_[310] = {
        0,     0,    12,     0,     0,     0,     0,     0,     0,     0, 
 };
 
-template<>
-const uint8 *CICS_parser_tables_t::Bm = &Bm_[0];
-
 // Boolean matrix row (for state)...
-static const uint16 Br_[668] = {
+const uint16 CICS_grm_Br[668] = {
        8,    16,    24,    31,    38,    46,    53,    59,    66,    72, 
       77,    82,    88,    72,    82,    94,    76,   100,   108,   114, 
      121,   127,   133,   140,    69,   146,   153,   153,   160,   167, 
@@ -1222,11 +1062,9 @@ static const uint16 Br_[668] = {
      235,   235,   235,   235,   235,   235,   235,     0, 
       };
 
-template<>
-const uint16 *CICS_parser_tables_t::Br = &Br_[0];
-
 // Boolean matrix column (displacement) ...
-static const uint8 Bc_[216] = {
+extern const uint8 CICS_grm_Bc[216];
+const uint8 CICS_grm_Bc[216] = {
        0,     0,     0,     0,     0,     0,     0,     0,     0,     0, 
        0,     1,     1,     1,     1,     1,     1,     1,     1,     1, 
        1,     1,     1,     1,     1,     2,     2,     2,     2,     2, 
@@ -1251,11 +1089,8 @@ static const uint8 Bc_[216] = {
        1,     7,     1,     7,     7,     1, 
       };
 
-template<>
-const uint8 *CICS_parser_tables_t::Bc = &Bc_[0];
-
 // Boolean matrix filter/mask value ...
-static const uint8 Bf_[216] = {
+const uint8 CICS_grm_Bf[216] = {
        1,     2,     4,     8,     1,     1,    16,     1,    32,    64, 
      128,     1,     2,     4,     8,    16,    32,    32,    32,    32, 
       16,    16,    64,   128,    16,     1,     1,     2,     4,     8, 
@@ -1280,11 +1115,8 @@ static const uint8 Bf_[216] = {
       16,    64,    16,   128,   128,    16, 
 };
 
-template<>
-const uint8 *CICS_parser_tables_t::Bf = &Bf_[0];
-
 // Terminal transition matrix ...
-static const int16 Tm_[1304] = {
+const int16 CICS_grm_Tm[1304] = {
        0,   504,  -350,   505,  -382,   506,  -383,  -160,   243,  -156, 
     -173,   246,  -171,  -184,   249,  -181,  -187,   250,  -185,  -195, 
      251,  -192,  -399,   253,  -194,  -418,   316,  -407,  -421,   318, 
@@ -1418,11 +1250,8 @@ static const int16 Tm_[1304] = {
     -791,   294,   295,  -810, 
 };
 
-template<>
-const int16 *CICS_parser_tables_t::Tm = &Tm_[0];
-
 // Terminal transition matrix row ...
-static const uint16 Tr_[668] = {
+const uint16 CICS_grm_Tr[668] = {
     1197,  1197,  1197,  1091,  1197,  1197,  1197,  1197,  1091,  1197, 
     1197,  1197,  1091,  1091,   974,   974,  1197,   909,  1091,  1091, 
      864,   801,   675,   974,  1197,   833,   748,   722,   815,   734, 
@@ -1492,11 +1321,8 @@ static const uint16 Tr_[668] = {
      301,   304,   671,   307,     0,     2,     4,  1197, 
 };
 
-template<>
-const uint16 *CICS_parser_tables_t::Tr = &Tr_[0];
-
 // Terminal transition matrix column ...
-static const uint8 Tc_[216] = {
+const uint8 CICS_grm_Tc[216] = {
       59,    59,     0,    23,    59,     0,    59,    23,    14,    26, 
       61,    24,    14,     1,     2,    27,    35,    36,    37,    39, 
       40,    47,    38,    56,    48,    57,    58,    29,    62,    63, 
@@ -1521,11 +1347,8 @@ static const uint8 Tc_[216] = {
      101,   102,   103,   104,   105,   106, 
 };
 
-template<>
-const uint8 *CICS_parser_tables_t::Tc = &Tc_[0];
-
 // Nonterminal transition matrix ...
-static const int16 Nm_[733] = {
+const int16 CICS_grm_Nm[733] = {
        0,     0,     0,     0,     0,     0,   -51,     0,     0,     0, 
        0,   -59,     0,     0,     0,     0,     0,     0,     0,     0, 
      -72,    55,     0,     0,     0,     0,   -79,     0,     0,     0, 
@@ -1602,11 +1425,8 @@ static const int16 Nm_[733] = {
      607,   608,   609, 
 };
 
-template<>
-const int16 *CICS_parser_tables_t::Nm = &Nm_[0];
-
 // Nonterminal transition matrix row ...
-static const uint16 Nr_[668] = {
+const uint16 CICS_grm_Nr[668] = {
   365,   365,   365,   365,   365,   365,   365,   365,   365,   365, 
   365,   365,   365,   365,   365,   365,   365,   365,   365,   365, 
   365,   365,   365,   365,   365,   365,   365,   365,   365,   365, 
@@ -1676,11 +1496,8 @@ static const uint16 Nr_[668] = {
   365,   365,   365,   365,   365,   365,   365,   365, 
 };
 
-template<>
-const uint16 *CICS_parser_tables_t::Nr = &Nr_[0];
-
 // Nonterminal transition matrix column ...
-static const uint16 Nc_[821] = {
+const uint16 CICS_grm_Nc[821] = {
     0,     0,     1,     1,     1,     1,     1,     1,     1,     1, 
     1,     1,     1,     1,     1,     1,     1,     1,     1,     1, 
     1,     1,     1,     1,     1,     1,     1,     1,     1,     1, 
@@ -1766,19 +1583,13 @@ static const uint16 Nc_[821] = {
   367, 
 };
 
-template<>
-const uint16 *CICS_parser_tables_t::Nc = &Nc_[0];
-
 // Reduction matrix ...
-static const uint8 Rm_[1] = {
+const uint8 CICS_grm_Rm[1] = {
        0, 
 };
 
-template<>
-const uint8 *CICS_parser_tables_t::Rm = &Rm_[0];
-
 // Reduction matrix row ...
-static const uint16 Rr_[668] = {
+const uint16 CICS_grm_Rr[668] = {
        0,     0,     0,     0,     0,     0,     0,     0,     0,     0, 
        0,     0,     0,     0,     0,     0,     0,     0,     0,     0, 
        0,     0,     0,     0,     0,     0,     0,     0,     0,     0, 
@@ -1848,11 +1659,8 @@ static const uint16 Rr_[668] = {
        0,     0,     0,     0,     0,     0,     0,     0, 
 };
 
-template<>
-const uint16 *CICS_parser_tables_t::Rr = &Rr_[0];
-
 // Reduction matrix column ...
-static const uint8 Rc_[216] = {
+const uint8 CICS_grm_Rc[216] = {
        0,     0,     0,     0,     0,     0,     0,     0,     0,     0, 
        0,     0,     0,     0,     0,     0,     0,     0,     0,     0, 
        0,     0,     0,     0,     0,     0,     0,     0,     0,     0, 
@@ -1877,11 +1685,8 @@ static const uint8 Rc_[216] = {
        0,     0,     0,     0,     0,     0, 
 };
 
-template<>
-const uint8 *CICS_parser_tables_t::Rc = &Rc_[0];
-
 // Production lengths (minus one) ...
-static const int8 PL_[821] = {
+const int8 CICS_grm_PL[821] = {
        1,     2,     0,     0,     0,     0,     0,     0,     0,     0, 
        0,     0,     0,     0,     0,     0,     0,     0,     0,     0, 
        0,     0,     0,     0,     0,     0,     0,     0,     0,     0, 
@@ -1967,23 +1772,8 @@ static const int8 PL_[821] = {
        0, 
 };
 
-template<>
-const int8 *CICS_parser_tables_t::PL = &PL_[0];
-
-template<>
-const int32 *CICS_parser_tables_t::nd_fterm = 0;
-
-template<>
-const int32 *CICS_parser_tables_t::nd_term = 0;
-
-template<>
-const int32 *CICS_parser_tables_t::nd_faction = 0;
-
-template<>
-const int32 *CICS_parser_tables_t::nd_action = 0;
-
 // Terminal action number ...
-static const int8 tact_numb_[216] = {
+const int8 CICS_grm_tact_numb[216] = {
        0,    -1,     1,     1,     1,     1,     1,     1,    -1,    -1, 
       -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1, 
       -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1, 
@@ -2007,16 +1797,4 @@ static const int8 tact_numb_[216] = {
       -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1, 
       -1,    -1,    -1,    -1,    -1,    -1, 
 };
-
-template<>
-const int8 *CICS_parser_tables_t::tact_numb = &tact_numb_[0];
-
-template<>
-const int32 *CICS_parser_tables_t::node_numb = 0;
-
-template<>
-const int32 *CICS_parser_tables_t::nact_numb = 0;
-
-template<>
-const int32 *CICS_parser_tables_t::reverse = 0;
 

@@ -5,39 +5,78 @@
 #define __Vba__ParserTables_TYPEDEF
 
 #include "lrstar_parser_tables.h"
-typedef templ_lrstar_parser_tables<
-   /* term_symb */  const char * const,
-   /* head_symb */  const char * const,
-   /* tact_name */  const char * const,
-   /* node_name */  const char * const,
-   /* head_numb */  uint8,
-   /* f_tail */  uint16,
-   /* tail */  int16,
-   /* arga */  int8,
-   /* argx */  int8,
-   /* argy */  int16,
-   /* Bm */  uint8,
-   /* Br */  uint16,
-   /* Bc */  uint8,
-   /* Bf */  uint8,
-   /* Tm */  int16,
-   /* Tr */  uint16,
-   /* Tc */  uint8,
-   /* Nm */  int16,
-   /* Nr */  uint16,
-   /* Nc */  uint8,
-   /* Rm */  uint16,
-   /* Rr */  int16,
-   /* Rc */  uint8,
-   /* PL */  int8,
-   /* nd_fterm */  int32,
-   /* nd_term */  int32,
-   /* nd_faction */  int32,
-   /* nd_action */  int32,
-   /* tact_numb */  int8,
-   /* node_numb */  int8,
-   /* nact_numb */  int8,
-   /* reverse */ int32> Vba_parser_tables_t;
+
+extern const char *Vba_grm_head_symb[181];
+extern const char *Vba_grm_tact_name[2];
+extern const char *Vba_grm_node_name[81];
+extern const uint8 Vba_grm_head_numb[405];
+extern const uint16 Vba_grm_f_tail[406];
+extern const int16 Vba_grm_tail[830];
+extern const char *Vba_grm_term_symb[139];
+extern const int8 Vba_grm_arga[139];
+extern const uint8 Vba_grm_Bm[892];
+extern const uint16 Vba_grm_Br[453];
+extern const uint8 Vba_grm_Bc[139];
+extern const uint8 Vba_grm_Bf[139];
+extern const int16 Vba_grm_Tm[1439];
+extern const uint16 Vba_grm_Tr[453];
+extern const uint8 Vba_grm_Tc[139];
+extern const int16 Vba_grm_Nm[4121];
+extern const uint16 Vba_grm_Nr[453];
+extern const uint8 Vba_grm_Nc[405];
+extern const uint16 Vba_grm_Rm[265];
+extern const int16 Vba_grm_Rr[453];
+extern const uint8 Vba_grm_Rc[139];
+extern const int8 Vba_grm_PL[405];
+extern const int8 Vba_grm_tact_numb[139];
+extern const int8 Vba_grm_argx[405];
+extern const int16 Vba_grm_argy[405];
+extern const int8 Vba_grm_node_numb[405];
+extern const int8 Vba_grm_nact_numb[405];
+
+
+template<typename T_term_symb,
+         typename T_head_symb,
+         typename T_tact_name,
+         typename T_node_name,
+         typename T_head_numb,
+         typename T_f_tail,
+         typename T_tail,
+         typename T_arga,
+         typename T_argx,
+         typename T_argy,
+         typename T_Bm,
+         typename T_Br,
+         typename T_Bc,
+         typename T_Bf,
+         typename T_Tm,
+         typename T_Tr,
+         typename T_Tc,
+         typename T_Nm,
+         typename T_Nr,
+         typename T_Nc,
+         typename T_Rm,
+         typename T_Rr,
+         typename T_Rc,
+         typename T_PL,
+         typename T_nd_fterm,
+         typename T_nd_term,
+         typename T_nd_faction,
+         typename T_nd_action,
+         typename T_tact_numb,
+         typename T_node_numb,
+         typename T_nact_numb,
+         typename T_reverse>
+   class Vba_parser_tables_ : public lrstar_parser_tables<T_term_symb, T_head_symb, T_tact_name, T_node_name, T_head_numb, T_f_tail, T_tail, T_arga, T_argx, T_argy, T_Bm, T_Br, T_Bc, T_Bf, T_Tm, T_Tr, T_Tc, T_Nm, T_Nr, T_Nc, T_Rm, T_Rr, T_Rc, T_PL, T_nd_fterm, T_nd_term, T_nd_faction, T_nd_action, T_tact_numb, T_node_numb, T_nact_numb, T_reverse>   {
+
+public:
+
+      Vba_parser_tables_() : lrstar_parser_tables<T_term_symb, T_head_symb, T_tact_name, T_node_name, T_head_numb, T_f_tail, T_tail, T_arga, T_argx, T_argy, T_Bm, T_Br, T_Bc, T_Bf, T_Tm, T_Tr, T_Tc, T_Nm, T_Nr, T_Nc, T_Rm, T_Rr, T_Rc, T_PL, T_nd_fterm, T_nd_term, T_nd_faction, T_nd_action, T_tact_numb, T_node_numb, T_nact_numb, T_reverse>(139, 181, 405, 453, 452, 2, 81, 81, 1, true, &Vba_grm_term_symb[0], &Vba_grm_head_symb[0], &Vba_grm_tact_name[0], &Vba_grm_node_name[0], &Vba_grm_head_numb[0], &Vba_grm_f_tail[0], &Vba_grm_tail[0], &Vba_grm_arga[0], &Vba_grm_argx[0], &Vba_grm_argy[0], &Vba_grm_Bm[0], &Vba_grm_Br[0], &Vba_grm_Bc[0], &Vba_grm_Bf[0], &Vba_grm_Tm[0], &Vba_grm_Tr[0], &Vba_grm_Tc[0], &Vba_grm_Nm[0], &Vba_grm_Nr[0], &Vba_grm_Nc[0], &Vba_grm_Rm[0], &Vba_grm_Rr[0], &Vba_grm_Rc[0], &Vba_grm_PL[0], 0, 0, 0, 0, &Vba_grm_tact_numb[0], &Vba_grm_node_numb[0], &Vba_grm_nact_numb[0], 0)
+      {
+      }
+   };
+
+typedef Vba_parser_tables_<const char * const, const char * const, const char * const, const char * const, uint8, uint16, int16, int8, int8, int16, uint8, uint16, uint8, uint8, int16, uint16, uint8, int16, uint16, uint8, uint16, int16, uint8, int8, int32, int32, int32, int32, int8, int8, int8, int32> Vba_parser_tables_t;
 
 
 #endif

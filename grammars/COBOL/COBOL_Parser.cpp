@@ -4,135 +4,8 @@
 #include "COBOL_ParserTables_typedef.h"
 #include "COBOL_Parser.h"
 
-template<>
-const int COBOL_parser_tables_t::n_term_symb = 351;
-
-template<>
-const int COBOL_parser_tables_t::n_head_symb = 425;
-
-template<>
-const int COBOL_parser_tables_t::n_tact_name = 2;
-
-template<>
-const int COBOL_parser_tables_t::n_node_name = 0;
-
-template<>
-const int COBOL_parser_tables_t::n_head_numb = 1005;
-
-template<>
-const int COBOL_parser_tables_t::n_f_tail = 1006;
-
-template<>
-const int COBOL_parser_tables_t::n_tail = 1841;
-
-template<>
-const int COBOL_parser_tables_t::n_arga = 351;
-
-template<>
-const int COBOL_parser_tables_t::n_argx = 0;
-
-template<>
-const int COBOL_parser_tables_t::n_argy = 0;
-
-template<>
-const int COBOL_parser_tables_t::n_Bm = 4284;
-
-template<>
-const int COBOL_parser_tables_t::n_Br = 887;
-
-template<>
-const int COBOL_parser_tables_t::n_Bc = 351;
-
-template<>
-const int COBOL_parser_tables_t::n_Bf = 351;
-
-template<>
-const int COBOL_parser_tables_t::n_Tm = 2986;
-
-template<>
-const int COBOL_parser_tables_t::n_Tr = 887;
-
-template<>
-const int COBOL_parser_tables_t::n_Tc = 351;
-
-template<>
-const int COBOL_parser_tables_t::n_Nm = 6183;
-
-template<>
-const int COBOL_parser_tables_t::n_Nr = 887;
-
-template<>
-const int COBOL_parser_tables_t::n_Nc = 1005;
-
-template<>
-const int COBOL_parser_tables_t::n_Rm = 239;
-
-template<>
-const int COBOL_parser_tables_t::n_Rr = 887;
-
-template<>
-const int COBOL_parser_tables_t::n_Rc = 351;
-
-template<>
-const int COBOL_parser_tables_t::n_PL = 1005;
-
-template<>
-const int COBOL_parser_tables_t::n_nd_fterm = 0;
-
-template<>
-const int COBOL_parser_tables_t::n_nd_term = 0;
-
-template<>
-const int COBOL_parser_tables_t::n_nd_faction = 0;
-
-template<>
-const int COBOL_parser_tables_t::n_nd_action = 0;
-
-template<>
-const int COBOL_parser_tables_t::n_tact_numb = 351;
-
-template<>
-const int COBOL_parser_tables_t::n_node_numb = 0;
-
-template<>
-const int COBOL_parser_tables_t::n_nact_numb = 0;
-
-template<>
-const int COBOL_parser_tables_t::n_reverse = 0;
-
-template<>
-const int COBOL_parser_tables_t::n_terms = 351; // Number of terminals.
-
-template<>
-const int COBOL_parser_tables_t::n_heads = 425; // Number of nonterminals.
-
-template<>
-const int COBOL_parser_tables_t::n_prods = 1005; // Number of productions.
-
-template<>
-const int COBOL_parser_tables_t::n_states = 887; // Number of states.
-
-template<>
-const int COBOL_parser_tables_t::accept_state = 886; // Accept state.
-
-template<>
-const int COBOL_parser_tables_t::n_termactns = 2; // Number of terminal actions.
-
-template<>
-const int COBOL_parser_tables_t::n_nodenames = 0; // Number of node names.
-
-template<>
-const int COBOL_parser_tables_t::n_nodeactns = 0; // Number of node actions.
-
-template<>
-const int COBOL_parser_tables_t::eof_symb = 1; // <eof> symbol number.
-
-template<>
-const int COBOL_parser_tables_t::err_used = 1; // <error> used in grammar?
-
-
 // Terminal symbols of the grammar.
-static const char *term_symb_[351] = {
+const char *COBOL_grm_term_symb[351] = {
    "<error>",
    "<eof>",
    "<ident>",
@@ -486,11 +359,8 @@ static const char *term_symb_[351] = {
    "\'$\'",
 };
 
-template<>
-const char * const *COBOL_parser_tables_t::term_symb = &term_symb_[0];
-
 // Nonterminal symbols of the grammar.
-static const char *head_symb_[425] = {
+const char *COBOL_grm_head_symb[425] = {
    "Goal",
    "Program",
    "IdentDiv",
@@ -918,23 +788,14 @@ static const char *head_symb_[425] = {
    "(FAC OF)?",
 };
 
-template<>
-const char * const *COBOL_parser_tables_t::head_symb = &head_symb_[0];
-
 // Terninal action names found in the grammar ...
-static const char *tact_name_[2] = {
+const char *COBOL_grm_tact_name[2] = {
    "error",
    "lookup",
 };
 
-template<>
-const char * const *COBOL_parser_tables_t::tact_name = &tact_name_[0];
-
-template<>
-const char * const *COBOL_parser_tables_t::node_name = 0;
-
 // Head symbol numbers for the productions.
-static const uint16 head_numb_[1005] = {
+const uint16 COBOL_grm_head_numb[1005] = {
        0,     1,     2,     3,     4,     5,     6,     6,     6,     7, 
        7,     7,     7,     7,     7,     8,     8,     8,     9,     9, 
        9,    10,    10,    10,    10,    11,    12,    13,    14,    15, 
@@ -1038,11 +899,8 @@ static const uint16 head_numb_[1005] = {
      422,   423,   423,   424,   424, 
 };
 
-template<>
-const uint16 *COBOL_parser_tables_t::head_numb = &head_numb_[0];
-
 // First tail symbol index into the tail list ...
-static const uint16 f_tail_[1006] = {
+const uint16 COBOL_grm_f_tail[1006] = {
        0,     2,     7,    20,    29,    33,    36,    37,    38,    39, 
       41,    44,    48,    51,    54,    57,    58,    59,    60,    62, 
       65,    68,    69,    70,    71,    72,    74,    76,    78,    80, 
@@ -1146,11 +1004,8 @@ static const uint16 f_tail_[1006] = {
     1835,  1837,  1838,  1839,  1839,  1841, 
 };
 
-template<>
-const uint16 *COBOL_parser_tables_t::f_tail = &f_tail_[0];
-
 // Tail symbol numbers ...
-static const int16 tail_[1841] = {
+const int16 COBOL_grm_tail[1841] = {
       -1,     1,    -2,  -201,  -202,  -203,  -204,     9,    10,    11, 
       12,    11,     2,  -205,    11,  -208,  -209,  -210,  -211,  -212, 
       20,    10,    11,  -213,  -216,  -220,  -223,  -225,  -229,    32, 
@@ -1338,11 +1193,8 @@ static const int16 tail_[1841] = {
       84, 
 };
 
-template<>
-const int16 *COBOL_parser_tables_t::tail = &tail_[0];
-
 // Arguments for token actions ...
-static const int8 arga_[351] = {
+const int8 COBOL_grm_arga[351] = {
       -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1, 
       -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1, 
       -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1, 
@@ -1381,17 +1233,8 @@ static const int8 arga_[351] = {
       -1, 
 };
 
-template<>
-const int8 *COBOL_parser_tables_t::arga = &arga_[0];
-
-template<>
-const int32 *COBOL_parser_tables_t::argx = 0;
-
-template<>
-const int32 *COBOL_parser_tables_t::argy = 0;
-
 // Boolean matrix ...
-static const uint8 Bm_[4284] = {
+const uint8 COBOL_grm_Bm[4284] = {
        0,     0,     0,     0,     0,     0,     0,     0,     0,     0, 
        0,     0,     0,     0,     0,     0,     0,     0,     0,     0, 
        0,     0,     0,     0,     0,     0,     0,     0,     0,     0, 
@@ -1823,11 +1666,8 @@ static const uint8 Bm_[4284] = {
        0,     0,     0,     0, 
 };
 
-template<>
-const uint8 *COBOL_parser_tables_t::Bm = &Bm_[0];
-
 // Boolean matrix row (for state)...
-static const uint16 Br_[887] = {
+const uint16 COBOL_grm_Br[887] = {
       29,    59,    86,    58,   105,    58,   134,   148,    58,   134, 
      176,    43,   206,    58,   227,   254,   134,   282,   312,   312, 
      341,   371,   401,   134,   430,   371,   437,   371,   371,   371, 
@@ -1919,11 +1759,9 @@ static const uint16 Br_[887] = {
      371,   371,   371,   274,  2022,   134,     0, 
       };
 
-template<>
-const uint16 *COBOL_parser_tables_t::Br = &Br_[0];
-
 // Boolean matrix column (displacement) ...
-static const uint8 Bc_[351] = {
+extern const uint8 COBOL_grm_Bc[351];
+const uint8 COBOL_grm_Bc[351] = {
        0,     0,     0,     0,     0,     0,     0,     0,     0,     1, 
        1,     1,     1,     1,     1,     1,     1,     2,     2,     2, 
        2,     2,     2,     2,     2,     3,     3,     3,     3,     3, 
@@ -1962,11 +1800,8 @@ static const uint8 Bc_[351] = {
       29, 
       };
 
-template<>
-const uint8 *COBOL_parser_tables_t::Bc = &Bc_[0];
-
 // Boolean matrix filter/mask value ...
-static const uint8 Bf_[351] = {
+const uint8 COBOL_grm_Bf[351] = {
        1,     2,     4,     8,    16,    32,    32,    64,   128,     1, 
        2,     4,     8,    16,    32,    64,   128,     1,     2,     4, 
        8,    16,    32,    64,   128,     1,     2,     4,     8,    16, 
@@ -2005,11 +1840,8 @@ static const uint8 Bf_[351] = {
        4, 
 };
 
-template<>
-const uint8 *COBOL_parser_tables_t::Bf = &Bf_[0];
-
 // Terminal transition matrix ...
-static const int16 Tm_[2986] = {
+const int16 COBOL_grm_Tm[2986] = {
     -328,  -912,   378,   392,  -345,  -346,  -359,  -396,  -420,   434, 
     -264,  -266,  -931,   486,  -397,  -756,  -228,  -229,  -309,  -465, 
      576,   595,  -388,  -962,   615,   617,  -979,   650,   651,   -18, 
@@ -2311,11 +2143,8 @@ static const int16 Tm_[2986] = {
     -537,   421,  -552,  -553,  -554,   184, 
 };
 
-template<>
-const int16 *COBOL_parser_tables_t::Tm = &Tm_[0];
-
 // Terminal transition matrix row ...
-static const uint16 Tr_[887] = {
+const uint16 COBOL_grm_Tr[887] = {
     2723,  2723,  2723,  2723,  2723,  2204,  2723,  2723,  2460,  2204, 
     2723,  2723,  2723,  1941,  2723,  2723,  2460,  2723,  2723,  2723, 
     1941,  2204,  2460,   825,  1454,  2204,  2723,  1941,   825,  1941, 
@@ -2407,11 +2236,8 @@ static const uint16 Tr_[887] = {
       55,    56,   176,  2204,   261,    71,  2723, 
 };
 
-template<>
-const uint16 *COBOL_parser_tables_t::Tr = &Tr_[0];
-
 // Terminal transition matrix column ...
-static const uint16 Tc_[351] = {
+const uint16 COBOL_grm_Tc[351] = {
       46,    41,     0,    43,    61,    44,    45,    42,    46,    65, 
       93,    51,    80,    94,    95,    99,   117,   169,   183,   202, 
      214,     2,    20,     5,    22,     6,    26,    28,    29,    35, 
@@ -2450,11 +2276,8 @@ static const uint16 Tc_[351] = {
      262, 
 };
 
-template<>
-const uint16 *COBOL_parser_tables_t::Tc = &Tc_[0];
-
 // Nonterminal transition matrix ...
-static const int16 Nm_[6183] = {
+const int16 COBOL_grm_Nm[6183] = {
        0,     0,     0,     0,     0,     0,     0,     0,     0,     0, 
        0,     0,     0,     0,     0,     0,     0,     0,     0,     0, 
        0,     0,     0,     0,     0,     0,     0,     0,     0,     0, 
@@ -3076,11 +2899,8 @@ static const int16 Nm_[6183] = {
      410,   189,   305, 
 };
 
-template<>
-const int16 *COBOL_parser_tables_t::Nm = &Nm_[0];
-
 // Nonterminal transition matrix row ...
-static const uint16 Nr_[887] = {
+const uint16 COBOL_grm_Nr[887] = {
  5840,  5840,  5840,  5840,  5840,  5840,  5840,  5840,  5840,  5840, 
  5840,  5840,  5840,  5840,  5840,  5840,  5840,  5840,  5497,  5156, 
  4842,  5840,  5840,  5840,  5840,  5497,  5840,  5840,  5840,  5497, 
@@ -3172,11 +2992,8 @@ static const uint16 Nr_[887] = {
  5840,  5840,  5840,  5840,  5497,  5840,  5840, 
 };
 
-template<>
-const uint16 *COBOL_parser_tables_t::Nr = &Nr_[0];
-
 // Nonterminal transition matrix column ...
-static const uint16 Nc_[1005] = {
+const uint16 COBOL_grm_Nc[1005] = {
   260,   260,   281,   319,    26,    62,   178,   178,   178,   265, 
   265,   265,   265,   265,   265,   273,   273,   273,   286,   286, 
   286,   260,   260,   260,   260,   281,   308,    38,   319,    26, 
@@ -3280,11 +3097,8 @@ static const uint16 Nc_[1005] = {
   340,   341,   341,   342,   342, 
 };
 
-template<>
-const uint16 *COBOL_parser_tables_t::Nc = &Nc_[0];
-
 // Reduction matrix ...
-static const uint16 Rm_[239] = {
+const uint16 COBOL_grm_Rm[239] = {
        0,     0,     0,     0,     0,     0,     0,     0,     0,     0, 
        0,     0,     0,     0,     0,     0,     0,     0,     0,     0, 
        0,   327,     0,   327,     0,   327,     0,     0,   327,     0, 
@@ -3311,11 +3125,8 @@ static const uint16 Rm_[239] = {
       74,     0,     0,     0,     0,     0,    74,     0,     0, 
 };
 
-template<>
-const uint16 *COBOL_parser_tables_t::Rm = &Rm_[0];
-
 // Reduction matrix row ...
-static const int16 Rr_[887] = {
+const int16 COBOL_grm_Rr[887] = {
        0,     0,   569,     0,   571,     0,     0,   573,     0,     0, 
        0,   575,     0,     0,   673,   593,     0,     0,     0,   159, 
        0,     0,   321,     0,     0,     0,     0,     0,     0,     0, 
@@ -3407,11 +3218,8 @@ static const int16 Rr_[887] = {
        0,     0,   672,     0,   661,     0,     0, 
 };
 
-template<>
-const int16 *COBOL_parser_tables_t::Rr = &Rr_[0];
-
 // Reduction matrix column ...
-static const uint8 Rc_[351] = {
+const uint8 COBOL_grm_Rc[351] = {
        0,     1,     2,     3,     4,     5,     5,     0,     5,     0, 
        0,     6,     0,     0,     0,     0,     0,     0,     0,     0, 
        0,     0,     0,     0,     6,     0,     0,     0,     0,     0, 
@@ -3450,11 +3258,8 @@ static const uint8 Rc_[351] = {
        0, 
 };
 
-template<>
-const uint8 *COBOL_parser_tables_t::Rc = &Rc_[0];
-
 // Production lengths (minus one) ...
-static const int8 PL_[1005] = {
+const int8 COBOL_grm_PL[1005] = {
        1,     4,    12,     8,     3,     2,     0,     0,     0,     1, 
        2,     3,     2,     2,     2,     0,     0,     0,     1,     2, 
        2,     0,     0,     0,     0,     1,     1,     1,     1,     1, 
@@ -3558,23 +3363,8 @@ static const int8 PL_[1005] = {
        1,     0,     0,    -1,     1, 
 };
 
-template<>
-const int8 *COBOL_parser_tables_t::PL = &PL_[0];
-
-template<>
-const int32 *COBOL_parser_tables_t::nd_fterm = 0;
-
-template<>
-const int32 *COBOL_parser_tables_t::nd_term = 0;
-
-template<>
-const int32 *COBOL_parser_tables_t::nd_faction = 0;
-
-template<>
-const int32 *COBOL_parser_tables_t::nd_action = 0;
-
 // Terminal action number ...
-static const int8 tact_numb_[351] = {
+const int8 COBOL_grm_tact_numb[351] = {
        0,    -1,     1,     1,     1,     1,     1,     1,     1,    -1, 
       -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1, 
       -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1, 
@@ -3612,16 +3402,4 @@ static const int8 tact_numb_[351] = {
       -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1, 
       -1, 
 };
-
-template<>
-const int8 *COBOL_parser_tables_t::tact_numb = &tact_numb_[0];
-
-template<>
-const int32 *COBOL_parser_tables_t::node_numb = 0;
-
-template<>
-const int32 *COBOL_parser_tables_t::nact_numb = 0;
-
-template<>
-const int32 *COBOL_parser_tables_t::reverse = 0;
 
