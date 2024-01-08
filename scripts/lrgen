@@ -1,5 +1,5 @@
 #!/bin/bash
-# Copyright (c) 2023 Logic Magicians Software
+# Copyright (c) 2023, 2024 Logic Magicians Software
 #
 # BSD 3 License
 #
@@ -194,7 +194,7 @@ function validate_options()
 
     grm=$(grm_filename "${DIRECTORY}" "${GRM}");
     if [ ! -r "${grm}" ] ; then
-        fatal "'${GRM}' is not a readable file.";
+        fatal "'${grm}' is not a readable file.";
     fi;
 
     # Validate that lrstar and dfa are both executable.
@@ -263,6 +263,9 @@ function create_makefile ()
 #  \${LRSTAR_BUILD_DIR}/\${LRSTAR_BUILD_TYPE}
 #
 GRM		:= ${GRM}
+${GRM}_GRMOPT	:= ${GRMOPT}
+${GRM}_LGROPT	:= ${LGROPT}
+
 .DEFAULT_GOAL	:= recurse	# In sample.defs
 
 
@@ -274,16 +277,38 @@ INSTALL_ROOT	:=			\\
 
 
 include \$(INSTALL_ROOT)/make/sample.defs
-GRMOPT	:= ${GRMOPT}
-LGROPT	:= ${LGROPT}
+
+# Create a list of source files for each listed grammar.  Only the
+# first-listed grammar's main() is included.
+#
+\$(foreach g,\$(GRM),				\\
+    \$(eval \$(g)_SOURCE=\$(g)_Lexer.cpp		\\
+	\$(g)_Main.cpp				\\
+	\$(g)_Parser.cpp				\\
+	\$(g)_user.cpp))
+\$(eval \$(firstword \$(GRM))_SOURCE += \$(firstword \$(GRM))_user_main.cpp)
 
 
-SOURCE	:=			\\
-	\$(GRM)_Lexer.cpp	\\
-	\$(GRM)_Main.cpp		\\
-	\$(GRM)_Parser.cpp	\\
-	\$(GRM)_user.cpp		\\
-	\$(GRM)_user_main.cpp
+# Create a list of object files for each included grammar.  The object
+# files are dependent on a sentinel file created when running lrgen on
+# the grammars; this ensures the source files are recompiled if the
+# grammars are changed.
+#
+\$(foreach g,\$(GRM),				\\
+    \$(eval \$(g)_OBJS=\$(\$(g)_SOURCE:.cpp=.o))	\\
+    \$(eval \$(\$(g)_OBJS): \$(g).sentinel))
+
+
+# Use the 'lrgen' function to process the grammars.
+#
+\$(foreach g,\$(GRM),	\\
+    \$(eval \$(call lrgen,\$(GRM_DIR),\$(g),\$(\$(g)_GRMOPT),\$(\$(g)_LGROPT))))
+
+
+# A master list of all source files that need to be compiled.
+#
+SOURCE	:=					\\
+	\$(foreach g,\$(GRM),\$(\$(g)_SOURCE))
 
 
 OBJS	:=				\\
@@ -291,19 +316,10 @@ OBJS	:=				\\
 	\$(INSTALL_ROOT)/lib/lrstar.a
 
 
-\$(GRM).sentinel:	\$(GRM).grm \$(GRM).lgr \$(GRM).make
-	\$(LRGEN)			\\
-	  --directory \$(GRM_DIR)	\\
-	  --grm \$(GRM)			\\
-	  --grmopt "\$(GRMOPT)"		\\
-	  --lgropt "\$(LGROPT)";		\\
-	touch \$@;
-
-
-\$(OBJS):	\$(GRM).sentinel
-
-
-\$(GRM):	\$(OBJS)
+# The created executable will have the same name as the first grammar
+# in \$(GRM).
+#
+\$(firstword \$(GRM)):	\$(OBJS)
 	\$(CC) \$(CXXFLAGS) -o \$@ \$(OBJS);
 
 

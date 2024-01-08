@@ -1,4 +1,4 @@
-# Copyright (c) 2023 Logic Magicians Software
+# Copyright (c) 2023, 2024 Logic Magicians Software
 # BSD 3 License
 
 $(if $(INSTALL_ROOT),,$(error INSTALL_ROOT is not set))
@@ -79,7 +79,21 @@ $(GRM_BUILD_DIR):
 	mkdir --parents $(GRM_BUILD_DIR)
 
 recurse:	| $(GRM_BUILD_DIR)
-	$(MAKE) -C $(GRM_BUILD_DIR) --makefile $(GRM_DIR)/$(GRM).make $(GRM) VPATH=$(GRM_DIR);
+	$(MAKE) -C $(GRM_BUILD_DIR) --makefile $(firstword $(MAKEFILE_LIST)) $(firstword $(GRM)) VPATH=$(GRM_DIR);
+
+
+
+# $(call lrgen,<grammar-directory>,<grammar-name>,<lrstar-opt>,<dfa-opt>)
+define lrgen
+$(2).sentinel:	$(2).grm $(2).lgr $(if $(wildcard $(2).make),$(2).make)
+	$(LRGEN)				\
+	  --directory $(1)			\
+	  --grm $(2)				\
+	  --grmopt "$(3)"			\
+	  --lgropt "$(4)";			\
+	touch $$@;
+endef
+
 
 # Local Variables:
 # mode: makefile

@@ -1,6 +1,6 @@
 #!/bin/bash
 #
-# Copyright (c) 2023 Logic Magicians Software
+# Copyright (c) 2023, 2024 Logic Magicians Software
 #
 #  This script is used to ensure that the lrstar and dfa program do
 #  not generate different output than a previous version.
@@ -20,6 +20,19 @@ SCRIPT="${0}";
 PN=${SCRIPT##*/};      # Program name (remove all before last '/').
 DN=${SCRIPT%/*};       # Directory name (removall all after last '/').
 
+# This is used to declare the name of the grammar(s) when there are
+# multiple grammars, or the grammar name does not match the directory
+# name.
+#
+declare -A grammars=(
+    ["multi"]="Hello Goodbye"
+);
+
+
+declare -A test_options=(
+    ["multi"]="--hello hello.input --goodbye goodbye.input"
+);
+
 
 function fatal ()
 {
@@ -31,7 +44,6 @@ function fatal ()
 
 function lrgen ()
 {
-
     declare -A lrstar_options=(
         ["ALGOL60"]="ast o"
         ["ANTLR"]=""
@@ -44,7 +56,7 @@ function lrgen ()
         ["Calc"]="d dt"
         ["Dbase"]=""
         ["Fortran"]=""
-        ["JSON"]="ast d"
+        ["JSON"]="ast astp=3 d"
         ["Java1"]=""
         ["Java9"]="/k=30"
         ["Kotlin"]=""
@@ -63,6 +75,7 @@ function lrgen ()
         ["YACC"]=""
         ["Zeus"]=""
         ["delphi"]="ci"
+        ["multi"]=""
         ["verilog"]=""
     );
 
@@ -97,17 +110,19 @@ function lrgen ()
         ["YACC"]=""
         ["Zeus"]=""
         ["delphi"]=""
+        ["multi"]=""
         ["verilog"]=""
     );
 
-    local grm="${1}";
+    local grm_dir="${1}";
+    local grm="${2}";
     local grm_name="$(basename "${grm}" ".grm")";
-    local grm_dir="$(dirname "${grm}")";
 
     ${LRSTAR_DIR}/scripts/lrgen                         \
         --directory "${grm_dir}"                        \
-        --grmopt "${lrstar_options[${grm_name}]}"       \
-        --lgropt "${dfa_options[${grm_name}]}";
+        --grm    "${grm}"                               \
+        --grmopt "${lrstar_options[${grm_name}]:-''}"   \
+        --lgropt "${dfa_options[${grm_name}]:-''}";
 }
 
 
@@ -125,25 +140,38 @@ function build ()
  }
 
 
-function process ()
+function lrgen_and_build ()
 {
     local grm_dir="${1}";
     local grm_name="$(basename "${grm_dir}")";
-    local grm="${grm_dir}/${grm_name}.grm";
-    local lgr="${grm_dir}/${grm_name}.lgr";
-    local makefile="${grm_dir}/Makefile"
+    local grms=( ${grammars[${grm_name}]:-${grm_name}} );
+    local grammar_count=${#grms[@]};
+    local grammar;
 
-    if [ -r "${grm}" ] ; then
-        lrgen "${grm}";
-    else
-        echo "${grm} does not exist";
-    fi;
+    for grammar in ${grms[@]}; do
+        local grm="${grm_dir}/${grammar}.grm";
+        local lgr="${grm_dir}/${grammar}.lgr";
 
-    if [ -r "${lgr}" ] ; then
-        # The lexical grammer exists, the project should build into an
-        # executable with the generated Makefile.
-        build "${grm_dir}" "${grm_name}";
-   fi;
+        if [ -r "${grm}" ] ; then
+            lrgen "${grm_dir}" "${grammar}";
+        else
+            echo "${grm} does not exist";
+        fi;
+
+        if [ ${grammar_count} == 1 ] ; then
+            if [ -r "${lgr}" ] ; then
+                # The lexical grammar exists, the project should build
+                # into an executable with the generated Makefile.
+                build "${grm_dir}" "${grammar}";
+            fi;
+        else
+            # Multiple grammars.  Build the first grammar, assuming it
+            # is the one modified to include the second grammar in the
+            # build process.
+            #
+            build "${grm_dir}" "${grms[0]}";
+        fi;
+    done;
 }
 
 
@@ -157,18 +185,50 @@ function cleanup ()
 }
 
 
+function test_grammar ()
+{
+    local grm="${1}";
+    local grm_name="${2}";
+    local options="${3}";
+
+    (cd ${grm};
+     grm_build_dir="${LRSTAR_BUILD_DIR}/${LRSTAR_BUILD_TYPE}/${grm##${LRSTAR_DIR}/}";
+     grm_exec="${grm_build_dir}/${grm_name}";
+     grm_output="${grm_build_dir}/${grm_name}-output.text";
+
+     rc=0;
+     if [ -x "${grm_exec}" ] ; then
+         if [ -z "${options}" ] ; then
+             if ! "${grm_exec}" --output ${grm_output} test.input.txt; then
+                 rc=1;
+                 echo "${grm}: test parse failed.";
+             fi;
+         else
+             if ! "${grm_exec}" --output ${grm_output} ${options}; then
+                 rc=1;
+                 echo "${grm}: test parse failed.";
+             fi;
+         fi;
+         exit ${rc};
+     else
+         echo "${grm_exec} does not exist.  Cannot run test.";
+         exit 1;
+     fi);
+}
+
+
 function main ()
 {
     export LANG=C;              # Make gcc not use UTF-8.
 
     if [ -v LRSTAR_DIR ] ; then
-        local grammars="${LRSTAR_DIR}/grammars";
-        local examples="${LRSTAR_DIR}/examples";
+        local grammar="${LRSTAR_DIR}/grammars";
+        local example="${LRSTAR_DIR}/examples";
         local grm_name;
 
         cd ${LRSTAR_DIR};
-        for grm in ${grammars}/* ${examples}/*; do
-            # The Kotlin lexical grammer is not a dfa grammer, so skip
+        for grm in ${grammar}/* ${example}/*; do
+            # The Kotlin lexical grammar is not a dfa grammar, so skip
             # testing until that can be sorted out.
             if [ "$(basename ${grm})" != "Kotlin" ] ; then
                 # Pre-cleanup in case last build & test failed.
@@ -184,7 +244,7 @@ function main ()
                 # execute lrstar while the CWD is directory containing
                 # the grammar file.
                 cleanup "${grm}";
-                process "${grm}";
+                lrgen_and_build "${grm}";
 
                 # Java1 and Java9 test files do not parse
                 # correctly.  They are both identical, so
@@ -198,24 +258,26 @@ function main ()
                 if [ "${grm_name}" != "Java1" ] &&
                    [ "${grm_name}" != "Java9" ] &&
                    [ "${grm_name}" != "LRK" ]; then
+
+                    # If there is a test.input.txt file in the
+                    # directory, the grammar will have been compiled
+                    # into an executable for testing.
+                    #
                     if [ -r "${grm}/test.input.txt" ] ; then
-                        (cd ${grm};
-                         grm_name=$(basename "${grm}");
-                         grm_build_dir="${LRSTAR_BUILD_DIR}/${LRSTAR_BUILD_TYPE}/${grm##${LRSTAR_DIR}/}";
-                         grm_exec="${grm_build_dir}/${grm_name}";
-                         grm_output="${grm_build_dir}/${grm_name}-output.text";
-                         
-                         rc=0;
-                         if [ -x "${grm_exec}" ] ; then
-                             if ! "${grm_exec}" --output ${grm_output} test.input.txt; then
-                                 rc=1;
-                                 echo "${grm}: test parse failed.";
-                             fi;
-                             exit ${rc};
-                         else
-                             echo "${grm_exec} does not exist.  Cannot run test.";
-                             exit 1;
-                         fi);
+                        test_grammar "${grm}" "${grm_name}" "";
+                    else
+                        # There is no test.input.txt.  It is a grammar
+                        # that has not been built into an executable,
+                        # or a different test invocation must be used.
+                        # The invocation for such grammars is stored
+                        # in 'test_options'.
+                        #
+                        local options="${test_options[${grm_name}]:-""}";
+                        if [ ! -z "${options}" ] ; then
+                            local grms=( ${grammars[${grm_name}]:-${grm_name}} );
+                            local gname="${grms[0]}";
+                            test_grammar "${grm}" "${gname}" "${options}";
+                        fi;
                     fi;
                 fi;
 
