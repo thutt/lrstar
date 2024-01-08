@@ -1531,11 +1531,12 @@ PG_Main::GenerateParserTableEnums(FILE *fp)
    }
 
    if (N_nodes > 0 && optn[PG_ASTCONST] > 0) {
-      fprintf(fp, "enum nodecon {\n");
+      fprintf(fp, "namespace %s {\n", gfn);
+      fprintf(fp, "    enum nodecon {\n");
       for (int i = 0; i < N_nodes; i++) {
-         fprintf(fp, "   N_%s = %d,\n", Node_start[i], i);
+         fprintf(fp, "        N_%s = %d,\n", Node_start[i], i);
       }
-      fprintf(fp, "};\n\n");
+      fprintf(fp, "    };\n}\n\n");
    }
 }
 
@@ -2512,10 +2513,10 @@ void  PG_Main::GenerateOtherFiles ()
 
    write_file(gdn, gfn, NULL, "_Parser.h", true, parser_header_fn);
    write_file(gdn, gfn, NULL, "_Main.cpp", true, main_cpp_fn);
-   write_file(gdn, gfn, NULL, "_user_main.cpp", true, user_main_cpp_fn);
+   write_file(gdn, gfn, NULL, "_user_main.cpp", false, user_main_cpp_fn);
    write_file(gdn, gfn, NULL, "_Parser.cpp", true, parser_cpp_fn);
    if (lrstar_linux) {
-      write_file(gdn, gfn, NULL, "_user.cpp", true,
+      write_file(gdn, gfn, NULL, "_user.cpp", false,
                  user_written_cpp_fn);
    }
    if (lrstar_windows) {
