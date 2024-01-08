@@ -1,0 +1,45 @@
+This example shows that it is possible to link two grammars together
+into a single executable using dfa & lrstar.  It is not full
+documentation (that will be done later), but it does provide a roadmap
+to accomplish the goal.
+
+In this example, there are two grammars, 'Hello' and 'Goodbye'.  The
+actual grammar implemented in each is immaterial, it's just important
+that they be different.  There is one sample input file for each
+grammar: 'hello.input', and 'goodbye.input'
+
+The steps to follow are:
+
+  1a. Choose one of the grammars to be the main grammar; in this case,
+      'Hello'.  Run 'lrgen' on this grammar.
+
+         cd ./examples/multi
+         lrgen --directory . --grm Hello --grmopt "d m" --lgropt "m"
+
+  1b. Run lrgen on the remaining grammars.
+
+        lrgen --directory . --grm Goodbye --grmopt "d o" --lgropt "o"
+
+      This step is needed because the proper Make recipes for
+      generating code to a path on VPATH and having Make detect the
+      generated files has not yet been determined.  If this step is
+      skipped, the Goodbye files will not exist, and the build process
+      will fail.  Once the files exist, however, the build system
+      works properly.  It should be possible to just run lrgen on one
+      grammar and follow from step 2, but it is not presently; this is
+      a defect, and will be addressed in the future,
+
+  2. Add the additional grammars to the Hello.make file by updating
+     the 'GRM', and 'OPT' variables, like so:
+
+       GRM              := Hello Goodbye
+       Hello_GRMOPT	:= d m
+       Hello_LGROPT	:=
+       Goodbye_GRMOPT	:= d m
+       Goodbye_LGROPT	:=
+
+  3. Next, simply execute the Makefile.  With a development build, the
+     command would be like this:
+
+       make LRSTAR_INSTALL_ROOT=${LRSTAR_BUILD_DIR}/${LRSTAR_BUILD_TYPE}/usr/local \
+            -f ${LRSTAR_DIR}/examples/multi/Hello.make

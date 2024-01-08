@@ -1,0 +1,24 @@
+/* Copyright (c) 2023, 2024 Logic Magicians Software
+ * BSD 3 License
+ *
+ */
+<error>        => error();
+<identifier>   => lookup();
+
+Goal
+   : Mumble <eof>                      +> goal
+   ;
+
+Mumble
+   : GOODBYE <identifier> '.'
+   ;
+
+
+/*--- End. ---*/
+/* Local Variables:      */
+/* mode: c               */
+/* c-basic-offset: 4     */
+/* tab-width: 4          */
+/* indent-tabs-mode: nil */
+/* End:                  */
+

@@ -1,0 +1,31 @@
+
+/* C Typedef Solution. */
+
+<eof>                -> \z
+
+<identifier>         -> letter (letter|digit)*
+
+
+letter               = 'a'..'z' | 'A'..'Z' | '_'
+digit                = '0'..'9'
+
+{whitespace}         -> whitechar+
+whitechar            = \t | \n | \v | ' '
+
+
+\t                   =  9                 // tab
+\n                   = 10                 // newline
+\v                   = 11                 // vertical feed?
+\f                   = 12                 // form feed
+\r                   = 13                 // return
+\z                   = 26                 // end of file
+\b                   = 32                 // blank/space
+
+
+/* End Of Grammar. */
+/* Local Variables:      */
+/* mode: c               */
+/* c-basic-offset: 3     */
+/* tab-width: 3          */
+/* indent-tabs-mode: nil */
+/* End:                  */
