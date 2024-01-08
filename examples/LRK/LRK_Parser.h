@@ -7,16 +7,18 @@
 #include "lrstar_basic_defs.h"
 #include "lrstar_lexer.h"
 
-enum nodecon {
-   N_goal_ = 0,
-   N_function_decl_ = 1,
-   N_function_def_ = 2,
-   N_type_spec_ = 3,
-   N_function_ = 4,
-   N_arg_ = 5,
-   N_arg_name_ = 6,
-   N_function_body_ = 7,
-};
+namespace LRK {
+    enum nodecon {
+        N_goal_ = 0,
+        N_function_decl_ = 1,
+        N_function_def_ = 2,
+        N_type_spec_ = 3,
+        N_function_ = 4,
+        N_arg_ = 5,
+        N_arg_name_ = 6,
+        N_function_body_ = 7,
+    };
+}
 
 #include "LRK_ParserTables_typedef.h"
 #include "lrstar_parser.h"

@@ -7,9 +7,11 @@
 #include "lrstar_basic_defs.h"
 #include "lrstar_lexer.h"
 
-enum nodecon {
-   N_hello_ = 0,
-};
+namespace Typedef {
+    enum nodecon {
+        N_hello_ = 0,
+    };
+}
 
 #include "Typedef_ParserTables_typedef.h"
 #include "lrstar_parser.h"

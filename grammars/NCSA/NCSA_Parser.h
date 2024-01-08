@@ -7,19 +7,21 @@
 #include "lrstar_basic_defs.h"
 #include "lrstar_lexer.h"
 
-enum nodecon {
-   N_Report = 0,
-   N_Day = 1,
-   N_Client = 2,
-   N_FullName = 3,
-   N_Name = 4,
-   N_Time = 5,
-   N_File = 6,
-   N_Code = 7,
-   N_Size = 8,
-   N_Source = 9,
-   N_Query = 10,
-};
+namespace NCSA {
+    enum nodecon {
+        N_Report = 0,
+        N_Day = 1,
+        N_Client = 2,
+        N_FullName = 3,
+        N_Name = 4,
+        N_Time = 5,
+        N_File = 6,
+        N_Code = 7,
+        N_Size = 8,
+        N_Source = 9,
+        N_Query = 10,
+    };
+}
 
 #include "NCSA_ParserTables_typedef.h"
 #include "lrstar_parser.h"

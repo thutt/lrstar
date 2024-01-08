@@ -7,9 +7,11 @@
 #include "lrstar_basic_defs.h"
 #include "lrstar_lexer.h"
 
-enum nodecon {
-   N_start = 0,
-};
+namespace Java9 {
+    enum nodecon {
+        N_start = 0,
+    };
+}
 
 #include "Java9_ParserTables_typedef.h"
 #include "lrstar_parser.h"

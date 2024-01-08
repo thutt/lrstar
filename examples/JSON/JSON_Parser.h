@@ -7,18 +7,20 @@
 #include "lrstar_basic_defs.h"
 #include "lrstar_lexer.h"
 
-enum nodecon {
-   N_goal = 0,
-   N_string = 1,
-   N_integer = 2,
-   N_real = 3,
-   N_null = 4,
-   N_false = 5,
-   N_true = 6,
-   N_array = 7,
-   N_object = 8,
-   N_member = 9,
-};
+namespace JSON {
+    enum nodecon {
+        N_goal = 0,
+        N_string = 1,
+        N_integer = 2,
+        N_real = 3,
+        N_null = 4,
+        N_false = 5,
+        N_true = 6,
+        N_array = 7,
+        N_object = 8,
+        N_member = 9,
+    };
+}
 
 #include "JSON_ParserTables_typedef.h"
 #include "lrstar_parser.h"
@@ -26,7 +28,7 @@ enum nodecon {
 extern const char JSON_grammar_name[];
 
 typedef lrstar_parser</* grammar           */   JSON_grammar_name,
-                      /* AST traversals    */   1,
+                      /* AST traversals    */   3,
                       /* actions           */   true,
                       /* debug_parser      */   true,
                       /* debug_trace       */   false,

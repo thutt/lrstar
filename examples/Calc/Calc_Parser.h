@@ -14,25 +14,27 @@ enum termcon {
    INT = 3,
 };
 
-enum nodecon {
-   N_goal_ = 0,
-   N_program_ = 1,
-   N_store_ = 2,
-   N_if_ = 3,
-   N_target_ = 4,
-   N_eq_ = 5,
-   N_ne_ = 6,
-   N_add_ = 7,
-   N_sub_ = 8,
-   N_mul_ = 9,
-   N_div_ = 10,
-   N_pwr_ = 11,
-   N_int_ = 12,
-   N_ident_ = 13,
-   N_then_ = 14,
-   N_then2_ = 15,
-   N_else2_ = 16,
-};
+namespace Calc {
+    enum nodecon {
+        N_goal_ = 0,
+        N_program_ = 1,
+        N_store_ = 2,
+        N_if_ = 3,
+        N_target_ = 4,
+        N_eq_ = 5,
+        N_ne_ = 6,
+        N_add_ = 7,
+        N_sub_ = 8,
+        N_mul_ = 9,
+        N_div_ = 10,
+        N_pwr_ = 11,
+        N_int_ = 12,
+        N_ident_ = 13,
+        N_then_ = 14,
+        N_then2_ = 15,
+        N_else2_ = 16,
+    };
+}
 
 #include "Calc_ParserTables_typedef.h"
 #include "lrstar_parser.h"
