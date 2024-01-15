@@ -4,9 +4,10 @@
 
 #define MAX    0x80000000
 
+namespace verilog {
 // Terminal number ...
-extern const uint8 verilog_lgr_term_numb[500];
-const uint8 verilog_lgr_term_numb[500] = {
+extern const uint8 lgr_term_numb[500];
+const uint8 lgr_term_numb[500] = {
 
        0,    22,     0,     9,    13,    10,     0,     0,     0,     0, 
        0,     0,     0,     0,     4,     3,     2,    12,     6,     5, 
@@ -61,8 +62,8 @@ const uint8 verilog_lgr_term_numb[500] = {
 };
 
 // Terminal transition matrix ...
-extern const uint16 verilog_lgr_Tm[27877];
-const uint16 verilog_lgr_Tm[27877] = {
+extern const uint16 lgr_Tm[27877];
+const uint16 lgr_Tm[27877] = {
 
      499,   471,   499,    45,     2,   456,    44,   457,    46,   499, 
      458,   459,    47,   460,   461,    48,     1,   462,   350,   351, 
@@ -2855,8 +2856,8 @@ const uint16 verilog_lgr_Tm[27877] = {
 };
 
 // Terminal transition matrix row ...
-extern const uint16 verilog_lgr_Tr[500];
-const uint16 verilog_lgr_Tr[500] = {
+extern const uint16 lgr_Tr[500];
+const uint16 lgr_Tr[500] = {
 
        0,    61,   122,   183,   244,   305,   366,   427,   488,   549, 
      610,   671,   732,   793,   854,   915,   976,  1037,  1098,  1159, 
@@ -2911,8 +2912,8 @@ const uint16 verilog_lgr_Tr[500] = {
 };
 
 // Terminal transition matrix column ...
-extern const uint8 verilog_lgr_Tc[256];
-const uint8 verilog_lgr_Tc[256] = {
+extern const uint8 lgr_Tc[256];
+const uint8 lgr_Tc[256] = {
 
     0,     0,     0,     0,     0,     0,     0,     0,     0,     0, 
     0,     0,     0,     0,     0,     0,     0,     0,     0,     0, 
@@ -2942,3 +2943,5 @@ const uint8 verilog_lgr_Tc[256] = {
     0,     0,     0,     0,     0,     0, 
 };
 
+
+};   /* namespace verilog */

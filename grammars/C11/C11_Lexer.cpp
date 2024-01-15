@@ -4,9 +4,10 @@
 
 #define MAX    0x80000000
 
+namespace C11 {
 // Terminal number ...
-extern const int8 C11_lgr_term_numb[288];
-const int8 C11_lgr_term_numb[288] = {
+extern const int8 lgr_term_numb[288];
+const int8 lgr_term_numb[288] = {
 
        0,    81,     0,     0,     4,     3,    -1,     4,    -1,     0, 
        0,     0,     0,     0,     2,     0,     0,     0,     0,     0, 
@@ -40,8 +41,8 @@ const int8 C11_lgr_term_numb[288] = {
 };
 
 // Terminal transition matrix ...
-extern const uint16 C11_lgr_Tm[14927];
-const uint16 C11_lgr_Tm[14927] = {
+extern const uint16 lgr_Tm[14927];
+const uint16 lgr_Tm[14927] = {
 
      287,     6,     6,   263,    36,     2,    37,    38,     3,   252, 
      253,    39,    40,   254,    41,     1,    42,     4,     4,   255, 
@@ -1539,8 +1540,8 @@ const uint16 C11_lgr_Tm[14927] = {
 };
 
 // Terminal transition matrix row ...
-extern const uint16 C11_lgr_Tr[288];
-const uint16 C11_lgr_Tr[288] = {
+extern const uint16 lgr_Tr[288];
+const uint16 lgr_Tr[288] = {
 
        0,    59,   118,   177,   236,   295,   354,   413,   472,   531, 
      590,   649,   708,   767,   826,   885,   944,  1003,  1062,  1121, 
@@ -1574,8 +1575,8 @@ const uint16 C11_lgr_Tr[288] = {
 };
 
 // Terminal transition matrix column ...
-extern const uint8 C11_lgr_Tc[256];
-const uint8 C11_lgr_Tc[256] = {
+extern const uint8 lgr_Tc[256];
+const uint8 lgr_Tc[256] = {
 
     0,     0,     0,     0,     0,     0,     0,     0,     0,     1, 
     2,     1,     1,     1,     0,     0,     0,     0,     0,     0, 
@@ -1605,3 +1606,5 @@ const uint8 C11_lgr_Tc[256] = {
     0,     0,     0,     0,     0,     0, 
 };
 
+
+};   /* namespace C11 */

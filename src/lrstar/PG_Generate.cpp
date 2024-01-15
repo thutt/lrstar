@@ -1807,9 +1807,8 @@ generate_grammar_parser_typedef(FILE *fp, const char *grammar)
            static_cast<int>(sizeof(templ) / sizeof(templ[0])) - 1, " ",
            b[PG_Main::N_tacts > 0]);
    fprintf(fp, ",\n%*s"
-           "/* lexer table type  */   %s_lexer_t",
-           static_cast<int>(sizeof(templ) / sizeof(templ[0])) - 1, " ",
-           grammar);
+           "/* lexer table type  */   lexer_t",
+           static_cast<int>(sizeof(templ) / sizeof(templ[0])) - 1, " ");
    fprintf(fp, ",\n%*s"
            "/* parser table type */   parser_tables_t",
            static_cast<int>(sizeof(templ) / sizeof(templ[0])) - 1, " ");

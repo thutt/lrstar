@@ -4,17 +4,18 @@
 
 #define MAX    0x80000000
 
+namespace Hello {
 // Terminal number ...
-extern const int8 Hello_lgr_term_numb[11];
-const int8 Hello_lgr_term_numb[11] = {
+extern const int8 lgr_term_numb[11];
+const int8 lgr_term_numb[11] = {
 
        0,     2,    -1,     2,     2,     2,     2,     3,     4,     1, 
        0, 
 };
 
 // Terminal transition matrix ...
-extern const uint8 Hello_lgr_Tm[90];
-const uint8 Hello_lgr_Tm[90] = {
+extern const uint8 lgr_Tm[90];
+const uint8 lgr_Tm[90] = {
 
       10,     2,     9,     8,    10,     1,     1,     3,     1,     1, 
        0,     0,     0,     0,     1,     1,     1,     1,     1,     1, 
@@ -28,16 +29,16 @@ const uint8 Hello_lgr_Tm[90] = {
 };
 
 // Terminal transition matrix row ...
-extern const uint8 Hello_lgr_Tr[11];
-const uint8 Hello_lgr_Tr[11] = {
+extern const uint8 lgr_Tr[11];
+const uint8 lgr_Tr[11] = {
 
        0,    10,    20,    30,    40,    50,    60,    70,    80,    80, 
       80, 
 };
 
 // Terminal transition matrix column ...
-extern const uint8 Hello_lgr_Tc[256];
-const uint8 Hello_lgr_Tc[256] = {
+extern const uint8 lgr_Tc[256];
+const uint8 lgr_Tc[256] = {
 
     0,     0,     0,     0,     0,     0,     0,     0,     0,     1, 
     1,     1,     0,     0,     0,     0,     0,     0,     0,     0, 
@@ -67,3 +68,5 @@ const uint8 Hello_lgr_Tc[256] = {
     0,     0,     0,     0,     0,     0, 
 };
 
+
+};   /* namespace Hello */

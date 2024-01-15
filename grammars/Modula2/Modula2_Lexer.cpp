@@ -4,9 +4,10 @@
 
 #define MAX    0x80000000
 
+namespace Modula2 {
 // Terminal number ...
-extern const int8 Modula2_lgr_term_numb[218];
-const int8 Modula2_lgr_term_numb[218] = {
+extern const int8 lgr_term_numb[218];
+const int8 lgr_term_numb[218] = {
 
        0,     0,    11,     0,    68,     2,     4,     4,    -1,     5, 
        0,     0,     0,     0,     5,     0,     0,     0,     5,     0, 
@@ -33,8 +34,8 @@ const int8 Modula2_lgr_term_numb[218] = {
 };
 
 // Terminal transition matrix ...
-extern const uint8 Modula2_lgr_Tm[10530];
-const uint8 Modula2_lgr_Tm[10530] = {
+extern const uint8 lgr_Tm[10530];
+const uint8 lgr_Tm[10530] = {
 
        8,   217,     8,   208,   194,     1,     3,    39,   195,   196, 
      197,   198,   199,     2,   200,     6,    40,   201,    41,   202, 
@@ -1092,8 +1093,8 @@ const uint8 Modula2_lgr_Tm[10530] = {
 };
 
 // Terminal transition matrix row ...
-extern const uint16 Modula2_lgr_Tr[218];
-const uint16 Modula2_lgr_Tr[218] = {
+extern const uint16 lgr_Tr[218];
+const uint16 lgr_Tr[218] = {
 
        0,    54,   108,   162,   216,   270,   324,   378,   432,   486, 
      540,   594,   648,   702,   756,   810,   864,   918,   972,  1026, 
@@ -1120,8 +1121,8 @@ const uint16 Modula2_lgr_Tr[218] = {
 };
 
 // Terminal transition matrix column ...
-extern const uint8 Modula2_lgr_Tc[256];
-const uint8 Modula2_lgr_Tc[256] = {
+extern const uint8 lgr_Tc[256];
+const uint8 lgr_Tc[256] = {
 
     0,     1,     1,     1,     1,     1,     1,     1,     1,     0, 
     2,     1,     1,     1,     1,     1,     1,     1,     1,     1, 
@@ -1151,3 +1152,5 @@ const uint8 Modula2_lgr_Tc[256] = {
     1,     1,     1,     1,     1,     0, 
 };
 
+
+};   /* namespace Modula2 */

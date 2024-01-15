@@ -6,16 +6,17 @@
 
 #include "lrstar_lexer.h"
 
-extern const int8 LRK_lgr_term_numb[61];
-extern const uint8 LRK_lgr_Tm[1632];
-extern const uint16 LRK_lgr_Tr[61];
-extern const uint8 LRK_lgr_Tc[256];
+namespace LRK {
+extern const int8 lgr_term_numb[61];
+extern const uint8 lgr_Tm[1632];
+extern const uint16 lgr_Tr[61];
+extern const uint8 lgr_Tc[256];
 
 template<bool C_debug, typename T_term_numb, typename T_Tm, typename T_Tr, typename T_Tc>
-class LRK_lexer_ : public lrstar_lexer<C_debug, T_term_numb, T_Tm, T_Tr, T_Tc> {
+class lexer_ : public lrstar_lexer<C_debug, T_term_numb, T_Tm, T_Tr, T_Tc> {
 public:
-    LRK_lexer_(char *input_start) :
-      lrstar_lexer<C_debug, T_term_numb, T_Tm, T_Tr, T_Tc>(&LRK_lgr_term_numb[0], &LRK_lgr_Tm[0], &LRK_lgr_Tr[0], &LRK_lgr_Tc[0], input_start)
+    lexer_(char *input_start) :
+      lrstar_lexer<C_debug, T_term_numb, T_Tm, T_Tr, T_Tc>(&lgr_term_numb[0], &lgr_Tm[0], &lgr_Tr[0], &lgr_Tc[0], input_start)
     {
 
     }
@@ -24,6 +25,8 @@ public:
 };
 
 
-typedef LRK_lexer_<false, int8, uint8, uint16, uint8> LRK_lexer_t;
+typedef lexer_<false, int8, uint8, uint16, uint8> lexer_t;
+
+};   /* namespace LRK */
 
 #endif

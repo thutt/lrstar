@@ -95,8 +95,7 @@ lexer_inst(char *buf, size_t buf_len, const char *fname /* grammar name */)
    static const char *b[] = { "false", "true" };
 
    snprintf(buf, buf_len,
-            "%s_lexer_<%s, %s, %s, %s, %s>",
-            fname,
+            "lexer_<%s, %s, %s, %s, %s>",
             b[!!optn[LG_DEBUG]],
             data_types[ts_TermNumb].type,
             data_types[ts_Tm].type,
@@ -104,6 +103,19 @@ lexer_inst(char *buf, size_t buf_len, const char *fname /* grammar name */)
             data_types[ts_Tc].type);
 }
 
+
+static void
+open_namespace(FILE *fp, const char *namespc)
+{
+   fprintf(fp, "namespace %s {\n", namespc);
+}
+
+
+static void
+close_namespace(FILE *fp, const char *namespc)
+{
+   fprintf(fp, "\n};   /* namespace %s */\n", namespc);
+}
 
 
 static void open_guard(FILE *fp,
@@ -152,6 +164,7 @@ LG::instantiate_lexer(const char *dname,
    }
    fprintf(fp, "#define MAX    0x80000000\n\n");
 
+   open_namespace(fp, fname);
    if (n_constants > 0) {
       int i;
       fprintf(fp, "enum terminal {\n");
@@ -163,10 +176,10 @@ LG::instantiate_lexer(const char *dname,
    }
 
    fprintf(fp, "// Terminal number ...\n");
-   fprintf(fp, "extern const %s %s_lgr_term_numb[%d];\n",
-           data_types[ts_TermNumb].type, fname, N_states);
-   fprintf(fp, "const %s %s_lgr_term_numb[%d] = {\n",
-           data_types[ts_TermNumb].type, fname, N_states);
+   fprintf(fp, "extern const %s lgr_term_numb[%d];\n",
+           data_types[ts_TermNumb].type, N_states);
+   fprintf(fp, "const %s lgr_term_numb[%d] = {\n",
+           data_types[ts_TermNumb].type, N_states);
 
    for (int i = 0; i < N_states; i++) {
       if (i % 10 == 0) {
@@ -177,10 +190,10 @@ LG::instantiate_lexer(const char *dname,
    fprintf(fp, "\n};\n\n");
 
    fprintf(fp, "// Terminal transition matrix ...\n");
-   fprintf(fp, "extern const %s %s_lgr_Tm[%d];\n",
-           data_types[ts_Tm].type, fname, T_size);
-   fprintf(fp, "const %s %s_lgr_Tm[%d] = {\n",
-           data_types[ts_Tm].type, fname, T_size);
+   fprintf(fp, "extern const %s lgr_Tm[%d];\n",
+           data_types[ts_Tm].type, T_size);
+   fprintf(fp, "const %s lgr_Tm[%d] = {\n",
+           data_types[ts_Tm].type, T_size);
    for (int i = 0; i < T_size; i++) {
       if (i % 10 == 0) {
          if (T_matrix[i] == INT_MAX) {
@@ -201,10 +214,10 @@ LG::instantiate_lexer(const char *dname,
    assert(optn[LG_TABL_MEDIUM]); /* Cannot set option; untested. */
    if (optn[LG_TABL_MEDIUM]) {
       fprintf(fp, "// Terminal transition matrix row ...\n");
-      fprintf(fp, "extern const %s %s_lgr_Tr[%d];\n",
-              data_types[ts_Tr].type, fname, tt_states);
-      fprintf(fp, "const %s %s_lgr_Tr[%d] = {\n",
-              data_types[ts_Tr].type, fname, tt_states);
+      fprintf(fp, "extern const %s lgr_Tr[%d];\n",
+              data_types[ts_Tr].type, tt_states);
+      fprintf(fp, "const %s lgr_Tr[%d] = {\n",
+              data_types[ts_Tr].type, tt_states);
       for (int i = 0; i < tt_states; i++) {
          if (i % 10 == 0) {
             fprintf(fp, "\n   %5d, ", T_row[i]);
@@ -219,10 +232,10 @@ LG::instantiate_lexer(const char *dname,
 
    if (optn[LG_TABL_MEDIUM]) {
       fprintf(fp, "// Terminal transition matrix column ...\n");
-      fprintf(fp, "extern const %s %s_lgr_Tc[%d];\n",
-              data_types[ts_Tc].type, fname, N_terms);
-      fprintf(fp, "const %s %s_lgr_Tc[%d] = {\n",
-              data_types[ts_Tc].type, fname, N_terms);
+      fprintf(fp, "extern const %s lgr_Tc[%d];\n",
+              data_types[ts_Tc].type, N_terms);
+      fprintf(fp, "const %s lgr_Tc[%d] = {\n",
+              data_types[ts_Tc].type, N_terms);
       for (int i = 0; i < N_terms; i++) {
          if (i % 10 == 0) {
             fprintf(fp, "\n%5d, ", T_col[i]);
@@ -234,6 +247,7 @@ LG::instantiate_lexer(const char *dname,
    } else {
       /* Non-existant Tc is handled in method Tc_() */
    }
+   close_namespace(fp, fname);
    fclose(fp);
 }
 
@@ -259,22 +273,23 @@ typedef_lexer(const char *dname,
    open_guard(fp, fname, cname, "TYPEDEF");
    fprintf(fp, "#include \"lrstar_lexer.h\"\n\n");
 
+   open_namespace(fp, fname);
    fprintf(fp,
-           "extern const %s %s_lgr_term_numb[%d];\n"
-           "extern const %s %s_lgr_Tm[%d];\n"
-           "extern const %s %s_lgr_Tr[%d];\n"
-           "extern const %s %s_lgr_Tc[%d];\n"
+           "extern const %s lgr_term_numb[%d];\n"
+           "extern const %s lgr_Tm[%d];\n"
+           "extern const %s lgr_Tr[%d];\n"
+           "extern const %s lgr_Tc[%d];\n"
            "\n",
-           data_types[ts_TermNumb].type, fname, data_types[ts_TermNumb].n_elem,
-           data_types[ts_Tm].type, fname, data_types[ts_Tm].n_elem,
-           data_types[ts_Tr].type, fname, data_types[ts_Tr].n_elem,
-           data_types[ts_Tc].type, fname, data_types[ts_Tc].n_elem);
+           data_types[ts_TermNumb].type, data_types[ts_TermNumb].n_elem,
+           data_types[ts_Tm].type, data_types[ts_Tm].n_elem,
+           data_types[ts_Tr].type, data_types[ts_Tr].n_elem,
+           data_types[ts_Tc].type, data_types[ts_Tc].n_elem);
    /* Extend lrstar_lexer */
    fprintf(fp,
            "template<bool C_debug, typename T_term_numb, "
            "typename T_Tm, typename T_Tr, typename T_Tc>\n"
-           "class %s_lexer_ : public lrstar_lexer<C_debug, T_term_numb, "
-           "T_Tm, T_Tr, T_Tc> {\n", fname);
+           "class lexer_ : public lrstar_lexer<C_debug, T_term_numb, "
+           "T_Tm, T_Tr, T_Tc> {\n");
 
    /* Cannot set option; untested.
     *
@@ -286,22 +301,21 @@ typedef_lexer(const char *dname,
    assert(optn[LG_TABL_MEDIUM]);
    fprintf(fp,
            "public:\n"
-           "    %s_lexer_(char *input_start) :\n"
+           "    lexer_(char *input_start) :\n"
            "      lrstar_lexer<C_debug, T_term_numb, "
-           "T_Tm, T_Tr, T_Tc>(&%s_lgr_term_numb[0], &%s_lgr_Tm[0], "
-           "&%s_lgr_Tr[0], &%s_lgr_Tc[0], input_start)\n"
+           "T_Tm, T_Tr, T_Tc>(&lgr_term_numb[0], &lgr_Tm[0], "
+           "&lgr_Tr[0], &lgr_Tc[0], input_start)\n"
            "    {\n"
            "\n"
            "    }\n"
-           "\n\n",
-           fname,
-           fname, fname, fname, fname);
+           "\n\n");
    fprintf(fp,
            "};\n"
            "\n\n");
 
 
-   fprintf(fp, "typedef %s %s_lexer_t;\n", lexer_instantiation, fname);
+   fprintf(fp, "typedef %s lexer_t;\n", lexer_instantiation);
+   close_namespace(fp, fname);
    close_guard(fp);
    fclose(fp);
 }

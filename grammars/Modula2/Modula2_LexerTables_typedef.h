@@ -6,16 +6,17 @@
 
 #include "lrstar_lexer.h"
 
-extern const int8 Modula2_lgr_term_numb[218];
-extern const uint8 Modula2_lgr_Tm[10530];
-extern const uint16 Modula2_lgr_Tr[218];
-extern const uint8 Modula2_lgr_Tc[256];
+namespace Modula2 {
+extern const int8 lgr_term_numb[218];
+extern const uint8 lgr_Tm[10530];
+extern const uint16 lgr_Tr[218];
+extern const uint8 lgr_Tc[256];
 
 template<bool C_debug, typename T_term_numb, typename T_Tm, typename T_Tr, typename T_Tc>
-class Modula2_lexer_ : public lrstar_lexer<C_debug, T_term_numb, T_Tm, T_Tr, T_Tc> {
+class lexer_ : public lrstar_lexer<C_debug, T_term_numb, T_Tm, T_Tr, T_Tc> {
 public:
-    Modula2_lexer_(char *input_start) :
-      lrstar_lexer<C_debug, T_term_numb, T_Tm, T_Tr, T_Tc>(&Modula2_lgr_term_numb[0], &Modula2_lgr_Tm[0], &Modula2_lgr_Tr[0], &Modula2_lgr_Tc[0], input_start)
+    lexer_(char *input_start) :
+      lrstar_lexer<C_debug, T_term_numb, T_Tm, T_Tr, T_Tc>(&lgr_term_numb[0], &lgr_Tm[0], &lgr_Tr[0], &lgr_Tc[0], input_start)
     {
 
     }
@@ -24,6 +25,8 @@ public:
 };
 
 
-typedef Modula2_lexer_<false, int8, uint8, uint16, uint8> Modula2_lexer_t;
+typedef lexer_<false, int8, uint8, uint16, uint8> lexer_t;
+
+};   /* namespace Modula2 */
 
 #endif

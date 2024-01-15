@@ -4,9 +4,10 @@
 
 #define MAX    0x80000000
 
+namespace LRK {
 // Terminal number ...
-extern const int8 LRK_lgr_term_numb[61];
-const int8 LRK_lgr_term_numb[61] = {
+extern const int8 lgr_term_numb[61];
+const int8 lgr_term_numb[61] = {
 
        0,     2,    -1,    -1,     0,     0,     0,     0,     0,     0, 
        0,     0,     2,     2,     2,     2,     2,     2,     0,     0, 
@@ -18,8 +19,8 @@ const int8 LRK_lgr_term_numb[61] = {
 };
 
 // Terminal transition matrix ...
-extern const uint8 LRK_lgr_Tm[1632];
-const uint8 LRK_lgr_Tm[1632] = {
+extern const uint8 lgr_Tm[1632];
+const uint8 lgr_Tm[1632] = {
 
       60,     2,     2,    57,    50,    51,    52,    53,    18,    19, 
       60,    54,     1,     1,    12,     1,     1,     1,     1,     1, 
@@ -188,8 +189,8 @@ const uint8 LRK_lgr_Tm[1632] = {
 };
 
 // Terminal transition matrix row ...
-extern const uint16 LRK_lgr_Tr[61];
-const uint16 LRK_lgr_Tr[61] = {
+extern const uint16 lgr_Tr[61];
+const uint16 lgr_Tr[61] = {
 
        0,    32,    64,    96,   128,   160,   192,   224,   256,   288, 
      320,   352,   384,   416,   448,   480,   512,   544,   576,   608, 
@@ -201,8 +202,8 @@ const uint16 LRK_lgr_Tr[61] = {
 };
 
 // Terminal transition matrix column ...
-extern const uint8 LRK_lgr_Tc[256];
-const uint8 LRK_lgr_Tc[256] = {
+extern const uint8 lgr_Tc[256];
+const uint8 lgr_Tc[256] = {
 
     0,     0,     0,     0,     0,     0,     0,     0,     0,     1, 
     2,     1,     1,     1,     0,     0,     0,     0,     0,     0, 
@@ -232,3 +233,5 @@ const uint8 LRK_lgr_Tc[256] = {
     0,     0,     0,     0,     0,     0, 
 };
 
+
+};   /* namespace LRK */

@@ -4,9 +4,10 @@
 
 #define MAX    0x80000000
 
+namespace Typedef {
 // Terminal number ...
-extern const int8 Typedef_lgr_term_numb[50];
-const int8 Typedef_lgr_term_numb[50] = {
+extern const int8 lgr_term_numb[50];
+const int8 lgr_term_numb[50] = {
 
        0,     2,    -1,    -1,     0,     0,     0,     0,     0,     0, 
        0,     0,     2,     2,     2,     2,     2,     0,     2,     2, 
@@ -16,8 +17,8 @@ const int8 Typedef_lgr_term_numb[50] = {
 };
 
 // Terminal transition matrix ...
-extern const uint8 Typedef_lgr_Tm[1170];
-const uint8 Typedef_lgr_Tm[1170] = {
+extern const uint8 lgr_Tm[1170];
+const uint8 lgr_Tm[1170] = {
 
       49,     2,     2,    47,    44,    45,    17,    49,    46,     1, 
        1,    12,     1,     1,     1,     1,     1,    13,     1,     1, 
@@ -139,8 +140,8 @@ const uint8 Typedef_lgr_Tm[1170] = {
 };
 
 // Terminal transition matrix row ...
-extern const uint16 Typedef_lgr_Tr[50];
-const uint16 Typedef_lgr_Tr[50] = {
+extern const uint16 lgr_Tr[50];
+const uint16 lgr_Tr[50] = {
 
        0,    26,    52,    78,   104,   130,   156,   182,   208,   234, 
      260,   286,   312,   338,   364,   390,   416,   442,   468,   494, 
@@ -150,8 +151,8 @@ const uint16 Typedef_lgr_Tr[50] = {
 };
 
 // Terminal transition matrix column ...
-extern const uint8 Typedef_lgr_Tc[256];
-const uint8 Typedef_lgr_Tc[256] = {
+extern const uint8 lgr_Tc[256];
+const uint8 lgr_Tc[256] = {
 
     0,     0,     0,     0,     0,     0,     0,     0,     0,     1, 
     2,     0,     0,     0,     0,     0,     0,     0,     0,     0, 
@@ -181,3 +182,5 @@ const uint8 Typedef_lgr_Tc[256] = {
     0,     0,     0,     0,     0,     0, 
 };
 
+
+};   /* namespace Typedef */

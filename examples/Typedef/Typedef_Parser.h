@@ -38,7 +38,7 @@ typedef lrstar_parser</* grammar           */   grammar_name,
                       /* semantics         */   true,
                       /* stksize           */   100,
                       /* term_actions      */   true,
-                      /* lexer table type  */   Typedef_lexer_t,
+                      /* lexer table type  */   lexer_t,
                       /* parser table type */   parser_tables_t> parser_t;
 
 };   /* namespace Typedef */

@@ -4,9 +4,10 @@
 
 #define MAX    0x80000000
 
+namespace JSON {
 // Terminal number ...
-extern const int8 JSON_lgr_term_numb[33];
-const int8 JSON_lgr_term_numb[33] = {
+extern const int8 lgr_term_numb[33];
+const int8 lgr_term_numb[33] = {
 
        0,     0,     0,     3,    -1,     4,     0,     0,     4,     0, 
        0,     0,     3,     0,     0,     0,     0,     0,     0,     0, 
@@ -15,8 +16,8 @@ const int8 JSON_lgr_term_numb[33] = {
 };
 
 // Terminal transition matrix ...
-extern const uint8 JSON_lgr_Tm[616];
-const uint8 JSON_lgr_Tm[616] = {
+extern const uint8 lgr_Tm[616];
+const uint8 lgr_Tm[616] = {
 
       32,     4,     4,    27,     2,    32,    32,    21,     1,    32, 
       12,     3,    22,    32,    23,    32,    24,    32,    32,     9, 
@@ -83,8 +84,8 @@ const uint8 JSON_lgr_Tm[616] = {
 };
 
 // Terminal transition matrix row ...
-extern const uint16 JSON_lgr_Tr[33];
-const uint16 JSON_lgr_Tr[33] = {
+extern const uint16 lgr_Tr[33];
+const uint16 lgr_Tr[33] = {
 
        0,    28,    56,    84,   112,   140,   168,   196,   224,   252, 
      280,   308,   336,   364,   392,   420,   448,   476,   504,   532, 
@@ -93,8 +94,8 @@ const uint16 JSON_lgr_Tr[33] = {
 };
 
 // Terminal transition matrix column ...
-extern const uint8 JSON_lgr_Tc[256];
-const uint8 JSON_lgr_Tc[256] = {
+extern const uint8 lgr_Tc[256];
+const uint8 lgr_Tc[256] = {
 
     0,     0,     0,     0,     0,     0,     0,     0,     0,     1, 
     2,     1,     0,     0,     0,     0,     0,     0,     0,     0, 
@@ -124,3 +125,5 @@ const uint8 JSON_lgr_Tc[256] = {
     0,     0,     0,     0,     0,     0, 
 };
 
+
+};   /* namespace JSON */

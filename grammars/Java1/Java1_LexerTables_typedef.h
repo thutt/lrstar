@@ -6,16 +6,17 @@
 
 #include "lrstar_lexer.h"
 
-extern const int8 Java1_lgr_term_numb[393];
-extern const uint16 Java1_lgr_Tm[26280];
-extern const uint16 Java1_lgr_Tr[393];
-extern const uint8 Java1_lgr_Tc[256];
+namespace Java1 {
+extern const int8 lgr_term_numb[393];
+extern const uint16 lgr_Tm[26280];
+extern const uint16 lgr_Tr[393];
+extern const uint8 lgr_Tc[256];
 
 template<bool C_debug, typename T_term_numb, typename T_Tm, typename T_Tr, typename T_Tc>
-class Java1_lexer_ : public lrstar_lexer<C_debug, T_term_numb, T_Tm, T_Tr, T_Tc> {
+class lexer_ : public lrstar_lexer<C_debug, T_term_numb, T_Tm, T_Tr, T_Tc> {
 public:
-    Java1_lexer_(char *input_start) :
-      lrstar_lexer<C_debug, T_term_numb, T_Tm, T_Tr, T_Tc>(&Java1_lgr_term_numb[0], &Java1_lgr_Tm[0], &Java1_lgr_Tr[0], &Java1_lgr_Tc[0], input_start)
+    lexer_(char *input_start) :
+      lrstar_lexer<C_debug, T_term_numb, T_Tm, T_Tr, T_Tc>(&lgr_term_numb[0], &lgr_Tm[0], &lgr_Tr[0], &lgr_Tc[0], input_start)
     {
 
     }
@@ -24,6 +25,8 @@ public:
 };
 
 
-typedef Java1_lexer_<false, int8, uint16, uint16, uint8> Java1_lexer_t;
+typedef lexer_<false, int8, uint16, uint16, uint8> lexer_t;
+
+};   /* namespace Java1 */
 
 #endif

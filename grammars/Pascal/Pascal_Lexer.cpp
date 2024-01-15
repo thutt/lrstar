@@ -4,9 +4,10 @@
 
 #define MAX    0x80000000
 
+namespace Pascal {
 // Terminal number ...
-extern const int8 Pascal_lgr_term_numb[353];
-const int8 Pascal_lgr_term_numb[353] = {
+extern const int8 lgr_term_numb[353];
+const int8 lgr_term_numb[353] = {
 
        0,     0,    24,     0,     0,     2,     3,     3,    -1,     3, 
        0,     0,     0,     0,     3,     0,     0,     0,     3,     0, 
@@ -47,8 +48,8 @@ const int8 Pascal_lgr_term_numb[353] = {
 };
 
 // Terminal transition matrix ...
-extern const uint16 Pascal_lgr_Tm[18592];
-const uint16 Pascal_lgr_Tm[18592] = {
+extern const uint16 lgr_Tm[18592];
+const uint16 lgr_Tm[18592] = {
 
        8,   352,     8,   343,   352,     1,     3,    41,   331,   332, 
      333,   334,   335,     2,   336,     7,    42,   337,    43,   338, 
@@ -1913,8 +1914,8 @@ const uint16 Pascal_lgr_Tm[18592] = {
 };
 
 // Terminal transition matrix row ...
-extern const uint16 Pascal_lgr_Tr[353];
-const uint16 Pascal_lgr_Tr[353] = {
+extern const uint16 lgr_Tr[353];
+const uint16 lgr_Tr[353] = {
 
        0,    56,   112,   168,   224,   280,   336,   392,   448,   504, 
      560,   616,   672,   728,   784,   840,   896,   952,  1008,  1064, 
@@ -1955,8 +1956,8 @@ const uint16 Pascal_lgr_Tr[353] = {
 };
 
 // Terminal transition matrix column ...
-extern const uint8 Pascal_lgr_Tc[256];
-const uint8 Pascal_lgr_Tc[256] = {
+extern const uint8 lgr_Tc[256];
+const uint8 lgr_Tc[256] = {
 
     0,     1,     1,     1,     1,     1,     1,     1,     1,     0, 
     2,     1,     1,     1,     1,     1,     1,     1,     1,     1, 
@@ -1986,3 +1987,5 @@ const uint8 Pascal_lgr_Tc[256] = {
     1,     1,     1,     1,     1,     0, 
 };
 
+
+};   /* namespace Pascal */

@@ -4,9 +4,10 @@
 
 #define MAX    0x80000000
 
+namespace ANTLR {
 // Terminal number ...
-extern const int8 ANTLR_lgr_term_numb[136];
-const int8 ANTLR_lgr_term_numb[136] = {
+extern const int8 lgr_term_numb[136];
+const int8 lgr_term_numb[136] = {
 
        0,     0,     0,     2,     5,     6,    -1,     0,     0,    -1, 
        0,     0,     0,     0,     0,     0,     0,     0,     5,     5, 
@@ -25,8 +26,8 @@ const int8 ANTLR_lgr_term_numb[136] = {
 };
 
 // Terminal transition matrix ...
-extern const uint8 ANTLR_lgr_Tm[6441];
-const uint8 ANTLR_lgr_Tm[6441] = {
+extern const uint8 lgr_Tm[6441];
+const uint8 lgr_Tm[6441] = {
 
      135,     6,     6,   127,   135,   135,   112,     2,   113,   114, 
      115,    28,   116,    29,    30,    32,     3,     3,    31,   117, 
@@ -676,8 +677,8 @@ const uint8 ANTLR_lgr_Tm[6441] = {
 };
 
 // Terminal transition matrix row ...
-extern const uint16 ANTLR_lgr_Tr[136];
-const uint16 ANTLR_lgr_Tr[136] = {
+extern const uint16 lgr_Tr[136];
+const uint16 lgr_Tr[136] = {
 
        0,    57,   114,   171,   228,   285,   342,   399,   456,   513, 
      570,   627,   684,   741,   798,   855,   912,   969,  1026,  1083, 
@@ -696,8 +697,8 @@ const uint16 ANTLR_lgr_Tr[136] = {
 };
 
 // Terminal transition matrix column ...
-extern const uint8 ANTLR_lgr_Tc[256];
-const uint8 ANTLR_lgr_Tc[256] = {
+extern const uint8 lgr_Tc[256];
+const uint8 lgr_Tc[256] = {
 
     0,     0,     0,     0,     0,     0,     0,     0,     0,     1, 
     2,     1,     1,     1,     0,     0,     0,     0,     0,     0, 
@@ -727,3 +728,5 @@ const uint8 ANTLR_lgr_Tc[256] = {
     0,     0,     0,     0,     0,     0, 
 };
 
+
+};   /* namespace ANTLR */

@@ -4,9 +4,10 @@
 
 #define MAX    0x80000000
 
+namespace Java1 {
 // Terminal number ...
-extern const int8 Java1_lgr_term_numb[393];
-const int8 Java1_lgr_term_numb[393] = {
+extern const int8 lgr_term_numb[393];
+const int8 lgr_term_numb[393] = {
 
        0,    55,     0,     0,     2,     3,     3,     0,     0,    -1, 
        0,     0,     0,     0,     3,     0,     0,     0,    -1,     0, 
@@ -51,8 +52,8 @@ const int8 Java1_lgr_term_numb[393] = {
 };
 
 // Terminal transition matrix ...
-extern const uint16 Java1_lgr_Tm[26280];
-const uint16 Java1_lgr_Tm[26280] = {
+extern const uint16 lgr_Tm[26280];
+const uint16 lgr_Tm[26280] = {
 
      392,     9,     9,   370,   112,     3,     4,   113,   114,     2, 
      359,   360,   115,   116,   361,   117,     1,   118,   298,   299, 
@@ -2685,8 +2686,8 @@ const uint16 Java1_lgr_Tm[26280] = {
 };
 
 // Terminal transition matrix row ...
-extern const uint16 Java1_lgr_Tr[393];
-const uint16 Java1_lgr_Tr[393] = {
+extern const uint16 lgr_Tr[393];
+const uint16 lgr_Tr[393] = {
 
        0,    73,   146,   219,   292,   365,   438,   511,   584,   657, 
      730,   803,   876,   949,  1022,  1095,  1168,  1241,  1314,  1387, 
@@ -2731,8 +2732,8 @@ const uint16 Java1_lgr_Tr[393] = {
 };
 
 // Terminal transition matrix column ...
-extern const uint8 Java1_lgr_Tc[256];
-const uint8 Java1_lgr_Tc[256] = {
+extern const uint8 lgr_Tc[256];
+const uint8 lgr_Tc[256] = {
 
     0,     0,     0,     0,     0,     0,     0,     0,     0,     1, 
     2,     1,     1,     1,     0,     0,     0,     0,     0,     0, 
@@ -2762,3 +2763,5 @@ const uint8 Java1_lgr_Tc[256] = {
     0,     0,     0,     0,     0,     0, 
 };
 
+
+};   /* namespace Java1 */
