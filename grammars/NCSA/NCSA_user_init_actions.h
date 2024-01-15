@@ -5,8 +5,11 @@
  *        It can be safely edited to add user-supplied code.
  */
 
-void
-NCSA_init_actions(UNUSED_PARAM(NCSA_parser_t *parser))
-{
-      /* Initialization code goes here */
-}
+namespace NCSA {
+    void
+    init_actions(UNUSED_PARAM(parser_t *parser))
+    {
+          /* Initialization code goes here */
+    }
+
+};   /* namespace NCSA */

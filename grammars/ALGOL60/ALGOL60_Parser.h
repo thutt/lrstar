@@ -6,13 +6,17 @@
 
 #include "lrstar_basic_defs.h"
 #include "lrstar_lexer.h"
+namespace ALGOL60 {
 
+
+};   /* namespace ALGOL60 */
 #include "ALGOL60_ParserTables_typedef.h"
 #include "lrstar_parser.h"
 
-extern const char ALGOL60_grammar_name[];
+namespace ALGOL60 {
+extern const char grammar_name[];
 
-typedef lrstar_parser</* grammar           */   ALGOL60_grammar_name,
+typedef lrstar_parser</* grammar           */   grammar_name,
                       /* AST traversals    */   1,
                       /* actions           */   false,
                       /* debug_parser      */   false,
@@ -29,6 +33,8 @@ typedef lrstar_parser</* grammar           */   ALGOL60_grammar_name,
                       /* stksize           */   100,
                       /* term_actions      */   false,
                       /* lexer table type  */   ALGOL60_lexer_t,
-                      /* parser table type */   ALGOL60_parser_tables_t> ALGOL60_parser_t;
+                      /* parser table type */   parser_tables_t> parser_t;
+
+};   /* namespace ALGOL60 */
 
 #endif

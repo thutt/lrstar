@@ -6,13 +6,17 @@
 
 #include "lrstar_basic_defs.h"
 #include "lrstar_lexer.h"
+namespace Python {
 
+
+};   /* namespace Python */
 #include "Python_ParserTables_typedef.h"
 #include "lrstar_parser.h"
 
-extern const char Python_grammar_name[];
+namespace Python {
+extern const char grammar_name[];
 
-typedef lrstar_parser</* grammar           */   Python_grammar_name,
+typedef lrstar_parser</* grammar           */   grammar_name,
                       /* AST traversals    */   1,
                       /* actions           */   false,
                       /* debug_parser      */   false,
@@ -29,6 +33,8 @@ typedef lrstar_parser</* grammar           */   Python_grammar_name,
                       /* stksize           */   100,
                       /* term_actions      */   false,
                       /* lexer table type  */   Python_lexer_t,
-                      /* parser table type */   Python_parser_tables_t> Python_parser_t;
+                      /* parser table type */   parser_tables_t> parser_t;
+
+};   /* namespace Python */
 
 #endif

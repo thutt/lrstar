@@ -4,8 +4,9 @@
 #include "ALGOL60_ParserTables_typedef.h"
 #include "ALGOL60_Parser.h"
 
+namespace ALGOL60 {
 // Terminal symbols of the grammar.
-const char *ALGOL60_grm_term_symb[57] = {
+const char *grm_term_symb[57] = {
    "<error>",
    "<eof>",
    "\'+\'",
@@ -66,7 +67,7 @@ const char *ALGOL60_grm_term_symb[57] = {
 };
 
 // Nonterminal symbols of the grammar.
-const char *ALGOL60_grm_head_symb[77] = {
+const char *grm_head_symb[77] = {
    "start",
    "a60program",
    "logical_val",
@@ -147,7 +148,7 @@ const char *ALGOL60_grm_head_symb[77] = {
 };
 
 // Head symbol numbers for the productions.
-const uint8 ALGOL60_grm_head_numb[169] = {
+const uint8 grm_head_numb[169] = {
        0,     1,     1,     2,     2,     3,     4,     5,     5,     6, 
        6,     7,     8,     9,     9,    10,    10,    11,    11,    11, 
       11,    11,    11,    11,    11,    11,    11,    11,    11,    11, 
@@ -168,7 +169,7 @@ const uint8 ALGOL60_grm_head_numb[169] = {
 };
 
 // First tail symbol index into the tail list ...
-const uint16 ALGOL60_grm_f_tail[170] = {
+const uint16 grm_f_tail[170] = {
        0,     2,     2,     3,     4,     5,     6,     7,     8,    12, 
       13,    16,    17,    21,    22,    26,    28,    29,    32,    35, 
       38,    41,    44,    47,    50,    53,    56,    59,    61,    62, 
@@ -189,7 +190,7 @@ const uint16 ALGOL60_grm_f_tail[170] = {
 };
 
 // Tail symbol numbers ...
-const int8 ALGOL60_grm_tail[317] = {
+const int8 grm_tail[317] = {
       -1,     1,   -18,     6,     7,     8,     9,    -3,    -3,    10, 
       -6,    11,    -7,    -6,    12,    -7,    -9,    -3,    13,   -44, 
       14,   -10,   -37,   -10,    15,    -9,     2,   -11,   -11,   -11, 
@@ -225,7 +226,7 @@ const int8 ALGOL60_grm_tail[317] = {
 };
 
 // Boolean matrix ...
-const uint8 ALGOL60_grm_Bm[159] = {
+const uint8 grm_Bm[159] = {
        0,     0,     0,     0,    64,     0,     5,     0,     0,     2, 
        0,     0,     0,     0,     8,    64,     0,   101,   240,     0, 
        0,    10,     0,     0,   108,   136,    65,     0,    16,     0, 
@@ -245,7 +246,7 @@ const uint8 ALGOL60_grm_Bm[159] = {
 };
 
 // Boolean matrix row (for state)...
-const uint8 ALGOL60_grm_Br[148] = {
+const uint8 grm_Br[148] = {
        4,     9,     7,     4,    11,    15,    15,    19,    24,    29, 
       33,    37,    40,    44,    37,    48,     0,    51,    56,    58, 
       63,     0,    24,    67,    68,    67,    67,    37,    73,    33, 
@@ -264,8 +265,8 @@ const uint8 ALGOL60_grm_Br[148] = {
       };
 
 // Boolean matrix column (displacement) ...
-extern const uint8 ALGOL60_grm_Bc[57];
-const uint8 ALGOL60_grm_Bc[57] = {
+extern const uint8 grm_Bc[57];
+const uint8 grm_Bc[57] = {
        0,     0,     0,     0,     0,     0,     0,     0,     0,     0, 
        1,     1,     1,     1,     1,     1,     1,     1,     1,     1, 
        1,     1,     1,     1,     1,     1,     1,     1,     1,     2, 
@@ -275,7 +276,7 @@ const uint8 ALGOL60_grm_Bc[57] = {
       };
 
 // Boolean matrix filter/mask value ...
-const uint8 ALGOL60_grm_Bf[57] = {
+const uint8 grm_Bf[57] = {
        1,     2,     4,     8,    16,    16,    32,    32,    64,   128, 
        1,     2,     4,     8,    16,    32,    64,    64,    64,    64, 
       64,    64,   128,    64,    64,    64,    64,    64,    64,     1, 
@@ -285,7 +286,7 @@ const uint8 ALGOL60_grm_Bf[57] = {
 };
 
 // Terminal transition matrix ...
-const int16 ALGOL60_grm_Tm[601] = {
+const int16 grm_Tm[601] = {
     -115,   129,   133,  -157,   142,   145,  -153,  -136,     0,   143, 
       48,     0,    56,    50,   134,    87,     0,   143,    48,     0, 
     -141,    50,    89,    48,  -163,     0,    50,  -164,  -140,    48, 
@@ -350,7 +351,7 @@ const int16 ALGOL60_grm_Tm[601] = {
 };
 
 // Terminal transition matrix row ...
-const uint16 ALGOL60_grm_Tr[148] = {
+const uint16 grm_Tr[148] = {
      563,   563,   563,   563,   563,   487,   487,   487,   525,   563, 
      563,   487,   563,   487,   487,    57,   563,   487,   487,   563, 
      401,   563,   525,    62,   563,    38,    12,   487,   563,    57, 
@@ -369,7 +370,7 @@ const uint16 ALGOL60_grm_Tr[148] = {
 };
 
 // Terminal transition matrix column ...
-const uint8 ALGOL60_grm_Tc[57] = {
+const uint8 grm_Tc[57] = {
       21,    21,    16,    18,    22,    27,    21,    22,     0,    27, 
        1,    19,     2,     3,     5,     4,    29,    30,    31,    33, 
       34,    36,     5,     6,     7,     8,     9,    10,    11,    12, 
@@ -379,7 +380,7 @@ const uint8 ALGOL60_grm_Tc[57] = {
 };
 
 // Nonterminal transition matrix ...
-const int16 ALGOL60_grm_Nm[531] = {
+const int16 grm_Nm[531] = {
        0,     0,     0,     0,     0,     0,     0,    52,     0,     0, 
        0,     0,     0,     0,     0,     0,     0,    43,    56,  -136, 
     -115,  -157,  -153,    53,    87,    87,    55,    55,    54,   133, 
@@ -437,7 +438,7 @@ const int16 ALGOL60_grm_Nm[531] = {
 };
 
 // Nonterminal transition matrix row ...
-const uint16 ALGOL60_grm_Nr[148] = {
+const uint16 grm_Nr[148] = {
   360,   360,   360,   338,   360,   509,   487,   360,   287,   360, 
   360,   381,   360,   305,   402,     0,   360,   423,   360,   360, 
   181,   360,   127,     6,   360,    27,     1,   465,   360,   360, 
@@ -456,7 +457,7 @@ const uint16 ALGOL60_grm_Nr[148] = {
 };
 
 // Nonterminal transition matrix column ...
-const uint8 ALGOL60_grm_Nc[169] = {
+const uint8 grm_Nc[169] = {
    21,    21,    21,    21,    21,    17,    14,     1,     1,    14, 
    14,    14,    21,    14,    14,    14,    14,    21,    21,    21, 
    21,    21,    21,    21,    21,    21,    21,    21,    21,    21, 
@@ -477,7 +478,7 @@ const uint8 ALGOL60_grm_Nc[169] = {
 };
 
 // Reduction matrix ...
-const uint8 ALGOL60_grm_Rm[36] = {
+const uint8 grm_Rm[36] = {
        0,     0,     0,     0,     0,     0,     0,     0,    82,    82, 
        0,     0,   132,     0,     0,    98,    98,    98,     7,   160, 
        0,   112,     0,     0,     0,     0,     0,   133,     0,     0, 
@@ -485,7 +486,7 @@ const uint8 ALGOL60_grm_Rm[36] = {
 };
 
 // Reduction matrix row ...
-const int16 ALGOL60_grm_Rr[148] = {
+const int16 grm_Rr[148] = {
        1,     0,     0,     0,     0,    -5,    -5,     0,     0,     0, 
      -13,    82,    83,    82,    82,     0,   -20,    82,   154,     0, 
        0,   -28,     0,     0,     0,     0,     0,    82,    16,     7, 
@@ -504,7 +505,7 @@ const int16 ALGOL60_grm_Rr[148] = {
 };
 
 // Reduction matrix column ...
-const uint8 ALGOL60_grm_Rc[57] = {
+const uint8 grm_Rc[57] = {
        0,     0,     0,     0,     0,     0,     0,     0,     1,     0, 
        0,     0,     0,     0,     0,     2,     0,     0,     0,     0, 
        0,     0,     0,     0,     0,     0,     0,     0,     0,     0, 
@@ -514,7 +515,7 @@ const uint8 ALGOL60_grm_Rc[57] = {
 };
 
 // Production lengths (minus one) ...
-const int8 ALGOL60_grm_PL[169] = {
+const int8 grm_PL[169] = {
        1,    -1,     0,     0,     0,     0,     0,     0,     3,     0, 
        2,     0,     3,     0,     3,     1,     0,     2,     2,     2, 
        2,     2,     2,     2,     2,     2,     2,     1,     0,     0, 
@@ -534,3 +535,5 @@ const int8 ALGOL60_grm_PL[169] = {
        0,     0,     0,     1,     1,     0,     2,     2,     1, 
 };
 
+
+};   /* namespace ALGOL60 */

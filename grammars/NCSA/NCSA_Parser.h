@@ -6,6 +6,7 @@
 
 #include "lrstar_basic_defs.h"
 #include "lrstar_lexer.h"
+namespace NCSA {
 
 namespace NCSA {
     enum nodecon {
@@ -23,12 +24,15 @@ namespace NCSA {
     };
 }
 
+
+};   /* namespace NCSA */
 #include "NCSA_ParserTables_typedef.h"
 #include "lrstar_parser.h"
 
-extern const char NCSA_grammar_name[];
+namespace NCSA {
+extern const char grammar_name[];
 
-typedef lrstar_parser</* grammar           */   NCSA_grammar_name,
+typedef lrstar_parser</* grammar           */   grammar_name,
                       /* AST traversals    */   1,
                       /* actions           */   true,
                       /* debug_parser      */   false,
@@ -45,6 +49,8 @@ typedef lrstar_parser</* grammar           */   NCSA_grammar_name,
                       /* stksize           */   100,
                       /* term_actions      */   true,
                       /* lexer table type  */   NCSA_lexer_t,
-                      /* parser table type */   NCSA_parser_tables_t> NCSA_parser_t;
+                      /* parser table type */   parser_tables_t> parser_t;
+
+};   /* namespace NCSA */
 
 #endif

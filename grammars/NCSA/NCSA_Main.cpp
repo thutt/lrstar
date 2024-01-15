@@ -2,27 +2,28 @@
 #include "NCSA_LexerTables_typedef.h"
 #include "NCSA_Parser.h"
 
+namespace NCSA {
 
-const char NCSA_grammar_name[] = "NCSA";
+const char grammar_name[] = "NCSA";
 
 
-void NCSA_init_actions(UNUSED_PARAM(NCSA_parser_t *parser)); /* User-supplied */
-void NCSA_term_actions(UNUSED_PARAM(NCSA_parser_t *parser)); /* User-supplied */
-static NCSA_parser_t::init_func_t NCSA_init_funcs_[2] = {
-   NCSA_init_actions,
-   NCSA_term_actions
+void init_actions(UNUSED_PARAM(parser_t *parser)); /* User-supplied */
+void term_actions(UNUSED_PARAM(parser_t *parser)); /* User-supplied */
+static parser_t::init_func_t init_funcs_[2] = {
+   init_actions,
+   term_actions
 };
 
-int NCSA_error(UNUSED_PARAM(NCSA_parser_t *parser), UNUSED_PARAM(int &t));
-int NCSA_lookup(UNUSED_PARAM(NCSA_parser_t *parser), UNUSED_PARAM(int &t));
+int error(UNUSED_PARAM(parser_t *parser), UNUSED_PARAM(int &t));
+int lookup(UNUSED_PARAM(parser_t *parser), UNUSED_PARAM(int &t));
 // Terminal action function pointers ...
-static NCSA_parser_t::tact_func_t NCSA_tact_funcs_[2] = {
-   NCSA_error,
-   NCSA_lookup,
+static parser_t::tact_func_t tact_funcs_[2] = {
+   error,
+   lookup,
 };
 
 // Node action function pointers ...
-static NCSA_parser_t::nact_func_t NCSA_nact_funcs_[11] = {
+static parser_t::nact_func_t nact_funcs_[11] = {
    0,
    0,
    0,
@@ -36,16 +37,18 @@ static NCSA_parser_t::nact_func_t NCSA_nact_funcs_[11] = {
    0,
 };
 
-NCSA_parser_t *
-NCSA_new_parser(const char *input_path,
-                char       *input_text,
-                unsigned    max_symbols)
+parser_t *
+new_parser(const char *input_path,
+           char       *input_text,
+           unsigned    max_symbols)
 {
-   return new NCSA_parser_t(/* input path   */   input_path,
-                            /* input text   */   input_text,
-                            /* max symbols  */   max_symbols,
-                            /* init_func    */   &NCSA_init_funcs_[0],
-                            /* tact_func    */   &NCSA_tact_funcs_[0],
-                            /* nact_func    */   &NCSA_nact_funcs_[0]);
+   return new parser_t(/* input path   */   input_path,
+                       /* input text   */   input_text,
+                       /* max symbols  */   max_symbols,
+                       /* init_func    */   &init_funcs_[0],
+                       /* tact_func    */   &tact_funcs_[0],
+                       /* nact_func    */   &nact_funcs_[0]);
 }
 
+
+};   /* namespace NCSA */

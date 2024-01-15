@@ -5,12 +5,15 @@
  *        It can be safely edited to add user-supplied code.
  */
 
-int
-XPL_error(UNUSED_PARAM(XPL_parser_t *parser), UNUSED_PARAM(int &t))
-{
-   if (parser->lt.token.end == parser->lt.token.start) {
-      // An illegal character.
-      parser->lt.token.end++;
-   }
-   return 0;
-}
+namespace XPL {
+    int
+    error(UNUSED_PARAM(parser_t *parser), UNUSED_PARAM(int &t))
+    {
+       if (parser->lt.token.end == parser->lt.token.start) {
+          // An illegal character.
+          parser->lt.token.end++;
+       }
+       return 0;
+    }
+
+};   /* namespace XPL */

@@ -6,6 +6,7 @@
 
 #include "lrstar_basic_defs.h"
 #include "lrstar_lexer.h"
+namespace C11 {
 
 enum termcon {
    ERROR = 0,
@@ -84,12 +85,15 @@ enum termcon {
    XOR_ASSIGN = 74,
 };
 
+
+};   /* namespace C11 */
 #include "C11_ParserTables_typedef.h"
 #include "lrstar_parser.h"
 
-extern const char C11_grammar_name[];
+namespace C11 {
+extern const char grammar_name[];
 
-typedef lrstar_parser</* grammar           */   C11_grammar_name,
+typedef lrstar_parser</* grammar           */   grammar_name,
                       /* AST traversals    */   1,
                       /* actions           */   true,
                       /* debug_parser      */   false,
@@ -106,6 +110,8 @@ typedef lrstar_parser</* grammar           */   C11_grammar_name,
                       /* stksize           */   100,
                       /* term_actions      */   true,
                       /* lexer table type  */   C11_lexer_t,
-                      /* parser table type */   C11_parser_tables_t> C11_parser_t;
+                      /* parser table type */   parser_tables_t> parser_t;
+
+};   /* namespace C11 */
 
 #endif

@@ -4,8 +4,9 @@
 #include "YACC_ParserTables_typedef.h"
 #include "YACC_Parser.h"
 
+namespace YACC {
 // Terminal symbols of the grammar.
-const char *YACC_grm_term_symb[27] = {
+const char *grm_term_symb[27] = {
    "<error>",
    "<eof>",
    "\'pp\'",
@@ -36,7 +37,7 @@ const char *YACC_grm_term_symb[27] = {
 };
 
 // Nonterminal symbols of the grammar.
-const char *YACC_grm_head_symb[17] = {
+const char *grm_head_symb[17] = {
    "start",
    "grammar",
    "aux_procs",
@@ -57,7 +58,7 @@ const char *YACC_grm_head_symb[17] = {
 };
 
 // Head symbol numbers for the productions.
-const uint8 YACC_grm_head_numb[59] = {
+const uint8 grm_head_numb[59] = {
        0,     1,     2,     2,     3,     3,     3,     4,     4,     4, 
        4,     4,     4,     4,     4,     4,     5,     5,     6,     6, 
        6,     6,     6,     6,     7,     7,     7,     7,     7,     8, 
@@ -67,7 +68,7 @@ const uint8 YACC_grm_head_numb[59] = {
 };
 
 // First tail symbol index into the tail list ...
-const uint8 YACC_grm_f_tail[60] = {
+const uint8 grm_f_tail[60] = {
        0,     2,     6,     6,     7,     7,     9,    11,    13,    15, 
       17,    20,    23,    26,    29,    32,    34,    34,    37,    38, 
       40,    43,    44,    46,    49,    50,    51,    52,    54,    56, 
@@ -77,7 +78,7 @@ const uint8 YACC_grm_f_tail[60] = {
 };
 
 // Tail symbol numbers ...
-const int8 YACC_grm_tail[110] = {
+const int8 grm_tail[110] = {
       -1,     1,    -3,     2,   -10,    -2,     2,    -3,    -4,    -3, 
        3,     4,     5,     4,     3,     6,     7,     8,    -5,    -6, 
        9,    -5,    -6,    10,    -5,    -6,    11,    -5,    -6,    12, 
@@ -92,7 +93,7 @@ const int8 YACC_grm_tail[110] = {
 };
 
 // Boolean matrix ...
-const uint8 YACC_grm_Bm[44] = {
+const uint8 grm_Bm[44] = {
        0,     0,     0,     2,     0,     0,    92,     0,     0,    72, 
        0,     0,    40,     0,   128,     0,     0,     1,     0,    12, 
      160,     0,    40,     8,    32,     0,    64,     0,    32,     0, 
@@ -101,7 +102,7 @@ const uint8 YACC_grm_Bm[44] = {
 };
 
 // Boolean matrix row (for state)...
-const uint8 YACC_grm_Br[43] = {
+const uint8 grm_Br[43] = {
        0,     3,     6,     9,    12,    14,    16,    16,    16,    16, 
       16,    19,    14,    22,    24,    22,    22,    22,    12,    25, 
        0,    27,    30,    32,    32,     2,    30,    30,    30,    35, 
@@ -110,22 +111,22 @@ const uint8 YACC_grm_Br[43] = {
       };
 
 // Boolean matrix column (displacement) ...
-extern const uint8 YACC_grm_Bc[27];
-const uint8 YACC_grm_Bc[27] = {
+extern const uint8 grm_Bc[27];
+const uint8 grm_Bc[27] = {
        0,     0,     0,     0,     0,     0,     0,     0,     0,     0, 
        0,     0,     0,     1,     1,     1,     1,     1,     1,     1, 
        1,     1,     2,     2,     2,     2,     2, 
       };
 
 // Boolean matrix filter/mask value ...
-const uint8 YACC_grm_Bf[27] = {
+const uint8 grm_Bf[27] = {
        1,     2,     4,     8,    16,    32,    64,   128,    16,    16, 
       16,    16,    16,     1,     2,     4,     8,     8,    16,    32, 
       64,   128,     1,     2,     1,     4,     8, 
 };
 
 // Terminal transition matrix ...
-const int8 YACC_grm_Tm[86] = {
+const int8 grm_Tm[86] = {
       -8,   -32,   -34,   -33,     0,     0,     0,     0,     0,   -40, 
      -21,     0,    33,     0,     0,    -7,   -35,   -35,   -35,    -3, 
      -24,    23,    19,   -23,    20,    24,   -22,     0,     0,     0, 
@@ -138,7 +139,7 @@ const int8 YACC_grm_Tm[86] = {
 };
 
 // Terminal transition matrix row ...
-const uint8 YACC_grm_Tr[43] = {
+const uint8 grm_Tr[43] = {
       65,    65,    65,    39,     0,    65,    65,    65,    65,    65, 
       65,     9,    39,    10,    65,    10,    10,    10,     1,    65, 
       65,    65,    26,    65,    39,    65,    26,    26,    26,     3, 
@@ -147,14 +148,14 @@ const uint8 YACC_grm_Tr[43] = {
 };
 
 // Terminal transition matrix column ...
-const uint8 YACC_grm_Tc[27] = {
+const uint8 grm_Tc[27] = {
        9,     9,    10,     0,    11,    15,    19,     1,     2,     3, 
        4,     5,     6,     7,     8,     9,    10,    11,    12,    13, 
       14,    15,    16,    17,    18,    19,    20, 
 };
 
 // Nonterminal transition matrix ...
-const int8 YACC_grm_Nm[48] = {
+const int8 grm_Nm[48] = {
        0,     0,     0,     0,    18,   -20,   -19,    17,    28,   -18, 
       16,    27,   -18,   -58,   -31,   -55,   -58,     0,   -54,   -58, 
        0,   -53,    15,    26,   -18,     0,   -30,     0,   -37,     0, 
@@ -163,7 +164,7 @@ const int8 YACC_grm_Nm[48] = {
 };
 
 // Nonterminal transition matrix row ...
-const uint8 YACC_grm_Nr[43] = {
+const uint8 grm_Nr[43] = {
    33,    33,    33,    33,    33,    33,    33,    19,     7,     4, 
     1,    33,    33,    33,    33,    19,     7,     4,    33,    33, 
    33,    19,     1,    33,    33,    33,     1,     1,     1,    19, 
@@ -172,7 +173,7 @@ const uint8 YACC_grm_Nr[43] = {
 };
 
 // Nonterminal transition matrix column ...
-const uint8 YACC_grm_Nc[59] = {
+const uint8 grm_Nc[59] = {
    14,    14,     0,     0,     1,     1,     1,     2,     2,     2, 
     2,     2,     2,     2,     2,     2,     3,     3,     4,     4, 
     4,     4,     4,     4,     5,     5,     5,     5,     5,     6, 
@@ -182,12 +183,12 @@ const uint8 YACC_grm_Nc[59] = {
 };
 
 // Reduction matrix ...
-const uint8 YACC_grm_Rm[1] = {
+const uint8 grm_Rm[1] = {
        0, 
 };
 
 // Reduction matrix row ...
-const uint8 YACC_grm_Rr[43] = {
+const uint8 grm_Rr[43] = {
        4,     0,     0,    36,     0,     0,    16,    16,    16,    16, 
       16,     2,     0,     0,     0,     0,     0,     0,    15,     0, 
       44,     0,    10,    25,    26,     0,    11,    12,    13,    14, 
@@ -196,14 +197,14 @@ const uint8 YACC_grm_Rr[43] = {
 };
 
 // Reduction matrix column ...
-const uint8 YACC_grm_Rc[27] = {
+const uint8 grm_Rc[27] = {
        0,     0,     0,     0,     0,     0,     0,     0,     0,     0, 
        0,     0,     0,     0,     0,     0,     0,     0,     0,     0, 
        0,     0,     0,     0,     0,     0,     0, 
 };
 
 // Production lengths (minus one) ...
-const int8 YACC_grm_PL[59] = {
+const int8 grm_PL[59] = {
        1,     3,    -1,     0,    -1,     1,     1,     1,     1,     1, 
        2,     2,     2,     2,     2,     1,    -1,     2,     0,     1, 
        2,     0,     1,     2,     0,     0,     0,     1,     1,     0, 
@@ -212,3 +213,5 @@ const int8 YACC_grm_PL[59] = {
        1,     0,    -1,     2,     2,     2,     1,    -1,     0, 
 };
 
+
+};   /* namespace YACC */

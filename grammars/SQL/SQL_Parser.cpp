@@ -4,8 +4,9 @@
 #include "SQL_ParserTables_typedef.h"
 #include "SQL_Parser.h"
 
+namespace SQL {
 // Terminal symbols of the grammar.
-const char *SQL_grm_term_symb[138] = {
+const char *grm_term_symb[138] = {
    "<error>",
    "<eof>",
    "<string>",
@@ -147,7 +148,7 @@ const char *SQL_grm_term_symb[138] = {
 };
 
 // Nonterminal symbols of the grammar.
-const char *SQL_grm_head_symb[154] = {
+const char *grm_head_symb[154] = {
    "Goal",
    "SQL",
    "D",
@@ -305,13 +306,13 @@ const char *SQL_grm_head_symb[154] = {
 };
 
 // Terninal action names found in the grammar ...
-const char *SQL_grm_tact_name[2] = {
+const char *grm_tact_name[2] = {
    "error",
    "lookup",
 };
 
 // Head symbol numbers for the productions.
-const uint8 SQL_grm_head_numb[399] = {
+const uint8 grm_head_numb[399] = {
        0,     1,     1,     2,     2,     2,     3,     3,     4,     4, 
        5,     5,     6,     6,     6,     6,     6,     6,     6,     6, 
        6,     6,     6,     6,     6,     6,     6,     6,     6,     6, 
@@ -355,7 +356,7 @@ const uint8 SQL_grm_head_numb[399] = {
 };
 
 // First tail symbol index into the tail list ...
-const uint16 SQL_grm_f_tail[400] = {
+const uint16 grm_f_tail[400] = {
        0,     2,     3,     5,     6,     7,     8,     9,    11,    12, 
       14,    15,    17,    21,    25,    28,    37,    43,    48,    56, 
       64,    69,    71,    74,    77,    82,    89,    94,    98,   103, 
@@ -399,7 +400,7 @@ const uint16 SQL_grm_f_tail[400] = {
 };
 
 // Tail symbol numbers ...
-const int16 SQL_grm_tail[1063] = {
+const int16 grm_tail[1063] = {
       -1,     1,    -2,    -1,    -2,    -3,    -4,    -5,    -6,    -3, 
       -6,    -7,    -4,    -7,   -10,    -5,   -10,     5,     6,     7, 
        8,     9,     6,     7,     8,    10,   -91,     8,     6,   -91, 
@@ -510,7 +511,7 @@ const int16 SQL_grm_tail[1063] = {
 };
 
 // Arguments for token actions ...
-const int8 SQL_grm_arga[138] = {
+const int8 grm_arga[138] = {
       -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1, 
       -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1, 
       -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1, 
@@ -528,7 +529,7 @@ const int8 SQL_grm_arga[138] = {
 };
 
 // Boolean matrix ...
-const uint8 SQL_grm_Bm[736] = {
+const uint8 grm_Bm[736] = {
        0,     0,     0,     0,     0,     0,     0,     0,     0,     0, 
        0,   120,     8,    80,    20,     9,   160,    32,     0,    24, 
        8,     8,   122,     8,    80,    20,     9,   160,    32,     0, 
@@ -606,7 +607,7 @@ const uint8 SQL_grm_Bm[736] = {
 };
 
 // Boolean matrix row (for state)...
-const uint16 SQL_grm_Br[532] = {
+const uint16 grm_Br[532] = {
       11,    22,    33,    44,    51,    57,    68,    79,    85,    92, 
      103,   103,   114,   114,   125,   114,   134,    11,   145,   114, 
      101,   101,   101,   101,   101,   153,   114,   164,   173,     0, 
@@ -664,8 +665,8 @@ const uint16 SQL_grm_Br[532] = {
       };
 
 // Boolean matrix column (displacement) ...
-extern const uint8 SQL_grm_Bc[138];
-const uint8 SQL_grm_Bc[138] = {
+extern const uint8 grm_Bc[138];
+const uint8 grm_Bc[138] = {
        0,     0,     0,     0,     0,     0,     0,     0,     1,     0, 
        0,     1,     1,     1,     1,     1,     1,     1,     0,     2, 
        0,     2,     0,     0,     2,     2,     2,     2,     0,     0, 
@@ -683,7 +684,7 @@ const uint8 SQL_grm_Bc[138] = {
       };
 
 // Boolean matrix filter/mask value ...
-const uint8 SQL_grm_Bf[138] = {
+const uint8 grm_Bf[138] = {
        1,     2,     4,     8,    16,    32,    64,   128,     1,    32, 
       32,     2,     4,     8,    16,    32,    64,   128,    32,     1, 
       32,     2,    32,    32,     4,     8,    16,    32,    32,    32, 
@@ -701,7 +702,7 @@ const uint8 SQL_grm_Bf[138] = {
 };
 
 // Terminal transition matrix ...
-const int16 SQL_grm_Tm[1073] = {
+const int16 grm_Tm[1073] = {
        0,     0,  -107,  -108,  -109,  -110,   -80,   -66,   -71,   -72, 
      -73,   -74,   -75,   -76,   -70,   -17,   -20,   -24,   -26,   -28, 
      -31,   -51,   -97,   -81,   -16,   -32,   -43,   -44,   -77,   -82, 
@@ -813,7 +814,7 @@ const int16 SQL_grm_Tm[1073] = {
 };
 
 // Terminal transition matrix row ...
-const uint16 SQL_grm_Tr[532] = {
+const uint16 grm_Tr[532] = {
      952,   952,   844,   952,   737,   952,   737,   952,   737,   952, 
      737,   524,   524,   524,   457,   457,   952,   952,   457,   524, 
      737,   524,   737,   737,   737,   952,   352,   308,   952,   952, 
@@ -871,7 +872,7 @@ const uint16 SQL_grm_Tr[532] = {
 };
 
 // Terminal transition matrix column ...
-const uint8 SQL_grm_Tc[138] = {
+const uint8 grm_Tc[138] = {
       66,    66,     0,    27,     1,    11,    28,    35,     2,    49, 
       50,    59,     3,    93,     4,     5,   100,     6,   101,   103, 
      104,     7,     8,     9,    66,    79,    10,    11,    12,    13, 
@@ -889,7 +890,7 @@ const uint8 SQL_grm_Tc[138] = {
 };
 
 // Nonterminal transition matrix ...
-const int16 SQL_grm_Nm[981] = {
+const int16 grm_Nm[981] = {
        0,     0,     0,     0,     0,     0,     0,     0,     0,     0, 
        0,     0,     0,     0,  -355,     0,  -357,     0,     0,     0, 
        0,   351,  -181,     0,     0,     0,     0,     0,     0,     0, 
@@ -992,7 +993,7 @@ const int16 SQL_grm_Nm[981] = {
 };
 
 // Nonterminal transition matrix row ...
-const uint16 SQL_grm_Nr[532] = {
+const uint16 grm_Nr[532] = {
   879,   778,   684,   879,   879,   552,   879,   879,   684,   684, 
   879,   879,   879,   778,   552,   242,   879,   604,   172,   684, 
   879,   879,   778,   684,   552,   879,   778,   879,   879,   879, 
@@ -1050,7 +1051,7 @@ const uint16 SQL_grm_Nr[532] = {
 };
 
 // Nonterminal transition matrix column ...
-const uint8 SQL_grm_Nc[399] = {
+const uint8 grm_Nc[399] = {
    90,    90,    90,    87,    87,    87,     1,     1,     2,     2, 
     3,     3,     5,     5,     5,     5,     5,     5,     5,     5, 
     5,     5,     5,     5,     5,     5,     5,     5,     5,     5, 
@@ -1094,14 +1095,14 @@ const uint8 SQL_grm_Nc[399] = {
 };
 
 // Reduction matrix ...
-const uint16 SQL_grm_Rm[28] = {
+const uint16 grm_Rm[28] = {
        0,     0,     0,     0,     0,     0,     0,     0,   232,     0, 
      300,   232,     0,     0,     0,   272,   271,   271,   271,   271, 
        0,   233,   395,     0,     0,     0,     0,   233, 
 };
 
 // Reduction matrix row ...
-const int16 SQL_grm_Rr[532] = {
+const int16 grm_Rr[532] = {
      300,   300,     3,     0,     0,    -4,     0,     0,     4,     5, 
        0,     0,     0,     0,     0,     0,   292,   300,     0,     0, 
        0,     0,     0,     0,     0,     0,     0,     0,     0,   -12, 
@@ -1159,7 +1160,7 @@ const int16 SQL_grm_Rr[532] = {
 };
 
 // Reduction matrix column ...
-const uint8 SQL_grm_Rc[138] = {
+const uint8 grm_Rc[138] = {
        0,     0,     0,     0,     0,     0,     0,     0,     1,     0, 
        0,     0,     0,     0,     0,     0,     0,     0,     0,     0, 
        0,     0,     0,     0,     0,     0,     0,     0,     0,     0, 
@@ -1177,7 +1178,7 @@ const uint8 SQL_grm_Rc[138] = {
 };
 
 // Production lengths (minus one) ...
-const int8 SQL_grm_PL[399] = {
+const int8 grm_PL[399] = {
        1,     0,     1,     0,     0,     0,     0,     1,     0,     1, 
        0,     1,     3,     3,     2,     8,     5,     4,     7,     7, 
        4,     1,     2,     2,     4,     6,     4,     3,     4,     6, 
@@ -1221,7 +1222,7 @@ const int8 SQL_grm_PL[399] = {
 };
 
 // Terminal action number ...
-const int8 SQL_grm_tact_numb[138] = {
+const int8 grm_tact_numb[138] = {
        0,    -1,     1,     1,     1,    -1,    -1,    -1,    -1,    -1, 
       -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1, 
       -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1, 
@@ -1238,3 +1239,5 @@ const int8 SQL_grm_tact_numb[138] = {
       -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1, 
 };
 
+
+};   /* namespace SQL */

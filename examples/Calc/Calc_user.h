@@ -10,7 +10,8 @@
  */
 
 #if !defined(__Calc_USER_HEADER__)
+namespace Calc {
 
 
-
+};
 #endif

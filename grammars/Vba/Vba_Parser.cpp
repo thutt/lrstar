@@ -4,8 +4,9 @@
 #include "Vba_ParserTables_typedef.h"
 #include "Vba_Parser.h"
 
+namespace Vba {
 // Terminal symbols of the grammar.
-const char *Vba_grm_term_symb[139] = {
+const char *grm_term_symb[139] = {
    "<error>",
    "<eof>",
    "<ident0>",
@@ -148,7 +149,7 @@ const char *Vba_grm_term_symb[139] = {
 };
 
 // Nonterminal symbols of the grammar.
-const char *Vba_grm_head_symb[181] = {
+const char *grm_head_symb[181] = {
    "ScriptFile",
    "GlobalStmtEOL",
    "StmtEOL",
@@ -333,13 +334,13 @@ const char *Vba_grm_head_symb[181] = {
 };
 
 // Terninal action names found in the grammar ...
-const char *Vba_grm_tact_name[2] = {
+const char *grm_tact_name[2] = {
    "error",
    "lookup",
 };
 
 // Node names found in the grammar.
-const char *Vba_grm_node_name[81] = {
+const char *grm_node_name[81] = {
    "label",
    "RemStmt",
    "DimStmt",
@@ -425,7 +426,7 @@ const char *Vba_grm_node_name[81] = {
 };
 
 // Head symbol numbers for the productions.
-const uint8 Vba_grm_head_numb[405] = {
+const uint8 grm_head_numb[405] = {
        0,     1,     1,     2,     2,     2,     3,     3,     4,     4, 
        5,     6,     6,     6,     6,     6,     6,     6,     6,     6, 
        7,     8,     9,    10,    10,    10,    10,    10,    10,    10, 
@@ -470,7 +471,7 @@ const uint8 Vba_grm_head_numb[405] = {
 };
 
 // First tail symbol index into the tail list ...
-const uint16 Vba_grm_f_tail[406] = {
+const uint16 grm_f_tail[406] = {
        0,     2,     3,     5,     6,     8,    11,    12,    13,    15, 
       18,    19,    20,    21,    22,    24,    26,    28,    30,    33, 
       36,    37,    38,    39,    40,    41,    42,    43,    44,    45, 
@@ -515,7 +516,7 @@ const uint16 Vba_grm_f_tail[406] = {
 };
 
 // Tail symbol numbers ...
-const int16 Vba_grm_tail[830] = {
+const int16 grm_tail[830] = {
     -137,     1,    23,    -6,    23,    23,    -3,    23,    -4,    -3, 
       23,   -11,   -10,    -5,    24,    -5,    24,  -138,     3,   -80, 
      -34,   -78,    -9,   -25,    -8,   -28,    -8,   -35,    -8,   -95, 
@@ -602,7 +603,7 @@ const int16 Vba_grm_tail[830] = {
 };
 
 // Arguments for token actions ...
-const int8 Vba_grm_arga[139] = {
+const int8 grm_arga[139] = {
       -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1, 
       -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1, 
       -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1, 
@@ -620,7 +621,7 @@ const int8 Vba_grm_arga[139] = {
 };
 
 // First arguments for productions ...
-const int8 Vba_grm_argx[405] = {
+const int8 grm_argx[405] = {
       -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1, 
        0,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1, 
       -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1, 
@@ -665,7 +666,7 @@ const int8 Vba_grm_argx[405] = {
 };
 
 // Second arguments for productions ...
-const int16 Vba_grm_argy[405] = {
+const int16 grm_argy[405] = {
       -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1, 
        1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1, 
       -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1, 
@@ -710,7 +711,7 @@ const int16 Vba_grm_argy[405] = {
 };
 
 // Boolean matrix ...
-const uint8 Vba_grm_Bm[892] = {
+const uint8 grm_Bm[892] = {
        0,     0,     0,     0,     0,     0,     0,     0,     0,     0, 
        0,     2,     0,     2,     0,     0,     4,     0,     0,     0, 
        0,     0,     2,     0,     0,     0,     0,     0,     0,     0, 
@@ -804,7 +805,7 @@ const uint8 Vba_grm_Bm[892] = {
 };
 
 // Boolean matrix row (for state)...
-const uint16 Vba_grm_Br[453] = {
+const uint16 grm_Br[453] = {
        0,    11,    20,    27,    38,    49,    60,    60,    71,     0, 
        0,    82,    60,    90,    97,    97,   103,   114,    49,   122, 
      122,   133,   139,   149,   139,   160,   114,   114,   114,   114, 
@@ -854,8 +855,8 @@ const uint16 Vba_grm_Br[453] = {
       };
 
 // Boolean matrix column (displacement) ...
-extern const uint8 Vba_grm_Bc[139];
-const uint8 Vba_grm_Bc[139] = {
+extern const uint8 grm_Bc[139];
+const uint8 grm_Bc[139] = {
        0,     0,     0,     0,     0,     0,     0,     0,     0,     1, 
        1,     1,     1,     1,     1,     1,     1,     1,     1,     1, 
        1,     1,     2,     2,     2,     2,     2,     0,     0,     0, 
@@ -873,7 +874,7 @@ const uint8 Vba_grm_Bc[139] = {
       };
 
 // Boolean matrix filter/mask value ...
-const uint8 Vba_grm_Bf[139] = {
+const uint8 grm_Bf[139] = {
        1,     2,     4,     8,    16,    32,    32,    64,   128,     1, 
        2,     4,     4,     4,     4,     4,     8,     8,    16,    32, 
       64,   128,     1,     2,     4,     8,    16,     2,     2,     2, 
@@ -891,7 +892,7 @@ const uint8 Vba_grm_Bf[139] = {
 };
 
 // Terminal transition matrix ...
-const int16 Vba_grm_Tm[1439] = {
+const int16 grm_Tm[1439] = {
        0,     0,     0,     0,  -268,   150,  -263,     0,     0,    84, 
      218,  -254,     0,     0,     0,   417,     0,   219,  -255,     0, 
        0,     0,     0,     0,     0,     0,     0,     0,  -269,   194, 
@@ -1039,7 +1040,7 @@ const int16 Vba_grm_Tm[1439] = {
 };
 
 // Terminal transition matrix row ...
-const uint16 Vba_grm_Tr[453] = {
+const uint16 grm_Tr[453] = {
     1366,  1366,  1148,  1366,  1366,  1366,  1366,  1366,  1366,  1366, 
     1366,  1148,  1366,  1366,  1366,  1148,  1366,   797,  1148,  1366, 
     1366,  1366,  1148,  1366,  1148,  1148,   435,     3,    39,   653, 
@@ -1089,7 +1090,7 @@ const uint16 Vba_grm_Tr[453] = {
 };
 
 // Terminal transition matrix column ...
-const uint8 Vba_grm_Tc[139] = {
+const uint8 grm_Tc[139] = {
       32,    64,    20,    68,    63,    64,    20,    70,    32,    63, 
       53,    64,    70,    42,    67,     7,    15,    25,     0,     4, 
       71,     5,    41,    69,    42,    20,    67,     7,    15,    25, 
@@ -1107,7 +1108,7 @@ const uint8 Vba_grm_Tc[139] = {
 };
 
 // Nonterminal transition matrix ...
-const int16 Vba_grm_Nm[4121] = {
+const int16 grm_Nm[4121] = {
        0,   303,     0,     0,     0,  -378,   175,     0,     0,     0, 
        0,     0,     0,     0,     0,     0,     0,     0,     0,     0, 
        0,     0,     0,     0,     0,     0,     0,     0,     0,     0, 
@@ -1524,7 +1525,7 @@ const int16 Vba_grm_Nm[4121] = {
 };
 
 // Nonterminal transition matrix row ...
-const uint16 Vba_grm_Nr[453] = {
+const uint16 grm_Nr[453] = {
  4013,  4013,  4013,  4013,  4013,  4013,  3581,  1967,  4013,  4013, 
  4013,  4013,  1727,  4013,  4013,  4013,  4013,  4013,  4013,  4013, 
  4013,  4013,  3581,  4013,  1967,  4013,  4013,  4013,  4013,  4013, 
@@ -1574,7 +1575,7 @@ const uint16 Vba_grm_Nr[453] = {
 };
 
 // Nonterminal transition matrix column ...
-const uint8 Vba_grm_Nc[405] = {
+const uint8 grm_Nc[405] = {
    83,    83,    83,    83,    83,    83,     2,     2,     3,     3, 
     5,     2,     2,     2,     2,     2,     2,     2,     2,     2, 
     3,     5,     6,     6,     6,     6,     6,     6,     6,     6, 
@@ -1619,7 +1620,7 @@ const uint8 Vba_grm_Nc[405] = {
 };
 
 // Reduction matrix ...
-const uint16 Vba_grm_Rm[265] = {
+const uint16 grm_Rm[265] = {
        0,   319,   319,     0,     0,     0,     0,     0,     0,   319, 
        0,     0,   319,     0,     0,     0,     0,   322,     0,   319, 
        0,     0,     0,     0,     0,     0,     0,     0,     0,     0, 
@@ -1650,7 +1651,7 @@ const uint16 Vba_grm_Rm[265] = {
 };
 
 // Reduction matrix row ...
-const int16 Vba_grm_Rr[453] = {
+const int16 grm_Rr[453] = {
      313,     0,   -20,   -20,   317,   191,   -20,   -20,   -20,   -39, 
      -59,   -20,   100,   -20,   -20,   -20,   -79,   -20,   192,    98, 
       99,   -20,   340,   -20,   340,   365,   -20,   -20,   -20,   -20, 
@@ -1700,7 +1701,7 @@ const int16 Vba_grm_Rr[453] = {
 };
 
 // Reduction matrix column ...
-const uint8 Vba_grm_Rc[139] = {
+const uint8 grm_Rc[139] = {
        0,     0,     1,     2,     3,     3,     3,     3,     4,     4, 
        5,     4,     4,     4,     4,     4,     6,     6,     4,     4, 
        4,     4,     4,     7,     8,     0,     9,     0,     0,     0, 
@@ -1718,7 +1719,7 @@ const uint8 Vba_grm_Rc[139] = {
 };
 
 // Production lengths (minus one) ...
-const int8 Vba_grm_PL[405] = {
+const int8 grm_PL[405] = {
        1,     0,     1,     0,     1,     2,     0,     0,     1,     2, 
        0,     0,     0,     0,     1,     1,     1,     1,     2,     2, 
        0,     0,     0,     0,     0,     0,     0,     0,     0,     0, 
@@ -1763,7 +1764,7 @@ const int8 Vba_grm_PL[405] = {
 };
 
 // Terminal action number ...
-const int8 Vba_grm_tact_numb[139] = {
+const int8 grm_tact_numb[139] = {
        0,    -1,     1,     1,     1,     1,     1,     1,    -1,    -1, 
       -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1, 
       -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1, 
@@ -1781,7 +1782,7 @@ const int8 Vba_grm_tact_numb[139] = {
 };
 
 // Node number for each production ...
-const int8 Vba_grm_node_numb[405] = {
+const int8 grm_node_numb[405] = {
       -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1, 
        0,     1,     2,     3,     4,     5,     6,     7,     8,     9, 
       -1,    -1,    -1,    10,    11,    12,    13,    14,    15,    16, 
@@ -1826,7 +1827,7 @@ const int8 Vba_grm_node_numb[405] = {
 };
 
 // Node action numbers ...
-const int8 Vba_grm_nact_numb[405] = {
+const int8 grm_nact_numb[405] = {
       -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1, 
       -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1, 
       -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1, 
@@ -1870,3 +1871,5 @@ const int8 Vba_grm_nact_numb[405] = {
       -1,    -1,    -1,    -1,    -1, 
 };
 
+
+};   /* namespace Vba */

@@ -9,7 +9,8 @@
  *        It can be safely edited to add user-supplied code.
  */
 #if !defined(__Goodbye_USER_HEADER__)
+namespace Goodbye {
 
 
-
+};
 #endif

@@ -6,32 +6,33 @@
 
 #include "lrstar_parser_tables.h"
 
-extern const char *JSON_grm_head_symb[8];
-extern const char *JSON_grm_tact_name[2];
-extern const char *JSON_grm_node_name[10];
-extern const uint8 JSON_grm_head_numb[17];
-extern const uint8 JSON_grm_f_tail[18];
-extern const int8 JSON_grm_tail[28];
-extern const char *JSON_grm_term_symb[14];
-extern const int8 JSON_grm_arga[14];
-extern const uint8 JSON_grm_Bm[7];
-extern const uint8 JSON_grm_Br[11];
-extern const uint8 JSON_grm_Bc[14];
-extern const uint8 JSON_grm_Bf[14];
-extern const int8 JSON_grm_Tm[23];
-extern const uint8 JSON_grm_Tr[11];
-extern const uint8 JSON_grm_Tc[14];
-extern const int8 JSON_grm_Nm[19];
-extern const uint8 JSON_grm_Nr[11];
-extern const uint8 JSON_grm_Nc[17];
-extern const uint8 JSON_grm_Rm[1];
-extern const uint8 JSON_grm_Rr[11];
-extern const uint8 JSON_grm_Rc[14];
-extern const uint8 JSON_grm_PL[17];
-extern const int8 JSON_grm_tact_numb[14];
-extern const int8 JSON_grm_argx[17];
-extern const int8 JSON_grm_node_numb[17];
-extern const int8 JSON_grm_nact_numb[17];
+namespace JSON {
+extern const char *grm_head_symb[8];
+extern const char *grm_tact_name[2];
+extern const char *grm_node_name[10];
+extern const uint8 grm_head_numb[17];
+extern const uint8 grm_f_tail[18];
+extern const int8 grm_tail[28];
+extern const char *grm_term_symb[14];
+extern const int8 grm_arga[14];
+extern const uint8 grm_Bm[7];
+extern const uint8 grm_Br[11];
+extern const uint8 grm_Bc[14];
+extern const uint8 grm_Bf[14];
+extern const int8 grm_Tm[23];
+extern const uint8 grm_Tr[11];
+extern const uint8 grm_Tc[14];
+extern const int8 grm_Nm[19];
+extern const uint8 grm_Nr[11];
+extern const uint8 grm_Nc[17];
+extern const uint8 grm_Rm[1];
+extern const uint8 grm_Rr[11];
+extern const uint8 grm_Rc[14];
+extern const uint8 grm_PL[17];
+extern const int8 grm_tact_numb[14];
+extern const int8 grm_argx[17];
+extern const int8 grm_node_numb[17];
+extern const int8 grm_nact_numb[17];
 
 
 template<typename T_term_symb,
@@ -66,16 +67,18 @@ template<typename T_term_symb,
          typename T_node_numb,
          typename T_nact_numb,
          typename T_reverse>
-   class JSON_parser_tables_ : public lrstar_parser_tables<T_term_symb, T_head_symb, T_tact_name, T_node_name, T_head_numb, T_f_tail, T_tail, T_arga, T_argx, T_argy, T_Bm, T_Br, T_Bc, T_Bf, T_Tm, T_Tr, T_Tc, T_Nm, T_Nr, T_Nc, T_Rm, T_Rr, T_Rc, T_PL, T_nd_fterm, T_nd_term, T_nd_faction, T_nd_action, T_tact_numb, T_node_numb, T_nact_numb, T_reverse>   {
+   class parser_tables_ : public lrstar_parser_tables<T_term_symb, T_head_symb, T_tact_name, T_node_name, T_head_numb, T_f_tail, T_tail, T_arga, T_argx, T_argy, T_Bm, T_Br, T_Bc, T_Bf, T_Tm, T_Tr, T_Tc, T_Nm, T_Nr, T_Nc, T_Rm, T_Rr, T_Rc, T_PL, T_nd_fterm, T_nd_term, T_nd_faction, T_nd_action, T_tact_numb, T_node_numb, T_nact_numb, T_reverse>   {
 
 public:
 
-      JSON_parser_tables_() : lrstar_parser_tables<T_term_symb, T_head_symb, T_tact_name, T_node_name, T_head_numb, T_f_tail, T_tail, T_arga, T_argx, T_argy, T_Bm, T_Br, T_Bc, T_Bf, T_Tm, T_Tr, T_Tc, T_Nm, T_Nr, T_Nc, T_Rm, T_Rr, T_Rc, T_PL, T_nd_fterm, T_nd_term, T_nd_faction, T_nd_action, T_tact_numb, T_node_numb, T_nact_numb, T_reverse>(14, 8, 17, 11, 10, 2, 10, 10, 1, false, &JSON_grm_term_symb[0], &JSON_grm_head_symb[0], &JSON_grm_tact_name[0], &JSON_grm_node_name[0], &JSON_grm_head_numb[0], &JSON_grm_f_tail[0], &JSON_grm_tail[0], &JSON_grm_arga[0], &JSON_grm_argx[0], 0, &JSON_grm_Bm[0], &JSON_grm_Br[0], &JSON_grm_Bc[0], &JSON_grm_Bf[0], &JSON_grm_Tm[0], &JSON_grm_Tr[0], &JSON_grm_Tc[0], &JSON_grm_Nm[0], &JSON_grm_Nr[0], &JSON_grm_Nc[0], &JSON_grm_Rm[0], &JSON_grm_Rr[0], &JSON_grm_Rc[0], &JSON_grm_PL[0], 0, 0, 0, 0, &JSON_grm_tact_numb[0], &JSON_grm_node_numb[0], &JSON_grm_nact_numb[0], 0)
+      parser_tables_() : lrstar_parser_tables<T_term_symb, T_head_symb, T_tact_name, T_node_name, T_head_numb, T_f_tail, T_tail, T_arga, T_argx, T_argy, T_Bm, T_Br, T_Bc, T_Bf, T_Tm, T_Tr, T_Tc, T_Nm, T_Nr, T_Nc, T_Rm, T_Rr, T_Rc, T_PL, T_nd_fterm, T_nd_term, T_nd_faction, T_nd_action, T_tact_numb, T_node_numb, T_nact_numb, T_reverse>(14, 8, 17, 11, 10, 2, 10, 10, 1, false, &grm_term_symb[0], &grm_head_symb[0], &grm_tact_name[0], &grm_node_name[0], &grm_head_numb[0], &grm_f_tail[0], &grm_tail[0], &grm_arga[0], &grm_argx[0], 0, &grm_Bm[0], &grm_Br[0], &grm_Bc[0], &grm_Bf[0], &grm_Tm[0], &grm_Tr[0], &grm_Tc[0], &grm_Nm[0], &grm_Nr[0], &grm_Nc[0], &grm_Rm[0], &grm_Rr[0], &grm_Rc[0], &grm_PL[0], 0, 0, 0, 0, &grm_tact_numb[0], &grm_node_numb[0], &grm_nact_numb[0], 0)
       {
       }
    };
 
-typedef JSON_parser_tables_<const char * const, const char * const, const char * const, const char * const, uint8, uint8, int8, int8, int8, int32, uint8, uint8, uint8, uint8, int8, uint8, uint8, int8, uint8, uint8, uint8, uint8, uint8, uint8, int32, int32, int32, int32, int8, int8, int8, int32> JSON_parser_tables_t;
+typedef parser_tables_<const char * const, const char * const, const char * const, const char * const, uint8, uint8, int8, int8, int8, int32, uint8, uint8, uint8, uint8, int8, uint8, uint8, int8, uint8, uint8, uint8, uint8, uint8, uint8, int32, int32, int32, int32, int8, int8, int8, int32> parser_tables_t;
 
+
+};   /* namespace JSON */
 
 #endif

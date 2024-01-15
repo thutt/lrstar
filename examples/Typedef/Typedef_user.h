@@ -10,7 +10,8 @@
  */
 
 #if !defined(__Typedef_USER_HEADER__)
+namespace Typedef {
 
 
-
+};
 #endif

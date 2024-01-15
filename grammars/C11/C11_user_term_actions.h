@@ -5,8 +5,11 @@
  *        It can be safely edited to add user-supplied code.
  */
 
-void
-C11_term_actions(UNUSED_PARAM(C11_parser_t *parser))
-{
-      /* Termination code goes here */
-}
+namespace C11 {
+    void
+    term_actions(UNUSED_PARAM(parser_t *parser))
+    {
+          /* Termination code goes here */
+    }
+
+};   /* namespace C11 */

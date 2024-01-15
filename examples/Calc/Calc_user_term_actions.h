@@ -5,8 +5,10 @@
  *        It can be safely edited to add user-supplied code.
  */
 
-void
-Calc_term_actions(UNUSED_PARAM(Calc_parser_t *parser))
-{
-      /* Termination code goes here */
-}
+namespace Calc {
+    void
+    term_actions(UNUSED_PARAM(parser_t *parser))
+    {
+        /* Termination code goes here */
+    }
+};

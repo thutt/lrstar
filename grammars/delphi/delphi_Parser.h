@@ -6,13 +6,17 @@
 
 #include "lrstar_basic_defs.h"
 #include "lrstar_lexer.h"
+namespace delphi {
 
+
+};   /* namespace delphi */
 #include "delphi_ParserTables_typedef.h"
 #include "lrstar_parser.h"
 
-extern const char delphi_grammar_name[];
+namespace delphi {
+extern const char grammar_name[];
 
-typedef lrstar_parser</* grammar           */   delphi_grammar_name,
+typedef lrstar_parser</* grammar           */   grammar_name,
                       /* AST traversals    */   1,
                       /* actions           */   false,
                       /* debug_parser      */   false,
@@ -29,6 +33,8 @@ typedef lrstar_parser</* grammar           */   delphi_grammar_name,
                       /* stksize           */   100,
                       /* term_actions      */   false,
                       /* lexer table type  */   delphi_lexer_t,
-                      /* parser table type */   delphi_parser_tables_t> delphi_parser_t;
+                      /* parser table type */   parser_tables_t> parser_t;
+
+};   /* namespace delphi */
 
 #endif

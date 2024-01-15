@@ -5,8 +5,10 @@
  *        It can be safely edited to add user-supplied code.
  */
 
-void
-Goodbye_term_actions(UNUSED_PARAM(Goodbye_parser_t *parser))
-{
-      /* Termination code goes here */
-}
+namespace Goodbye {
+    void
+    term_actions(UNUSED_PARAM(parser_t *parser))
+    {
+        /* Termination code goes here */
+    }
+};

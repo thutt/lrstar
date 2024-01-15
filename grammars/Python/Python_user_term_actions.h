@@ -5,8 +5,11 @@
  *        It can be safely edited to add user-supplied code.
  */
 
-void
-Python_term_actions(UNUSED_PARAM(Python_parser_t *parser))
-{
-      /* Termination code goes here */
-}
+namespace Python {
+    void
+    term_actions(UNUSED_PARAM(parser_t *parser))
+    {
+          /* Termination code goes here */
+    }
+
+};   /* namespace Python */

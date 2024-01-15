@@ -4,8 +4,9 @@
 #include "verilog_ParserTables_typedef.h"
 #include "verilog_Parser.h"
 
+namespace verilog {
 // Terminal symbols of the grammar.
-const char *verilog_grm_term_symb[177] = {
+const char *grm_term_symb[177] = {
    "<error>",
    "<eof>",
    "<output_symbol>",
@@ -186,7 +187,7 @@ const char *verilog_grm_term_symb[177] = {
 };
 
 // Nonterminal symbols of the grammar.
-const char *verilog_grm_head_symb[230] = {
+const char *grm_head_symb[230] = {
    "source_text",
    "description",
    "module",
@@ -420,13 +421,13 @@ const char *verilog_grm_head_symb[230] = {
 };
 
 // Terninal action names found in the grammar ...
-const char *verilog_grm_tact_name[2] = {
+const char *grm_tact_name[2] = {
    "error",
    "lookup",
 };
 
 // Head symbol numbers for the productions.
-const uint8 verilog_grm_head_numb[521] = {
+const uint8 grm_head_numb[521] = {
        0,     1,     1,     2,     2,     3,     4,     5,     5,     6, 
        6,     7,     7,     7,     8,     9,     9,     9,     9,     9, 
        9,     9,     9,     9,     9,     9,     9,     9,     9,     9, 
@@ -483,7 +484,7 @@ const uint8 verilog_grm_head_numb[521] = {
 };
 
 // First tail symbol index into the tail list ...
-const uint16 verilog_grm_f_tail[522] = {
+const uint16 grm_f_tail[522] = {
        0,     2,     3,     4,    11,    17,    18,    22,    23,    28, 
       29,    33,    34,    38,    44,    45,    46,    47,    48,    49, 
       50,    51,    52,    53,    54,    55,    56,    57,    58,    59, 
@@ -540,7 +541,7 @@ const uint16 verilog_grm_f_tail[522] = {
 };
 
 // Tail symbol numbers ...
-const int16 verilog_grm_tail[1093] = {
+const int16 grm_tail[1093] = {
     -153,     1,    -2,   -10,    14,    -3,  -154,    15,    16,  -155, 
       17,    18,    -3,  -154,    16,  -155,    17,  -147,    19,    -5, 
     -157,    21,  -158,    22,    -8,    19,  -158,    21,    -7,    23, 
@@ -654,7 +655,7 @@ const int16 verilog_grm_tail[1093] = {
 };
 
 // Arguments for token actions ...
-const int8 verilog_grm_arga[177] = {
+const int8 grm_arga[177] = {
       -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1, 
       -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1, 
       -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1, 
@@ -676,7 +677,7 @@ const int8 verilog_grm_arga[177] = {
 };
 
 // Boolean matrix ...
-const uint8 verilog_grm_Bm[505] = {
+const uint8 grm_Bm[505] = {
        0,     0,     0,     0,     0,     0,     0,     0,     0,     2, 
        0,     0,     0,     0,     0,     0,     0,     8,     0,     0, 
        0,     0,     0,     0,   128,     0,     0,     0,     0,     0, 
@@ -731,7 +732,7 @@ const uint8 verilog_grm_Bm[505] = {
 };
 
 // Boolean matrix row (for state)...
-const uint16 verilog_grm_Br[569] = {
+const uint16 grm_Br[569] = {
        0,     9,    16,    16,    16,    23,    23,    23,    30,    37, 
       44,    16,    44,     0,    43,    16,    16,     0,     0,     0, 
       51,    59,     0,    23,    68,    51,    68,    37,    74,    79, 
@@ -792,8 +793,8 @@ const uint16 verilog_grm_Br[569] = {
       };
 
 // Boolean matrix column (displacement) ...
-extern const uint8 verilog_grm_Bc[177];
-const uint8 verilog_grm_Bc[177] = {
+extern const uint8 grm_Bc[177];
+const uint8 grm_Bc[177] = {
        0,     0,     0,     0,     0,     0,     0,     0,     1,     1, 
        1,     1,     1,     1,     0,     1,     1,     1,     0,     1, 
        2,     2,     2,     2,     2,     2,     2,     2,     0,     3, 
@@ -815,7 +816,7 @@ const uint8 verilog_grm_Bc[177] = {
       };
 
 // Boolean matrix filter/mask value ...
-const uint8 verilog_grm_Bf[177] = {
+const uint8 grm_Bf[177] = {
        1,     2,     4,     8,    16,    32,    64,   128,     1,     2, 
        1,     1,     4,     8,     2,    16,    32,    64,     2,   128, 
        1,     2,     4,     8,    16,    32,    64,   128,     2,     1, 
@@ -837,7 +838,7 @@ const uint8 verilog_grm_Bf[177] = {
 };
 
 // Terminal transition matrix ...
-const int16 verilog_grm_Tm[1592] = {
+const int16 grm_Tm[1592] = {
     -297,  -298,  -265,     0,  -259,  -256,   532,   549,  -260,     0, 
      534,  -255,  -263,     0,   542,   550,  -264,     0,   551,   553, 
     -290,     0,   552,   554,  -291,     0,   564,   563,  -201,   205, 
@@ -1001,7 +1002,7 @@ const int16 verilog_grm_Tm[1592] = {
 };
 
 // Terminal transition matrix row ...
-const uint16 verilog_grm_Tr[569] = {
+const uint16 grm_Tr[569] = {
     1467,  1467,  1467,  1467,  1467,  1467,  1467,  1342,  1467,  1467, 
     1467,  1467,  1342,  1467,  1467,  1467,  1467,  1467,  1467,  1467, 
     1467,   978,  1467,  1217,  1467,  1342,  1342,  1467,  1467,  1467, 
@@ -1062,7 +1063,7 @@ const uint16 verilog_grm_Tr[569] = {
 };
 
 // Terminal transition matrix column ...
-const uint8 verilog_grm_Tc[177] = {
+const uint8 grm_Tc[177] = {
       57,    57,    78,    55,    57,    78,    59,    55,    57,    60, 
       78,    59,    60,    79,     9,    10,     0,    19,    20,     1, 
        2,     3,    61,    82,    83,    84,     4,     5,    21,    22, 
@@ -1084,7 +1085,7 @@ const uint8 verilog_grm_Tc[177] = {
 };
 
 // Nonterminal transition matrix ...
-const int16 verilog_grm_Nm[3577] = {
+const int16 grm_Nm[3577] = {
        0,     0,     0,     0,     0,     0,     0,     0,     0,     0, 
        0,     0,     0,     0,   100,     0,     0,   206,   362,   286, 
      287,  -432,  -397,     0,     0,     0,     0,  -379,  -514,   433, 
@@ -1446,7 +1447,7 @@ const int16 verilog_grm_Nm[3577] = {
 };
 
 // Nonterminal transition matrix row ...
-const uint16 verilog_grm_Nr[569] = {
+const uint16 grm_Nr[569] = {
  3467,  3467,  3467,  3361,  3064,  3467,  3361,  3467,  3467,  3262, 
  3467,  2829,  3467,  3467,  3467,   327,   317,  3467,  3467,  3361, 
  3467,  2924,  3467,  3467,  3163,  3467,  3163,   308,  3467,  3467, 
@@ -1507,7 +1508,7 @@ const uint16 verilog_grm_Nr[569] = {
 };
 
 // Nonterminal transition matrix column ...
-const uint8 verilog_grm_Nc[521] = {
+const uint8 grm_Nc[521] = {
    50,    50,    50,     2,     2,     9,    17,    50,    50,     2, 
     2,     9,     9,     9,    17,    50,    50,    50,    50,    50, 
    50,    50,    50,    50,    50,    50,    50,    50,    50,    50, 
@@ -1564,7 +1565,7 @@ const uint8 verilog_grm_Nc[521] = {
 };
 
 // Reduction matrix ...
-const uint16 verilog_grm_Rm[153] = {
+const uint16 grm_Rm[153] = {
        0,     0,     0,     0,     0,     0,     0,     0,     0,     0, 
        0,     0,     0,     0,     0,     0,     0,     0,     0,   350, 
      350,   369,   350,   350,     0,   350,   350,     0,     0,     0, 
@@ -1584,7 +1585,7 @@ const uint16 verilog_grm_Rm[153] = {
 };
 
 // Reduction matrix row ...
-const int16 verilog_grm_Rr[569] = {
+const int16 grm_Rr[569] = {
      386,     0,     0,     0,     0,   388,   388,     0,     0,   395, 
        0,     0,     0,   393,    11,     0,     0,   390,   401,   390, 
        0,     0,   398,     0,     0,     0,     0,   395,     0,   307, 
@@ -1645,7 +1646,7 @@ const int16 verilog_grm_Rr[569] = {
 };
 
 // Reduction matrix column ...
-const uint8 verilog_grm_Rc[177] = {
+const uint8 grm_Rc[177] = {
        0,     0,     0,     0,     1,     0,     0,     0,     0,     0, 
        0,     0,     0,     2,     0,     0,     3,     0,     0,     4, 
        5,     6,     7,     8,     9,    10,     9,     9,     0,     0, 
@@ -1667,7 +1668,7 @@ const uint8 verilog_grm_Rc[177] = {
 };
 
 // Production lengths (minus one) ...
-const int8 verilog_grm_PL[521] = {
+const int8 grm_PL[521] = {
        1,     0,     0,     6,     5,     0,     3,     0,     4,     0, 
        3,     0,     3,     5,     0,     0,     0,     0,     0,     0, 
        0,     0,     0,     0,     0,     0,     0,     0,     0,     0, 
@@ -1724,7 +1725,7 @@ const int8 verilog_grm_PL[521] = {
 };
 
 // Terminal action number ...
-const int8 verilog_grm_tact_numb[177] = {
+const int8 grm_tact_numb[177] = {
        0,     1,     1,     1,     1,     1,     1,     1,     1,     1, 
        1,     1,     1,     1,    -1,    -1,    -1,    -1,    -1,    -1, 
       -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1, 
@@ -1745,3 +1746,5 @@ const int8 verilog_grm_tact_numb[177] = {
       -1,    -1,    -1,    -1,    -1,    -1,    -1, 
 };
 
+
+};   /* namespace verilog */

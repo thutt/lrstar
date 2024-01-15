@@ -6,25 +6,26 @@
 
 #include "lrstar_parser_tables.h"
 
-extern const char *YACC_grm_head_symb[17];
-extern const uint8 YACC_grm_head_numb[59];
-extern const uint8 YACC_grm_f_tail[60];
-extern const int8 YACC_grm_tail[110];
-extern const char *YACC_grm_term_symb[27];
-extern const uint8 YACC_grm_Bm[44];
-extern const uint8 YACC_grm_Br[43];
-extern const uint8 YACC_grm_Bc[27];
-extern const uint8 YACC_grm_Bf[27];
-extern const int8 YACC_grm_Tm[86];
-extern const uint8 YACC_grm_Tr[43];
-extern const uint8 YACC_grm_Tc[27];
-extern const int8 YACC_grm_Nm[48];
-extern const uint8 YACC_grm_Nr[43];
-extern const uint8 YACC_grm_Nc[59];
-extern const uint8 YACC_grm_Rm[1];
-extern const uint8 YACC_grm_Rr[43];
-extern const uint8 YACC_grm_Rc[27];
-extern const int8 YACC_grm_PL[59];
+namespace YACC {
+extern const char *grm_head_symb[17];
+extern const uint8 grm_head_numb[59];
+extern const uint8 grm_f_tail[60];
+extern const int8 grm_tail[110];
+extern const char *grm_term_symb[27];
+extern const uint8 grm_Bm[44];
+extern const uint8 grm_Br[43];
+extern const uint8 grm_Bc[27];
+extern const uint8 grm_Bf[27];
+extern const int8 grm_Tm[86];
+extern const uint8 grm_Tr[43];
+extern const uint8 grm_Tc[27];
+extern const int8 grm_Nm[48];
+extern const uint8 grm_Nr[43];
+extern const uint8 grm_Nc[59];
+extern const uint8 grm_Rm[1];
+extern const uint8 grm_Rr[43];
+extern const uint8 grm_Rc[27];
+extern const int8 grm_PL[59];
 
 
 template<typename T_term_symb,
@@ -59,16 +60,18 @@ template<typename T_term_symb,
          typename T_node_numb,
          typename T_nact_numb,
          typename T_reverse>
-   class YACC_parser_tables_ : public lrstar_parser_tables<T_term_symb, T_head_symb, T_tact_name, T_node_name, T_head_numb, T_f_tail, T_tail, T_arga, T_argx, T_argy, T_Bm, T_Br, T_Bc, T_Bf, T_Tm, T_Tr, T_Tc, T_Nm, T_Nr, T_Nc, T_Rm, T_Rr, T_Rc, T_PL, T_nd_fterm, T_nd_term, T_nd_faction, T_nd_action, T_tact_numb, T_node_numb, T_nact_numb, T_reverse>   {
+   class parser_tables_ : public lrstar_parser_tables<T_term_symb, T_head_symb, T_tact_name, T_node_name, T_head_numb, T_f_tail, T_tail, T_arga, T_argx, T_argy, T_Bm, T_Br, T_Bc, T_Bf, T_Tm, T_Tr, T_Tc, T_Nm, T_Nr, T_Nc, T_Rm, T_Rr, T_Rc, T_PL, T_nd_fterm, T_nd_term, T_nd_faction, T_nd_action, T_tact_numb, T_node_numb, T_nact_numb, T_reverse>   {
 
 public:
 
-      YACC_parser_tables_() : lrstar_parser_tables<T_term_symb, T_head_symb, T_tact_name, T_node_name, T_head_numb, T_f_tail, T_tail, T_arga, T_argx, T_argy, T_Bm, T_Br, T_Bc, T_Bf, T_Tm, T_Tr, T_Tc, T_Nm, T_Nr, T_Nc, T_Rm, T_Rr, T_Rc, T_PL, T_nd_fterm, T_nd_term, T_nd_faction, T_nd_action, T_tact_numb, T_node_numb, T_nact_numb, T_reverse>(27, 17, 59, 43, 42, 0, 0, 0, 1, false, &YACC_grm_term_symb[0], &YACC_grm_head_symb[0], 0, 0, &YACC_grm_head_numb[0], &YACC_grm_f_tail[0], &YACC_grm_tail[0], 0, 0, 0, &YACC_grm_Bm[0], &YACC_grm_Br[0], &YACC_grm_Bc[0], &YACC_grm_Bf[0], &YACC_grm_Tm[0], &YACC_grm_Tr[0], &YACC_grm_Tc[0], &YACC_grm_Nm[0], &YACC_grm_Nr[0], &YACC_grm_Nc[0], &YACC_grm_Rm[0], &YACC_grm_Rr[0], &YACC_grm_Rc[0], &YACC_grm_PL[0], 0, 0, 0, 0, 0, 0, 0, 0)
+      parser_tables_() : lrstar_parser_tables<T_term_symb, T_head_symb, T_tact_name, T_node_name, T_head_numb, T_f_tail, T_tail, T_arga, T_argx, T_argy, T_Bm, T_Br, T_Bc, T_Bf, T_Tm, T_Tr, T_Tc, T_Nm, T_Nr, T_Nc, T_Rm, T_Rr, T_Rc, T_PL, T_nd_fterm, T_nd_term, T_nd_faction, T_nd_action, T_tact_numb, T_node_numb, T_nact_numb, T_reverse>(27, 17, 59, 43, 42, 0, 0, 0, 1, false, &grm_term_symb[0], &grm_head_symb[0], 0, 0, &grm_head_numb[0], &grm_f_tail[0], &grm_tail[0], 0, 0, 0, &grm_Bm[0], &grm_Br[0], &grm_Bc[0], &grm_Bf[0], &grm_Tm[0], &grm_Tr[0], &grm_Tc[0], &grm_Nm[0], &grm_Nr[0], &grm_Nc[0], &grm_Rm[0], &grm_Rr[0], &grm_Rc[0], &grm_PL[0], 0, 0, 0, 0, 0, 0, 0, 0)
       {
       }
    };
 
-typedef YACC_parser_tables_<const char * const, const char * const, const char * const, const char * const, uint8, uint8, int8, int32, int32, int32, uint8, uint8, uint8, uint8, int8, uint8, uint8, int8, uint8, uint8, uint8, uint8, uint8, int8, int32, int32, int32, int32, int32, int32, int32, int32> YACC_parser_tables_t;
+typedef parser_tables_<const char * const, const char * const, const char * const, const char * const, uint8, uint8, int8, int32, int32, int32, uint8, uint8, uint8, uint8, int8, uint8, uint8, int8, uint8, uint8, uint8, uint8, uint8, int8, int32, int32, int32, int32, int32, int32, int32, int32> parser_tables_t;
 
+
+};   /* namespace YACC */
 
 #endif

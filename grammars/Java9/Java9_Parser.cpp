@@ -4,8 +4,9 @@
 #include "Java9_ParserTables_typedef.h"
 #include "Java9_Parser.h"
 
+namespace Java9 {
 // Terminal symbols of the grammar.
-const char *Java9_grm_term_symb[110] = {
+const char *grm_term_symb[110] = {
    "<error>",
    "<eof>",
    "<identifier>",
@@ -119,7 +120,7 @@ const char *Java9_grm_term_symb[110] = {
 };
 
 // Nonterminal symbols of the grammar.
-const char *Java9_grm_head_symb[366] = {
+const char *grm_head_symb[366] = {
    "Start",
    "primitiveType",
    "numericType",
@@ -489,19 +490,19 @@ const char *Java9_grm_head_symb[366] = {
 };
 
 // Terninal action names found in the grammar ...
-const char *Java9_grm_tact_name[2] = {
+const char *grm_tact_name[2] = {
    "error",
    "lookup",
 };
 
 // Node names found in the grammar.
-const char *Java9_grm_node_name[1] = {
+const char *grm_node_name[1] = {
    "start",
 
 };
 
 // Head symbol numbers for the productions.
-const uint16 Java9_grm_head_numb[733] = {
+const uint16 grm_head_numb[733] = {
        0,     1,     1,     2,     2,     3,     3,     3,     3,     3, 
        4,     4,     5,     5,     5,     6,     7,     7,     8,     9, 
       10,    11,    12,    13,    14,    14,    14,    15,    16,    17, 
@@ -579,7 +580,7 @@ const uint16 Java9_grm_head_numb[733] = {
 };
 
 // First tail symbol index into the tail list ...
-const uint16 Java9_grm_f_tail[734] = {
+const uint16 grm_f_tail[734] = {
        0,     2,     4,     6,     7,     8,     9,    10,    11,    12, 
       13,    14,    15,    16,    17,    18,    20,    23,    28,    32, 
       35,    36,    37,    38,    40,    42,    44,    46,    50,    53, 
@@ -657,7 +658,7 @@ const uint16 Java9_grm_f_tail[734] = {
 };
 
 // Tail symbol numbers ...
-const int16 Java9_grm_tail[1440] = {
+const int16 grm_tail[1440] = {
      -31,     1,  -239,    -2,  -239,     3,    -3,    -4,     4,     5, 
        6,     7,     8,     9,    10,    -6,   -13,   -14,  -240,  -242, 
     -239,     2,  -243,    -6,    11,  -239,     2,  -243,    11,  -239, 
@@ -805,7 +806,7 @@ const int16 Java9_grm_tail[1440] = {
 };
 
 // Arguments for token actions ...
-const int8 Java9_grm_arga[110] = {
+const int8 grm_arga[110] = {
       -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1, 
       -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1, 
       -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1, 
@@ -820,7 +821,7 @@ const int8 Java9_grm_arga[110] = {
 };
 
 // First arguments for productions ...
-const int8 Java9_grm_argx[733] = {
+const int8 grm_argx[733] = {
        0,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1, 
       -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1, 
       -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1, 
@@ -898,7 +899,7 @@ const int8 Java9_grm_argx[733] = {
 };
 
 // Boolean matrix ...
-const uint8 Java9_grm_Bm[555] = {
+const uint8 grm_Bm[555] = {
        0,     0,     0,     0,     0,     0,     0,     0,     0,     2, 
        0,     0,     0,     0,     0,     0,     0,    64,     0,     0, 
        0,     0,     2,     0,     0,     1,     0,     0,     0,     0, 
@@ -958,7 +959,7 @@ const uint8 Java9_grm_Bm[555] = {
 };
 
 // Boolean matrix row (for state)...
-const uint16 Java9_grm_Br[745] = {
+const uint16 grm_Br[745] = {
        0,     9,     0,    16,    23,    23,    31,    31,    37,    45, 
       52,    60,    68,    74,    60,    31,    80,    87,    31,    31, 
       94,    31,   103,   111,    31,    31,    31,   119,     4,     0, 
@@ -1037,8 +1038,8 @@ const uint16 Java9_grm_Br[745] = {
       };
 
 // Boolean matrix column (displacement) ...
-extern const uint8 Java9_grm_Bc[110];
-const uint8 Java9_grm_Bc[110] = {
+extern const uint8 grm_Bc[110];
+const uint8 grm_Bc[110] = {
        0,     0,     0,     0,     0,     0,     0,     0,     0,     0, 
        0,     0,     0,     0,     0,     1,     1,     1,     1,     1, 
        1,     1,     1,     2,     2,     2,     2,     2,     2,     2, 
@@ -1053,7 +1054,7 @@ const uint8 Java9_grm_Bc[110] = {
       };
 
 // Boolean matrix filter/mask value ...
-const uint8 Java9_grm_Bf[110] = {
+const uint8 grm_Bf[110] = {
        1,     2,     4,     8,     8,     8,     8,     8,     8,     8, 
        8,    16,    32,    64,   128,     1,     2,     4,     8,    16, 
       32,    64,   128,     1,     2,     4,     8,    16,    32,    64, 
@@ -1068,7 +1069,7 @@ const uint8 Java9_grm_Bf[110] = {
 };
 
 // Terminal transition matrix ...
-const int16 Java9_grm_Tm[1084] = {
+const int16 grm_Tm[1084] = {
        0,     0,     0,     0,     0,     0,     0,     0,     0,     0, 
        0,     0,     0,   742,     0,     0,     0,     0,     7,     7, 
        7,     7,     7,     7,   656,   709,   721,   734,   722,   735, 
@@ -1181,7 +1182,7 @@ const int16 Java9_grm_Tm[1084] = {
 };
 
 // Terminal transition matrix row ...
-const uint16 Java9_grm_Tr[745] = {
+const uint16 grm_Tr[745] = {
      978,   978,   978,   978,   978,   978,   978,  1030,   978,  1030, 
      978,  1030,   978,   978,   772,  1030,   978,   772,   772,   874, 
     1030,   606,   874,   874,   516,   335,   314,  1030,   978,   978, 
@@ -1260,7 +1261,7 @@ const uint16 Java9_grm_Tr[745] = {
 };
 
 // Terminal transition matrix column ...
-const uint8 Java9_grm_Tc[110] = {
+const uint8 grm_Tc[110] = {
       20,    20,    38,    20,    23,    17,    14,    18,    19,    21, 
       22,    49,    39,     0,    23,    17,    12,    14,     3,    39, 
       40,    18,    41,    19,    20,    15,    21,    22,    42,     2, 
@@ -1275,7 +1276,7 @@ const uint8 Java9_grm_Tc[110] = {
 };
 
 // Nonterminal transition matrix ...
-const int16 Java9_grm_Nm[20133] = {
+const int16 grm_Nm[20133] = {
        0,     0,     0,     0,     0,     0,     0,     0,     0,  -130, 
     -131,  -132,     0,  -579,  -579,     0,  -579,  -579,     0,     0, 
        0,   272,     0,     0,     0,   498,     0,     0,     0,     0, 
@@ -3293,7 +3294,7 @@ const int16 Java9_grm_Nm[20133] = {
 };
 
 // Nonterminal transition matrix row ...
-const uint16 Java9_grm_Nr[745] = {
+const uint16 grm_Nr[745] = {
 19960, 19960, 10571, 19960, 19960, 19960, 19960, 19960, 10571, 10571, 
 19960, 19960, 19960, 19960, 19960,  3257,  3257,  2619, 19960, 19960, 
 17566, 19960, 19960, 19960, 19960, 19960, 19960, 19960, 19960, 19960, 
@@ -3372,7 +3373,7 @@ const uint16 Java9_grm_Nr[745] = {
 };
 
 // Nonterminal transition matrix column ...
-const uint8 Java9_grm_Nc[733] = {
+const uint8 grm_Nc[733] = {
    86,    86,    86,    96,    96,     0,     0,     0,     0,     0, 
     2,     2,    22,    22,    22,     1,   117,   117,    86,    21, 
    22,    96,    51,    63,    81,    81,    81,     1,   117,    92, 
@@ -3450,7 +3451,7 @@ const uint8 Java9_grm_Nc[733] = {
 };
 
 // Reduction matrix ...
-const uint16 Java9_grm_Rm[6436] = {
+const uint16 grm_Rm[6436] = {
        0,   531,     0,     0,     0,     0,     0,     0,     0,     0, 
        0,     0,     0,   537,   531,     0,   531,   533,     0,     0, 
      531,   531,     0,     0,     0,     0,     0,     0,     0,     0, 
@@ -4098,7 +4099,7 @@ const uint16 Java9_grm_Rm[6436] = {
 };
 
 // Reduction matrix row ...
-const int16 Java9_grm_Rr[745] = {
+const int16 grm_Rr[745] = {
        0,   -34,   533,   -34,   507,   535,   -34,   -34,   539,   -34, 
      -84,   -34,   239,   -34,   -34,   -34,   -34,   -34,   -34,   -34, 
     -118,   -34,   -34,   -34,   -34,   -34,   -34,   -34,   -34,   646, 
@@ -4177,7 +4178,7 @@ const int16 Java9_grm_Rr[745] = {
 };
 
 // Reduction matrix column ...
-const uint8 Java9_grm_Rc[110] = {
+const uint8 grm_Rc[110] = {
        0,     1,     2,     3,     3,     3,     3,     3,     3,     3, 
        3,     4,     5,     6,     0,     7,     8,     9,    10,    11, 
       12,    13,    14,     0,    15,    16,    17,    17,    18,    19, 
@@ -4192,7 +4193,7 @@ const uint8 Java9_grm_Rc[110] = {
 };
 
 // Production lengths (minus one) ...
-const int8 Java9_grm_PL[733] = {
+const int8 grm_PL[733] = {
        1,     1,     1,     0,     0,     0,     0,     0,     0,     0, 
        0,     0,     0,     0,     0,     1,     2,     4,     3,     2, 
        0,     0,     0,     1,     1,     1,     1,     3,     2,     0, 
@@ -4270,7 +4271,7 @@ const int8 Java9_grm_PL[733] = {
 };
 
 // Nondeterministic first terminal in the list ...
-const uint16 Java9_grm_nd_fterm[746] = {
+const uint16 grm_nd_fterm[746] = {
        0,     2,     2,     2,     2,     2,     2,     2,     2,     2, 
        2,     9,     9,     9,     9,     9,     9,     9,     9,     9, 
        9,    19,    19,    19,    19,    19,    19,    19,    19,    19, 
@@ -4349,7 +4350,7 @@ const uint16 Java9_grm_nd_fterm[746] = {
 };
 
 // Nondeterministic terminal list ...
-const uint8 Java9_grm_nd_term[1456] = {
+const uint8 grm_nd_term[1456] = {
       23,    61,    25,    39,    40,    41,    42,    44,    61,     2, 
        3,     4,     5,     6,     7,     8,     9,    10,    61,    19, 
       94,    95,    77,    96,    15,    97,    98,    16,    17,    99, 
@@ -4499,7 +4500,7 @@ const uint8 Java9_grm_nd_term[1456] = {
 };
 
 // Nondeterministic first action in the list ...
-const uint16 Java9_grm_nd_faction[1457] = {
+const uint16 grm_nd_faction[1457] = {
        0,     2,     5,     7,     9,    11,    13,    15,    17,    19, 
       21,    23,    25,    27,    29,    31,    33,    35,    37,    39, 
       41,    43,    45,    47,    49,    51,    53,    55,    57,    59, 
@@ -4649,7 +4650,7 @@ const uint16 Java9_grm_nd_faction[1457] = {
 };
 
 // Nondeterministic actions list ...
-const int16 Java9_grm_nd_action[3079] = {
+const int16 grm_nd_action[3079] = {
     -531,  -533,  -531,  -537,  -533,  -554,  -627,  -554,  -627,  -554, 
     -627,  -554,  -627,  -554,  -627,  -554,  -627,  -554,  -627,    63, 
     -507,   862,  -507,   749,  -507,   750,  -507,   751,  -507,   752, 
@@ -4961,7 +4962,7 @@ const int16 Java9_grm_nd_action[3079] = {
 };
 
 // Terminal action number ...
-const int8 Java9_grm_tact_numb[110] = {
+const int8 grm_tact_numb[110] = {
        0,    -1,     1,    -1,    -1,    -1,    -1,    -1,    -1,    -1, 
       -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1, 
       -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1, 
@@ -4976,7 +4977,7 @@ const int8 Java9_grm_tact_numb[110] = {
 };
 
 // Node number for each production ...
-const int8 Java9_grm_node_numb[733] = {
+const int8 grm_node_numb[733] = {
        0,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1, 
       -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1, 
       -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1, 
@@ -5054,7 +5055,7 @@ const int8 Java9_grm_node_numb[733] = {
 };
 
 // Node action numbers ...
-const int8 Java9_grm_nact_numb[733] = {
+const int8 grm_nact_numb[733] = {
       -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1, 
       -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1, 
       -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1, 
@@ -5131,3 +5132,5 @@ const int8 Java9_grm_nact_numb[733] = {
       -1,    -1,    -1, 
 };
 
+
+};   /* namespace Java9 */

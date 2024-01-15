@@ -6,36 +6,37 @@
 
 #include "lrstar_parser_tables.h"
 
-extern const char *Java9_grm_head_symb[366];
-extern const char *Java9_grm_tact_name[2];
-extern const char *Java9_grm_node_name[1];
-extern const uint16 Java9_grm_head_numb[733];
-extern const uint16 Java9_grm_f_tail[734];
-extern const int16 Java9_grm_tail[1440];
-extern const char *Java9_grm_term_symb[110];
-extern const int8 Java9_grm_arga[110];
-extern const uint8 Java9_grm_Bm[555];
-extern const uint16 Java9_grm_Br[745];
-extern const uint8 Java9_grm_Bc[110];
-extern const uint8 Java9_grm_Bf[110];
-extern const int16 Java9_grm_Tm[1084];
-extern const uint16 Java9_grm_Tr[745];
-extern const uint8 Java9_grm_Tc[110];
-extern const int16 Java9_grm_Nm[20133];
-extern const uint16 Java9_grm_Nr[745];
-extern const uint8 Java9_grm_Nc[733];
-extern const uint16 Java9_grm_Rm[6436];
-extern const int16 Java9_grm_Rr[745];
-extern const uint8 Java9_grm_Rc[110];
-extern const int8 Java9_grm_PL[733];
-extern const int8 Java9_grm_tact_numb[110];
-extern const int8 Java9_grm_argx[733];
-extern const uint16 Java9_grm_nd_fterm[746];
-extern const uint8 Java9_grm_nd_term[1456];
-extern const uint16 Java9_grm_nd_faction[1457];
-extern const int16 Java9_grm_nd_action[3079];
-extern const int8 Java9_grm_node_numb[733];
-extern const int8 Java9_grm_nact_numb[733];
+namespace Java9 {
+extern const char *grm_head_symb[366];
+extern const char *grm_tact_name[2];
+extern const char *grm_node_name[1];
+extern const uint16 grm_head_numb[733];
+extern const uint16 grm_f_tail[734];
+extern const int16 grm_tail[1440];
+extern const char *grm_term_symb[110];
+extern const int8 grm_arga[110];
+extern const uint8 grm_Bm[555];
+extern const uint16 grm_Br[745];
+extern const uint8 grm_Bc[110];
+extern const uint8 grm_Bf[110];
+extern const int16 grm_Tm[1084];
+extern const uint16 grm_Tr[745];
+extern const uint8 grm_Tc[110];
+extern const int16 grm_Nm[20133];
+extern const uint16 grm_Nr[745];
+extern const uint8 grm_Nc[733];
+extern const uint16 grm_Rm[6436];
+extern const int16 grm_Rr[745];
+extern const uint8 grm_Rc[110];
+extern const int8 grm_PL[733];
+extern const int8 grm_tact_numb[110];
+extern const int8 grm_argx[733];
+extern const uint16 grm_nd_fterm[746];
+extern const uint8 grm_nd_term[1456];
+extern const uint16 grm_nd_faction[1457];
+extern const int16 grm_nd_action[3079];
+extern const int8 grm_node_numb[733];
+extern const int8 grm_nact_numb[733];
 
 
 template<typename T_term_symb,
@@ -70,16 +71,18 @@ template<typename T_term_symb,
          typename T_node_numb,
          typename T_nact_numb,
          typename T_reverse>
-   class Java9_parser_tables_ : public lrstar_parser_tables<T_term_symb, T_head_symb, T_tact_name, T_node_name, T_head_numb, T_f_tail, T_tail, T_arga, T_argx, T_argy, T_Bm, T_Br, T_Bc, T_Bf, T_Tm, T_Tr, T_Tc, T_Nm, T_Nr, T_Nc, T_Rm, T_Rr, T_Rc, T_PL, T_nd_fterm, T_nd_term, T_nd_faction, T_nd_action, T_tact_numb, T_node_numb, T_nact_numb, T_reverse>   {
+   class parser_tables_ : public lrstar_parser_tables<T_term_symb, T_head_symb, T_tact_name, T_node_name, T_head_numb, T_f_tail, T_tail, T_arga, T_argx, T_argy, T_Bm, T_Br, T_Bc, T_Bf, T_Tm, T_Tr, T_Tc, T_Nm, T_Nr, T_Nc, T_Rm, T_Rr, T_Rc, T_PL, T_nd_fterm, T_nd_term, T_nd_faction, T_nd_action, T_tact_numb, T_node_numb, T_nact_numb, T_reverse>   {
 
 public:
 
-      Java9_parser_tables_() : lrstar_parser_tables<T_term_symb, T_head_symb, T_tact_name, T_node_name, T_head_numb, T_f_tail, T_tail, T_arga, T_argx, T_argy, T_Bm, T_Br, T_Bc, T_Bf, T_Tm, T_Tr, T_Tc, T_Nm, T_Nr, T_Nc, T_Rm, T_Rr, T_Rc, T_PL, T_nd_fterm, T_nd_term, T_nd_faction, T_nd_action, T_tact_numb, T_node_numb, T_nact_numb, T_reverse>(110, 366, 733, 745, 744, 2, 1, 1, 1, false, &Java9_grm_term_symb[0], &Java9_grm_head_symb[0], &Java9_grm_tact_name[0], &Java9_grm_node_name[0], &Java9_grm_head_numb[0], &Java9_grm_f_tail[0], &Java9_grm_tail[0], &Java9_grm_arga[0], &Java9_grm_argx[0], 0, &Java9_grm_Bm[0], &Java9_grm_Br[0], &Java9_grm_Bc[0], &Java9_grm_Bf[0], &Java9_grm_Tm[0], &Java9_grm_Tr[0], &Java9_grm_Tc[0], &Java9_grm_Nm[0], &Java9_grm_Nr[0], &Java9_grm_Nc[0], &Java9_grm_Rm[0], &Java9_grm_Rr[0], &Java9_grm_Rc[0], &Java9_grm_PL[0], &Java9_grm_nd_fterm[0], &Java9_grm_nd_term[0], &Java9_grm_nd_faction[0], &Java9_grm_nd_action[0], &Java9_grm_tact_numb[0], &Java9_grm_node_numb[0], &Java9_grm_nact_numb[0], 0)
+      parser_tables_() : lrstar_parser_tables<T_term_symb, T_head_symb, T_tact_name, T_node_name, T_head_numb, T_f_tail, T_tail, T_arga, T_argx, T_argy, T_Bm, T_Br, T_Bc, T_Bf, T_Tm, T_Tr, T_Tc, T_Nm, T_Nr, T_Nc, T_Rm, T_Rr, T_Rc, T_PL, T_nd_fterm, T_nd_term, T_nd_faction, T_nd_action, T_tact_numb, T_node_numb, T_nact_numb, T_reverse>(110, 366, 733, 745, 744, 2, 1, 1, 1, false, &grm_term_symb[0], &grm_head_symb[0], &grm_tact_name[0], &grm_node_name[0], &grm_head_numb[0], &grm_f_tail[0], &grm_tail[0], &grm_arga[0], &grm_argx[0], 0, &grm_Bm[0], &grm_Br[0], &grm_Bc[0], &grm_Bf[0], &grm_Tm[0], &grm_Tr[0], &grm_Tc[0], &grm_Nm[0], &grm_Nr[0], &grm_Nc[0], &grm_Rm[0], &grm_Rr[0], &grm_Rc[0], &grm_PL[0], &grm_nd_fterm[0], &grm_nd_term[0], &grm_nd_faction[0], &grm_nd_action[0], &grm_tact_numb[0], &grm_node_numb[0], &grm_nact_numb[0], 0)
       {
       }
    };
 
-typedef Java9_parser_tables_<const char * const, const char * const, const char * const, const char * const, uint16, uint16, int16, int8, int8, int32, uint8, uint16, uint8, uint8, int16, uint16, uint8, int16, uint16, uint8, uint16, int16, uint8, int8, uint16, uint8, uint16, int16, int8, int8, int8, int32> Java9_parser_tables_t;
+typedef parser_tables_<const char * const, const char * const, const char * const, const char * const, uint16, uint16, int16, int8, int8, int32, uint8, uint16, uint8, uint8, int16, uint16, uint8, int16, uint16, uint8, uint16, int16, uint8, int8, uint16, uint8, uint16, int16, int8, int8, int8, int32> parser_tables_t;
 
+
+};   /* namespace Java9 */
 
 #endif

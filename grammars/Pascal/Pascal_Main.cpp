@@ -2,27 +2,28 @@
 #include "Pascal_LexerTables_typedef.h"
 #include "Pascal_Parser.h"
 
+namespace Pascal {
 
-const char Pascal_grammar_name[] = "Pascal";
+const char grammar_name[] = "Pascal";
 
 
-void Pascal_init_actions(UNUSED_PARAM(Pascal_parser_t *parser)); /* User-supplied */
-void Pascal_term_actions(UNUSED_PARAM(Pascal_parser_t *parser)); /* User-supplied */
-static Pascal_parser_t::init_func_t Pascal_init_funcs_[2] = {
-   Pascal_init_actions,
-   Pascal_term_actions
+void init_actions(UNUSED_PARAM(parser_t *parser)); /* User-supplied */
+void term_actions(UNUSED_PARAM(parser_t *parser)); /* User-supplied */
+static parser_t::init_func_t init_funcs_[2] = {
+   init_actions,
+   term_actions
 };
 
-int Pascal_error(UNUSED_PARAM(Pascal_parser_t *parser), UNUSED_PARAM(int &t));
-int Pascal_lookup(UNUSED_PARAM(Pascal_parser_t *parser), UNUSED_PARAM(int &t));
+int error(UNUSED_PARAM(parser_t *parser), UNUSED_PARAM(int &t));
+int lookup(UNUSED_PARAM(parser_t *parser), UNUSED_PARAM(int &t));
 // Terminal action function pointers ...
-static Pascal_parser_t::tact_func_t Pascal_tact_funcs_[2] = {
-   Pascal_error,
-   Pascal_lookup,
+static parser_t::tact_func_t tact_funcs_[2] = {
+   error,
+   lookup,
 };
 
 // Node action function pointers ...
-static Pascal_parser_t::nact_func_t Pascal_nact_funcs_[185] = {
+static parser_t::nact_func_t nact_funcs_[185] = {
    0,
    0,
    0,
@@ -210,16 +211,18 @@ static Pascal_parser_t::nact_func_t Pascal_nact_funcs_[185] = {
    0,
 };
 
-Pascal_parser_t *
-Pascal_new_parser(const char *input_path,
-                  char       *input_text,
-                  unsigned    max_symbols)
+parser_t *
+new_parser(const char *input_path,
+           char       *input_text,
+           unsigned    max_symbols)
 {
-   return new Pascal_parser_t(/* input path   */   input_path,
-                              /* input text   */   input_text,
-                              /* max symbols  */   max_symbols,
-                              /* init_func    */   &Pascal_init_funcs_[0],
-                              /* tact_func    */   &Pascal_tact_funcs_[0],
-                              /* nact_func    */   &Pascal_nact_funcs_[0]);
+   return new parser_t(/* input path   */   input_path,
+                       /* input text   */   input_text,
+                       /* max symbols  */   max_symbols,
+                       /* init_func    */   &init_funcs_[0],
+                       /* tact_func    */   &tact_funcs_[0],
+                       /* nact_func    */   &nact_funcs_[0]);
 }
 
+
+};   /* namespace Pascal */

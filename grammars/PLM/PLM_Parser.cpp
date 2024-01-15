@@ -4,8 +4,9 @@
 #include "PLM_ParserTables_typedef.h"
 #include "PLM_Parser.h"
 
+namespace PLM {
 // Terminal symbols of the grammar.
-const char *PLM_grm_term_symb[70] = {
+const char *grm_term_symb[70] = {
    "<error>",
    "<eof>",
    "\'AND\'",
@@ -79,7 +80,7 @@ const char *PLM_grm_term_symb[70] = {
 };
 
 // Nonterminal symbols of the grammar.
-const char *PLM_grm_head_symb[152] = {
+const char *grm_head_symb[152] = {
    "Goal",
    "Compiland",
    "Compiland_component",
@@ -235,12 +236,12 @@ const char *PLM_grm_head_symb[152] = {
 };
 
 // Terninal action names found in the grammar ...
-const char *PLM_grm_tact_name[1] = {
+const char *grm_tact_name[1] = {
    "error",
 };
 
 // Head symbol numbers for the productions.
-const uint8 PLM_grm_head_numb[255] = {
+const uint8 grm_head_numb[255] = {
        0,     1,     2,     2,     3,     4,     4,     5,     5,     6, 
        6,     7,     7,     7,     7,     7,     8,     9,    10,    10, 
       11,    11,    12,    12,    13,    13,    13,    14,    14,    14, 
@@ -270,7 +271,7 @@ const uint8 PLM_grm_head_numb[255] = {
 };
 
 // First tail symbol index into the tail list ...
-const uint16 PLM_grm_f_tail[256] = {
+const uint16 grm_f_tail[256] = {
        0,     2,     3,     4,     6,    10,    11,    14,    15,    18, 
       18,    20,    21,    22,    23,    24,    25,    29,    30,    31, 
       32,    32,    33,    36,    39,    40,    41,    42,    43,    44, 
@@ -300,7 +301,7 @@ const uint16 PLM_grm_f_tail[256] = {
 };
 
 // Tail symbol numbers ...
-const int16 PLM_grm_tail[410] = {
+const int16 grm_tail[410] = {
       -1,     1,    -2,   -36,    -2,   -36,    -4,   -11,   -13,    -6, 
     -113,  -113,   -88,    -5,  -113,  -113,   -99,  -113,    -6,    -7, 
     -134,    -8,   -27,  -107,    -9,   -86,  -104,   -65,  -106,   -95, 
@@ -345,7 +346,7 @@ const int16 PLM_grm_tail[410] = {
 };
 
 // Arguments for token actions ...
-const int8 PLM_grm_arga[70] = {
+const int8 grm_arga[70] = {
       -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1, 
       -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1, 
       -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1, 
@@ -356,7 +357,7 @@ const int8 PLM_grm_arga[70] = {
 };
 
 // Boolean matrix ...
-const uint8 PLM_grm_Bm[190] = {
+const uint8 grm_Bm[190] = {
        0,     0,     0,     0,     0,     9,   144,     0,     4,     2, 
        0,     0,     0,     0,   128,     0,    16,   144,    16,    48, 
       24,     0,     4,     1,     0,     0,   128,     0,     0,     0, 
@@ -379,7 +380,7 @@ const uint8 PLM_grm_Bm[190] = {
 };
 
 // Boolean matrix row (for state)...
-const uint8 PLM_grm_Br[148] = {
+const uint8 grm_Br[148] = {
        4,     9,     4,    11,    16,    21,    25,    28,    10,    28, 
       33,    38,    38,    38,    38,     0,    43,     0,     0,     0, 
       48,     0,    52,    11,    57,    58,    63,    68,    73,    78, 
@@ -398,8 +399,8 @@ const uint8 PLM_grm_Br[148] = {
       };
 
 // Boolean matrix column (displacement) ...
-extern const uint8 PLM_grm_Bc[70];
-const uint8 PLM_grm_Bc[70] = {
+extern const uint8 grm_Bc[70];
+const uint8 grm_Bc[70] = {
        0,     0,     0,     0,     0,     0,     0,     0,     1,     1, 
        1,     1,     0,     1,     1,     1,     1,     0,     1,     1, 
        1,     1,     2,     2,     2,     1,     1,     2,     2,     1, 
@@ -410,7 +411,7 @@ const uint8 PLM_grm_Bc[70] = {
       };
 
 // Boolean matrix filter/mask value ...
-const uint8 PLM_grm_Bf[70] = {
+const uint8 grm_Bf[70] = {
        1,     2,     4,     8,    16,    32,    64,   128,     1,     2, 
        1,     4,     8,     8,     1,     1,    16,   128,    32,     1, 
       64,   128,     1,     2,     4,     1,     1,     8,     8,     1, 
@@ -421,7 +422,7 @@ const uint8 PLM_grm_Bf[70] = {
 };
 
 // Terminal transition matrix ...
-const int16 PLM_grm_Tm[69] = {
+const int16 grm_Tm[69] = {
      147,  -187,  -188,  -189,  -190,  -191,  -192,  -193,  -194,  -195, 
     -196,  -197,  -198,  -199,  -200,  -201,  -202,  -203,  -204,  -205, 
     -206,  -207,  -208,  -209,  -210,  -211,  -212,  -213,  -214,  -215, 
@@ -432,7 +433,7 @@ const int16 PLM_grm_Tm[69] = {
 };
 
 // Terminal transition matrix row ...
-const uint8 PLM_grm_Tr[148] = {
+const uint8 grm_Tr[148] = {
        0,     0,     0,     0,     0,     0,     0,     0,     0,     0, 
        0,     0,     0,     0,     0,     0,     0,     0,     0,     0, 
        0,     0,     0,     0,     0,     0,     0,     0,     0,     0, 
@@ -451,7 +452,7 @@ const uint8 PLM_grm_Tr[148] = {
 };
 
 // Terminal transition matrix column ...
-const uint8 PLM_grm_Tc[70] = {
+const uint8 grm_Tc[70] = {
        0,     0,     1,     2,     3,     4,     5,     6,     7,     8, 
        9,    10,    11,    12,    13,    14,    15,    16,    17,    18, 
       19,    20,    21,    22,    23,    24,    25,    26,    27,    28, 
@@ -462,7 +463,7 @@ const uint8 PLM_grm_Tc[70] = {
 };
 
 // Nonterminal transition matrix ...
-const int16 PLM_grm_Nm[2415] = {
+const int16 grm_Nm[2415] = {
        0,     0,     0,     0,     0,     0,     0,     0,     0,    -6, 
      112,   141,     0,    82,     0,     0,     0,     0,     0,     0, 
        0,     0,     0,     0,     0,     0,     0,     0,     0,     0, 
@@ -708,7 +709,7 @@ const int16 PLM_grm_Nm[2415] = {
 };
 
 // Nonterminal transition matrix row ...
-const uint16 PLM_grm_Nr[148] = {
+const uint16 grm_Nr[148] = {
  2325,  2325,  2236,  2325,  2148,  2325,  2325,   224,  2325,   269, 
  1193,  2148,   224,   269,   204,  2325,    90,  2236,  2148,   224, 
   204,  2325,  2003,  2236,  2325,  2325,  2325,   388,  2236,  2325, 
@@ -727,7 +728,7 @@ const uint16 PLM_grm_Nr[148] = {
 };
 
 // Nonterminal transition matrix column ...
-const uint8 PLM_grm_Nc[255] = {
+const uint8 grm_Nc[255] = {
     3,     3,    56,    56,     3,    56,    56,     3,     3,     2, 
     2,    56,    56,    56,    56,    56,     3,     2,    56,    56, 
     3,     3,     2,     2,    56,    56,    56,    74,    74,    74, 
@@ -757,12 +758,12 @@ const uint8 PLM_grm_Nc[255] = {
 };
 
 // Reduction matrix ...
-const uint8 PLM_grm_Rm[5] = {
+const uint8 grm_Rm[5] = {
        0,     0,     0,   126,    61, 
 };
 
 // Reduction matrix row ...
-const int16 PLM_grm_Rr[148] = {
+const int16 grm_Rr[148] = {
        0,     0,     1,    77,     0,     0,   128,     0,     0,     0, 
        0,     0,     0,     0,     0,    75,     0,    75,    75,    75, 
        0,    62,     0,    79,     0,   145,   148,     0,   157,   159, 
@@ -781,7 +782,7 @@ const int16 PLM_grm_Rr[148] = {
 };
 
 // Reduction matrix column ...
-const uint8 PLM_grm_Rc[70] = {
+const uint8 grm_Rc[70] = {
        0,     0,     1,     0,     0,     0,     0,     0,     0,     0, 
        0,     2,     0,     0,     0,     0,     0,     0,     0,     0, 
        0,     0,     1,     2,     0,     0,     0,     1,     1,     0, 
@@ -792,7 +793,7 @@ const uint8 PLM_grm_Rc[70] = {
 };
 
 // Production lengths (minus one) ...
-const int8 PLM_grm_PL[255] = {
+const int8 grm_PL[255] = {
        1,     0,     0,     1,     3,     0,     2,     0,     2,    -1, 
        1,     0,     0,     0,     0,     0,     3,     0,     0,     0, 
       -1,     0,     2,     2,     0,     0,     0,     0,     0,     0, 
@@ -822,7 +823,7 @@ const int8 PLM_grm_PL[255] = {
 };
 
 // Terminal action number ...
-const int8 PLM_grm_tact_numb[70] = {
+const int8 grm_tact_numb[70] = {
        0,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1, 
       -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1, 
       -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1, 
@@ -832,3 +833,5 @@ const int8 PLM_grm_tact_numb[70] = {
       -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1, 
 };
 
+
+};   /* namespace PLM */

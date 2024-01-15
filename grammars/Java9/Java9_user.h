@@ -8,9 +8,10 @@
  *  NOTE: lrstar will never rewrite or delete this file.
  *        It can be safely edited to add user-supplied code.
  */
-
 #if !defined(__Java9_USER_HEADER__)
+namespace Java9 {
 
 
 
+};   /* namespace Java9 */
 #endif

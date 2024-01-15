@@ -5,8 +5,11 @@
  *        It can be safely edited to add user-supplied code.
  */
 
-void
-Ada_init_actions(UNUSED_PARAM(Ada_parser_t *parser))
-{
-      /* Initialization code goes here */
-}
+namespace Ada {
+    void
+    init_actions(UNUSED_PARAM(parser_t *parser))
+    {
+          /* Initialization code goes here */
+    }
+
+};   /* namespace Ada */

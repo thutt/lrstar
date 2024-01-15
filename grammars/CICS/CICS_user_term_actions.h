@@ -5,8 +5,11 @@
  *        It can be safely edited to add user-supplied code.
  */
 
-void
-CICS_term_actions(UNUSED_PARAM(CICS_parser_t *parser))
-{
-      /* Termination code goes here */
-}
+namespace CICS {
+    void
+    term_actions(UNUSED_PARAM(parser_t *parser))
+    {
+          /* Termination code goes here */
+    }
+
+};   /* namespace CICS */

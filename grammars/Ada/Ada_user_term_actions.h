@@ -5,8 +5,11 @@
  *        It can be safely edited to add user-supplied code.
  */
 
-void
-Ada_term_actions(UNUSED_PARAM(Ada_parser_t *parser))
-{
-      /* Termination code goes here */
-}
+namespace Ada {
+    void
+    term_actions(UNUSED_PARAM(parser_t *parser))
+    {
+          /* Termination code goes here */
+    }
+
+};   /* namespace Ada */

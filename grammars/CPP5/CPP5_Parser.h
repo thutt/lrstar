@@ -6,13 +6,17 @@
 
 #include "lrstar_basic_defs.h"
 #include "lrstar_lexer.h"
+namespace CPP5 {
 
+
+};   /* namespace CPP5 */
 #include "CPP5_ParserTables_typedef.h"
 #include "lrstar_parser.h"
 
-extern const char CPP5_grammar_name[];
+namespace CPP5 {
+extern const char grammar_name[];
 
-typedef lrstar_parser</* grammar           */   CPP5_grammar_name,
+typedef lrstar_parser</* grammar           */   grammar_name,
                       /* AST traversals    */   1,
                       /* actions           */   false,
                       /* debug_parser      */   false,
@@ -29,6 +33,8 @@ typedef lrstar_parser</* grammar           */   CPP5_grammar_name,
                       /* stksize           */   100,
                       /* term_actions      */   false,
                       /* lexer table type  */   CPP5_lexer_t,
-                      /* parser table type */   CPP5_parser_tables_t> CPP5_parser_t;
+                      /* parser table type */   parser_tables_t> parser_t;
+
+};   /* namespace CPP5 */
 
 #endif

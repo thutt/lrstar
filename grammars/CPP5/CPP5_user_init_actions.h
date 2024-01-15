@@ -5,8 +5,11 @@
  *        It can be safely edited to add user-supplied code.
  */
 
-void
-CPP5_init_actions(UNUSED_PARAM(CPP5_parser_t *parser))
-{
-      /* Initialization code goes here */
-}
+namespace CPP5 {
+    void
+    init_actions(UNUSED_PARAM(parser_t *parser))
+    {
+          /* Initialization code goes here */
+    }
+
+};   /* namespace CPP5 */

@@ -4,8 +4,9 @@
 #include "delphi_ParserTables_typedef.h"
 #include "delphi_Parser.h"
 
+namespace delphi {
 // Terminal symbols of the grammar.
-const char *delphi_grm_term_symb[101] = {
+const char *grm_term_symb[101] = {
    "<error>",
    "<eof>",
    "\'package\'",
@@ -110,7 +111,7 @@ const char *delphi_grm_term_symb[101] = {
 };
 
 // Nonterminal symbols of the grammar.
-const char *delphi_grm_head_symb[166] = {
+const char *grm_head_symb[166] = {
    "start",
    "compilation_unit",
    "program",
@@ -280,7 +281,7 @@ const char *delphi_grm_head_symb[166] = {
 };
 
 // Head symbol numbers for the productions.
-const uint8 delphi_grm_head_numb[355] = {
+const uint8 grm_head_numb[355] = {
        0,     1,     1,     1,     1,     2,     3,     3,     4,     4, 
        5,     5,     6,     6,     7,     8,     9,    10,    11,    11, 
       12,    12,    13,    13,    14,    15,    15,    16,    16,    17, 
@@ -320,7 +321,7 @@ const uint8 delphi_grm_head_numb[355] = {
 };
 
 // First tail symbol index into the tail list ...
-const uint16 delphi_grm_f_tail[356] = {
+const uint16 grm_f_tail[356] = {
        0,     2,     3,     4,     5,     6,    10,    13,    19,    19, 
       22,    23,    26,    27,    30,    32,    39,    42,    45,    45, 
       48,    49,    52,    53,    56,    59,    59,    61,    61,    63, 
@@ -360,7 +361,7 @@ const uint16 delphi_grm_f_tail[356] = {
 };
 
 // Tail symbol numbers ...
-const int16 delphi_grm_tail[678] = {
+const int16 grm_tail[678] = {
       -1,     1,    -2,    -8,   -17,     2,    -3,    -4,    -7,     3, 
        4,  -163,     5,     4,  -163,     6,   -13,     7,     5,     8, 
       -5,     5,    -6,    -5,     9,    -6,  -163,  -163,    10,    11, 
@@ -432,7 +433,7 @@ const int16 delphi_grm_tail[678] = {
 };
 
 // Boolean matrix ...
-const uint8 delphi_grm_Bm[394] = {
+const uint8 grm_Bm[394] = {
        0,     0,     0,     0,     0,     0,     0,     0,     4,     0, 
        0,     0,     0,     0,     0,     0,     2,     0,     0,     0, 
        0,     0,     0,   128,     0,     0,     0,     0,     0,     0, 
@@ -476,7 +477,7 @@ const uint8 delphi_grm_Bm[394] = {
 };
 
 // Boolean matrix row (for state)...
-const uint16 delphi_grm_Br[343] = {
+const uint16 grm_Br[343] = {
        8,    16,    23,    30,    23,    33,    33,    33,     0,    33, 
       41,    23,     0,    33,    49,    57,    57,    65,    71,    79, 
       15,    85,    23,     0,    65,    91,    79,    33,    33,    33, 
@@ -515,8 +516,8 @@ const uint16 delphi_grm_Br[343] = {
       };
 
 // Boolean matrix column (displacement) ...
-extern const uint8 delphi_grm_Bc[101];
-const uint8 delphi_grm_Bc[101] = {
+extern const uint8 grm_Bc[101];
+const uint8 grm_Bc[101] = {
        0,     0,     0,     0,     0,     0,     0,     0,     0,     1, 
        1,     1,     1,     0,     1,     1,     1,     1,     0,     2, 
        2,     2,     2,     2,     2,     2,     2,     2,     3,     2, 
@@ -531,7 +532,7 @@ const uint8 delphi_grm_Bc[101] = {
       };
 
 // Boolean matrix filter/mask value ...
-const uint8 delphi_grm_Bf[101] = {
+const uint8 grm_Bf[101] = {
        1,     2,     4,     8,     4,    16,    32,    64,   128,     1, 
        2,     4,     8,     4,    16,    32,    64,   128,     4,     1, 
        2,     4,     4,     8,    16,    32,    64,   128,     1,   128, 
@@ -546,7 +547,7 @@ const uint8 delphi_grm_Bf[101] = {
 };
 
 // Terminal transition matrix ...
-const int16 delphi_grm_Tm[580] = {
+const int16 grm_Tm[580] = {
        0,  -105,   242,  -210,  -219,   -66,   288,  -274,   326,  -194, 
     -192,  -185,  -187,  -188,  -196,  -186,  -167,   -51,   265,   272, 
      309,    92,   308,  -191,   -92,  -221,  -285,     0,    87,   316, 
@@ -608,7 +609,7 @@ const int16 delphi_grm_Tm[580] = {
 };
 
 // Terminal transition matrix row ...
-const uint16 delphi_grm_Tr[343] = {
+const uint16 grm_Tr[343] = {
      509,   509,   509,   509,   297,   509,   509,   509,   509,   509, 
      509,   297,   509,   509,   509,   297,   368,   509,   509,   439, 
      509,   509,   297,   509,   297,   297,   104,   509,   509,   509, 
@@ -647,7 +648,7 @@ const uint16 delphi_grm_Tr[343] = {
 };
 
 // Terminal transition matrix column ...
-const uint8 delphi_grm_Tc[101] = {
+const uint8 grm_Tc[101] = {
       19,    19,    52,     0,    53,     1,     2,     3,    55,     4, 
        9,     5,     6,    54,    16,    25,    15,    17,    18,    19, 
        7,    20,    21,    28,    29,     8,    52,    53,     9,    54, 
@@ -662,7 +663,7 @@ const uint8 delphi_grm_Tc[101] = {
 };
 
 // Nonterminal transition matrix ...
-const int16 delphi_grm_Nm[2246] = {
+const int16 grm_Nm[2246] = {
        0,     0,     0,     0,     0,     0,     0,     0,     0,     0, 
        0,     0,     0,     0,     0,     0,     0,     0,     0,     0, 
        0,     0,     0,     0,     0,     0,     0,     0,   -49,     0, 
@@ -891,7 +892,7 @@ const int16 delphi_grm_Nm[2246] = {
 };
 
 // Nonterminal transition matrix row ...
-const uint16 delphi_grm_Nr[343] = {
+const uint16 grm_Nr[343] = {
  2187,  2187,  2187,  2187,  2187,  2187,  2069,   256,  2187,   270, 
  2187,  2069,  2187,   164,  2187,  2187,  2187,  2187,  2187,  2187, 
  2187,  2187,   256,  2069,  2187,  2069,  2187,   179,    92,    94, 
@@ -930,7 +931,7 @@ const uint16 delphi_grm_Nr[343] = {
 };
 
 // Nonterminal transition matrix column ...
-const uint8 delphi_grm_Nc[355] = {
+const uint8 grm_Nc[355] = {
    27,    27,    27,    27,    27,    34,    20,    20,     1,     1, 
    27,    27,    34,    34,    45,    46,    53,    13,    16,    16, 
    20,    20,     1,     1,     0,     2,     2,     3,     3,     4, 
@@ -970,7 +971,7 @@ const uint8 delphi_grm_Nc[355] = {
 };
 
 // Reduction matrix ...
-const uint16 delphi_grm_Rm[91] = {
+const uint16 grm_Rm[91] = {
        0,     0,     0,     0,     0,     0,     0,     0,     0,     0, 
        0,     0,     0,     0,   351,   351,   351,     0,     0,     0, 
       46,   351,     0,     0,   351,     0,   351,   110,     0,   110, 
@@ -984,7 +985,7 @@ const uint16 delphi_grm_Rm[91] = {
 };
 
 // Reduction matrix row ...
-const int16 delphi_grm_Rr[343] = {
+const int16 grm_Rr[343] = {
        0,     0,     8,     0,    18,     0,     0,     0,    58,     0, 
        0,    18,    31,     0,     0,     0,     0,     0,     0,     0, 
       12,    25,    18,    58,     0,     0,     0,     0,    60,    61, 
@@ -1023,7 +1024,7 @@ const int16 delphi_grm_Rr[343] = {
 };
 
 // Reduction matrix column ...
-const uint8 delphi_grm_Rc[101] = {
+const uint8 grm_Rc[101] = {
        0,     0,     0,     1,     0,     2,     3,     4,     0,     4, 
        5,     0,     2,     0,     0,     0,     0,     0,     0,     0, 
        0,     0,     0,     6,     0,     7,     0,     0,     0,     0, 
@@ -1038,7 +1039,7 @@ const uint8 delphi_grm_Rc[101] = {
 };
 
 // Production lengths (minus one) ...
-const int8 delphi_grm_PL[355] = {
+const int8 grm_PL[355] = {
        1,     0,     0,     0,     0,     3,     2,     5,    -1,     2, 
        0,     2,     0,     2,     1,     6,     2,     2,    -1,     2, 
        0,     2,     0,     2,     2,    -1,     1,    -1,     1,     3, 
@@ -1077,3 +1078,5 @@ const int8 delphi_grm_PL[355] = {
        0,     0,     2,     0,     1, 
 };
 
+
+};   /* namespace delphi */

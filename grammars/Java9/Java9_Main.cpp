@@ -2,40 +2,43 @@
 #include "Java9_LexerTables_typedef.h"
 #include "Java9_Parser.h"
 
+namespace Java9 {
 
-const char Java9_grammar_name[] = "Java9";
+const char grammar_name[] = "Java9";
 
 
-void Java9_init_actions(UNUSED_PARAM(Java9_parser_t *parser)); /* User-supplied */
-void Java9_term_actions(UNUSED_PARAM(Java9_parser_t *parser)); /* User-supplied */
-static Java9_parser_t::init_func_t Java9_init_funcs_[2] = {
-   Java9_init_actions,
-   Java9_term_actions
+void init_actions(UNUSED_PARAM(parser_t *parser)); /* User-supplied */
+void term_actions(UNUSED_PARAM(parser_t *parser)); /* User-supplied */
+static parser_t::init_func_t init_funcs_[2] = {
+   init_actions,
+   term_actions
 };
 
-int Java9_error(UNUSED_PARAM(Java9_parser_t *parser), UNUSED_PARAM(int &t));
-int Java9_lookup(UNUSED_PARAM(Java9_parser_t *parser), UNUSED_PARAM(int &t));
+int error(UNUSED_PARAM(parser_t *parser), UNUSED_PARAM(int &t));
+int lookup(UNUSED_PARAM(parser_t *parser), UNUSED_PARAM(int &t));
 // Terminal action function pointers ...
-static Java9_parser_t::tact_func_t Java9_tact_funcs_[2] = {
-   Java9_error,
-   Java9_lookup,
+static parser_t::tact_func_t tact_funcs_[2] = {
+   error,
+   lookup,
 };
 
 // Node action function pointers ...
-static Java9_parser_t::nact_func_t Java9_nact_funcs_[1] = {
+static parser_t::nact_func_t nact_funcs_[1] = {
    0,
 };
 
-Java9_parser_t *
-Java9_new_parser(const char *input_path,
-                 char       *input_text,
-                 unsigned    max_symbols)
+parser_t *
+new_parser(const char *input_path,
+           char       *input_text,
+           unsigned    max_symbols)
 {
-   return new Java9_parser_t(/* input path   */   input_path,
-                             /* input text   */   input_text,
-                             /* max symbols  */   max_symbols,
-                             /* init_func    */   &Java9_init_funcs_[0],
-                             /* tact_func    */   &Java9_tact_funcs_[0],
-                             /* nact_func    */   &Java9_nact_funcs_[0]);
+   return new parser_t(/* input path   */   input_path,
+                       /* input text   */   input_text,
+                       /* max symbols  */   max_symbols,
+                       /* init_func    */   &init_funcs_[0],
+                       /* tact_func    */   &tact_funcs_[0],
+                       /* nact_func    */   &nact_funcs_[0]);
 }
 
+
+};   /* namespace Java9 */

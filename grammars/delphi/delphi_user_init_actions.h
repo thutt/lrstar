@@ -5,8 +5,11 @@
  *        It can be safely edited to add user-supplied code.
  */
 
-void
-delphi_init_actions(UNUSED_PARAM(delphi_parser_t *parser))
-{
-      /* Initialization code goes here */
-}
+namespace delphi {
+    void
+    init_actions(UNUSED_PARAM(parser_t *parser))
+    {
+          /* Initialization code goes here */
+    }
+
+};   /* namespace delphi */

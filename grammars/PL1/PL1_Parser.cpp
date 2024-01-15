@@ -4,8 +4,9 @@
 #include "PL1_ParserTables_typedef.h"
 #include "PL1_Parser.h"
 
+namespace PL1 {
 // Terminal symbols of the grammar.
-const char *PL1_grm_term_symb[226] = {
+const char *grm_term_symb[226] = {
    "<error>",
    "<eof>",
    "<identifier>",
@@ -235,7 +236,7 @@ const char *PL1_grm_term_symb[226] = {
 };
 
 // Nonterminal symbols of the grammar.
-const char *PL1_grm_head_symb[632] = {
+const char *grm_head_symb[632] = {
    "Goal",
    "TranUnit",
    "TranList",
@@ -871,13 +872,13 @@ const char *PL1_grm_head_symb[632] = {
 };
 
 // Terninal action names found in the grammar ...
-const char *PL1_grm_tact_name[2] = {
+const char *grm_tact_name[2] = {
    "error",
    "lookup",
 };
 
 // Head symbol numbers for the productions.
-const uint16 PL1_grm_head_numb[1272] = {
+const uint16 grm_head_numb[1272] = {
        0,     1,     1,     2,     2,     3,     4,     5,     6,     6, 
        7,     8,     9,     9,    10,    11,    12,    12,    12,    12, 
       12,    12,    12,    12,    13,    14,    15,    16,    17,    18, 
@@ -1009,7 +1010,7 @@ const uint16 PL1_grm_head_numb[1272] = {
 };
 
 // First tail symbol index into the tail list ...
-const uint16 PL1_grm_f_tail[1273] = {
+const uint16 grm_f_tail[1273] = {
        0,     2,     2,     3,     4,     6,     7,    11,    12,    12, 
       14,    15,    17,    17,    19,    20,    21,    23,    24,    26, 
       27,    29,    31,    32,    33,    34,    35,    36,    37,    38, 
@@ -1141,7 +1142,7 @@ const uint16 PL1_grm_f_tail[1273] = {
 };
 
 // Tail symbol numbers ...
-const int16 PL1_grm_tail[2199] = {
+const int16 grm_tail[2199] = {
       -1,     1,    -2,    -3,    -2,    -3,    -4,  -376,    -5,    -6, 
       -8,  -268,    -6,    -7,   -12,    -9,   -11,    -9,   -10,  -380, 
     -138,  -376,   -13,   -13,  -376,   -14,   -14,  -376,   -15,  -376, 
@@ -1365,7 +1366,7 @@ const int16 PL1_grm_tail[2199] = {
 };
 
 // Arguments for token actions ...
-const int8 PL1_grm_arga[226] = {
+const int8 grm_arga[226] = {
       -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1, 
       -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1, 
       -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1, 
@@ -1392,7 +1393,7 @@ const int8 PL1_grm_arga[226] = {
 };
 
 // Boolean matrix ...
-const uint8 PL1_grm_Bm[668] = {
+const uint8 grm_Bm[668] = {
        0,     0,     0,     0,     0,     0,     0,     0,     0,     0, 
        4,     8,     0,     0,     0,     0,     0,     0,     0,     0, 
        2,     0,     0,     0,     0,     0,     0,     0,     0,     0, 
@@ -1463,7 +1464,7 @@ const uint8 PL1_grm_Bm[668] = {
 };
 
 // Boolean matrix row (for state)...
-const uint16 PL1_grm_Br[860] = {
+const uint16 grm_Br[860] = {
       10,    20,    10,    30,    39,    42,     0,    39,    50,    53, 
       62,    72,    81,    78,    91,    62,   101,   101,    50,    42, 
      111,   121,    39,   101,   130,     0,   140,     0,    89,   148, 
@@ -1553,8 +1554,8 @@ const uint16 PL1_grm_Br[860] = {
       };
 
 // Boolean matrix column (displacement) ...
-extern const uint8 PL1_grm_Bc[226];
-const uint8 PL1_grm_Bc[226] = {
+extern const uint8 grm_Bc[226];
+const uint8 grm_Bc[226] = {
        0,     0,     0,     0,     0,     0,     0,     0,     1,     1, 
        1,     1,     1,     1,     1,     1,     1,     2,     2,     1, 
        2,     1,     1,     2,     2,     2,     2,     2,     2,     2, 
@@ -1581,7 +1582,7 @@ const uint8 PL1_grm_Bc[226] = {
       };
 
 // Boolean matrix filter/mask value ...
-const uint8 PL1_grm_Bf[226] = {
+const uint8 grm_Bf[226] = {
        1,     2,     4,     8,    16,    32,    64,   128,     1,     1, 
        2,     4,     8,    16,    32,    64,   128,     1,     2,     1, 
        4,     1,     1,     8,    16,    16,    32,    32,    32,    32, 
@@ -1608,7 +1609,7 @@ const uint8 PL1_grm_Bf[226] = {
 };
 
 // Terminal transition matrix ...
-const int16 PL1_grm_Tm[4576] = {
+const int16 grm_Tm[4576] = {
        0,     0,     0,   745,   775,   780,   782,   783,   814,   819, 
      842,   845,   331,  -919,   332,  -923,   343,  -183,   345,  -110, 
      346,  -112,   347,  -202,   348,  -290,   349,  -302,   352,  -375, 
@@ -2070,7 +2071,7 @@ const int16 PL1_grm_Tm[4576] = {
 };
 
 // Terminal transition matrix row ...
-const uint16 PL1_grm_Tr[860] = {
+const uint16 grm_Tr[860] = {
     4030,  4030,  4030,  4030,  3490,  4030,  4030,  1893,  4030,  4030, 
     4030,  4108,  4030,  4030,  3490,  3490,  3490,  1893,  3490,  3490, 
     4030,  4420,  3490,  4108,  1387,  4030,  1893,  4030,  4030,  1893, 
@@ -2160,7 +2161,7 @@ const uint16 PL1_grm_Tr[860] = {
 };
 
 // Terminal transition matrix column ...
-const uint8 PL1_grm_Tc[226] = {
+const uint8 grm_Tc[226] = {
       65,    65,     0,    66,    16,     1,    17,    18,    65,    66, 
        2,     6,     3,     4,     7,     5,    39,    32,    26,    16, 
       13,    17,    18,    33,    67,    60,     6,     7,     8,     8, 
@@ -2187,7 +2188,7 @@ const uint8 PL1_grm_Tc[226] = {
 };
 
 // Nonterminal transition matrix ...
-const int16 PL1_grm_Nm[9999] = {
+const int16 grm_Nm[9999] = {
        0,     0,     0,     0,     0,     0,     0,     0,     0,   398, 
        0,     0,     0,     0,     0,     0,     0,     0,     0,     0, 
        0,     0,     0,     0,     0,     0,     0,     0,     0,     0, 
@@ -3191,7 +3192,7 @@ const int16 PL1_grm_Nm[9999] = {
 };
 
 // Nonterminal transition matrix row ...
-const uint16 PL1_grm_Nr[860] = {
+const uint16 grm_Nr[860] = {
  9768,  9768,  9537,  8197,  9768,  9768,  9768,  9768,  9768,  9768, 
  9768,  9308,  9768,  9768,  9768,  9768,  9768,  9768,  9768,  9537, 
  6322,  9086,  9768,  9768,  9768,  9768,  5577,  9768,  9768,  8197, 
@@ -3281,7 +3282,7 @@ const uint16 PL1_grm_Nr[860] = {
 };
 
 // Nonterminal transition matrix column ...
-const uint8 PL1_grm_Nc[1272] = {
+const uint8 grm_Nc[1272] = {
    13,    13,    13,    76,    76,    76,    76,    13,    51,    51, 
    76,    13,    51,    51,    76,    13,    76,    76,    76,    76, 
    76,    76,    76,    76,    76,   170,    51,    86,    76,   170, 
@@ -3413,7 +3414,7 @@ const uint8 PL1_grm_Nc[1272] = {
 };
 
 // Reduction matrix ...
-const uint16 PL1_grm_Rm[121] = {
+const uint16 grm_Rm[121] = {
        0,     0,     0,     0,     0,     0,     0,     0,     0,     0, 
        0,     0,     0,  1230,     0,     0,  1230,     0,   603,  1230, 
        0,     0,    40,    75,    40,     0,    40,     0,     0,     0, 
@@ -3430,7 +3431,7 @@ const uint16 PL1_grm_Rm[121] = {
 };
 
 // Reduction matrix row ...
-const int16 PL1_grm_Rr[860] = {
+const int16 grm_Rr[860] = {
        1,     0,     2,     0,   603,     0,     8,   438,     0,     0, 
        0,    12,     0,   443,     0,     0,     0,     0,     0,     0, 
        0,     0,    -9,     0,     0,    82,     0,    92,   125,     0, 
@@ -3520,7 +3521,7 @@ const int16 PL1_grm_Rr[860] = {
 };
 
 // Reduction matrix column ...
-const uint8 PL1_grm_Rc[226] = {
+const uint8 grm_Rc[226] = {
        0,     0,     1,     0,     0,     0,     0,     2,     3,     3, 
        4,     0,     5,     6,     0,     5,     7,     0,     0,     3, 
        8,     3,     3,     8,     8,     8,     3,     3,     3,     3, 
@@ -3547,7 +3548,7 @@ const uint8 PL1_grm_Rc[226] = {
 };
 
 // Production lengths (minus one) ...
-const int8 PL1_grm_PL[1272] = {
+const int8 grm_PL[1272] = {
        1,    -1,     0,     0,     1,     0,     3,     0,    -1,     1, 
        0,     1,    -1,     1,     0,     0,     1,     0,     1,     0, 
        1,     1,     0,     0,     0,     0,     0,     0,     0,     0, 
@@ -3679,7 +3680,7 @@ const int8 PL1_grm_PL[1272] = {
 };
 
 // Terminal action number ...
-const int8 PL1_grm_tact_numb[226] = {
+const int8 grm_tact_numb[226] = {
        0,    -1,     1,     1,     1,     1,     1,    -1,    -1,    -1, 
       -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1, 
       -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1, 
@@ -3705,3 +3706,5 @@ const int8 PL1_grm_tact_numb[226] = {
       -1,    -1,    -1,    -1,    -1,    -1, 
 };
 
+
+};   /* namespace PL1 */

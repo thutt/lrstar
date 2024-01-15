@@ -6,13 +6,17 @@
 
 #include "lrstar_basic_defs.h"
 #include "lrstar_lexer.h"
+namespace Modula2 {
 
+
+};   /* namespace Modula2 */
 #include "Modula2_ParserTables_typedef.h"
 #include "lrstar_parser.h"
 
-extern const char Modula2_grammar_name[];
+namespace Modula2 {
+extern const char grammar_name[];
 
-typedef lrstar_parser</* grammar           */   Modula2_grammar_name,
+typedef lrstar_parser</* grammar           */   grammar_name,
                       /* AST traversals    */   1,
                       /* actions           */   true,
                       /* debug_parser      */   false,
@@ -29,6 +33,8 @@ typedef lrstar_parser</* grammar           */   Modula2_grammar_name,
                       /* stksize           */   100,
                       /* term_actions      */   true,
                       /* lexer table type  */   Modula2_lexer_t,
-                      /* parser table type */   Modula2_parser_tables_t> Modula2_parser_t;
+                      /* parser table type */   parser_tables_t> parser_t;
+
+};   /* namespace Modula2 */
 
 #endif

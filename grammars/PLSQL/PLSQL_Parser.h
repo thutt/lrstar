@@ -6,13 +6,17 @@
 
 #include "lrstar_basic_defs.h"
 #include "lrstar_lexer.h"
+namespace PLSQL {
 
+
+};   /* namespace PLSQL */
 #include "PLSQL_ParserTables_typedef.h"
 #include "lrstar_parser.h"
 
-extern const char PLSQL_grammar_name[];
+namespace PLSQL {
+extern const char grammar_name[];
 
-typedef lrstar_parser</* grammar           */   PLSQL_grammar_name,
+typedef lrstar_parser</* grammar           */   grammar_name,
                       /* AST traversals    */   1,
                       /* actions           */   false,
                       /* debug_parser      */   false,
@@ -29,6 +33,8 @@ typedef lrstar_parser</* grammar           */   PLSQL_grammar_name,
                       /* stksize           */   100,
                       /* term_actions      */   false,
                       /* lexer table type  */   PLSQL_lexer_t,
-                      /* parser table type */   PLSQL_parser_tables_t> PLSQL_parser_t;
+                      /* parser table type */   parser_tables_t> parser_t;
+
+};   /* namespace PLSQL */
 
 #endif

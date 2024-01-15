@@ -5,12 +5,15 @@
  *        It can be safely edited to add user-supplied code.
  */
 
-int
-COBOL_error(UNUSED_PARAM(COBOL_parser_t *parser), UNUSED_PARAM(int &t))
-{
-   if (parser->lt.token.end == parser->lt.token.start) {
-      // An illegal character.
-      parser->lt.token.end++;
-   }
-   return 0;
-}
+namespace COBOL {
+    int
+    error(UNUSED_PARAM(parser_t *parser), UNUSED_PARAM(int &t))
+    {
+       if (parser->lt.token.end == parser->lt.token.start) {
+          // An illegal character.
+          parser->lt.token.end++;
+       }
+       return 0;
+    }
+
+};   /* namespace COBOL */

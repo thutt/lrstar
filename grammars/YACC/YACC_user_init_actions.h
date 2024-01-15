@@ -5,8 +5,11 @@
  *        It can be safely edited to add user-supplied code.
  */
 
-void
-YACC_init_actions(UNUSED_PARAM(YACC_parser_t *parser))
-{
-      /* Initialization code goes here */
-}
+namespace YACC {
+    void
+    init_actions(UNUSED_PARAM(parser_t *parser))
+    {
+          /* Initialization code goes here */
+    }
+
+};   /* namespace YACC */

@@ -5,8 +5,11 @@
  *        It can be safely edited to add user-supplied code.
  */
 
-void
-CICS_init_actions(UNUSED_PARAM(CICS_parser_t *parser))
-{
-      /* Initialization code goes here */
-}
+namespace CICS {
+    void
+    init_actions(UNUSED_PARAM(parser_t *parser))
+    {
+          /* Initialization code goes here */
+    }
+
+};   /* namespace CICS */

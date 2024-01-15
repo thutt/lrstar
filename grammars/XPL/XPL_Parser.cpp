@@ -4,8 +4,9 @@
 #include "XPL_ParserTables_typedef.h"
 #include "XPL_Parser.h"
 
+namespace XPL {
 // Terminal symbols of the grammar.
-const char *XPL_grm_term_symb[49] = {
+const char *grm_term_symb[49] = {
    "<error>",
    "<eof>",
    "<identifier>",
@@ -58,7 +59,7 @@ const char *XPL_grm_term_symb[49] = {
 };
 
 // Nonterminal symbols of the grammar.
-const char *XPL_grm_head_symb[49] = {
+const char *grm_head_symb[49] = {
    "program",
    "statement_list",
    "statement",
@@ -111,13 +112,13 @@ const char *XPL_grm_head_symb[49] = {
 };
 
 // Terninal action names found in the grammar ...
-const char *XPL_grm_tact_name[2] = {
+const char *grm_tact_name[2] = {
    "error",
    "lookup",
 };
 
 // Head symbol numbers for the productions.
-const uint8 XPL_grm_head_numb[109] = {
+const uint8 grm_head_numb[109] = {
        0,     1,     1,     2,     2,     3,     3,     3,     3,     3, 
        3,     3,     3,     3,     4,     4,     4,     5,     6,     7, 
        8,     8,     8,     8,     8,     9,    10,    10,    11,    12, 
@@ -132,7 +133,7 @@ const uint8 XPL_grm_head_numb[109] = {
 };
 
 // First tail symbol index into the tail list ...
-const uint8 XPL_grm_f_tail[110] = {
+const uint8 grm_f_tail[110] = {
        0,     2,     3,     5,     6,     7,     9,    11,    13,    15, 
       17,    19,    21,    22,    24,    26,    29,    31,    34,    36, 
       38,    40,    43,    46,    49,    51,    55,    57,    61,    63, 
@@ -147,7 +148,7 @@ const uint8 XPL_grm_f_tail[110] = {
 };
 
 // Tail symbol numbers ...
-const int8 XPL_grm_tail[221] = {
+const int8 grm_tail[221] = {
       -1,     1,    -2,    -1,    -2,    -3,    -4,   -34,     5,    -7, 
        5,   -13,     5,   -20,     5,   -21,     5,   -22,     5,   -24, 
        5,     5,   -19,    -3,    -5,    -2,    -5,    -6,    -2,   -19, 
@@ -174,7 +175,7 @@ const int8 XPL_grm_tail[221] = {
 };
 
 // Arguments for token actions ...
-const int8 XPL_grm_arga[49] = {
+const int8 grm_arga[49] = {
       -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1, 
       -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1, 
       -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1, 
@@ -183,7 +184,7 @@ const int8 XPL_grm_arga[49] = {
 };
 
 // Boolean matrix ...
-const uint8 XPL_grm_Bm[118] = {
+const uint8 grm_Bm[118] = {
        0,     0,     0,     0,   100,     0,     0,     0,   102,     0, 
        0,     0,    32,     0,     0,   128,    64,     0,    28,    64, 
        0,    18,     4,     0,     0,     0,   100,     0,     1,     0, 
@@ -199,7 +200,7 @@ const uint8 XPL_grm_Bm[118] = {
 };
 
 // Boolean matrix row (for state)...
-const uint8 XPL_grm_Br[97] = {
+const uint8 grm_Br[97] = {
        4,     8,    12,    14,    18,    22,    12,    26,    12,     4, 
       30,    34,    12,    12,    12,    22,    38,     4,    40,    44, 
       18,    22,    47,    51,    18,    18,    54,    57,    61,    65, 
@@ -213,8 +214,8 @@ const uint8 XPL_grm_Br[97] = {
       };
 
 // Boolean matrix column (displacement) ...
-extern const uint8 XPL_grm_Bc[49];
-const uint8 XPL_grm_Bc[49] = {
+extern const uint8 grm_Bc[49];
+const uint8 grm_Bc[49] = {
        0,     0,     0,     0,     0,     0,     0,     0,     1,     0, 
        1,     1,     1,     1,     1,     1,     1,     1,     2,     2, 
        0,     0,     0,     0,     0,     2,     2,     2,     2,     2, 
@@ -223,7 +224,7 @@ const uint8 XPL_grm_Bc[49] = {
       };
 
 // Boolean matrix filter/mask value ...
-const uint8 XPL_grm_Bf[49] = {
+const uint8 grm_Bf[49] = {
        1,     2,     4,     8,    16,    32,    64,   128,     1,    64, 
        2,     4,     8,     8,    16,    32,    64,   128,     1,     2, 
       64,    64,    64,    64,    64,     4,     8,    16,    16,    16, 
@@ -232,7 +233,7 @@ const uint8 XPL_grm_Bf[49] = {
 };
 
 // Terminal transition matrix ...
-const int8 XPL_grm_Tm[144] = {
+const int8 grm_Tm[144] = {
        0,     0,   -10,   -32,   -21,   -22,   -23,   -34,   -11,     0, 
       31,     0,   -20,    44,    52,   -46,     0,    -6,     0,   -52, 
      -59,   -60,    58,     0,    -7,     0,   -33,   -36,   -64,   -38, 
@@ -251,7 +252,7 @@ const int8 XPL_grm_Tm[144] = {
 };
 
 // Terminal transition matrix row ...
-const uint8 XPL_grm_Tr[97] = {
+const uint8 grm_Tr[97] = {
      106,   106,    71,   106,    71,    71,    15,   106,    22,   106, 
       51,   106,    44,    30,     0,    15,     6,   106,   106,    10, 
       71,    71,   106,    22,    71,    71,    71,   106,    71,   106, 
@@ -265,7 +266,7 @@ const uint8 XPL_grm_Tr[97] = {
 };
 
 // Terminal transition matrix column ...
-const uint8 XPL_grm_Tc[49] = {
+const uint8 grm_Tc[49] = {
       29,    29,     0,     4,     1,     2,    24,    25,    26,    27, 
        3,    28,    29,     4,    30,     5,     6,     7,    31,     8, 
        9,    10,    11,    12,    13,    14,    15,    16,    17,    18, 
@@ -274,7 +275,7 @@ const uint8 XPL_grm_Tc[49] = {
 };
 
 // Nonterminal transition matrix ...
-const int8 XPL_grm_Nm[580] = {
+const int8 grm_Nm[580] = {
        0,     0,     0,     0,     0,     0,     0,     0,     0,     0, 
        0,     0,     0,     0,     0,     0,     0,     0,     0,     0, 
        0,     0,     0,     0,     0,     0,     0,     0,     0,     0, 
@@ -336,7 +337,7 @@ const int8 XPL_grm_Nm[580] = {
 };
 
 // Nonterminal transition matrix row ...
-const uint16 XPL_grm_Nr[97] = {
+const uint16 grm_Nr[97] = {
   545,   510,   545,   545,   230,    63,   545,   370,   545,   405, 
   545,   265,   545,   545,   545,   545,   545,   440,   545,    21, 
   112,     0,   545,   545,   124,   136,   545,   545,   545,   545, 
@@ -350,7 +351,7 @@ const uint16 XPL_grm_Nr[97] = {
 };
 
 // Nonterminal transition matrix column ...
-const uint8 XPL_grm_Nc[109] = {
+const uint8 grm_Nc[109] = {
     4,     4,     4,    26,    26,    29,    29,    29,    29,    29, 
    29,    29,    29,    29,    30,    30,    30,    23,     4,    24, 
    25,    25,    25,    25,    25,    26,    28,    28,    29,    30, 
@@ -365,12 +366,12 @@ const uint8 XPL_grm_Nc[109] = {
 };
 
 // Reduction matrix ...
-const uint8 XPL_grm_Rm[1] = {
+const uint8 grm_Rm[1] = {
        0, 
 };
 
 // Reduction matrix row ...
-const uint8 XPL_grm_Rr[97] = {
+const uint8 grm_Rr[97] = {
        0,     0,     0,     0,     0,     0,     0,     0,     0,     0, 
        0,     0,     0,     0,     0,     0,     0,     0,   105,     0, 
       43,     0,     0,     0,     0,     0,     0,    73,    79,    89, 
@@ -384,7 +385,7 @@ const uint8 XPL_grm_Rr[97] = {
 };
 
 // Reduction matrix column ...
-const uint8 XPL_grm_Rc[49] = {
+const uint8 grm_Rc[49] = {
        0,     0,     0,     0,     0,     0,     0,     0,     0,     0, 
        0,     0,     0,     0,     0,     0,     0,     0,     0,     0, 
        0,     0,     0,     0,     0,     0,     0,     0,     0,     0, 
@@ -393,7 +394,7 @@ const uint8 XPL_grm_Rc[49] = {
 };
 
 // Production lengths (minus one) ...
-const uint8 XPL_grm_PL[109] = {
+const uint8 grm_PL[109] = {
        1,     0,     1,     0,     0,     1,     1,     1,     1,     1, 
        1,     1,     0,     1,     1,     2,     1,     2,     1,     1, 
        1,     2,     2,     2,     1,     3,     1,     3,     1,     1, 
@@ -408,7 +409,7 @@ const uint8 XPL_grm_PL[109] = {
 };
 
 // Terminal action number ...
-const int8 XPL_grm_tact_numb[49] = {
+const int8 grm_tact_numb[49] = {
        0,    -1,     1,     1,     1,    -1,    -1,    -1,    -1,    -1, 
       -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1, 
       -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1, 
@@ -416,3 +417,5 @@ const int8 XPL_grm_tact_numb[49] = {
       -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1, 
 };
 
+
+};   /* namespace XPL */

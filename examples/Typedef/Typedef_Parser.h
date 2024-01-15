@@ -6,6 +6,7 @@
 
 #include "lrstar_basic_defs.h"
 #include "lrstar_lexer.h"
+namespace Typedef {
 
 namespace Typedef {
     enum nodecon {
@@ -13,12 +14,15 @@ namespace Typedef {
     };
 }
 
+
+};   /* namespace Typedef */
 #include "Typedef_ParserTables_typedef.h"
 #include "lrstar_parser.h"
 
-extern const char Typedef_grammar_name[];
+namespace Typedef {
+extern const char grammar_name[];
 
-typedef lrstar_parser</* grammar           */   Typedef_grammar_name,
+typedef lrstar_parser</* grammar           */   grammar_name,
                       /* AST traversals    */   1,
                       /* actions           */   true,
                       /* debug_parser      */   true,
@@ -35,6 +39,8 @@ typedef lrstar_parser</* grammar           */   Typedef_grammar_name,
                       /* stksize           */   100,
                       /* term_actions      */   true,
                       /* lexer table type  */   Typedef_lexer_t,
-                      /* parser table type */   Typedef_parser_tables_t> Typedef_parser_t;
+                      /* parser table type */   parser_tables_t> parser_t;
+
+};   /* namespace Typedef */
 
 #endif

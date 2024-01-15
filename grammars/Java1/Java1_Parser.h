@@ -6,6 +6,7 @@
 
 #include "lrstar_basic_defs.h"
 #include "lrstar_lexer.h"
+namespace Java1 {
 
 enum termcon {
    BOOLEAN = 4,
@@ -58,12 +59,15 @@ enum termcon {
    INSTANCEOF = 51,
 };
 
+
+};   /* namespace Java1 */
 #include "Java1_ParserTables_typedef.h"
 #include "lrstar_parser.h"
 
-extern const char Java1_grammar_name[];
+namespace Java1 {
+extern const char grammar_name[];
 
-typedef lrstar_parser</* grammar           */   Java1_grammar_name,
+typedef lrstar_parser</* grammar           */   grammar_name,
                       /* AST traversals    */   1,
                       /* actions           */   true,
                       /* debug_parser      */   false,
@@ -80,6 +84,8 @@ typedef lrstar_parser</* grammar           */   Java1_grammar_name,
                       /* stksize           */   100,
                       /* term_actions      */   true,
                       /* lexer table type  */   Java1_lexer_t,
-                      /* parser table type */   Java1_parser_tables_t> Java1_parser_t;
+                      /* parser table type */   parser_tables_t> parser_t;
+
+};   /* namespace Java1 */
 
 #endif

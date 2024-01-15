@@ -5,8 +5,11 @@
  *        It can be safely edited to add user-supplied code.
  */
 
-void
-Dbase_init_actions(UNUSED_PARAM(Dbase_parser_t *parser))
-{
-      /* Initialization code goes here */
-}
+namespace Dbase {
+    void
+    init_actions(UNUSED_PARAM(parser_t *parser))
+    {
+          /* Initialization code goes here */
+    }
+
+};   /* namespace Dbase */

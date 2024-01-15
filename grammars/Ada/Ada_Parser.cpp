@@ -4,8 +4,9 @@
 #include "Ada_ParserTables_typedef.h"
 #include "Ada_Parser.h"
 
+namespace Ada {
 // Terminal symbols of the grammar.
-const char *Ada_grm_term_symb[93] = {
+const char *grm_term_symb[93] = {
    "<error>",
    "<eof>",
    "<identifier>",
@@ -102,7 +103,7 @@ const char *Ada_grm_term_symb[93] = {
 };
 
 // Nonterminal symbols of the grammar.
-const char *Ada_grm_head_symb[205] = {
+const char *grm_head_symb[205] = {
    "Goal",
    "Units",
    "Unit",
@@ -311,13 +312,13 @@ const char *Ada_grm_head_symb[205] = {
 };
 
 // Terninal action names found in the grammar ...
-const char *Ada_grm_tact_name[2] = {
+const char *grm_tact_name[2] = {
    "error",
    "lookup",
 };
 
 // Head symbol numbers for the productions.
-const uint8 Ada_grm_head_numb[414] = {
+const uint8 grm_head_numb[414] = {
        0,     1,     1,     2,     3,     3,     4,     4,     5,     5, 
        6,     7,     8,     8,     9,     9,     9,     9,     9,     9, 
       10,    11,    11,    11,    11,    11,    12,    13,    14,    15, 
@@ -363,7 +364,7 @@ const uint8 Ada_grm_head_numb[414] = {
 };
 
 // First tail symbol index into the tail list ...
-const uint16 Ada_grm_f_tail[415] = {
+const uint16 grm_f_tail[415] = {
        0,     2,     3,     5,     8,    11,    17,    18,    21,    22, 
       25,    27,    30,    31,    34,    35,    36,    37,    38,    39, 
       40,    43,    44,    45,    46,    47,    48,    53,    61,    70, 
@@ -409,7 +410,7 @@ const uint16 Ada_grm_f_tail[415] = {
 };
 
 // Tail symbol numbers ...
-const int16 Ada_grm_tail[903] = {
+const int16 grm_tail[903] = {
       -1,     1,    -2,    -1,    -2,  -166,  -167,   -11,     5,     2, 
        6,     5,     2,     7,    -4,     8,     6,    -5,    -4,     9, 
       -5,   -72,     2,    10,   -72,    -7,  -168,    11,    -8,     6, 
@@ -504,7 +505,7 @@ const int16 Ada_grm_tail[903] = {
 };
 
 // Arguments for token actions ...
-const int8 Ada_grm_arga[93] = {
+const int8 grm_arga[93] = {
       -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1, 
       -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1, 
       -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1, 
@@ -518,7 +519,7 @@ const int8 Ada_grm_arga[93] = {
 };
 
 // Boolean matrix ...
-const uint8 Ada_grm_Bm[723] = {
+const uint8 grm_Bm[723] = {
        0,     0,     0,     0,     0,     0,     0,     0,     0,     0, 
        2,     0,     0,     0,     0,     0,     0,     0,     0,    32, 
        0,     0,     0,     0,     0,     0,     0,     0,     0,     4, 
@@ -595,7 +596,7 @@ const uint8 Ada_grm_Bm[723] = {
 };
 
 // Boolean matrix row (for state)...
-const uint16 Ada_grm_Br[464] = {
+const uint16 grm_Br[464] = {
        0,    10,    19,   537,    29,     0,    38,   547,    38,    47, 
       56,    29,    84,    94,    84,   103,    37,   613,    38,    38, 
       38,   112,    29,    84,    29,    58,    29,    84,    84,   121, 
@@ -646,8 +647,8 @@ const uint16 Ada_grm_Br[464] = {
       };
 
 // Boolean matrix column (displacement) ...
-extern const uint8 Ada_grm_Bc[93];
-const uint8 Ada_grm_Bc[93] = {
+extern const uint8 grm_Bc[93];
+const uint8 grm_Bc[93] = {
        0,     0,     0,     0,     0,     0,     0,     0,     1,     1, 
        1,     1,     1,     1,     1,     1,     2,     2,     2,     2, 
        2,     2,     2,     2,     2,     3,     3,     3,     3,     3, 
@@ -661,7 +662,7 @@ const uint8 Ada_grm_Bc[93] = {
       };
 
 // Boolean matrix filter/mask value ...
-const uint8 Ada_grm_Bf[93] = {
+const uint8 grm_Bf[93] = {
        1,     2,     4,     8,    16,    32,    64,   128,     1,     2, 
        4,     8,    16,    32,    64,   128,     1,     2,     4,     8, 
       16,    32,    64,    64,   128,     1,     2,     4,     8,    16, 
@@ -675,7 +676,7 @@ const uint8 Ada_grm_Bf[93] = {
 };
 
 // Terminal transition matrix ...
-const int16 Ada_grm_Tm[607] = {
+const int16 grm_Tm[607] = {
     -266,   463,   161,   336,  -184,    49,    14,    10,    36,   350, 
       13,   338,   218,   216,   219,   220,   185,   323,   341,   337, 
      160,    48,   169,   301,     4,   221,   282,  -249,   155,    31, 
@@ -740,7 +741,7 @@ const int16 Ada_grm_Tm[607] = {
 };
 
 // Terminal transition matrix row ...
-const uint16 Ada_grm_Tr[464] = {
+const uint16 grm_Tr[464] = {
        0,     0,     0,     0,   220,     0,   318,   358,   488,     0, 
      188,   137,   121,   495,   443,   285,     0,   240,   188,   201, 
      224,     0,   488,   121,   188,   393,   201,   443,   443,   514, 
@@ -791,7 +792,7 @@ const uint16 Ada_grm_Tr[464] = {
 };
 
 // Terminal transition matrix column ...
-const uint8 Ada_grm_Tc[93] = {
+const uint8 grm_Tc[93] = {
        0,     1,     2,    13,    27,    24,     0,     3,     4,     5, 
       32,     6,    66,     7,     8,     9,    10,    29,    76,    11, 
       12,    13,    14,    15,    16,    17,    18,    19,    20,    21, 
@@ -805,7 +806,7 @@ const uint8 Ada_grm_Tc[93] = {
 };
 
 // Nonterminal transition matrix ...
-const int16 Ada_grm_Nm[3098] = {
+const int16 grm_Nm[3098] = {
       -1,   -86,  -116,     1,   156,   -85,  -125,  -126,   -95,   -92, 
     -110,   377,   -47,  -111,   -43,   -48,   -49,   -50,  -113,   263, 
     -114,   378,  -100,  -353,    40,  -351,   335,  -115,   -97,    16, 
@@ -1119,7 +1120,7 @@ const int16 Ada_grm_Nm[3098] = {
 };
 
 // Nonterminal transition matrix row ...
-const uint16 Ada_grm_Nr[464] = {
+const uint16 grm_Nr[464] = {
     0,   138,  1963,   273,     0,     0,     0,   496,     0,   273, 
     0,     0,    81,     0,   224,     0,     0,     0,     0,     0, 
     0,     0,     0,   141,     0,   605,     0,   799,  2795,     0, 
@@ -1170,7 +1171,7 @@ const uint16 Ada_grm_Nr[464] = {
 };
 
 // Nonterminal transition matrix column ...
-const uint8 Ada_grm_Nc[414] = {
+const uint8 grm_Nc[414] = {
     3,     3,     3,     0,     1,     1,     3,     3,     2,     2, 
     3,     0,     3,     3,     4,     4,     4,     4,     4,     4, 
     5,     2,     2,     2,     2,     2,    10,     6,     7,     8, 
@@ -1216,7 +1217,7 @@ const uint8 Ada_grm_Nc[414] = {
 };
 
 // Reduction matrix ...
-const uint16 Ada_grm_Rm[374] = {
+const uint16 grm_Rm[374] = {
        0,     0,     0,     0,     0,     0,     0,     0,     0,     0, 
        0,     0,     0,     0,     0,     0,     0,     0,     0,     0, 
        0,   141,   249,   141,   141,   141,     0,     0,   141,   141, 
@@ -1258,7 +1259,7 @@ const uint16 Ada_grm_Rm[374] = {
 };
 
 // Reduction matrix row ...
-const int16 Ada_grm_Rr[464] = {
+const int16 grm_Rr[464] = {
      328,   328,   330,     0,     0,   354,     0,     0,     0,   332, 
        0,     0,     0,     0,     0,     0,     0,   356,     0,     0, 
        0,     0,     0,     0,     0,     0,     0,     0,     0,   394, 
@@ -1309,7 +1310,7 @@ const int16 Ada_grm_Rr[464] = {
 };
 
 // Reduction matrix column ...
-const uint8 Ada_grm_Rc[93] = {
+const uint8 grm_Rc[93] = {
        0,     0,     1,     0,     1,     0,     2,     3,     4,     5, 
        6,     0,     0,     0,     7,     8,     0,     0,     2,     0, 
        9,    10,    11,    11,     0,     0,     0,     0,     1,    12, 
@@ -1323,7 +1324,7 @@ const uint8 Ada_grm_Rc[93] = {
 };
 
 // Production lengths (minus one) ...
-const int8 Ada_grm_PL[414] = {
+const int8 grm_PL[414] = {
        1,     0,     1,     2,     2,     5,     0,     2,     0,     2, 
        1,     2,     0,     2,     0,     0,     0,     0,     0,     0, 
        2,     0,     0,     0,     0,     0,     4,     7,     8,     1, 
@@ -1369,7 +1370,7 @@ const int8 Ada_grm_PL[414] = {
 };
 
 // Terminal action number ...
-const int8 Ada_grm_tact_numb[93] = {
+const int8 grm_tact_numb[93] = {
        0,    -1,     1,     1,     1,    -1,    -1,    -1,    -1,    -1, 
       -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1, 
       -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1, 
@@ -1382,3 +1383,5 @@ const int8 Ada_grm_tact_numb[93] = {
       -1,    -1,    -1, 
 };
 
+
+};   /* namespace Ada */

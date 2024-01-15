@@ -2,35 +2,38 @@
 #include "COBOL_LexerTables_typedef.h"
 #include "COBOL_Parser.h"
 
+namespace COBOL {
 
-const char COBOL_grammar_name[] = "COBOL";
+const char grammar_name[] = "COBOL";
 
 
-void COBOL_init_actions(UNUSED_PARAM(COBOL_parser_t *parser)); /* User-supplied */
-void COBOL_term_actions(UNUSED_PARAM(COBOL_parser_t *parser)); /* User-supplied */
-static COBOL_parser_t::init_func_t COBOL_init_funcs_[2] = {
-   COBOL_init_actions,
-   COBOL_term_actions
+void init_actions(UNUSED_PARAM(parser_t *parser)); /* User-supplied */
+void term_actions(UNUSED_PARAM(parser_t *parser)); /* User-supplied */
+static parser_t::init_func_t init_funcs_[2] = {
+   init_actions,
+   term_actions
 };
 
-int COBOL_error(UNUSED_PARAM(COBOL_parser_t *parser), UNUSED_PARAM(int &t));
-int COBOL_lookup(UNUSED_PARAM(COBOL_parser_t *parser), UNUSED_PARAM(int &t));
+int error(UNUSED_PARAM(parser_t *parser), UNUSED_PARAM(int &t));
+int lookup(UNUSED_PARAM(parser_t *parser), UNUSED_PARAM(int &t));
 // Terminal action function pointers ...
-static COBOL_parser_t::tact_func_t COBOL_tact_funcs_[2] = {
-   COBOL_error,
-   COBOL_lookup,
+static parser_t::tact_func_t tact_funcs_[2] = {
+   error,
+   lookup,
 };
 
-COBOL_parser_t *
-COBOL_new_parser(const char *input_path,
-                 char       *input_text,
-                 unsigned    max_symbols)
+parser_t *
+new_parser(const char *input_path,
+           char       *input_text,
+           unsigned    max_symbols)
 {
-   return new COBOL_parser_t(/* input path   */   input_path,
-                             /* input text   */   input_text,
-                             /* max symbols  */   max_symbols,
-                             /* init_func    */   &COBOL_init_funcs_[0],
-                             /* tact_func    */   &COBOL_tact_funcs_[0],
-                             /* nact_func    */   0);
+   return new parser_t(/* input path   */   input_path,
+                       /* input text   */   input_text,
+                       /* max symbols  */   max_symbols,
+                       /* init_func    */   &init_funcs_[0],
+                       /* tact_func    */   &tact_funcs_[0],
+                       /* nact_func    */   0);
 }
 
+
+};   /* namespace COBOL */

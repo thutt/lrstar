@@ -4,8 +4,9 @@
 #include "Dbase_ParserTables_typedef.h"
 #include "Dbase_Parser.h"
 
+namespace Dbase {
 // Terminal symbols of the grammar.
-const char *Dbase_grm_term_symb[280] = {
+const char *grm_term_symb[280] = {
    "<error>",
    "<eof>",
    "<identifier>",
@@ -289,7 +290,7 @@ const char *Dbase_grm_term_symb[280] = {
 };
 
 // Nonterminal symbols of the grammar.
-const char *Dbase_grm_head_symb[174] = {
+const char *grm_head_symb[174] = {
    "goal",
    "cmdlist",
    "command",
@@ -467,13 +468,13 @@ const char *Dbase_grm_head_symb[174] = {
 };
 
 // Terninal action names found in the grammar ...
-const char *Dbase_grm_tact_name[2] = {
+const char *grm_tact_name[2] = {
    "error",
    "lookup",
 };
 
 // Head symbol numbers for the productions.
-const uint8 Dbase_grm_head_numb[618] = {
+const uint8 grm_head_numb[618] = {
        0,     1,     2,     3,     3,     3,     3,     3,     3,     3, 
        3,     3,     3,     3,     3,     3,     3,     3,     3,     3, 
        3,     3,     3,     3,     3,     3,     3,     3,     3,     3, 
@@ -539,7 +540,7 @@ const uint8 Dbase_grm_head_numb[618] = {
 };
 
 // First tail symbol index into the tail list ...
-const uint16 Dbase_grm_f_tail[619] = {
+const uint16 grm_f_tail[619] = {
        0,     2,     3,     5,     7,     9,    11,    13,    18,    23, 
       28,    33,    36,    40,    42,    43,    45,    47,    50,    51, 
       53,    55,    57,    58,    61,    63,    65,    69,    71,    73, 
@@ -605,7 +606,7 @@ const uint16 Dbase_grm_f_tail[619] = {
 };
 
 // Tail symbol numbers ...
-const int16 Dbase_grm_tail[1265] = {
+const int16 grm_tail[1265] = {
       -1,     1,   -57,   -58,     5,     6,    -5,     7,    -2,     8, 
      -59,     9,   -24,    10,   -14,    11,    12,   -14,    10,   -14, 
       13,   -54,   -61,    10,   -14,    16,   -11,   -62,    10,   -14, 
@@ -736,7 +737,7 @@ const int16 Dbase_grm_tail[1265] = {
 };
 
 // Arguments for token actions ...
-const int8 Dbase_grm_arga[280] = {
+const int8 grm_arga[280] = {
       -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1, 
       -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1, 
       -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1, 
@@ -768,7 +769,7 @@ const int8 Dbase_grm_arga[280] = {
 };
 
 // Boolean matrix ...
-const uint8 Dbase_grm_Bm[785] = {
+const uint8 grm_Bm[785] = {
        0,     0,     0,     0,     0,     0,     0,     0,     0,     0, 
        0,     0,   196,     3,     8,   192,     8,     0,    36,     0, 
       10,     0,     0,     0,     2,     0,     0,     0,     0,     0, 
@@ -851,7 +852,7 @@ const uint8 Dbase_grm_Bm[785] = {
 };
 
 // Boolean matrix row (for state)...
-const uint16 Dbase_grm_Br[635] = {
+const uint16 grm_Br[635] = {
       12,    24,    12,    35,    45,     0,    12,    57,    57,    69, 
       81,     0,     0,     0,    93,     0,   102,   111,   119,     0, 
      127,     0,    93,   136,   148,     0,   160,    92,   172,   184, 
@@ -919,8 +920,8 @@ const uint16 Dbase_grm_Br[635] = {
       };
 
 // Boolean matrix column (displacement) ...
-extern const uint8 Dbase_grm_Bc[280];
-const uint8 Dbase_grm_Bc[280] = {
+extern const uint8 grm_Bc[280];
+const uint8 grm_Bc[280] = {
        0,     0,     0,     0,     0,     0,     0,     0,     1,     0, 
        0,     1,     1,     1,     1,     1,     1,     1,     1,     0, 
        0,     2,     2,     2,     2,     0,     0,     2,     0,     2, 
@@ -952,7 +953,7 @@ const uint8 Dbase_grm_Bc[280] = {
       };
 
 // Boolean matrix filter/mask value ...
-const uint8 Dbase_grm_Bf[280] = {
+const uint8 grm_Bf[280] = {
        1,     2,     4,     8,    16,    32,    64,   128,     1,   128, 
      128,     2,     4,     8,    16,    32,     8,    64,   128,   128, 
      128,     1,     2,     4,     8,   128,   128,    16,   128,    32, 
@@ -984,7 +985,7 @@ const uint8 Dbase_grm_Bf[280] = {
 };
 
 // Terminal transition matrix ...
-const int16 Dbase_grm_Tm[1996] = {
+const int16 grm_Tm[1996] = {
        0,     0,     0,     0,     0,     0,     0,     0,     0,     0, 
        0,     0,     0,     0,     0,     0,     0,     0,     0,     0, 
        0,     0,     0,     0,     0,     0,     0,     0,     0,     0, 
@@ -1188,7 +1189,7 @@ const int16 Dbase_grm_Tm[1996] = {
 };
 
 // Terminal transition matrix row ...
-const uint16 Dbase_grm_Tr[635] = {
+const uint16 grm_Tr[635] = {
     1861,  1861,  1861,  1861,  1861,  1861,  1861,  1726,  1726,  1861, 
     1861,  1861,  1861,  1861,   817,  1861,  1861,  1726,  1861,  1861, 
     1726,  1861,   868,  1726,   933,  1861,   868,  1861,   817,   868, 
@@ -1256,7 +1257,7 @@ const uint16 Dbase_grm_Tr[635] = {
 };
 
 // Terminal transition matrix column ...
-const uint8 Dbase_grm_Tc[280] = {
+const uint8 grm_Tc[280] = {
       23,    23,     5,     0,     9,    14,    10,    26,    13,     3, 
        8,    22,     1,    23,    11,    24,    26,    27,    16,    28, 
       45,    34,    21,     3,    25,    37,    39,     8,    41,     2, 
@@ -1288,7 +1289,7 @@ const uint8 Dbase_grm_Tc[280] = {
 };
 
 // Nonterminal transition matrix ...
-const int16 Dbase_grm_Nm[1094] = {
+const int16 grm_Nm[1094] = {
     -171,  -171,  -171,  -171,  -171,  -171,  -171,     0,  -171,  -171, 
      509,   510,  -171,  -171,  -171,   511,   512,     0,  -171,     0, 
      517,  -171,  -171,   523,   524,     0,     0,     0,  -177,  -177, 
@@ -1402,7 +1403,7 @@ const int16 Dbase_grm_Nm[1094] = {
 };
 
 // Nonterminal transition matrix row ...
-const uint16 Dbase_grm_Nr[635] = {
+const uint16 grm_Nr[635] = {
   948,   948,   815,   948,   948,   948,   699,   948,   815,   948, 
   948,   948,   948,   948,   948,   948,   948,   948,   948,   948, 
   948,   948,   948,   948,   948,   815,   815,   948,   948,   948, 
@@ -1470,7 +1471,7 @@ const uint16 Dbase_grm_Nr[635] = {
 };
 
 // Nonterminal transition matrix column ...
-const uint8 Dbase_grm_Nc[618] = {
+const uint8 grm_Nc[618] = {
    79,    79,    86,     1,     1,     1,     1,     1,     1,     1, 
     1,     1,     1,     1,     1,     1,     1,     1,     1,     1, 
     1,     1,     1,     1,     1,     1,     1,     1,     1,     1, 
@@ -1536,13 +1537,13 @@ const uint8 Dbase_grm_Nc[618] = {
 };
 
 // Reduction matrix ...
-const uint16 Dbase_grm_Rm[13] = {
+const uint16 grm_Rm[13] = {
        0,     0,     0,     0,     0,     1,     0,   298,     0,     0, 
      373,   382,   382, 
 };
 
 // Reduction matrix row ...
-const int16 Dbase_grm_Rr[635] = {
+const int16 grm_Rr[635] = {
      298,     0,    -4,     0,     0,   568,   298,   300,     0,     0, 
      310,   316,   323,   332,     0,   340,     0,     0,   365,   371, 
       -8,   387,   389,   396,     0,   340,     0,     0,     0,     0, 
@@ -1610,7 +1611,7 @@ const int16 Dbase_grm_Rr[635] = {
 };
 
 // Reduction matrix column ...
-const uint8 Dbase_grm_Rc[280] = {
+const uint8 grm_Rc[280] = {
        0,     1,     2,     0,     0,     3,     0,     0,     0,     0, 
        0,     0,     0,     0,     0,     0,     0,     0,     0,     0, 
        0,     0,     4,     0,     0,     0,     0,     0,     0,     0, 
@@ -1642,7 +1643,7 @@ const uint8 Dbase_grm_Rc[280] = {
 };
 
 // Production lengths (minus one) ...
-const int8 Dbase_grm_PL[618] = {
+const int8 grm_PL[618] = {
        1,     0,     1,     1,     1,     1,     1,     4,     4,     4, 
        4,     2,     3,     1,     0,     1,     1,     2,     0,     1, 
        1,     1,     0,     2,     1,     1,     3,     1,     1,     1, 
@@ -1708,7 +1709,7 @@ const int8 Dbase_grm_PL[618] = {
 };
 
 // Terminal action number ...
-const int8 Dbase_grm_tact_numb[280] = {
+const int8 grm_tact_numb[280] = {
        0,    -1,     1,     1,     1,    -1,    -1,    -1,    -1,    -1, 
       -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1, 
       -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1, 
@@ -1739,3 +1740,5 @@ const int8 Dbase_grm_tact_numb[280] = {
       -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1, 
 };
 
+
+};   /* namespace Dbase */

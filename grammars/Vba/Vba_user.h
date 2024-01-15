@@ -8,9 +8,10 @@
  *  NOTE: lrstar will never rewrite or delete this file.
  *        It can be safely edited to add user-supplied code.
  */
-
 #if !defined(__Vba_USER_HEADER__)
+namespace Vba {
 
 
 
+};   /* namespace Vba */
 #endif

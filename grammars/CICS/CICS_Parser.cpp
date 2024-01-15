@@ -4,8 +4,9 @@
 #include "CICS_ParserTables_typedef.h"
 #include "CICS_Parser.h"
 
+namespace CICS {
 // Terminal symbols of the grammar.
-const char *CICS_grm_term_symb[216] = {
+const char *grm_term_symb[216] = {
    "<error>",
    "<eof>",
    "<identifier>",
@@ -225,7 +226,7 @@ const char *CICS_grm_term_symb[216] = {
 };
 
 // Nonterminal symbols of the grammar.
-const char *CICS_grm_head_symb[369] = {
+const char *grm_head_symb[369] = {
    "Goal",
    "CICS",
    "Stmt",
@@ -598,13 +599,13 @@ const char *CICS_grm_head_symb[369] = {
 };
 
 // Terninal action names found in the grammar ...
-const char *CICS_grm_tact_name[2] = {
+const char *grm_tact_name[2] = {
    "error",
    "lookup",
 };
 
 // Head symbol numbers for the productions.
-const uint16 CICS_grm_head_numb[821] = {
+const uint16 grm_head_numb[821] = {
        0,     1,     2,     2,     2,     2,     2,     2,     2,     2, 
        2,     2,     2,     2,     2,     2,     2,     2,     2,     2, 
        2,     2,     2,     2,     2,     2,     2,     2,     2,     2, 
@@ -691,7 +692,7 @@ const uint16 CICS_grm_head_numb[821] = {
 };
 
 // First tail symbol index into the tail list ...
-const uint16 CICS_grm_f_tail[822] = {
+const uint16 grm_f_tail[822] = {
        0,     2,     5,     6,     7,     8,     9,    10,    11,    12, 
       13,    14,    15,    16,    17,    18,    19,    20,    21,    22, 
       23,    24,    25,    26,    27,    28,    29,    30,    31,    32, 
@@ -778,7 +779,7 @@ const uint16 CICS_grm_f_tail[822] = {
 };
 
 // Tail symbol numbers ...
-const int16 CICS_grm_tail[1488] = {
+const int16 grm_tail[1488] = {
       -1,     1,    -2,    -3,     8,    -4,    -9,   -17,   -18,   -24, 
      -30,   -40,   -47,   -50,   -55,   -61,   -68,   -71,   -77,   -83, 
      -86,   -93,  -164,  -170,  -181,  -188,  -195,  -203,  -205,  -215, 
@@ -931,7 +932,7 @@ const int16 CICS_grm_tail[1488] = {
 };
 
 // Arguments for token actions ...
-const int8 CICS_grm_arga[216] = {
+const int8 grm_arga[216] = {
       -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1, 
       -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1, 
       -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1, 
@@ -957,7 +958,7 @@ const int8 CICS_grm_arga[216] = {
 };
 
 // Boolean matrix ...
-const uint8 CICS_grm_Bm[310] = {
+const uint8 grm_Bm[310] = {
        0,     0,     0,     0,     0,     0,     0,     0,   128,    17, 
        0,    64,     0,    10,   192,     0,     2,     0,     0,     0, 
        0,     0,     0,     0,    64,     0,     0,     0,     0,     0, 
@@ -992,7 +993,7 @@ const uint8 CICS_grm_Bm[310] = {
 };
 
 // Boolean matrix row (for state)...
-const uint16 CICS_grm_Br[668] = {
+const uint16 grm_Br[668] = {
        8,    16,    24,    31,    38,    46,    53,    59,    66,    72, 
       77,    82,    88,    72,    82,    94,    76,   100,   108,   114, 
      121,   127,   133,   140,    69,   146,   153,   153,   160,   167, 
@@ -1063,8 +1064,8 @@ const uint16 CICS_grm_Br[668] = {
       };
 
 // Boolean matrix column (displacement) ...
-extern const uint8 CICS_grm_Bc[216];
-const uint8 CICS_grm_Bc[216] = {
+extern const uint8 grm_Bc[216];
+const uint8 grm_Bc[216] = {
        0,     0,     0,     0,     0,     0,     0,     0,     0,     0, 
        0,     1,     1,     1,     1,     1,     1,     1,     1,     1, 
        1,     1,     1,     1,     1,     2,     2,     2,     2,     2, 
@@ -1090,7 +1091,7 @@ const uint8 CICS_grm_Bc[216] = {
       };
 
 // Boolean matrix filter/mask value ...
-const uint8 CICS_grm_Bf[216] = {
+const uint8 grm_Bf[216] = {
        1,     2,     4,     8,     1,     1,    16,     1,    32,    64, 
      128,     1,     2,     4,     8,    16,    32,    32,    32,    32, 
       16,    16,    64,   128,    16,     1,     1,     2,     4,     8, 
@@ -1116,7 +1117,7 @@ const uint8 CICS_grm_Bf[216] = {
 };
 
 // Terminal transition matrix ...
-const int16 CICS_grm_Tm[1304] = {
+const int16 grm_Tm[1304] = {
        0,   504,  -350,   505,  -382,   506,  -383,  -160,   243,  -156, 
     -173,   246,  -171,  -184,   249,  -181,  -187,   250,  -185,  -195, 
      251,  -192,  -399,   253,  -194,  -418,   316,  -407,  -421,   318, 
@@ -1251,7 +1252,7 @@ const int16 CICS_grm_Tm[1304] = {
 };
 
 // Terminal transition matrix row ...
-const uint16 CICS_grm_Tr[668] = {
+const uint16 grm_Tr[668] = {
     1197,  1197,  1197,  1091,  1197,  1197,  1197,  1197,  1091,  1197, 
     1197,  1197,  1091,  1091,   974,   974,  1197,   909,  1091,  1091, 
      864,   801,   675,   974,  1197,   833,   748,   722,   815,   734, 
@@ -1322,7 +1323,7 @@ const uint16 CICS_grm_Tr[668] = {
 };
 
 // Terminal transition matrix column ...
-const uint8 CICS_grm_Tc[216] = {
+const uint8 grm_Tc[216] = {
       59,    59,     0,    23,    59,     0,    59,    23,    14,    26, 
       61,    24,    14,     1,     2,    27,    35,    36,    37,    39, 
       40,    47,    38,    56,    48,    57,    58,    29,    62,    63, 
@@ -1348,7 +1349,7 @@ const uint8 CICS_grm_Tc[216] = {
 };
 
 // Nonterminal transition matrix ...
-const int16 CICS_grm_Nm[733] = {
+const int16 grm_Nm[733] = {
        0,     0,     0,     0,     0,     0,   -51,     0,     0,     0, 
        0,   -59,     0,     0,     0,     0,     0,     0,     0,     0, 
      -72,    55,     0,     0,     0,     0,   -79,     0,     0,     0, 
@@ -1426,7 +1427,7 @@ const int16 CICS_grm_Nm[733] = {
 };
 
 // Nonterminal transition matrix row ...
-const uint16 CICS_grm_Nr[668] = {
+const uint16 grm_Nr[668] = {
   365,   365,   365,   365,   365,   365,   365,   365,   365,   365, 
   365,   365,   365,   365,   365,   365,   365,   365,   365,   365, 
   365,   365,   365,   365,   365,   365,   365,   365,   365,   365, 
@@ -1497,7 +1498,7 @@ const uint16 CICS_grm_Nr[668] = {
 };
 
 // Nonterminal transition matrix column ...
-const uint16 CICS_grm_Nc[821] = {
+const uint16 grm_Nc[821] = {
     0,     0,     1,     1,     1,     1,     1,     1,     1,     1, 
     1,     1,     1,     1,     1,     1,     1,     1,     1,     1, 
     1,     1,     1,     1,     1,     1,     1,     1,     1,     1, 
@@ -1584,12 +1585,12 @@ const uint16 CICS_grm_Nc[821] = {
 };
 
 // Reduction matrix ...
-const uint8 CICS_grm_Rm[1] = {
+const uint8 grm_Rm[1] = {
        0, 
 };
 
 // Reduction matrix row ...
-const uint16 CICS_grm_Rr[668] = {
+const uint16 grm_Rr[668] = {
        0,     0,     0,     0,     0,     0,     0,     0,     0,     0, 
        0,     0,     0,     0,     0,     0,     0,     0,     0,     0, 
        0,     0,     0,     0,     0,     0,     0,     0,     0,     0, 
@@ -1660,7 +1661,7 @@ const uint16 CICS_grm_Rr[668] = {
 };
 
 // Reduction matrix column ...
-const uint8 CICS_grm_Rc[216] = {
+const uint8 grm_Rc[216] = {
        0,     0,     0,     0,     0,     0,     0,     0,     0,     0, 
        0,     0,     0,     0,     0,     0,     0,     0,     0,     0, 
        0,     0,     0,     0,     0,     0,     0,     0,     0,     0, 
@@ -1686,7 +1687,7 @@ const uint8 CICS_grm_Rc[216] = {
 };
 
 // Production lengths (minus one) ...
-const int8 CICS_grm_PL[821] = {
+const int8 grm_PL[821] = {
        1,     2,     0,     0,     0,     0,     0,     0,     0,     0, 
        0,     0,     0,     0,     0,     0,     0,     0,     0,     0, 
        0,     0,     0,     0,     0,     0,     0,     0,     0,     0, 
@@ -1773,7 +1774,7 @@ const int8 CICS_grm_PL[821] = {
 };
 
 // Terminal action number ...
-const int8 CICS_grm_tact_numb[216] = {
+const int8 grm_tact_numb[216] = {
        0,    -1,     1,     1,     1,     1,     1,     1,    -1,    -1, 
       -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1, 
       -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1, 
@@ -1798,3 +1799,5 @@ const int8 CICS_grm_tact_numb[216] = {
       -1,    -1,    -1,    -1,    -1,    -1, 
 };
 
+
+};   /* namespace CICS */

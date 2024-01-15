@@ -4,8 +4,9 @@
 #include "CPP5_ParserTables_typedef.h"
 #include "CPP5_Parser.h"
 
+namespace CPP5 {
 // Terminal symbols of the grammar.
-const char *CPP5_grm_term_symb[103] = {
+const char *grm_term_symb[103] = {
    "<error>",
    "<eof>",
    "\'AUTO\'",
@@ -112,7 +113,7 @@ const char *CPP5_grm_term_symb[103] = {
 };
 
 // Nonterminal symbols of the grammar.
-const char *CPP5_grm_head_symb[164] = {
+const char *grm_head_symb[164] = {
    "Start",
    "constant",
    "string_literal_list",
@@ -280,7 +281,7 @@ const char *CPP5_grm_head_symb[164] = {
 };
 
 // Head symbol numbers for the productions.
-const uint8 CPP5_grm_head_numb[643] = {
+const uint8 grm_head_numb[643] = {
        0,     1,     1,     1,     1,     1,     2,     2,     3,     3, 
        3,     4,     4,     4,     4,     4,     4,     5,     5,     5, 
        5,     5,     5,     6,     6,     6,     7,     7,     7,     8, 
@@ -349,7 +350,7 @@ const uint8 CPP5_grm_head_numb[643] = {
 };
 
 // First tail symbol index into the tail list ...
-const uint16 CPP5_grm_f_tail[644] = {
+const uint16 grm_f_tail[644] = {
        0,     2,     3,     4,     5,     6,     7,     8,    10,    11, 
       12,    15,    16,    17,    18,    19,    20,    23,    24,    25, 
       26,    27,    28,    29,    31,    34,    37,    37,    39,    41, 
@@ -418,7 +419,7 @@ const uint16 CPP5_grm_f_tail[644] = {
 };
 
 // Tail symbol numbers ...
-const int16 CPP5_grm_tail[1532] = {
+const int16 grm_tail[1532] = {
     -113,     1,    49,    48,    51,    52,    50,    47,    -2,    47, 
     -156,  -157,    79,    -3,    80,  -159,  -160,    36,    -1,    -2, 
       79,   -37,    80,   -58,   -55,   -60,   -62,    53,  -162,    37, 
@@ -576,7 +577,7 @@ const int16 CPP5_grm_tail[1532] = {
 };
 
 // Boolean matrix ...
-const uint8 CPP5_grm_Bm[685] = {
+const uint8 grm_Bm[685] = {
        0,     0,     0,     0,     0,     0,     0,   158,   161,     9, 
      144,   164,     0,     0,     0,     0,     0,   128,     1,     0, 
        0,     0,   128,     0,     2,    16,    32,     9,     0,   132, 
@@ -649,7 +650,7 @@ const uint8 CPP5_grm_Bm[685] = {
 };
 
 // Boolean matrix row (for state)...
-const uint16 CPP5_grm_Br[701] = {
+const uint16 grm_Br[701] = {
        0,     7,    12,    19,    25,    30,    35,    41,    47,    52, 
       58,    64,    47,    70,    76,    76,    70,    82,    88,    88, 
       94,   100,   104,    93,    88,   111,   111,    47,   117,   124, 
@@ -724,8 +725,8 @@ const uint16 CPP5_grm_Br[701] = {
       };
 
 // Boolean matrix column (displacement) ...
-extern const uint8 CPP5_grm_Bc[103];
-const uint8 CPP5_grm_Bc[103] = {
+extern const uint8 grm_Bc[103];
+const uint8 grm_Bc[103] = {
        0,     0,     0,     0,     0,     0,     0,     0,     0,     0, 
        0,     0,     0,     0,     0,     0,     0,     0,     1,     0, 
        0,     0,     0,     0,     0,     0,     0,     0,     1,     1, 
@@ -740,7 +741,7 @@ const uint8 CPP5_grm_Bc[103] = {
       };
 
 // Boolean matrix filter/mask value ...
-const uint8 CPP5_grm_Bf[103] = {
+const uint8 grm_Bf[103] = {
        1,     2,     4,     8,     8,    16,    32,    64,     8,    32, 
       32,   128,     4,     4,     8,     4,    32,    16,     1,     8, 
        8,     8,    32,    32,     8,     8,    32,    32,     2,     1, 
@@ -755,7 +756,7 @@ const uint8 CPP5_grm_Bf[103] = {
 };
 
 // Terminal transition matrix ...
-const int16 CPP5_grm_Tm[6334] = {
+const int16 grm_Tm[6334] = {
        0,     0,     0,     0,     0,     0,     0,     0,     0,     0, 
        0,     0,     0,     0,     0,     0,     0,     0,     0,     0, 
        0,     0,     0,     0,     0,     0,     0,     0,     0,     0, 
@@ -1393,7 +1394,7 @@ const int16 CPP5_grm_Tm[6334] = {
 };
 
 // Terminal transition matrix row ...
-const uint16 CPP5_grm_Tr[701] = {
+const uint16 grm_Tr[701] = {
     6186,  6186,  6186,  6038,  6038,  6038,  1932,  4876,  4876,  6038, 
     2005,  1075,  2005,  6038,  3468,  4949,  6038,  3540,  1932,  4876, 
     6186,  6038,  1932,  6038,  2005,  6038,  6038,  3540,  3051,  1075, 
@@ -1468,7 +1469,7 @@ const uint16 CPP5_grm_Tr[701] = {
 };
 
 // Terminal transition matrix column ...
-const uint8 CPP5_grm_Tc[103] = {
+const uint8 grm_Tc[103] = {
       28,    28,     0,     1,     2,     3,    28,    41,     4,    41, 
       43,     5,     6,     7,     8,     9,    44,    10,    11,    12, 
       13,    14,    45,    30,    15,    16,    31,    32,    33,    17, 
@@ -1483,7 +1484,7 @@ const uint8 CPP5_grm_Tc[103] = {
 };
 
 // Nonterminal transition matrix ...
-const int16 CPP5_grm_Nm[15764] = {
+const int16 grm_Nm[15764] = {
        0,     0,     0,     0,     0,     0,     0,     0,     0,     0, 
        0,     0,     0,    51,     0,     0,     0,   655,     0,     0, 
        0,     0,     0,     0,     0,     0,     0,    51,     0,     0, 
@@ -3064,7 +3065,7 @@ const int16 CPP5_grm_Nm[15764] = {
 };
 
 // Nonterminal transition matrix row ...
-const uint16 CPP5_grm_Nr[701] = {
+const uint16 grm_Nr[701] = {
 15444, 15444, 15444, 15444,  3283, 15444,   738,  4600,  4163, 15444, 
  8795,   610,  7789,  3283, 11236, 11316,   738,  8872,  4163,   610, 
 15444, 15444,   226, 15444,  7789,   226,  7933,  7933, 12028, 15444, 
@@ -3139,7 +3140,7 @@ const uint16 CPP5_grm_Nr[701] = {
 };
 
 // Nonterminal transition matrix column ...
-const uint8 CPP5_grm_Nc[643] = {
+const uint8 grm_Nc[643] = {
    30,    30,    30,    30,    30,    30,    31,    31,    22,    22, 
    22,    18,    18,    18,    18,    18,    18,    30,    30,    30, 
    30,    30,    30,     5,     5,     5,    31,    31,    31,    22, 
@@ -3208,7 +3209,7 @@ const uint8 CPP5_grm_Nc[643] = {
 };
 
 // Reduction matrix ...
-const uint16 CPP5_grm_Rm[834] = {
+const uint16 grm_Rm[834] = {
        0,     0,     0,     0,     0,     0,     0,     0,     0,     0, 
        0,     0,     0,     0,     0,     0,     0,     0,   284,     0, 
      284,   284,     0,   284,     0,   284,   284,   284,   284,     0, 
@@ -3296,7 +3297,7 @@ const uint16 CPP5_grm_Rm[834] = {
 };
 
 // Reduction matrix row ...
-const int16 CPP5_grm_Rr[701] = {
+const int16 grm_Rr[701] = {
      472,     0,     0,   582,   625,     0,   292,     0,     0,     0, 
        0,   624,     0,   216,     0,     0,   219,     0,   217,   220, 
      -17,   285,     0,     0,   221,   218,   222,     0,     0,     0, 
@@ -3371,7 +3372,7 @@ const int16 CPP5_grm_Rr[701] = {
 };
 
 // Reduction matrix column ...
-const uint8 CPP5_grm_Rc[103] = {
+const uint8 grm_Rc[103] = {
        0,     0,     1,     2,     2,     3,     0,     0,     2,     0, 
        0,     2,     1,     1,     2,     1,     0,     3,     1,     2, 
        2,     2,     0,     0,     2,     2,     0,     0,     0,     1, 
@@ -3386,7 +3387,7 @@ const uint8 CPP5_grm_Rc[103] = {
 };
 
 // Production lengths (minus one) ...
-const int8 CPP5_grm_PL[643] = {
+const int8 grm_PL[643] = {
        1,     0,     0,     0,     0,     0,     0,     1,     0,     0, 
        2,     0,     0,     0,     0,     0,     2,     0,     0,     0, 
        0,     0,     0,     1,     2,     2,    -1,     1,     1,     0, 
@@ -3454,3 +3455,5 @@ const int8 CPP5_grm_PL[643] = {
        1,     0,     0, 
 };
 
+
+};   /* namespace CPP5 */

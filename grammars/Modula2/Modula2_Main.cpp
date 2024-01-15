@@ -2,35 +2,38 @@
 #include "Modula2_LexerTables_typedef.h"
 #include "Modula2_Parser.h"
 
+namespace Modula2 {
 
-const char Modula2_grammar_name[] = "Modula2";
+const char grammar_name[] = "Modula2";
 
 
-void Modula2_init_actions(UNUSED_PARAM(Modula2_parser_t *parser)); /* User-supplied */
-void Modula2_term_actions(UNUSED_PARAM(Modula2_parser_t *parser)); /* User-supplied */
-static Modula2_parser_t::init_func_t Modula2_init_funcs_[2] = {
-   Modula2_init_actions,
-   Modula2_term_actions
+void init_actions(UNUSED_PARAM(parser_t *parser)); /* User-supplied */
+void term_actions(UNUSED_PARAM(parser_t *parser)); /* User-supplied */
+static parser_t::init_func_t init_funcs_[2] = {
+   init_actions,
+   term_actions
 };
 
-int Modula2_error(UNUSED_PARAM(Modula2_parser_t *parser), UNUSED_PARAM(int &t));
-int Modula2_lookup(UNUSED_PARAM(Modula2_parser_t *parser), UNUSED_PARAM(int &t));
+int error(UNUSED_PARAM(parser_t *parser), UNUSED_PARAM(int &t));
+int lookup(UNUSED_PARAM(parser_t *parser), UNUSED_PARAM(int &t));
 // Terminal action function pointers ...
-static Modula2_parser_t::tact_func_t Modula2_tact_funcs_[2] = {
-   Modula2_error,
-   Modula2_lookup,
+static parser_t::tact_func_t tact_funcs_[2] = {
+   error,
+   lookup,
 };
 
-Modula2_parser_t *
-Modula2_new_parser(const char *input_path,
-                   char       *input_text,
-                   unsigned    max_symbols)
+parser_t *
+new_parser(const char *input_path,
+           char       *input_text,
+           unsigned    max_symbols)
 {
-   return new Modula2_parser_t(/* input path   */   input_path,
-                               /* input text   */   input_text,
-                               /* max symbols  */   max_symbols,
-                               /* init_func    */   &Modula2_init_funcs_[0],
-                               /* tact_func    */   &Modula2_tact_funcs_[0],
-                               /* nact_func    */   0);
+   return new parser_t(/* input path   */   input_path,
+                       /* input text   */   input_text,
+                       /* max symbols  */   max_symbols,
+                       /* init_func    */   &init_funcs_[0],
+                       /* tact_func    */   &tact_funcs_[0],
+                       /* nact_func    */   0);
 }
 
+
+};   /* namespace Modula2 */

@@ -5,28 +5,31 @@
  *        It can be safely edited to add user-supplied code.
  */
 
-int
-Fortran_lookup(Fortran_parser_t *parser, int &t)
-{
-   // Lookup in symbol table.
+namespace Fortran {
+    int
+    lookup(UNUSED_PARAM(parser_t *parser), UNUSED_PARAM(int &t))
+    {
+       // Lookup in symbol table.
 
-   int sti;
+       int sti;
+    
+       if (parser->opt_nd_parsing() &&
+           parser->lt.lookahead.start != 0) {
+          // In lookahead mode.
+          sti = parser->add_symbol(t, parser->lt.lookahead.start,
+                                   parser->lt.lookahead.end);
+       } else {
+          // Regular mode of parsing
+          sti = parser->add_symbol(t, parser->lt.token.start,
+                                   parser->lt.token.end);
+       }
 
-   if (parser->opt_nd_parsing() &&
-       parser->lt.lookahead.start != 0) {
-      // In lookahead mode.
-      sti = parser->add_symbol(t, parser->lt.lookahead.start,
-                               parser->lt.lookahead.end);
-   } else {
-      // Regular mode of parsing
-      sti = parser->add_symbol(t, parser->lt.token.start,
-                               parser->lt.token.end);
-   }
+       if (parser->opt_semantics()) {
+          // Redefine terminal number?
+          t = parser->symbol[sti].term;
+       }
 
-   if (parser->opt_semantics()) {
-      // Redefine terminal number?
-      t = parser->symbol[sti].term;
-   }
+       return sti; // Return symbol-table index.
+    }
 
-   return sti; // Return symbol-table index.
-}
+};   /* namespace Fortran */

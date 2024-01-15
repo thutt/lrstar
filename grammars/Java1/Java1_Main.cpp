@@ -2,35 +2,38 @@
 #include "Java1_LexerTables_typedef.h"
 #include "Java1_Parser.h"
 
+namespace Java1 {
 
-const char Java1_grammar_name[] = "Java1";
+const char grammar_name[] = "Java1";
 
 
-void Java1_init_actions(UNUSED_PARAM(Java1_parser_t *parser)); /* User-supplied */
-void Java1_term_actions(UNUSED_PARAM(Java1_parser_t *parser)); /* User-supplied */
-static Java1_parser_t::init_func_t Java1_init_funcs_[2] = {
-   Java1_init_actions,
-   Java1_term_actions
+void init_actions(UNUSED_PARAM(parser_t *parser)); /* User-supplied */
+void term_actions(UNUSED_PARAM(parser_t *parser)); /* User-supplied */
+static parser_t::init_func_t init_funcs_[2] = {
+   init_actions,
+   term_actions
 };
 
-int Java1_error(UNUSED_PARAM(Java1_parser_t *parser), UNUSED_PARAM(int &t));
-int Java1_lookup(UNUSED_PARAM(Java1_parser_t *parser), UNUSED_PARAM(int &t));
+int error(UNUSED_PARAM(parser_t *parser), UNUSED_PARAM(int &t));
+int lookup(UNUSED_PARAM(parser_t *parser), UNUSED_PARAM(int &t));
 // Terminal action function pointers ...
-static Java1_parser_t::tact_func_t Java1_tact_funcs_[2] = {
-   Java1_error,
-   Java1_lookup,
+static parser_t::tact_func_t tact_funcs_[2] = {
+   error,
+   lookup,
 };
 
-Java1_parser_t *
-Java1_new_parser(const char *input_path,
-                 char       *input_text,
-                 unsigned    max_symbols)
+parser_t *
+new_parser(const char *input_path,
+           char       *input_text,
+           unsigned    max_symbols)
 {
-   return new Java1_parser_t(/* input path   */   input_path,
-                             /* input text   */   input_text,
-                             /* max symbols  */   max_symbols,
-                             /* init_func    */   &Java1_init_funcs_[0],
-                             /* tact_func    */   &Java1_tact_funcs_[0],
-                             /* nact_func    */   0);
+   return new parser_t(/* input path   */   input_path,
+                       /* input text   */   input_text,
+                       /* max symbols  */   max_symbols,
+                       /* init_func    */   &init_funcs_[0],
+                       /* tact_func    */   &tact_funcs_[0],
+                       /* nact_func    */   0);
 }
 
+
+};   /* namespace Java1 */

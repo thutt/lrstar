@@ -5,8 +5,11 @@
  *        It can be safely edited to add user-supplied code.
  */
 
-void
-verilog_init_actions(UNUSED_PARAM(verilog_parser_t *parser))
-{
-      /* Initialization code goes here */
-}
+namespace verilog {
+    void
+    init_actions(UNUSED_PARAM(parser_t *parser))
+    {
+          /* Initialization code goes here */
+    }
+
+};   /* namespace verilog */

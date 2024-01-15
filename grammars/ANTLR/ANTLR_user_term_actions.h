@@ -5,8 +5,11 @@
  *        It can be safely edited to add user-supplied code.
  */
 
-void
-ANTLR_term_actions(UNUSED_PARAM(ANTLR_parser_t *parser))
-{
-      /* Termination code goes here */
-}
+namespace ANTLR {
+    void
+    term_actions(UNUSED_PARAM(parser_t *parser))
+    {
+          /* Termination code goes here */
+    }
+
+};   /* namespace ANTLR */

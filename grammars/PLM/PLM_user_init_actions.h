@@ -5,8 +5,11 @@
  *        It can be safely edited to add user-supplied code.
  */
 
-void
-PLM_init_actions(UNUSED_PARAM(PLM_parser_t *parser))
-{
-      /* Initialization code goes here */
-}
+namespace PLM {
+    void
+    init_actions(UNUSED_PARAM(parser_t *parser))
+    {
+          /* Initialization code goes here */
+    }
+
+};   /* namespace PLM */

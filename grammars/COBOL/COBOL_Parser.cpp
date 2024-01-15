@@ -4,8 +4,9 @@
 #include "COBOL_ParserTables_typedef.h"
 #include "COBOL_Parser.h"
 
+namespace COBOL {
 // Terminal symbols of the grammar.
-const char *COBOL_grm_term_symb[351] = {
+const char *grm_term_symb[351] = {
    "<error>",
    "<eof>",
    "<ident>",
@@ -360,7 +361,7 @@ const char *COBOL_grm_term_symb[351] = {
 };
 
 // Nonterminal symbols of the grammar.
-const char *COBOL_grm_head_symb[425] = {
+const char *grm_head_symb[425] = {
    "Goal",
    "Program",
    "IdentDiv",
@@ -789,13 +790,13 @@ const char *COBOL_grm_head_symb[425] = {
 };
 
 // Terninal action names found in the grammar ...
-const char *COBOL_grm_tact_name[2] = {
+const char *grm_tact_name[2] = {
    "error",
    "lookup",
 };
 
 // Head symbol numbers for the productions.
-const uint16 COBOL_grm_head_numb[1005] = {
+const uint16 grm_head_numb[1005] = {
        0,     1,     2,     3,     4,     5,     6,     6,     6,     7, 
        7,     7,     7,     7,     7,     8,     8,     8,     9,     9, 
        9,    10,    10,    10,    10,    11,    12,    13,    14,    15, 
@@ -900,7 +901,7 @@ const uint16 COBOL_grm_head_numb[1005] = {
 };
 
 // First tail symbol index into the tail list ...
-const uint16 COBOL_grm_f_tail[1006] = {
+const uint16 grm_f_tail[1006] = {
        0,     2,     7,    20,    29,    33,    36,    37,    38,    39, 
       41,    44,    48,    51,    54,    57,    58,    59,    60,    62, 
       65,    68,    69,    70,    71,    72,    74,    76,    78,    80, 
@@ -1005,7 +1006,7 @@ const uint16 COBOL_grm_f_tail[1006] = {
 };
 
 // Tail symbol numbers ...
-const int16 COBOL_grm_tail[1841] = {
+const int16 grm_tail[1841] = {
       -1,     1,    -2,  -201,  -202,  -203,  -204,     9,    10,    11, 
       12,    11,     2,  -205,    11,  -208,  -209,  -210,  -211,  -212, 
       20,    10,    11,  -213,  -216,  -220,  -223,  -225,  -229,    32, 
@@ -1194,7 +1195,7 @@ const int16 COBOL_grm_tail[1841] = {
 };
 
 // Arguments for token actions ...
-const int8 COBOL_grm_arga[351] = {
+const int8 grm_arga[351] = {
       -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1, 
       -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1, 
       -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1, 
@@ -1234,7 +1235,7 @@ const int8 COBOL_grm_arga[351] = {
 };
 
 // Boolean matrix ...
-const uint8 COBOL_grm_Bm[4284] = {
+const uint8 grm_Bm[4284] = {
        0,     0,     0,     0,     0,     0,     0,     0,     0,     0, 
        0,     0,     0,     0,     0,     0,     0,     0,     0,     0, 
        0,     0,     0,     0,     0,     0,     0,     0,     0,     0, 
@@ -1667,7 +1668,7 @@ const uint8 COBOL_grm_Bm[4284] = {
 };
 
 // Boolean matrix row (for state)...
-const uint16 COBOL_grm_Br[887] = {
+const uint16 grm_Br[887] = {
       29,    59,    86,    58,   105,    58,   134,   148,    58,   134, 
      176,    43,   206,    58,   227,   254,   134,   282,   312,   312, 
      341,   371,   401,   134,   430,   371,   437,   371,   371,   371, 
@@ -1760,8 +1761,8 @@ const uint16 COBOL_grm_Br[887] = {
       };
 
 // Boolean matrix column (displacement) ...
-extern const uint8 COBOL_grm_Bc[351];
-const uint8 COBOL_grm_Bc[351] = {
+extern const uint8 grm_Bc[351];
+const uint8 grm_Bc[351] = {
        0,     0,     0,     0,     0,     0,     0,     0,     0,     1, 
        1,     1,     1,     1,     1,     1,     1,     2,     2,     2, 
        2,     2,     2,     2,     2,     3,     3,     3,     3,     3, 
@@ -1801,7 +1802,7 @@ const uint8 COBOL_grm_Bc[351] = {
       };
 
 // Boolean matrix filter/mask value ...
-const uint8 COBOL_grm_Bf[351] = {
+const uint8 grm_Bf[351] = {
        1,     2,     4,     8,    16,    32,    32,    64,   128,     1, 
        2,     4,     8,    16,    32,    64,   128,     1,     2,     4, 
        8,    16,    32,    64,   128,     1,     2,     4,     8,    16, 
@@ -1841,7 +1842,7 @@ const uint8 COBOL_grm_Bf[351] = {
 };
 
 // Terminal transition matrix ...
-const int16 COBOL_grm_Tm[2986] = {
+const int16 grm_Tm[2986] = {
     -328,  -912,   378,   392,  -345,  -346,  -359,  -396,  -420,   434, 
     -264,  -266,  -931,   486,  -397,  -756,  -228,  -229,  -309,  -465, 
      576,   595,  -388,  -962,   615,   617,  -979,   650,   651,   -18, 
@@ -2144,7 +2145,7 @@ const int16 COBOL_grm_Tm[2986] = {
 };
 
 // Terminal transition matrix row ...
-const uint16 COBOL_grm_Tr[887] = {
+const uint16 grm_Tr[887] = {
     2723,  2723,  2723,  2723,  2723,  2204,  2723,  2723,  2460,  2204, 
     2723,  2723,  2723,  1941,  2723,  2723,  2460,  2723,  2723,  2723, 
     1941,  2204,  2460,   825,  1454,  2204,  2723,  1941,   825,  1941, 
@@ -2237,7 +2238,7 @@ const uint16 COBOL_grm_Tr[887] = {
 };
 
 // Terminal transition matrix column ...
-const uint16 COBOL_grm_Tc[351] = {
+const uint16 grm_Tc[351] = {
       46,    41,     0,    43,    61,    44,    45,    42,    46,    65, 
       93,    51,    80,    94,    95,    99,   117,   169,   183,   202, 
      214,     2,    20,     5,    22,     6,    26,    28,    29,    35, 
@@ -2277,7 +2278,7 @@ const uint16 COBOL_grm_Tc[351] = {
 };
 
 // Nonterminal transition matrix ...
-const int16 COBOL_grm_Nm[6183] = {
+const int16 grm_Nm[6183] = {
        0,     0,     0,     0,     0,     0,     0,     0,     0,     0, 
        0,     0,     0,     0,     0,     0,     0,     0,     0,     0, 
        0,     0,     0,     0,     0,     0,     0,     0,     0,     0, 
@@ -2900,7 +2901,7 @@ const int16 COBOL_grm_Nm[6183] = {
 };
 
 // Nonterminal transition matrix row ...
-const uint16 COBOL_grm_Nr[887] = {
+const uint16 grm_Nr[887] = {
  5840,  5840,  5840,  5840,  5840,  5840,  5840,  5840,  5840,  5840, 
  5840,  5840,  5840,  5840,  5840,  5840,  5840,  5840,  5497,  5156, 
  4842,  5840,  5840,  5840,  5840,  5497,  5840,  5840,  5840,  5497, 
@@ -2993,7 +2994,7 @@ const uint16 COBOL_grm_Nr[887] = {
 };
 
 // Nonterminal transition matrix column ...
-const uint16 COBOL_grm_Nc[1005] = {
+const uint16 grm_Nc[1005] = {
   260,   260,   281,   319,    26,    62,   178,   178,   178,   265, 
   265,   265,   265,   265,   265,   273,   273,   273,   286,   286, 
   286,   260,   260,   260,   260,   281,   308,    38,   319,    26, 
@@ -3098,7 +3099,7 @@ const uint16 COBOL_grm_Nc[1005] = {
 };
 
 // Reduction matrix ...
-const uint16 COBOL_grm_Rm[239] = {
+const uint16 grm_Rm[239] = {
        0,     0,     0,     0,     0,     0,     0,     0,     0,     0, 
        0,     0,     0,     0,     0,     0,     0,     0,     0,     0, 
        0,   327,     0,   327,     0,   327,     0,     0,   327,     0, 
@@ -3126,7 +3127,7 @@ const uint16 COBOL_grm_Rm[239] = {
 };
 
 // Reduction matrix row ...
-const int16 COBOL_grm_Rr[887] = {
+const int16 grm_Rr[887] = {
        0,     0,   569,     0,   571,     0,     0,   573,     0,     0, 
        0,   575,     0,     0,   673,   593,     0,     0,     0,   159, 
        0,     0,   321,     0,     0,     0,     0,     0,     0,     0, 
@@ -3219,7 +3220,7 @@ const int16 COBOL_grm_Rr[887] = {
 };
 
 // Reduction matrix column ...
-const uint8 COBOL_grm_Rc[351] = {
+const uint8 grm_Rc[351] = {
        0,     1,     2,     3,     4,     5,     5,     0,     5,     0, 
        0,     6,     0,     0,     0,     0,     0,     0,     0,     0, 
        0,     0,     0,     0,     6,     0,     0,     0,     0,     0, 
@@ -3259,7 +3260,7 @@ const uint8 COBOL_grm_Rc[351] = {
 };
 
 // Production lengths (minus one) ...
-const int8 COBOL_grm_PL[1005] = {
+const int8 grm_PL[1005] = {
        1,     4,    12,     8,     3,     2,     0,     0,     0,     1, 
        2,     3,     2,     2,     2,     0,     0,     0,     1,     2, 
        2,     0,     0,     0,     0,     1,     1,     1,     1,     1, 
@@ -3364,7 +3365,7 @@ const int8 COBOL_grm_PL[1005] = {
 };
 
 // Terminal action number ...
-const int8 COBOL_grm_tact_numb[351] = {
+const int8 grm_tact_numb[351] = {
        0,    -1,     1,     1,     1,     1,     1,     1,     1,    -1, 
       -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1, 
       -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1, 
@@ -3403,3 +3404,5 @@ const int8 COBOL_grm_tact_numb[351] = {
       -1, 
 };
 
+
+};   /* namespace COBOL */

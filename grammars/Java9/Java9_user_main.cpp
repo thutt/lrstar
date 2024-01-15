@@ -88,11 +88,14 @@ extern "C" {
     }
 }
 
+namespace Java9 {
+    parser_t *new_parser(const char *input_path,
+                                     char       *input_text,
+                                     unsigned    max_symbols);
+
+};   /* namespace Java9 */
 
 
-Java9_parser_t *Java9_new_parser(const char *input_path,
-                                 char       *input_text,
-                                 unsigned    max_symbols);
 int
 main(int argc, char **argv)
 {
@@ -106,7 +109,7 @@ main(int argc, char **argv)
     unsigned    iteration;
     char *input_start;
     FILE *output_fp;
-    Java9_parser_t *parser;
+    Java9::parser_t *parser;
 
     get_options(argc, argv, &options);
 
@@ -132,7 +135,7 @@ main(int argc, char **argv)
         ++iteration;
         input_start = read_input(argv[optind]);
 
-        parser = Java9_new_parser(argv[optind], input_start, 100000);
+        parser = Java9::new_parser(argv[optind], input_start, 100000);
         printf("%s parser.\n", parser->grammar);
 
         start = clock();

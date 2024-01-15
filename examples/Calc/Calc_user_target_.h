@@ -1,19 +1,21 @@
-void
-Calc_target_(UNUSED_PARAM(unsigned traversal_number),
-             UNUSED_PARAM(parse_direction_t direction),
-             UNUSED_PARAM(Calc_parser_t *parser),
-             UNUSED_PARAM(Node *v))
-{
-    Node *n = v;
+namespace Calc {
+    void
+    target_(UNUSED_PARAM(unsigned traversal_number),
+            UNUSED_PARAM(parse_direction_t direction),
+            UNUSED_PARAM(parser_t *parser),
+            UNUSED_PARAM(Node *v))
+    {
+        Node *n = v;
 
-    if (traversal_number == 1) {
-        switch (direction) {
-        case TOP_DOWN:
-            break;
+        if (traversal_number == 1) {
+            switch (direction) {
+            case TOP_DOWN:
+                break;
 
-        case BOTTOM_UP:
-            printf("\t\tLADR %s\n", parser->symbol_name(n->sti));
-            break;
+            case BOTTOM_UP:
+                printf("\t\tLADR %s\n", parser->symbol_name(n->sti));
+                break;
+            }
         }
     }
-}
+};

@@ -4,8 +4,9 @@
 #include "Python_ParserTables_typedef.h"
 #include "Python_Parser.h"
 
+namespace Python {
 // Terminal symbols of the grammar.
-const char *Python_grm_term_symb[94] = {
+const char *grm_term_symb[94] = {
    "<error>",
    "<eof>",
    "<newline>",
@@ -103,7 +104,7 @@ const char *Python_grm_term_symb[94] = {
 };
 
 // Nonterminal symbols of the grammar.
-const char *Python_grm_head_symb[220] = {
+const char *grm_head_symb[220] = {
    "Goal",
    "single_input",
    "file_input",
@@ -327,7 +328,7 @@ const char *Python_grm_head_symb[220] = {
 };
 
 // Head symbol numbers for the productions.
-const uint8 Python_grm_head_numb[396] = {
+const uint8 grm_head_numb[396] = {
        0,     1,     1,     1,     2,     3,     4,     5,     6,     7, 
        8,     9,     9,     9,    10,    11,    11,    11,    12,    13, 
       13,    14,    15,    15,    15,    15,    15,    15,    15,    15, 
@@ -371,7 +372,7 @@ const uint8 Python_grm_head_numb[396] = {
 };
 
 // First tail symbol index into the tail list ...
-const uint16 Python_grm_f_tail[397] = {
+const uint16 grm_f_tail[397] = {
        0,     2,     3,     4,     6,     7,     9,    13,    14,    16, 
       22,    25,    29,    33,    35,    37,    41,    45,    47,    48, 
       49,    50,    54,    55,    56,    57,    58,    59,    60,    61, 
@@ -415,7 +416,7 @@ const uint16 Python_grm_f_tail[397] = {
 };
 
 // Tail symbol numbers ...
-const int16 Python_grm_tail[600] = {
+const int16 grm_tail[600] = {
      -85,     1,     2,   -14,   -38,     2,   -87,   -72,   -88,     3, 
      -34,   -91,     2,   -92,    -5,   -93,     6,     7,    -8,   -95, 
        9,   -46,     4,   -96,     5,   -10,   -98,  -100,  -107,    12, 
@@ -479,7 +480,7 @@ const int16 Python_grm_tail[600] = {
 };
 
 // Boolean matrix ...
-const uint8 Python_grm_Bm[236] = {
+const uint8 grm_Bm[236] = {
        0,     0,     0,     0,     0,     0,     2,     0,     0,     0, 
        0,     0,   128,     0,     0,     0,     0,    64,     0,     0, 
        0,   144,     0,    16,     0,     0,    26,     1,     4,     0, 
@@ -507,7 +508,7 @@ const uint8 Python_grm_Bm[236] = {
 };
 
 // Boolean matrix row (for state)...
-const uint8 Python_grm_Br[257] = {
+const uint8 grm_Br[257] = {
        0,     6,     0,    11,     0,     0,    15,     0,     0,     0, 
       21,    28,    34,    40,    46,     0,    52,    58,    63,    68, 
       68,    73,    79,     0,    79,    79,    68,    68,    68,    63, 
@@ -537,8 +538,8 @@ const uint8 Python_grm_Br[257] = {
       };
 
 // Boolean matrix column (displacement) ...
-extern const uint8 Python_grm_Bc[94];
-const uint8 Python_grm_Bc[94] = {
+extern const uint8 grm_Bc[94];
+const uint8 grm_Bc[94] = {
        0,     0,     0,     0,     0,     0,     0,     0,     1,     1, 
        1,     1,     1,     1,     1,     1,     1,     1,     1,     1, 
        1,     1,     1,     1,     1,     1,     1,     1,     2,     2, 
@@ -552,7 +553,7 @@ const uint8 Python_grm_Bc[94] = {
       };
 
 // Boolean matrix filter/mask value ...
-const uint8 Python_grm_Bf[94] = {
+const uint8 grm_Bf[94] = {
        1,     2,     4,     8,    16,    32,    64,   128,     1,     2, 
        4,     8,    16,    32,    64,   128,   128,   128,   128,   128, 
      128,   128,   128,   128,   128,   128,   128,   128,     1,     1, 
@@ -566,7 +567,7 @@ const uint8 Python_grm_Bf[94] = {
 };
 
 // Terminal transition matrix ...
-const int16 Python_grm_Tm[320] = {
+const int16 grm_Tm[320] = {
        0,     0,     0,   250,   255,  -261,   196,   190,  -133,   202, 
      225,  -270,   204,   228,  -273,   211,   231,   177,   242,   -18, 
      234,   236,   161,   198,   191,  -258,   177,   200,   218,   178, 
@@ -602,7 +603,7 @@ const int16 Python_grm_Tm[320] = {
 };
 
 // Terminal transition matrix row ...
-const uint8 Python_grm_Tr[257] = {
+const uint8 grm_Tr[257] = {
      252,   252,   252,   252,   252,   252,   252,   252,   252,   252, 
      252,   252,   252,   252,   192,   252,   252,    83,   252,   252, 
      252,   252,   192,   252,   132,    58,   252,   252,   252,   252, 
@@ -632,7 +633,7 @@ const uint8 Python_grm_Tr[257] = {
 };
 
 // Terminal transition matrix column ...
-const uint8 Python_grm_Tc[94] = {
+const uint8 grm_Tc[94] = {
       37,    37,     0,    32,    47,     1,    33,     2,    38,     3, 
       48,     4,     5,    17,    39,    49,     6,     7,    13,    14, 
       15,    19,    22,    24,    27,    34,    35,    36,    37,    38, 
@@ -646,7 +647,7 @@ const uint8 Python_grm_Tc[94] = {
 };
 
 // Nonterminal transition matrix ...
-const int16 Python_grm_Nm[3046] = {
+const int16 grm_Nm[3046] = {
        0,     0,     0,     0,     0,     0,     0,     0,     0,  -315, 
     -370,    64,  -312,   -95,     0,    59,  -309,     8,   -95,     0, 
       59,     0,   230,     7,     8,   -95,   188,    59,  -276,     0, 
@@ -955,7 +956,7 @@ const int16 Python_grm_Nm[3046] = {
 };
 
 // Nonterminal transition matrix row ...
-const uint16 Python_grm_Nr[257] = {
+const uint16 grm_Nr[257] = {
  2873,  2873,  2873,  2873,  2873,  2873,  2873,  2873,  2873,  2873, 
  2873,  2873,  2536,  2536,  2701,  2873,  2536,  2873,   772,   882, 
  2163,   968,  2873,  2873,  2873,  2873,   711,   591,   482,   284, 
@@ -985,7 +986,7 @@ const uint16 Python_grm_Nr[257] = {
 };
 
 // Nonterminal transition matrix column ...
-const uint8 Python_grm_Nc[396] = {
+const uint8 grm_Nc[396] = {
    30,    30,    30,    30,   153,   172,     1,     3,    19,    21, 
    22,    24,    24,    24,    26,    29,    29,    29,    75,    30, 
    30,    32,    34,    34,    34,    34,    34,    34,    34,    34, 
@@ -1029,7 +1030,7 @@ const uint8 Python_grm_Nc[396] = {
 };
 
 // Reduction matrix ...
-const uint16 Python_grm_Rm[368] = {
+const uint16 grm_Rm[368] = {
        0,   167,     0,     0,     0,     0,     0,     0,     0,     0, 
        0,     0,     0,     0,     0,     0,     0,     0,     0,   359, 
        0,     0,     0,     0,     0,   235,     0,     0,   235,   235, 
@@ -1070,7 +1071,7 @@ const uint16 Python_grm_Rm[368] = {
 };
 
 // Reduction matrix row ...
-const int16 Python_grm_Rr[257] = {
+const int16 grm_Rr[257] = {
        0,    -2,   222,   231,   238,   -18,   305,   310,   313,   -34, 
       -2,    -2,    -2,     7,   -50,   169,   318,   307,   318,   -65, 
      -80,   -95,    -2,  -107,    -2,    -2,   318,   318,   318,   318, 
@@ -1100,7 +1101,7 @@ const int16 Python_grm_Rr[257] = {
 };
 
 // Reduction matrix column ...
-const uint8 Python_grm_Rc[94] = {
+const uint8 grm_Rc[94] = {
        0,     1,     2,     0,     3,     4,     0,     5,     0,     6, 
        7,     8,     9,     9,    10,    11,    11,    11,    11,    11, 
       11,    11,    11,    11,    11,    11,    11,    11,     0,     0, 
@@ -1114,7 +1115,7 @@ const uint8 Python_grm_Rc[94] = {
 };
 
 // Production lengths (minus one) ...
-const int8 Python_grm_PL[396] = {
+const int8 grm_PL[396] = {
        1,     0,     0,     1,     0,     1,     3,     0,     1,     5, 
        2,     3,     3,     1,     1,     3,     3,     1,     0,     0, 
        0,     3,     0,     0,     0,     0,     0,     0,     0,     0, 
@@ -1158,7 +1159,7 @@ const int8 Python_grm_PL[396] = {
 };
 
 // Nondeterministic first terminal in the list ...
-const uint8 Python_grm_nd_fterm[258] = {
+const uint8 grm_nd_fterm[258] = {
        0,    43,    43,    43,    43,    43,    45,    45,    45,    45, 
       62,    62,    62,    62,    62,    62,    62,    62,    62,    62, 
       62,    62,    62,    62,    64,    64,    64,    64,    64,    64, 
@@ -1188,7 +1189,7 @@ const uint8 Python_grm_nd_fterm[258] = {
 };
 
 // Nondeterministic terminal list ...
-const uint8 Python_grm_nd_term[83] = {
+const uint8 grm_nd_term[83] = {
        2,     3,     4,     6,     7,    12,    28,    29,    30,    31, 
       32,    33,    34,    35,    37,    39,    40,    41,    42,    45, 
       46,    48,    50,    54,    57,    71,    72,    76,    77,    79, 
@@ -1201,7 +1202,7 @@ const uint8 Python_grm_nd_term[83] = {
 };
 
 // Nondeterministic first action in the list ...
-const uint8 Python_grm_nd_faction[84] = {
+const uint8 grm_nd_faction[84] = {
        0,     2,     4,     6,     8,    10,    12,    14,    16,    18, 
       20,    22,    24,    26,    28,    30,    32,    34,    36,    38, 
       40,    42,    44,    46,    48,    50,    52,    54,    56,    58, 
@@ -1214,7 +1215,7 @@ const uint8 Python_grm_nd_faction[84] = {
 };
 
 // Nondeterministic actions list ...
-const int16 Python_grm_nd_action[166] = {
+const int16 grm_nd_action[166] = {
      257,  -167,    34,  -167,  -318,  -167,    32,  -167,  -318,  -167, 
      575,  -167,    18,  -167,   302,  -167,   308,  -167,   309,  -167, 
       19,  -167,    20,  -167,    23,  -167,    22,  -167,  -318,  -167, 
@@ -1234,3 +1235,5 @@ const int16 Python_grm_nd_action[166] = {
     -319,  -318,  -319,  -318,  -319,  -318, 
 };
 
+
+};   /* namespace Python */

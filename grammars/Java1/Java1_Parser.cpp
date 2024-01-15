@@ -4,8 +4,9 @@
 #include "Java1_ParserTables_typedef.h"
 #include "Java1_Parser.h"
 
+namespace Java1 {
 // Terminal symbols of the grammar.
-const char *Java1_grm_term_symb[99] = {
+const char *grm_term_symb[99] = {
    "<error>",
    "<eof>",
    "<identifier>",
@@ -108,7 +109,7 @@ const char *Java1_grm_term_symb[99] = {
 };
 
 // Nonterminal symbols of the grammar.
-const char *Java1_grm_head_symb[99] = {
+const char *grm_head_symb[99] = {
    "Goal",
    "TypeSpecifier",
    "TypeName",
@@ -211,13 +212,13 @@ const char *Java1_grm_head_symb[99] = {
 };
 
 // Terninal action names found in the grammar ...
-const char *Java1_grm_tact_name[2] = {
+const char *grm_tact_name[2] = {
    "error",
    "lookup",
 };
 
 // Head symbol numbers for the productions.
-const uint8 Java1_grm_head_numb[270] = {
+const uint8 grm_head_numb[270] = {
        0,     1,     1,     2,     2,     3,     3,     4,     4,     4, 
        4,     4,     4,     4,     4,     4,     5,     6,     6,     6, 
        6,     6,     6,     6,     7,     8,     8,     9,     9,    10, 
@@ -248,7 +249,7 @@ const uint8 Java1_grm_head_numb[270] = {
 };
 
 // First tail symbol index into the tail list ...
-const uint16 Java1_grm_f_tail[271] = {
+const uint16 grm_f_tail[271] = {
        0,     2,     3,     5,     6,     7,     8,    11,    12,    13, 
       14,    15,    16,    17,    18,    19,    20,    21,    24,    26, 
       28,    30,    31,    32,    33,    36,    37,    39,    40,    42, 
@@ -280,7 +281,7 @@ const uint16 Java1_grm_f_tail[271] = {
 };
 
 // Tail symbol numbers ...
-const int8 Java1_grm_tail[568] = {
+const int8 grm_tail[568] = {
       -5,     1,    -2,    -2,   -72,    -4,   -11,   -11,    -3,    52, 
      -11,     4,     5,     6,     7,     8,     9,    10,    11,    12, 
       -6,    -7,    -9,    -8,    -7,    -9,    -7,    -8,    -9,    -8, 
@@ -341,7 +342,7 @@ const int8 Java1_grm_tail[568] = {
 };
 
 // Arguments for token actions ...
-const int8 Java1_grm_arga[99] = {
+const int8 grm_arga[99] = {
       -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1, 
       -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1, 
       -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1, 
@@ -355,7 +356,7 @@ const int8 Java1_grm_arga[99] = {
 };
 
 // Boolean matrix ...
-const uint8 Java1_grm_Bm[266] = {
+const uint8 grm_Bm[266] = {
        0,     0,     0,     0,     0,   224,     3,     0,     0,     0, 
        0,     2,     0,     0,     0,     0,   160,     3,     0,     0, 
        0,    32,     3,     0,     0,     0,     0,     1,     0,     0, 
@@ -386,7 +387,7 @@ const uint8 Java1_grm_Bm[266] = {
 };
 
 // Boolean matrix row (for state)...
-const uint16 Java1_grm_Br[236] = {
+const uint16 grm_Br[236] = {
        5,    11,    16,    16,    21,    24,    21,    30,    30,    35, 
       16,    21,    21,    41,    30,    46,    49,    30,    30,    21, 
       41,    52,    58,    30,    62,    65,    69,    24,    60,    75, 
@@ -414,8 +415,8 @@ const uint16 Java1_grm_Br[236] = {
       };
 
 // Boolean matrix column (displacement) ...
-extern const uint8 Java1_grm_Bc[99];
-const uint8 Java1_grm_Bc[99] = {
+extern const uint8 grm_Bc[99];
+const uint8 grm_Bc[99] = {
        0,     0,     0,     0,     0,     0,     0,     0,     0,     0, 
        0,     0,     0,     0,     0,     0,     0,     0,     0,     0, 
        0,     1,     0,     0,     0,     1,     0,     0,     1,     1, 
@@ -429,7 +430,7 @@ const uint8 Java1_grm_Bc[99] = {
       };
 
 // Boolean matrix filter/mask value ...
-const uint8 Java1_grm_Bf[99] = {
+const uint8 grm_Bf[99] = {
        1,     2,     4,     8,    16,    16,    16,    16,    16,    16, 
       16,    16,    16,    32,    64,   128,    32,    32,    32,    32, 
       32,     1,    32,    32,    32,     2,    32,    32,     4,     8, 
@@ -443,7 +444,7 @@ const uint8 Java1_grm_Bf[99] = {
 };
 
 // Terminal transition matrix ...
-const int16 Java1_grm_Tm[608] = {
+const int16 grm_Tm[608] = {
     -171,   234,  -170,     0,   152,     0,   153,     0,     0,     0, 
        0,     0,     0,     0,   -32,     0,     0,     0,     0,   -90, 
        0,     0,     0,     0,     0,  -135,     0,   -30,   -32,  -141, 
@@ -508,7 +509,7 @@ const int16 Java1_grm_Tm[608] = {
 };
 
 // Terminal transition matrix row ...
-const uint16 Java1_grm_Tr[236] = {
+const uint16 grm_Tr[236] = {
      540,   540,   540,   540,   540,   540,   540,   540,   151,   151, 
      540,   540,   540,   417,    54,   540,   540,   151,   151,   540, 
      376,   151,   307,    19,   540,   540,   151,   151,   540,   499, 
@@ -536,7 +537,7 @@ const uint16 Java1_grm_Tr[236] = {
 };
 
 // Terminal transition matrix column ...
-const uint8 Java1_grm_Tc[99] = {
+const uint8 grm_Tc[99] = {
        4,     4,     0,     4,     1,     2,     3,     5,     9,    19, 
       20,    23,    28,     6,     1,     2,     7,     8,    10,    12, 
       13,    14,    15,    16,    17,    26,    18,    21,     3,    22, 
@@ -550,7 +551,7 @@ const uint8 Java1_grm_Tc[99] = {
 };
 
 // Nonterminal transition matrix ...
-const int16 Java1_grm_Nm[3135] = {
+const int16 grm_Nm[3135] = {
      208,    93,    25,    25,    25,   157,    25,    25,    25,     0, 
       93,   -81,     0,     0,   -93,    -3,    -3,    -3,   160,    -3, 
       -3,    -3,     0,     0,     0,     0,    25,   141,  -104,    24, 
@@ -868,7 +869,7 @@ const int16 Java1_grm_Nm[3135] = {
 };
 
 // Nonterminal transition matrix row ...
-const uint16 Java1_grm_Nr[236] = {
+const uint16 grm_Nr[236] = {
  1266,  1266,   251,   112,  3077,  1266,    70,  1266,  1266,  1266, 
    85,  3077,  3077,   190,  1266,  1266,  1266,   251,   112,  3077, 
   132,  1266,    70,  1266,  1266,  1266,  1266,   251,  1266,  3077, 
@@ -896,7 +897,7 @@ const uint16 Java1_grm_Nr[236] = {
 };
 
 // Nonterminal transition matrix column ...
-const uint8 Java1_grm_Nc[270] = {
+const uint8 grm_Nc[270] = {
    39,    39,    39,    25,    25,    39,    39,    13,    13,    13, 
    13,    13,    13,    13,    13,    13,    25,    39,    39,    39, 
    39,    39,    39,    39,    13,     5,     5,     6,     6,     7, 
@@ -927,7 +928,7 @@ const uint8 Java1_grm_Nc[270] = {
 };
 
 // Reduction matrix ...
-const uint8 Java1_grm_Rm[49] = {
+const uint8 grm_Rm[49] = {
        0,     0,     0,     0,     0,     0,     0,     0,     0,     4, 
      157,   157,     0,     0,   176,     0,     0,   159,   159,   159, 
      159,   175,   159,     0,     0,   163,   163,   163,   163,   174, 
@@ -936,7 +937,7 @@ const uint8 Java1_grm_Rm[49] = {
 };
 
 // Reduction matrix row ...
-const int16 Java1_grm_Rr[236] = {
+const int16 grm_Rr[236] = {
        0,     0,    21,    22,    23,     0,     0,     0,     0,   266, 
       18,    19,    20,     0,     0,    43,     0,     0,     0,    17, 
        0,     0,     0,     0,     1,     4,     0,    51,    31,     0, 
@@ -964,7 +965,7 @@ const int16 Java1_grm_Rr[236] = {
 };
 
 // Reduction matrix column ...
-const uint8 Java1_grm_Rc[99] = {
+const uint8 grm_Rc[99] = {
        0,     0,     1,     0,     0,     0,     0,     0,     0,     0, 
        0,     0,     0,     0,     0,     0,     0,     0,     0,     0, 
        0,     0,     0,     0,     0,     0,     0,     0,     0,     1, 
@@ -978,7 +979,7 @@ const uint8 Java1_grm_Rc[99] = {
 };
 
 // Production lengths (minus one) ...
-const int8 Java1_grm_PL[270] = {
+const int8 grm_PL[270] = {
        1,     0,     1,     0,     0,     0,     2,     0,     0,     0, 
        0,     0,     0,     0,     0,     0,     0,     2,     1,     1, 
        1,     0,     0,     0,     2,     0,     1,     0,     1,     3, 
@@ -1009,7 +1010,7 @@ const int8 Java1_grm_PL[270] = {
 };
 
 // Terminal action number ...
-const int8 Java1_grm_tact_numb[99] = {
+const int8 grm_tact_numb[99] = {
        0,    -1,     1,     1,    -1,    -1,    -1,    -1,    -1,    -1, 
       -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1, 
       -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1, 
@@ -1022,3 +1023,5 @@ const int8 Java1_grm_tact_numb[99] = {
       -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1, 
 };
 
+
+};   /* namespace Java1 */

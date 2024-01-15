@@ -5,8 +5,10 @@
  *        It can be safely edited to add user-supplied code.
  */
 
-void
-Typedef_term_actions(UNUSED_PARAM(Typedef_parser_t *parser))
-{
-      /* Termination code goes here */
+namespace Typedef {
+    void
+    term_actions(UNUSED_PARAM(parser_t *parser))
+    {
+        /* Termination code goes here */
+    }
 }

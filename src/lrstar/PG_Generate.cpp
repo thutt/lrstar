@@ -179,14 +179,14 @@ main_init_functions(FILE *fp, int N_tacts, int N_nacts)
 {
    if (N_tacts > 0 || N_nacts > 0) {
       fprintf(fp,
-              "void %s_init_actions(UNUSED_PARAM(%s_parser_t *parser)); "
+              "void init_actions(UNUSED_PARAM(parser_t *parser)); "
               "/* User-supplied */\n"
-              "void %s_term_actions(UNUSED_PARAM(%s_parser_t *parser)); "
+              "void term_actions(UNUSED_PARAM(parser_t *parser)); "
               "/* User-supplied */\n"
-              "static %s_parser_t::init_func_t %s_init_funcs_[2] = {\n"
-              "   %s_init_actions,\n"
-              "   %s_term_actions\n"
-              "};\n\n", gfn, gfn, gfn, gfn, gfn, gfn, gfn, gfn);
+              "static parser_t::init_func_t init_funcs_[2] = {\n"
+              "   init_actions,\n"
+              "   term_actions\n"
+              "};\n\n");
       return true;
    } else {
       return false;
@@ -204,16 +204,16 @@ main_tact_functions(FILE *fp, int N_tacts, const char **Tact_start)
       // Token Actions ...
       for (int t = 0; t < N_tacts; t++) {
          fprintf (fp,
-                  "int %s_%s(UNUSED_PARAM(%s_parser_t *parser), "
+                  "int %s(UNUSED_PARAM(parser_t *parser), "
                   "UNUSED_PARAM(int &t));\n",
-                  gfn, Tact_start[t], gfn);
+                  Tact_start[t]);
       }
       fprintf(fp,
               "// Terminal action function pointers ...\n"
-              "static %s_parser_t::tact_func_t %s_tact_funcs_[%d] = {\n",
-              gfn, gfn, N_tacts);
+              "static parser_t::tact_func_t tact_funcs_[%d] = {\n",
+              N_tacts);
       for (int t = 0; t < N_tacts; t++) {
-         fprintf (fp, "   %s_%s,\n", gfn, Tact_start[t]);
+         fprintf (fp, "   %s,\n", Tact_start[t]);
       }
       fprintf (fp, "};\n\n");
       return true;
@@ -236,27 +236,25 @@ main_nact_functions(FILE *fp, int N_nacts, const char **Nact_start)
 
          if (strcmp (Nact_start[n], "NULL") != 0) {
             fprintf(fp,
-                    "void %s_%s(UNUSED_PARAM(unsigned traversal_number),\n"
+                    "void %s(UNUSED_PARAM(unsigned traversal_number),\n"
                     "%*sUNUSED_PARAM(parse_direction_t direction),\n"
-                    "%*sUNUSED_PARAM(%s_parser_t *parser),\n"
+                    "%*sUNUSED_PARAM(parser_t *parser),\n"
                     "%*sUNUSED_PARAM(Node *node));\n",
-                    gfn,
                     Nact_start[n],
                     prefix_len, " ",
                     prefix_len, " ",
-                    gfn,
                     prefix_len, " ");
          }
       }
 
       fprintf(fp, "// Node action function pointers ...\n");
-      fprintf(fp, "static %s_parser_t::nact_func_t %s_nact_funcs_[%d] = {\n",
-              gfn, gfn, N_nacts);
+      fprintf(fp, "static parser_t::nact_func_t nact_funcs_[%d] = {\n",
+              N_nacts);
       for (int n = 0; n < N_nacts; n++) {
          if (strcmp (Nact_start[n], "NULL") == 0) {
             fprintf(fp, "   0,\n");
          } else {
-            fprintf(fp, "   %s_%s,\n",  gfn, Nact_start[n]);
+            fprintf(fp, "   %s,\n", Nact_start[n]);
          }
       }
       fprintf(fp, "};\n\n");
@@ -357,8 +355,7 @@ PG_Main::instantiate_constants(FILE *fp)
 void PG_Main::instantiate_term_symb_data(FILE *fp)
 {
    fprintf(fp, "// Terminal symbols of the grammar.\n");
-   fprintf(fp, "const char *%s_grm_term_symb[%d] = {\n",
-           gfn,
+   fprintf(fp, "const char *grm_term_symb[%d] = {\n",
            data_types[ts_T_term_symb].n_elem);
    for (int i = 0; i < N_terms; i++) {
       fprintf(fp, "   \"%s\",\n", make_term(term_name[i]));
@@ -370,8 +367,7 @@ void PG_Main::instantiate_term_symb_data(FILE *fp)
 void PG_Main::instantiate_head_symb_data(FILE *fp)
 {
    fprintf(fp, "// Nonterminal symbols of the grammar.\n");
-   fprintf(fp, "const char *%s_grm_head_symb[%d] = {\n",
-           gfn,
+   fprintf(fp, "const char *grm_head_symb[%d] = {\n",
            data_types[ts_T_head_symb].n_elem);
    for (int i = 0; i < N_heads; i++) {
       fprintf(fp, "   \"%s\",\n", head_name[i]);
@@ -383,8 +379,7 @@ void PG_Main::instantiate_head_symb_data(FILE *fp)
 void PG_Main::instantiate_tact_name_data(FILE *fp)
 {
    fprintf(fp, "// Terninal action names found in the grammar ...\n");
-   fprintf(fp, "const char *%s_grm_tact_name[%d] = {\n",
-           gfn,
+   fprintf(fp, "const char *grm_tact_name[%d] = {\n",
            data_types[ts_T_tact_name].n_elem);
    for (int i = 0; i < N_tacts; i++) {
       fprintf (fp, "   \"%s\",\n", Tact_start[i]);
@@ -397,7 +392,7 @@ void PG_Main::instantiate_node_name_data(FILE *fp)
 {
    if (N_nodes > 0) {
       fprintf(fp, "// Node names found in the grammar.\n");
-      fprintf(fp, "const char *%s_grm_node_name[%d] = {\n", gfn, N_nodes);
+      fprintf(fp, "const char *grm_node_name[%d] = {\n", N_nodes);
       for (int i = 0; i < N_nodes; i++) {
          fprintf(fp, "   \"%s\",\n", Node_start[i]);
       }
@@ -409,9 +404,8 @@ void PG_Main::instantiate_node_name_data(FILE *fp)
 void PG_Main::instantiate_head_numb_data(FILE *fp)
 {
    fprintf(fp, "// Head symbol numbers for the productions.\n");
-   fprintf(fp, "const %s %s_grm_head_numb[%d] = {",
+   fprintf(fp, "const %s grm_head_numb[%d] = {",
            data_types[ts_T_head_numb].type,
-           gfn,
            data_types[ts_T_head_numb].n_elem);
    for (int i = 0; i < N_prods; i++) {
       if (i % 10 == 0) {
@@ -428,9 +422,8 @@ void PG_Main::instantiate_head_numb_data(FILE *fp)
 void PG_Main::instantiate_f_tail_data(FILE *fp)
 {
    fprintf(fp, "// First tail symbol index into the tail list ...\n");
-   fprintf(fp, "const %s %s_grm_f_tail[%d] = {",
+   fprintf(fp, "const %s grm_f_tail[%d] = {",
            data_types[ts_T_f_tail].type,
-           gfn,
            data_types[ts_T_f_tail].n_elem);
    for (int i = 0; i < N_prods+1; i++) {
       if (i % 10 == 0) {
@@ -445,9 +438,8 @@ void PG_Main::instantiate_f_tail_data(FILE *fp)
 void PG_Main::instantiate_tail_data(FILE *fp)
 {
    fprintf(fp, "// Tail symbol numbers ...\n");
-   fprintf(fp, "const %s %s_grm_tail[%d] = {",
+   fprintf(fp, "const %s grm_tail[%d] = {",
            data_types[ts_T_tail].type,
-           gfn,
            data_types[ts_T_tail].n_elem);
    for (int i = 0; i < N_tails; i++) {
       if (i % 10 == 0) {
@@ -471,9 +463,8 @@ void PG_Main::instantiate_arga_data(FILE *fp)
          }
       }
       fprintf(fp, "// Arguments for token actions ...\n");
-      fprintf(fp, "const %s %s_grm_arga[%d] = {",
+      fprintf(fp, "const %s grm_arga[%d] = {",
               data_types[ts_T_arga].type,
-              gfn,
               data_types[ts_T_arga].n_elem);
       for (int i = 0; i < N_terms; i++) {
          if (i % 10 == 0) {
@@ -494,7 +485,7 @@ void PG_Main::instantiate_Bm_data(FILE *fp)
    if (optn[PG_BOOLMATRIX] > 0) {
       // B_matrix ...
       fprintf(fp, "// Boolean matrix ...\n");
-      fprintf(fp, "const uint8 %s_grm_Bm[%d] = {", gfn, B_size);
+      fprintf(fp, "const uint8 grm_Bm[%d] = {", B_size);
       if (optn[PG_BOOLMATRIX] == 1) { // char
          for (int i = 0; i < B_size; i++) {
             int x = static_cast<uint8>(B_matrix[i]);
@@ -524,9 +515,8 @@ void PG_Main::instantiate_Br_data(FILE *fp)
 {
    if (optn[PG_BOOLMATRIX] > 0) {
       fprintf(fp, "// Boolean matrix row (for state)...\n");
-      fprintf(fp, "const %s %s_grm_Br[%d] = {",
+      fprintf(fp, "const %s grm_Br[%d] = {",
               data_types[ts_T_Br].type,
-              gfn,
               data_types[ts_T_Br].n_elem);
       for (int i = 0; i < N_states; i++) {
          if (i % 10 == 0) {
@@ -544,13 +534,11 @@ void PG_Main::instantiate_Bc_data(FILE *fp)
 {
    if (optn[PG_BOOLMATRIX] > 0) {
       fprintf(fp, "// Boolean matrix column (displacement) ...\n");
-      fprintf(fp, "extern const %s %s_grm_Bc[%d];\n",
+      fprintf(fp, "extern const %s grm_Bc[%d];\n",
               data_types[ts_T_Bc].type,
-              gfn,
               data_types[ts_T_Bc].n_elem);
-      fprintf(fp, "const %s %s_grm_Bc[%d] = {",
+      fprintf(fp, "const %s grm_Bc[%d] = {",
               data_types[ts_T_Bc].type,
-              gfn,
               data_types[ts_T_Bc].n_elem);
       for (int i = 0; i < N_terms; i++) {
          if (i % 10 == 0) {
@@ -570,7 +558,7 @@ void PG_Main::instantiate_Bf_data(FILE *fp)
    if (optn[PG_BOOLMATRIX] > 1) {
       // B_matrix mask ...
       fprintf(fp, "// Boolean matrix filter/mask value ...\n");
-      fprintf(fp, "const uint8 %s_grm_Bf[%d] = {", gfn, N_terms);
+      fprintf(fp, "const uint8 grm_Bf[%d] = {", N_terms);
       for (int i = 0; i < N_terms; i++) {
          if (i % 10 == 0) {
             fprintf(fp, "\n   %5d, ", B_mask[i]);
@@ -587,9 +575,8 @@ void PG_Main::instantiate_Bf_data(FILE *fp)
 void PG_Main::instantiate_Tm_data(FILE *fp)
 {
    fprintf(fp, "// Terminal transition matrix ...\n");
-   fprintf(fp, "const %s %s_grm_Tm[%d] = {",
+   fprintf(fp, "const %s grm_Tm[%d] = {",
            data_types[ts_T_Tm].type,
-           gfn,
            data_types[ts_T_Tm].n_elem);
    for (int i = 0; i < T_size; i++)
    {
@@ -606,9 +593,8 @@ void PG_Main::instantiate_Tm_data(FILE *fp)
 void PG_Main::instantiate_Tr_data(FILE *fp)
 {
    fprintf(fp, "// Terminal transition matrix row ...\n");
-   fprintf(fp, "const %s %s_grm_Tr[%d] = {",
+   fprintf(fp, "const %s grm_Tr[%d] = {",
            data_types[ts_T_Tr].type,
-           gfn,
            data_types[ts_T_Tr].n_elem);
    for (int i = 0; i < tt_states; i++) {
       if (i % 10 == 0) {
@@ -624,9 +610,8 @@ void PG_Main::instantiate_Tr_data(FILE *fp)
 void PG_Main::instantiate_Tc_data(FILE *fp)
 {
    fprintf(fp, "// Terminal transition matrix column ...\n");
-   fprintf(fp, "const %s %s_grm_Tc[%d] = {",
+   fprintf(fp, "const %s grm_Tc[%d] = {",
            data_types[ts_T_Tc].type,
-           gfn,
            data_types[ts_T_Tc].n_elem);
 
    for (int i = 0; i < N_terms; i++) {
@@ -643,9 +628,8 @@ void PG_Main::instantiate_Tc_data(FILE *fp)
 void PG_Main::instantiate_Nm_data(FILE *fp)
 {
    fprintf(fp, "// Nonterminal transition matrix ...\n");
-   fprintf(fp, "const %s %s_grm_Nm[%d] = {",
+   fprintf(fp, "const %s grm_Nm[%d] = {",
            data_types[ts_T_Nm].type,
-           gfn,
            data_types[ts_T_Nm].n_elem);
    for (int i = 0; i < N_size; i++) {
       if (i % 10 == 0) {
@@ -661,9 +645,8 @@ void PG_Main::instantiate_Nm_data(FILE *fp)
 void PG_Main::instantiate_Nr_data(FILE *fp)
 {
    fprintf(fp, "// Nonterminal transition matrix row ...\n");
-   fprintf(fp, "const %s %s_grm_Nr[%d] = {",
+   fprintf(fp, "const %s grm_Nr[%d] = {",
            data_types[ts_T_Nr].type,
-           gfn,
            data_types[ts_T_Nr].n_elem);
    for (int i = 0; i < ntt_states; i++) {
       if (i % 10 == 0) {
@@ -679,9 +662,8 @@ void PG_Main::instantiate_Nr_data(FILE *fp)
 void PG_Main::instantiate_Nc_data(FILE *fp)
 {
    fprintf(fp, "// Nonterminal transition matrix column ...\n");
-   fprintf(fp, "const %s %s_grm_Nc[%d] = {",
+   fprintf(fp, "const %s grm_Nc[%d] = {",
            data_types[ts_T_Nc].type,
-           gfn,
            data_types[ts_T_Nc].n_elem);
    for (int i = 0; i < N_prods; i++) {
       if (i % 10 == 0) {
@@ -697,9 +679,8 @@ void PG_Main::instantiate_Nc_data(FILE *fp)
 void PG_Main::instantiate_Rm_data(FILE *fp)
 {
    fprintf(fp, "// Reduction matrix ...\n");
-   fprintf(fp, "const %s %s_grm_Rm[%d] = {",
+   fprintf(fp, "const %s grm_Rm[%d] = {",
            data_types[ts_T_Rm].type,
-           gfn,
            data_types[ts_T_Rm].n_elem);
    for (int i = 0; i < R_size; i++) {
       if (i % 10 == 0) {
@@ -715,9 +696,8 @@ void PG_Main::instantiate_Rm_data(FILE *fp)
 void PG_Main::instantiate_Rr_data(FILE *fp)
 {
    fprintf(fp, "// Reduction matrix row ...\n");
-   fprintf(fp, "const %s %s_grm_Rr[%d] = {",
+   fprintf(fp, "const %s grm_Rr[%d] = {",
            data_types[ts_T_Rr].type,
-           gfn,
            data_types[ts_T_Rr].n_elem);
    for (int i = 0; i < N_states; i++) {
       if (i % 10 == 0) {
@@ -733,9 +713,8 @@ void PG_Main::instantiate_Rr_data(FILE *fp)
 void PG_Main::instantiate_Rc_data(FILE *fp)
 {
    fprintf(fp, "// Reduction matrix column ...\n");
-   fprintf(fp, "const %s %s_grm_Rc[%d] = {",
+   fprintf(fp, "const %s grm_Rc[%d] = {",
            data_types[ts_T_Rc].type,
-           gfn,
            data_types[ts_T_Rc].n_elem);
    for (int i = 0; i < N_terms; i++) {
       if (i % 10 == 0) {
@@ -751,9 +730,8 @@ void PG_Main::instantiate_Rc_data(FILE *fp)
 void PG_Main::instantiate_PL_data(FILE *fp)
 {
    fprintf(fp, "// Production lengths (minus one) ...\n");
-   fprintf(fp, "const %s %s_grm_PL[%d] = {",
+   fprintf(fp, "const %s grm_PL[%d] = {",
            data_types[ts_T_PL].type,
-           gfn,
            data_types[ts_T_PL].n_elem);
    for (int i = 0; i < N_prods; i++) {
       if (i % 10 == 0) {
@@ -770,9 +748,8 @@ void PG_Main::instantiate_tact_numb_data(FILE *fp)
 {
    if (N_tacts > 0) {           // Number of terminal actions.
       fprintf(fp, "// Terminal action number ...\n");
-      fprintf(fp, "const %s %s_grm_tact_numb[%d] = {",
+      fprintf(fp, "const %s grm_tact_numb[%d] = {",
               data_types[ts_T_tact_numb].type,
-              gfn,
               data_types[ts_T_tact_numb].n_elem);
       for (int i = 0; i < N_terms; i++) {
          if (i % 10 == 0) {
@@ -798,9 +775,8 @@ void PG_Main::instantiate_argx_data(FILE *fp)
          }
       }
       fprintf(fp, "// First arguments for productions ...\n");
-      fprintf(fp, "const %s %s_grm_argx[%d] = {",
+      fprintf(fp, "const %s grm_argx[%d] = {",
               data_types[ts_T_argx].type,
-              gfn,
               data_types[ts_T_argx].n_elem);
       for (int i = 0; i < N_prods; i++) {
          if (i % 10 == 0) {
@@ -829,9 +805,8 @@ void PG_Main::instantiate_argy_data(FILE *fp)
       }
 
       fprintf(fp, "// Second arguments for productions ...\n");
-      fprintf(fp, "const %s %s_grm_argy[%d] = {",
+      fprintf(fp, "const %s grm_argy[%d] = {",
               data_types[ts_T_argy].type,
-              gfn,
               data_types[ts_T_argy].n_elem);
 
       for (int i = 0; i < N_prods; i++) {
@@ -853,9 +828,8 @@ void PG_Main::instantiate_nd_fterm_data(FILE *fp)
       // Nondeterministic Items (terminals) in a state ...
       int count = N_states + 1;
       fprintf(fp, "// Nondeterministic first terminal in the list ...\n");
-      fprintf(fp, "const %s %s_grm_nd_fterm[%d] = {",
+      fprintf(fp, "const %s grm_nd_fterm[%d] = {",
               data_types[ts_T_nd_fterm].type,
-              gfn,
               data_types[ts_T_nd_fterm].n_elem);
       for (int i = 0; i < count; i++) {
          if (i % 10 == 0) {
@@ -875,9 +849,8 @@ void PG_Main::instantiate_nd_term_data(FILE *fp)
       // Nondeterministic Terminal List ...
       int count = n_ndterms;
       fprintf(fp, "// Nondeterministic terminal list ...\n");
-      fprintf(fp, "const %s %s_grm_nd_term[%d] = {",
+      fprintf(fp, "const %s grm_nd_term[%d] = {",
               data_types[ts_T_nd_term].type,
-              gfn,
               data_types[ts_T_nd_term].n_elem);
       for (int i = 0; i < count; i++) {
          if (i % 10 == 0) {
@@ -897,9 +870,8 @@ void PG_Main::instantiate_nd_faction_data(FILE *fp)
       // Nondeterministic Start of a terminal's actions for state ...
       int count = n_ndterms + 1;
       fprintf(fp, "// Nondeterministic first action in the list ...\n");
-      fprintf(fp, "const %s %s_grm_nd_faction[%d] = {",
+      fprintf(fp, "const %s grm_nd_faction[%d] = {",
               data_types[ts_T_nd_faction].type,
-              gfn,
               data_types[ts_T_nd_faction].n_elem);
       for (int i = 0; i < count; i++) {
          if (i % 10 == 0) {
@@ -919,9 +891,8 @@ void PG_Main::instantiate_nd_action_data(FILE *fp)
       // Nondeterministic Action ...
       int count = n_nditems;
       fprintf(fp, "// Nondeterministic actions list ...\n");
-      fprintf(fp, "const %s %s_grm_nd_action[%d] = {",
+      fprintf(fp, "const %s grm_nd_action[%d] = {",
               data_types[ts_T_nd_action].type,
-              gfn,
               data_types[ts_T_nd_action].n_elem);
       for (int i = 0; i < count; i++) {
          if (i % 10 == 0) {
@@ -939,9 +910,8 @@ void PG_Main::instantiate_node_numb_data(FILE *fp)
 {
    if (optn[PG_ASTCONST] > 0 && N_nodes > 0) {
       fprintf(fp, "// Node number for each production ...\n");
-      fprintf(fp, "const %s %s_grm_node_numb[%d] = {",
+      fprintf(fp, "const %s grm_node_numb[%d] = {",
               data_types[ts_T_node_numb].type,
-              gfn,
               data_types[ts_T_node_numb].n_elem);
       for (int i = 0; i < N_prods; i++) {
          if (i % 10 == 0) {
@@ -960,9 +930,8 @@ void PG_Main::instantiate_nact_numb_data(FILE *fp)
    if (optn[PG_ASTCONST] > 0 && N_nodes > 0) {
       if (N_nacts > 0) {
          fprintf(fp, "// Node action numbers ...\n");
-         fprintf(fp, "const %s %s_grm_nact_numb[%d] = {",
+         fprintf(fp, "const %s grm_nact_numb[%d] = {",
                  data_types[ts_T_nact_numb].type,
-                 gfn,
                  data_types[ts_T_nact_numb].n_elem);
          for (int i = 0; i < N_prods; i++) {
             if (i % 10 == 0) {
@@ -983,7 +952,7 @@ void PG_Main::instantiate_reverse_data(FILE *fp)
       if (N_reverses > 0) {
          // Reverse the order of nodes (for a production/rule) ...
          fprintf(fp, "// Reverse the order of nodes ...\n");
-         fprintf(fp, "const uint8 %s_grm_reverse[%d] = {", gfn, N_prods);
+         fprintf(fp, "const uint8 grm_reverse[%d] = {", N_prods);
          for (int i = 0; i < N_prods; i++) {
             if (i % 10 == 0) {
                fprintf(fp, "\n   %5d, ", Reverse[i]);
@@ -1109,6 +1078,20 @@ parser_tables_template_args(FILE *fp)
 }
 
 
+static void
+open_namespace(FILE *fp, const char *namespc)
+{
+   fprintf(fp, "namespace %s {\n", namespc);
+}
+
+
+static void
+close_namespace(FILE *fp, const char *namespc)
+{
+   fprintf(fp, "\n};   /* namespace %s */\n", namespc);
+}
+
+
 void
 PG_Main::typedef_tables(const char *dname,
                         const char *fname,
@@ -1134,176 +1117,150 @@ PG_Main::typedef_tables(const char *dname,
    open_guard(fp, fname, cname, "TYPEDEF");
    fprintf(fp, "#include \"lrstar_parser_tables.h\"\n\n");
 
+   open_namespace(fp, gfn);
+
    /* External references to generate parser tables for the grammar. */
-   fprintf(fp, "extern const char *%s_grm_head_symb[%d];\n",
-           gfn,
+   fprintf(fp, "extern const char *grm_head_symb[%d];\n",
            data_types[ts_T_head_symb].n_elem);
 
    if (N_tacts > 0) {
-      fprintf(fp, "extern const char *%s_grm_tact_name[%d];\n",
-              gfn,
+      fprintf(fp, "extern const char *grm_tact_name[%d];\n",
               data_types[ts_T_tact_name].n_elem);
    }
 
    if (N_nodes > 0) {
-      fprintf(fp, "extern const char *%s_grm_node_name[%d];\n", gfn, N_nodes);
+      fprintf(fp, "extern const char *grm_node_name[%d];\n", N_nodes);
    }
 
-   fprintf(fp, "extern const %s %s_grm_head_numb[%d];\n",
+   fprintf(fp, "extern const %s grm_head_numb[%d];\n",
            data_types[ts_T_head_numb].type,
-           gfn,
            data_types[ts_T_head_numb].n_elem);
 
-   fprintf(fp, "extern const %s %s_grm_f_tail[%d];\n",
+   fprintf(fp, "extern const %s grm_f_tail[%d];\n",
            data_types[ts_T_f_tail].type,
-           gfn,
            data_types[ts_T_f_tail].n_elem);
 
-   fprintf(fp, "extern const %s %s_grm_tail[%d];\n",
+   fprintf(fp, "extern const %s grm_tail[%d];\n",
            data_types[ts_T_tail].type,
-           gfn,
            data_types[ts_T_tail].n_elem);
 
-   fprintf(fp, "extern const char *%s_grm_term_symb[%d];\n",
-           gfn,
+   fprintf(fp, "extern const char *grm_term_symb[%d];\n",
            data_types[ts_T_term_symb].n_elem);
 
    if (N_tacts > 0) {
-      fprintf(fp, "extern const %s %s_grm_arga[%d];\n",
+      fprintf(fp, "extern const %s grm_arga[%d];\n",
               data_types[ts_T_arga].type,
-              gfn,
               data_types[ts_T_arga].n_elem);
    }
 
    if (optn[PG_BOOLMATRIX] > 0) {
-      fprintf(fp, "extern const uint8 %s_grm_Bm[%d];\n", gfn, B_size);
-      fprintf(fp, "extern const %s %s_grm_Br[%d];\n",
+      fprintf(fp, "extern const uint8 grm_Bm[%d];\n", B_size);
+      fprintf(fp, "extern const %s grm_Br[%d];\n",
               data_types[ts_T_Br].type,
-              gfn,
               data_types[ts_T_Br].n_elem);
    }
 
    if (optn[PG_BOOLMATRIX] > 0) {
-      fprintf(fp, "extern const %s %s_grm_Bc[%d];\n",
+      fprintf(fp, "extern const %s grm_Bc[%d];\n",
               data_types[ts_T_Bc].type,
-              gfn,
               data_types[ts_T_Bc].n_elem);
    }
 
    if (optn[PG_BOOLMATRIX] > 1) {
-      fprintf(fp, "extern const uint8 %s_grm_Bf[%d];\n", gfn, N_terms);
+      fprintf(fp, "extern const uint8 grm_Bf[%d];\n", N_terms);
    }
 
-   fprintf(fp, "extern const %s %s_grm_Tm[%d];\n",
+   fprintf(fp, "extern const %s grm_Tm[%d];\n",
            data_types[ts_T_Tm].type,
-           gfn,
            data_types[ts_T_Tm].n_elem);
 
-   fprintf(fp, "extern const %s %s_grm_Tr[%d];\n",
+   fprintf(fp, "extern const %s grm_Tr[%d];\n",
            data_types[ts_T_Tr].type,
-           gfn,
            data_types[ts_T_Tr].n_elem);
 
-   fprintf(fp, "extern const %s %s_grm_Tc[%d];\n",
+   fprintf(fp, "extern const %s grm_Tc[%d];\n",
            data_types[ts_T_Tc].type,
-           gfn,
            data_types[ts_T_Tc].n_elem);
 
-   fprintf(fp, "extern const %s %s_grm_Nm[%d];\n",
+   fprintf(fp, "extern const %s grm_Nm[%d];\n",
            data_types[ts_T_Nm].type,
-           gfn,
            data_types[ts_T_Nm].n_elem);
 
-   fprintf(fp, "extern const %s %s_grm_Nr[%d];\n",
+   fprintf(fp, "extern const %s grm_Nr[%d];\n",
            data_types[ts_T_Nr].type,
-           gfn,
            data_types[ts_T_Nr].n_elem);
 
-   fprintf(fp, "extern const %s %s_grm_Nc[%d];\n",
+   fprintf(fp, "extern const %s grm_Nc[%d];\n",
            data_types[ts_T_Nc].type,
-           gfn,
            data_types[ts_T_Nc].n_elem);
 
-   fprintf(fp, "extern const %s %s_grm_Rm[%d];\n",
+   fprintf(fp, "extern const %s grm_Rm[%d];\n",
            data_types[ts_T_Rm].type,
-           gfn,
            data_types[ts_T_Rm].n_elem);
 
-   fprintf(fp, "extern const %s %s_grm_Rr[%d];\n",
+   fprintf(fp, "extern const %s grm_Rr[%d];\n",
            data_types[ts_T_Rr].type,
-           gfn,
            data_types[ts_T_Rr].n_elem);
 
-   fprintf(fp, "extern const %s %s_grm_Rc[%d];\n",
+   fprintf(fp, "extern const %s grm_Rc[%d];\n",
            data_types[ts_T_Rc].type,
-           gfn,
            data_types[ts_T_Rc].n_elem);
 
-   fprintf(fp, "extern const %s %s_grm_PL[%d];\n",
+   fprintf(fp, "extern const %s grm_PL[%d];\n",
            data_types[ts_T_PL].type,
-           gfn,
            data_types[ts_T_PL].n_elem);
 
    if (N_tacts > 0) {           // Number of terminal actions.
-      fprintf(fp, "extern const %s %s_grm_tact_numb[%d];\n",
+      fprintf(fp, "extern const %s grm_tact_numb[%d];\n",
               data_types[ts_T_tact_numb].type,
-              gfn,
               data_types[ts_T_tact_numb].n_elem);
    }
 
    if (N_nodes > 0 || N_semantics > 0) {
-      fprintf(fp, "extern const %s %s_grm_argx[%d];\n",
+      fprintf(fp, "extern const %s grm_argx[%d];\n",
               data_types[ts_T_argx].type,
-              gfn,
               data_types[ts_T_argx].n_elem);
    }
 
    if (N_semantics > 0) {
-      fprintf(fp, "extern const %s %s_grm_argy[%d];\n",
+      fprintf(fp, "extern const %s grm_argy[%d];\n",
               data_types[ts_T_argy].type,
-              gfn,
               data_types[ts_T_argy].n_elem);
    }
 
    if (n_ndstates > 0) {
-      fprintf(fp, "extern const %s %s_grm_nd_fterm[%d];\n",
+      fprintf(fp, "extern const %s grm_nd_fterm[%d];\n",
               data_types[ts_T_nd_fterm].type,
-              gfn,
               data_types[ts_T_nd_fterm].n_elem);
 
-      fprintf(fp, "extern const %s %s_grm_nd_term[%d];\n",
+      fprintf(fp, "extern const %s grm_nd_term[%d];\n",
               data_types[ts_T_nd_term].type,
-              gfn,
               data_types[ts_T_nd_term].n_elem);
 
-      fprintf(fp, "extern const %s %s_grm_nd_faction[%d];\n",
+      fprintf(fp, "extern const %s grm_nd_faction[%d];\n",
               data_types[ts_T_nd_faction].type,
-              gfn,
               data_types[ts_T_nd_faction].n_elem);
 
-      fprintf(fp, "extern const %s %s_grm_nd_action[%d];\n",
+      fprintf(fp, "extern const %s grm_nd_action[%d];\n",
               data_types[ts_T_nd_action].type,
-              gfn,
               data_types[ts_T_nd_action].n_elem);
    }
 
    if (optn[PG_ASTCONST] > 0 && N_nodes > 0) {
-      fprintf(fp, "extern const %s %s_grm_node_numb[%d];\n",
+      fprintf(fp, "extern const %s grm_node_numb[%d];\n",
               data_types[ts_T_node_numb].type,
-              gfn,
               data_types[ts_T_node_numb].n_elem);
    }
 
    if (N_nacts > 0) {
-      fprintf(fp, "extern const %s %s_grm_nact_numb[%d];\n",
+      fprintf(fp, "extern const %s grm_nact_numb[%d];\n",
               data_types[ts_T_nact_numb].type,
-              gfn,
               data_types[ts_T_nact_numb].n_elem);
    }
 
    if (optn[PG_ASTCONST] > 0 && N_nodes > 0) {
       if (N_reverses > 0) {
-         fprintf(fp, "extern const uint8 %s_grm_reverse[%d];\n", gfn, N_prods);
+         fprintf(fp, "extern const uint8 grm_reverse[%d];\n", N_prods);
       }
    }
    fprintf(fp, "\n\n");
@@ -1377,11 +1334,11 @@ PG_Main::typedef_tables(const char *dname,
            width, " ",
            width, " ",
            width, " ");
-   fprintf(fp, "   class %s_parser_tables_ : public lrstar_parser_tables", gfn);
+   fprintf(fp, "   class parser_tables_ : public lrstar_parser_tables");
    parser_tables_template_args(fp);
    fprintf(fp, "   {\n");
    fprintf(fp, "\npublic:\n\n");
-   fprintf(fp, "      %s_parser_tables_() : lrstar_parser_tables", gfn);
+   fprintf(fp, "      parser_tables_() : lrstar_parser_tables");
    parser_tables_template_args(fp);
 
    fprintf(fp, "(");
@@ -1396,100 +1353,99 @@ PG_Main::typedef_tables(const char *dname,
    fprintf(fp, "%d, ", eof_term);
    fprintf(fp, "%s, ", b[!!error_used]);
 
-   fprintf(fp, "&%s_grm_term_symb[0], ", gfn);
-   fprintf(fp, "&%s_grm_head_symb[0], ", gfn);
+   fprintf(fp, "&grm_term_symb[0], ");
+   fprintf(fp, "&grm_head_symb[0], ");
    if (N_tacts > 0) {
-      fprintf(fp, "&%s_grm_tact_name[0], ", gfn);
+      fprintf(fp, "&grm_tact_name[0], ");
    } else {
       fprintf(fp, "0, ");
    }
 
    if (N_nodes > 0) {
-      fprintf(fp, "&%s_grm_node_name[0], ", gfn);
+      fprintf(fp, "&grm_node_name[0], ");
    } else {
       fprintf(fp, "0, ");
    }
 
-   fprintf(fp, "&%s_grm_head_numb[0], ", gfn);
-   fprintf(fp, "&%s_grm_f_tail[0], ", gfn);
-   fprintf(fp, "&%s_grm_tail[0], ", gfn);
+   fprintf(fp, "&grm_head_numb[0], ");
+   fprintf(fp, "&grm_f_tail[0], ");
+   fprintf(fp, "&grm_tail[0], ");
 
    if (N_tacts > 0) {
-      fprintf(fp, "&%s_grm_arga[0], ", gfn);
+      fprintf(fp, "&grm_arga[0], ");
    } else {
       fprintf(fp, "0, ");
    }
 
    if (N_nodes > 0 || N_semantics > 0) {
-      fprintf(fp, "&%s_grm_argx[0], ", gfn);
+      fprintf(fp, "&grm_argx[0], ");
    } else {
       fprintf(fp, "0, ");
    }
 
    if (N_semantics > 0) {
-      fprintf(fp, "&%s_grm_argy[0], ", gfn);
+      fprintf(fp, "&grm_argy[0], ");
    } else {
       fprintf(fp, "0, ");
    }
 
    if (optn[PG_BOOLMATRIX] > 0) {
-      fprintf(fp, "&%s_grm_Bm[0], ", gfn);
-      fprintf(fp, "&%s_grm_Br[0], ", gfn);
-      fprintf(fp, "&%s_grm_Bc[0], ", gfn);
+      fprintf(fp, "&grm_Bm[0], ");
+      fprintf(fp, "&grm_Br[0], ");
+      fprintf(fp, "&grm_Bc[0], ");
    } else {
       fprintf(fp, "0, 0, 0, ");
    }
    if (optn[PG_BOOLMATRIX] > 1) {
-      fprintf(fp, "&%s_grm_Bf[0], ", gfn);
+      fprintf(fp, "&grm_Bf[0], ");
    } else {
       fprintf(fp, "0, ");
    }
 
-   fprintf(fp, "&%s_grm_Tm[0], ", gfn);
-   fprintf(fp, "&%s_grm_Tr[0], ", gfn);
-   fprintf(fp, "&%s_grm_Tc[0], ", gfn);
+   fprintf(fp, "&grm_Tm[0], ");
+   fprintf(fp, "&grm_Tr[0], ");
+   fprintf(fp, "&grm_Tc[0], ");
 
-   fprintf(fp, "&%s_grm_Nm[0], ", gfn);
-   fprintf(fp, "&%s_grm_Nr[0], ", gfn);
-   fprintf(fp, "&%s_grm_Nc[0], ", gfn);
+   fprintf(fp, "&grm_Nm[0], ");
+   fprintf(fp, "&grm_Nr[0], ");
+   fprintf(fp, "&grm_Nc[0], ");
 
-   fprintf(fp, "&%s_grm_Rm[0], ", gfn);
-   fprintf(fp, "&%s_grm_Rr[0], ", gfn);
-   fprintf(fp, "&%s_grm_Rc[0], ", gfn);
+   fprintf(fp, "&grm_Rm[0], ");
+   fprintf(fp, "&grm_Rr[0], ");
+   fprintf(fp, "&grm_Rc[0], ");
 
-   fprintf(fp, "&%s_grm_PL[0], ", gfn);
+   fprintf(fp, "&grm_PL[0], ");
 
    if (n_ndstates > 0) {
       fprintf(fp,
-              "&%s_grm_nd_fterm[0], "
-              "&%s_grm_nd_term[0], "
-              "&%s_grm_nd_faction[0], "
-              "&%s_grm_nd_action[0], ",
-              gfn, gfn, gfn, gfn);
+              "&grm_nd_fterm[0], "
+              "&grm_nd_term[0], "
+              "&grm_nd_faction[0], "
+              "&grm_nd_action[0], ");
    } else {
       fprintf(fp, "0, 0, 0, 0, ");
    }
 
    if (N_tacts > 0) {           // Number of terminal actions.
-      fprintf(fp, "&%s_grm_tact_numb[0], ", gfn);
+      fprintf(fp, "&grm_tact_numb[0], ");
    } else {
       fprintf(fp, "0, ");
    }
    if (optn[PG_ASTCONST] > 0 && N_nodes > 0) {
-      fprintf(fp, "&%s_grm_node_numb[0], ", gfn);
+      fprintf(fp, "&grm_node_numb[0], ");
    } else {
       fprintf(fp, "0, ");
    }
 
    if (N_nacts > 0) {
-      fprintf(fp, "&%s_grm_nact_numb[0], ", gfn);
+      fprintf(fp, "&grm_nact_numb[0], ");
    } else {
       fprintf(fp, "0, ");
    }
 
    if (optn[PG_ASTCONST] > 0 && N_nodes > 0) {
       if (N_reverses > 0) {
-         fprintf(fp, "&%s_grm_reverse[0]", gfn);
+         fprintf(fp, "&grm_reverse[0]");
       } else {
          fprintf(fp, "0");
       }
@@ -1502,9 +1458,10 @@ PG_Main::typedef_tables(const char *dname,
            "      }\n");
    fprintf(fp, "   };\n\n");
 
-   fprintf(fp, "typedef %s_parser_tables_", gfn);
+   fprintf(fp, "typedef parser_tables_");
    parser_tables_instantiate_args(fp);
-   fprintf(fp, " %s_parser_tables_t;\n\n", gfn);
+   fprintf(fp, " parser_tables_t;\n\n");
+   close_namespace(fp, gfn);
    close_guard(fp);
    fclose(fp);
 }
@@ -1773,11 +1730,11 @@ generate_grammar_parser_typedef(FILE *fp, const char *grammar)
    static const char *b[] = { "false", "true" };
    static const char templ[] = "typedef lrstar_parser<";
 
-   fprintf(fp, "extern const char %s_grammar_name[];\n\n", gfn);
+   fprintf(fp, "extern const char grammar_name[];\n\n");
 
    fprintf(fp, "%s", templ);
    fprintf(fp,
-           "/* grammar           */   %s_grammar_name", gfn);
+           "/* grammar           */   grammar_name");
    {
       /* Number of AST traversals.  Must be > 0.  An error should be
        * produced if the value is not greater than 0, but bounding it
@@ -1854,10 +1811,9 @@ generate_grammar_parser_typedef(FILE *fp, const char *grammar)
            static_cast<int>(sizeof(templ) / sizeof(templ[0])) - 1, " ",
            grammar);
    fprintf(fp, ",\n%*s"
-           "/* parser table type */   %s_parser_tables_t",
-           static_cast<int>(sizeof(templ) / sizeof(templ[0])) - 1, " ",
-           grammar);
-   fprintf(fp, "> %s_parser_t;\n", grammar);
+           "/* parser table type */   parser_tables_t",
+           static_cast<int>(sizeof(templ) / sizeof(templ[0])) - 1, " ");
+   fprintf(fp, "> parser_t;\n");
 }
 
 
@@ -1865,7 +1821,7 @@ static void
 generate_parser_allocation(FILE *fp)
 {
    static const char prefix[] = "   return new ";
-   static const char suffix[] = "_parser_t(";
+   static const char suffix[] = "parser_t(";
    int               space_width;
    char             *templ;
    int               templ_len;
@@ -1886,20 +1842,19 @@ generate_parser_allocation(FILE *fp)
                                  callback_info.Nact_start);
 
    templ_len = ((sizeof(prefix) / sizeof(prefix[0]) - 1) +
-                (sizeof(suffix) / sizeof(suffix[0]) - 1) +
-                strlen(gfn));
+                (sizeof(suffix) / sizeof(suffix[0]) - 1));
    templ = new char[templ_len + 1];
-   sprintf(templ, "%s%s%s", prefix, gfn, suffix);
+   sprintf(templ, "%s%s", prefix, suffix);
 
-   space_width = strlen(gfn) + strlen("_new_parser") + 1;
+   space_width = strlen("new_parser") + 1;
    fprintf(fp,
-           "%s_parser_t *\n%s_new_parser(const char *input_path,\n"
+           "parser_t *\nnew_parser(const char *input_path,\n"
            "%*schar       *input_text,\n"
            "%*sunsigned    max_symbols"
            ")\n"
            "{\n"
            "%s",
-           gfn, gfn, space_width, " ", space_width, " ", templ);
+           space_width, " ", space_width, " ", templ);
 
    fprintf(fp, "/* input path   */   input_path");
 
@@ -1913,9 +1868,8 @@ generate_parser_allocation(FILE *fp)
 
    if (init_fn) {
       fprintf(fp, ",\n%*s"
-              "/* init_func    */   &%s_init_funcs_[0]",
-              static_cast<int>(templ_len), " ",
-              gfn);
+              "/* init_func    */   &init_funcs_[0]",
+              static_cast<int>(templ_len), " ");
    } else {
       fprintf(fp, ",\n%*s"
               "/* init_func    */   0",
@@ -1924,9 +1878,8 @@ generate_parser_allocation(FILE *fp)
 
    if (tact_fn) {
       fprintf(fp, ",\n%*s"
-              "/* tact_func    */   &%s_tact_funcs_[0]",
-              static_cast<int>(templ_len), " ",
-              gfn);
+              "/* tact_func    */   &tact_funcs_[0]",
+              static_cast<int>(templ_len), " ");
    } else {
       fprintf(fp, ",\n%*s"
               "/* tact_func    */   0",
@@ -1935,10 +1888,8 @@ generate_parser_allocation(FILE *fp)
 
    if (nact_fn) {
       fprintf(fp, ",\n%*s"
-              "/* nact_func    */   &%s_nact_funcs_[0]",
-              static_cast<int>(templ_len), " ",
-              gfn);
-
+              "/* nact_func    */   &nact_funcs_[0]",
+              static_cast<int>(templ_len), " ");
    } else {
       fprintf(fp, ",\n%*s"
               "/* nact_func    */   0",
@@ -1953,7 +1904,7 @@ static void
 instantiate_generated_parser(FILE *fp)
 {
    fprintf(fp, "\n");
-   fprintf(fp, "const char %s_grammar_name[] = \"%s\";\n", gfn, gfn);
+   fprintf(fp, "const char grammar_name[] = \"%s\";\n", gfn);
    fprintf(fp, "\n");
 
    fprintf(fp, "\n");
@@ -1973,13 +1924,17 @@ parser_header_fn(FILE       *fp,
    if (lrstar_linux) {
       fprintf (fp, "#include \"lrstar_lexer.h\"\n");
    }
-
+   open_namespace(fp, grammar);
    fprintf(fp, "\n");
    PG_Main::GenerateParserTableEnums(fp);
+   close_namespace(fp, grammar);
 
    fprintf(fp, "#include \"%s_ParserTables_typedef.h\"\n", grammar);
    fprintf(fp, "#include \"lrstar_parser.h\"\n\n");
+
+   open_namespace(fp, grammar);
    generate_grammar_parser_typedef(fp, grammar);
+   close_namespace(fp, grammar);
    close_guard(fp);
 }
 
@@ -2001,13 +1956,15 @@ static void
 write_user_init(FILE *fp, const char *fn_name)
 {
    write_user_preamble(fp);
+   open_namespace(fp, gfn);
    fprintf(fp,
-           "void\n"
-           "%s_%s(UNUSED_PARAM(%s_parser_t *parser))\n"
-           "{\n"
-           "      /* Initialization code goes here */\n"
-           "}\n",
-           gfn, fn_name, gfn);
+           "    void\n"
+           "    %s(UNUSED_PARAM(parser_t *parser))\n"
+           "    {\n"
+           "          /* Initialization code goes here */\n"
+           "    }\n",
+           fn_name);
+   close_namespace(fp, gfn);
 }
 
 
@@ -2015,13 +1972,15 @@ static void
 write_user_term(FILE *fp, const char *fn_name)
 {
    write_user_preamble(fp);
+   open_namespace(fp, gfn);
    fprintf(fp,
-           "void\n"
-           "%s_%s(UNUSED_PARAM(%s_parser_t *parser))\n"
-           "{\n"
-           "      /* Termination code goes here */\n"
-           "}\n",
-           gfn, fn_name, gfn);
+           "    void\n"
+           "    %s(UNUSED_PARAM(parser_t *parser))\n"
+           "    {\n"
+           "          /* Termination code goes here */\n"
+           "    }\n",
+           fn_name);
+   close_namespace(fp, gfn);
 }
 
 
@@ -2029,18 +1988,19 @@ static void
 write_user_error(FILE *fp, const char *fn_name)
 {
    write_user_preamble(fp);
+   open_namespace(fp, gfn);
    fprintf(fp,
-           "int\n"
-           "%s_%s(UNUSED_PARAM(%s_parser_t *parser), "
-           "UNUSED_PARAM(int &t))\n"
-           "{\n"
-           "   if (parser->lt.token.end == parser->lt.token.start) {\n"
-           "      // An illegal character.\n"
-           "      parser->lt.token.end++;\n"
-           "   }\n"
-           "   return 0;\n"
-           "}\n",
-           gfn, fn_name, gfn);
+           "    int\n"
+           "    %s(UNUSED_PARAM(parser_t *parser), UNUSED_PARAM(int &t))\n"
+           "    {\n"
+           "       if (parser->lt.token.end == parser->lt.token.start) {\n"
+           "          // An illegal character.\n"
+           "          parser->lt.token.end++;\n"
+           "       }\n"
+           "       return 0;\n"
+           "    }\n",
+           fn_name);
+   close_namespace(fp, gfn);
 }
 
 
@@ -2048,31 +2008,32 @@ static void
 write_user_lookup(FILE *fp, const char *fn_name)
 {
    write_user_preamble(fp);
+   open_namespace(fp, gfn);
    fprintf(fp,
-           "int\n"
-           "%s_%s(UNUSED_PARAM(%s_parser_t *parser), "
-           "UNUSED_PARAM(int &t))\n"
-           "{\n"
-           "   // Lookup in symbol table.\n\n"
-           "   int sti;\n"
-           "\n"
-           "   if (parser->opt_nd_parsing() &&\n"
-           "       parser->lt.lookahead.start != 0) {\n"
-           "      // In lookahead mode.\n"
-           "      sti = parser->add_symbol(t, parser->lt.lookahead.start,\n"
-           "                               parser->lt.lookahead.end);\n"
-           "   } else {\n"
-           "      // Regular mode of parsing\n"
-           "      sti = parser->add_symbol(t, parser->lt.token.start,\n"
-           "                               parser->lt.token.end);\n"
-           "   }\n\n"
-           "   if (parser->opt_semantics()) {\n"
-           "      // Redefine terminal number?\n"
-           "      t = parser->symbol[sti].term;\n"
-           "   }\n\n"
-           "   return sti; // Return symbol-table index.\n"
-           "}\n",
-           gfn, fn_name, gfn);
+           "    int\n"
+           "    %s(UNUSED_PARAM(parser_t *parser), UNUSED_PARAM(int &t))\n"
+           "    {\n"
+           "       // Lookup in symbol table.\n\n"
+           "       int sti;\n"
+           "    \n"
+           "       if (parser->opt_nd_parsing() &&\n"
+           "           parser->lt.lookahead.start != 0) {\n"
+           "          // In lookahead mode.\n"
+           "          sti = parser->add_symbol(t, parser->lt.lookahead.start,\n"
+           "                                   parser->lt.lookahead.end);\n"
+           "       } else {\n"
+           "          // Regular mode of parsing\n"
+           "          sti = parser->add_symbol(t, parser->lt.token.start,\n"
+           "                                   parser->lt.token.end);\n"
+           "       }\n\n"
+           "       if (parser->opt_semantics()) {\n"
+           "          // Redefine terminal number?\n"
+           "          t = parser->symbol[sti].term;\n"
+           "       }\n\n"
+           "       return sti; // Return symbol-table index.\n"
+           "    }\n",
+           fn_name);
+   close_namespace(fp, gfn);
 }
 
 
@@ -2085,21 +2046,20 @@ write_user_nact(FILE *fp, const char *fn_name)
                      1 /* ' ' */);
 
    write_user_preamble(fp);
+   open_namespace(fp, gfn);
    fprintf(fp,
            "void\n"
-           "%s_%s(UNUSED_PARAM(unsigned traversal_number),\n"
+           "%s(UNUSED_PARAM(unsigned traversal_number),\n"
            "%*sUNUSED_PARAM(parse_direction_t direction),\n"
-           "%*sUNUSED_PARAM(%s_parser_t *parser),\n"
+           "%*sUNUSED_PARAM(parser_t *parser),\n"
            "%*sUNUSED_PARAM(Node *v))\n"
            "{\n"
            "}\n",
-           gfn,
            fn_name,
            prefix_len, " ",
            prefix_len, " ",
-           gfn,
            prefix_len, " ");
-
+   close_namespace(fp, gfn);
 }
 
 
@@ -2117,11 +2077,11 @@ write_user_header(FILE *fp, const char *fn_name)
            " *  NOTE: lrstar will never rewrite or delete this file.\n"
            " *        It can be safely edited to add user-supplied code.\n"
            " */\n"
-           "#if !defined(__%s_USER_HEADER__)\n"
-           "\n"
-           "\n"
-           "\n"
-           "#endif\n", gfn);
+           "#if !defined(__%s_USER_HEADER__)\n", gfn);
+   open_namespace(fp, gfn);
+   fprintf(fp, "\n\n");
+   close_namespace(fp, gfn);
+   fprintf(fp, "#endif\n");
 }
 
 
@@ -2208,12 +2168,14 @@ static void main_cpp_fn(FILE       *fp,
            "#include \"%s_LexerTables_typedef.h\"\n"
            "#include \"%s_Parser.h\"\n"
            "\n", grammar, grammar);
+   open_namespace(fp, grammar);
    if (lrstar_linux) {
       instantiate_generated_parser(fp);
    } else {
       assert(lrstar_windows);
       fprintf (fp, "#include \"../../code/main.cpp\"\n");
    }
+   close_namespace(fp, grammar);
 }
 
 
@@ -2234,9 +2196,11 @@ parser_cpp_fn(FILE       *fp,
                  "#include \"%s_Parser.h\"\n\n"),
             grammar, grammar, grammar);
 
+   open_namespace(fp, grammar);
    instantiate_field_lengths(fp);
    PG_Main::instantiate_constants(fp);
    PG_Main::instantiate_fields(fp);
+   close_namespace(fp, grammar);
 }
 
 
@@ -2389,15 +2353,16 @@ static void instantiate_getopt(FILE *fp)
 
 static void instantiate_main(FILE *fp, const char *grammar)
 {
+   open_namespace(fp, grammar);
    fprintf(fp,
-           "\n\n"
-           "%s_parser_t *%s_new_parser(const char *input_path,\n"
-           "                                 char       *input_text,\n"
-           "                                 unsigned    max_symbols"
-           ");\n",
-           grammar, grammar);
+           "    parser_t *new_parser(const char *input_path,\n"
+           "                                     char       *input_text,\n"
+           "                                     unsigned    max_symbols"
+           ");\n");
+   close_namespace(fp, grammar);
 
    fprintf(fp,
+           "\n\n"
            "int\n"
            "main(int argc, char **argv)\n"
            "{\n"
@@ -2411,7 +2376,7 @@ static void instantiate_main(FILE *fp, const char *grammar)
            "    unsigned    iteration;\n"
            "    char *input_start;\n"
            "    FILE *output_fp;\n"
-           "    %s_parser_t *parser;\n", grammar);
+           "    %s::parser_t *parser;\n", grammar);
 
    fprintf(fp, "\n"
            "    get_options(argc, argv, &options);\n"
@@ -2440,7 +2405,7 @@ static void instantiate_main(FILE *fp, const char *grammar)
    fprintf(fp,
            "        input_start = read_input(argv[optind]);\n"
            "\n"
-           "        parser = %s_new_parser(argv[optind], input_start, 100000);\n",
+           "        parser = %s::new_parser(argv[optind], input_start, 100000);\n",
            grammar);
    fprintf(fp,
            "        printf(\"%%s parser.\\n\", parser->grammar);\n"

@@ -10,7 +10,8 @@
  */
 
 #if !defined(__LRK_USER_HEADER__)
+namespace LRK {
 
 
-
+};
 #endif

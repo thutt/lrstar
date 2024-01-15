@@ -5,8 +5,11 @@
  *        It can be safely edited to add user-supplied code.
  */
 
-void
-C_init_actions(UNUSED_PARAM(C_parser_t *parser))
-{
-      /* Initialization code goes here */
-}
+namespace C {
+    void
+    init_actions(UNUSED_PARAM(parser_t *parser))
+    {
+          /* Initialization code goes here */
+    }
+
+};   /* namespace C */

@@ -90,23 +90,26 @@ extern "C" {
 
 
 
-Goodbye_parser_t *Goodbye_new_parser(const char *input_path,
-                                 char       *input_text,
-                                 unsigned    max_symbols);
+namespace Goodbye {
+    parser_t *new_parser(const char *input_path,
+                         char       *input_text,
+                         unsigned    max_symbols);
+};
+
 int
 main(int argc, char **argv)
 {
-    int         nl;
-    clock_t     start;
-    clock_t     end;
-    clock_t     thou;
-    clock_t     sec;
-    clock_t     nlps;
-    clock_t     t;
-    unsigned    iteration;
-    char *input_start;
-    FILE *output_fp;
-    Goodbye_parser_t *parser;
+    int                nl;
+    clock_t            start;
+    clock_t            end;
+    clock_t            thou;
+    clock_t            sec;
+    clock_t            nlps;
+    clock_t            t;
+    unsigned           iteration;
+    char              *input_start;
+    FILE              *output_fp;
+    Goodbye::parser_t *parser;
 
     get_options(argc, argv, &options);
 

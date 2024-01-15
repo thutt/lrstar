@@ -6,6 +6,7 @@
 
 #include "lrstar_basic_defs.h"
 #include "lrstar_lexer.h"
+namespace LRK {
 
 namespace LRK {
     enum nodecon {
@@ -20,12 +21,15 @@ namespace LRK {
     };
 }
 
+
+};   /* namespace LRK */
 #include "LRK_ParserTables_typedef.h"
 #include "lrstar_parser.h"
 
-extern const char LRK_grammar_name[];
+namespace LRK {
+extern const char grammar_name[];
 
-typedef lrstar_parser</* grammar           */   LRK_grammar_name,
+typedef lrstar_parser</* grammar           */   grammar_name,
                       /* AST traversals    */   1,
                       /* actions           */   true,
                       /* debug_parser      */   true,
@@ -42,6 +46,8 @@ typedef lrstar_parser</* grammar           */   LRK_grammar_name,
                       /* stksize           */   100,
                       /* term_actions      */   true,
                       /* lexer table type  */   LRK_lexer_t,
-                      /* parser table type */   LRK_parser_tables_t> LRK_parser_t;
+                      /* parser table type */   parser_tables_t> parser_t;
+
+};   /* namespace LRK */
 
 #endif

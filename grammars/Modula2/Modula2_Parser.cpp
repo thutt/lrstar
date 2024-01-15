@@ -4,8 +4,9 @@
 #include "Modula2_ParserTables_typedef.h"
 #include "Modula2_Parser.h"
 
+namespace Modula2 {
 // Terminal symbols of the grammar.
-const char *Modula2_grm_term_symb[71] = {
+const char *grm_term_symb[71] = {
    "<error>",
    "<eof>",
    "<identifier>",
@@ -80,7 +81,7 @@ const char *Modula2_grm_term_symb[71] = {
 };
 
 // Nonterminal symbols of the grammar.
-const char *Modula2_grm_head_symb[122] = {
+const char *grm_head_symb[122] = {
    "Goal",
    "CompilationUnit",
    "DefinitionModule",
@@ -206,13 +207,13 @@ const char *Modula2_grm_head_symb[122] = {
 };
 
 // Terninal action names found in the grammar ...
-const char *Modula2_grm_tact_name[2] = {
+const char *grm_tact_name[2] = {
    "error",
    "lookup",
 };
 
 // Head symbol numbers for the productions.
-const uint8 Modula2_grm_head_numb[226] = {
+const uint8 grm_head_numb[226] = {
        0,     1,     1,     2,     3,     4,     5,     6,     7,     7, 
        7,     7,     8,     9,     9,     9,     9,     9,    10,    11, 
       12,    13,    14,    15,    16,    16,    16,    16,    16,    16, 
@@ -239,7 +240,7 @@ const uint8 Modula2_grm_head_numb[226] = {
 };
 
 // First tail symbol index into the tail list ...
-const uint16 Modula2_grm_f_tail[227] = {
+const uint16 grm_f_tail[227] = {
        0,     2,     4,     5,    15,    23,    27,    31,    34,    36, 
       38,    40,    42,    45,    47,    49,    51,    53,    55,    58, 
       61,    64,    68,    76,    80,    81,    82,    83,    84,    85, 
@@ -266,7 +267,7 @@ const uint16 Modula2_grm_f_tail[227] = {
 };
 
 // Tail symbol numbers ...
-const int8 Modula2_grm_tail[397] = {
+const int8 grm_tail[397] = {
       -1,     1,   -65,    -3,    -2,     7,     8,   -60,     9,   -66, 
      -67,   -68,    10,   -60,    11,     8,   -60,   -69,     9,   -66, 
       -8,   -60,    11,   -70,    13,   -61,     9,    14,    15,   -61, 
@@ -310,7 +311,7 @@ const int8 Modula2_grm_tail[397] = {
 };
 
 // Arguments for token actions ...
-const int8 Modula2_grm_arga[71] = {
+const int8 grm_arga[71] = {
       -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1, 
       -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1, 
       -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1, 
@@ -322,7 +323,7 @@ const int8 Modula2_grm_arga[71] = {
 };
 
 // Boolean matrix ...
-const uint8 Modula2_grm_Bm[158] = {
+const uint8 grm_Bm[158] = {
        0,     0,     0,     0,     0,     0,    16,     0,     0,     0, 
        0,     0,     2,     0,     0,     0,     0,     0,    32,     0, 
        0,     0,     0,     0,     4,     0,     0,     0,     0,    64, 
@@ -342,7 +343,7 @@ const uint8 Modula2_grm_Bm[158] = {
 };
 
 // Boolean matrix row (for state)...
-const uint8 Modula2_grm_Br[205] = {
+const uint8 grm_Br[205] = {
        6,    12,    18,    18,    24,    24,    17,    29,    29,    30, 
        0,     0,    28,    33,    39,    44,    11,    30,     0,     0, 
       46,     0,    52,     4,    30,    39,     0,    23,     5,    24, 
@@ -367,8 +368,8 @@ const uint8 Modula2_grm_Br[205] = {
       };
 
 // Boolean matrix column (displacement) ...
-extern const uint8 Modula2_grm_Bc[71];
-const uint8 Modula2_grm_Bc[71] = {
+extern const uint8 grm_Bc[71];
+const uint8 grm_Bc[71] = {
        0,     0,     0,     0,     0,     0,     0,     0,     0,     0, 
        0,     1,     1,     1,     1,     1,     1,     1,     1,     1, 
        2,     2,     2,     2,     2,     2,     2,     2,     3,     3, 
@@ -380,7 +381,7 @@ const uint8 Modula2_grm_Bc[71] = {
       };
 
 // Boolean matrix filter/mask value ...
-const uint8 Modula2_grm_Bf[71] = {
+const uint8 grm_Bf[71] = {
        1,     2,     4,     8,     8,     8,    16,    16,    32,    64, 
      128,     1,     2,     4,     8,    16,    32,    64,   128,   128, 
        1,     2,     4,     8,    16,    32,    64,   128,     1,     2, 
@@ -392,7 +393,7 @@ const uint8 Modula2_grm_Bf[71] = {
 };
 
 // Terminal transition matrix ...
-const int16 Modula2_grm_Tm[229] = {
+const int16 grm_Tm[229] = {
        0,     0,  -141,  -134,   125,  -130,   174,   -23,    95,   -75, 
     -126,   -40,   143,    -5,   -68,     0,    -6,   -69,     0,   -17, 
      -76,     0,   -11,   -36,     0,     0,     0,   142,   188,   203, 
@@ -419,7 +420,7 @@ const int16 Modula2_grm_Tm[229] = {
 };
 
 // Terminal transition matrix row ...
-const uint8 Modula2_grm_Tr[205] = {
+const uint8 grm_Tr[205] = {
      166,   166,   166,   103,   166,   166,   166,   166,   103,   166, 
      166,   166,   166,   166,   166,   166,   166,   166,   166,   166, 
      166,   166,   166,   103,   166,   166,   166,   166,   166,   166, 
@@ -444,7 +445,7 @@ const uint8 Modula2_grm_Tr[205] = {
 };
 
 // Terminal transition matrix column ...
-const uint8 Modula2_grm_Tc[71] = {
+const uint8 grm_Tc[71] = {
       14,    14,     0,    22,    26,    27,    35,    53,     1,     2, 
        3,     4,    62,     5,     6,     7,     8,     9,    10,    11, 
       12,    13,    14,    15,    16,    17,    18,    19,    20,    21, 
@@ -456,7 +457,7 @@ const uint8 Modula2_grm_Tc[71] = {
 };
 
 // Nonterminal transition matrix ...
-const int16 Modula2_grm_Nm[1169] = {
+const int16 grm_Nm[1169] = {
        0,     0,   -22,  -155,  -224,  -224,  -175,  -222,   -51,  -222, 
      194,  -222,  -224,     0,     0,     0,     0,    13,     0,  -223, 
     -224,    13,     0,  -219,     0,    13,   176,    42,     0,    13, 
@@ -577,7 +578,7 @@ const int16 Modula2_grm_Nm[1169] = {
 };
 
 // Nonterminal transition matrix row ...
-const uint16 Modula2_grm_Nr[205] = {
+const uint16 grm_Nr[205] = {
  1109,  1109,  1109,  1109,  1109,   841,  1109,  1109,  1109,  1109, 
  1109,   841,  1109,  1109,   929,  1109,  1109,   841,  1109,  1109, 
  1109,  1109,  1109,  1109,   929,   676,  1109,  1109,  1109,    29, 
@@ -602,7 +603,7 @@ const uint16 Modula2_grm_Nr[205] = {
 };
 
 // Nonterminal transition matrix column ...
-const uint8 Modula2_grm_Nc[226] = {
+const uint8 grm_Nc[226] = {
    46,    46,    46,     4,     5,     9,    55,    42,    46,    46, 
    46,    46,    54,     3,     3,     3,     3,     3,     4,     5, 
     9,    12,    40,    55,    42,    42,    42,    42,    42,    42, 
@@ -629,7 +630,7 @@ const uint8 Modula2_grm_Nc[226] = {
 };
 
 // Reduction matrix ...
-const uint8 Modula2_grm_Rm[239] = {
+const uint8 grm_Rm[239] = {
        0,     0,     0,     0,     0,     0,     0,     0,     0,     0, 
        0,     0,     0,     0,     0,     0,     0,     0,     0,     0, 
      118,     0,   124,     0,     0,   118,     0,     0,     0,     0, 
@@ -657,7 +658,7 @@ const uint8 Modula2_grm_Rm[239] = {
 };
 
 // Reduction matrix row ...
-const int16 Modula2_grm_Rr[205] = {
+const int16 grm_Rr[205] = {
      114,     0,     0,     0,     0,     0,   122,     0,     0,   203, 
      116,   116,     0,   201,   148,   -15,   -32,   203,   207,   210, 
        0,   -48,   107,   187,   203,   148,   120,     0,     0,     0, 
@@ -682,7 +683,7 @@ const int16 Modula2_grm_Rr[205] = {
 };
 
 // Reduction matrix column ...
-const uint8 Modula2_grm_Rc[71] = {
+const uint8 grm_Rc[71] = {
        0,     0,     1,     2,     2,     2,     0,     0,     3,     4, 
        5,     6,     0,     7,     8,     0,     9,     6,    10,    10, 
        6,    10,     3,     6,    11,    12,     6,    13,    14,    15, 
@@ -694,7 +695,7 @@ const uint8 Modula2_grm_Rc[71] = {
 };
 
 // Production lengths (minus one) ...
-const int8 Modula2_grm_PL[226] = {
+const int8 grm_PL[226] = {
        1,     1,     0,     9,     7,     3,     3,     2,     1,     1, 
        1,     1,     2,     1,     1,     1,     1,     1,     2,     2, 
        2,     3,     7,     3,     0,     0,     0,     0,     0,     0, 
@@ -721,7 +722,7 @@ const int8 Modula2_grm_PL[226] = {
 };
 
 // Terminal action number ...
-const int8 Modula2_grm_tact_numb[71] = {
+const int8 grm_tact_numb[71] = {
        0,    -1,     1,     1,     1,     1,    -1,    -1,    -1,    -1, 
       -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1, 
       -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1, 
@@ -732,3 +733,5 @@ const int8 Modula2_grm_tact_numb[71] = {
       -1, 
 };
 
+
+};   /* namespace Modula2 */

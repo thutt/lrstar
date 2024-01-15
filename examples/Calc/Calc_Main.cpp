@@ -2,124 +2,127 @@
 #include "Calc_LexerTables_typedef.h"
 #include "Calc_Parser.h"
 
+namespace Calc {
 
-const char Calc_grammar_name[] = "Calc";
+const char grammar_name[] = "Calc";
 
 
-void Calc_init_actions(UNUSED_PARAM(Calc_parser_t *parser)); /* User-supplied */
-void Calc_term_actions(UNUSED_PARAM(Calc_parser_t *parser)); /* User-supplied */
-static Calc_parser_t::init_func_t Calc_init_funcs_[2] = {
-   Calc_init_actions,
-   Calc_term_actions
+void init_actions(UNUSED_PARAM(parser_t *parser)); /* User-supplied */
+void term_actions(UNUSED_PARAM(parser_t *parser)); /* User-supplied */
+static parser_t::init_func_t init_funcs_[2] = {
+   init_actions,
+   term_actions
 };
 
-int Calc_error(UNUSED_PARAM(Calc_parser_t *parser), UNUSED_PARAM(int &t));
-int Calc_lookup(UNUSED_PARAM(Calc_parser_t *parser), UNUSED_PARAM(int &t));
+int error(UNUSED_PARAM(parser_t *parser), UNUSED_PARAM(int &t));
+int lookup(UNUSED_PARAM(parser_t *parser), UNUSED_PARAM(int &t));
 // Terminal action function pointers ...
-static Calc_parser_t::tact_func_t Calc_tact_funcs_[2] = {
-   Calc_error,
-   Calc_lookup,
+static parser_t::tact_func_t tact_funcs_[2] = {
+   error,
+   lookup,
 };
 
-void Calc_goal_(UNUSED_PARAM(unsigned traversal_number),
+void goal_(UNUSED_PARAM(unsigned traversal_number),
                 UNUSED_PARAM(parse_direction_t direction),
-                UNUSED_PARAM(Calc_parser_t *parser),
+                UNUSED_PARAM(parser_t *parser),
                 UNUSED_PARAM(Node *node));
-void Calc_program_(UNUSED_PARAM(unsigned traversal_number),
+void program_(UNUSED_PARAM(unsigned traversal_number),
                    UNUSED_PARAM(parse_direction_t direction),
-                   UNUSED_PARAM(Calc_parser_t *parser),
+                   UNUSED_PARAM(parser_t *parser),
                    UNUSED_PARAM(Node *node));
-void Calc_store_(UNUSED_PARAM(unsigned traversal_number),
+void store_(UNUSED_PARAM(unsigned traversal_number),
                  UNUSED_PARAM(parse_direction_t direction),
-                 UNUSED_PARAM(Calc_parser_t *parser),
+                 UNUSED_PARAM(parser_t *parser),
                  UNUSED_PARAM(Node *node));
-void Calc_if_(UNUSED_PARAM(unsigned traversal_number),
+void if_(UNUSED_PARAM(unsigned traversal_number),
               UNUSED_PARAM(parse_direction_t direction),
-              UNUSED_PARAM(Calc_parser_t *parser),
+              UNUSED_PARAM(parser_t *parser),
               UNUSED_PARAM(Node *node));
-void Calc_target_(UNUSED_PARAM(unsigned traversal_number),
+void target_(UNUSED_PARAM(unsigned traversal_number),
                   UNUSED_PARAM(parse_direction_t direction),
-                  UNUSED_PARAM(Calc_parser_t *parser),
+                  UNUSED_PARAM(parser_t *parser),
                   UNUSED_PARAM(Node *node));
-void Calc_eq_(UNUSED_PARAM(unsigned traversal_number),
+void eq_(UNUSED_PARAM(unsigned traversal_number),
               UNUSED_PARAM(parse_direction_t direction),
-              UNUSED_PARAM(Calc_parser_t *parser),
+              UNUSED_PARAM(parser_t *parser),
               UNUSED_PARAM(Node *node));
-void Calc_ne_(UNUSED_PARAM(unsigned traversal_number),
+void ne_(UNUSED_PARAM(unsigned traversal_number),
               UNUSED_PARAM(parse_direction_t direction),
-              UNUSED_PARAM(Calc_parser_t *parser),
+              UNUSED_PARAM(parser_t *parser),
               UNUSED_PARAM(Node *node));
-void Calc_add_(UNUSED_PARAM(unsigned traversal_number),
+void add_(UNUSED_PARAM(unsigned traversal_number),
                UNUSED_PARAM(parse_direction_t direction),
-               UNUSED_PARAM(Calc_parser_t *parser),
+               UNUSED_PARAM(parser_t *parser),
                UNUSED_PARAM(Node *node));
-void Calc_sub_(UNUSED_PARAM(unsigned traversal_number),
+void sub_(UNUSED_PARAM(unsigned traversal_number),
                UNUSED_PARAM(parse_direction_t direction),
-               UNUSED_PARAM(Calc_parser_t *parser),
+               UNUSED_PARAM(parser_t *parser),
                UNUSED_PARAM(Node *node));
-void Calc_mul_(UNUSED_PARAM(unsigned traversal_number),
+void mul_(UNUSED_PARAM(unsigned traversal_number),
                UNUSED_PARAM(parse_direction_t direction),
-               UNUSED_PARAM(Calc_parser_t *parser),
+               UNUSED_PARAM(parser_t *parser),
                UNUSED_PARAM(Node *node));
-void Calc_div_(UNUSED_PARAM(unsigned traversal_number),
+void div_(UNUSED_PARAM(unsigned traversal_number),
                UNUSED_PARAM(parse_direction_t direction),
-               UNUSED_PARAM(Calc_parser_t *parser),
+               UNUSED_PARAM(parser_t *parser),
                UNUSED_PARAM(Node *node));
-void Calc_pwr_(UNUSED_PARAM(unsigned traversal_number),
+void pwr_(UNUSED_PARAM(unsigned traversal_number),
                UNUSED_PARAM(parse_direction_t direction),
-               UNUSED_PARAM(Calc_parser_t *parser),
+               UNUSED_PARAM(parser_t *parser),
                UNUSED_PARAM(Node *node));
-void Calc_int_(UNUSED_PARAM(unsigned traversal_number),
+void int_(UNUSED_PARAM(unsigned traversal_number),
                UNUSED_PARAM(parse_direction_t direction),
-               UNUSED_PARAM(Calc_parser_t *parser),
+               UNUSED_PARAM(parser_t *parser),
                UNUSED_PARAM(Node *node));
-void Calc_ident_(UNUSED_PARAM(unsigned traversal_number),
+void ident_(UNUSED_PARAM(unsigned traversal_number),
                  UNUSED_PARAM(parse_direction_t direction),
-                 UNUSED_PARAM(Calc_parser_t *parser),
+                 UNUSED_PARAM(parser_t *parser),
                  UNUSED_PARAM(Node *node));
-void Calc_then_(UNUSED_PARAM(unsigned traversal_number),
+void then_(UNUSED_PARAM(unsigned traversal_number),
                 UNUSED_PARAM(parse_direction_t direction),
-                UNUSED_PARAM(Calc_parser_t *parser),
+                UNUSED_PARAM(parser_t *parser),
                 UNUSED_PARAM(Node *node));
-void Calc_then2_(UNUSED_PARAM(unsigned traversal_number),
+void then2_(UNUSED_PARAM(unsigned traversal_number),
                  UNUSED_PARAM(parse_direction_t direction),
-                 UNUSED_PARAM(Calc_parser_t *parser),
+                 UNUSED_PARAM(parser_t *parser),
                  UNUSED_PARAM(Node *node));
-void Calc_else2_(UNUSED_PARAM(unsigned traversal_number),
+void else2_(UNUSED_PARAM(unsigned traversal_number),
                  UNUSED_PARAM(parse_direction_t direction),
-                 UNUSED_PARAM(Calc_parser_t *parser),
+                 UNUSED_PARAM(parser_t *parser),
                  UNUSED_PARAM(Node *node));
 // Node action function pointers ...
-static Calc_parser_t::nact_func_t Calc_nact_funcs_[17] = {
-   Calc_goal_,
-   Calc_program_,
-   Calc_store_,
-   Calc_if_,
-   Calc_target_,
-   Calc_eq_,
-   Calc_ne_,
-   Calc_add_,
-   Calc_sub_,
-   Calc_mul_,
-   Calc_div_,
-   Calc_pwr_,
-   Calc_int_,
-   Calc_ident_,
-   Calc_then_,
-   Calc_then2_,
-   Calc_else2_,
+static parser_t::nact_func_t nact_funcs_[17] = {
+   goal_,
+   program_,
+   store_,
+   if_,
+   target_,
+   eq_,
+   ne_,
+   add_,
+   sub_,
+   mul_,
+   div_,
+   pwr_,
+   int_,
+   ident_,
+   then_,
+   then2_,
+   else2_,
 };
 
-Calc_parser_t *
-Calc_new_parser(const char *input_path,
-                char       *input_text,
-                unsigned    max_symbols)
+parser_t *
+new_parser(const char *input_path,
+           char       *input_text,
+           unsigned    max_symbols)
 {
-   return new Calc_parser_t(/* input path   */   input_path,
-                            /* input text   */   input_text,
-                            /* max symbols  */   max_symbols,
-                            /* init_func    */   &Calc_init_funcs_[0],
-                            /* tact_func    */   &Calc_tact_funcs_[0],
-                            /* nact_func    */   &Calc_nact_funcs_[0]);
+   return new parser_t(/* input path   */   input_path,
+                       /* input text   */   input_text,
+                       /* max symbols  */   max_symbols,
+                       /* init_func    */   &init_funcs_[0],
+                       /* tact_func    */   &tact_funcs_[0],
+                       /* nact_func    */   &nact_funcs_[0]);
 }
 
+
+};   /* namespace Calc */

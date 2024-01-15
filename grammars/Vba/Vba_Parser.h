@@ -6,6 +6,7 @@
 
 #include "lrstar_basic_defs.h"
 #include "lrstar_lexer.h"
+namespace Vba {
 
 namespace Vba {
     enum nodecon {
@@ -93,12 +94,15 @@ namespace Vba {
     };
 }
 
+
+};   /* namespace Vba */
 #include "Vba_ParserTables_typedef.h"
 #include "lrstar_parser.h"
 
-extern const char Vba_grammar_name[];
+namespace Vba {
+extern const char grammar_name[];
 
-typedef lrstar_parser</* grammar           */   Vba_grammar_name,
+typedef lrstar_parser</* grammar           */   grammar_name,
                       /* AST traversals    */   1,
                       /* actions           */   true,
                       /* debug_parser      */   false,
@@ -115,6 +119,8 @@ typedef lrstar_parser</* grammar           */   Vba_grammar_name,
                       /* stksize           */   100,
                       /* term_actions      */   true,
                       /* lexer table type  */   Vba_lexer_t,
-                      /* parser table type */   Vba_parser_tables_t> Vba_parser_t;
+                      /* parser table type */   parser_tables_t> parser_t;
+
+};   /* namespace Vba */
 
 #endif

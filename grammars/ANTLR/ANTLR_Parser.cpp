@@ -4,8 +4,9 @@
 #include "ANTLR_ParserTables_typedef.h"
 #include "ANTLR_Parser.h"
 
+namespace ANTLR {
 // Terminal symbols of the grammar.
-const char *ANTLR_grm_term_symb[43] = {
+const char *grm_term_symb[43] = {
    "<error>",
    "<eof>",
    "<integer>",
@@ -52,7 +53,7 @@ const char *ANTLR_grm_term_symb[43] = {
 };
 
 // Nonterminal symbols of the grammar.
-const char *ANTLR_grm_head_symb[126] = {
+const char *grm_head_symb[126] = {
    "Goal",
    "grammarSpec",
    "grammarType",
@@ -182,13 +183,13 @@ const char *ANTLR_grm_head_symb[126] = {
 };
 
 // Terninal action names found in the grammar ...
-const char *ANTLR_grm_tact_name[2] = {
+const char *grm_tact_name[2] = {
    "error",
    "lookup",
 };
 
 // Head symbol numbers for the productions.
-const uint8 ANTLR_grm_head_numb[213] = {
+const uint8 grm_head_numb[213] = {
        0,     1,     2,     3,     3,     3,     3,     3,     4,     5, 
        6,     6,     6,     6,     7,     8,     8,     9,    10,    11, 
       12,    13,    13,    13,    14,    15,    16,    17,    18,    18, 
@@ -214,7 +215,7 @@ const uint8 ANTLR_grm_head_numb[213] = {
 };
 
 // First tail symbol index into the tail list ...
-const uint16 ANTLR_grm_f_tail[214] = {
+const uint16 grm_f_tail[214] = {
        0,     2,     8,     9,    10,    11,    12,    13,    14,    18, 
       21,    23,    24,    25,    26,    30,    33,    34,    38,    42, 
       45,    49,    50,    51,    52,    55,    58,    62,    63,    64, 
@@ -240,7 +241,7 @@ const uint16 ANTLR_grm_f_tail[214] = {
 };
 
 // Tail symbol numbers ...
-const int8 ANTLR_grm_tail[327] = {
+const int8 grm_tail[327] = {
       -1,     1,    -2,   -63,    21,   -67,   -17,   -68,   -69,    -4, 
       -7,    -9,   -10,   -12,    10,    41,   -71,    42,   -63,    30, 
       -6,   -63,   -73,     3,   -14,     2,    13,    -8,   -75,    21, 
@@ -277,7 +278,7 @@ const int8 ANTLR_grm_tail[327] = {
 };
 
 // Arguments for token actions ...
-const int8 ANTLR_grm_arga[43] = {
+const int8 grm_arga[43] = {
       -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1, 
       -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1, 
       -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1, 
@@ -286,7 +287,7 @@ const int8 ANTLR_grm_arga[43] = {
 };
 
 // Boolean matrix ...
-const uint8 ANTLR_grm_Bm[169] = {
+const uint8 grm_Bm[169] = {
        0,     0,     0,     0,   128,     1,     0,     0,     0,     2, 
        0,     0,     0,     0,    96,     0,     0,     0,   128,     0, 
        0,     0,     0,     6,     0,     0,     2,    32,     8,     0, 
@@ -307,7 +308,7 @@ const uint8 ANTLR_grm_Bm[169] = {
 };
 
 // Boolean matrix row (for state)...
-const uint8 ANTLR_grm_Br[148] = {
+const uint8 grm_Br[148] = {
        4,     9,    14,    18,    18,     7,     0,    22,     0,    27, 
       29,    14,    29,    29,    34,    37,    41,    29,     0,     0, 
       43,    14,    14,    14,    47,    14,     8,    51,     0,    56, 
@@ -326,8 +327,8 @@ const uint8 ANTLR_grm_Br[148] = {
       };
 
 // Boolean matrix column (displacement) ...
-extern const uint8 ANTLR_grm_Bc[43];
-const uint8 ANTLR_grm_Bc[43] = {
+extern const uint8 grm_Bc[43];
+const uint8 grm_Bc[43] = {
        0,     0,     0,     0,     0,     0,     0,     0,     1,     1, 
        1,     1,     1,     1,     1,     1,     1,     1,     1,     1, 
        2,     2,     2,     2,     2,     2,     2,     2,     3,     3, 
@@ -336,7 +337,7 @@ const uint8 ANTLR_grm_Bc[43] = {
       };
 
 // Boolean matrix filter/mask value ...
-const uint8 ANTLR_grm_Bf[43] = {
+const uint8 grm_Bf[43] = {
        1,     2,     4,     8,    16,    32,    64,   128,     1,     1, 
        2,     4,     4,     4,     8,    16,    32,    64,   128,   128, 
        1,     2,     4,     8,    16,    32,    64,   128,     1,     2, 
@@ -345,7 +346,7 @@ const uint8 ANTLR_grm_Bf[43] = {
 };
 
 // Terminal transition matrix ...
-const int16 ANTLR_grm_Tm[201] = {
+const int16 grm_Tm[201] = {
      -11,   -13,  -104,  -105,     0,    65,     0,   140,    95,    65, 
      -82,   -80,    95,     0,     0,    65,   118,   127,    64,     0, 
        0,     0,     0,     0,     0,   129,     0,     0,     0,    68, 
@@ -370,7 +371,7 @@ const int16 ANTLR_grm_Tm[201] = {
 };
 
 // Terminal transition matrix row ...
-const uint8 ANTLR_grm_Tr[148] = {
+const uint8 grm_Tr[148] = {
      163,   163,   163,    36,   125,   163,   163,   163,   163,    36, 
      163,   163,    36,   125,   125,   163,    36,    89,   163,   163, 
      163,   163,   163,   163,   163,   163,   163,   163,   163,   163, 
@@ -389,7 +390,7 @@ const uint8 ANTLR_grm_Tr[148] = {
 };
 
 // Terminal transition matrix column ...
-const uint8 ANTLR_grm_Tc[43] = {
+const uint8 grm_Tc[43] = {
       28,    28,     1,     0,     1,     2,     3,    24,    35,     4, 
        5,     6,     7,     8,     9,    10,    11,    12,    13,    14, 
       15,    16,    17,    18,    19,    20,    21,    22,    23,    24, 
@@ -398,7 +399,7 @@ const uint8 ANTLR_grm_Tc[43] = {
 };
 
 // Nonterminal transition matrix ...
-const int16 ANTLR_grm_Nm[519] = {
+const int16 grm_Nm[519] = {
        0,     0,     0,     0,     0,     0,     0,     0,     0,     0, 
        0,     0,     0,  -127,   113,  -119,  -163,    72,  -157,   -60, 
       94,    73,     0,   -58,    96,    97,  -102,    94,  -122,     0, 
@@ -454,7 +455,7 @@ const int16 ANTLR_grm_Nm[519] = {
 };
 
 // Nonterminal transition matrix row ...
-const uint16 ANTLR_grm_Nr[148] = {
+const uint16 grm_Nr[148] = {
   443,   443,   443,   443,   443,   443,   443,   443,   443,   443, 
   443,   374,   443,   443,   209,   443,   443,   443,   443,   443, 
   443,   273,   354,    34,   443,    56,   374,   443,   443,    26, 
@@ -473,7 +474,7 @@ const uint16 ANTLR_grm_Nr[148] = {
 };
 
 // Nonterminal transition matrix column ...
-const uint8 ANTLR_grm_Nc[213] = {
+const uint8 grm_Nc[213] = {
    14,    14,    26,     3,     3,     3,     3,     3,    12,    14, 
    26,    26,    26,    26,    59,     3,     3,     2,     8,    14, 
    20,    26,    26,    26,    67,    68,    30,    31,    10,    10, 
@@ -499,7 +500,7 @@ const uint8 ANTLR_grm_Nc[213] = {
 };
 
 // Reduction matrix ...
-const uint8 ANTLR_grm_Rm[121] = {
+const uint8 grm_Rm[121] = {
        0,     0,     0,     0,     0,     0,     0,     0,     0,     0, 
        0,     0,     0,     0,    27,     0,     0,   166,     0,     0, 
        0,     0,     0,     0,     0,     0,     0,    26,     0,     0, 
@@ -516,7 +517,7 @@ const uint8 ANTLR_grm_Rm[121] = {
 };
 
 // Reduction matrix row ...
-const int16 ANTLR_grm_Rr[148] = {
+const int16 grm_Rr[148] = {
        0,     0,     0,     0,     0,     0,   109,   141,   111,   -13, 
        0,     0,     0,     0,     0,     1,     0,   143,   117,   123, 
       16,   125,   125,     0,     0,     0,   168,   145,   137,     0, 
@@ -535,7 +536,7 @@ const int16 ANTLR_grm_Rr[148] = {
 };
 
 // Reduction matrix column ...
-const uint8 ANTLR_grm_Rc[43] = {
+const uint8 grm_Rc[43] = {
        0,     1,     0,     2,     3,     2,     4,     0,     0,     0, 
        0,     0,     0,     0,     0,     0,     0,     0,     0,     0, 
        1,     5,     6,     0,     0,     2,     7,     3,     8,     0, 
@@ -544,7 +545,7 @@ const uint8 ANTLR_grm_Rc[43] = {
 };
 
 // Production lengths (minus one) ...
-const int8 ANTLR_grm_PL[213] = {
+const int8 grm_PL[213] = {
        1,     5,     0,     0,     0,     0,     0,     0,     3,     2, 
        1,     0,     0,     0,     3,     2,     0,     3,     3,     2, 
        3,     0,     0,     0,     2,     2,     3,     0,     0,     0, 
@@ -570,7 +571,7 @@ const int8 ANTLR_grm_PL[213] = {
 };
 
 // Terminal action number ...
-const int8 ANTLR_grm_tact_numb[43] = {
+const int8 grm_tact_numb[43] = {
        0,    -1,     1,     1,     1,     1,     1,    -1,    -1,    -1, 
       -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1, 
       -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1, 
@@ -578,3 +579,5 @@ const int8 ANTLR_grm_tact_numb[43] = {
       -1,    -1,    -1, 
 };
 
+
+};   /* namespace ANTLR */

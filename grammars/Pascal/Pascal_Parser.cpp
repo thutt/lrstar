@@ -4,8 +4,9 @@
 #include "Pascal_ParserTables_typedef.h"
 #include "Pascal_Parser.h"
 
+namespace Pascal {
 // Terminal symbols of the grammar.
-const char *Pascal_grm_term_symb[113] = {
+const char *grm_term_symb[113] = {
    "<error>",
    "<eof>",
    "<identifier>",
@@ -122,7 +123,7 @@ const char *Pascal_grm_term_symb[113] = {
 };
 
 // Nonterminal symbols of the grammar.
-const char *Pascal_grm_head_symb[194] = {
+const char *grm_head_symb[194] = {
    "Goal",
    "Unit",
    "Program",
@@ -320,13 +321,13 @@ const char *Pascal_grm_head_symb[194] = {
 };
 
 // Terninal action names found in the grammar ...
-const char *Pascal_grm_tact_name[2] = {
+const char *grm_tact_name[2] = {
    "error",
    "lookup",
 };
 
 // Node names found in the grammar.
-const char *Pascal_grm_node_name[185] = {
+const char *grm_node_name[185] = {
    "Comp_Unit",
    "Unit_Tree",
    "Prog_Tree",
@@ -516,7 +517,7 @@ const char *Pascal_grm_node_name[185] = {
 };
 
 // Head symbol numbers for the productions.
-const uint8 Pascal_grm_head_numb[379] = {
+const uint8 grm_head_numb[379] = {
        0,     1,     2,     3,     4,     5,     6,     7,     7,     7, 
        7,     8,     8,     9,    10,    11,    11,    11,    11,    11, 
       12,    12,    13,    14,    15,    16,    17,    18,    19,    20, 
@@ -558,7 +559,7 @@ const uint8 Pascal_grm_head_numb[379] = {
 };
 
 // First tail symbol index into the tail list ...
-const uint16 Pascal_grm_f_tail[380] = {
+const uint16 grm_f_tail[380] = {
        0,     2,     8,    12,    15,    17,    19,    22,    23,    24, 
       25,    26,    29,    32,    35,    37,    38,    39,    40,    41, 
       42,    44,    47,    48,    50,    51,    52,    54,    58,    63, 
@@ -600,7 +601,7 @@ const uint16 Pascal_grm_f_tail[380] = {
 };
 
 // Tail symbol numbers ...
-const int16 Pascal_grm_tail[695] = {
+const int16 grm_tail[695] = {
     -119,     1,    -5,    23,    -6,    -9,  -100,    24,  -120,  -121, 
      -10,    24,    25,  -104,  -123,    29,  -125,    30,  -104,    31, 
     -121,  -126,   -14,   -17,   -44,    -8,   -84,    23,  -127,   -82, 
@@ -674,7 +675,7 @@ const int16 Pascal_grm_tail[695] = {
 };
 
 // Arguments for token actions ...
-const int8 Pascal_grm_arga[113] = {
+const int8 grm_arga[113] = {
       -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1, 
       -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1, 
       -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1, 
@@ -690,7 +691,7 @@ const int8 Pascal_grm_arga[113] = {
 };
 
 // First arguments for productions ...
-const int8 Pascal_grm_argx[379] = {
+const int8 grm_argx[379] = {
       -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1, 
       -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1, 
       -1,    -1,     0,    -1,    -1,     0,    -1,    -1,    -1,    -1, 
@@ -732,7 +733,7 @@ const int8 Pascal_grm_argx[379] = {
 };
 
 // Second arguments for productions ...
-const int8 Pascal_grm_argy[379] = {
+const int8 grm_argy[379] = {
       -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1, 
       -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1, 
       -1,    -1,    34,    -1,    -1,    36,    -1,    -1,    -1,    -1, 
@@ -774,7 +775,7 @@ const int8 Pascal_grm_argy[379] = {
 };
 
 // Boolean matrix ...
-const uint8 Pascal_grm_Bm[530] = {
+const uint8 grm_Bm[530] = {
        0,     0,     0,     0,     0,     0,     0,     0,     0,     2, 
        0,     0,     0,     0,     0,     0,     0,    64,     0,     0, 
        0,     0,     0,     0,     4,     0,     0,     0,     0,     0, 
@@ -831,7 +832,7 @@ const uint8 Pascal_grm_Bm[530] = {
 };
 
 // Boolean matrix row (for state)...
-const uint16 Pascal_grm_Br[344] = {
+const uint16 grm_Br[344] = {
        0,     9,    15,     7,     7,    24,    24,    30,     0,    38, 
       45,    22,     3,    48,     7,    56,     7,    65,    24,    24, 
       24,    24,    24,    24,    71,    15,    24,    21,    75,    83, 
@@ -870,8 +871,8 @@ const uint16 Pascal_grm_Br[344] = {
       };
 
 // Boolean matrix column (displacement) ...
-extern const uint8 Pascal_grm_Bc[113];
-const uint8 Pascal_grm_Bc[113] = {
+extern const uint8 grm_Bc[113];
+const uint8 grm_Bc[113] = {
        0,     0,     0,     0,     0,     0,     0,     0,     1,     1, 
        1,     1,     1,     1,     1,     1,     1,     1,     1,     1, 
        1,     1,     2,     2,     2,     0,     2,     2,     2,     2, 
@@ -887,7 +888,7 @@ const uint8 Pascal_grm_Bc[113] = {
       };
 
 // Boolean matrix filter/mask value ...
-const uint8 Pascal_grm_Bf[113] = {
+const uint8 grm_Bf[113] = {
        1,     2,     4,     8,    16,    32,    64,   128,     1,     2, 
        4,     4,     8,     8,    16,    16,    32,    32,    64,   128, 
       64,    64,     1,     2,     4,     2,     8,    16,    32,    64, 
@@ -903,7 +904,7 @@ const uint8 Pascal_grm_Bf[113] = {
 };
 
 // Terminal transition matrix ...
-const int16 Pascal_grm_Tm[703] = {
+const int16 grm_Tm[703] = {
        0,     0,     0,     0,     0,     0,     0,     0,     0,     0, 
        0,     0,  -252,   341,   163,   179,  -132,   166,   329,  -345, 
      174,   312,  -190,   207,  -173,   -33,   162,   340,  -131,  -355, 
@@ -978,7 +979,7 @@ const int16 Pascal_grm_Tm[703] = {
 };
 
 // Terminal transition matrix row ...
-const uint16 Pascal_grm_Tr[344] = {
+const uint16 grm_Tr[344] = {
      630,   630,   630,   630,   366,   630,   630,   630,   630,   630, 
      630,   630,   630,   630,   184,   630,   557,   436,   366,   630, 
      184,   557,   177,   630,   630,   630,   630,   630,   630,   630, 
@@ -1017,7 +1018,7 @@ const uint16 Pascal_grm_Tr[344] = {
 };
 
 // Terminal transition matrix column ...
-const uint8 Pascal_grm_Tc[113] = {
+const uint8 grm_Tc[113] = {
        3,     3,    38,     0,     1,    39,    53,    16,     2,     3, 
        4,     5,     6,     7,    21,    22,     8,     9,    23,    24, 
       25,    26,    10,    11,    12,    27,    13,    14,    15,    28, 
@@ -1033,7 +1034,7 @@ const uint8 Pascal_grm_Tc[113] = {
 };
 
 // Nonterminal transition matrix ...
-const int16 Pascal_grm_Nm[3240] = {
+const int16 grm_Nm[3240] = {
        0,     0,     0,     0,     0,     0,     0,     0,     0,     0, 
        0,     0,  -231,   217,     0,     0,     0,     0,     0,  -360, 
      242,  -363,   197,   310,  -142,  -143,    85,  -126,     0,   180, 
@@ -1361,7 +1362,7 @@ const int16 Pascal_grm_Nm[3240] = {
 };
 
 // Nonterminal transition matrix row ...
-const uint16 Pascal_grm_Nr[344] = {
+const uint16 grm_Nr[344] = {
  3140,  3140,  3140,  3140,  3140,  3140,  2851,  3140,  3140,  3140, 
  3140,  3140,  3140,  2851,  3140,  2851,  3140,  3140,  3140,  2940, 
  3140,  3140,  3140,  2508,  3140,  2851,  2706,  3140,  3140,  2940, 
@@ -1400,7 +1401,7 @@ const uint16 Pascal_grm_Nr[344] = {
 };
 
 // Nonterminal transition matrix column ...
-const uint8 Pascal_grm_Nc[379] = {
+const uint8 grm_Nc[379] = {
    10,    10,    41,    57,     6,    92,    98,    10,    10,    10, 
    10,    41,    41,    44,    47,    90,    90,    90,    90,    90, 
     2,     2,    97,     3,     4,    42,    59,    57,     5,     6, 
@@ -1442,13 +1443,13 @@ const uint8 Pascal_grm_Nc[379] = {
 };
 
 // Reduction matrix ...
-const uint16 Pascal_grm_Rm[12] = {
+const uint16 grm_Rm[12] = {
        0,     0,     0,     0,     0,   308,   326,     0,   287,   285, 
        0,     0, 
 };
 
 // Reduction matrix row ...
-const int16 Pascal_grm_Rr[344] = {
+const int16 grm_Rr[344] = {
      225,   227,   229,     0,     0,     0,     0,   244,   236,     0, 
      233,     0,     0,   170,     0,   171,     0,     0,     0,     0, 
        0,     0,     0,     4,     0,   229,     0,   317,   354,   244, 
@@ -1487,7 +1488,7 @@ const int16 Pascal_grm_Rr[344] = {
 };
 
 // Reduction matrix column ...
-const uint8 Pascal_grm_Rc[113] = {
+const uint8 grm_Rc[113] = {
        0,     0,     0,     0,     0,     0,     0,     0,     0,     0, 
        0,     0,     0,     0,     0,     0,     0,     0,     0,     0, 
        0,     0,     0,     0,     0,     0,     0,     0,     1,     0, 
@@ -1503,7 +1504,7 @@ const uint8 Pascal_grm_Rc[113] = {
 };
 
 // Production lengths (minus one) ...
-const int8 Pascal_grm_PL[379] = {
+const int8 grm_PL[379] = {
        1,     5,     3,     2,     1,     1,     2,     0,     0,     0, 
        0,     2,     2,     2,     1,     0,     0,     0,     0,     0, 
        1,     2,     0,     1,     0,     0,     1,     3,     4,     0, 
@@ -1545,7 +1546,7 @@ const int8 Pascal_grm_PL[379] = {
 };
 
 // Terminal action number ...
-const int8 Pascal_grm_tact_numb[113] = {
+const int8 grm_tact_numb[113] = {
        0,    -1,     1,     1,     1,    -1,    -1,    -1,    -1,    -1, 
       -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1, 
       -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1, 
@@ -1561,7 +1562,7 @@ const int8 Pascal_grm_tact_numb[113] = {
 };
 
 // Node number for each production ...
-const int16 Pascal_grm_node_numb[379] = {
+const int16 grm_node_numb[379] = {
        0,     1,     2,     3,     4,     5,     6,     7,     8,     9, 
       10,    11,    12,    13,    14,    15,    16,    17,    18,    19, 
       -1,    -1,    -1,    20,    -1,    -1,    -1,    -1,    -1,    21, 
@@ -1603,7 +1604,7 @@ const int16 Pascal_grm_node_numb[379] = {
 };
 
 // Node action numbers ...
-const int8 Pascal_grm_nact_numb[379] = {
+const int8 grm_nact_numb[379] = {
       -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1, 
       -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1, 
       -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1, 
@@ -1644,3 +1645,5 @@ const int8 Pascal_grm_nact_numb[379] = {
       -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1, 
 };
 
+
+};   /* namespace Pascal */

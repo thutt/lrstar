@@ -4,8 +4,9 @@
 #include "Fortran_ParserTables_typedef.h"
 #include "Fortran_Parser.h"
 
+namespace Fortran {
 // Terminal symbols of the grammar.
-const char *Fortran_grm_term_symb[268] = {
+const char *grm_term_symb[268] = {
    "<error>",
    "<eof>",
    "<identifier>",
@@ -277,7 +278,7 @@ const char *Fortran_grm_term_symb[268] = {
 };
 
 // Nonterminal symbols of the grammar.
-const char *Fortran_grm_head_symb[572] = {
+const char *grm_head_symb[572] = {
    "Goal",
    "TranUnit",
    "ProgList",
@@ -853,13 +854,13 @@ const char *Fortran_grm_head_symb[572] = {
 };
 
 // Terninal action names found in the grammar ...
-const char *Fortran_grm_tact_name[2] = {
+const char *grm_tact_name[2] = {
    "error",
    "lookup",
 };
 
 // Head symbol numbers for the productions.
-const uint16 Fortran_grm_head_numb[1133] = {
+const uint16 grm_head_numb[1133] = {
        0,     1,     1,     2,     2,     3,     3,     3,     3,     4, 
        4,     5,     6,     7,     8,     9,     9,    10,    11,    11, 
       12,    12,    12,    12,    12,    12,    12,    13,    13,    14, 
@@ -977,7 +978,7 @@ const uint16 Fortran_grm_head_numb[1133] = {
 };
 
 // First tail symbol index into the tail list ...
-const uint16 Fortran_grm_f_tail[1134] = {
+const uint16 grm_f_tail[1134] = {
        0,     2,     2,     3,     4,     6,     7,     8,     9,    10, 
       12,    13,    15,    17,    19,    24,    26,    27,    28,    28, 
       30,    32,    34,    35,    37,    38,    40,    41,    41,    43, 
@@ -1095,7 +1096,7 @@ const uint16 Fortran_grm_f_tail[1134] = {
 };
 
 // Tail symbol numbers ...
-const int16 Fortran_grm_tail[1911] = {
+const int16 grm_tail[1911] = {
       -1,     1,    -2,    -3,    -2,    -3,    -4,    -5,    -6,    -7, 
     -324,    -8,    -8,  -189,    -8,  -395,    -8,   -38,    -8,   -11, 
      -13,   -15,   -17,    -9,   -10,  -128,  -128,     6,   -11,   -12, 
@@ -1291,7 +1292,7 @@ const int16 Fortran_grm_tail[1911] = {
 };
 
 // Arguments for token actions ...
-const int8 Fortran_grm_arga[268] = {
+const int8 grm_arga[268] = {
       -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1, 
       -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1, 
       -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1, 
@@ -1322,7 +1323,7 @@ const int8 Fortran_grm_arga[268] = {
 };
 
 // Boolean matrix ...
-const uint8 Fortran_grm_Bm[762] = {
+const uint8 grm_Bm[762] = {
        0,     0,     0,     0,     0,     0,     0,     0,     0,     0, 
        4,     0,     0,   192,     2,    32,     0,     0,     2,     0, 
        0,     0,     0,     0,     0,     0,     0,     0,     4,     0, 
@@ -1403,7 +1404,7 @@ const uint8 Fortran_grm_Bm[762] = {
 };
 
 // Boolean matrix row (for state)...
-const uint16 Fortran_grm_Br[724] = {
+const uint16 grm_Br[724] = {
        8,    18,     8,     0,    28,    37,     0,     4,    16,    16, 
        0,    28,     0,    28,    45,    53,    62,    71,    79,    28, 
       87,    96,    28,   105,   114,    96,    62,   123,   130,   137, 
@@ -1480,8 +1481,8 @@ const uint16 Fortran_grm_Br[724] = {
       };
 
 // Boolean matrix column (displacement) ...
-extern const uint8 Fortran_grm_Bc[268];
-const uint8 Fortran_grm_Bc[268] = {
+extern const uint8 grm_Bc[268];
+const uint8 grm_Bc[268] = {
        0,     0,     0,     0,     0,     0,     0,     0,     1,     1, 
        1,     1,     1,     1,     1,     1,     1,     2,     2,     2, 
        2,     1,     1,     2,     2,     2,     2,     1,     3,     3, 
@@ -1512,7 +1513,7 @@ const uint8 Fortran_grm_Bc[268] = {
       };
 
 // Boolean matrix filter/mask value ...
-const uint8 Fortran_grm_Bf[268] = {
+const uint8 grm_Bf[268] = {
        1,     2,     4,     8,    16,    32,    64,   128,     1,     2, 
        4,     8,    16,     4,    32,    64,   128,     1,     2,     4, 
        8,     4,     4,    16,    32,    64,   128,     4,     1,     2, 
@@ -1543,7 +1544,7 @@ const uint8 Fortran_grm_Bf[268] = {
 };
 
 // Terminal transition matrix ...
-const int16 Fortran_grm_Tm[1750] = {
+const int16 grm_Tm[1750] = {
        0,     0,     0,   555,   556,   557,   558,   559,   564,   565, 
      566,   568,   569,   570,   571,   576,   577,   578,   579,   580, 
      581,   582,   583,   584,   585,   586,   587,   622,   660,   719, 
@@ -1722,7 +1723,7 @@ const int16 Fortran_grm_Tm[1750] = {
 };
 
 // Terminal transition matrix row ...
-const uint16 Fortran_grm_Tr[724] = {
+const uint16 grm_Tr[724] = {
     1542,  1542,  1542,  1542,  1542,  1542,  1542,  1542,  1542,  1480, 
     1542,  1480,  1542,  1418,  1542,  1542,  1542,  1480,  1542,   538, 
     1418,  1542,   475,  1542,  1480,  1418,  1480,  1480,  1480,   492, 
@@ -1799,7 +1800,7 @@ const uint16 Fortran_grm_Tr[724] = {
 };
 
 // Terminal transition matrix column ...
-const uint8 Fortran_grm_Tc[268] = {
+const uint8 grm_Tc[268] = {
       14,    14,     0,    32,     1,    14,    58,     2,     3,     8, 
       32,     4,     5,    14,     6,    31,    30,    58,     7,    10, 
       61,     8,    30,    32,    34,    14,    44,    10,    33,    12, 
@@ -1830,7 +1831,7 @@ const uint8 Fortran_grm_Tc[268] = {
 };
 
 // Nonterminal transition matrix ...
-const int16 Fortran_grm_Nm[3405] = {
+const int16 grm_Nm[3405] = {
        0,     0,     0,     0,     0,     0,     0,     0,     0,     0, 
     -477,     0,     0,     0,     0,     0,     0,     0,     0,     0, 
        0,     0,     0,     0,     0,     0,     0,     0,     0,     0, 
@@ -2175,7 +2176,7 @@ const int16 Fortran_grm_Nm[3405] = {
 };
 
 // Nonterminal transition matrix row ...
-const uint16 Fortran_grm_Nr[724] = {
+const uint16 grm_Nr[724] = {
  3092,  3092,  2782,  1865,  3092,  3092,  1365,  3092,  3092,  3092, 
  1640,  3092,  2173,  3092,  3092,  3092,  3092,  2782,  1865,  3092, 
  3092,  3092,  3092,  3092,  3092,  3092,  3092,  1365,  1640,  3092, 
@@ -2252,7 +2253,7 @@ const uint16 Fortran_grm_Nr[724] = {
 };
 
 // Nonterminal transition matrix column ...
-const uint16 Fortran_grm_Nc[1133] = {
+const uint16 grm_Nc[1133] = {
     1,     1,     1,   307,   307,   309,   309,   309,   309,     0, 
     0,     2,    55,    84,     3,     1,     1,   302,    13,    13, 
     4,     4,     4,     4,     4,     4,     4,   168,   168,   307, 
@@ -2370,7 +2371,7 @@ const uint16 Fortran_grm_Nc[1133] = {
 };
 
 // Reduction matrix ...
-const uint16 Fortran_grm_Rm[298] = {
+const uint16 grm_Rm[298] = {
        0,     1,    18,     0,    18,     0,     0,     0,     0,     0, 
        0,    18,     0,     0,     0,     0,     0,     0,     0,     0, 
        0,     0,     0,     0,     0,     0,     0,     0,     0,     0, 
@@ -2404,7 +2405,7 @@ const uint16 Fortran_grm_Rm[298] = {
 };
 
 // Reduction matrix row ...
-const int16 Fortran_grm_Rr[724] = {
+const int16 grm_Rr[724] = {
        0,   -12,   -31,    18,   -12,    27,    18,   -12,   379,   383, 
       18,   -12,    18,   -12,   -12,   -12,   -12,    52,   -12,   -12, 
      -12,   -12,   -12,   -12,   -12,   716,   -12,    59,   -12,   -12, 
@@ -2481,7 +2482,7 @@ const int16 Fortran_grm_Rr[724] = {
 };
 
 // Reduction matrix column ...
-const uint8 Fortran_grm_Rc[268] = {
+const uint8 grm_Rc[268] = {
        0,     1,     2,     3,     3,     0,     4,     5,     0,     0, 
        4,     6,     7,     4,     8,     4,     0,     0,     9,     0, 
        4,     4,     4,     0,     0,     4,    10,     4,    11,     0, 
@@ -2512,7 +2513,7 @@ const uint8 Fortran_grm_Rc[268] = {
 };
 
 // Production lengths (minus one) ...
-const int8 Fortran_grm_PL[1133] = {
+const int8 grm_PL[1133] = {
        1,    -1,     0,     0,     1,     0,     0,     0,     0,     1, 
        0,     1,     1,     1,     4,     1,     0,     0,    -1,     1, 
        1,     1,     0,     1,     0,     1,     0,    -1,     1,     1, 
@@ -2630,7 +2631,7 @@ const int8 Fortran_grm_PL[1133] = {
 };
 
 // Terminal action number ...
-const int8 Fortran_grm_tact_numb[268] = {
+const int8 grm_tact_numb[268] = {
        0,    -1,     1,     1,     1,     1,     1,    -1,    -1,    -1, 
       -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1, 
       -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1, 
@@ -2660,3 +2661,5 @@ const int8 Fortran_grm_tact_numb[268] = {
       -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1, 
 };
 
+
+};   /* namespace Fortran */

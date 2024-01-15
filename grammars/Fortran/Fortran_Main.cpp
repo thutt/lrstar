@@ -2,35 +2,38 @@
 #include "Fortran_LexerTables_typedef.h"
 #include "Fortran_Parser.h"
 
+namespace Fortran {
 
-const char Fortran_grammar_name[] = "Fortran";
+const char grammar_name[] = "Fortran";
 
 
-void Fortran_init_actions(UNUSED_PARAM(Fortran_parser_t *parser)); /* User-supplied */
-void Fortran_term_actions(UNUSED_PARAM(Fortran_parser_t *parser)); /* User-supplied */
-static Fortran_parser_t::init_func_t Fortran_init_funcs_[2] = {
-   Fortran_init_actions,
-   Fortran_term_actions
+void init_actions(UNUSED_PARAM(parser_t *parser)); /* User-supplied */
+void term_actions(UNUSED_PARAM(parser_t *parser)); /* User-supplied */
+static parser_t::init_func_t init_funcs_[2] = {
+   init_actions,
+   term_actions
 };
 
-int Fortran_error(UNUSED_PARAM(Fortran_parser_t *parser), UNUSED_PARAM(int &t));
-int Fortran_lookup(UNUSED_PARAM(Fortran_parser_t *parser), UNUSED_PARAM(int &t));
+int error(UNUSED_PARAM(parser_t *parser), UNUSED_PARAM(int &t));
+int lookup(UNUSED_PARAM(parser_t *parser), UNUSED_PARAM(int &t));
 // Terminal action function pointers ...
-static Fortran_parser_t::tact_func_t Fortran_tact_funcs_[2] = {
-   Fortran_error,
-   Fortran_lookup,
+static parser_t::tact_func_t tact_funcs_[2] = {
+   error,
+   lookup,
 };
 
-Fortran_parser_t *
-Fortran_new_parser(const char *input_path,
-                   char       *input_text,
-                   unsigned    max_symbols)
+parser_t *
+new_parser(const char *input_path,
+           char       *input_text,
+           unsigned    max_symbols)
 {
-   return new Fortran_parser_t(/* input path   */   input_path,
-                               /* input text   */   input_text,
-                               /* max symbols  */   max_symbols,
-                               /* init_func    */   &Fortran_init_funcs_[0],
-                               /* tact_func    */   &Fortran_tact_funcs_[0],
-                               /* nact_func    */   0);
+   return new parser_t(/* input path   */   input_path,
+                       /* input text   */   input_text,
+                       /* max symbols  */   max_symbols,
+                       /* init_func    */   &init_funcs_[0],
+                       /* tact_func    */   &tact_funcs_[0],
+                       /* nact_func    */   0);
 }
 
+
+};   /* namespace Fortran */

@@ -104,29 +104,34 @@ extern "C" {
 
 
 
-Hello_parser_t *Hello_new_parser(const char *input_path,
-                                 char       *input_text,
-                                 unsigned    max_symbols);
-Goodbye_parser_t *Goodbye_new_parser(const char *input_path,
-                                     char       *input_text,
-                                     unsigned    max_symbols);
+namespace Hello {
+    parser_t *new_parser(const char *input_path,
+                         char       *input_text,
+                         unsigned    max_symbols);
+};
+
+namespace Goodbye {
+    parser_t *new_parser(const char *input_path,
+                         char       *input_text,
+                         unsigned    max_symbols);
+};
 
 
 static void
 run_hello(const char *pathname, FILE *output_fp)
 {
-    int             nl;
-    clock_t         start;
-    clock_t         end;
-    clock_t         thou;
-    clock_t         sec;
-    clock_t         nlps;
-    clock_t         t;
-    char           *input_start;
-    Hello_parser_t *parser;
+    int              nl;
+    clock_t          start;
+    clock_t          end;
+    clock_t          thou;
+    clock_t          sec;
+    clock_t          nlps;
+    clock_t          t;
+    char            *input_start;
+    Hello::parser_t *parser;
 
     input_start = read_input(pathname);
-    parser      = Hello_new_parser(pathname, input_start, 100000);
+    parser      = Hello::new_parser(pathname, input_start, 100000);
     printf("%s parser.\n", parser->grammar);
 
     start = clock();
@@ -162,18 +167,18 @@ run_hello(const char *pathname, FILE *output_fp)
 static void
 run_goodbye(const char *pathname, FILE *output_fp)
 {
-    int               nl;
-    clock_t           start;
-    clock_t           end;
-    clock_t           thou;
-    clock_t           sec;
-    clock_t           nlps;
-    clock_t           t;
-    char             *input_start;
-    Goodbye_parser_t *parser;
+    int                nl;
+    clock_t            start;
+    clock_t            end;
+    clock_t            thou;
+    clock_t            sec;
+    clock_t            nlps;
+    clock_t            t;
+    char              *input_start;
+    Goodbye::parser_t *parser;
 
     input_start = read_input(pathname);
-    parser      = Goodbye_new_parser(pathname, input_start, 100000);
+    parser      = Goodbye::new_parser(pathname, input_start, 100000);
     printf("%s parser.\n", parser->grammar);
 
     start = clock();

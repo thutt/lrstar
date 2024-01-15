@@ -4,8 +4,9 @@
 #include "C11_ParserTables_typedef.h"
 #include "C11_Parser.h"
 
+namespace C11 {
 // Terminal symbols of the grammar.
-const char *C11_grm_term_symb[99] = {
+const char *grm_term_symb[99] = {
    "<error>",
    "<eof>",
    "<f_constant>",
@@ -108,7 +109,7 @@ const char *C11_grm_term_symb[99] = {
 };
 
 // Nonterminal symbols of the grammar.
-const char *C11_grm_head_symb[78] = {
+const char *grm_head_symb[78] = {
    "Goal",
    "primary_expression",
    "constant",
@@ -190,13 +191,13 @@ const char *C11_grm_head_symb[78] = {
 };
 
 // Terninal action names found in the grammar ...
-const char *C11_grm_tact_name[2] = {
+const char *grm_tact_name[2] = {
    "error",
    "lookup",
 };
 
 // Head symbol numbers for the productions.
-const uint8 C11_grm_head_numb[275] = {
+const uint8 grm_head_numb[275] = {
        0,     1,     1,     1,     1,     1,     2,     2,     2,     3, 
        4,     4,     5,     6,     6,     7,     7,     8,     8,     8, 
        8,     8,     8,     8,     8,     8,     8,     9,     9,    10, 
@@ -228,7 +229,7 @@ const uint8 C11_grm_head_numb[275] = {
 };
 
 // First tail symbol index into the tail list ...
-const uint16 C11_grm_f_tail[276] = {
+const uint16 grm_f_tail[276] = {
        0,     2,     3,     4,     5,     8,     9,    10,    11,    12, 
       13,    14,    15,    21,    22,    25,    28,    31,    32,    36, 
       39,    43,    46,    49,    51,    53,    59,    66,    67,    70, 
@@ -260,7 +261,7 @@ const uint16 C11_grm_f_tail[276] = {
 };
 
 // Tail symbol numbers ...
-const int8 C11_grm_tail[647] = {
+const int8 grm_tail[647] = {
      -74,     1,     3,    -2,    -4,    75,   -26,    76,    -5,     4, 
        2,    28,     3,     5,    33,    34,    75,   -24,    77,    -6, 
       76,    -7,    -6,    77,    -7,   -56,    78,   -24,    21,    78, 
@@ -329,7 +330,7 @@ const int8 C11_grm_tail[647] = {
 };
 
 // Arguments for token actions ...
-const int8 C11_grm_arga[99] = {
+const int8 grm_arga[99] = {
       -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1, 
       -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1, 
       -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1, 
@@ -343,7 +344,7 @@ const int8 C11_grm_arga[99] = {
 };
 
 // Boolean matrix ...
-const uint8 C11_grm_Bm[276] = {
+const uint8 grm_Bm[276] = {
        0,     0,     0,     0,     0,    64,     3,    24,     0,     0, 
       66,     3,    24,     0,     0,     8,     0,    64,     0,    65, 
       64,     3,     8,     0,     0,    32,     0,     0,    64,     0, 
@@ -375,7 +376,7 @@ const uint8 C11_grm_Bm[276] = {
 };
 
 // Boolean matrix row (for state)...
-const uint16 C11_grm_Br[256] = {
+const uint16 grm_Br[256] = {
        5,    10,    15,    20,    20,    22,    20,    20,    20,     0, 
       22,    26,    26,    29,    33,    38,    41,    45,    50,    55, 
       58,    62,    67,    58,    72,    77,    50,    82,    15,    87, 
@@ -405,8 +406,8 @@ const uint16 C11_grm_Br[256] = {
       };
 
 // Boolean matrix column (displacement) ...
-extern const uint8 C11_grm_Bc[99];
-const uint8 C11_grm_Bc[99] = {
+extern const uint8 grm_Bc[99];
+const uint8 grm_Bc[99] = {
        0,     0,     0,     0,     0,     0,     0,     0,     0,     0, 
        0,     1,     0,     1,     1,     1,     1,     1,     1,     1, 
        1,     1,     0,     1,     1,     1,     0,     1,     0,     1, 
@@ -420,7 +421,7 @@ const uint8 C11_grm_Bc[99] = {
       };
 
 // Boolean matrix filter/mask value ...
-const uint8 C11_grm_Bf[99] = {
+const uint8 grm_Bf[99] = {
        1,     2,     4,     8,     4,    16,    32,    64,     4,    32, 
      128,     1,    64,     2,     4,     4,     2,     2,     1,     4, 
        8,    16,    32,     4,     2,    32,     1,     2,     4,    64, 
@@ -434,7 +435,7 @@ const uint8 C11_grm_Bf[99] = {
 };
 
 // Terminal transition matrix ...
-const int16 C11_grm_Tm[1352] = {
+const int16 grm_Tm[1352] = {
        0,     0,     0,     0,     0,   -21,     0,   -22,     0,     0, 
        0,     0,     0,  -234,     0,     0,     0,     0,     0,  -196, 
        0,     0,     0,     0,     0,     0,     0,     0,     0,     0, 
@@ -574,7 +575,7 @@ const int16 C11_grm_Tm[1352] = {
 };
 
 // Terminal transition matrix row ...
-const uint16 C11_grm_Tr[256] = {
+const uint16 grm_Tr[256] = {
     1154,  1154,  1154,  1154,  1154,    96,  1154,  1154,  1154,  1154, 
      326,    96,   326,    96,  1154,  1154,   697,    96,  1154,  1154, 
      697,  1154,   697,  1022,  1022,  1022,  1154,  1154,  1154,   749, 
@@ -604,7 +605,7 @@ const uint16 C11_grm_Tr[256] = {
 };
 
 // Terminal transition matrix column ...
-const uint8 C11_grm_Tc[99] = {
+const uint8 grm_Tc[99] = {
       20,    20,    20,     2,     1,     0,    20,    10,    14,     1, 
       14,    15,    18,    23,    48,     6,    31,    41,    57,    11, 
       12,    46,     0,    16,    58,     1,     2,     3,    19,    48, 
@@ -618,7 +619,7 @@ const uint8 C11_grm_Tc[99] = {
 };
 
 // Nonterminal transition matrix ...
-const int16 C11_grm_Nm[3182] = {
+const int16 grm_Nm[3182] = {
      -17,    -2,    -3,    -5,    58,   -42,    59,   -17,    -2,    -3, 
       -5,    58,   -42,    59,     0,     0,     0,     0,     0,     0, 
      -45,     0,     0,     0,     0,     0,     0,   -46,   -17,    -2, 
@@ -941,7 +942,7 @@ const int16 C11_grm_Nm[3182] = {
 };
 
 // Nonterminal transition matrix row ...
-const uint16 C11_grm_Nr[256] = {
+const uint16 grm_Nr[256] = {
  3136,  3044,  3136,  1566,   535,  3136,  1069,  1107,  2952,  3136, 
  3136,  3136,  3136,  3136,  2906,  3044,  3136,  2683,  1566,  2860, 
  3136,  1839,  3136,  3136,  1878,  3136,   535,  2775,  1069,  3044, 
@@ -971,7 +972,7 @@ const uint16 C11_grm_Nr[256] = {
 };
 
 // Nonterminal transition matrix column ...
-const uint8 C11_grm_Nc[275] = {
+const uint8 grm_Nc[275] = {
     0,     0,     0,     0,     0,     0,     1,     1,     1,    28, 
     2,     2,     3,    28,    28,    10,    10,     4,     4,     4, 
     4,     4,     4,     4,     4,     4,     4,    28,    28,     5, 
@@ -1003,12 +1004,12 @@ const uint8 C11_grm_Nc[275] = {
 };
 
 // Reduction matrix ...
-const uint8 C11_grm_Rm[10] = {
+const uint8 grm_Rm[10] = {
        0,     0,     0,     0,   161,   161,     0,   253,   253,     0, 
 };
 
 // Reduction matrix row ...
-const int16 C11_grm_Rr[256] = {
+const int16 grm_Rr[256] = {
        0,     0,     0,    94,    96,     0,    98,   100,   102,    -2, 
        0,     0,     0,     0,   106,     0,   167,   185,     0,     0, 
      131,     0,     0,   152,     0,     0,     0,     0,     0,     0, 
@@ -1038,7 +1039,7 @@ const int16 C11_grm_Rr[256] = {
 };
 
 // Reduction matrix column ...
-const uint8 C11_grm_Rc[99] = {
+const uint8 grm_Rc[99] = {
        0,     0,     1,     2,     1,     1,     0,     2,     1,     0, 
        0,     2,     2,     2,     1,     1,     2,     2,     2,     1, 
        1,     1,     0,     1,     2,     0,     0,     2,     1,     0, 
@@ -1052,7 +1053,7 @@ const uint8 C11_grm_Rc[99] = {
 };
 
 // Production lengths (minus one) ...
-const uint8 C11_grm_PL[275] = {
+const uint8 grm_PL[275] = {
        1,     0,     0,     0,     2,     0,     0,     0,     0,     0, 
        0,     0,     5,     0,     2,     2,     2,     0,     3,     2, 
        3,     2,     2,     1,     1,     5,     6,     0,     2,     0, 
@@ -1084,7 +1085,7 @@ const uint8 C11_grm_PL[275] = {
 };
 
 // Nondeterministic first terminal in the list ...
-const uint8 C11_grm_nd_fterm[257] = {
+const uint8 grm_nd_fterm[257] = {
        0,     0,     0,     0,     0,     0,     0,     0,     0,     0, 
        1,     1,     1,     1,     1,     1,     1,     1,     1,     1, 
        1,     1,     1,     1,     1,     1,     1,     1,     1,     1, 
@@ -1114,22 +1115,22 @@ const uint8 C11_grm_nd_fterm[257] = {
 };
 
 // Nondeterministic terminal list ...
-const uint8 C11_grm_nd_term[2] = {
+const uint8 grm_nd_term[2] = {
       75,    26, 
 };
 
 // Nondeterministic first action in the list ...
-const uint8 C11_grm_nd_faction[3] = {
+const uint8 grm_nd_faction[3] = {
        0,     2,     4, 
 };
 
 // Nondeterministic actions list ...
-const int16 C11_grm_nd_action[4] = {
+const int16 grm_nd_action[4] = {
       21,  -161,   251,  -253, 
 };
 
 // Terminal action number ...
-const int8 C11_grm_tact_numb[99] = {
+const int8 grm_tact_numb[99] = {
        0,    -1,     1,     1,     1,     1,    -1,    -1,    -1,    -1, 
       -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1, 
       -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1, 
@@ -1142,3 +1143,5 @@ const int8 C11_grm_tact_numb[99] = {
       -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1, 
 };
 
+
+};   /* namespace C11 */

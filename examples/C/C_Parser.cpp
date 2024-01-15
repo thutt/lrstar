@@ -4,8 +4,9 @@
 #include "C_ParserTables_typedef.h"
 #include "C_Parser.h"
 
+namespace C {
 // Terminal symbols of the grammar.
-const char *C_grm_term_symb[82] = {
+const char *grm_term_symb[82] = {
    "<error>",
    "<eof>",
    "<identifier>",
@@ -91,7 +92,7 @@ const char *C_grm_term_symb[82] = {
 };
 
 // Nonterminal symbols of the grammar.
-const char *C_grm_head_symb[70] = {
+const char *grm_head_symb[70] = {
    "Goal",
    "ExternalDef",
    "ExtDeclaration",
@@ -165,7 +166,7 @@ const char *C_grm_head_symb[70] = {
 };
 
 // Node names found in the grammar.
-const char *C_grm_node_name[106] = {
+const char *grm_node_name[106] = {
    "goal_",
    "extdef_",
    "extdecl_",
@@ -276,7 +277,7 @@ const char *C_grm_node_name[106] = {
 };
 
 // Head symbol numbers for the productions.
-const uint8 C_grm_head_numb[206] = {
+const uint8 grm_head_numb[206] = {
        0,     1,     1,     2,     2,     3,     4,     5,     6,     7, 
        7,     8,     8,     8,     8,     8,     8,     8,     8,     8, 
        8,     8,     8,     8,     8,     9,     9,     9,    10,    10, 
@@ -301,7 +302,7 @@ const uint8 C_grm_head_numb[206] = {
 };
 
 // First tail symbol index into the tail list ...
-const uint16 C_grm_f_tail[207] = {
+const uint16 grm_f_tail[207] = {
        0,     2,     3,     4,     8,    11,    14,    16,    19,    20, 
       21,    22,    23,    24,    25,    26,    27,    28,    29,    30, 
       31,    32,    33,    34,    35,    36,    37,    38,    39,    40, 
@@ -326,7 +327,7 @@ const uint16 C_grm_f_tail[207] = {
 };
 
 // Tail symbol numbers ...
-const int8 C_grm_tail[445] = {
+const int8 grm_tail[445] = {
      -45,     1,    -2,    -4,    24,   -46,   -49,    26,   -50,   -51, 
       26,   -52,   -53,    26,    -5,    -6,   -50,   -17,   -54,   -32, 
       -8,    -9,    27,    28,    29,    30,    31,    32,    33,    34, 
@@ -375,7 +376,7 @@ const int8 C_grm_tail[445] = {
 };
 
 // First arguments for productions ...
-const int8 C_grm_argx[206] = {
+const int8 grm_argx[206] = {
       -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1, 
       -1,     0,     0,     0,     0,     0,     0,     0,     0,     0, 
        0,     0,    -1,    -1,    -1,     0,     0,     0,    -1,    -1, 
@@ -400,7 +401,7 @@ const int8 C_grm_argx[206] = {
 };
 
 // Second arguments for productions ...
-const int8 C_grm_argy[206] = {
+const int8 grm_argy[206] = {
       -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1, 
       -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1, 
       -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1,    -1, 
@@ -425,7 +426,7 @@ const int8 C_grm_argy[206] = {
 };
 
 // Boolean matrix ...
-const uint8 C_grm_Bm[230] = {
+const uint8 grm_Bm[230] = {
        0,     0,     0,     0,     0,     2,     0,     0,     0,     0, 
        4,    64,    12,     1,     0,     0,    32,     0,     0,     4, 
        0,     0,     3,     0,     0,    16,     0,     0,     0,     5, 
@@ -452,7 +453,7 @@ const uint8 C_grm_Bm[230] = {
 };
 
 // Boolean matrix row (for state)...
-const uint8 C_grm_Br[216] = {
+const uint8 grm_Br[216] = {
        0,     5,    10,    14,    17,    20,    23,    26,    31,    36, 
        0,    41,    41,    41,     0,    44,    36,    47,    52,    57, 
       62,    26,     2,    44,    14,    67,    14,    17,    14,    17, 
@@ -478,8 +479,8 @@ const uint8 C_grm_Br[216] = {
       };
 
 // Boolean matrix column (displacement) ...
-extern const uint8 C_grm_Bc[82];
-const uint8 C_grm_Bc[82] = {
+extern const uint8 grm_Bc[82];
+const uint8 grm_Bc[82] = {
        0,     0,     0,     0,     0,     0,     0,     0,     0,     1, 
        1,     1,     1,     1,     1,     1,     1,     1,     1,     1, 
        1,     1,     1,     1,     0,     2,     2,     2,     2,     2, 
@@ -492,7 +493,7 @@ const uint8 C_grm_Bc[82] = {
       };
 
 // Boolean matrix filter/mask value ...
-const uint8 C_grm_Bf[82] = {
+const uint8 grm_Bf[82] = {
        1,     2,     4,     8,     8,    16,    32,    64,   128,     1, 
        2,     4,     4,     8,     8,     8,     8,    16,    16,    32, 
       32,    64,   128,   128,     2,     1,     2,     4,     4,     4, 
@@ -505,7 +506,7 @@ const uint8 C_grm_Bf[82] = {
 };
 
 // Terminal transition matrix ...
-const int16 C_grm_Tm[792] = {
+const int16 grm_Tm[792] = {
        0,     0,  -145,   175,    21,     0,     0,     0,   165,     0, 
        0,     0,   182,   194,   179,   180,    58,   193,    59,    10, 
        0,     0,  -171,    12,     0,    13,     7,    11,   164,    10, 
@@ -589,7 +590,7 @@ const int16 C_grm_Tm[792] = {
 };
 
 // Terminal transition matrix row ...
-const uint16 C_grm_Tr[216] = {
+const uint16 grm_Tr[216] = {
      323,   323,   323,   323,   748,   323,   323,   748,   145,   323, 
      323,   748,   704,   180,   323,   145,   323,   704,   366,   366, 
      115,   748,   323,   180,   145,    83,   115,   366,    83,   366, 
@@ -615,7 +616,7 @@ const uint16 C_grm_Tr[216] = {
 };
 
 // Terminal transition matrix column ...
-const uint8 C_grm_Tc[82] = {
+const uint8 grm_Tc[82] = {
       16,    16,     0,    16,    16,    16,    41,    17,    18,    19, 
       22,    20,    21,    23,    24,    25,    26,    27,    28,     1, 
        2,     3,    39,    40,    41,     4,     5,     6,     6,     6, 
@@ -628,7 +629,7 @@ const uint8 C_grm_Tc[82] = {
 };
 
 // Nonterminal transition matrix ...
-const int16 C_grm_Nm[827] = {
+const int16 grm_Nm[827] = {
     -143,  -145,   175,    37,    37,    37,    37,    37,    37,     0, 
        0,     0,     0,   139,   140,   141,  -129,   139,   140,   141, 
       37,    37,    37,  -139,  -129,   139,   140,   141,   142,   143, 
@@ -715,7 +716,7 @@ const int16 C_grm_Nm[827] = {
 };
 
 // Nonterminal transition matrix row ...
-const uint16 C_grm_Nr[216] = {
+const uint16 grm_Nr[216] = {
   805,   805,   805,   805,   603,   805,   805,   805,   603,   516, 
   805,   805,   805,   805,   603,   761,   394,   516,   761,   528, 
   783,   805,   805,   528,   805,   805,   805,   394,   805,   544, 
@@ -741,7 +742,7 @@ const uint16 C_grm_Nr[216] = {
 };
 
 // Nonterminal transition matrix column ...
-const uint8 C_grm_Nc[206] = {
+const uint8 grm_Nc[206] = {
     6,     6,     6,     6,     6,     6,     6,     8,     2,    21, 
    21,    21,    21,    21,    21,    21,    21,    21,    21,    21, 
    21,    21,    21,    21,    21,    21,    21,    21,     4,     4, 
@@ -766,12 +767,12 @@ const uint8 C_grm_Nc[206] = {
 };
 
 // Reduction matrix ...
-const uint8 C_grm_Rm[5] = {
+const uint8 grm_Rm[5] = {
        0,     0,     0,    28,   174, 
 };
 
 // Reduction matrix row ...
-const int16 C_grm_Rr[216] = {
+const int16 grm_Rr[216] = {
      156,   165,   167,     0,     0,     0,    -2,    45,     0,     0, 
      184,     0,     0,     0,   174,   160,     0,     7,     0,   182, 
       60,    46,     0,    52,    40,     0,    30,     0,    33,     0, 
@@ -797,7 +798,7 @@ const int16 C_grm_Rr[216] = {
 };
 
 // Reduction matrix column ...
-const uint8 C_grm_Rc[82] = {
+const uint8 grm_Rc[82] = {
        0,     0,     0,     0,     0,     0,     0,     0,     0,     0, 
        0,     0,     0,     0,     0,     0,     0,     0,     0,     0, 
        0,     0,     0,     0,     0,     1,     1,     2,     2,     2, 
@@ -810,7 +811,7 @@ const uint8 C_grm_Rc[82] = {
 };
 
 // Production lengths (minus one) ...
-const int8 C_grm_PL[206] = {
+const int8 grm_PL[206] = {
        1,     0,     0,     3,     2,     2,     1,     2,     0,     0, 
        0,     0,     0,     0,     0,     0,     0,     0,     0,     0, 
        0,     0,     0,     0,     0,     0,     0,     0,     0,     2, 
@@ -834,3 +835,5 @@ const int8 C_grm_PL[206] = {
        1,    -1,     2,    -1,     0,     2, 
 };
 
+
+};   /* namespace C */

@@ -5,8 +5,11 @@
  *        It can be safely edited to add user-supplied code.
  */
 
-void
-COBOL_init_actions(UNUSED_PARAM(COBOL_parser_t *parser))
-{
-      /* Initialization code goes here */
-}
+namespace COBOL {
+    void
+    init_actions(UNUSED_PARAM(parser_t *parser))
+    {
+          /* Initialization code goes here */
+    }
+
+};   /* namespace COBOL */

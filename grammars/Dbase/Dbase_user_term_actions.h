@@ -5,8 +5,11 @@
  *        It can be safely edited to add user-supplied code.
  */
 
-void
-Dbase_term_actions(UNUSED_PARAM(Dbase_parser_t *parser))
-{
-      /* Termination code goes here */
-}
+namespace Dbase {
+    void
+    term_actions(UNUSED_PARAM(parser_t *parser))
+    {
+          /* Termination code goes here */
+    }
+
+};   /* namespace Dbase */

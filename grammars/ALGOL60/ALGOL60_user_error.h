@@ -5,12 +5,15 @@
  *        It can be safely edited to add user-supplied code.
  */
 
-int
-ALGOL60_error(UNUSED_PARAM(ALGOL60_parser_t *parser), UNUSED_PARAM(int &t))
-{
-   if (parser->lt.token.end == parser->lt.token.start) {
-      // An illegal character.
-      parser->lt.token.end++;
-   }
-   return 0;
-}
+namespace ALGOL60 {
+    int
+    error(UNUSED_PARAM(parser_t *parser), UNUSED_PARAM(int &t))
+    {
+       if (parser->lt.token.end == parser->lt.token.start) {
+          // An illegal character.
+          parser->lt.token.end++;
+       }
+       return 0;
+    }
+
+};   /* namespace ALGOL60 */

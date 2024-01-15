@@ -2,35 +2,38 @@
 #include "ANTLR_LexerTables_typedef.h"
 #include "ANTLR_Parser.h"
 
+namespace ANTLR {
 
-const char ANTLR_grammar_name[] = "ANTLR";
+const char grammar_name[] = "ANTLR";
 
 
-void ANTLR_init_actions(UNUSED_PARAM(ANTLR_parser_t *parser)); /* User-supplied */
-void ANTLR_term_actions(UNUSED_PARAM(ANTLR_parser_t *parser)); /* User-supplied */
-static ANTLR_parser_t::init_func_t ANTLR_init_funcs_[2] = {
-   ANTLR_init_actions,
-   ANTLR_term_actions
+void init_actions(UNUSED_PARAM(parser_t *parser)); /* User-supplied */
+void term_actions(UNUSED_PARAM(parser_t *parser)); /* User-supplied */
+static parser_t::init_func_t init_funcs_[2] = {
+   init_actions,
+   term_actions
 };
 
-int ANTLR_error(UNUSED_PARAM(ANTLR_parser_t *parser), UNUSED_PARAM(int &t));
-int ANTLR_lookup(UNUSED_PARAM(ANTLR_parser_t *parser), UNUSED_PARAM(int &t));
+int error(UNUSED_PARAM(parser_t *parser), UNUSED_PARAM(int &t));
+int lookup(UNUSED_PARAM(parser_t *parser), UNUSED_PARAM(int &t));
 // Terminal action function pointers ...
-static ANTLR_parser_t::tact_func_t ANTLR_tact_funcs_[2] = {
-   ANTLR_error,
-   ANTLR_lookup,
+static parser_t::tact_func_t tact_funcs_[2] = {
+   error,
+   lookup,
 };
 
-ANTLR_parser_t *
-ANTLR_new_parser(const char *input_path,
-                 char       *input_text,
-                 unsigned    max_symbols)
+parser_t *
+new_parser(const char *input_path,
+           char       *input_text,
+           unsigned    max_symbols)
 {
-   return new ANTLR_parser_t(/* input path   */   input_path,
-                             /* input text   */   input_text,
-                             /* max symbols  */   max_symbols,
-                             /* init_func    */   &ANTLR_init_funcs_[0],
-                             /* tact_func    */   &ANTLR_tact_funcs_[0],
-                             /* nact_func    */   0);
+   return new parser_t(/* input path   */   input_path,
+                       /* input text   */   input_text,
+                       /* max symbols  */   max_symbols,
+                       /* init_func    */   &init_funcs_[0],
+                       /* tact_func    */   &tact_funcs_[0],
+                       /* nact_func    */   0);
 }
 
+
+};   /* namespace ANTLR */

@@ -5,8 +5,11 @@
  *        It can be safely edited to add user-supplied code.
  */
 
-void
-PL1_term_actions(UNUSED_PARAM(PL1_parser_t *parser))
-{
-      /* Termination code goes here */
-}
+namespace PL1 {
+    void
+    term_actions(UNUSED_PARAM(parser_t *parser))
+    {
+          /* Termination code goes here */
+    }
+
+};   /* namespace PL1 */

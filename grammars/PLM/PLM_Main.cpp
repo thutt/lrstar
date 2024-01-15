@@ -2,33 +2,36 @@
 #include "PLM_LexerTables_typedef.h"
 #include "PLM_Parser.h"
 
+namespace PLM {
 
-const char PLM_grammar_name[] = "PLM";
+const char grammar_name[] = "PLM";
 
 
-void PLM_init_actions(UNUSED_PARAM(PLM_parser_t *parser)); /* User-supplied */
-void PLM_term_actions(UNUSED_PARAM(PLM_parser_t *parser)); /* User-supplied */
-static PLM_parser_t::init_func_t PLM_init_funcs_[2] = {
-   PLM_init_actions,
-   PLM_term_actions
+void init_actions(UNUSED_PARAM(parser_t *parser)); /* User-supplied */
+void term_actions(UNUSED_PARAM(parser_t *parser)); /* User-supplied */
+static parser_t::init_func_t init_funcs_[2] = {
+   init_actions,
+   term_actions
 };
 
-int PLM_error(UNUSED_PARAM(PLM_parser_t *parser), UNUSED_PARAM(int &t));
+int error(UNUSED_PARAM(parser_t *parser), UNUSED_PARAM(int &t));
 // Terminal action function pointers ...
-static PLM_parser_t::tact_func_t PLM_tact_funcs_[1] = {
-   PLM_error,
+static parser_t::tact_func_t tact_funcs_[1] = {
+   error,
 };
 
-PLM_parser_t *
-PLM_new_parser(const char *input_path,
-               char       *input_text,
-               unsigned    max_symbols)
+parser_t *
+new_parser(const char *input_path,
+           char       *input_text,
+           unsigned    max_symbols)
 {
-   return new PLM_parser_t(/* input path   */   input_path,
-                           /* input text   */   input_text,
-                           /* max symbols  */   max_symbols,
-                           /* init_func    */   &PLM_init_funcs_[0],
-                           /* tact_func    */   &PLM_tact_funcs_[0],
-                           /* nact_func    */   0);
+   return new parser_t(/* input path   */   input_path,
+                       /* input text   */   input_text,
+                       /* max symbols  */   max_symbols,
+                       /* init_func    */   &init_funcs_[0],
+                       /* tact_func    */   &tact_funcs_[0],
+                       /* nact_func    */   0);
 }
 
+
+};   /* namespace PLM */

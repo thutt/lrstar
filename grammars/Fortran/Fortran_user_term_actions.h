@@ -5,8 +5,11 @@
  *        It can be safely edited to add user-supplied code.
  */
 
-void
-Fortran_term_actions(UNUSED_PARAM(Fortran_parser_t *parser))
-{
-      /* Termination code goes here */
-}
+namespace Fortran {
+    void
+    term_actions(UNUSED_PARAM(parser_t *parser))
+    {
+          /* Termination code goes here */
+    }
+
+};   /* namespace Fortran */

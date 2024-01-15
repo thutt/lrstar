@@ -4,8 +4,9 @@
 #include "PLSQL_ParserTables_typedef.h"
 #include "PLSQL_Parser.h"
 
+namespace PLSQL {
 // Terminal symbols of the grammar.
-const char *PLSQL_grm_term_symb[2285] = {
+const char *grm_term_symb[2285] = {
    "<error>",
    "<eof>",
    "\'SEMICOLON\'",
@@ -2294,7 +2295,7 @@ const char *PLSQL_grm_term_symb[2285] = {
 };
 
 // Nonterminal symbols of the grammar.
-const char *PLSQL_grm_head_symb[2242] = {
+const char *grm_head_symb[2242] = {
    "sql_script",
    "unit_statement",
    "drop_function",
@@ -4540,7 +4541,7 @@ const char *PLSQL_grm_head_symb[2242] = {
 };
 
 // Head symbol numbers for the productions.
-const uint16 PLSQL_grm_head_numb[6574] = {
+const uint16 grm_head_numb[6574] = {
        0,     1,     1,     1,     1,     1,     1,     1,     1,     1, 
        1,     1,     1,     1,     1,     1,     1,     1,     1,     1, 
        1,     1,     1,     1,     1,     1,     1,     1,     1,     1, 
@@ -5202,7 +5203,7 @@ const uint16 PLSQL_grm_head_numb[6574] = {
 };
 
 // First tail symbol index into the tail list ...
-const uint16 PLSQL_grm_f_tail[6575] = {
+const uint16 grm_f_tail[6575] = {
        0,     2,     3,     4,     5,     6,     7,     8,     9,    10, 
       11,    12,    13,    14,    15,    16,    17,    18,    19,    20, 
       21,    22,    23,    24,    25,    26,    27,    28,    29,    30, 
@@ -5864,7 +5865,7 @@ const uint16 PLSQL_grm_f_tail[6575] = {
 };
 
 // Tail symbol numbers ...
-const int16 PLSQL_grm_tail[9789] = {
+const int16 grm_tail[9789] = {
     -755,     1,  -512,  -328,  -331,    -3,   -11,   -19,   -83,   -84, 
      -24,   -43,  -375,  -212,  -114,  -195,  -237,  -242,  -135,  -201, 
     -153,  -160,  -175,  -173,    -4,   -22,   -12,   -13,   -89,  -258, 
@@ -6847,7 +6848,7 @@ const int16 PLSQL_grm_tail[9789] = {
 };
 
 // Boolean matrix ...
-const uint8 PLSQL_grm_Bm[35849] = {
+const uint8 grm_Bm[35849] = {
      144,   103,   206,   251,    92,   239,   156,   253,   229,   249, 
      255,   239,   254,   127,   255,   255,   239,    31,   197,   249, 
      255,   127,   255,   111,   255,   244,   255,   239,   255,   239, 
@@ -10436,7 +10437,7 @@ const uint8 PLSQL_grm_Bm[35849] = {
 };
 
 // Boolean matrix row (for state)...
-const uint16 PLSQL_grm_Br[3750] = {
+const uint16 grm_Br[3750] = {
    35765,   419, 34515, 35765, 13399, 27098, 35765, 20141, 34594, 34676, 
    35765,  1332,  1747, 20400, 20400, 13258,  2888, 13478, 34591, 35765, 
    27099,  6539, 35765, 34695, 34587, 35765, 20171, 34769, 34681, 18045, 
@@ -10815,8 +10816,8 @@ const uint16 PLSQL_grm_Br[3750] = {
       };
 
 // Boolean matrix column (displacement) ...
-extern const uint8 PLSQL_grm_Bc[2285];
-const uint8 PLSQL_grm_Bc[2285] = {
+extern const uint8 grm_Bc[2285];
+const uint8 grm_Bc[2285] = {
        0,     0,     0,     0,     0,     0,     0,     0,     1,     1, 
        1,     1,     1,     1,     1,     1,     2,     2,     2,     2, 
        2,     2,     2,     2,     3,     2,     3,     3,     3,     3, 
@@ -11049,7 +11050,7 @@ const uint8 PLSQL_grm_Bc[2285] = {
       };
 
 // Boolean matrix filter/mask value ...
-const uint8 PLSQL_grm_Bf[2285] = {
+const uint8 grm_Bf[2285] = {
        1,     2,     4,     8,    16,    32,    64,   128,     1,     2, 
        4,     8,    16,    32,    64,   128,     1,     2,     4,     8, 
       16,    32,    64,   128,     1,   128,     2,     4,     8,    16, 
@@ -11282,7 +11283,7 @@ const uint8 PLSQL_grm_Bf[2285] = {
 };
 
 // Terminal transition matrix ...
-const int16 PLSQL_grm_Tm[67135] = {
+const int16 grm_Tm[67135] = {
    -3570,  1105, -2225,   -78,  2597, -1975, -2064, -2928, -2994,  2505, 
     2347, -2907,   932,   207,  2720, -2927, -1446, -1468, -3598, -3599, 
    -2065, -1433, -3479, -1467, -2746,   324, -6103, -2246, -2849, -2386, 
@@ -18000,7 +18001,7 @@ const int16 PLSQL_grm_Tm[67135] = {
 };
 
 // Terminal transition matrix row ...
-const uint16 PLSQL_grm_Tr[3750] = {
+const uint16 grm_Tr[3750] = {
        0,  9040,     0,     0, 61323,     0,     0, 18075, 58720, 45171, 
        0, 31623, 51945, 58720, 58720,     0, 61985, 64696, 58720,     0, 
     2260, 62641,     0, 58720,     0,     0, 58720, 61823, 58720,     0, 
@@ -18379,7 +18380,7 @@ const uint16 PLSQL_grm_Tr[3750] = {
 };
 
 // Terminal transition matrix column ...
-const uint16 PLSQL_grm_Tc[2285] = {
+const uint16 grm_Tc[2285] = {
        0,     0,     0,     1,     2,     3,     4,     5,     6,     7, 
        8,     9,    10,    11,    12,    13,    14,    15,    16,    17, 
       18,    19,    20,    21,    22,    23,    24,    25,    26,    27, 
@@ -18612,7 +18613,7 @@ const uint16 PLSQL_grm_Tc[2285] = {
 };
 
 // Nonterminal transition matrix ...
-const int16 PLSQL_grm_Nm[18970] = {
+const int16 grm_Nm[18970] = {
    -3619, -3700, -3621, -3723, -3778, -3770,  1665, -3612, -3696, -3679, 
    -3708, -3731, -3681, -3664, -3665,  -164,  2611, -3671, -3663, -3667, 
    -3737, -3814,  -183,  -178, -3736, -3819, -3914, -3845,  2504, -3930, 
@@ -20513,7 +20514,7 @@ const int16 PLSQL_grm_Nm[18970] = {
 };
 
 // Nonterminal transition matrix row ...
-const uint16 PLSQL_grm_Nr[3750] = {
+const uint16 grm_Nr[3750] = {
     0,  6166,     0,     0,     0,     0,     0,  1316,     0,  1316, 
     0, 11049, 10459,     0,  1316,  5933,     0,     0,     0,     0, 
     0,  2229,     0,     0,     0,     0,     0,     0,     0,     0, 
@@ -20892,7 +20893,7 @@ const uint16 PLSQL_grm_Nr[3750] = {
 };
 
 // Nonterminal transition matrix column ...
-const uint16 PLSQL_grm_Nc[6574] = {
+const uint16 grm_Nc[6574] = {
     0,     0,     0,     0,     0,     0,     0,     0,     0,     0, 
     0,     0,     0,     0,     0,     0,     0,     0,     0,     0, 
     0,     0,     0,     0,     0,     0,     0,     0,     0,     0, 
@@ -21554,7 +21555,7 @@ const uint16 PLSQL_grm_Nc[6574] = {
 };
 
 // Reduction matrix ...
-const uint16 PLSQL_grm_Rm[42894] = {
+const uint16 grm_Rm[42894] = {
        0,     0,     0,     0,     0,     0,     0,     0,     0,     0, 
        0,     0,     0,     0,     0,     0,     0,     0,     0,     0, 
        0,     0,     0,     0,     0,     0,     0,     0,     0,     0, 
@@ -25848,7 +25849,7 @@ const uint16 PLSQL_grm_Rm[42894] = {
 };
 
 // Reduction matrix row ...
-const int32 PLSQL_grm_Rr[3750] = {
+const int32 grm_Rr[3750] = {
     3572,  5707,  3569,  4068,     0,     0,  5713,     0,     0,  3692, 
     6349,     0,  1482,  -177,  -354,  -531,     0,  1434,  1856,  1436, 
     1970,  -708,  1451,  2168,  2447,  1476,  2999,  3412,  3508,  -885, 
@@ -26227,7 +26228,7 @@ const int32 PLSQL_grm_Rr[3750] = {
 };
 
 // Reduction matrix column ...
-const uint8 PLSQL_grm_Rc[2285] = {
+const uint8 grm_Rc[2285] = {
        0,     1,     1,     2,     3,     4,     5,     6,     7,     8, 
        9,     5,    10,     9,    11,    12,    13,     9,    14,     9, 
       15,    16,     9,    17,    18,    17,    19,    20,    21,     9, 
@@ -26460,7 +26461,7 @@ const uint8 PLSQL_grm_Rc[2285] = {
 };
 
 // Production lengths (minus one) ...
-const int8 PLSQL_grm_PL[6574] = {
+const int8 grm_PL[6574] = {
        1,     0,     0,     0,     0,     0,     0,     0,     0,     0, 
        0,     0,     0,     0,     0,     0,     0,     0,     0,     0, 
        0,     0,     0,     0,     0,     0,     0,     0,     0,     0, 
@@ -27121,3 +27122,5 @@ const int8 PLSQL_grm_PL[6574] = {
        1,     1,    -1,     0, 
 };
 
+
+};   /* namespace PLSQL */

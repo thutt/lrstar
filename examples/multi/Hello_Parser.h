@@ -6,6 +6,7 @@
 
 #include "lrstar_basic_defs.h"
 #include "lrstar_lexer.h"
+namespace Hello {
 
 namespace Hello {
     enum nodecon {
@@ -13,12 +14,15 @@ namespace Hello {
     };
 }
 
+
+};   /* namespace Hello */
 #include "Hello_ParserTables_typedef.h"
 #include "lrstar_parser.h"
 
-extern const char Hello_grammar_name[];
+namespace Hello {
+extern const char grammar_name[];
 
-typedef lrstar_parser</* grammar           */   Hello_grammar_name,
+typedef lrstar_parser</* grammar           */   grammar_name,
                       /* AST traversals    */   1,
                       /* actions           */   true,
                       /* debug_parser      */   true,
@@ -35,6 +39,8 @@ typedef lrstar_parser</* grammar           */   Hello_grammar_name,
                       /* stksize           */   100,
                       /* term_actions      */   true,
                       /* lexer table type  */   Hello_lexer_t,
-                      /* parser table type */   Hello_parser_tables_t> Hello_parser_t;
+                      /* parser table type */   parser_tables_t> parser_t;
+
+};   /* namespace Hello */
 
 #endif

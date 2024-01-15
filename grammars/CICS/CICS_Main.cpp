@@ -2,35 +2,38 @@
 #include "CICS_LexerTables_typedef.h"
 #include "CICS_Parser.h"
 
+namespace CICS {
 
-const char CICS_grammar_name[] = "CICS";
+const char grammar_name[] = "CICS";
 
 
-void CICS_init_actions(UNUSED_PARAM(CICS_parser_t *parser)); /* User-supplied */
-void CICS_term_actions(UNUSED_PARAM(CICS_parser_t *parser)); /* User-supplied */
-static CICS_parser_t::init_func_t CICS_init_funcs_[2] = {
-   CICS_init_actions,
-   CICS_term_actions
+void init_actions(UNUSED_PARAM(parser_t *parser)); /* User-supplied */
+void term_actions(UNUSED_PARAM(parser_t *parser)); /* User-supplied */
+static parser_t::init_func_t init_funcs_[2] = {
+   init_actions,
+   term_actions
 };
 
-int CICS_error(UNUSED_PARAM(CICS_parser_t *parser), UNUSED_PARAM(int &t));
-int CICS_lookup(UNUSED_PARAM(CICS_parser_t *parser), UNUSED_PARAM(int &t));
+int error(UNUSED_PARAM(parser_t *parser), UNUSED_PARAM(int &t));
+int lookup(UNUSED_PARAM(parser_t *parser), UNUSED_PARAM(int &t));
 // Terminal action function pointers ...
-static CICS_parser_t::tact_func_t CICS_tact_funcs_[2] = {
-   CICS_error,
-   CICS_lookup,
+static parser_t::tact_func_t tact_funcs_[2] = {
+   error,
+   lookup,
 };
 
-CICS_parser_t *
-CICS_new_parser(const char *input_path,
-                char       *input_text,
-                unsigned    max_symbols)
+parser_t *
+new_parser(const char *input_path,
+           char       *input_text,
+           unsigned    max_symbols)
 {
-   return new CICS_parser_t(/* input path   */   input_path,
-                            /* input text   */   input_text,
-                            /* max symbols  */   max_symbols,
-                            /* init_func    */   &CICS_init_funcs_[0],
-                            /* tact_func    */   &CICS_tact_funcs_[0],
-                            /* nact_func    */   0);
+   return new parser_t(/* input path   */   input_path,
+                       /* input text   */   input_text,
+                       /* max symbols  */   max_symbols,
+                       /* init_func    */   &init_funcs_[0],
+                       /* tact_func    */   &tact_funcs_[0],
+                       /* nact_func    */   0);
 }
 
+
+};   /* namespace CICS */

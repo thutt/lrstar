@@ -5,14 +5,16 @@
  *        It can be safely edited to add user-supplied code.
  */
 
-void
-JSON_integer(UNUSED_PARAM(unsigned traversal_number),
+namespace JSON {
+    void
+    integer_(UNUSED_PARAM(unsigned traversal_number),
              UNUSED_PARAM(parse_direction_t direction),
-             UNUSED_PARAM(JSON_parser_t *parser),
+             UNUSED_PARAM(parser_t *parser),
              UNUSED_PARAM(Node *v))
-{
-    if (traversal_number == 1 && direction == TOP_DOWN) {
-        json_data *d = new json_data(v->get_token());
-        v->set_node_data(d);
+    {
+        if (traversal_number == 1 && direction == TOP_DOWN) {
+            json_data *d = new json_data(v->get_token());
+            v->set_node_data(d);
+        }
     }
-}
+};

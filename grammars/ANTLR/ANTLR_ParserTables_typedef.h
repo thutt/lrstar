@@ -6,28 +6,29 @@
 
 #include "lrstar_parser_tables.h"
 
-extern const char *ANTLR_grm_head_symb[126];
-extern const char *ANTLR_grm_tact_name[2];
-extern const uint8 ANTLR_grm_head_numb[213];
-extern const uint16 ANTLR_grm_f_tail[214];
-extern const int8 ANTLR_grm_tail[327];
-extern const char *ANTLR_grm_term_symb[43];
-extern const int8 ANTLR_grm_arga[43];
-extern const uint8 ANTLR_grm_Bm[169];
-extern const uint8 ANTLR_grm_Br[148];
-extern const uint8 ANTLR_grm_Bc[43];
-extern const uint8 ANTLR_grm_Bf[43];
-extern const int16 ANTLR_grm_Tm[201];
-extern const uint8 ANTLR_grm_Tr[148];
-extern const uint8 ANTLR_grm_Tc[43];
-extern const int16 ANTLR_grm_Nm[519];
-extern const uint16 ANTLR_grm_Nr[148];
-extern const uint8 ANTLR_grm_Nc[213];
-extern const uint8 ANTLR_grm_Rm[121];
-extern const int16 ANTLR_grm_Rr[148];
-extern const uint8 ANTLR_grm_Rc[43];
-extern const int8 ANTLR_grm_PL[213];
-extern const int8 ANTLR_grm_tact_numb[43];
+namespace ANTLR {
+extern const char *grm_head_symb[126];
+extern const char *grm_tact_name[2];
+extern const uint8 grm_head_numb[213];
+extern const uint16 grm_f_tail[214];
+extern const int8 grm_tail[327];
+extern const char *grm_term_symb[43];
+extern const int8 grm_arga[43];
+extern const uint8 grm_Bm[169];
+extern const uint8 grm_Br[148];
+extern const uint8 grm_Bc[43];
+extern const uint8 grm_Bf[43];
+extern const int16 grm_Tm[201];
+extern const uint8 grm_Tr[148];
+extern const uint8 grm_Tc[43];
+extern const int16 grm_Nm[519];
+extern const uint16 grm_Nr[148];
+extern const uint8 grm_Nc[213];
+extern const uint8 grm_Rm[121];
+extern const int16 grm_Rr[148];
+extern const uint8 grm_Rc[43];
+extern const int8 grm_PL[213];
+extern const int8 grm_tact_numb[43];
 
 
 template<typename T_term_symb,
@@ -62,16 +63,18 @@ template<typename T_term_symb,
          typename T_node_numb,
          typename T_nact_numb,
          typename T_reverse>
-   class ANTLR_parser_tables_ : public lrstar_parser_tables<T_term_symb, T_head_symb, T_tact_name, T_node_name, T_head_numb, T_f_tail, T_tail, T_arga, T_argx, T_argy, T_Bm, T_Br, T_Bc, T_Bf, T_Tm, T_Tr, T_Tc, T_Nm, T_Nr, T_Nc, T_Rm, T_Rr, T_Rc, T_PL, T_nd_fterm, T_nd_term, T_nd_faction, T_nd_action, T_tact_numb, T_node_numb, T_nact_numb, T_reverse>   {
+   class parser_tables_ : public lrstar_parser_tables<T_term_symb, T_head_symb, T_tact_name, T_node_name, T_head_numb, T_f_tail, T_tail, T_arga, T_argx, T_argy, T_Bm, T_Br, T_Bc, T_Bf, T_Tm, T_Tr, T_Tc, T_Nm, T_Nr, T_Nc, T_Rm, T_Rr, T_Rc, T_PL, T_nd_fterm, T_nd_term, T_nd_faction, T_nd_action, T_tact_numb, T_node_numb, T_nact_numb, T_reverse>   {
 
 public:
 
-      ANTLR_parser_tables_() : lrstar_parser_tables<T_term_symb, T_head_symb, T_tact_name, T_node_name, T_head_numb, T_f_tail, T_tail, T_arga, T_argx, T_argy, T_Bm, T_Br, T_Bc, T_Bf, T_Tm, T_Tr, T_Tc, T_Nm, T_Nr, T_Nc, T_Rm, T_Rr, T_Rc, T_PL, T_nd_fterm, T_nd_term, T_nd_faction, T_nd_action, T_tact_numb, T_node_numb, T_nact_numb, T_reverse>(43, 126, 213, 148, 147, 2, 0, 0, 1, true, &ANTLR_grm_term_symb[0], &ANTLR_grm_head_symb[0], &ANTLR_grm_tact_name[0], 0, &ANTLR_grm_head_numb[0], &ANTLR_grm_f_tail[0], &ANTLR_grm_tail[0], &ANTLR_grm_arga[0], 0, 0, &ANTLR_grm_Bm[0], &ANTLR_grm_Br[0], &ANTLR_grm_Bc[0], &ANTLR_grm_Bf[0], &ANTLR_grm_Tm[0], &ANTLR_grm_Tr[0], &ANTLR_grm_Tc[0], &ANTLR_grm_Nm[0], &ANTLR_grm_Nr[0], &ANTLR_grm_Nc[0], &ANTLR_grm_Rm[0], &ANTLR_grm_Rr[0], &ANTLR_grm_Rc[0], &ANTLR_grm_PL[0], 0, 0, 0, 0, &ANTLR_grm_tact_numb[0], 0, 0, 0)
+      parser_tables_() : lrstar_parser_tables<T_term_symb, T_head_symb, T_tact_name, T_node_name, T_head_numb, T_f_tail, T_tail, T_arga, T_argx, T_argy, T_Bm, T_Br, T_Bc, T_Bf, T_Tm, T_Tr, T_Tc, T_Nm, T_Nr, T_Nc, T_Rm, T_Rr, T_Rc, T_PL, T_nd_fterm, T_nd_term, T_nd_faction, T_nd_action, T_tact_numb, T_node_numb, T_nact_numb, T_reverse>(43, 126, 213, 148, 147, 2, 0, 0, 1, true, &grm_term_symb[0], &grm_head_symb[0], &grm_tact_name[0], 0, &grm_head_numb[0], &grm_f_tail[0], &grm_tail[0], &grm_arga[0], 0, 0, &grm_Bm[0], &grm_Br[0], &grm_Bc[0], &grm_Bf[0], &grm_Tm[0], &grm_Tr[0], &grm_Tc[0], &grm_Nm[0], &grm_Nr[0], &grm_Nc[0], &grm_Rm[0], &grm_Rr[0], &grm_Rc[0], &grm_PL[0], 0, 0, 0, 0, &grm_tact_numb[0], 0, 0, 0)
       {
       }
    };
 
-typedef ANTLR_parser_tables_<const char * const, const char * const, const char * const, const char * const, uint8, uint16, int8, int8, int32, int32, uint8, uint8, uint8, uint8, int16, uint8, uint8, int16, uint16, uint8, uint8, int16, uint8, int8, int32, int32, int32, int32, int8, int32, int32, int32> ANTLR_parser_tables_t;
+typedef parser_tables_<const char * const, const char * const, const char * const, const char * const, uint8, uint16, int8, int8, int32, int32, uint8, uint8, uint8, uint8, int16, uint8, uint8, int16, uint16, uint8, uint8, int16, uint8, int8, int32, int32, int32, int32, int8, int32, int32, int32> parser_tables_t;
 
+
+};   /* namespace ANTLR */
 
 #endif

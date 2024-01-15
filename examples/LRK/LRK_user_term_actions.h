@@ -5,8 +5,10 @@
  *        It can be safely edited to add user-supplied code.
  */
 
-void
-LRK_term_actions(UNUSED_PARAM(LRK_parser_t *parser))
-{
-      /* Termination code goes here */
-}
+namespace LRK {
+    void
+    term_actions(UNUSED_PARAM(parser_t *parser))
+    {
+        /* Termination code goes here */
+    }
+};

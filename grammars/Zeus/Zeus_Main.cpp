@@ -2,35 +2,38 @@
 #include "Zeus_LexerTables_typedef.h"
 #include "Zeus_Parser.h"
 
+namespace Zeus {
 
-const char Zeus_grammar_name[] = "Zeus";
+const char grammar_name[] = "Zeus";
 
 
-void Zeus_init_actions(UNUSED_PARAM(Zeus_parser_t *parser)); /* User-supplied */
-void Zeus_term_actions(UNUSED_PARAM(Zeus_parser_t *parser)); /* User-supplied */
-static Zeus_parser_t::init_func_t Zeus_init_funcs_[2] = {
-   Zeus_init_actions,
-   Zeus_term_actions
+void init_actions(UNUSED_PARAM(parser_t *parser)); /* User-supplied */
+void term_actions(UNUSED_PARAM(parser_t *parser)); /* User-supplied */
+static parser_t::init_func_t init_funcs_[2] = {
+   init_actions,
+   term_actions
 };
 
-int Zeus_error(UNUSED_PARAM(Zeus_parser_t *parser), UNUSED_PARAM(int &t));
-int Zeus_lookup(UNUSED_PARAM(Zeus_parser_t *parser), UNUSED_PARAM(int &t));
+int error(UNUSED_PARAM(parser_t *parser), UNUSED_PARAM(int &t));
+int lookup(UNUSED_PARAM(parser_t *parser), UNUSED_PARAM(int &t));
 // Terminal action function pointers ...
-static Zeus_parser_t::tact_func_t Zeus_tact_funcs_[2] = {
-   Zeus_error,
-   Zeus_lookup,
+static parser_t::tact_func_t tact_funcs_[2] = {
+   error,
+   lookup,
 };
 
-Zeus_parser_t *
-Zeus_new_parser(const char *input_path,
-                char       *input_text,
-                unsigned    max_symbols)
+parser_t *
+new_parser(const char *input_path,
+           char       *input_text,
+           unsigned    max_symbols)
 {
-   return new Zeus_parser_t(/* input path   */   input_path,
-                            /* input text   */   input_text,
-                            /* max symbols  */   max_symbols,
-                            /* init_func    */   &Zeus_init_funcs_[0],
-                            /* tact_func    */   &Zeus_tact_funcs_[0],
-                            /* nact_func    */   0);
+   return new parser_t(/* input path   */   input_path,
+                       /* input text   */   input_text,
+                       /* max symbols  */   max_symbols,
+                       /* init_func    */   &init_funcs_[0],
+                       /* tact_func    */   &tact_funcs_[0],
+                       /* nact_func    */   0);
 }
 
+
+};   /* namespace Zeus */

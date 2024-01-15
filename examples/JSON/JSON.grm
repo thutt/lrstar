@@ -1,4 +1,4 @@
-/* Copyright (c) 2023 Logic Magicians Software
+/* Copyright (c) 2023, 2024 Logic Magicians Software
  * BSD 3 License
  *
  *  This syntax & lexical grammar and code parses JSON files, and
@@ -93,36 +93,36 @@
 <real>         => lookup();
 
 Goal
-   : Value/','+ <eof>                      *> goal
+   : Value/','+ <eof>                      *> goal_
    ;
 
 Value
    : Array
    | Object
-   | <string>                              *> string(1)
-   | <integer>                             *> integer(1)
-   | <real>                                *> real(1)
-   | 'null'                                *> null
-   | 'false'                               *> false
-   | 'true'                                *> true
+   | <string>                              *> string_(1)
+   | <integer>                             *> integer_(1)
+   | <real>                                *> real_(1)
+   | 'null'                                *> null_
+   | 'false'                               *> false_
+   | 'true'                                *> true_
    ;
 
 Array
-   :  '[' Value/','+ ']'                   *> array
+   :  '[' Value/','+ ']'                   *> array_
    ;
 
 Object
-   :  '{' Member/','+ '}'                  *> object
+   :  '{' Member/','+ '}'                  *> object_
    ;
 
 
 Member
-   : String ':' Value                      *> member
+   : String ':' Value                      *> member_
    ;
 
 
 String
-   : <string>                              *> string(1)
+   : <string>                              *> string_(1)
    ;
 
 /*--- End. ---*/

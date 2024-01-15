@@ -2,27 +2,28 @@
 #include "Vba_LexerTables_typedef.h"
 #include "Vba_Parser.h"
 
+namespace Vba {
 
-const char Vba_grammar_name[] = "Vba";
+const char grammar_name[] = "Vba";
 
 
-void Vba_init_actions(UNUSED_PARAM(Vba_parser_t *parser)); /* User-supplied */
-void Vba_term_actions(UNUSED_PARAM(Vba_parser_t *parser)); /* User-supplied */
-static Vba_parser_t::init_func_t Vba_init_funcs_[2] = {
-   Vba_init_actions,
-   Vba_term_actions
+void init_actions(UNUSED_PARAM(parser_t *parser)); /* User-supplied */
+void term_actions(UNUSED_PARAM(parser_t *parser)); /* User-supplied */
+static parser_t::init_func_t init_funcs_[2] = {
+   init_actions,
+   term_actions
 };
 
-int Vba_error(UNUSED_PARAM(Vba_parser_t *parser), UNUSED_PARAM(int &t));
-int Vba_lookup(UNUSED_PARAM(Vba_parser_t *parser), UNUSED_PARAM(int &t));
+int error(UNUSED_PARAM(parser_t *parser), UNUSED_PARAM(int &t));
+int lookup(UNUSED_PARAM(parser_t *parser), UNUSED_PARAM(int &t));
 // Terminal action function pointers ...
-static Vba_parser_t::tact_func_t Vba_tact_funcs_[2] = {
-   Vba_error,
-   Vba_lookup,
+static parser_t::tact_func_t tact_funcs_[2] = {
+   error,
+   lookup,
 };
 
 // Node action function pointers ...
-static Vba_parser_t::nact_func_t Vba_nact_funcs_[81] = {
+static parser_t::nact_func_t nact_funcs_[81] = {
    0,
    0,
    0,
@@ -106,16 +107,18 @@ static Vba_parser_t::nact_func_t Vba_nact_funcs_[81] = {
    0,
 };
 
-Vba_parser_t *
-Vba_new_parser(const char *input_path,
-               char       *input_text,
-               unsigned    max_symbols)
+parser_t *
+new_parser(const char *input_path,
+           char       *input_text,
+           unsigned    max_symbols)
 {
-   return new Vba_parser_t(/* input path   */   input_path,
-                           /* input text   */   input_text,
-                           /* max symbols  */   max_symbols,
-                           /* init_func    */   &Vba_init_funcs_[0],
-                           /* tact_func    */   &Vba_tact_funcs_[0],
-                           /* nact_func    */   &Vba_nact_funcs_[0]);
+   return new parser_t(/* input path   */   input_path,
+                       /* input text   */   input_text,
+                       /* max symbols  */   max_symbols,
+                       /* init_func    */   &init_funcs_[0],
+                       /* tact_func    */   &tact_funcs_[0],
+                       /* nact_func    */   &nact_funcs_[0]);
 }
 
+
+};   /* namespace Vba */

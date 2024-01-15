@@ -5,8 +5,11 @@
  *        It can be safely edited to add user-supplied code.
  */
 
-void
-Pascal_init_actions(UNUSED_PARAM(Pascal_parser_t *parser))
-{
-      /* Initialization code goes here */
-}
+namespace Pascal {
+    void
+    init_actions(UNUSED_PARAM(parser_t *parser))
+    {
+          /* Initialization code goes here */
+    }
+
+};   /* namespace Pascal */

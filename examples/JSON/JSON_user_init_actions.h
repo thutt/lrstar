@@ -5,8 +5,10 @@
  *        It can be safely edited to add user-supplied code.
  */
 
-void
-JSON_init_actions(UNUSED_PARAM(JSON_parser_t *parser))
-{
-      /* Initialization code goes here */
+namespace JSON {
+    void
+    init_actions(UNUSED_PARAM(parser_t *parser))
+    {
+        /* Initialization code goes here */
+    }
 }

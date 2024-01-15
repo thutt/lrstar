@@ -6,13 +6,17 @@
 
 #include "lrstar_basic_defs.h"
 #include "lrstar_lexer.h"
+namespace CICS {
 
+
+};   /* namespace CICS */
 #include "CICS_ParserTables_typedef.h"
 #include "lrstar_parser.h"
 
-extern const char CICS_grammar_name[];
+namespace CICS {
+extern const char grammar_name[];
 
-typedef lrstar_parser</* grammar           */   CICS_grammar_name,
+typedef lrstar_parser</* grammar           */   grammar_name,
                       /* AST traversals    */   1,
                       /* actions           */   true,
                       /* debug_parser      */   false,
@@ -29,6 +33,8 @@ typedef lrstar_parser</* grammar           */   CICS_grammar_name,
                       /* stksize           */   100,
                       /* term_actions      */   true,
                       /* lexer table type  */   CICS_lexer_t,
-                      /* parser table type */   CICS_parser_tables_t> CICS_parser_t;
+                      /* parser table type */   parser_tables_t> parser_t;
+
+};   /* namespace CICS */
 
 #endif

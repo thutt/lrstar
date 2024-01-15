@@ -2,40 +2,43 @@
 #include "Typedef_LexerTables_typedef.h"
 #include "Typedef_Parser.h"
 
+namespace Typedef {
 
-const char Typedef_grammar_name[] = "Typedef";
+const char grammar_name[] = "Typedef";
 
 
-void Typedef_init_actions(UNUSED_PARAM(Typedef_parser_t *parser)); /* User-supplied */
-void Typedef_term_actions(UNUSED_PARAM(Typedef_parser_t *parser)); /* User-supplied */
-static Typedef_parser_t::init_func_t Typedef_init_funcs_[2] = {
-   Typedef_init_actions,
-   Typedef_term_actions
+void init_actions(UNUSED_PARAM(parser_t *parser)); /* User-supplied */
+void term_actions(UNUSED_PARAM(parser_t *parser)); /* User-supplied */
+static parser_t::init_func_t init_funcs_[2] = {
+   init_actions,
+   term_actions
 };
 
-int Typedef_error(UNUSED_PARAM(Typedef_parser_t *parser), UNUSED_PARAM(int &t));
-int Typedef_lookup(UNUSED_PARAM(Typedef_parser_t *parser), UNUSED_PARAM(int &t));
+int error(UNUSED_PARAM(parser_t *parser), UNUSED_PARAM(int &t));
+int lookup(UNUSED_PARAM(parser_t *parser), UNUSED_PARAM(int &t));
 // Terminal action function pointers ...
-static Typedef_parser_t::tact_func_t Typedef_tact_funcs_[2] = {
-   Typedef_error,
-   Typedef_lookup,
+static parser_t::tact_func_t tact_funcs_[2] = {
+   error,
+   lookup,
 };
 
 // Node action function pointers ...
-static Typedef_parser_t::nact_func_t Typedef_nact_funcs_[1] = {
+static parser_t::nact_func_t nact_funcs_[1] = {
    0,
 };
 
-Typedef_parser_t *
-Typedef_new_parser(const char *input_path,
-                   char       *input_text,
-                   unsigned    max_symbols)
+parser_t *
+new_parser(const char *input_path,
+           char       *input_text,
+           unsigned    max_symbols)
 {
-   return new Typedef_parser_t(/* input path   */   input_path,
-                               /* input text   */   input_text,
-                               /* max symbols  */   max_symbols,
-                               /* init_func    */   &Typedef_init_funcs_[0],
-                               /* tact_func    */   &Typedef_tact_funcs_[0],
-                               /* nact_func    */   &Typedef_nact_funcs_[0]);
+   return new parser_t(/* input path   */   input_path,
+                       /* input text   */   input_text,
+                       /* max symbols  */   max_symbols,
+                       /* init_func    */   &init_funcs_[0],
+                       /* tact_func    */   &tact_funcs_[0],
+                       /* nact_func    */   &nact_funcs_[0]);
 }
 
+
+};   /* namespace Typedef */

@@ -6,13 +6,17 @@
 
 #include "lrstar_basic_defs.h"
 #include "lrstar_lexer.h"
+namespace PL1 {
 
+
+};   /* namespace PL1 */
 #include "PL1_ParserTables_typedef.h"
 #include "lrstar_parser.h"
 
-extern const char PL1_grammar_name[];
+namespace PL1 {
+extern const char grammar_name[];
 
-typedef lrstar_parser</* grammar           */   PL1_grammar_name,
+typedef lrstar_parser</* grammar           */   grammar_name,
                       /* AST traversals    */   1,
                       /* actions           */   true,
                       /* debug_parser      */   false,
@@ -29,6 +33,8 @@ typedef lrstar_parser</* grammar           */   PL1_grammar_name,
                       /* stksize           */   100,
                       /* term_actions      */   true,
                       /* lexer table type  */   PL1_lexer_t,
-                      /* parser table type */   PL1_parser_tables_t> PL1_parser_t;
+                      /* parser table type */   parser_tables_t> parser_t;
+
+};   /* namespace PL1 */
 
 #endif

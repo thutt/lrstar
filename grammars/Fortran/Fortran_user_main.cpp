@@ -88,11 +88,14 @@ extern "C" {
     }
 }
 
+namespace Fortran {
+    parser_t *new_parser(const char *input_path,
+                                     char       *input_text,
+                                     unsigned    max_symbols);
+
+};   /* namespace Fortran */
 
 
-Fortran_parser_t *Fortran_new_parser(const char *input_path,
-                                 char       *input_text,
-                                 unsigned    max_symbols);
 int
 main(int argc, char **argv)
 {
@@ -106,7 +109,7 @@ main(int argc, char **argv)
     unsigned    iteration;
     char *input_start;
     FILE *output_fp;
-    Fortran_parser_t *parser;
+    Fortran::parser_t *parser;
 
     get_options(argc, argv, &options);
 
@@ -132,7 +135,7 @@ main(int argc, char **argv)
         ++iteration;
         input_start = read_input(argv[optind]);
 
-        parser = Fortran_new_parser(argv[optind], input_start, 100000);
+        parser = Fortran::new_parser(argv[optind], input_start, 100000);
         printf("%s parser.\n", parser->grammar);
 
         start = clock();

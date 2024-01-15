@@ -2,35 +2,38 @@
 #include "Ada_LexerTables_typedef.h"
 #include "Ada_Parser.h"
 
+namespace Ada {
 
-const char Ada_grammar_name[] = "Ada";
+const char grammar_name[] = "Ada";
 
 
-void Ada_init_actions(UNUSED_PARAM(Ada_parser_t *parser)); /* User-supplied */
-void Ada_term_actions(UNUSED_PARAM(Ada_parser_t *parser)); /* User-supplied */
-static Ada_parser_t::init_func_t Ada_init_funcs_[2] = {
-   Ada_init_actions,
-   Ada_term_actions
+void init_actions(UNUSED_PARAM(parser_t *parser)); /* User-supplied */
+void term_actions(UNUSED_PARAM(parser_t *parser)); /* User-supplied */
+static parser_t::init_func_t init_funcs_[2] = {
+   init_actions,
+   term_actions
 };
 
-int Ada_error(UNUSED_PARAM(Ada_parser_t *parser), UNUSED_PARAM(int &t));
-int Ada_lookup(UNUSED_PARAM(Ada_parser_t *parser), UNUSED_PARAM(int &t));
+int error(UNUSED_PARAM(parser_t *parser), UNUSED_PARAM(int &t));
+int lookup(UNUSED_PARAM(parser_t *parser), UNUSED_PARAM(int &t));
 // Terminal action function pointers ...
-static Ada_parser_t::tact_func_t Ada_tact_funcs_[2] = {
-   Ada_error,
-   Ada_lookup,
+static parser_t::tact_func_t tact_funcs_[2] = {
+   error,
+   lookup,
 };
 
-Ada_parser_t *
-Ada_new_parser(const char *input_path,
-               char       *input_text,
-               unsigned    max_symbols)
+parser_t *
+new_parser(const char *input_path,
+           char       *input_text,
+           unsigned    max_symbols)
 {
-   return new Ada_parser_t(/* input path   */   input_path,
-                           /* input text   */   input_text,
-                           /* max symbols  */   max_symbols,
-                           /* init_func    */   &Ada_init_funcs_[0],
-                           /* tact_func    */   &Ada_tact_funcs_[0],
-                           /* nact_func    */   0);
+   return new parser_t(/* input path   */   input_path,
+                       /* input text   */   input_text,
+                       /* max symbols  */   max_symbols,
+                       /* init_func    */   &init_funcs_[0],
+                       /* tact_func    */   &tact_funcs_[0],
+                       /* nact_func    */   0);
 }
 
+
+};   /* namespace Ada */

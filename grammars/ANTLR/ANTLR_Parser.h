@@ -6,6 +6,7 @@
 
 #include "lrstar_basic_defs.h"
 #include "lrstar_lexer.h"
+namespace ANTLR {
 
 enum termcon {
    ERR = 0,
@@ -53,12 +54,15 @@ enum termcon {
    RBRACE = 42,
 };
 
+
+};   /* namespace ANTLR */
 #include "ANTLR_ParserTables_typedef.h"
 #include "lrstar_parser.h"
 
-extern const char ANTLR_grammar_name[];
+namespace ANTLR {
+extern const char grammar_name[];
 
-typedef lrstar_parser</* grammar           */   ANTLR_grammar_name,
+typedef lrstar_parser</* grammar           */   grammar_name,
                       /* AST traversals    */   1,
                       /* actions           */   true,
                       /* debug_parser      */   false,
@@ -75,6 +79,8 @@ typedef lrstar_parser</* grammar           */   ANTLR_grammar_name,
                       /* stksize           */   100,
                       /* term_actions      */   true,
                       /* lexer table type  */   ANTLR_lexer_t,
-                      /* parser table type */   ANTLR_parser_tables_t> ANTLR_parser_t;
+                      /* parser table type */   parser_tables_t> parser_t;
+
+};   /* namespace ANTLR */
 
 #endif

@@ -2,35 +2,38 @@
 #include "XPL_LexerTables_typedef.h"
 #include "XPL_Parser.h"
 
+namespace XPL {
 
-const char XPL_grammar_name[] = "XPL";
+const char grammar_name[] = "XPL";
 
 
-void XPL_init_actions(UNUSED_PARAM(XPL_parser_t *parser)); /* User-supplied */
-void XPL_term_actions(UNUSED_PARAM(XPL_parser_t *parser)); /* User-supplied */
-static XPL_parser_t::init_func_t XPL_init_funcs_[2] = {
-   XPL_init_actions,
-   XPL_term_actions
+void init_actions(UNUSED_PARAM(parser_t *parser)); /* User-supplied */
+void term_actions(UNUSED_PARAM(parser_t *parser)); /* User-supplied */
+static parser_t::init_func_t init_funcs_[2] = {
+   init_actions,
+   term_actions
 };
 
-int XPL_error(UNUSED_PARAM(XPL_parser_t *parser), UNUSED_PARAM(int &t));
-int XPL_lookup(UNUSED_PARAM(XPL_parser_t *parser), UNUSED_PARAM(int &t));
+int error(UNUSED_PARAM(parser_t *parser), UNUSED_PARAM(int &t));
+int lookup(UNUSED_PARAM(parser_t *parser), UNUSED_PARAM(int &t));
 // Terminal action function pointers ...
-static XPL_parser_t::tact_func_t XPL_tact_funcs_[2] = {
-   XPL_error,
-   XPL_lookup,
+static parser_t::tact_func_t tact_funcs_[2] = {
+   error,
+   lookup,
 };
 
-XPL_parser_t *
-XPL_new_parser(const char *input_path,
-               char       *input_text,
-               unsigned    max_symbols)
+parser_t *
+new_parser(const char *input_path,
+           char       *input_text,
+           unsigned    max_symbols)
 {
-   return new XPL_parser_t(/* input path   */   input_path,
-                           /* input text   */   input_text,
-                           /* max symbols  */   max_symbols,
-                           /* init_func    */   &XPL_init_funcs_[0],
-                           /* tact_func    */   &XPL_tact_funcs_[0],
-                           /* nact_func    */   0);
+   return new parser_t(/* input path   */   input_path,
+                       /* input text   */   input_text,
+                       /* max symbols  */   max_symbols,
+                       /* init_func    */   &init_funcs_[0],
+                       /* tact_func    */   &tact_funcs_[0],
+                       /* nact_func    */   0);
 }
 
+
+};   /* namespace XPL */

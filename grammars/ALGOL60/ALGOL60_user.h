@@ -8,9 +8,10 @@
  *  NOTE: lrstar will never rewrite or delete this file.
  *        It can be safely edited to add user-supplied code.
  */
-
 #if !defined(__ALGOL60_USER_HEADER__)
+namespace ALGOL60 {
 
 
 
+};   /* namespace ALGOL60 */
 #endif

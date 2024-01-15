@@ -5,8 +5,11 @@
  *        It can be safely edited to add user-supplied code.
  */
 
-void
-Java9_term_actions(UNUSED_PARAM(Java9_parser_t *parser))
-{
-      /* Termination code goes here */
-}
+namespace Java9 {
+    void
+    term_actions(UNUSED_PARAM(parser_t *parser))
+    {
+          /* Termination code goes here */
+    }
+
+};   /* namespace Java9 */

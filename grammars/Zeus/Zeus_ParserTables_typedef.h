@@ -6,28 +6,29 @@
 
 #include "lrstar_parser_tables.h"
 
-extern const char *Zeus_grm_head_symb[114];
-extern const char *Zeus_grm_tact_name[2];
-extern const uint8 Zeus_grm_head_numb[222];
-extern const uint16 Zeus_grm_f_tail[223];
-extern const int8 Zeus_grm_tail[479];
-extern const char *Zeus_grm_term_symb[71];
-extern const int8 Zeus_grm_arga[71];
-extern const uint8 Zeus_grm_Bm[340];
-extern const uint16 Zeus_grm_Br[229];
-extern const uint8 Zeus_grm_Bc[71];
-extern const uint8 Zeus_grm_Bf[71];
-extern const int16 Zeus_grm_Tm[400];
-extern const uint16 Zeus_grm_Tr[229];
-extern const uint8 Zeus_grm_Tc[71];
-extern const int16 Zeus_grm_Nm[1154];
-extern const uint16 Zeus_grm_Nr[229];
-extern const uint8 Zeus_grm_Nc[222];
-extern const uint8 Zeus_grm_Rm[1];
-extern const uint8 Zeus_grm_Rr[229];
-extern const uint8 Zeus_grm_Rc[71];
-extern const int8 Zeus_grm_PL[222];
-extern const int8 Zeus_grm_tact_numb[71];
+namespace Zeus {
+extern const char *grm_head_symb[114];
+extern const char *grm_tact_name[2];
+extern const uint8 grm_head_numb[222];
+extern const uint16 grm_f_tail[223];
+extern const int8 grm_tail[479];
+extern const char *grm_term_symb[71];
+extern const int8 grm_arga[71];
+extern const uint8 grm_Bm[340];
+extern const uint16 grm_Br[229];
+extern const uint8 grm_Bc[71];
+extern const uint8 grm_Bf[71];
+extern const int16 grm_Tm[400];
+extern const uint16 grm_Tr[229];
+extern const uint8 grm_Tc[71];
+extern const int16 grm_Nm[1154];
+extern const uint16 grm_Nr[229];
+extern const uint8 grm_Nc[222];
+extern const uint8 grm_Rm[1];
+extern const uint8 grm_Rr[229];
+extern const uint8 grm_Rc[71];
+extern const int8 grm_PL[222];
+extern const int8 grm_tact_numb[71];
 
 
 template<typename T_term_symb,
@@ -62,16 +63,18 @@ template<typename T_term_symb,
          typename T_node_numb,
          typename T_nact_numb,
          typename T_reverse>
-   class Zeus_parser_tables_ : public lrstar_parser_tables<T_term_symb, T_head_symb, T_tact_name, T_node_name, T_head_numb, T_f_tail, T_tail, T_arga, T_argx, T_argy, T_Bm, T_Br, T_Bc, T_Bf, T_Tm, T_Tr, T_Tc, T_Nm, T_Nr, T_Nc, T_Rm, T_Rr, T_Rc, T_PL, T_nd_fterm, T_nd_term, T_nd_faction, T_nd_action, T_tact_numb, T_node_numb, T_nact_numb, T_reverse>   {
+   class parser_tables_ : public lrstar_parser_tables<T_term_symb, T_head_symb, T_tact_name, T_node_name, T_head_numb, T_f_tail, T_tail, T_arga, T_argx, T_argy, T_Bm, T_Br, T_Bc, T_Bf, T_Tm, T_Tr, T_Tc, T_Nm, T_Nr, T_Nc, T_Rm, T_Rr, T_Rc, T_PL, T_nd_fterm, T_nd_term, T_nd_faction, T_nd_action, T_tact_numb, T_node_numb, T_nact_numb, T_reverse>   {
 
 public:
 
-      Zeus_parser_tables_() : lrstar_parser_tables<T_term_symb, T_head_symb, T_tact_name, T_node_name, T_head_numb, T_f_tail, T_tail, T_arga, T_argx, T_argy, T_Bm, T_Br, T_Bc, T_Bf, T_Tm, T_Tr, T_Tc, T_Nm, T_Nr, T_Nc, T_Rm, T_Rr, T_Rc, T_PL, T_nd_fterm, T_nd_term, T_nd_faction, T_nd_action, T_tact_numb, T_node_numb, T_nact_numb, T_reverse>(71, 114, 222, 229, 228, 2, 0, 0, 1, false, &Zeus_grm_term_symb[0], &Zeus_grm_head_symb[0], &Zeus_grm_tact_name[0], 0, &Zeus_grm_head_numb[0], &Zeus_grm_f_tail[0], &Zeus_grm_tail[0], &Zeus_grm_arga[0], 0, 0, &Zeus_grm_Bm[0], &Zeus_grm_Br[0], &Zeus_grm_Bc[0], &Zeus_grm_Bf[0], &Zeus_grm_Tm[0], &Zeus_grm_Tr[0], &Zeus_grm_Tc[0], &Zeus_grm_Nm[0], &Zeus_grm_Nr[0], &Zeus_grm_Nc[0], &Zeus_grm_Rm[0], &Zeus_grm_Rr[0], &Zeus_grm_Rc[0], &Zeus_grm_PL[0], 0, 0, 0, 0, &Zeus_grm_tact_numb[0], 0, 0, 0)
+      parser_tables_() : lrstar_parser_tables<T_term_symb, T_head_symb, T_tact_name, T_node_name, T_head_numb, T_f_tail, T_tail, T_arga, T_argx, T_argy, T_Bm, T_Br, T_Bc, T_Bf, T_Tm, T_Tr, T_Tc, T_Nm, T_Nr, T_Nc, T_Rm, T_Rr, T_Rc, T_PL, T_nd_fterm, T_nd_term, T_nd_faction, T_nd_action, T_tact_numb, T_node_numb, T_nact_numb, T_reverse>(71, 114, 222, 229, 228, 2, 0, 0, 1, false, &grm_term_symb[0], &grm_head_symb[0], &grm_tact_name[0], 0, &grm_head_numb[0], &grm_f_tail[0], &grm_tail[0], &grm_arga[0], 0, 0, &grm_Bm[0], &grm_Br[0], &grm_Bc[0], &grm_Bf[0], &grm_Tm[0], &grm_Tr[0], &grm_Tc[0], &grm_Nm[0], &grm_Nr[0], &grm_Nc[0], &grm_Rm[0], &grm_Rr[0], &grm_Rc[0], &grm_PL[0], 0, 0, 0, 0, &grm_tact_numb[0], 0, 0, 0)
       {
       }
    };
 
-typedef Zeus_parser_tables_<const char * const, const char * const, const char * const, const char * const, uint8, uint16, int8, int8, int32, int32, uint8, uint16, uint8, uint8, int16, uint16, uint8, int16, uint16, uint8, uint8, uint8, uint8, int8, int32, int32, int32, int32, int8, int32, int32, int32> Zeus_parser_tables_t;
+typedef parser_tables_<const char * const, const char * const, const char * const, const char * const, uint8, uint16, int8, int8, int32, int32, uint8, uint16, uint8, uint8, int16, uint16, uint8, int16, uint16, uint8, uint8, uint8, uint8, int8, int32, int32, int32, int32, int8, int32, int32, int32> parser_tables_t;
 
+
+};   /* namespace Zeus */
 
 #endif

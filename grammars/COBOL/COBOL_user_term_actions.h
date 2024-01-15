@@ -5,8 +5,11 @@
  *        It can be safely edited to add user-supplied code.
  */
 
-void
-COBOL_term_actions(UNUSED_PARAM(COBOL_parser_t *parser))
-{
-      /* Termination code goes here */
-}
+namespace COBOL {
+    void
+    term_actions(UNUSED_PARAM(parser_t *parser))
+    {
+          /* Termination code goes here */
+    }
+
+};   /* namespace COBOL */

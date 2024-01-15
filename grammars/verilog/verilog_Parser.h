@@ -6,13 +6,17 @@
 
 #include "lrstar_basic_defs.h"
 #include "lrstar_lexer.h"
+namespace verilog {
 
+
+};   /* namespace verilog */
 #include "verilog_ParserTables_typedef.h"
 #include "lrstar_parser.h"
 
-extern const char verilog_grammar_name[];
+namespace verilog {
+extern const char grammar_name[];
 
-typedef lrstar_parser</* grammar           */   verilog_grammar_name,
+typedef lrstar_parser</* grammar           */   grammar_name,
                       /* AST traversals    */   1,
                       /* actions           */   true,
                       /* debug_parser      */   false,
@@ -29,6 +33,8 @@ typedef lrstar_parser</* grammar           */   verilog_grammar_name,
                       /* stksize           */   100,
                       /* term_actions      */   true,
                       /* lexer table type  */   verilog_lexer_t,
-                      /* parser table type */   verilog_parser_tables_t> verilog_parser_t;
+                      /* parser table type */   parser_tables_t> parser_t;
+
+};   /* namespace verilog */
 
 #endif
