@@ -5,143 +5,163 @@
 #include "Hello_Parser.h"
 
 namespace Hello {
-// Terminal symbols of the grammar.
-const char *grm_term_symb[5] = {
-   "<error>",
-   "<eof>",
-   "<identifier>",
-   "\'GREET\'",
-   "\'.\'",
-};
+    extern const char * grm_term_symb[5];  /* gcc can elide unreferenced constants. */
+    const char * grm_term_symb[5] = {  /* Terminal symbols of the grammar. */
+        "<error>",
+        "<eof>",
+        "<identifier>",
+        "\'GREET\'",
+        "\'.\'",
+    };
 
-// Nonterminal symbols of the grammar.
-const char *grm_head_symb[2] = {
-   "Goal",
-   "Greet",
-};
+    extern const char * grm_head_symb[2];  /* gcc can elide unreferenced constants. */
+    const char * grm_head_symb[2] = {  /* Nonterminal symbols of the grammar. */
+        "Goal",
+        "Greet",
+    };
 
-// Terninal action names found in the grammar ...
-const char *grm_tact_name[2] = {
-   "error",
-   "lookup",
-};
+    extern const char * grm_tact_name[2];  /* gcc can elide unreferenced constants. */
+    const char * grm_tact_name[2] = {  /* Terminal action names found in the grammar. */
+        "error",
+        "lookup",
+    };
 
-// Node names found in the grammar.
-const char *grm_node_name[1] = {
-   "goal",
+    extern const char * grm_node_name[1];  /* gcc can elide unreferenced constants. */
+    const char * grm_node_name[1] = {  /* Node names found in the grammar. */
+        "goal",
+    };
 
-};
+    extern const uint8 grm_head_numb[2];  /* gcc can elide unreferenced constants. */
+    const uint8 grm_head_numb[2] = {  /* Head symbol numbers for the productions. */
 
-// Head symbol numbers for the productions.
-const uint8 grm_head_numb[2] = {
-       0,     1, 
-};
+            0,     1, 
+    };
 
-// First tail symbol index into the tail list ...
-const uint8 grm_f_tail[3] = {
-       0,     2,     5, 
-};
+    extern const uint8 grm_f_tail[3];  /* gcc can elide unreferenced constants. */
+    const uint8 grm_f_tail[3] = {  /* First tail symbol index into the tail list. */
 
-// Tail symbol numbers ...
-const int8 grm_tail[5] = {
-      -1,     1,     3,     2,     4, 
-};
+            0,     2,     5, 
+    };
 
-// Arguments for token actions ...
-const int8 grm_arga[5] = {
-      -1,    -1,    -1,    -1,    -1, 
-};
+    extern const int8 grm_tail[5];  /* gcc can elide unreferenced constants. */
+    const int8 grm_tail[5] = {  /* Tail symbol numbers. */
 
-// First arguments for productions ...
-const int8 grm_argx[2] = {
-      -1,    -1, 
-};
+           -1,     1,     3,     2,     4, 
+    };
 
-// Boolean matrix ...
-const uint8 grm_Bm[5] = {
-       8,     2,     4,    16,     0, 
-};
+    extern const int8 grm_arga[5];  /* gcc can elide unreferenced constants. */
+    const int8 grm_arga[5] = {  /* Arguments for token actions. */
 
-// Boolean matrix row (for state)...
-const uint8 grm_Br[5] = {
-       0,     1,     2,     3,     4, 
-      };
+           -1,    -1,    -1,    -1,    -1, 
+    };
 
-// Boolean matrix column (displacement) ...
-extern const uint8 grm_Bc[5];
-const uint8 grm_Bc[5] = {
-       0,     0,     0,     0,     0, 
-      };
+    extern const int8 grm_argx[2];  /* gcc can elide unreferenced constants. */
+    const int8 grm_argx[2] = {  /* First arguments for productions. */
 
-// Boolean matrix filter/mask value ...
-const uint8 grm_Bf[5] = {
-       1,     2,     4,     8,    16, 
-};
+           -1,    -1, 
+    };
 
-// Terminal transition matrix ...
-const int8 grm_Tm[4] = {
-       4,     3,     2,    -1, 
-};
+    extern const uint8 grm_Bm[5];  /* gcc can elide unreferenced constants. */
+    const uint8 grm_Bm[5] = {  /* Boolean matrix. */
 
-// Terminal transition matrix row ...
-const uint8 grm_Tr[5] = {
-       0,     0,     0,     0,     0, 
-};
+            8,     2,     4,    16,     0, 
+    };
 
-// Terminal transition matrix column ...
-const uint8 grm_Tc[5] = {
-       0,     0,     1,     2,     3, 
-};
+    extern const uint8 grm_Br[5];  /* gcc can elide unreferenced constants. */
+    const uint8 grm_Br[5] = {  /* Boolean matrix row (for state). */
 
-// Nonterminal transition matrix ...
-const uint8 grm_Nm[1] = {
-       1, 
-};
+            0,     1,     2,     3,     4, 
+    };
 
-// Nonterminal transition matrix row ...
-const uint8 grm_Nr[5] = {
-    0,     0,     0,     0,     0, 
-};
+    extern const uint8 grm_Bc[5];  /* gcc can elide unreferenced constants. */
+    const uint8 grm_Bc[5] = {  /* Boolean matrix column (displacement). */
 
-// Nonterminal transition matrix column ...
-const uint8 grm_Nc[2] = {
-    0,     0, 
-};
+            0,     0,     0,     0,     0, 
+    };
 
-// Reduction matrix ...
-const uint8 grm_Rm[1] = {
-       0, 
-};
+    extern const uint8 grm_Bf[5];  /* gcc can elide unreferenced constants. */
+    const uint8 grm_Bf[5] = {  /* Boolean matrix filter/mask value. */
 
-// Reduction matrix row ...
-const uint8 grm_Rr[5] = {
-       0,     0,     0,     0,     0, 
-};
+            1,     2,     4,     8,    16, 
+    };
 
-// Reduction matrix column ...
-const uint8 grm_Rc[5] = {
-       0,     0,     0,     0,     0, 
-};
+    extern const int8 grm_Tm[4];  /* gcc can elide unreferenced constants. */
+    const int8 grm_Tm[4] = {  /* Terminal transition matrix. */
 
-// Production lengths (minus one) ...
-const uint8 grm_PL[2] = {
-       1,     2, 
-};
+            4,     3,     2,    -1, 
+    };
 
-// Terminal action number ...
-const int8 grm_tact_numb[5] = {
-       0,    -1,     1,    -1,    -1, 
-};
+    extern const uint8 grm_Tr[5];  /* gcc can elide unreferenced constants. */
+    const uint8 grm_Tr[5] = {  /* Terminal transition matrix row. */
 
-// Node number for each production ...
-const int8 grm_node_numb[2] = {
-       0,    -1, 
-};
+            0,     0,     0,     0,     0, 
+    };
 
-// Node action numbers ...
-const int8 grm_nact_numb[2] = {
-      -1,    -1, 
-};
+    extern const uint8 grm_Tc[5];  /* gcc can elide unreferenced constants. */
+    const uint8 grm_Tc[5] = {  /* Terminal transition matrix column. */
+
+            0,     0,     1,     2,     3, 
+    };
+
+    extern const uint8 grm_Nm[1];  /* gcc can elide unreferenced constants. */
+    const uint8 grm_Nm[1] = {  /* Nonterminal transition matrix. */
+
+            1, 
+    };
+
+    extern const uint8 grm_Nr[5];  /* gcc can elide unreferenced constants. */
+    const uint8 grm_Nr[5] = {  /* Nonterminal transition matrix row. */
+
+            0,     0,     0,     0,     0, 
+    };
+
+    extern const uint8 grm_Nc[2];  /* gcc can elide unreferenced constants. */
+    const uint8 grm_Nc[2] = {  /* Nonterminal transition matrix column. */
+
+            0,     0, 
+    };
+
+    extern const uint8 grm_Rm[1];  /* gcc can elide unreferenced constants. */
+    const uint8 grm_Rm[1] = {  /* Reduction matrix. */
+
+            0, 
+    };
+
+    extern const uint8 grm_Rr[5];  /* gcc can elide unreferenced constants. */
+    const uint8 grm_Rr[5] = {  /* Reduction matrix row. */
+
+            0,     0,     0,     0,     0, 
+    };
+
+    extern const uint8 grm_Rc[5];  /* gcc can elide unreferenced constants. */
+    const uint8 grm_Rc[5] = {  /* Reduction matrix column. */
+
+            0,     0,     0,     0,     0, 
+    };
+
+    extern const uint8 grm_PL[2];  /* gcc can elide unreferenced constants. */
+    const uint8 grm_PL[2] = {  /* Production lengths (minus one). */
+
+            1,     2, 
+    };
+
+    extern const int8 grm_tact_numb[5];  /* gcc can elide unreferenced constants. */
+    const int8 grm_tact_numb[5] = {  /* Terminal action number. */
+
+            0,    -1,     1,    -1,    -1, 
+    };
+
+    extern const int8 grm_node_numb[2];  /* gcc can elide unreferenced constants. */
+    const int8 grm_node_numb[2] = {  /* Node number for each production. */
+
+            0,    -1, 
+    };
+
+    extern const int8 grm_nact_numb[2];  /* gcc can elide unreferenced constants. */
+    const int8 grm_nact_numb[2] = {  /* Node action numbers. */
+
+           -1,    -1, 
+    };
 
 
 };   /* namespace Hello */

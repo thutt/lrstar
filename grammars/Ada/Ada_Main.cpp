@@ -16,7 +16,7 @@ static parser_t::init_func_t init_funcs_[2] = {
 
 int error(UNUSED_PARAM(parser_t *parser), UNUSED_PARAM(int &t));
 int lookup(UNUSED_PARAM(parser_t *parser), UNUSED_PARAM(int &t));
-// Terminal action function pointers ...
+// Terminal action function pointers.
 static parser_t::tact_func_t tact_funcs_[2] = {
    error,
    lookup,
