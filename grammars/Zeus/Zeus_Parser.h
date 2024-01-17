@@ -14,26 +14,26 @@ namespace Zeus {
 #include "lrstar_parser.h"
 
 namespace Zeus {
-extern const char grammar_name[];
+    extern const char grammar_name[];
 
-typedef lrstar_parser</* grammar           */   grammar_name,
-                      /* AST traversals    */   1,
-                      /* actions           */   true,
-                      /* debug_parser      */   false,
-                      /* debug_trace       */   false,
-                      /* expecting         */   true,
-                      /* insensitive       */   false,
-                      /* lookaheads        */   1,
-                      /* make_ast          */   false,
-                      /* nd_parsing        */   false,
-                      /* nd_threads        */   0,
-                      /* node_actions      */   false,
-                      /* reversable        */   false,
-                      /* semantics         */   false,
-                      /* stksize           */   100,
-                      /* term_actions      */   true,
-                      /* lexer table type  */   lexer_t,
-                      /* parser table type */   parser_tables_t> parser_t;
+    typedef lrstar_parser</* grammar           */   grammar_name,
+                          /* AST traversals    */   1,
+                          /* actions           */   true,
+                          /* debug_parser      */   false,
+                          /* debug_trace       */   false,
+                          /* expecting         */   true,
+                          /* insensitive       */   false,
+                          /* lookaheads        */   1,
+                          /* make_ast          */   false,
+                          /* nd_parsing        */   false,
+                          /* nd_threads        */   0,
+                          /* node_actions      */   false,
+                          /* reversable        */   false,
+                          /* semantics         */   false,
+                          /* stksize           */   100,
+                          /* term_actions      */   true,
+                          /* lexer table type  */   lexer_t,
+                          /* parser table type */   parser_tables_t> parser_t;
 
 };   /* namespace Zeus */
 

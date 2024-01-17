@@ -8,12 +8,12 @@
 #include "lrstar_lexer.h"
 namespace Calc {
 
-enum termcon {
-   END_OF_FILE = 1,
-   ERR = 0,
-   ID = 2,
-   INT = 3,
-};
+    enum termcon {
+        END_OF_FILE = 1,
+        ERR = 0,
+        ID = 2,
+        INT = 3,
+    };
 
 namespace Calc {
     enum nodecon {
@@ -43,26 +43,26 @@ namespace Calc {
 #include "lrstar_parser.h"
 
 namespace Calc {
-extern const char grammar_name[];
+    extern const char grammar_name[];
 
-typedef lrstar_parser</* grammar           */   grammar_name,
-                      /* AST traversals    */   1,
-                      /* actions           */   true,
-                      /* debug_parser      */   true,
-                      /* debug_trace       */   true,
-                      /* expecting         */   true,
-                      /* insensitive       */   false,
-                      /* lookaheads        */   1,
-                      /* make_ast          */   true,
-                      /* nd_parsing        */   false,
-                      /* nd_threads        */   0,
-                      /* node_actions      */   true,
-                      /* reversable        */   true,
-                      /* semantics         */   false,
-                      /* stksize           */   100,
-                      /* term_actions      */   true,
-                      /* lexer table type  */   lexer_t,
-                      /* parser table type */   parser_tables_t> parser_t;
+    typedef lrstar_parser</* grammar           */   grammar_name,
+                          /* AST traversals    */   1,
+                          /* actions           */   true,
+                          /* debug_parser      */   true,
+                          /* debug_trace       */   true,
+                          /* expecting         */   true,
+                          /* insensitive       */   false,
+                          /* lookaheads        */   1,
+                          /* make_ast          */   true,
+                          /* nd_parsing        */   false,
+                          /* nd_threads        */   0,
+                          /* node_actions      */   true,
+                          /* reversable        */   true,
+                          /* semantics         */   false,
+                          /* stksize           */   100,
+                          /* term_actions      */   true,
+                          /* lexer table type  */   lexer_t,
+                          /* parser table type */   parser_tables_t> parser_t;
 
 };   /* namespace Calc */
 

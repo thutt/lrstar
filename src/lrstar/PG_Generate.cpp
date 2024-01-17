@@ -357,10 +357,24 @@ static const char *
 namespace_indent(unsigned level)
 {
    switch (level) {
-   case 1: return "    ";
-   case 2: return "        ";
+   case 1:  return "    ";
+   case 2:  return "        ";
+   case 3:  return "            ";
    default: return "";          /* Unsupported depth. */
    }
+}
+
+
+static void
+extern_array(FILE *fp,
+             const char *type_name,
+             const char *var_name,
+             unsigned    n_elem)
+{
+   fprintf(fp,
+           "%sextern const %s %s[%d];  "
+           "/* gcc can elide unreferenced constants. */\n",
+           namespace_indent(1), type_name, var_name, n_elem);
 }
 
 static void
@@ -370,10 +384,9 @@ open_defn_array(FILE *fp,
                 const char *var_name,
                 unsigned    n_elem)
 {
+   extern_array(fp, type_name, var_name, n_elem);
    fprintf(fp,
-           "%sextern const %s %s[%d];  /* gcc can elide unreferenced constants. */\n"
            "%sconst %s %s[%d] = {  /* %s */\n",
-           namespace_indent(1), type_name, var_name, n_elem,
            namespace_indent(1), type_name, var_name, n_elem, comment);
 }
 
@@ -1148,7 +1161,7 @@ PG_Main::typedef_tables(const char *dname,
    char parser[1024];
    char pathname[PATH_MAX];
    const char templ[] = "template<";
-   const int width = sizeof(templ) / sizeof(templ[0]) - 1;
+   const int width = strlen(namespace_indent(1)) + sizeof(templ) / sizeof(templ[0]) - 1;
 
    parser_tables_inst(parser, sizeof(parser) / sizeof(parser[0]));
    create_filename(pathname, PATH_MAX, dname, fname, cname,
@@ -1166,147 +1179,170 @@ PG_Main::typedef_tables(const char *dname,
    open_namespace(fp, gfn);
 
    /* External references to generate parser tables for the grammar. */
-   fprintf(fp, "extern const char *grm_head_symb[%d];\n",
-           data_types[ts_T_head_symb].n_elem);
+   extern_array(fp, "char *", "grm_head_symb",
+                data_types[ts_T_head_symb].n_elem);
 
    if (N_tacts > 0) {
-      fprintf(fp, "extern const char *grm_tact_name[%d];\n",
-              data_types[ts_T_tact_name].n_elem);
+      extern_array(fp, "char *", "grm_tact_name",
+                   data_types[ts_T_tact_name].n_elem);
    }
 
    if (N_nodes > 0) {
-      fprintf(fp, "extern const char *grm_node_name[%d];\n", N_nodes);
+      extern_array(fp, "char *", "grm_node_name", N_nodes);
    }
 
-   fprintf(fp, "extern const %s grm_head_numb[%d];\n",
-           data_types[ts_T_head_numb].type,
-           data_types[ts_T_head_numb].n_elem);
+   extern_array(fp,
+                data_types[ts_T_head_numb].type,
+                "grm_head_numb",
+                data_types[ts_T_head_numb].n_elem);
 
-   fprintf(fp, "extern const %s grm_f_tail[%d];\n",
-           data_types[ts_T_f_tail].type,
-           data_types[ts_T_f_tail].n_elem);
+   extern_array(fp,
+                data_types[ts_T_f_tail].type,
+                "grm_f_tail",
+                data_types[ts_T_f_tail].n_elem);
 
-   fprintf(fp, "extern const %s grm_tail[%d];\n",
-           data_types[ts_T_tail].type,
-           data_types[ts_T_tail].n_elem);
+   extern_array(fp,
+                data_types[ts_T_tail].type,
+                "grm_tail",
+                data_types[ts_T_tail].n_elem);
 
-   fprintf(fp, "extern const char *grm_term_symb[%d];\n",
-           data_types[ts_T_term_symb].n_elem);
+   extern_array(fp,
+                "char *",
+                "grm_term_symb",
+                data_types[ts_T_term_symb].n_elem);
 
    if (N_tacts > 0) {
-      fprintf(fp, "extern const %s grm_arga[%d];\n",
-              data_types[ts_T_arga].type,
-              data_types[ts_T_arga].n_elem);
+      extern_array(fp,
+                   data_types[ts_T_arga].type,
+                   "grm_arga",
+                   data_types[ts_T_arga].n_elem);
    }
 
    if (optn[PG_BOOLMATRIX] > 0) {
-      fprintf(fp, "extern const uint8 grm_Bm[%d];\n", B_size);
-      fprintf(fp, "extern const %s grm_Br[%d];\n",
-              data_types[ts_T_Br].type,
-              data_types[ts_T_Br].n_elem);
+      extern_array(fp, "uint8", "grm_Bm", B_size);
+      extern_array(fp, data_types[ts_T_Br].type,
+                   "grm_Br", data_types[ts_T_Br].n_elem);
    }
 
    if (optn[PG_BOOLMATRIX] > 0) {
-      fprintf(fp, "extern const %s grm_Bc[%d];\n",
-              data_types[ts_T_Bc].type,
-              data_types[ts_T_Bc].n_elem);
+      extern_array(fp, data_types[ts_T_Bc].type,
+                   "grm_Bc", data_types[ts_T_Bc].n_elem);
    }
 
    if (optn[PG_BOOLMATRIX] > 1) {
-      fprintf(fp, "extern const uint8 grm_Bf[%d];\n", N_terms);
+      extern_array(fp, "uint8", "grm_Bf", N_terms);
    }
 
-   fprintf(fp, "extern const %s grm_Tm[%d];\n",
-           data_types[ts_T_Tm].type,
-           data_types[ts_T_Tm].n_elem);
+   extern_array(fp,
+                data_types[ts_T_Tm].type,
+                "grm_Tm",
+                data_types[ts_T_Tm].n_elem);
 
-   fprintf(fp, "extern const %s grm_Tr[%d];\n",
-           data_types[ts_T_Tr].type,
-           data_types[ts_T_Tr].n_elem);
+   extern_array(fp,
+                data_types[ts_T_Tr].type,
+                "grm_Tr",
+                data_types[ts_T_Tr].n_elem);
 
-   fprintf(fp, "extern const %s grm_Tc[%d];\n",
-           data_types[ts_T_Tc].type,
-           data_types[ts_T_Tc].n_elem);
+   extern_array(fp,
+                data_types[ts_T_Tc].type,
+                "grm_Tc",
+                data_types[ts_T_Tc].n_elem);
 
-   fprintf(fp, "extern const %s grm_Nm[%d];\n",
-           data_types[ts_T_Nm].type,
-           data_types[ts_T_Nm].n_elem);
+   extern_array(fp,
+                data_types[ts_T_Nm].type,
+                "grm_Nm",
+                data_types[ts_T_Nm].n_elem);
 
-   fprintf(fp, "extern const %s grm_Nr[%d];\n",
-           data_types[ts_T_Nr].type,
-           data_types[ts_T_Nr].n_elem);
+   extern_array(fp,
+                data_types[ts_T_Nr].type,
+                "grm_Nr",
+                data_types[ts_T_Nr].n_elem);
 
-   fprintf(fp, "extern const %s grm_Nc[%d];\n",
-           data_types[ts_T_Nc].type,
-           data_types[ts_T_Nc].n_elem);
+   extern_array(fp,
+                data_types[ts_T_Nc].type,
+                "grm_Nc",
+                data_types[ts_T_Nc].n_elem);
 
-   fprintf(fp, "extern const %s grm_Rm[%d];\n",
-           data_types[ts_T_Rm].type,
-           data_types[ts_T_Rm].n_elem);
+   extern_array(fp,
+                data_types[ts_T_Rm].type,
+                "grm_Rm",
+                data_types[ts_T_Rm].n_elem);
 
-   fprintf(fp, "extern const %s grm_Rr[%d];\n",
-           data_types[ts_T_Rr].type,
-           data_types[ts_T_Rr].n_elem);
+   extern_array(fp,
+                data_types[ts_T_Rr].type,
+                "grm_Rr",
+                data_types[ts_T_Rr].n_elem);
 
-   fprintf(fp, "extern const %s grm_Rc[%d];\n",
-           data_types[ts_T_Rc].type,
-           data_types[ts_T_Rc].n_elem);
+   extern_array(fp,
+                data_types[ts_T_Rc].type,
+                "grm_Rc",
+                data_types[ts_T_Rc].n_elem);
 
-   fprintf(fp, "extern const %s grm_PL[%d];\n",
-           data_types[ts_T_PL].type,
-           data_types[ts_T_PL].n_elem);
+   extern_array(fp,
+                data_types[ts_T_PL].type,
+                "grm_PL",
+                data_types[ts_T_PL].n_elem);
 
    if (N_tacts > 0) {           // Number of terminal actions.
-      fprintf(fp, "extern const %s grm_tact_numb[%d];\n",
-              data_types[ts_T_tact_numb].type,
-              data_types[ts_T_tact_numb].n_elem);
+      extern_array(fp,
+                   data_types[ts_T_tact_numb].type,
+                   "grm_tact_numb",
+                   data_types[ts_T_tact_numb].n_elem);
    }
 
    if (N_nodes > 0 || N_semantics > 0) {
-      fprintf(fp, "extern const %s grm_argx[%d];\n",
-              data_types[ts_T_argx].type,
-              data_types[ts_T_argx].n_elem);
+      extern_array(fp,
+                   data_types[ts_T_argx].type,
+                   "grm_argx",
+                   data_types[ts_T_argx].n_elem);
    }
 
    if (N_semantics > 0) {
-      fprintf(fp, "extern const %s grm_argy[%d];\n",
-              data_types[ts_T_argy].type,
-              data_types[ts_T_argy].n_elem);
+      extern_array(fp,
+                   data_types[ts_T_argy].type,
+                   "grm_argy",
+                   data_types[ts_T_argy].n_elem);
    }
 
    if (n_ndstates > 0) {
-      fprintf(fp, "extern const %s grm_nd_fterm[%d];\n",
-              data_types[ts_T_nd_fterm].type,
-              data_types[ts_T_nd_fterm].n_elem);
+      extern_array(fp,
+                   data_types[ts_T_nd_fterm].type,
+                   "grm_nd_fterm",
+                   data_types[ts_T_nd_fterm].n_elem);
 
-      fprintf(fp, "extern const %s grm_nd_term[%d];\n",
-              data_types[ts_T_nd_term].type,
-              data_types[ts_T_nd_term].n_elem);
+      extern_array(fp,
+                   data_types[ts_T_nd_term].type,
+                   "grm_nd_term",
+                   data_types[ts_T_nd_term].n_elem);
 
-      fprintf(fp, "extern const %s grm_nd_faction[%d];\n",
-              data_types[ts_T_nd_faction].type,
-              data_types[ts_T_nd_faction].n_elem);
+      extern_array(fp,
+                   data_types[ts_T_nd_faction].type,
+                   "grm_nd_faction",
+                   data_types[ts_T_nd_faction].n_elem);
 
-      fprintf(fp, "extern const %s grm_nd_action[%d];\n",
-              data_types[ts_T_nd_action].type,
-              data_types[ts_T_nd_action].n_elem);
+      extern_array(fp,
+                   data_types[ts_T_nd_action].type,
+                   "grm_nd_action",
+                   data_types[ts_T_nd_action].n_elem);
    }
 
    if (optn[PG_ASTCONST] > 0 && N_nodes > 0) {
-      fprintf(fp, "extern const %s grm_node_numb[%d];\n",
-              data_types[ts_T_node_numb].type,
-              data_types[ts_T_node_numb].n_elem);
+      extern_array(fp,
+                   data_types[ts_T_node_numb].type,
+                   "grm_node_numb",
+                   data_types[ts_T_node_numb].n_elem);
    }
 
    if (N_nacts > 0) {
-      fprintf(fp, "extern const %s grm_nact_numb[%d];\n",
-              data_types[ts_T_nact_numb].type,
-              data_types[ts_T_nact_numb].n_elem);
+      extern_array(fp,
+                   data_types[ts_T_nact_numb].type,
+                   "grm_nact_numb",
+                   data_types[ts_T_nact_numb].n_elem);
    }
 
    if (optn[PG_ASTCONST] > 0 && N_nodes > 0) {
       if (N_reverses > 0) {
-         fprintf(fp, "extern const uint8 grm_reverse[%d];\n", N_prods);
+         extern_array(fp, "uint8", "grm_reverse", N_prods);
       }
    }
    fprintf(fp, "\n\n");
@@ -1314,6 +1350,7 @@ PG_Main::typedef_tables(const char *dname,
    /* Extend lrstar_parser_tables to have constructor that initializes
     * tables. */
    fprintf(fp,
+           "%s"
            "%s"
            "typename T_term_symb,\n"
            "%*stypename T_head_symb,\n"
@@ -1348,6 +1385,7 @@ PG_Main::typedef_tables(const char *dname,
            "%*stypename T_nact_numb,\n"
            "%*stypename T_reverse"
            ">\n",
+           namespace_indent(1),
            templ,
            width, " ",
            width, " ",
@@ -1380,11 +1418,12 @@ PG_Main::typedef_tables(const char *dname,
            width, " ",
            width, " ",
            width, " ");
-   fprintf(fp, "   class parser_tables_ : public lrstar_parser_tables");
+   fprintf(fp, "%sclass parser_tables_ : public lrstar_parser_tables",
+           namespace_indent(2));
    parser_tables_template_args(fp);
-   fprintf(fp, "   {\n");
-   fprintf(fp, "\npublic:\n\n");
-   fprintf(fp, "      parser_tables_() : lrstar_parser_tables");
+   fprintf(fp, "\n%s{\n", namespace_indent(2));
+   fprintf(fp, "%spublic:\n\n", namespace_indent(3));
+   fprintf(fp, "%sparser_tables_() : lrstar_parser_tables", namespace_indent(3));
    parser_tables_template_args(fp);
 
    fprintf(fp, "(");
@@ -1500,11 +1539,11 @@ PG_Main::typedef_tables(const char *dname,
    }
    fprintf(fp, ")\n");
    fprintf(fp,
-           "      {\n"
-           "      }\n");
-   fprintf(fp, "   };\n\n");
+           "%s{\n"
+           "%s}\n", namespace_indent(3), namespace_indent(3));
+   fprintf(fp, "%s};\n\n", namespace_indent(2));
 
-   fprintf(fp, "typedef parser_tables_");
+   fprintf(fp, "%stypedef parser_tables_", namespace_indent(1));
    parser_tables_instantiate_args(fp);
    fprintf(fp, " parser_tables_t;\n\n");
    close_namespace(fp, gfn);
@@ -1526,11 +1565,12 @@ PG_Main::GenerateParserTableEnums(FILE *fp)
 {
    int i;
    if (n_constants > 0) {
-      fprintf(fp, "enum termcon {\n");
+      fprintf(fp, "%senum termcon {\n", namespace_indent(1));
       for (i = 0; i < n_constants; i++) {
-         fprintf(fp, "   %s = %d,\n", Defcon_name[i], Defcon_value[i]);
+         fprintf(fp, "%s%s = %d,\n",
+                 namespace_indent(2), Defcon_name[i], Defcon_value[i]);
       }
-      fprintf(fp, "};\n\n");
+      fprintf(fp, "%s};\n\n", namespace_indent(1));
    }
 
    if (N_nodes > 0 && optn[PG_ASTCONST] > 0) {
@@ -1776,9 +1816,9 @@ generate_grammar_parser_typedef(FILE *fp, const char *grammar)
    static const char *b[] = { "false", "true" };
    static const char templ[] = "typedef lrstar_parser<";
 
-   fprintf(fp, "extern const char grammar_name[];\n\n");
+   fprintf(fp, "%sextern const char grammar_name[];\n\n", namespace_indent(1));
 
-   fprintf(fp, "%s", templ);
+   fprintf(fp, "%s%s", namespace_indent(1), templ);
    fprintf(fp,
            "/* grammar           */   grammar_name");
    {
@@ -1791,72 +1831,89 @@ generate_grammar_parser_typedef(FILE *fp, const char *grammar)
       if (traversals == 0) {
          traversals = 1;
       }
-      fprintf(fp, ",\n%*s"
+      fprintf(fp, ",\n%s%*s"
               "/* AST traversals    */   %u",
+              namespace_indent(1),
               static_cast<int>(sizeof(templ) / sizeof(templ[0])) - 1, " ",
               traversals);
    }
-   fprintf(fp, ",\n%*s"
+   fprintf(fp, ",\n%s%*s"
            "/* actions           */   %s",
+           namespace_indent(1),
            static_cast<int>(sizeof(templ) / sizeof(templ[0])) - 1, " ",
            b[PG_Main::N_tacts > 0 || PG_Main::N_nacts > 0]);
-   fprintf(fp, ",\n%*s"
+   fprintf(fp, ",\n%s%*s"
            "/* debug_parser      */   %s",
+           namespace_indent(1),
            static_cast<int>(sizeof(templ) / sizeof(templ[0])) - 1, " ",
            b[!!optn[PG_DEBUG]]);
-   fprintf(fp, ",\n%*s"
+   fprintf(fp, ",\n%s%*s"
            "/* debug_trace       */   %s",
+           namespace_indent(1),
            static_cast<int>(sizeof(templ) / sizeof(templ[0])) - 1, " ",
            b[!!optn[PG_DEBUGTRACE]]);
-   fprintf(fp, ",\n%*s"
+   fprintf(fp, ",\n%s%*s"
            "/* expecting         */   %s",
+           namespace_indent(1),
            static_cast<int>(sizeof(templ) / sizeof(templ[0])) - 1, " ",
            b[optn[PG_EXPECTING] || PG_Main::error_used > 0]);
-   fprintf(fp, ",\n%*s"
+   fprintf(fp, ",\n%s%*s"
            "/* insensitive       */   %s",
+           namespace_indent(1),
            static_cast<int>(sizeof(templ) / sizeof(templ[0])) - 1, " ",
            b[!!optn[PG_INSENSITIVE]]);
-   fprintf(fp, ",\n%*s"
+   fprintf(fp, ",\n%s%*s"
            "/* lookaheads        */   %d",
+           namespace_indent(1),
            static_cast<int>(sizeof(templ) / sizeof(templ[0])) - 1, " ",
            optn[PG_LOOKAHEADS]);
-   fprintf(fp, ",\n%*s"
+   fprintf(fp, ",\n%s%*s"
            "/* make_ast          */   %s",
+           namespace_indent(1),
            static_cast<int>(sizeof(templ) / sizeof(templ[0])) - 1, " ",
            b[optn[PG_ASTCONST] && PG_Main::N_nodes > 0]);
-   fprintf(fp, ",\n%*s"
+   fprintf(fp, ",\n%s%*s"
            "/* nd_parsing        */   %s",
+           namespace_indent(1),
            static_cast<int>(sizeof(templ) / sizeof(templ[0])) - 1, " ",
            b[PG_Main::n_ndstates > 0]);
-   fprintf(fp, ",\n%*s"
+   fprintf(fp, ",\n%s%*s"
            "/* nd_threads        */   %d",
+           namespace_indent(1),
            static_cast<int>(sizeof(templ) / sizeof(templ[0])) - 1, " ",
            PG_Main::n_ndstates > 0 ? PG_Main::nd_maxcount : 0);
-   fprintf(fp, ",\n%*s"
+   fprintf(fp, ",\n%s%*s"
            "/* node_actions      */   %s",
+           namespace_indent(1),
            static_cast<int>(sizeof(templ) / sizeof(templ[0])) - 1, " ",
            b[PG_Main::N_nacts > 0]);
-   fprintf(fp, ",\n%*s"
+   fprintf(fp, ",\n%s%*s"
            "/* reversable        */   %s",
+           namespace_indent(1),
            static_cast<int>(sizeof(templ) / sizeof(templ[0])) - 1, " ",
            b[PG_Main::N_reverses > 0]);
-   fprintf(fp, ",\n%*s"
+   fprintf(fp, ",\n%s%*s"
            "/* semantics         */   %s",
+           namespace_indent(1),
            static_cast<int>(sizeof(templ) / sizeof(templ[0])) - 1, " ",
            b[PG_Main::N_semantics > 0]);
-   fprintf(fp, ",\n%*s"
+   fprintf(fp, ",\n%s%*s"
            "/* stksize           */   %d",
+           namespace_indent(1),
            static_cast<int>(sizeof(templ) / sizeof(templ[0])) - 1, " ",
            stksize);
-   fprintf(fp, ",\n%*s"
+   fprintf(fp, ",\n%s%*s"
            "/* term_actions      */   %s",
+           namespace_indent(1),
            static_cast<int>(sizeof(templ) / sizeof(templ[0])) - 1, " ",
            b[PG_Main::N_tacts > 0]);
-   fprintf(fp, ",\n%*s"
+   fprintf(fp, ",\n%s%*s"
            "/* lexer table type  */   lexer_t",
+           namespace_indent(1),
            static_cast<int>(sizeof(templ) / sizeof(templ[0])) - 1, " ");
-   fprintf(fp, ",\n%*s"
+   fprintf(fp, ",\n%s%*s"
            "/* parser table type */   parser_tables_t",
+           namespace_indent(1),
            static_cast<int>(sizeof(templ) / sizeof(templ[0])) - 1, " ");
    fprintf(fp, "> parser_t;\n");
 }
@@ -2003,12 +2060,17 @@ write_user_init(FILE *fp, const char *fn_name)
    write_user_preamble(fp);
    open_namespace(fp, gfn);
    fprintf(fp,
-           "    void\n"
-           "    %s(UNUSED_PARAM(parser_t *parser))\n"
-           "    {\n"
-           "          /* Initialization code goes here */\n"
-           "    }\n",
-           fn_name);
+           "%svoid\n"
+           "%s%s(UNUSED_PARAM(parser_t *parser))\n"
+           "%s{\n"
+           "%s/* Initialization code goes here */\n"
+           "%s}\n",
+           namespace_indent(1),
+           fn_name,
+           namespace_indent(1),
+           namespace_indent(1),
+           namespace_indent(2),
+           namespace_indent(1));
    close_namespace(fp, gfn);
 }
 
@@ -2019,12 +2081,17 @@ write_user_term(FILE *fp, const char *fn_name)
    write_user_preamble(fp);
    open_namespace(fp, gfn);
    fprintf(fp,
-           "    void\n"
-           "    %s(UNUSED_PARAM(parser_t *parser))\n"
-           "    {\n"
-           "          /* Termination code goes here */\n"
-           "    }\n",
-           fn_name);
+           "%svoid\n"
+           "%s%s(UNUSED_PARAM(parser_t *parser))\n"
+           "%s{\n"
+           "%s/* Termination code goes here */\n"
+           "%s}\n",
+           namespace_indent(1),
+           fn_name,
+           namespace_indent(1),
+           namespace_indent(1),
+           namespace_indent(2),
+           namespace_indent(1));
    close_namespace(fp, gfn);
 }
 
@@ -2035,16 +2102,25 @@ write_user_error(FILE *fp, const char *fn_name)
    write_user_preamble(fp);
    open_namespace(fp, gfn);
    fprintf(fp,
-           "    int\n"
-           "    %s(UNUSED_PARAM(parser_t *parser), UNUSED_PARAM(int &t))\n"
-           "    {\n"
-           "       if (parser->lt.token.end == parser->lt.token.start) {\n"
-           "          // An illegal character.\n"
-           "          parser->lt.token.end++;\n"
-           "       }\n"
-           "       return 0;\n"
-           "    }\n",
-           fn_name);
+           "%sint\n"
+           "%s%s(UNUSED_PARAM(parser_t *parser), UNUSED_PARAM(int &t))\n"
+           "%s{\n"
+           "%sif (parser->lt.token.end == parser->lt.token.start) {\n"
+           "%s// An illegal character.\n"
+           "%sparser->lt.token.end++;\n"
+           "%s}\n"
+           "%sreturn 0;\n"
+           "%s}\n",
+           namespace_indent(1),
+           fn_name,
+           namespace_indent(1),
+           namespace_indent(1),
+           namespace_indent(2),
+           namespace_indent(3),
+           namespace_indent(3),
+           namespace_indent(2),
+           namespace_indent(2),
+           namespace_indent(1));
    close_namespace(fp, gfn);
 }
 
@@ -2055,29 +2131,55 @@ write_user_lookup(FILE *fp, const char *fn_name)
    write_user_preamble(fp);
    open_namespace(fp, gfn);
    fprintf(fp,
-           "    int\n"
-           "    %s(UNUSED_PARAM(parser_t *parser), UNUSED_PARAM(int &t))\n"
-           "    {\n"
-           "       // Lookup in symbol table.\n\n"
-           "       int sti;\n"
-           "    \n"
-           "       if (parser->opt_nd_parsing() &&\n"
-           "           parser->lt.lookahead.start != 0) {\n"
-           "          // In lookahead mode.\n"
-           "          sti = parser->add_symbol(t, parser->lt.lookahead.start,\n"
-           "                                   parser->lt.lookahead.end);\n"
-           "       } else {\n"
-           "          // Regular mode of parsing\n"
-           "          sti = parser->add_symbol(t, parser->lt.token.start,\n"
-           "                                   parser->lt.token.end);\n"
-           "       }\n\n"
-           "       if (parser->opt_semantics()) {\n"
-           "          // Redefine terminal number?\n"
-           "          t = parser->symbol[sti].term;\n"
-           "       }\n\n"
-           "       return sti; // Return symbol-table index.\n"
-           "    }\n",
-           fn_name);
+           "%sint\n"
+           "%s%s(UNUSED_PARAM(parser_t *parser), UNUSED_PARAM(int &t))\n"
+           "%s{\n"
+           "%s// Lookup in symbol table.\n\n"
+           "%sint sti;\n"
+           "\n"
+
+           "%sif (parser->opt_nd_parsing() &&\n"
+           "%s    parser->lt.lookahead.start != 0) {\n"
+           "%s// In lookahead mode.\n"
+           "%ssti = parser->add_symbol(t, parser->lt.lookahead.start,\n"
+           "%s                         parser->lt.lookahead.end);\n"
+           "%s} else {\n"
+           "%s// Regular mode of parsing\n"
+           "%ssti = parser->add_symbol(t, parser->lt.token.start,\n"
+           "%s                         parser->lt.token.end);\n"
+           "%s}\n\n"
+           "%sif (parser->opt_semantics()) {\n"
+           "%s// Redefine terminal number?\n"
+           "%st = parser->symbol[sti].term;\n"
+           "%s}\n\n"
+           "%sreturn sti; // Return symbol-table index.\n"
+           "%s}\n",
+           namespace_indent(1),
+           namespace_indent(1),
+           fn_name,
+           namespace_indent(1),
+           namespace_indent(2),
+           namespace_indent(2),
+           namespace_indent(2),
+
+           namespace_indent(2),
+           namespace_indent(3),
+           namespace_indent(3),
+           namespace_indent(3),
+
+           namespace_indent(2),
+           namespace_indent(3),
+           namespace_indent(3),
+           namespace_indent(3),
+
+           namespace_indent(2),
+
+           namespace_indent(2),
+           namespace_indent(3),
+           namespace_indent(3),
+           namespace_indent(2),
+           namespace_indent(2),
+           namespace_indent(1));
    close_namespace(fp, gfn);
 }
 
@@ -2093,17 +2195,20 @@ write_user_nact(FILE *fp, const char *fn_name)
    write_user_preamble(fp);
    open_namespace(fp, gfn);
    fprintf(fp,
-           "void\n"
-           "%s(UNUSED_PARAM(unsigned traversal_number),\n"
-           "%*sUNUSED_PARAM(parse_direction_t direction),\n"
-           "%*sUNUSED_PARAM(parser_t *parser),\n"
-           "%*sUNUSED_PARAM(Node *v))\n"
-           "{\n"
-           "}\n",
-           fn_name,
-           prefix_len, " ",
-           prefix_len, " ",
-           prefix_len, " ");
+           "%svoid\n"
+           "%s%s(UNUSED_PARAM(unsigned traversal_number),\n"
+           "%s%*sUNUSED_PARAM(parse_direction_t direction),\n"
+           "%s%*sUNUSED_PARAM(parser_t *parser),\n"
+           "%s%*sUNUSED_PARAM(Node *v))\n"
+           "%s{\n"
+           "%s}\n",
+           namespace_indent(1),
+           namespace_indent(1), fn_name,
+           namespace_indent(1), prefix_len, " ",
+           namespace_indent(1), prefix_len, " ",
+           namespace_indent(1), prefix_len, " ",
+           namespace_indent(1),
+           namespace_indent(1));
    close_namespace(fp, gfn);
 }
 

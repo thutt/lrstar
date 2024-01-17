@@ -75,7 +75,7 @@ function lrgen ()
         ["YACC"]=""
         ["Zeus"]=""
         ["delphi"]="ci"
-        ["multi"]=""
+        ["multi"]="d m"
         ["verilog"]=""
     );
 

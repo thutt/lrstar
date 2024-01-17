@@ -20,26 +20,26 @@ namespace Java9 {
 #include "lrstar_parser.h"
 
 namespace Java9 {
-extern const char grammar_name[];
+    extern const char grammar_name[];
 
-typedef lrstar_parser</* grammar           */   grammar_name,
-                      /* AST traversals    */   1,
-                      /* actions           */   true,
-                      /* debug_parser      */   false,
-                      /* debug_trace       */   false,
-                      /* expecting         */   true,
-                      /* insensitive       */   false,
-                      /* lookaheads        */   30,
-                      /* make_ast          */   true,
-                      /* nd_parsing        */   true,
-                      /* nd_threads        */   5,
-                      /* node_actions      */   true,
-                      /* reversable        */   false,
-                      /* semantics         */   false,
-                      /* stksize           */   100,
-                      /* term_actions      */   true,
-                      /* lexer table type  */   lexer_t,
-                      /* parser table type */   parser_tables_t> parser_t;
+    typedef lrstar_parser</* grammar           */   grammar_name,
+                          /* AST traversals    */   1,
+                          /* actions           */   true,
+                          /* debug_parser      */   false,
+                          /* debug_trace       */   false,
+                          /* expecting         */   true,
+                          /* insensitive       */   false,
+                          /* lookaheads        */   30,
+                          /* make_ast          */   true,
+                          /* nd_parsing        */   true,
+                          /* nd_threads        */   5,
+                          /* node_actions      */   true,
+                          /* reversable        */   false,
+                          /* semantics         */   false,
+                          /* stksize           */   100,
+                          /* term_actions      */   true,
+                          /* lexer table type  */   lexer_t,
+                          /* parser table type */   parser_tables_t> parser_t;
 
 };   /* namespace Java9 */
 

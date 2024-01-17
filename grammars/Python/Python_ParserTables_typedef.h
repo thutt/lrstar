@@ -7,73 +7,73 @@
 #include "lrstar_parser_tables.h"
 
 namespace Python {
-extern const char *grm_head_symb[220];
-extern const uint8 grm_head_numb[396];
-extern const uint16 grm_f_tail[397];
-extern const int16 grm_tail[600];
-extern const char *grm_term_symb[94];
-extern const uint8 grm_Bm[236];
-extern const uint8 grm_Br[257];
-extern const uint8 grm_Bc[94];
-extern const uint8 grm_Bf[94];
-extern const int16 grm_Tm[320];
-extern const uint8 grm_Tr[257];
-extern const uint8 grm_Tc[94];
-extern const int16 grm_Nm[3046];
-extern const uint16 grm_Nr[257];
-extern const uint8 grm_Nc[396];
-extern const uint16 grm_Rm[368];
-extern const int16 grm_Rr[257];
-extern const uint8 grm_Rc[94];
-extern const int8 grm_PL[396];
-extern const uint8 grm_nd_fterm[258];
-extern const uint8 grm_nd_term[83];
-extern const uint8 grm_nd_faction[84];
-extern const int16 grm_nd_action[166];
+    extern const char * grm_head_symb[220];  /* gcc can elide unreferenced constants. */
+    extern const uint8 grm_head_numb[396];  /* gcc can elide unreferenced constants. */
+    extern const uint16 grm_f_tail[397];  /* gcc can elide unreferenced constants. */
+    extern const int16 grm_tail[600];  /* gcc can elide unreferenced constants. */
+    extern const char * grm_term_symb[94];  /* gcc can elide unreferenced constants. */
+    extern const uint8 grm_Bm[236];  /* gcc can elide unreferenced constants. */
+    extern const uint8 grm_Br[257];  /* gcc can elide unreferenced constants. */
+    extern const uint8 grm_Bc[94];  /* gcc can elide unreferenced constants. */
+    extern const uint8 grm_Bf[94];  /* gcc can elide unreferenced constants. */
+    extern const int16 grm_Tm[320];  /* gcc can elide unreferenced constants. */
+    extern const uint8 grm_Tr[257];  /* gcc can elide unreferenced constants. */
+    extern const uint8 grm_Tc[94];  /* gcc can elide unreferenced constants. */
+    extern const int16 grm_Nm[3046];  /* gcc can elide unreferenced constants. */
+    extern const uint16 grm_Nr[257];  /* gcc can elide unreferenced constants. */
+    extern const uint8 grm_Nc[396];  /* gcc can elide unreferenced constants. */
+    extern const uint16 grm_Rm[368];  /* gcc can elide unreferenced constants. */
+    extern const int16 grm_Rr[257];  /* gcc can elide unreferenced constants. */
+    extern const uint8 grm_Rc[94];  /* gcc can elide unreferenced constants. */
+    extern const int8 grm_PL[396];  /* gcc can elide unreferenced constants. */
+    extern const uint8 grm_nd_fterm[258];  /* gcc can elide unreferenced constants. */
+    extern const uint8 grm_nd_term[83];  /* gcc can elide unreferenced constants. */
+    extern const uint8 grm_nd_faction[84];  /* gcc can elide unreferenced constants. */
+    extern const int16 grm_nd_action[166];  /* gcc can elide unreferenced constants. */
 
 
-template<typename T_term_symb,
-         typename T_head_symb,
-         typename T_tact_name,
-         typename T_node_name,
-         typename T_head_numb,
-         typename T_f_tail,
-         typename T_tail,
-         typename T_arga,
-         typename T_argx,
-         typename T_argy,
-         typename T_Bm,
-         typename T_Br,
-         typename T_Bc,
-         typename T_Bf,
-         typename T_Tm,
-         typename T_Tr,
-         typename T_Tc,
-         typename T_Nm,
-         typename T_Nr,
-         typename T_Nc,
-         typename T_Rm,
-         typename T_Rr,
-         typename T_Rc,
-         typename T_PL,
-         typename T_nd_fterm,
-         typename T_nd_term,
-         typename T_nd_faction,
-         typename T_nd_action,
-         typename T_tact_numb,
-         typename T_node_numb,
-         typename T_nact_numb,
-         typename T_reverse>
-   class parser_tables_ : public lrstar_parser_tables<T_term_symb, T_head_symb, T_tact_name, T_node_name, T_head_numb, T_f_tail, T_tail, T_arga, T_argx, T_argy, T_Bm, T_Br, T_Bc, T_Bf, T_Tm, T_Tr, T_Tc, T_Nm, T_Nr, T_Nc, T_Rm, T_Rr, T_Rc, T_PL, T_nd_fterm, T_nd_term, T_nd_faction, T_nd_action, T_tact_numb, T_node_numb, T_nact_numb, T_reverse>   {
+    template<typename T_term_symb,
+             typename T_head_symb,
+             typename T_tact_name,
+             typename T_node_name,
+             typename T_head_numb,
+             typename T_f_tail,
+             typename T_tail,
+             typename T_arga,
+             typename T_argx,
+             typename T_argy,
+             typename T_Bm,
+             typename T_Br,
+             typename T_Bc,
+             typename T_Bf,
+             typename T_Tm,
+             typename T_Tr,
+             typename T_Tc,
+             typename T_Nm,
+             typename T_Nr,
+             typename T_Nc,
+             typename T_Rm,
+             typename T_Rr,
+             typename T_Rc,
+             typename T_PL,
+             typename T_nd_fterm,
+             typename T_nd_term,
+             typename T_nd_faction,
+             typename T_nd_action,
+             typename T_tact_numb,
+             typename T_node_numb,
+             typename T_nact_numb,
+             typename T_reverse>
+        class parser_tables_ : public lrstar_parser_tables<T_term_symb, T_head_symb, T_tact_name, T_node_name, T_head_numb, T_f_tail, T_tail, T_arga, T_argx, T_argy, T_Bm, T_Br, T_Bc, T_Bf, T_Tm, T_Tr, T_Tc, T_Nm, T_Nr, T_Nc, T_Rm, T_Rr, T_Rc, T_PL, T_nd_fterm, T_nd_term, T_nd_faction, T_nd_action, T_tact_numb, T_node_numb, T_nact_numb, T_reverse>
+        {
+            public:
 
-public:
+            parser_tables_() : lrstar_parser_tables<T_term_symb, T_head_symb, T_tact_name, T_node_name, T_head_numb, T_f_tail, T_tail, T_arga, T_argx, T_argy, T_Bm, T_Br, T_Bc, T_Bf, T_Tm, T_Tr, T_Tc, T_Nm, T_Nr, T_Nc, T_Rm, T_Rr, T_Rc, T_PL, T_nd_fterm, T_nd_term, T_nd_faction, T_nd_action, T_tact_numb, T_node_numb, T_nact_numb, T_reverse>(94, 220, 396, 257, 256, 0, 0, 0, 1, false, &grm_term_symb[0], &grm_head_symb[0], 0, 0, &grm_head_numb[0], &grm_f_tail[0], &grm_tail[0], 0, 0, 0, &grm_Bm[0], &grm_Br[0], &grm_Bc[0], &grm_Bf[0], &grm_Tm[0], &grm_Tr[0], &grm_Tc[0], &grm_Nm[0], &grm_Nr[0], &grm_Nc[0], &grm_Rm[0], &grm_Rr[0], &grm_Rc[0], &grm_PL[0], &grm_nd_fterm[0], &grm_nd_term[0], &grm_nd_faction[0], &grm_nd_action[0], 0, 0, 0, 0)
+            {
+            }
+        };
 
-      parser_tables_() : lrstar_parser_tables<T_term_symb, T_head_symb, T_tact_name, T_node_name, T_head_numb, T_f_tail, T_tail, T_arga, T_argx, T_argy, T_Bm, T_Br, T_Bc, T_Bf, T_Tm, T_Tr, T_Tc, T_Nm, T_Nr, T_Nc, T_Rm, T_Rr, T_Rc, T_PL, T_nd_fterm, T_nd_term, T_nd_faction, T_nd_action, T_tact_numb, T_node_numb, T_nact_numb, T_reverse>(94, 220, 396, 257, 256, 0, 0, 0, 1, false, &grm_term_symb[0], &grm_head_symb[0], 0, 0, &grm_head_numb[0], &grm_f_tail[0], &grm_tail[0], 0, 0, 0, &grm_Bm[0], &grm_Br[0], &grm_Bc[0], &grm_Bf[0], &grm_Tm[0], &grm_Tr[0], &grm_Tc[0], &grm_Nm[0], &grm_Nr[0], &grm_Nc[0], &grm_Rm[0], &grm_Rr[0], &grm_Rc[0], &grm_PL[0], &grm_nd_fterm[0], &grm_nd_term[0], &grm_nd_faction[0], &grm_nd_action[0], 0, 0, 0, 0)
-      {
-      }
-   };
-
-typedef parser_tables_<const char * const, const char * const, const char * const, const char * const, uint8, uint16, int16, int32, int32, int32, uint8, uint8, uint8, uint8, int16, uint8, uint8, int16, uint16, uint8, uint16, int16, uint8, int8, uint8, uint8, uint8, int16, int32, int32, int32, int32> parser_tables_t;
+    typedef parser_tables_<const char * const, const char * const, const char * const, const char * const, uint8, uint16, int16, int32, int32, int32, uint8, uint8, uint8, uint8, int16, uint8, uint8, int16, uint16, uint8, uint16, int16, uint8, int8, uint8, uint8, uint8, int16, int32, int32, int32, int32> parser_tables_t;
 
 
 };   /* namespace Python */

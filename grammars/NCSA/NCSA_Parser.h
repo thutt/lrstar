@@ -30,26 +30,26 @@ namespace NCSA {
 #include "lrstar_parser.h"
 
 namespace NCSA {
-extern const char grammar_name[];
+    extern const char grammar_name[];
 
-typedef lrstar_parser</* grammar           */   grammar_name,
-                      /* AST traversals    */   1,
-                      /* actions           */   true,
-                      /* debug_parser      */   false,
-                      /* debug_trace       */   false,
-                      /* expecting         */   true,
-                      /* insensitive       */   false,
-                      /* lookaheads        */   1,
-                      /* make_ast          */   true,
-                      /* nd_parsing        */   false,
-                      /* nd_threads        */   0,
-                      /* node_actions      */   true,
-                      /* reversable        */   false,
-                      /* semantics         */   true,
-                      /* stksize           */   100,
-                      /* term_actions      */   true,
-                      /* lexer table type  */   lexer_t,
-                      /* parser table type */   parser_tables_t> parser_t;
+    typedef lrstar_parser</* grammar           */   grammar_name,
+                          /* AST traversals    */   1,
+                          /* actions           */   true,
+                          /* debug_parser      */   false,
+                          /* debug_trace       */   false,
+                          /* expecting         */   true,
+                          /* insensitive       */   false,
+                          /* lookaheads        */   1,
+                          /* make_ast          */   true,
+                          /* nd_parsing        */   false,
+                          /* nd_threads        */   0,
+                          /* node_actions      */   true,
+                          /* reversable        */   false,
+                          /* semantics         */   true,
+                          /* stksize           */   100,
+                          /* term_actions      */   true,
+                          /* lexer table type  */   lexer_t,
+                          /* parser table type */   parser_tables_t> parser_t;
 
 };   /* namespace NCSA */
 
