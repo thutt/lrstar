@@ -299,26 +299,26 @@ private:                        // LR Parser
    reduce(int p)
    {
       if (C_semantics) {
-         if (pt.argy[p] >= 0) {
+         if (pt.tbls.argy[p] >= 0) {
             // Switch terminal number to semantic symbol.  See
             // {typename} in Typedef example.
-            symbol[PS[0].sti].term = pt.argy[p];
+            symbol[PS[0].sti].term = pt.tbls.argy[p];
          }
       }
 
       if (C_make_ast) {
          int psi;                                        // Parse stack index.
-         if (pt.node_numb[p] >= 0) {                     // MAKE NODE ?
+         if (pt.tbls.node_numb[p] >= 0) {                     // MAKE NODE ?
             Node *n;
-            if (pt.argx[p] >= 0) {                       // If first argument specified.
-               psi = pt.argx[p];               // Parse Stack Index.
-               n   = new_node(pt.node_numb[p],
+            if (pt.tbls.argx[p] >= 0) {                       // If first argument specified.
+               psi = pt.tbls.argx[p];               // Parse Stack Index.
+               n   = new_node(pt.tbls.node_numb[p],
                               PS[psi].sti,     // Move sti from parse stack to node.
                               PS[psi].line,    // Move line from parse stack to node.
                               PS[psi].start);  // Move start from parse stack to node.
             } else { // No argument on production.
                // Create a Node with no Symbol attachment.
-               n = new_node(pt.node_numb[p], 0, 0, 0);
+               n = new_node(pt.tbls.node_numb[p], 0, 0, 0);
             }
             psi = linkup(p);                             // Linkup the nodes in this rule.
             if (psi >= 0) {                              // Any nodes found in this rule?
@@ -344,8 +344,8 @@ private:                        // LR Parser
       int i;
       int next = -1;
 
-      if (C_reversable && pt.reverse[p] != 0) {          // IF NOT TO REVERSE THE ORDER.
-         for (i = 0; i <= pt.PL[p]; i++) {               // For each tail pointer.
+      if (C_reversable && pt.tbls.reverse[p] != 0) {          // IF NOT TO REVERSE THE ORDER.
+         for (i = 0; i <= pt.tbls.PL[p]; i++) {               // For each tail pointer.
             if (PS[i].node != 0) {                       // If tail points to node.
                if (next >= 0) {                          // If one waiting.
                   PS[i   ].last->next = PS[next].node;   // Define next node.
@@ -356,7 +356,7 @@ private:                        // LR Parser
             }
          }
       } else {                                           // REVERSE THE ORDER.
-         for (i = pt.PL[p]; i >= 0; i--) {               // For each tail pointer.
+         for (i = pt.tbls.PL[p]; i >= 0; i--) {               // For each tail pointer.
             if (PS[i].node != NULL) {                    // If tail points to node.
                if (next >= 0) {                          // If one waiting.
                   PS[i   ].last->next = PS[next].node;   // Define next node.
@@ -393,37 +393,37 @@ private:                        // LR Parser
       }
 
    Shft:
-      if (pt.Bm[pt.Br[State[i]] +
-                pt.Bc[LA]] & pt.Bf[LA]) {             // Check B-matrix for shift action.
+      if (pt.tbls.Bm[pt.tbls.Br[State[i]] +
+                pt.tbls.Bc[LA]] & pt.tbls.Bf[LA]) {             // Check B-matrix for shift action.
          SS[i]++;
          SS[i]->state = State[i];                     // Put current state on stack.
-         State[i] = pt.Tm[pt.Tr[State[i]] +
-                          pt.Tc[LA]];                 // Get next state from term. trans. matrix.
+         State[i] = pt.tbls.Tm[pt.tbls.Tr[State[i]] +
+                                pt.tbls.Tc[LA]];     // Get next state from term. trans. matrix.
          while (State[i] < 0) {                       // While shift-reduce actions.
          SR:
             p = -State[i];
-            SS[i] -= pt.PL[p];                        // Reduce stack ptr by production length.
-            State[i] = pt.Nm[pt.Nr[SS[i]->state] +
-                             pt.Nc[p]];               // Get next state from nonter. trans. matrix.
+            SS[i] -= pt.tbls.PL[p];                        // Reduce stack ptr by production length.
+            State[i] = pt.tbls.Nm[pt.tbls.Nr[SS[i]->state] +
+                                   pt.tbls.Nc[p]];               // Get next state from nonter. trans. matrix.
          }
          return 1;                                    // Return success.
       }
 
-      if ((p = pt.Rr[State[i]]) > 0 ||                   // Default reduction?
-          (p = pt.Rm[pt.Rc[LA] - p]) > 0) {              // Compute reduction?
+      if ((p = pt.tbls.Rr[State[i]]) > 0 ||                   // Default reduction?
+          (p = pt.tbls.Rm[pt.tbls.Rc[LA] - p]) > 0) {              // Compute reduction?
       Red:
-         SS[i] -= pt.PL[p]; // Reduce parse stack ptr by rule length - 1.
-         if (pt.PL[p] < 0) {
+         SS[i] -= pt.tbls.PL[p]; // Reduce parse stack ptr by rule length - 1.
+         if (pt.tbls.PL[p] < 0) {
             SS[i]->state = State[i];      // Stack current state.
          }
          while (1) {
-            State[i] = pt.Nm[pt.Nr[SS[i]->state] +
-                             pt.Nc[p]]; // Get next state from nonterminal transition.
+            State[i] = pt.tbls.Nm[pt.tbls.Nr[SS[i]->state] +
+                                   pt.tbls.Nc[p]]; // Get next state from nonterminal transition.
             if (State[i] > 0) {
                goto Shft;       // If a state, continue parsing.
             }
             p = -State[i];     // Make the production number positive.
-            SS[i] -= pt.PL[p]; // Reduce parse stack ptr by rule length - 1.
+            SS[i] -= pt.tbls.PL[p]; // Reduce parse stack ptr by rule length - 1.
          }
       }
 
@@ -432,20 +432,20 @@ private:                        // LR Parser
       }
 
       // LOOK FOR A SHIFT ACTION FOR THIS TOKEN ...
-      for (int j = pt.nd_fterm[State[i]];
-           j < pt.nd_fterm[State[i] + 1]; j++) {
-         if (pt.nd_term[j] == LA) {
-            int k = pt.nd_faction[j];
+      for (int j = pt.tbls.nd_fterm[State[i]];
+           j < pt.tbls.nd_fterm[State[i] + 1]; j++) {
+         if (pt.tbls.nd_term[j] == LA) {
+            int k = pt.tbls.nd_faction[j];
 
-            if (pt.nd_action[k] > 0) {                    // Shift action (always first one)?
+            if (pt.tbls.nd_action[k] > 0) {                    // Shift action (always first one)?
                SS[i]++;
                SS[i]->state = State[i];                   // Put State on stack.
 
-               if (pt.nd_action[k] > pt.accept_state) {   // Shift and reduce?
-                  State[i] = pt.accept_state - pt.nd_action[k];// Convert to production number.
+               if (pt.tbls.nd_action[k] > pt.accept_state) {   // Shift and reduce?
+                  State[i] = pt.accept_state - pt.tbls.nd_action[k];// Convert to production number.
                   goto SR;
                }
-               State[i] = pt.nd_action[k];
+               State[i] = pt.tbls.nd_action[k];
                return 1;
             }
             if (C_debug_parser) {
@@ -459,16 +459,16 @@ private:                        // LR Parser
                sprintf(string, "In state %d", State[i]);
 
                if (la == 0) {
-                  syntax_error(string, &lt.token, pt.term_symb[LA]);
+                  syntax_error(string, &lt.token, pt.tbls.term_symb[LA]);
                } else {
-                  syntax_error(string, &lt.lookahead, pt.term_symb[LA]);
+                  syntax_error(string, &lt.lookahead, pt.tbls.term_symb[LA]);
                }
 
                printf ("\n   STOPPED LR(*) parsing after %d lookaheads, "
                        "for conflicting actions:\n\n", la + 1);
                do {
-                  print_prod ("   * Reduce", -pt.nd_action[k], 0);
-               } while (++k < pt.nd_faction[j+1]);
+                  print_prod ("   * Reduce", -pt.tbls.nd_action[k], 0);
+               } while (++k < pt.tbls.nd_faction[j+1]);
                print_action ("\n   IGNORING ", i);
             }
             return 0;
@@ -479,9 +479,9 @@ private:                        // LR Parser
          char string[16];
          sprintf(string, "In state %d", State[i]);
          if (la == 0) {
-            syntax_error(string, &lt.token, pt.term_symb[LA]);
+            syntax_error(string, &lt.token, pt.tbls.term_symb[LA]);
          } else {
-            syntax_error(string, &lt.lookahead, pt.term_symb[LA]);
+            syntax_error(string, &lt.lookahead, pt.tbls.term_symb[LA]);
          }
          print_action("\n   IGNORING ", i);
       }
@@ -505,7 +505,7 @@ private:                        // LR Parser
          last_line = lt.token.line;
          sprintf(string, "In state %d", x);
          printf("////////////////////////////////////////////////////////////\n");
-         syntax_error(string, &lt.token, pt.term_symb [t]);
+         syntax_error(string, &lt.token, pt.tbls.term_symb [t]);
          printf("\n   STARTED LR(*) parsing for the following choices:\n\n");
          print_actions(na);
          n_warnings++;
@@ -559,8 +559,8 @@ private:                        // LR Parser
          total = 0;
          LA = lt.get_lookahead();
          if (C_term_actions) {
-            if (pt.tact_numb[LA] >= 0) {                // If term action ...
-               (*tact_func[pt.tact_numb[LA]])(this, LA);   // Call term-action function.
+            if (pt.tbls.tact_numb[LA] >= 0) {                // If term action ...
+               (*tact_func[pt.tbls.tact_numb[LA]])(this, LA);   // Call term-action function.
             }
          }
 
@@ -599,7 +599,7 @@ private:                        // LR Parser
          // TOKEN NOT ACCEPTED, SYNTAX ERROR ...
          if (total == 0) {
             if (n_warnings == 0) {
-               syntax_error("Error", &lt.lookahead, pt.term_symb[LA]);
+               syntax_error("Error", &lt.lookahead, pt.tbls.term_symb[LA]);
                printf("\n   AMBIGUITY after %d lookaheads, unable to choose from:\n\n",
                       la + 1);
                print_actions(na);
@@ -632,7 +632,7 @@ private:                        // LR Parser
          printf("\n   AMBIGUITY after %d lookaheads, unable to decide.\n", limit);
       } else {
          sprintf(string, "In state %d", x);
-         syntax_error(string, &lt.token, pt.term_symb[t]);
+         syntax_error(string, &lt.token, pt.tbls.term_symb[t]);
          printf("\n   AMBIGUITY after %d lookaheads, unable to choose from:\n\n", limit);
          print_actions(na);
       }
@@ -857,16 +857,16 @@ public:
    print_prod(const char *prefix, int p, int dot)
    {
       const char *symb;
-      int len = pt.f_tail[p + 1] - pt.f_tail[p];
+      int len = pt.tbls.f_tail[p + 1] - pt.tbls.f_tail[p];
 
-      printf("%s %4d %s -> ", prefix, p, pt.head_symb[pt.head_numb[p]]);
-      for (int i = pt.f_tail[p]; i < pt.f_tail[p + 1]; i++) {
-         int s = pt.tail[i];
+      printf("%s %4d %s -> ", prefix, p, pt.tbls.head_symb[pt.tbls.head_numb[p]]);
+      for (int i = pt.tbls.f_tail[p]; i < pt.tbls.f_tail[p + 1]; i++) {
+         int s = pt.tbls.tail[i];
 
          if (s >= 0) {
-            symb = pt.term_symb[ s];
+            symb = pt.tbls.term_symb[ s];
          } else {
-            symb = pt.head_symb[-s];
+            symb = pt.tbls.head_symb[-s];
          }
 
          if (len++ == dot) {
@@ -909,7 +909,7 @@ public:
       static char  name[100];
 
       if (sti < 0) {            // Terminal symbol?
-         p = (char *)pt.term_symb[-sti];
+         p = (char *)pt.tbls.term_symb[-sti];
          for (i = 0; p[i] != 0; i++) {
             name[i] = p[i];
          }
@@ -1058,8 +1058,8 @@ public:
       P = new const char *[pt.n_terms];
 
       for (i = 0; i < pt.n_terms; i++) {
-         P[i] = pt.term_symb[i];
-         L[i] = strlen(pt.term_symb[i]);
+         P[i] = pt.tbls.term_symb[i];
+         L[i] = strlen(pt.tbls.term_symb[i]);
          seq[i] = i;
       }
       for (i = 1; i < pt.n_terms; i++) { // Bubble sort algorithm.
@@ -1110,8 +1110,8 @@ public:
 
          // if (x == pt.eof_symb) continue;
          if (T_exp[x]) {
-            if (pt.term_symb[x][0] == '<' ||  pt.term_symb[x][0] == '{') {
-               printf ("         %4d %-30s\n", x, pt.term_symb[x]);
+            if (pt.tbls.term_symb[x][0] == '<' ||  pt.tbls.term_symb[x][0] == '{') {
+               printf ("         %4d %-30s\n", x, pt.tbls.term_symb[x]);
             }
          }
       }
@@ -1122,8 +1122,8 @@ public:
             continue;
          }
          if (T_exp[x]) {
-            if (pt.term_symb[x][0] != '<' && pt.term_symb[x][0] != '{') {
-               printf ("         %4d %-30s\n", x, pt.term_symb[x]);
+            if (pt.tbls.term_symb[x][0] != '<' && pt.tbls.term_symb[x][0] != '{') {
+               printf ("         %4d %-30s\n", x, pt.tbls.term_symb[x]);
             }
          }
       }
@@ -1138,16 +1138,16 @@ public:
       RStack* RSx = RS;                // Reset restore-stack pointer.
       PStack* PSx = PS;                // Save parse-stack pointer.
 
-      PS -= pt.PL[q];                  // Reduce parse stack ptr by rule length - 1.
-      if (pt.PL[q] < 0) {              // Null production?
+      PS -= pt.tbls.PL[q];                  // Reduce parse stack ptr by rule length - 1.
+      if (pt.tbls.PL[q] < 0) {              // Null production?
          (++RS)->ptr = PS;             // Save parse-stack pointer.
          RS->state = PS->state;        // Save old state before replacing it.
          PS->state = x;                // Stack current state, replacing old state.
       }
 
       while (1) {
-         x = pt.Nm[pt.Nr[PS->state] +
-                   pt.Nc[q]];          // Get next state from nonterminal transition.
+         x = pt.tbls.Nm[pt.tbls.Nr[PS->state] +
+                         pt.tbls.Nc[q]];          // Get next state from nonterminal transition.
          if (x > 0) {
             if (!S_exam[x]) {          // Not been there yet?
                expecting(x);           // Recursive call, potential loop, but very rare.
@@ -1155,7 +1155,7 @@ public:
             break;
          }
          q = -x;                       // Set production number.
-         PS -= pt.PL[q];               // Reduce parse stack pointer.
+         PS -= pt.tbls.PL[q];               // Reduce parse stack pointer.
       }
 
       // Restore parse stack.
@@ -1175,35 +1175,35 @@ public:
 
       S_exam[x] = true;                            // Mark this state as seen.
       for (t = 0; t < pt.n_terms; t++) {           // For all terminals.
-         if (pt.Bm[pt.Br[x] +
-                   pt.Bc[t]] & pt.Bf[t]) {         // Check B-matrix for shift action.
+         if (pt.tbls.Bm[pt.tbls.Br[x] +
+                   pt.tbls.Bc[t]] & pt.tbls.Bf[t]) {         // Check B-matrix for shift action.
             T_exp[t] = true;                       // Mark this terminal.
          }
       }
 
       if (C_nd_parsing) {
          int i, j;
-         for (i = pt.nd_fterm[x];
-              i < pt.nd_fterm[x+1]; i++) {         // For all terminals in this state.
-            for (j = pt.nd_faction[i];
-                 j < pt.nd_faction[i+1]; j++) {    // For all actions for these terminals.
-               if (pt.nd_action[j] > 0) {          // Terminal transition.
-                  T_exp[pt.nd_term[i]] = true;     // Mark this terminal.
-               } else if (pt.nd_action[j] < 0) {
-                  int pp = -pt.nd_action[j];
+         for (i = pt.tbls.nd_fterm[x];
+              i < pt.tbls.nd_fterm[x+1]; i++) {         // For all terminals in this state.
+            for (j = pt.tbls.nd_faction[i];
+                 j < pt.tbls.nd_faction[i+1]; j++) {    // For all actions for these terminals.
+               if (pt.tbls.nd_action[j] > 0) {          // Terminal transition.
+                  T_exp[pt.tbls.nd_term[i]] = true;     // Mark this terminal.
+               } else if (pt.tbls.nd_action[j] < 0) {
+                  int pp = -pt.tbls.nd_action[j];
                   reduction(pp, x);
                }
             }
          }
       }
 
-      if ((p = pt.Rr[x]) > 0) {                    // Default reduction?
+      if ((p = pt.tbls.Rr[x]) > 0) {                    // Default reduction?
          reduction(p, x);
          return;
       }
 
       for (t = 0; t < pt.n_terms; t++) {           // For all terminals.
-         q = pt.Rm[pt.Rc[t] - p];                  // Reduction for this terminal.
+         q = pt.tbls.Rm[pt.tbls.Rc[t] - p];                  // Reduction for this terminal.
          if (q > 0) {                              // If not zero production?
             reduction(q, x);
          }
@@ -1222,7 +1222,7 @@ public:
             int         sym = ps->sym;
 
             if (sym <= 0) {     // Terminal?
-               name  = pt.term_symb[-sym];
+               name  = pt.tbls.term_symb[-sym];
                name2 = "";
                if (*name == '<' || *name == '{') {
                   if (ps->sti > 0) {
@@ -1232,7 +1232,7 @@ public:
 
                printf("   state%5d %4d %s %s\n",  ps->state, -sym, name, name2);
             } else {            // Nonterminal.
-               name = pt.head_symb[sym];
+               name = pt.tbls.head_symb[sym];
                printf("   state%5d %4d %s\n", ps->state, sym, name);
             }
          }
@@ -1300,9 +1300,9 @@ public:
    Read:
       T = t = lt.get_token();                         // Get incoming token.
       if (C_term_actions) {
-         if (pt.tact_numb[t] >= 0) {                  // If token action ...
+         if (pt.tbls.tact_numb[t] >= 0) {                  // If token action ...
             // Call token-action function.
-            lt.token.sti = (*tact_func[pt.tact_numb[t]])(this, t);
+            lt.token.sti = (*tact_func[pt.tbls.tact_numb[t]])(this, t);
          }
       } else {
          lt.token.sti = -t;
@@ -1314,8 +1314,8 @@ public:
       }
 
    Test:
-      if (pt.Bm[pt.Br[x] +
-                pt.Bc[t]] & pt.Bf[t]) {             // Check B-matrix for shift action.
+      if (pt.tbls.Bm[pt.tbls.Br[x] +
+                pt.tbls.Bc[t]] & pt.tbls.Bf[t]) {             // Check B-matrix for shift action.
          PS++;
          PS->state = x;                            // Put current state on stack.
          PS->sti   = lt.token.sti;                 // Put symbol-table index on stack.
@@ -1328,26 +1328,26 @@ public:
          if (C_expecting) {
             PS->sym   = -t;                        // Put symbol on stack.
          }
-         x = pt.Tm[pt.Tr[x] +
-                   pt.Tc[t]];                      // Get next state from terminal transition matrix.
+         x = pt.tbls.Tm[pt.tbls.Tr[x] +
+                         pt.tbls.Tc[t]];          // Get next state from terminal transition matrix.
          while (x < 0) {                           // While shift-reduce actions.
             p = -x;
          SR:
-            PS -= pt.PL[p];                        // Reduce stack ptr by production length.
+            PS -= pt.tbls.PL[p];                        // Reduce stack ptr by production length.
             if (C_expecting) {
-               PS->sym = pt.head_numb[p];          // Put symbol on stack.
+               PS->sym = pt.tbls.head_numb[p];          // Put symbol on stack.
             }
             reduce(p);                             // Call reduce action with production number.
-            x = pt.Nm[pt.Nr[PS->state] +
-                      pt.Nc[p]];                   // Get next state from nonterminal transition.
+            x = pt.tbls.Nm[pt.tbls.Nr[PS->state] +
+                            pt.tbls.Nc[p]];                   // Get next state from nonterminal transition.
          }
          goto Read;                                // Go to read next token.
       }
-      if ((p = pt.Rr[x]) > 0 ||                    // Default reduction 90% of the time.
-          (p = pt.Rm[pt.Rc[t] - p]) > 0) {         // Compute reduction?
+      if ((p = pt.tbls.Rr[x]) > 0 ||                    // Default reduction 90% of the time.
+          (p = pt.tbls.Rm[pt.tbls.Rc[t] - p]) > 0) {         // Compute reduction?
       Red:
-         PS -= pt.PL[p];                           // Reduce parse stack ptr by rule length - 1.
-         if (pt.PL[p] < 0) {                       // Null production?
+         PS -= pt.tbls.PL[p];                           // Reduce parse stack ptr by rule length - 1.
+         if (pt.tbls.PL[p] < 0) {                       // Null production?
             if (C_expecting) {
                RS++;
                RS->ptr   = PS;
@@ -1361,16 +1361,16 @@ public:
          }
          while (1) {
             if (C_expecting) {
-               PS->sym = pt.head_numb[p];          // Put symbol on stack.
+               PS->sym = pt.tbls.head_numb[p];          // Put symbol on stack.
             }
             reduce(p);                             // Call reduce action with production number.
-            x = pt.Nm[pt.Nr[PS->state] +
-                      pt.Nc[p]];                   // Get next state from nonterminal transition.
+            x = pt.tbls.Nm[pt.tbls.Nr[PS->state] +
+                            pt.tbls.Nc[p]];                   // Get next state from nonterminal transition.
             if (x > 0) {
                goto Test;                          // Continue parsing.
             }
             p = -x;                                // Set production number.
-            PS -= pt.PL[p];                        // Reduce parse stack ptr by rule length - 1.
+            PS -= pt.tbls.PL[p];                        // Reduce parse stack ptr by rule length - 1.
          }
       }
 
@@ -1378,14 +1378,14 @@ public:
          int i, j, na, y;
 
          // For all ND terminals in this state.
-         for (i = pt.nd_fterm[x]; i < pt.nd_fterm[x+1]; i++) {
-            if (pt.nd_term[i] == t) {                 // Got a match?
-               j = pt.nd_faction[i];                  // Start of actions.
+         for (i = pt.tbls.nd_fterm[x]; i < pt.tbls.nd_fterm[x+1]; i++) {
+            if (pt.tbls.nd_term[i] == t) {                 // Got a match?
+               j = pt.tbls.nd_faction[i];                  // Start of actions.
                na = 0;                                // Number of actions.
                do {
                   State[na] = x;                      // Copy this state.
-                  Action[na++] = pt.nd_action[j];     // Copy this action.
-               } while (++j < pt.nd_faction[i+1]);    // While there's more.
+                  Action[na++] = pt.tbls.nd_action[j];     // Copy this action.
+               } while (++j < pt.tbls.nd_faction[i+1]);    // While there's more.
                y = nd_parser (x,t,na);                // ND lookahead parser.
                if (y > 0) {                           // Shift?
                   PS++;                               // Increment parser stack pointer.
@@ -1415,7 +1415,7 @@ public:
       }
 
       if (x == pt.accept_state) {                     // If Goal production.
-         PS -= pt.PL[p];                              // Reduce parse stack ptr by rule length - 1.
+         PS -= pt.tbls.PL[p];                              // Reduce parse stack ptr by rule length - 1.
          reduce (p);                                  // Call reduce action with production number.
          if (C_nd_parsing) {
             print_lookaheads();                       // Print lookahead statistics.
@@ -1450,7 +1450,7 @@ public:
          if (C_expecting) {
             print_stack ();
          }
-         syntax_error ("Error", &lt.token, pt.term_symb[T]);
+         syntax_error ("Error", &lt.token, pt.tbls.term_symb[T]);
          if (C_expecting) {
             expecting (x);
             print_terms (x);
@@ -1543,7 +1543,7 @@ public:
                name = symbol_name(n->sti);
             }
             printf("   %u  %s %s (%s)\n", traverse_num, dir,
-                   pt.node_name[n->id], name);
+                   pt.tbls.node_name[n->id], name);
          }
       }
    }
@@ -1563,7 +1563,7 @@ public:
                        symbol[i].type,
                        symbol_name(i),
                        symbol[i].term,
-                       pt.term_symb[symbol[i].term]);
+                       pt.tbls.term_symb[symbol[i].term]);
             }
          } else {               // No symbols in the table.
             fprintf(fp,"   Symbol Table is empty.\n");
@@ -1582,7 +1582,7 @@ public:
 
       node_name = "<invalid>";
       if (id != -1) {
-         node_name = pt.node_name[id];
+         node_name = pt.tbls.node_name[id];
       }
 
       if (sti == 0) {
@@ -1595,7 +1595,7 @@ public:
       } else {
          // invariant: sti < 0
          /* References terminal symbol. */
-         label     = pt.term_symb[-sti];
+         label     = pt.tbls.term_symb[-sti];
          label_len = strlen(label);
       }
 

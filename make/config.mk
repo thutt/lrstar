@@ -1,4 +1,4 @@
-# Copyright (c) 2023 Logic Magicians Software
+# Copyright (c) 2023, 2024 Logic Magicians Software
 # BSD 3 License
 
 SHELL	:=	\
@@ -58,6 +58,7 @@ OPT	:=							\
 	-Wall							\
 	-Werror							\
 	$(if $(filter release,$(LRSTAR_BUILD_TYPE)),-Os,-Og)	\
+	-std=c++20						\
 	-fdata-sections						\
 	-ffunction-sections					\
 	-fno-rtti						\

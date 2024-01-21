@@ -1,5 +1,5 @@
 
-/* Copyright 2018, 2023 Paul B Mann.  BSD License. */
+/* Copyright 2018, 2023, 2024 Paul B Mann.  BSD License. */
 
 #pragma once
 
@@ -71,7 +71,6 @@ public:
                               const char *fname,
                               const char *cname);
    static void instantiate_fields(FILE *fp);
-   static void instantiate_constants(FILE *fp);
 #define PFCP(pfl_) PF(pfl_)
 #define PFL(pfl_) PF(pfl_)
 #define PF(pf_) static void instantiate_##pf_##_data(FILE *fp);

@@ -35,6 +35,43 @@ namespace Hello {
     extern const int8 grm_nact_numb[2];  /* gcc can elide unreferenced constants. */
 
 
+    typedef lrstar_parser_tables_data<const char * const, const char * const, const char * const, const char * const, uint8, uint8, int8, int8, int8, int32, uint8, uint8, uint8, uint8, int8, uint8, uint8, uint8, uint8, uint8, uint8, uint8, uint8, uint8, int32, int32, int32, int32, int8, int8, int8, int32> parser_tables_data;
+
+    static const parser_tables_data ptd = {
+        .term_symb  = &grm_term_symb[0],
+        .head_symb  = &grm_head_symb[0],
+        .tact_name  = &grm_tact_name[0],
+        .node_name  = &grm_node_name[0],
+        .head_numb  = &grm_head_numb[0],
+        .f_tail     = &grm_f_tail[0],
+        .tail       = &grm_tail[0],
+        .arga       = &grm_arga[0],
+        .argx       = &grm_argx[0],
+        .argy       = 0,
+        .Bm         = &grm_Bm[0],
+        .Br         = &grm_Br[0],
+        .Bc         = &grm_Bc[0],
+        .Bf         = &grm_Bf[0],
+        .Tm         = &grm_Tm[0],
+        .Tr         = &grm_Tr[0],
+        .Tc         = &grm_Tc[0],
+        .Nm         = &grm_Nm[0],
+        .Nr         = &grm_Nr[0],
+        .Nc         = &grm_Nc[0],
+        .Rm         = &grm_Rm[0],
+        .Rr         = &grm_Rr[0],
+        .Rc         = &grm_Rc[0],
+        .PL         = &grm_PL[0],
+        .nd_fterm   = 0,
+        .nd_term    = 0,
+        .nd_faction = 0,
+        .nd_action  = 0,
+        .tact_numb  = &grm_tact_numb[0],
+        .node_numb  = &grm_node_numb[0],
+        .nact_numb  = &grm_nact_numb[0],
+        .reverse    = 0
+    };
+
     template<typename T_term_symb,
              typename T_head_symb,
              typename T_tact_name,
@@ -71,7 +108,7 @@ namespace Hello {
         {
             public:
 
-            parser_tables_() : lrstar_parser_tables<T_term_symb, T_head_symb, T_tact_name, T_node_name, T_head_numb, T_f_tail, T_tail, T_arga, T_argx, T_argy, T_Bm, T_Br, T_Bc, T_Bf, T_Tm, T_Tr, T_Tc, T_Nm, T_Nr, T_Nc, T_Rm, T_Rr, T_Rc, T_PL, T_nd_fterm, T_nd_term, T_nd_faction, T_nd_action, T_tact_numb, T_node_numb, T_nact_numb, T_reverse>(5, 2, 2, 5, 4, 2, 1, 1, 1, false, &grm_term_symb[0], &grm_head_symb[0], &grm_tact_name[0], &grm_node_name[0], &grm_head_numb[0], &grm_f_tail[0], &grm_tail[0], &grm_arga[0], &grm_argx[0], 0, &grm_Bm[0], &grm_Br[0], &grm_Bc[0], &grm_Bf[0], &grm_Tm[0], &grm_Tr[0], &grm_Tc[0], &grm_Nm[0], &grm_Nr[0], &grm_Nc[0], &grm_Rm[0], &grm_Rr[0], &grm_Rc[0], &grm_PL[0], 0, 0, 0, 0, &grm_tact_numb[0], &grm_node_numb[0], &grm_nact_numb[0], 0)
+            parser_tables_() : lrstar_parser_tables<T_term_symb, T_head_symb, T_tact_name, T_node_name, T_head_numb, T_f_tail, T_tail, T_arga, T_argx, T_argy, T_Bm, T_Br, T_Bc, T_Bf, T_Tm, T_Tr, T_Tc, T_Nm, T_Nr, T_Nc, T_Rm, T_Rr, T_Rc, T_PL, T_nd_fterm, T_nd_term, T_nd_faction, T_nd_action, T_tact_numb, T_node_numb, T_nact_numb, T_reverse>(5, 2, 2, 5, 4, 2, 1, 1, 1, false, ptd)
             {
             }
         };
