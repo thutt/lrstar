@@ -3,7 +3,7 @@
 
    THIS IS MY SPEED TEST - SYNTAX CHECKING SPEED.
 
-	Thes is an early ANSIC C grammar, I think.
+	This is an early ANSIC C grammar, I think.
 	I'm getting 8,000,000 lines/sec on my desktop machine.
 	Built with LRSTAR options /ast=0 and /o, VS Release Build mode,
 	and all compiler speed optimizations.  Measuring the 2nd, 3rd and
