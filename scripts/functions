@@ -1,5 +1,5 @@
 #!/bin/bash
-# Copyright (c) 2023 Logic Magician Software
+# Copyright (c) 2023, 2024 Logic Magician Software
 #
 # BSD 3 License
 #
@@ -186,6 +186,18 @@ function dfa ()
     "$(dfa-path)" "${@}";
 }
 export -f lrstar;
+
+
+function lrstar-refman-path ()
+{
+    # This pathname construction must match the pathname construction
+    # in the lrstar build process.
+
+    local ip="$(lrstar-install-root)";
+    local path="${ip}/doc/lrstar-dfa-reference.pdf"
+    echo "${path}";
+}
+export -f lrstar-path;
 
 
 function lrstar-show-config ()
