@@ -1,4 +1,4 @@
-# Copyright (c) 2023 Logic Magicians Software
+# Copyright (c) 2023, 2024 Logic Magicians Software
 # BSD 3 License
 #
 # This section of the build process delivers files into a directory
@@ -22,6 +22,10 @@ DISTRIB_DFA	:=	\
 
 DISTRIB_LRGEN	:= 	\
 	$(DISTRIB_ROOT)/bin/lrgen
+
+
+DISTRIB_REFMAN	:= 	\
+	$(DISTRIB_ROOT)/doc/lrstar-dfa-reference.pdf
 
 
 DISTRIB_BASIC_DEFS_HEADER	:=	\
@@ -169,6 +173,16 @@ $(DISTRIB_LRGEN):	$(LRSTAR_DIR)/scripts/lrgen
 	echo "LRGEN: $@";
 
 
+$(DISTRIB_REFMAN):	$(REFMAN)
+	$(PROLOG);				\
+	$(INSTALL)				\
+		--mode=555			\
+		-D				\
+		"$<"				\
+		$@;				\
+	echo "REFMAN: $@";
+
+
 # The 'distribution' target uses Gnu Coreutils 'install' program to
 # put all the delivered build artifacts into the '/usr/local'
 # directory tree.
@@ -184,6 +198,7 @@ distribution:						\
 		$(DISTRIB_PARSER_HEADER)		\
 		$(DISTRIB_PARSER_TABLES_HEADER)		\
 		$(DISTRIB_SAMPLE_HEADER)		\
-		$(DISTRIB_SAMPLE_MAKE_DEFS)
+		$(DISTRIB_SAMPLE_MAKE_DEFS)		\
+		$(DISTRIB_REFMAN)
 	$(PROLOG);	\
 	true;

@@ -1,0 +1,395 @@
+\chapter{dfa}
+
+The \dfae program generates a table-driven lexer (also known as a
+\emph{scanner}) from a user-supplied lexical grammar specified in
+\dfagrmfn, which is more powerful, and easier to read than regular
+expressions.
+
+A lexer uses the rules of the lexical grammar to combine sequences of
+characters into the \emph{tokens} that are specified in the syntactic
+grammar.  In cooperation with the parser, the lexer turns tokens from
+the input stream into numbers that stand for the textual token,
+reducing token matching from a string to a simpler and faster integer
+comparison.
+
+\section{Invocation}
+The \dfae program uses a unique command line argument processing
+scheme that is rooted in mainframe usage: the program's options are
+placed after all other arguments.  \Figref{dfa-sample} highlights how
+options, shown in \figref{dfa-options}, are passed to the tool.
+
+
+\begin{figure}[h!]
+  \begin{alltt}
+    dfa ANTLR.lgr g m
+  \end{alltt}
+  \caption{\dfae invocation sample}
+  \label{fig:dfa-sample}
+\end{figure}
+
+
+\begin{figure}
+  \begin{alltt}
+    |
+    |   DFA LEXER GENERATOR
+    |
+    |   dfa <grammar> [<option>...]
+    |
+    |   OPTION  DEFAULT  DESCRIPTION
+    |   crr         1    Conflict report for Reduce-Reduce
+    |   csr         1    Conflict report for Shift-Reduce
+    |   d           0    Debug lexer activated
+    |   g           0    Grammar listing
+    |   ko          0    Keywords only (no identifiers).
+    |   m           0    Minimize lexer-table size
+    |   st          0    State machine for conflicts report
+    |   sto         0    State machine optimized
+    |   v           2    Verbose mode (0,1,2)
+    |   w           0    Print warnings on screen
+    |
+  \end{alltt}
+  \caption{\dfae command line help}
+  \label{fig:dfa-options}
+\end{figure}
+
+The command line options are shown with their initial value, and the
+purpose of each valid option.
+
+\subsection{Input Files}
+
+\dfae reads one explicitly named, and one implicitly named file,
+processes them and creates a series of output files.  The following
+list describes the input files.
+
+
+\begin{itemize}
+\item Lexical Grammar
+
+  The lexical grammar, named on the command line, has the format
+  \emph{grammar-name}.\texttt{lgr}.  This file must contains a \dfagrm
+  grammar, as seen in \figref{dfa-lex-grm}, that describes the set of
+  tokens that are allowed by the syntactic grammar.
+
+\item Token Values
+
+  The lexer must produce specific values for recognized tokens, as
+  decided by \lrstare.  The token values are provided through an
+  output file created by \lrstare.  The naming of the file will,
+  following the same form of the lexical grammar file, be of the form
+  \emph{grammar-name}.\texttt{lex}.
+
+  The file is used internally, and will not be further described.
+\end{itemize}
+
+\subsection{Output Files}
+\dfae produces a number of output files, some of which are program
+code, while others are just logs of processing the grammar.  The list
+below describes each output file.
+
+\begin{itemize}
+\item \emph{grammar-name}\texttt{\_Lexer.cpp}
+
+  This output file contains the statically initialized arrays that are
+  used by the lexer library to recognize tokens.
+
+\item \emph{grammar-name}\texttt{\_LexerTables\_typedef.h}
+
+  This output file contains an extension of the \texttt{lrstar\_lexer}
+  class which is used to construct an instance of the lexer for use by
+  the entire system.
+
+\item \emph{grammar-name}\texttt{.lgr.conflicts.txt}
+
+  This log file contains a listing of the conflicts found in the grammar.
+
+\item \emph{grammar-name}\texttt{.lgr.grammar.txt}
+
+  When the \emph{g} option is provided on the command line, this log
+  file contains a listing of the grammar.
+
+\item \emph{grammar-name}\texttt{.lgr.log.txt}
+
+  This output file contains a final report of the results of running
+  \dfae on the input grammar.
+
+\item \emph{grammar-name}\texttt{.lgr.states.txt}
+
+  When the \emph{st} option is provided on the command line, this log
+  file contains a listing of all the states in the state machine of
+  the grammar.
+
+\item \emph{grammar-name}\texttt{.lgr.warnings.txt}
+
+  This output file contains all warnings produced by \dfae for the
+  supplied grammar.
+
+\end{itemize}
+
+\section{Lexical Grammar}
+\Figref{dfa-lex-grm} shows the lexical grammar used by \dfae.  It
+provides a good example of many \dfae capabilities, such as set
+creation, set subtraction and token creation.  These capabilities are
+described in \todo{xref section that describes capabilities}.
+
+\begin{figure}
+  \begin{scriptsize}
+    \begin{alltt}
+      <eof>             -> \escape{z}
+      <alpha>           ->         alpha
+                        ->         alpha '_'
+                        ->     '_' alpha
+                        ->     '_' alpha '_'
+                        ->         alpha '_' '_'
+                        -> '_' '_' alpha
+                        -> '_' '_' alpha '_' '_'
+      <lexical>         -> '<' <alpha> '>'
+      <ignore>          -> '{' <alpha> '}'
+      <escape>          -> '\textbackslash' <alpha>
+      alpha             ->       letter
+                        -> alpha letter
+                        -> alpha digit
+                        -> alpha '_' letter
+                        -> alpha '_' digit
+      <integer>         -> digit+
+      <literal>         -> ''' ' ' '''
+                        -> ''' ''' '''
+                        -> ''' '"' '''
+                        -> ''' '\textbackslash' '''
+                        -> ''' lchar+ '''
+      lchar             -> '\textbackslash' '''
+                        -> '\textbackslash' '\textbackslash'
+                        -> '\textbackslash' '"'
+                        -> lany
+      \curlybrace{whitespace}      -> ( \escape{t} | \escape{n} | \escape{r} | ' ' )+
+      \curlybrace{commentline}     -> '/' '/' neol*
+      \curlybrace{commentblock}    -> '/' '*' na* '*'+ (nans na* '*'+)* '/'
+      lany              =  33..254 - ''' - '"' - '\textbackslash'
+      letter            = 'a'..'z' | 'A'..'Z'
+      digit             = '0'..'9'
+      na                = any - '*'          // not asterisk
+      nans              = any - '*' - '/'    // not asterisk not slash
+      neol              = any - \escape{n}           // not end of line
+      any               = 1..254 - \escape{z}        // any character except EOF
+      \escape{t}                =  9                 // tab
+      \escape{n}                = 10                 // newline
+      \escape{v}                = 11                 // vertical feed
+      \escape{f}                = 12                 // form feed
+      \escape{r}                = 13                 // return
+      \escape{z}                = 26                 // end of file
+    \end{alltt}
+  \end{scriptsize}
+  \caption{\dfae lexical grammar}
+  \label{fig:dfa-lex-grm}
+\end{figure}
+
+\subsection{Declaring Character Sets}
+A name can be assigned to a character or a class of characters with
+\texttt{=}, and references to that name will encompass all the
+characters in the class.  In \figref{dfa-lex-grm}, for example, the
+identifier \texttt{letter} refers to the upper and lowercase letters
+of the English alphabet.  Similarly, \texttt{any} is the full set of
+\texttt{ASCII} characters, excluding zero (0) and \texttt{eof}, which
+has the value $26_{10}$.
+
+Individual values can be subtracted from a set with the \texttt{-}
+operator, as is shown with the \texttt{lany} class.
+
+Any character can be referenced by its base-10 value, as can be
+evidenced by the symbolic naming of several control characters, such
+as \texttt{\escape{z}} for Ctrl-Z.
+
+
+\subsection{Declaring Rules}
+
+A rule in \dfagrm is denoted by the \texttt{->} character sequence, and
+it consists of two parts:
+\begin{enumerate}
+\item Name
+
+  Each rule in the grammar is given a name.  There are three types of
+  names.
+  \begin{enumerate}
+  \item Tokens
+
+    Tokens, as specified in the \texttt{lex} input file, are denoted
+    by surround the name in angle brackets.  There must be a rule for
+    each token specified in the \texttt{lex} file.  They are written
+    like this:
+    \begin{alltt}
+      <eof>    -> \escape{z}
+    \end{alltt}
+
+  \item Ignored sequences
+
+    An ignored sequence is a rule that will match text that should be
+    ignored in the source file being parsed.  A good usage for this
+    is to ignore comments.
+
+    \begin{alltt}
+      \curlybrace{commentline} -> '/' '/' neol*
+      any           = 0..255 - \escape{z}   // All chars but EOF.
+      neol          = any - \escape{n}      // All but EOF and EOL.
+    \end{alltt}
+
+  \item Internal names
+
+    Internal names have neither a curly brace nor angled brackts.
+    They serve as names for characters sets, or other rules that can
+    be used directly in the grammar.
+
+    \begin{alltt}
+      any   = 0..255 - \escape{z}   // All chars but EOF.
+      neol  = any - \escape{n}      // All but EOF and EOL.
+    \end{alltt}
+
+  \end{enumerate}
+
+\item Production
+
+  The second part of the rule is the production -- the character
+  sequences that must be matched in the input file.
+\end{enumerate}
+
+\subsection{Specifying Character literals}
+
+A control character can be expressed by prefixing any alphabetic
+character with \texttt{\textbackslash}.
+
+Any other character that has special meaning to \dfae can be escaped
+by prefixing it with \texttt{\textbackslash}.
+
+\begin{alltt}
+  <eof>  -> \escape{z}
+\end{alltt}
+
+\subsection{Special Repetition Characters}
+There are special characters that can used in the lexcical grammar
+to indicate repitition.  They are described in the following list
+
+\begin{itemize}
+\item Asterisk
+
+  The asterisk ('*') character following a production means it can be
+  repeated zero (0) or more times.
+
+  \begin{alltt}
+    \curlybrace{commentline} -> '/' '/' neol*
+    any           = 0..255 - \escape{z}   // All chars but EOF.
+    neol          = any - \escape{n}      // All but EOF and EOL.
+  \end{alltt}
+
+  Above, a comment begins with \texttt{//} is followed by zero or more
+  character, and ends with a newline.  Also note that the
+  \texttt{\curlybrace{commentline}} production will be fully consumed
+  by \dfae because it is denoted by curly braces; no token will be
+  passed to the syntax parser for comments.
+
+\item Plus
+
+  A plus ('+') character following a production means it must be
+  present once, but can be repeated any number of times.
+
+  \begin{alltt}
+    <string>  -> ''' schar+ '''
+    any       = 0..255 - \escape{z}
+    sany      = any - ''' - '\textbackslash'' - \escape{n}
+    schar     -> sany
+              -> \escape{\textbackslash}
+              -> \escape{'}
+              -> \escape{"}
+              -> \escape{n}
+              -> \escape{t}
+              -> \escape{a}
+              -> \escape{b}
+              -> \escape{f}
+              -> \escape{r}
+              -> \escape{v}
+              -> \escape{0}
+  \end{alltt}
+
+  In the example shown above, a string is started with single quote,
+  followed by one or more chacters in the \texttt{schar} production,
+  and closed with a single quote.
+\end{itemize}
+
+
+\section{Syntactic Grammar}
+
+The syntactic grammar for \dfae, shown in \figref{dfa-syn-grm},
+describes the productions that can be created for a lexical grammar.
+
+\begin{figure}[h]
+  \begin{scriptsize}
+    \begin{alltt}
+      Goal              -> Grammar <eof>
+      Grammar           -> TokenProd... (NonterminalDef|SetDef|EscapeDef)...
+      TokenProd         -> Token ReturnValue
+      Token             -> {lexical}
+                        -> {literal}
+      ReturnValue       -> <integer>
+                        -> <alpha>
+      NonterminalDef    -> HeadSymbol ArrowProd...
+      HeadSymbol        -> {alpha}
+                        -> {lexical}
+                        -> {ignore}
+      ArrowProd         -> Arrow TailExprList
+      Arrow             -> '->'
+      TailExprList      -> TailExpr...
+      TailExpr          -> TailSymbol
+                        -> TailSymbol '+'
+                        -> TailSymbol '*'
+                        -> TailSymbol '?'
+                        -> GroupStart List GroupEnd
+      List              -> TailExpr
+                        -> List TailExpr
+                        -> List Or TailExpr
+      Or                -> '|'
+      GroupStart        -> '('
+      GroupEnd          -> ')'
+                        -> ')' '+'
+                        -> ')' '*'
+                        -> ')' '?'
+      TailSymbol        -> <alpha>
+                        -> <escape>
+                        -> <lexical>
+                        -> <literal>
+                        -> <integer>
+      SetDef            -> AlphaSymbol Equals SetExpr [';']
+      AlphaSymbol       -> {alpha}
+      Equals            -> '='
+      SetExpr           -> Range
+                        -> FCharacter '|' Range
+                        -> FCharacter '|' Character
+                        -> FCharacter '|' SetItem
+                        -> FCharacter '-' Range
+                        -> FCharacter '-' Character
+                        -> FCharacter '-' SetItem
+                        -> FSetItem   '|' Range
+                        -> FSetItem   '|' Character
+                        -> FSetItem   '|' SetItem
+                        -> FSetItem   '-' Range
+                        -> FSetItem   '-' Character
+                        -> FSetItem   '-' SetItem
+                        -> SetExpr    '|' Range
+                        -> SetExpr    '|' Character
+                        -> SetExpr    '|' SetItem
+                        -> SetExpr    '-' Range
+                        -> SetExpr    '-' Character
+                        -> SetExpr    '-' SetItem
+      Range             -> RangeStart '..' RangeEnd
+      RangeEnd          -> Character
+      RangeStart        -> Character
+      FCharacter        -> Character
+      FSetItem          -> SetItem
+      Character         -> <literal>
+                        -> <integer>
+      SetItem           -> <alpha>
+                        -> <escape>
+      EscapeDef         -> EscapeSymbol Equals Number [';']
+      EscapeSymbol      -> {escape}
+      Number            -> <integer>
+    \end{alltt}
+  \end{scriptsize}
+  \caption{\dfae syntactic grammar}
+  \label{fig:dfa-syn-grm}
+\end{figure}

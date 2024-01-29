@@ -1,4 +1,4 @@
-# Copyright (c) 2023 Logic Magicians Software
+# Copyright (c) 2023, 2024 Logic Magicians Software
 # BSD 3 License
 
 
@@ -16,7 +16,11 @@ LIBRARY_RELA_DIR	:= src/lib
 LIBRARY_BUILD_DIR	:= $(_BUILD_DIR)/$(LIBRARY_RELA_DIR)
 LRSTAR_LIB		:= $(LIBRARY_BUILD_DIR)/lrstar.a
 
+REFMAN_RELA_DIR		:= doc/refman
+REFMAN_BUILD_DIR	:= $(_BUILD_DIR)/$(REFMAN_RELA_DIR)
+REFMAN			:= $(REFMAN_BUILD_DIR)/refman.pdf
 
 export LRSTAR
 export DFA
 export LRSTAR_LIB
+export REFMAN

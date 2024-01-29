@@ -1,0 +1,54 @@
+\chap{Introduction}
+
+The \lrstar parser generator system is composed of two programs ---
+\lrstare \& \dfae --- that generate a table-driven syntax and lexcial
+parsers respectively.  A runtime library is that is also included that
+is used; it is used to interpret the data in the generated tables and
+parse the input source files.
+
+Many grammars have been provided to help showcase the expressive style
+of the EBNF grammars accepted by \lrstar.  They can be used as the
+starting point of your new compiler project.
+
+Additionally, several example projects are included to showcase how
+specific parsing problems can be met by using lrstar.  To name a few:
+
+\begin{itemize}
+\item Context-sensitive symbol interpretation
+
+  In the \texttt{C} programming language, determining if a
+  \emph{symbol} is a \texttt{typedef} requires more information than
+  is present with a text-only parse of an input file.  With a properly
+  written grammar, \lrstar system can automatically promote a symbol
+  to a \emph{semantic symbol} so that parse tree will properly match
+  the source, without additional grammar work.
+
+
+\item Multiple parsers in a single program
+
+  Sometimes it's desirable to have a single program parse multiple
+  languages.  This examples shows that it is easy to do with the
+  \lrstar system.
+
+
+\item LR(\emph{k}) parsing
+
+  This example shows that a generated LR(\emph{k}) parser is simple to
+  with proper invocation of the \lrstar tooling.
+
+\item JSON
+  This implements and small parser for JSON, with the result being an
+  appropriate internal data structure for any valid JSON input.
+\end{itemize}
+
+
+This reference will show how  syntactic and lexcial grammars are
+created, and how to use the \lrstar system to generate a working
+parser for them.  But, more than that, it will show how to use the
+\lrstar runtime system to fill out the parser into a tool that produce
+useful work.
+
+The syntactic grammars are specified using \tbnfgrmfn, while the lexical
+grammars are specified via \dfagrmfn.  A user of this software must
+understand both of these systems able to effectively read and write
+grammars.

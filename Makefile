@@ -1,4 +1,4 @@
-# Copyright (c) 2023 Logic Magicians Software
+# Copyright (c) 2023, 2024 Logic Magicians Software
 # BSD 3 License
 
 $(if $(LRSTAR_DIR),,$(error 'LRSTAR_DIR' is not defined.))
@@ -10,12 +10,12 @@ include $(LRSTAR_DIR)/make/distribution.mk
 .DEFAULT_GOAL	:= distribution
 
 
-all:	$(DFA) $(LRSTAR)
+all:	$(DFA) $(LRSTAR) $(LRSTAR_LIB) $(REFMAN)
 	$(PROLOG);					\
 	echo "Master: All targets built.";
 
-.PHONY:	$(DFA) $(LRSTAR) $(LRSTAR_LIB)
-$(DFA) $(LRSTAR) $(LRSTAR_LIB):		\
+.PHONY:	$(DFA) $(LRSTAR) $(LRSTAR_LIB) $(REFMAN)
+$(DFA) $(LRSTAR) $(LRSTAR_LIB) $(REFMAN):		\
 		| build-directories
 	$(PROLOG);							\
 	src_dir="$(subst $(_BUILD_DIR),$(LRSTAR_DIR),$(dir $@))";	\
@@ -34,15 +34,16 @@ clean:
 	rm -rf $(_BUILD_DIR);
 
 
-$(DFA_BUILD_DIR) $(LRSTAR_BUILD_DIR) $(LIBRARY_BUILD_DIR):
+$(DFA_BUILD_DIR) $(LRSTAR_BUILD_DIR) $(LIBRARY_BUILD_DIR) $(REFMAN_BUILD_DIR):
 	$(PROLOG);	\
 	mkdir -p $@;
 
 
 build-directories:				\
 	| $(DFA_BUILD_DIR)			\
-	  $(LIBRARY_BUILD_DIR)		\
-	  $(LRSTAR_BUILD_DIR)
+	  $(LIBRARY_BUILD_DIR)			\
+	  $(LRSTAR_BUILD_DIR)			\
+	  $(REFMAN_BUILD_DIR)
 
 
 # Show predefined preprocessor symbols for this compiler.  This is
