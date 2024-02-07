@@ -226,7 +226,7 @@ ushort PG_ParserTables::f_tail[142] =
 };
 
 // Tail symbol numbers ...
-char PG_ParserTables::tail[257] =
+schar PG_ParserTables::tail[257] =
 {
    -1,    1,   -2,   -6,   -9,  -52,   -4,   -5,   14,   -4,   -5,  -40,   14,   -5,   14,   -5,  -40,   14,    4,    4,
    5,    6,    7,   10,  -53,   20,  -54,   21,   24,   20,  -54,   21,   25,    4,    5,    7,    6,  -10,  -55,  -11,
@@ -244,14 +244,14 @@ char PG_ParserTables::tail[257] =
 };
 
 // Arguments for token actions ...
-char PG_ParserTables::arga[34] =
+schar PG_ParserTables::arga[34] =
 {
    -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,
    -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1
 };
 
 // First arguments for productions ...
-char PG_ParserTables::argx[141] =
+schar PG_ParserTables::argx[141] =
 {
    -1,   -1,   -1,   -1,    0,    0,   -1,   -1,    0,    0,    0,    0,    0,    0,   -1,   -1,   -1,   -1,    0,    0,
    0,    0,   -1,    0,    0,    0,    0,   -1,   -1,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,
@@ -299,7 +299,7 @@ uchar PG_ParserTables::Bf[34] =
 };
 
 // Terminal transition matrix ...
-char PG_ParserTables::Tm[161] =
+schar PG_ParserTables::Tm[161] =
 {
    -99, -101,  -84,  -30,    0,  -85,    0,  -29,    0,    0,   84,  -32,  -90,  -91,  -92,  -93,  -76,   58,   59,  -88,
    -89,    0,    0,   17,   65,    0,    0,    0,   74,   29,   49,   -5,    0,   30,    0,    0, -109,    0, -112, -113,
@@ -398,7 +398,7 @@ uchar PG_ParserTables::Rc[34] =
 };
 
 // Production lengths (minus one) ...
-char PG_ParserTables::PL[141] =
+schar PG_ParserTables::PL[141] =
 {
    1,    2,   -1,    0,    2,    3,    1,    2,    0,    0,    0,    0,    0,    0,   -1,    0,    3,    3,    0,    0,
    0,    0,    1,    1,    0,    3,    2,    1,    0,    0,    0,    2,    3,    1,    2,    0,    2,    2,    2,    2,
@@ -411,14 +411,14 @@ char PG_ParserTables::PL[141] =
 };
 
 // Terminal action number ...
-char PG_ParserTables::tact_numb[34] =
+schar PG_ParserTables::tact_numb[34] =
 {
    0,   -1,   -1,   -1,    1,    2,    2,    2,    2,    2,    2,    3,    4,    5,    6,    7,    7,    7,    7,    7,
    7,    7,    7,    7,    7,    7,    7,    7,    7,    7,    7,    7,    7,   -1
 };
 
 // Parse action numbers ...
-char PG_ParserTables::pact_numb[141] =
+schar PG_ParserTables::pact_numb[141] =
 {
    -1,   -1,   -1,   -1,    0,    0,   -1,   -1,    1,    2,    2,    2,    2,    2,   -1,   -1,   -1,   -1,    3,    3,
    3,    3,   -1,   -1,    4,    5,    5,   -1,    6,    7,    8,   -1,   -1,   -1,   -1,    9,    5,    5,    5,    5,
@@ -431,7 +431,7 @@ char PG_ParserTables::pact_numb[141] =
 };
 
 // Node number for each production ...
-char PG_ParserTables::node_numb[141] =
+schar PG_ParserTables::node_numb[141] =
 {
    0,   -1,    1,    1,    2,    2,    2,    2,    3,    4,    4,    4,    4,    4,    5,    5,    6,    7,    8,    8,
    8,    8,    9,   10,   -1,   11,   11,   12,   -1,   13,   14,   15,   15,   15,   15,   -1,   11,   11,   11,   11,
@@ -444,7 +444,7 @@ char PG_ParserTables::node_numb[141] =
 };
 
 // Node action numbers ...
-char PG_ParserTables::nact_numb[141] =
+schar PG_ParserTables::nact_numb[141] =
 {
    0,   -1,    1,    1,    2,    2,    2,    2,    3,    4,    4,    4,    4,    4,    5,    5,    6,    7,    8,    8,
    8,    8,    9,   10,   -1,   11,   11,   12,   -1,   13,   14,   15,   15,   15,   15,   -1,   11,   11,   11,   11,

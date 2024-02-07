@@ -77,28 +77,28 @@ public:
    static const char*  pact_name[    32]; // Parse action names found in the grammar.
    static uchar  head_numb[    80]; // Head symbol number for a production.
    static uchar  f_tail   [    81]; // First tail in a production.
-   static char   tail     [   143]; // Tail symbol number.
-   static char   arga     [    24]; // Arguments for terminal actions.
-   static char   argx     [    80]; // First arguments for productions.
+   static schar  tail     [   143]; // Tail symbol number.
+   static schar  arga     [    24]; // Arguments for terminal actions.
+   static schar  argx     [    80]; // First arguments for productions.
 
 private:
    static uchar  Bm[    33]       ; // Boolean matrix.
    static uchar  Br[    40]       ; // Boolean matrix row.
    static uchar  Bc[    24]       ; // Boolean matrix column.
    static uchar  Bf[    24]       ; // Boolean matrix filter/mask.
-   static char   Tm[    61]       ; // Terminal transition matrix.
+   static schar  Tm[    61]       ; // Terminal transition matrix.
    static uchar  Tr[    40]       ; // Terminal transition matrix row.
    static uchar  Tc[    24]       ; // Terminal transition matrix column.
-   static char   Nm[   117]       ; // Nonterminal transition matrix.
+   static schar  Nm[   117]       ; // Nonterminal transition matrix.
    static uchar  Nr[    40]       ; // Nonterminal transition matrix row.
    static uchar  Nc[    80]       ; // Nonterminal transition matrix column.
    static uchar  Rm[    58]       ; // Reduction matrix.
-   static char   Rr[    40]       ; // Reduction matrix row.
+   static schar  Rr[    40]       ; // Reduction matrix row.
    static uchar  Rc[    24]       ; // Reduction matrix column.
-   static char   PL[    80]       ; // Production length minus one.
+   static schar  PL[    80]       ; // Production length minus one.
 
-   static char   tact_numb[    24]; // Terminal action numbers.
-   static char   pact_numb[    80]; // Parse action numbers.
+   static schar  tact_numb[    24]; // Terminal action numbers.
+   static schar  pact_numb[    80]; // Parse action numbers.
 
    static void   (*init_func[    2]) ()       ; // Init action function pointers.
    static int    (*tact_func[    3]) (int& t) ; // Terminal action function pointers.

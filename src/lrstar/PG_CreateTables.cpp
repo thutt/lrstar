@@ -665,7 +665,7 @@ int   PGCreateTables::MRG_ROWE2T (int **matrix, int n_terms, int *row, int N_sta
 
 int   PGCreateTables::MRG_ROWZ_T (int **matrix, int n_terms, int *row, int N_states, int opt)
 {
-   int *density, *indx;
+   int *density, *indx = NULL;
    int s, i, r, nr, t, x, v;
 
    if (opt)
@@ -720,7 +720,7 @@ int   PGCreateTables::MRG_ROWZ_T (int **matrix, int n_terms, int *row, int N_sta
 
 int   PGCreateTables::MRG_ROWZ_N (int **matrix, int n_heads, int *row, int N_states, int opt)
 {
-   int *density, *indx;
+   int *density, *indx = NULL;
    int s, i, r, nr, t, x, v;
 
    if (opt)

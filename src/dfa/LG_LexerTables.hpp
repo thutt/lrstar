@@ -127,7 +127,7 @@ static uchar Tc[256] =
 };
 
 // Terminal number ...
-static char term_numb[80] =
+static schar term_numb[80] =
 {
    0,    0,    0,    0,    0,    0,    2,    7,   -1,    0,    2,    0,    5,    0,    0,    0,    0,    0,   -1,    0,
    2,    2,    2,    0,    5,    5,    0,    0,    0,    0,    0,    0,    0,    0,    0,    5,    5,    0,    0,    0,

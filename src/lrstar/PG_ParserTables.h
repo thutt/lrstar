@@ -120,16 +120,16 @@ public:
    static const char*  node_name[    38]; // Node names found in the grammar.
    static uchar  head_numb[   141]; // Head symbol number for a production.
    static ushort f_tail   [   142]; // First tail in a production.
-   static char   tail     [   257]; // Tail symbol number.
-   static char   arga     [    34]; // Arguments for terminal actions.
-   static char   argx     [   141]; // First arguments for productions.
+   static schar  tail     [   257]; // Tail symbol number.
+   static schar  arga     [    34]; // Arguments for terminal actions.
+   static schar  argx     [   141]; // First arguments for productions.
 
 private:
    static uchar  Bm[   108]       ; // Boolean matrix.
    static uchar  Br[    86]       ; // Boolean matrix row.
    static uchar  Bc[    34]       ; // Boolean matrix column.
    static uchar  Bf[    34]       ; // Boolean matrix filter/mask.
-   static char   Tm[   161]       ; // Terminal transition matrix.
+   static schar  Tm[   161]       ; // Terminal transition matrix.
    static uchar  Tr[    86]       ; // Terminal transition matrix row.
    static uchar  Tc[    34]       ; // Terminal transition matrix column.
    static short  Nm[   307]       ; // Nonterminal transition matrix.
@@ -138,12 +138,12 @@ private:
    static uchar  Rm[    25]       ; // Reduction matrix.
    static short  Rr[    86]       ; // Reduction matrix row.
    static uchar  Rc[    34]       ; // Reduction matrix column.
-   static char   PL[   141]       ; // Production length minus one.
+   static schar  PL[   141]       ; // Production length minus one.
 
-   static char   tact_numb[    34]; // Terminal action numbers.
-   static char   pact_numb[   141]; // Parse action numbers.
-   static char   node_numb[   141]; // Node numbers for the productions.
-   static char   nact_numb[   141]; // Node action numbers for the productions.
+   static schar  tact_numb[    34]; // Terminal action numbers.
+   static schar  pact_numb[   141]; // Parse action numbers.
+   static schar  node_numb[   141]; // Node numbers for the productions.
+   static schar  nact_numb[   141]; // Node action numbers for the productions.
 
    static void   (*init_func[    2]) ()       ; // Init action function pointers.
    static int    (*tact_func[    8]) (int& t) ; // Terminal action function pointers.

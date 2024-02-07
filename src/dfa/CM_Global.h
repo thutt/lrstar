@@ -9,6 +9,7 @@
 #define EXTERN extern
 #endif
 
+typedef signed char         schar;
 typedef unsigned char       uchar;
 typedef unsigned short int  ushort;
 

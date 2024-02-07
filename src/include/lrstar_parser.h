@@ -1529,7 +1529,7 @@ public:
       if (C_debug_trace) {
          const char *name;
          if (C_node_actions) {
-            const char *dir;
+            const char *dir = "<invalid>";
             switch (direction) {
             case TOP_DOWN:
                dir = "*>";
