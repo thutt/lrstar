@@ -68,9 +68,16 @@ And sample projects for:
 # Getting Started
 
 
-To get started, you must set up an environment by sourcing the setup
-file into your Bash environment, like so:
+To get started, you must have the following installed:
 
+  make
+  g++
+  pdflatex
+  texlive-latex-base   (Debian package)
+  texlive-latex-extra  (Debian package)
+
+You must also set up an environment by sourcing the setup
+file into your Bash environment, like so:
 
     git clone https://github.com/thutt/lrstar.git
     cd lrstar
@@ -95,6 +102,11 @@ To build:
 The exported build artifacts will be placed in:
 
    ${LRSTAR_BUILD_DIR}/${LRSTAR_BUILD_TYPE}/usr/local
+
+
+The software is known to build & run on x86-based Ubuntu 22.04 and
+Arm64-based Ubuntu 23.10.
+
 
 # Processing grammars
 
