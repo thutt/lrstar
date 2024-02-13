@@ -130,12 +130,15 @@ function build ()
 {
     local grm_dir="${1}";
     local grm="${2}";
-    local root="${LRSTAR_BUILD_DIR}/${LRSTAR_BUILD_TYPE}/usr/local";
+    local lrstar_dir="${LRSTAR_BUILD_DIR}/${LRSTAR_BUILD_TYPE}"
+    local root="${lrstar_dir}/usr/local";
+    local bod="${lrstar_dir}${grm_dir//${LRSTAR_DIR}}";
 
     rm -f "${grm_dir}/*.o";
     make                                        \
         -C "${grm_dir}"                         \
         --makefile ${grm_dir}/${grm}.make       \
+        LRSTAR_BOD="${bod}"                     \
         LRSTAR_INSTALL_ROOT=${root}
  }
 

@@ -243,24 +243,62 @@ function create_makefile ()
 #
 # This Makefile will build the '${GRM}' parser sample program.
 #
+# It should be invoked like this when using a DEVELOPMENT tree of
+# lrstar:
 #
-# When using a development tree, invoke like this:
+#  make                                      \\
+#     LRSTAR_BOD=<bod>                       \\
+#     LRSTAR_INSTALL_ROOT=<lrstar-directory> \\
+#     -f $(readlink -f ./${GRM}.make)
+#
+#
+# It should be invoked like this when using an INSTALLED lrstar:
+#
+#  make                                      \\
+#     LRSTAR_BOD=<bod>                       \\
+#     -f $(readlink -f ./${GRM}.make)
+#
+#
+#  <bod>:
+#
+#   This is the 'build output directory'.  It should be the full
+#   pathname where the artifacts should be placed by the build
+#   process.
+#
+#   The <bod> should not be placed into the source directory.
+#   A good location is "/tmp/\${GRM}".
+#
+#  <lrstar-directory>:
+#
+#   This it the directory to which lrstar has been installed.
+#
+#   When using an lrstar development tree, the value should be:
+#
+#     LRSTAR_INSTALL_ROOT=\${LRSTAR_BUILD_DIR}/\${LRSTAR_BUILD_TYPE}/usr/local
+#
+#   If using an installed version of lrstar, it should be:
+#
+#     LRSTAR_INSTALL_ROOT=/usr/local
+#
+# Example (development lrstar):
 #
 #  make \\
-#     LRSTAR_INSTALL_ROOT=\${LRSTAR_BUILD_DIR}/\${LRSTAR_BUILD_TYPE}/usr/local \\
-#     -f <directory of grammar>/${GRM}.make
+#     LRSTAR_BOD=/tmp/${GRM} \\
+#     LRSTAR_INSTALL_ROOT=\${LRSTAR_BUILD_DIR}/\${LRSTAR_BUILD_TYPE}/usr/local
+#     -f \$(readlink -f ./\${GRM}.make)
 #
 #
-# When using lrstar installed in /usr/local, invoke like this:
+# Example (installed lrstar):
 #
 #  make \\
-#     -f <directory of grammar>/${GRM}.make
+#     LRSTAR_BOD=/tmp/${GRM} \\
+#     -f \$(readlink -f ./\${GRM}.make)
 #
 #
 # The resultant executable, having the 'basename' of the grammar,
 # will be placed into a subdirectory of:
 #
-#  \${LRSTAR_BUILD_DIR}/\${LRSTAR_BUILD_TYPE}
+#  \${LRSTAR_BOD}
 #
 GRM		:= ${GRM}
 ${GRM}_GRMOPT	:= ${GRMOPT}

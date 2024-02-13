@@ -74,7 +74,8 @@ GRM_DIR	:=	\
 
 
 GRM_BUILD_DIR	:=					\
-	$(LRSTAR_BUILD_DIR)/$(LRSTAR_BUILD_TYPE)/$(subst $(LRSTAR_DIR)/,,$(GRM_DIR))
+	$(if $(LRSTAR_BOD),$(LRSTAR_BOD), \
+	$(error LRSTAR_BOD unset; must be build-output-directory outside of source tree))
 
 $(GRM_BUILD_DIR):
 	mkdir --parents $(GRM_BUILD_DIR)
